@@ -5,7 +5,8 @@
 .cursor/hooks/
 
 # Data (large, downloaded from public sources; not versioned)
-data/
+data/*
+!data/README.md
 *.h5ad
 *.h5mu
 

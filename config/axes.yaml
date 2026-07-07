@@ -1,0 +1,109 @@
+# Functional axes for ISCI — T-cell state signatures
+# Each axis: signed gene loadings (+1 = pushes toward axis state when upregulated after KD logic applied in movement.py)
+# Validate clinically with IDOR immunologists before final submission.
+
+axes:
+  activation_tcr:
+    description: TCR activation / early response program
+    clinical_relevance: Bispecifics and TCE depend on functional T-cell activation
+    source: dataset_suppl_activation_regulator_coefficients
+    curated_markers:
+      IL2: 1.0
+      IL2RA: 1.0
+      CD69: 1.0
+      TNF: 1.0
+      IRF4: 1.0
+      NR4A1: 1.0
+
+  th1_effector:
+    description: Th1 / type-1 effector polarization
+    clinical_relevance: Anti-tumor cytotoxicity
+    source: Th2_Th1_polarization_suppl_table  # LFC < 0 = Th1-high
+    curated_markers:
+      IFNG: 1.0
+      TBX21: 1.0
+      EOMES: 1.0
+      STAT1: 1.0
+      IRF1: 1.0
+      JAK2: 1.0
+
+  th2:
+    description: Th2 polarization (contrast / negative control axis)
+    clinical_relevance: Context-dependent; mostly contrast axis
+    source: Th2_Th1_polarization_suppl_table  # LFC > 0 = Th2-high
+    curated_markers:
+      GATA3: 1.0
+      IL4: 1.0
+      IL5: 1.0
+      IL13: 1.0
+      CCR4: 1.0
+      STAT6: 1.0
+      IL4R: 1.0
+      RARA: 1.0
+
+  exhaustion_like:
+    description: T-cell exhaustion / dysfunction program
+    clinical_relevance: CAR-T failure and bispecific non-response
+    source: curated_belk_pnas2021
+    curated_markers:
+      TOX: 1.0
+      TOX2: 1.0
+      PDCD1: 1.0
+      LAG3: 1.0
+      HAVCR2: 1.0
+      NR4A2: 1.0
+      NR4A3: 1.0
+      TIGIT: 1.0
+      ENTPD1: 1.0
+
+  memory_stem_like:
+    description: Stem-like / central memory persistence program
+    clinical_relevance: Durable CAR-T response; FOXO1 regulon (Nature 2024)
+    source: curated_foxo1_nature2024
+    curated_markers:
+      TCF7: 1.0
+      LEF1: 1.0
+      IL7R: 1.0
+      SELL: 1.0
+      CCR7: 1.0
+      BACH2: 1.0
+      ID3: 1.0
+      KLF2: 1.0
+      FOXO1: 1.0
+
+  cd4_ctl_cytotoxic:
+    description: CD4 cytotoxic / CD4-CTL-like program
+    clinical_relevance: Direct effector function in TCE settings
+    source: curated_review_with_idor  # REVIEW defensibility with IDOR
+    curated_markers:
+      GZMB: 1.0
+      PRF1: 1.0
+      NKG7: 1.0
+      GNLY: 1.0
+      ZEB2: 1.0
+
+  treg:
+    description: Regulatory T-cell program (control / confounder axis)
+    clinical_relevance: CAR-Treg enrichment in non-responders (Haradhvala 2022)
+    source: curated_haradhvala_cartreg
+    curated_markers:
+      FOXP3: 1.0
+      IKZF2: 1.0
+      IL2RA: 1.0
+      CTLA4: 1.0
+
+# Canonical controllers for benchmark (positive ground-truth; see docs/benchmark.md)
+ground_truth_controllers:
+  memory_stem_like: [FOXO1, TCF7, BACH2, ID3]
+  exhaustion_like: [TOX, TOX2, NR4A1, NR4A2, NR4A3, BATF3]
+  structural: [ARID1A, INO80, IKZF1, ETS1]
+
+conditions:
+  - Rest
+  - Stim8hr
+  - Stim48hr
+
+data_paths:
+  de_stats: data/GWCD4i.DE_stats.h5ad
+  pseudobulk: data/GWCD4i.pseudobulk_merged.h5ad
+  suppl_dir: data/supplementary/
