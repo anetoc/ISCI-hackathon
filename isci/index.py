@@ -6,6 +6,32 @@ import numpy as np
 import pandas as pd
 
 
+def rank_product(components: list[pd.Series], names: list[str] | None = None) -> pd.Series:
+    """ISCI-core aggregation: geometric mean of per-component percentile ranks.
+
+    rank_product = ( prod_i rank_pct(component_i) ) ** (1/k), computed in log space.
+    This is the PRIMARY ISCI-core aggregator (revised architecture): non-parametric,
+    scale-free, and robust to the different units of M/Q/R/C. Components are aligned on
+    their union index; a gene missing from a component gets rank 0 there (worst),
+    which is correct — absence of evidence in a component is not neutral.
+
+    Each input is percentile-ranked here (so callers may pass raw component values).
+    Returns a Series in [0,1], higher = stronger candidate state-shift controller.
+    """
+    if not components:
+        raise ValueError("need at least one component")
+    idx = components[0].index
+    for c in components[1:]:
+        idx = idx.union(c.index)
+    log_ranks = []
+    for c in components:
+        r = c.reindex(idx).rank(pct=True)          # NaN -> NaN, ranked among present
+        r = r.fillna(0.0).clip(lower=1e-6)          # missing = worst rank, avoid log(0)
+        log_ranks.append(np.log(r.to_numpy()))
+    rp = np.exp(np.mean(log_ranks, axis=0))
+    return pd.Series(rp, index=idx, name="ISCI_core")
+
+
 def _geomean_eps(components: list[pd.Series], epsilon: float) -> pd.Series:
     """Epsilon-floored geometric mean (C4): a single zero component must not annihilate
     the score, but low components should still pull it down. Aligns on the union index."""

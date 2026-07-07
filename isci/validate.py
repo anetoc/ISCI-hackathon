@@ -19,8 +19,9 @@ def ground_truth_recovery(
     ``scores`` is a gene-level ranking (index = gene symbol, value = ISCI or baseline).
     Positives are ground-truth controllers; negatives default to all non-positive genes
     in ``scores`` (or an explicit expression-matched set). ``leave_one_out_axes`` is a
-    provenance flag recorded in the output — the LOO reconstruction happens upstream in
-    axes.build_axis_vectors; this function asserts the scores were produced that way.
+    provenance flag recorded verbatim in the output for audit; the LOO reconstruction
+    itself happens upstream in axes.build_axis_vectors. This function does not verify
+    how ``scores`` were produced — the caller is responsible for passing LOO scores.
     """
     from sklearn.metrics import average_precision_score, roc_auc_score
 

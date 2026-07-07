@@ -1,0 +1,60 @@
+# Frozen output contract for ISCI-core scores. Every parallel track (tests,
+# benchmark, figures, evidence cards) reads/writes tables matching this schema,
+# so a fixture can be swapped for the real .parquet without code changes.
+
+isci_core_scores:
+  description: >
+    Gene x axis x condition ISCI-core scores with components separated and
+    provenance welded in. One row per (perturbation_gene, axis, condition).
+  required_columns:
+    # identity
+    - perturbation_gene       # target_contrast_gene_name
+    - condition               # Rest | Stim8hr | Stim48hr
+    - axis                    # axis name from config/axes.yaml
+    # components (each in [0,1] unless noted)
+    - M_signed                # signed directional movement (can be negative)
+    - M_rank                  # percentile rank of |M_signed| within (axis, condition)
+    - Q_score                 # causal/QC confidence
+    - R_score                 # donor/guide reproducibility
+    - C_score                 # OPTIONAL state-shift coherence (NaN if not computed)
+    - ISCI_core               # rank_product(M_signed_positive, Q, R, C_optional)
+    - therapeutic_direction   # +1 pro-memory/Th1/activation, -1 pro-exhaustion/Treg
+    # QC provenance columns (from DE_stats.obs)
+    - n_guides
+    - ontarget_significant
+    - low_target_gex
+    - neighboring_gene_KD
+    - distal_offtarget_flag
+    - target_baseMean         # for Marson-native expression-matched negatives
+    - n_cells_target
+    # reproducibility manifest (welded per Rule 6)
+    - data_sha256
+    - axes_sha256
+    - git_sha
+  dtypes:
+    perturbation_gene: str
+    condition: str
+    axis: str
+    M_signed: float
+    M_rank: float
+    Q_score: float
+    R_score: float
+    C_score: float
+    ISCI_core: float
+    therapeutic_direction: int
+    ontarget_significant: bool
+
+benchmark_metrics:
+  description: Recovery metrics per (score, positive_set), LOO axes enforced.
+  required_columns:
+    - score_name              # ISCI_core | M_only | M+Q | M+R | DE_magnitude | n_downstream | ontarget | pert2state | centrality
+    - positive_set            # clinical_curated | marson_native
+    - precision_at_20         # PRIMARY
+    - precision_at_50         # PRIMARY
+    - auprc                   # PRIMARY
+    - rank_stability          # PRIMARY (Spearman across conditions / bootstraps)
+    - auroc                   # secondary (few positives)
+    - n_positives
+    - n_negatives
+    - leave_one_out_axes      # must be true for headline rows
+    - negatives_source        # 'marson_expression_matched' (NOT gtex)
