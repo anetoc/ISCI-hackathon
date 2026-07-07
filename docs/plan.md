@@ -39,6 +39,8 @@ isProject: false
 
 ## Documentos já produzidos (base do refinamento)
 
+> **Operational plan (Jul 7):** use [`execution_plan.json`](execution_plan.json) + updated [`method.md`](method.md) / [`benchmark.md`](benchmark.md) with C1–C8 fixes. This file is the strategic archive.
+
 - [docs/related_work.md](docs/related_work.md) — revisão expandida (§3f vizinhos semânticos, §6b matriz de mecanismos, §7b rede de ajuda, §9–11 features Claude + MCP + repos)
 - [docs/method.md](docs/method.md) — especificação matemática ISCI (M, R, D, A, S)
 - Plano anterior: [immune-state_controllability_ce195daa.plan.md](/Users/abelcosta/.cursor/plans/immune-state_controllability_ce195daa.plan.md)

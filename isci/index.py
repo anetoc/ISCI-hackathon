@@ -11,9 +11,12 @@ def geometric_mean_components(
     a: pd.Series | None,
     s: pd.Series | None,
     r: pd.Series,
+    epsilon: float = 1e-3,
 ) -> pd.Series:
     """
-    ISCI(g,a,c) = R * S * geomean(M, D, A) with missing components omitted (D0 = R * M).
+    ISCI(g,a,c) = R * S * geomean_eps(M, D, A) with epsilon floor (C4).
+
+    D0 degradation: R * geomean_eps(M) when D/A/S absent.
     """
     raise NotImplementedError("Implement in Claude Science build (D0)")
 

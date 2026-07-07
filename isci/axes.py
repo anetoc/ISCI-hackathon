@@ -18,11 +18,12 @@ def build_axis_vectors(
     config: dict[str, Any],
     gene_names: list[str],
     suppl_dir: Path | None = None,
+    leave_one_out: str | None = None,
 ) -> dict[str, np.ndarray]:
     """
     Return unit L2-normalized signature vector u_a per axis, aligned to gene_names.
 
-    Combines curated markers from axes.yaml with data-native tables (Th1/Th2, activation)
-    when suppl_dir is provided.
+    If leave_one_out=gene_symbol, rebuild every axis with that gene removed from
+    curated markers and data-native loadings (C1 — mandatory for benchmark).
     """
     raise NotImplementedError("Implement in Claude Science build (D0)")

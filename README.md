@@ -2,29 +2,33 @@
 
 **Built with Claude: Life Sciences** hackathon (Researcher Track) — genome-scale Perturb-seq in primary human CD4+ T cells → clinically projectable controllability scores for CAR-T and bispecific/T-cell engager resistance.
 
-> Private development repo during the event. Open-source MIT submission by Jul 13, 2026.
+> Private repo during the event → MIT open-source submission by Jul 13, 2026.  
+> **Build environment:** Claude for Life Sciences (CPU-local, Mac 24GB).
 
 ## Thesis
 
-Genome-scale perturbation maps tell us which genes *change* T-cell state, but not which genes *control* it in a reproducible, structurally grounded, and clinically actionable way. **ISCI** separates **controllers** from **associates** using five components:
+Genome-scale perturbation maps tell us which genes *change* T-cell state, but not which genes *control* it in a reproducible, structurally grounded, and clinically actionable way. **ISCI** separates **controllers** from **associates** using five components (all benchmarked under **leave-one-out axes**):
 
 | Component | Meaning |
 |-----------|---------|
 | **M** | Directional movement along functional axes |
 | **R** | Reproducibility (cross-donor / cross-guide) |
-| **D** | Structural network control (GRN + FVS/MDS) |
-| **A** | In-silico concordance (CellOracle / GEARS / pert2state) |
-| **S** | Target-state stability / attractor depth *(novel)* |
+| **D** | Continuous network influence (connector-grounded GRN) |
+| **A** | pert2state linear concordance (also mandatory baseline) |
+| **S** | Magnitude-residualized geometric coherence (Shesha) |
+
+**Headline:** auditable causal index + clinical bridge — not raw stability alone.
 
 ## Documentation
 
 | Document | Purpose |
 |----------|---------|
-| [docs/plan.md](docs/plan.md) | Full phased plan (D0–D6), architecture, handoff |
-| [docs/related_work.md](docs/related_work.md) | Literature review, datasets, connectors, novelty gap |
-| [docs/method.md](docs/method.md) | ISCI mathematical specification |
-| [docs/benchmark.md](docs/benchmark.md) | Ablation design and ground-truth benchmark |
-| [docs/claude_science_prompt.md](docs/claude_science_prompt.md) | Master prompt for Claude for Life Sciences |
+| [docs/execution_plan.json](docs/execution_plan.json) | **Approved phased plan** from Claude Science (D0–D4) |
+| [docs/method.md](docs/method.md) | ISCI spec with C1–C8 peer-review fixes |
+| [docs/benchmark.md](docs/benchmark.md) | LOO ablation design + ground-truth tiers |
+| [docs/related_work.md](docs/related_work.md) | Literature, datasets, connectors |
+| [docs/plan.md](docs/plan.md) | Full strategic plan (D0–D6) |
+| [docs/claude_science_prompt.md](docs/claude_science_prompt.md) | Master prompt (initial critique; fixes now in method.md) |
 
 ## Primary data (not in git — download locally)
 
@@ -38,31 +42,19 @@ aws s3 cp --no-sign-request \
   data/
 ```
 
-Reference: [Marson lab Perturb-seq](https://virtualcellmodels.cziscience.com/dataset/genome-scale-tcell-perturb-seq) · code [`emdann/GWT_perturbseq_analysis_2025`](https://github.com/emdann/GWT_perturbseq_analysis_2025) · baseline [`emdann/pert2state_model`](https://github.com/emdann/pert2state_model)
-
 ## Setup
 
 ```bash
-# Requires Python 3.11+ and uv (https://docs.astral.sh/uv/)
-uv sync
+uv sync   # Python 3.11+
 ```
 
-## Package layout (seed stubs — implementation in Claude Science)
+## Minimum submission (D0–D2)
 
-```
-isci/           # M, R, D, A, S components + validation + evidence cards
-config/axes.yaml
-notebooks/01_isci_d0.ipynb
-```
+LOO benchmark + ranked gene table + **central ablation figure** (ISCI vs pert2state vs DE magnitude).
 
-## Ambition ladder
+## Stretch (D4)
 
-- **D0** — M+R + baselines + ground-truth recovery (minimum submission)
-- **D1** — + network control (D)
-- **D2** — + stability (S) + ablation
-- **D3** — external validation (Belk / Schmidt / Frangieh)
-- **D4** — clinical bridge (CAR-T / bispecific cohorts) — gold for Impact
-- **D5–D6** — multi-omics, foundation models, Claude Science skill
+ISCI signature on Functional CAR-T atlas (phenotype floor) → outcome test if powered.
 
 ## Author
 

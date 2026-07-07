@@ -11,8 +11,9 @@ def ground_truth_recovery(
     scores: pd.Series,
     positives: Sequence[str],
     negatives: Sequence[str] | None = None,
+    leave_one_out_axes: bool = True,
 ) -> dict[str, float]:
-    """Return AUROC, AUPRC, precision@20, precision@50."""
+    """Return AUROC, AUPRC, precision@20, precision@50 (LOO axes required for headline metrics)."""
     raise NotImplementedError("Implement in Claude Science build (D0)")
 
 

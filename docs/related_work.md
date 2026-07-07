@@ -325,21 +325,44 @@ Benchling, BioMart, CellGuide, bioRxiv/medRxiv, ClinicalTrials.gov, Medidata, an
 
 ---
 
-## 10. MCP connectors available in this Cursor workspace (mapped to ISCI pipeline)
+## 10. Connectors — two environments (do not conflate)
 
-| Connector | Tools available | ISCI pipeline stage |
-|---|---|---|
-| **PubMed** | search_articles, get_metadata, find_related, full_text, convert_ids | Literature grounding per gene; related_work expansion |
-| **Consensus** | search (AI evidence synthesis) | Rapid evidence cards for top candidates |
-| **bioRxiv** | (plugin installed) | Preprint checks (Marson, Belk, geometric coherence) |
-| **Wiley Scholar Gateway** | (plugin installed) | Full-text access where available |
-| **Open Targets** | GraphQL query, search_entities, batch_query | Druggability, disease association (LLA/LNH/MM), target validation |
-| **ClinicalTrials.gov** | (plugin installed) | Translational context; active CAR-T/TCE trials |
-| **Medidata** | (plugin installed; check auth) | Trial planning context (stretch) |
-| **Cortellis** | (plugin installed; institutional) | Regulatory intelligence for drug targets |
-| **Context7** | Library docs | pertpy, scanpy, CellOracle API reference during implementation |
+**Build and demo run in Claude for Life Sciences.** Cursor MCPs are for local planning only.
 
-**Workflow rule:** every gene in the final ranking gets an **evidence card**: empirical ISCI score + PubMed/Consensus citation + Open Targets disease link. No hallucinated references.
+### 10a. Claude for Life Sciences (primary — use in implementation)
+
+| Connector / skill | ISCI stage |
+|---|---|
+| `mcp-pubmed` | Evidence cards; literature per gene |
+| `mcp-biorxiv` | Preprint checks (Marson, Belk, Shesha) |
+| `mcp-open-targets` | Druggability, disease (LBCL/MM/ALL) |
+| `mcp-chembl` | Druggability of controller genes |
+| `mcp-clinical-trials` | CAR-T / TCE trial context |
+| `mcp-protein-annotation` (STRING, InterPro, HPA) | **D** — PPI network (Gladstone hook) |
+| `mcp-regulation` (ENCODE, JASPAR, UniBind) | **D** — TF→target edges for GRN |
+| `mcp-omics-archives` (GEO, ArrayExpress) | D3/D4 — GSE151511, Belk, Schmidt |
+| `mcp-genes-ontologies` (MyGene, GO, Reactome) | Axis validation; evidence cards |
+| `mcp-expression` (GTEx) | Benchmark negatives (expression-matched) |
+| `mcp-cellguide` (CELLxGENE) | Validate `axes.yaml` markers |
+| `mcp-human-genetics` (GWAS, eQTL) | Optional controller support |
+| `scvi-tools` | D4 — CAR-T atlas latent projection |
+| `scgpt` | Optional A/S embedding (stretch) |
+| `literature-review` | Hallucination-safe evidence synthesis |
+| `figure-style` / `paper-narrative` | Demo central figure |
+| `hematology-medical-writer` | Clinician report |
+| Sub-agents (`host.delegate`) | Parallel evidence cards (Claude Use 25%) |
+
+**Not available in Claude Science (Cursor-only — do not depend on):** Consensus, Wiley Scholar Gateway, Cortellis, Medidata, Synapse, Owkin, tooluniverse.
+
+### 10b. Cursor workspace (planning / secondary)
+
+| Connector | Notes |
+|---|---|
+| PubMed, Open Targets, bioRxiv, ClinicalTrials | Overlap with Claude Science |
+| Consensus | Useful in Cursor; **not** in Claude Science build path |
+| Context7 | Library docs during local editing |
+
+**Workflow rule:** every top gene gets an evidence card: ISCI score + **PubMed + Open Targets + literature-review** (no hallucinated references).
 
 ---
 
@@ -349,7 +372,7 @@ Benchling, BioMart, CellGuide, bioRxiv/medRxiv, ClinicalTrials.gov, Medidata, an
 |---|---|---|
 | `emdann/GWT_perturbseq_analysis_2025` | — | Understand data structure; figure map |
 | `emdann/pert2state_model` | MIT | **Baseline to beat** (Marson's own approach) |
-| `morris-lab/CellOracle` | MIT | Component A |
+| `morris-lab/CellOracle` | MIT | Descoped (CPU-local); pert2state for A |
 | CEFCON | open | Component D reference |
 | `GuanLab/PSGRN` | — | GRN inference benchmark |
 | `scverse/pertpy` | BSD | Mixscape, Augur, Distance, harmonized datasets |

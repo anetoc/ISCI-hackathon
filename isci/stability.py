@@ -9,10 +9,12 @@ def compute_stability(
     pseudobulk,
     by_guide_path: str | None = None,
     by_donors_path: str | None = None,
+    magnitude_vectors: pd.Series | None = None,
 ) -> pd.DataFrame:
     """
-    Compute S(g,a,c) from geometric coherence across guide and donor replicates.
+    Compute S(g,a,c) via shesha-geometry with magnitude residualization (C3).
 
-    High S = tight attractor; low S = scattered / unstable intermediate state.
+    Pseudobulk by_guide/by_donor dispersion is a proxy — validate on one
+  single-cell subsample. Residualize C_raw against ||z|| before percentile rank.
     """
     raise NotImplementedError("Implement in Claude Science build (D2)")

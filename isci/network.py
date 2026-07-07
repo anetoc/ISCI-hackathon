@@ -12,7 +12,8 @@ def infer_grn(de_stats, method: str = "collectri") -> object:
 
 def compute_structural_control(grn: object, gene_names: list[str]) -> pd.Series:
     """
-    Compute D(g) from driver-set membership (MFVS/MDS) and influence score.
-    Returns percentile-ranked Series in [0, 1].
+    Compute D(g) as continuous influence/controllability score (C5).
+
+    Never use binary MFVS/MDS membership alone. Percentile-rank to [0, 1].
     """
     raise NotImplementedError("Implement in Claude Science build (D1)")

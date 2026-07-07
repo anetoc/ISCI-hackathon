@@ -12,9 +12,9 @@ def build_evidence_card(
     claims: list[str],
 ) -> dict:
     """
-    Build evidence card: ISCI empirical score + connector-sourced citations.
+    Build evidence card: ISCI score + PubMed + Open Targets + literature-review.
 
-    No hallucinated references — every claim must map to a connector result or local data.
+    No hallucinated references. Consensus is NOT available in Claude Science.
     """
     raise NotImplementedError("Implement in Claude Science build (D0+)")
 

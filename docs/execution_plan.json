@@ -1,0 +1,165 @@
+{
+  "version": 3,
+  "created_at": "2026-07-07T19:30:01.930Z",
+  "task_summary": "Build and benchmark ISCI on Marson CD4+ Perturb-seq, CPU-local, with a leak-controlled ablation figure and CAR-T clinical bridge",
+  "agents": [],
+  "phases": [
+    {
+      "name": "D0 — Data, axes, and the leak-controlled core",
+      "delegations": [
+        {
+          "name": "Core index",
+          "steps": [
+            {
+              "title": "Load data + provenance manifest",
+              "description": "Implement isci/io.py: load GWCD4i.DE_stats.h5ad and pseudobulk_merged.h5ad from data/ (download via aws s3 --no-sign-request), SHA-256 every input, write an execution manifest (versions, hashes, seeds, git-SHA). Confirm .obs/.layers/.varm structure matches method.md §12a."
+            },
+            {
+              "title": "Build axes with leave-one-out",
+              "description": "Implement isci/axes.py: build unit-normalized signature vectors u_a from config/axes.yaml curated markers + data-native Th1/Th2 and activation loadings. Add leave-one-out mode that rebuilds every axis with a scored gene removed (fixes C1). Cross-check markers against CELLxGENE via mcp-cellguide."
+            },
+            {
+              "title": "Compute M and R",
+              "description": "Implement isci/movement.py (M = percentile-ranked |cosine(z, u_a)| with sign kept) and isci/repro.py (R from donor_correlation_hits_mean, guide_correlation_signif, gated by ontarget_significant). Compute per (g,a,c)."
+            },
+            {
+              "title": "Baselines + ground-truth benchmark",
+              "description": "Implement isci/baselines.py (DE-magnitude, effect-size, centrality-only) and isci/validate.py ground_truth_recovery (AUROC/AUPRC/precision@k). Assemble positive set (clinical-curated leads; Marson-native secondary) and expression-matched negatives via GTEx (mcp-expression). Report all metrics under leave-one-out."
+            },
+            {
+              "title": "D0 ISCI = R x geomean(M) + report",
+              "description": "Implement isci/index.py minimal aggregation (R-gated M) with epsilon floor. Produce the first ranked gene table and a draft AUROC readout. This is the guaranteed minimum submission."
+            }
+          ]
+        }
+      ],
+      "id": "phase-0"
+    },
+    {
+      "name": "D1–D2 — Network control, stability, ablation figure",
+      "delegations": [
+        {
+          "name": "Structural control D",
+          "steps": [
+            {
+              "title": "Connector-grounded GRN",
+              "description": "Implement isci/network.py: build a directed GRN from CollecTRI priors intersected with STRING (mcp-protein-annotation) and JASPAR/UniBind TFBS (mcp-regulation) edges, restricted to measured genes. Avoid fragile de-novo GRNBoost2."
+            },
+            {
+              "title": "Influence-based D score",
+              "description": "Score D as a continuous influence/controllability contribution (fraction of minimal driver sets containing g, or CEFCON-style influence), never binary MFVS/MDS membership (fixes C5). Percentile-rank to [0,1]."
+            },
+            {
+              "title": "Magnitude-residualized stability S",
+              "description": "Implement isci/stability.py using shesha-geometry: compute geometric coherence, then residualize against effect magnitude so S is orthogonal to M (fixes C3). Use by_guide/by_donor replicate dispersion as the pseudobulk proxy and validate against true single-cell Shesha on one subsampled perturbation set."
+            },
+            {
+              "title": "A via pert2state linear concordance",
+              "description": "Implement isci/insilico.py: run the pert2state linear model (also the mandated must-beat baseline) and compute A as predicted-vs-observed axis-projection concordance. No GEARS/CellOracle (CPU-local decision)."
+            },
+            {
+              "title": "Full aggregation + component-appropriate nulls",
+              "description": "Complete isci/index.py: ISCI = R x S x geomean(M,D,A) with epsilon floor; null via label permutation for M, degree-preserving rewiring for D, within-perturbation guide shuffling for S (fixes C6); BH-FDR q-values."
+            },
+            {
+              "title": "Central ablation figure",
+              "description": "Implement isci/validate.py ablation_curve; render the central figure (AUROC/AUPRC for ISCI-full vs -D/-A/-S vs M+R-only vs each baseline incl. pert2state) using figure-style. Include cross-donor and cross-condition holdouts."
+            }
+          ]
+        }
+      ],
+      "id": "phase-1"
+    },
+    {
+      "name": "D3–D4 — External transfer and clinical bridge",
+      "delegations": [
+        {
+          "name": "External transfer",
+          "steps": [
+            {
+              "title": "Frangieh transfer",
+              "description": "Load Frangieh Perturb-CITE-seq via pertpy (pt.data.frangieh_2021); test rank-correlation of ISCI controllability across datasets using pertpy Distance/Augur. Do this first (zero download friction)."
+            },
+            {
+              "title": "Belk + Schmidt transfer",
+              "description": "Pull Belk 2022 and Schmidt 2022 via mcp-omics-archives (GEO); test whether Marson-trained ISCI recovers their hits better than raw DE. Belk is the ARID1A/INO80 Gladstone tie-in."
+            }
+          ]
+        },
+        {
+          "name": "Clinical bridge",
+          "steps": [
+            {
+              "title": "Project ISCI onto CAR-T atlas",
+              "description": "Load the Functional CAR-T atlas (Zenodo 10.5281/zenodo.17213452) using its pre-computed scVI-hub latent (no re-integration). Build a per-sample ISCI controllability signature score and project it onto the atlas."
+            },
+            {
+              "title": "Phenotype separation floor",
+              "description": "Before any outcome test, verify the ISCI controllability signature separates exhaustion vs memory/stem phenotypes in the atlas latent (near-guaranteed positive control). This is the minimum-acceptable D4 result: a figure that lands even if outcome separation is weak. Correct for study/batch (13 studies) before interpreting."
+            },
+            {
+              "title": "Responder vs non-responder test",
+              "description": "Implement isci/validate.py project_clinical_signature: only after the phenotype floor lands, test responder/non-responder separation (AUROC) with study as a covariate/holdout, benchmark against a TCF7/FOXO1-regulon reference. Report honestly if underpowered; keep hypothesis-generated strictly separate from evidence-supported."
+            }
+          ]
+        }
+      ],
+      "id": "phase-2"
+    },
+    {
+      "name": "D5 (stretch, cut-first) — Gladstone chromatin layer",
+      "delegations": [
+        {
+          "name": "Chromatin validation",
+          "steps": [
+            {
+              "title": "Verify CPU feasibility of borzoi/evo2",
+              "description": "Before promising anything: load the borzoi and evo2 skills and confirm a handful of loci can be scored on CPU-local within demo time. If infeasible CPU-local, stop here and report — do not reopen remote compute unless the user asks."
+            },
+            {
+              "title": "Regulatory-variant effect on top controllers",
+              "description": "For ~10-20 top ISCI controllers (e.g. FOXO1, TOX, ARID1A), score predicted chromatin/expression effects of regulatory variants in their loci using borzoi/evo2 + mcp-regulation (ENCODE ATAC) and mcp-genomes (VEP/UCSC). One focused mechanistic-validation figure. Runs only if D2+D4 close early; first to cut under time pressure."
+            }
+          ]
+        }
+      ],
+      "id": "phase-chromatin"
+    },
+    {
+      "name": "Continuous — Evidence cards, report, demo, packaging",
+      "delegations": [
+        {
+          "name": "Evidence + delivery",
+          "steps": [
+            {
+              "title": "Per-gene evidence cards",
+              "description": "Implement isci/evidence.py: for each top-ranked gene, build a claim->citation card from PubMed (mcp-pubmed) + Open Targets (mcp-open-targets) + literature-review skill, fact-checked, no hallucinated references. Fan out with sub-agents for parallelism (Claude Use)."
+            },
+            {
+              "title": "Clinician report",
+              "description": "Draft a clinician-readable report tying top controllers to CAR-T failure / bispecific resistance, using hematology-medical-writer. Flag explicitly where resistance is tumor-intrinsic or microenvironmental (out of ISCI scope)."
+            },
+            {
+              "title": "Demo, summary, MIT repo, skill",
+              "description": "Assemble the 3-minute demo assets (problem -> ISCI figure -> live evidence card -> ablation -> clinical bridge), the 100-200 word written summary, ensure MIT license and event-timestamped commit history, and package the pipeline as a reusable Claude Science skill with per-artifact provenance."
+            }
+          ]
+        }
+      ],
+      "id": "phase-3"
+    }
+  ],
+  "desired_outputs": [
+    "Ranked ISCI gene table (per-axis + overall) with null-permutation q-values, saved as CSV",
+    "Central ablation figure: AUROC/AUPRC for ISCI-full vs ablated variants vs baselines (DE-magnitude, effect-size, centrality, pert2state), under leave-one-out axis construction",
+    "Per-gene evidence cards for top controllers (claim -> PubMed/Open Targets citation, fact-checked) as markdown/JSON",
+    "Clinical-bridge figure: ISCI controllability signature projected onto Functional CAR-T atlas latent, responder vs non-responder separation (AUROC)",
+    "Reproducibility manifest (data SHA-256, env, seeds, git-SHA) welded to every artifact",
+    "Implemented isci/ Python package (io, axes, movement, repro, network, insilico, stability, index, baselines, validate, evidence)",
+    "3-minute demo assets + 100-200 word written summary + MIT repo, packaged as a reusable Claude Science skill"
+  ],
+  "feasibility": {
+    "confidence": "medium",
+    "rationale": "Core index, benchmark, and ablation (D0-D2) are firmly feasible CPU-local on DE_stats/pseudobulk; leakage and identifiability fixes are well-scoped. The clinical bridge (D4) is de-risked with a guaranteed phenotype-separation floor before the outcome test, which may still be underpowered. The Gladstone chromatin layer (D5) is an explicit cut-first stretch, gated on CPU feasibility. S's independent value depends on magnitude-residualization holding up empirically."
+  }
+}
