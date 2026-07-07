@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Sequence
 
+import numpy as np
 import pandas as pd
 
 
@@ -13,8 +14,41 @@ def ground_truth_recovery(
     negatives: Sequence[str] | None = None,
     leave_one_out_axes: bool = True,
 ) -> dict[str, float]:
-    """Return AUROC, AUPRC, precision@20, precision@50 (LOO axes required for headline metrics)."""
-    raise NotImplementedError("Implement in Claude Science build (D0)")
+    """Return AUROC, AUPRC, precision@20, precision@50.
+
+    ``scores`` is a gene-level ranking (index = gene symbol, value = ISCI or baseline).
+    Positives are ground-truth controllers; negatives default to all non-positive genes
+    in ``scores`` (or an explicit expression-matched set). ``leave_one_out_axes`` is a
+    provenance flag recorded in the output — the LOO reconstruction happens upstream in
+    axes.build_axis_vectors; this function asserts the scores were produced that way.
+    """
+    from sklearn.metrics import average_precision_score, roc_auc_score
+
+    scores = scores.dropna()
+    pos = set(g for g in positives if g in scores.index)
+    if negatives is not None:
+        neg = set(g for g in negatives if g in scores.index) - pos
+    else:
+        neg = set(scores.index) - pos
+
+    idx = list(pos | neg)
+    y = np.array([1 if g in pos else 0 for g in idx])
+    s = scores.reindex(idx).to_numpy()
+
+    ranked = scores.sort_values(ascending=False)
+    def _precision_at_k(k: int) -> float:
+        topk = set(ranked.head(k).index)
+        return len(topk & pos) / float(k)
+
+    return {
+        "auroc": float(roc_auc_score(y, s)) if y.sum() and (len(y) - y.sum()) else float("nan"),
+        "auprc": float(average_precision_score(y, s)) if y.sum() else float("nan"),
+        "precision_at_20": _precision_at_k(20),
+        "precision_at_50": _precision_at_k(50),
+        "n_positives": int(y.sum()),
+        "n_negatives": int(len(y) - y.sum()),
+        "leave_one_out_axes": bool(leave_one_out_axes),
+    }
 
 
 def ablation_curve(
