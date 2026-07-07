@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+
+# Cursor internal state (keep plans, drop hook state)
+.cursor/hooks/
+
+# Data (large, downloaded from public sources; not versioned)
+data/
+*.h5ad
+*.h5mu
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.uv/
+.ipynb_checkpoints/
+
+# Env / secrets
+.env
+.env.*
