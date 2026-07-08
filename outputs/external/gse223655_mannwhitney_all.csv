@@ -1,0 +1,37 @@
+compartment,module,axis,n_CR,n_PD,mean_CR,mean_PD,delta_CR_minus_PD,p_onesided,hypothesis
+CD8+CAR T cells,R_memory_stem,sensitivity,6,5,0.413,-0.4956,0.9087,0.0043,higher_in_CR
+CD8+CAR T cells,R_migration,sensitivity,6,5,-0.0351,0.0421,-0.0771,0.6039,higher_in_CR
+CD8+CAR T cells,R_killing,sensitivity,6,5,-0.0332,0.0399,-0.0731,0.5346,higher_in_CR
+CD8+CAR T cells,NR_Treg,resistance,6,5,-0.0049,0.0059,-0.0108,0.6039,higher_in_PD_expected
+CD8+CAR T cells,NR_exhaustion,resistance,6,5,-0.0687,0.0824,-0.1511,0.5346,higher_in_PD_expected
+CD8+CAR T cells,toxicity_infl,resistance,6,5,0.1277,-0.1533,0.281,0.8355,higher_in_PD_expected
+CD4+CAR T cells,R_memory_stem,sensitivity,6,6,0.282,-0.282,0.564,0.0465,higher_in_CR
+CD4+CAR T cells,R_migration,sensitivity,6,6,0.0128,-0.0128,0.0257,0.1201,higher_in_CR
+CD4+CAR T cells,R_killing,sensitivity,6,6,0.1528,-0.1528,0.3056,0.2944,higher_in_CR
+CD4+CAR T cells,NR_Treg,resistance,6,6,0.0461,-0.0461,0.0923,0.5909,higher_in_PD_expected
+CD4+CAR T cells,NR_exhaustion,resistance,6,6,-0.1082,0.1082,-0.2164,0.2944,higher_in_PD_expected
+CD4+CAR T cells,toxicity_infl,resistance,6,6,0.4355,-0.4355,0.871,0.987,higher_in_PD_expected
+Non-Naïve CD4 T cells,R_memory_stem,sensitivity,6,6,0.4118,-0.4118,0.8236,0.0465,higher_in_CR
+Non-Naïve CD4 T cells,R_migration,sensitivity,6,6,0.1838,-0.1838,0.3676,0.0898,higher_in_CR
+Non-Naïve CD4 T cells,R_killing,sensitivity,6,6,0.0495,-0.0495,0.099,0.7056,higher_in_CR
+Non-Naïve CD4 T cells,NR_Treg,resistance,6,6,0.1563,-0.1563,0.3126,0.9102,higher_in_PD_expected
+Non-Naïve CD4 T cells,NR_exhaustion,resistance,6,6,0.0081,-0.0081,0.0162,0.4686,higher_in_PD_expected
+Non-Naïve CD4 T cells,toxicity_infl,resistance,6,6,-0.2629,0.2629,-0.5257,0.0465,higher_in_PD_expected
+Non-Naïve CD8 T cells,R_memory_stem,sensitivity,5,5,0.1845,-0.1845,0.3691,0.3452,higher_in_CR
+Non-Naïve CD8 T cells,R_migration,sensitivity,5,5,0.0713,-0.0713,0.1425,0.3452,higher_in_CR
+Non-Naïve CD8 T cells,R_killing,sensitivity,5,5,-0.005,0.005,-0.0101,0.4206,higher_in_CR
+Non-Naïve CD8 T cells,NR_Treg,resistance,5,5,-0.0828,0.0828,-0.1655,0.1548,higher_in_PD_expected
+Non-Naïve CD8 T cells,NR_exhaustion,resistance,5,5,-0.2265,0.2265,-0.453,0.1111,higher_in_PD_expected
+Non-Naïve CD8 T cells,toxicity_infl,resistance,5,5,-0.0779,0.0779,-0.1557,0.3452,higher_in_PD_expected
+Naïve CD4 T cells,R_memory_stem,sensitivity,5,5,0.448,-0.448,0.896,0.0278,higher_in_CR
+Naïve CD4 T cells,R_migration,sensitivity,5,5,0.1894,-0.1894,0.3788,0.1548,higher_in_CR
+Naïve CD4 T cells,R_killing,sensitivity,5,5,-0.2769,0.2769,-0.5539,0.8452,higher_in_CR
+Naïve CD4 T cells,NR_Treg,resistance,5,5,-0.0863,0.0863,-0.1726,0.2103,higher_in_PD_expected
+Naïve CD4 T cells,NR_exhaustion,resistance,5,5,-0.0675,0.0675,-0.135,0.4206,higher_in_PD_expected
+Naïve CD4 T cells,toxicity_infl,resistance,5,5,-0.1129,0.1129,-0.2258,0.2738,higher_in_PD_expected
+Naïve CD8 T cells,R_memory_stem,sensitivity,5,5,0.5935,-0.5935,1.1869,0.004,higher_in_CR
+Naïve CD8 T cells,R_migration,sensitivity,5,5,0.1575,-0.1575,0.315,0.0754,higher_in_CR
+Naïve CD8 T cells,R_killing,sensitivity,5,5,0.3369,-0.3369,0.6737,0.1111,higher_in_CR
+Naïve CD8 T cells,NR_Treg,resistance,5,5,0.0982,-0.0982,0.1963,0.7262,higher_in_PD_expected
+Naïve CD8 T cells,NR_exhaustion,resistance,5,5,-0.0262,0.0262,-0.0525,0.5,higher_in_PD_expected
+Naïve CD8 T cells,toxicity_infl,resistance,5,5,-0.0046,0.0046,-0.0092,0.5,higher_in_PD_expected
