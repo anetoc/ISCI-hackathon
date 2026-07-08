@@ -1,0 +1,30 @@
+# Python env for the institutional machine (vuno-idor) — pip venv under /mnt/dados2/abel-tsc
+# Built by Claude Code. Matches the Claude Science 'isci' stack + GPU extras.
+# Create:  python3 -m venv /mnt/dados2/abel-tsc/venv-tsc && source /mnt/dados2/abel-tsc/venv-tsc/bin/activate
+# Install: pip install -r envs/requirements_machine.txt
+
+# --- core scientific stack (CPU, matches Claude Science) ---
+numpy>=1.26
+pandas>=2.1
+scipy>=1.11
+scikit-learn>=1.4
+statsmodels>=0.14
+matplotlib>=3.8
+seaborn>=0.13
+pyarrow>=15
+pyyaml>=6.0
+
+# --- single-cell ---
+scanpy>=1.10
+anndata>=0.10
+
+# --- gene-set / enrichment (L3 synapse set, family enrichment) ---
+gseapy>=1.1
+
+# --- GRN / pathway activity (optional, for closure experiments) ---
+decoupler>=1.6
+
+# --- GPU-accelerated single cell (install ONLY on the GPU machine, CUDA build) ---
+# These are heavy and CUDA-specific; install separately once the base stack works:
+#   pip install scvi-tools    # probabilistic latent factors at cell-level (TSC estimation)
+# For rapids-singlecell (GPU scanpy) follow NVIDIA's channel; not pip-trivial.

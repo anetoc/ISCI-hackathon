@@ -54,6 +54,27 @@ synapse/killing?) needs functional data — that is what the tasks here are abou
 - **Sync protocol:** pull before work, commit + push when a task finishes. Abel relays
   results back to Claude Science, who reviews and writes the next brief.
 
+## Tooling — use OUR method skill, not ad-hoc code
+
+This repo ships the project's own skill at `skills/isci-controllership/` (SKILL.md +
+kernel.py). It is the **single source of truth** for the CCI method: expression-matched
+negatives, leave-marker-out axes, conditional LR test, bootstrap AUPRC gain, movability
+gate, clinical reversal score, matched-null enrichment, confounder ledger. **Reuse these
+helpers — do not re-implement the statistics.**
+
+- The kernel.py functions are plain numpy/pandas/scipy/sklearn (no external deps). Import
+  them directly: `import sys; sys.path.insert(0, "skills/isci-controllership"); import kernel`
+  then e.g. `kernel.bootstrap_auprc_gain(...)`, `kernel.expression_matched_negatives(...)`.
+- To have Claude Code auto-discover it as a native skill, copy it once:
+  `mkdir -p .claude/skills && cp -r skills/isci-controllership .claude/skills/`
+  (`.claude/` is machine-local / gitignored — recreate it after a fresh clone).
+- Environment: build a pip venv from `envs/requirements_machine.txt` (see its header).
+  Heavy GPU extras (scvi-tools, rapids) are listed but commented — install only when a
+  task needs cell-level latent estimation on the GPU.
+
+Do NOT install unrelated Claude Code marketplace plugins — they cost context every turn
+and add nothing to this analysis. The only tooling we need is this repo's skill + the venv.
+
 ## Active task
 
 See `briefs/01_behav3d_p3_proxy.md` — the first job (BEHAV3D GSE172325 as a correlational
