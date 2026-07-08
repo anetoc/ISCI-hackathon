@@ -1,0 +1,7 @@
+variant,system,n_pos,n_neg,rho_CM,LR_p_C,dAUPRC,CI_lo,CI_hi,P_gt0,verdict
+Marson CD4+ (immune anchor),immune / KD-KO,19,matched,0.02,<1e-4,0.229,0.072,0.405,0.996,PASS
+Replogle RPE1 (non-immune proliferation),non-immune / CRISPRi prolif,33,219,-0.005,0.195,0.06,-0.013,0.204,0.894,FAIL
+"Norman K562 gate50 (PRIMARY, non-immune differentiation)",non-immune / CRISPRa differentiation,13,32,0.052,0.0128,0.1377,-0.033,0.3701,0.926,FAIL
+Norman K562 gate25 (looser),non-immune / CRISPRa differentiation,19,54,0.006,0.0103,0.125,-0.0058,0.3063,0.9573333333333334,FAIL
+Norman K562 gate67 (stricter),non-immune / CRISPRa differentiation,12,21,-0.015,0.005,0.2372,0.0038,0.4686,0.976,PASS
+Norman K562 gate50 npp6 seed7,non-immune / CRISPRa differentiation,13,28,0.052,0.0239,0.1464,-0.0156,0.3644,0.9446666666666667,FAIL

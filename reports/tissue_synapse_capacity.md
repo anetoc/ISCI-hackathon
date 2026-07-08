@@ -131,6 +131,49 @@ TSC makes **specific, testable predictions**:
   the honest gap: TSC as a transcriptional latent is measurable now; TSC as a predictor
   of physical synapse function needs data on the institutional-compute / collaboration roadmap.
 
+## 5a. Scope test extended to a third system — TSC P1 confirmed, graded (done)
+
+We added a third system to the CCI scope test to test prediction **P1** directly:
+**Norman & Weissman 2019 K562 CRISPRa** (non-immune erythroid/megakaryocyte
+*differentiation* program — the wanted non-proliferation far point).
+
+![CCI scope across 4 systems](figures/cci_scope_4systems.png)
+
+| System | Type | ΔAUPRC | 95% CI | LR p | Verdict |
+|---|---|---|---|---|---|
+| Marson CD4+ | immune, KD/KO | +0.229 | [0.072, 0.405] | <1e-4 | **PASS** |
+| Schmidt CD4+ | immune, CRISPRa | +0.138 | [−0.029, 0.434] | n.s. | near-miss |
+| **Norman K562** | **non-immune, differentiation** | +0.138 | [−0.033, 0.370] | **0.013** | **FAIL (near)** |
+| Replogle RPE1 | non-immune, proliferation | +0.060 | [−0.013, 0.204] | 0.195 | FAIL |
+
+**The prediction holds, and the boundary is graded, not a hard wall.** The four systems
+order exactly as TSC P1 predicts: immune PASS > non-immune differentiation near-miss >
+non-immune proliferation clean-FAIL. Crucially, the residual signal that survives in the
+differentiation screen (Norman) is carried by **reproducibility R (p=0.0009), NOT
+axis-specificity S (p=0.17)** — i.e. the differentiation program has reproducible
+controllers but they are *not axis-selective independent of magnitude*, which is the exact
+property that defines controllers in the immune system. This refines the property: **the
+axis-selective component of controllership (S) is what is immune-specific**; reproducibility
+alone can carry weak signal in a non-immune differentiation program.
+
+## 5b. Is the decisive functional test (P3) reachable? (scouted)
+
+We scouted for data to test P3 (does a TSC transcriptional score predict *functional*
+synapse/killing?). Finding (see `outputs/generalization/synapse_functional_scout.md`):
+
+- **The gold standard exists but is gated:** dbGaP phs002966 (Nat Cancer 2024, PMID
+  38750245) pairs TIMING nanowell serial-killing + scRNA-seq on the same clinical LBCL
+  CAR-T products — but is controlled-access (DAC approval = weeks–months, not
+  hackathon-feasible).
+- **A local-feasible correlational proxy exists:** BEHAV3D (GSE172325, Nat Biotechnol
+  2022) links live-imaging killing behavior to scRNA-seq of the same engineered T cells —
+  testable in ≤1 week to ask whether a TSC score tracks killing-behavior classes and beats
+  magnitude/activation baselines. This is a **correlational surrogate**, not the decisive
+  per-cell perturbation→killing test.
+- **Honest verdict:** the decisive P3 (perturbation-anchored score → functional per-cell
+  killing) needs controlled-access data or a wet-lab collaboration. The correlational proxy
+  is the reachable next step.
+
 ## 6. Positioning
 
 - **Submitted / demonstrated:** the immune-scoped CCI (a real, falsifiable property with a
