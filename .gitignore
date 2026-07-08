@@ -23,3 +23,24 @@ __pycache__/
 
 # Transient run logs
 logs/
+
+# Large datasets and local compute
+data/
+data_public/
+*.h5ad
+*.h5mu
+*.loom
+*.mtx
+*.tar
+*.tar.gz
+*.fastq
+*.bam
+*.cram
+tmp/
+scratch/
+logs/*.log
+.env
+.env.*
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store

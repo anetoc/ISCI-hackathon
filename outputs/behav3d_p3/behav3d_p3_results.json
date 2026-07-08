@@ -1,0 +1,252 @@
+{
+  "replication": {
+    "verdict": "NOT-EVALUABLE",
+    "reason": "No GEO count matrix corresponds to the Pseudotime engagement metadata; well-ID barcodes collide across independent experiments (same ID, contradictory engagement labels), so any expression join is invalid.",
+    "pseudo_counts_is_nonexposed": true,
+    "n_pseudo_meta": 3296,
+    "n_spurious_match_exposed_counts": 1516,
+    "label_contradiction_crosstab": {
+      "engager": {
+        "medium-exposed": 181,
+        "never-engaged": 0,
+        "super-engaged": 208
+      },
+      "medium-exposed": {
+        "medium-exposed": 0,
+        "never-engaged": 293,
+        "super-engaged": 179
+      },
+      "never-engaged": {
+        "medium-exposed": 0,
+        "never-engaged": 160,
+        "super-engaged": 66
+      },
+      "nonengager": {
+        "medium-exposed": 144,
+        "never-engaged": 0,
+        "super-engaged": 0
+      },
+      "super-engaged": {
+        "medium-exposed": 0,
+        "never-engaged": 200,
+        "super-engaged": 85
+      }
+    }
+  },
+  "confounder_guard": {
+    "exposed": {
+      "source": "expression-derived (CD8A/CD8B>0)",
+      "crosstab": {
+        "CD8+": {
+          "medium-exposed": 322,
+          "never-engaged": 654,
+          "super-engaged": 745
+        },
+        "CD8-": {
+          "medium-exposed": 153,
+          "never-engaged": 381,
+          "super-engaged": 189
+        }
+      },
+      "cd8frac_super": 0.797644539614561,
+      "cd8frac_never": 0.6318840579710145,
+      "ratio": 1.2623273677386402
+    }
+  },
+  "exposed_all": {
+    "tag": "exposed_all",
+    "label": "exposed super-vs-never (all cells)",
+    "n": 1969,
+    "n_pos": 934,
+    "n_neg": 1035,
+    "metrics": {
+      "TSC": {
+        "auroc": 0.34981224591130555,
+        "auprc": 0.37401264375778204
+      },
+      "activation": {
+        "auroc": 0.9906278124321137,
+        "auprc": 0.9889616246112174
+      },
+      "cd8_identity": {
+        "auroc": 0.847928498277628,
+        "auprc": 0.8292793175523319
+      },
+      "total_counts": {
+        "auroc": 0.7265162565041534,
+        "auprc": 0.6961223196029005
+      }
+    },
+    "loading_auroc": {
+      "L1_state": 0.3027454509718731,
+      "L2_migration": 0.15443213439675593,
+      "L3_synapse": 0.29801073767184927,
+      "L4_killing": 0.9473585120359163
+    },
+    "diff_vs": {
+      "activation": {
+        "dAUROC_mean": -0.641314104556888,
+        "dAUROC_ci": [
+          -0.6662238232493537,
+          -0.6164101004524053
+        ],
+        "dAUPRC_mean": -0.6142499180463744,
+        "dAUPRC_ci": [
+          -0.6363263340308836,
+          -0.5909190486592731
+        ]
+      },
+      "cd8_identity": {
+        "dAUROC_mean": -0.4984596900361076,
+        "dAUROC_ci": [
+          -0.5266023231656746,
+          -0.4703393776389401
+        ],
+        "dAUPRC_mean": -0.45447401087202965,
+        "dAUPRC_ci": [
+          -0.4791772197664315,
+          -0.4298735101020558
+        ]
+      },
+      "total_counts": {
+        "dAUROC_mean": -0.3770694339220761,
+        "dAUROC_ci": [
+          -0.41097828864894825,
+          -0.34509036180300046
+        ],
+        "dAUPRC_mean": -0.321597307316346,
+        "dAUPRC_ci": [
+          -0.3518381226367982,
+          -0.29276927736701525
+        ]
+      }
+    },
+    "spearman": {
+      "activation": -0.2729662624461498,
+      "cd8_identity": -0.1145345730558207,
+      "total_counts": -0.11507662185630244
+    }
+  },
+  "exposed_cd8only": {
+    "tag": "exposed_cd8only",
+    "label": "exposed super-vs-never (CD8+ stratum)",
+    "n": 1399,
+    "n_pos": 745,
+    "n_neg": 654,
+    "metrics": {
+      "TSC": {
+        "auroc": 0.37273566898589994,
+        "auprc": 0.43867541635191537
+      },
+      "activation": {
+        "auroc": 0.9932372801346386,
+        "auprc": 0.9932608011845246
+      },
+      "cd8_identity": {
+        "auroc": 0.8601563943106952,
+        "auprc": 0.8668133059752311
+      },
+      "total_counts": {
+        "auroc": 0.7223713646532439,
+        "auprc": 0.7295759741718602
+      }
+    },
+    "loading_auroc": {
+      "L1_state": 0.36743016645116267,
+      "L2_migration": 0.15012211891714386,
+      "L3_synapse": 0.28351702481374297,
+      "L4_killing": 0.9543767830388111
+    },
+    "diff_vs": {
+      "activation": {
+        "dAUROC_mean": -0.6204567007495794,
+        "dAUROC_ci": [
+          -0.6473076399410188,
+          -0.5909600171767356
+        ],
+        "dAUPRC_mean": -0.552871635122468,
+        "dAUPRC_ci": [
+          -0.5804671582816763,
+          -0.5239721902787121
+        ]
+      },
+      "cd8_identity": {
+        "dAUROC_mean": -0.4875349871941186,
+        "dAUROC_ci": [
+          -0.5209622166385824,
+          -0.45278729066457646
+        ],
+        "dAUPRC_mean": -0.42678901483984605,
+        "dAUPRC_ci": [
+          -0.45612495359232275,
+          -0.3982081070329514
+        ]
+      },
+      "total_counts": {
+        "dAUROC_mean": -0.34926660266783655,
+        "dAUROC_ci": [
+          -0.3877290024109858,
+          -0.30719134779408475
+        ],
+        "dAUPRC_mean": -0.28970225325969073,
+        "dAUPRC_ci": [
+          -0.3240430454161666,
+          -0.25376139864174446
+        ]
+      }
+    },
+    "spearman": {
+      "activation": -0.21929110703143048,
+      "cd8_identity": -0.06781567283980106,
+      "total_counts": -0.11763139347521569
+    }
+  },
+  "score_by_class": {
+    "TSC": {
+      "medium-exposed": 0.22194781121521287,
+      "never-engaged": 0.049557183217128965,
+      "super-engaged": -0.16779110809095768
+    },
+    "b_activation": {
+      "medium-exposed": -0.949013031931427,
+      "never-engaged": -0.567460478608138,
+      "super-engaged": 1.111459085146521
+    }
+  },
+  "coverage": {
+    "exposed": {
+      "memory_stem": {
+        "present": 9,
+        "total": 9
+      },
+      "exhaustion": {
+        "present": 8,
+        "total": 8
+      },
+      "migration": {
+        "present": 8,
+        "total": 8
+      },
+      "synapse": {
+        "present": 23,
+        "total": 23
+      },
+      "killing": {
+        "present": 7,
+        "total": 7
+      },
+      "activation": {
+        "present": 11,
+        "total": 11
+      },
+      "cd8_pos": {
+        "present": 5,
+        "total": 5
+      },
+      "cd4_pos": {
+        "present": 2,
+        "total": 2
+      }
+    }
+  }
+}
