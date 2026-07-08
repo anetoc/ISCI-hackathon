@@ -52,6 +52,48 @@ def ground_truth_recovery(
     }
 
 
+def expression_matched_negatives(
+    positives: Sequence[str],
+    obs: pd.DataFrame,
+    gene_col: str = "target_contrast_gene_name",
+    match_cols: Sequence[str] = ("target_baseMean", "n_cells_target"),
+    n_per_positive: int = 5,
+    exclude: Sequence[str] | None = None,
+    seed: int = 42,
+) -> list[str]:
+    """Marson-native negatives matched to positives on expression/power covariates.
+
+    For each positive, pick the ``n_per_positive`` nearest perturbations (by standardized
+    Euclidean distance over ``match_cols``, computed on the per-gene means from ``obs``)
+    that are NOT positives and NOT in ``exclude``. This removes the confound where the
+    positives are simply higher-expressed or better-powered than a random background —
+    the red-team's requirement (NOT GTEx bulk, NOT the full 11k background).
+
+    Returns a de-duplicated list of matched negative gene symbols.
+    """
+    rng = np.random.default_rng(seed)
+    per_gene = obs.groupby(gene_col, observed=True)[list(match_cols)].apply(
+        lambda d: d.apply(lambda s: np.nanmean(pd.to_numeric(s, errors="coerce")))
+    )
+    per_gene = per_gene.dropna()
+    # standardize covariates
+    Z = (per_gene - per_gene.mean()) / (per_gene.std(ddof=0) + 1e-12)
+    pos = set(positives)
+    excl = set(exclude or []) | pos
+    cand = Z.index[~Z.index.isin(excl)]
+    chosen: list[str] = []
+    used: set[str] = set()
+    for g in positives:
+        if g not in Z.index:
+            continue
+        d = np.sqrt(((Z.loc[cand] - Z.loc[g]) ** 2).sum(axis=1))
+        order = d.sort_values().index
+        picked = [x for x in order if x not in used][:n_per_positive]
+        chosen.extend(picked)
+        used.update(picked)
+    return sorted(set(chosen))
+
+
 def ablation_curve(
     full_scores: pd.DataFrame,
     variants: dict[str, pd.DataFrame],
