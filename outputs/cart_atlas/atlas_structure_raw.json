@@ -1,0 +1,680 @@
+{
+  "h5ad": "/mnt/dados2/abel-tsc/data_public/cart/Atlas_integ_scArches_FINAL_V5.h5ad",
+  "n_obs": 455370,
+  "n_var": 48740,
+  "obsm_keys": [
+    "X_umap"
+  ],
+  "layers": [],
+  "uns_keys": [
+    "cell_type_colors",
+    "leiden",
+    "neighbors",
+    "umap"
+  ],
+  "var_names_head": [
+    "A1BG",
+    "A1BG-AS1",
+    "AAAS",
+    "AACS",
+    "AAGAB"
+  ],
+  "obs_schema": {
+    "orig_ident": {
+      "dtype": "category",
+      "n_unique": 14,
+      "n_missing": 0,
+      "values": {
+        "Li_X_Cancer_Cell_letter_et_al": 121911,
+        "Boroughs_et_al": 48493,
+        "Jordana_et_al": 40848,
+        "Rodriguez_Marquez_et_al": 40095,
+        "Sheih_et_al": 40068,
+        "Good_et_al": 38017,
+        "Haradvala_et_al": 37149,
+        "Li_X_et_al": 25263,
+        "Deng_et_al": 24111,
+        "Lynn_et_al": 16071,
+        "Wang_et_al": 7554,
+        "Xhangolli_et_al": 6870,
+        "Bai_et_al": 6809,
+        "Melenhorst_et_al": 2111
+      }
+    },
+    "nCount_RNA": {
+      "dtype": "float64",
+      "n_unique": 41196,
+      "n_missing": 0
+    },
+    "nFeature_RNA": {
+      "dtype": "int32",
+      "n_unique": 6875,
+      "n_missing": 0
+    },
+    "Product": {
+      "dtype": "category",
+      "n_unique": 193,
+      "n_missing": 0
+    },
+    "log10GenesPerUMI": {
+      "dtype": "float64",
+      "n_unique": 446090,
+      "n_missing": 0
+    },
+    "mitoRatio": {
+      "dtype": "float64",
+      "n_unique": 399832,
+      "n_missing": 0
+    },
+    "S.Score": {
+      "dtype": "float64",
+      "n_unique": 455368,
+      "n_missing": 0
+    },
+    "G2M.Score": {
+      "dtype": "float64",
+      "n_unique": 455370,
+      "n_missing": 0
+    },
+    "Phase": {
+      "dtype": "category",
+      "n_unique": 3,
+      "n_missing": 0,
+      "values": {
+        "G1": 235187,
+        "S": 125955,
+        "G2M": 94228
+      }
+    },
+    "Product_norm": {
+      "dtype": "category",
+      "n_unique": 193,
+      "n_missing": 0
+    },
+    "Marked_cells": {
+      "dtype": "int32",
+      "n_unique": 3,
+      "n_missing": 0,
+      "values": {
+        "2": 447816,
+        "0": 7553,
+        "1": 1
+      }
+    },
+    "barcode": {
+      "dtype": "category",
+      "n_unique": 21,
+      "n_missing": 0,
+      "values": {
+        "NA": 445827,
+        "Axi-N-09": 1573,
+        "Tisa-N-27": 1535,
+        "Tisa-N-25": 1226,
+        "Tisa-R-32": 953,
+        "Tisa-N-29": 567,
+        "Axi-N-10": 529,
+        "Tisa-R-22": 400,
+        "Tisa-N-23": 389,
+        "Axi-R-08": 374,
+        "Axi-N-07": 315,
+        "Axi-N-16": 281,
+        "Tisa-R-26": 272,
+        "Tisa-N-24": 225,
+        "Axi-R-15": 179,
+        "Tisa-R-30": 177,
+        "Tisa-N-31": 166,
+        "Axi-R-19": 163,
+        "Tisa-N-28": 93,
+        "Axi-N-18": 74,
+        "Axi-R-13": 52
+      }
+    },
+    "timepoint": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 0,
+      "values": {
+        "NA": 445827,
+        "Infusion": 9543
+      }
+    },
+    "barcode_timepoint": {
+      "dtype": "category",
+      "n_unique": 21,
+      "n_missing": 0,
+      "values": {
+        "NA": 445827,
+        "Axi-N-09_Infusion": 1573,
+        "Tisa-N-27_Infusion": 1535,
+        "Tisa-N-25_Infusion": 1226,
+        "Tisa-R-32_Infusion": 953,
+        "Tisa-N-29_Infusion": 567,
+        "Axi-N-10_Infusion": 529,
+        "Tisa-R-22_Infusion": 400,
+        "Tisa-N-23_Infusion": 389,
+        "Axi-R-08_Infusion": 374,
+        "Axi-N-07_Infusion": 315,
+        "Axi-N-16_Infusion": 281,
+        "Tisa-R-26_Infusion": 272,
+        "Tisa-N-24_Infusion": 225,
+        "Axi-R-15_Infusion": 179,
+        "Tisa-R-30_Infusion": 177,
+        "Tisa-N-31_Infusion": 166,
+        "Axi-R-19_Infusion": 163,
+        "Tisa-N-28_Infusion": 93,
+        "Axi-N-18_Infusion": 74,
+        "Axi-R-13_Infusion": 52
+      }
+    },
+    "celltypist_predicted_labels": {
+      "dtype": "category",
+      "n_unique": 88,
+      "n_missing": 0
+    },
+    "celltypist_over_clustering": {
+      "dtype": "int32",
+      "n_unique": 542,
+      "n_missing": 0
+    },
+    "celltypist_majority_voting": {
+      "dtype": "category",
+      "n_unique": 14,
+      "n_missing": 0,
+      "values": {
+        "Regulatory T cells": 210873,
+        "Tem/Temra cytotoxic T cells": 64840,
+        "Tem/Trm cytotoxic T cells": 49851,
+        "NK cells": 35217,
+        "Tem/Effector helper T cells": 31314,
+        "Cycling T cells": 22808,
+        "Tcm/Naive helper T cells": 16744,
+        "Tcm/Naive cytotoxic T cells": 11653,
+        "Plasmablasts": 7921,
+        "T(agonist)": 1611,
+        "Classical monocytes": 1176,
+        "Trm cytotoxic T cells": 987,
+        "Migratory DCs": 262,
+        "Mast cells": 113
+      }
+    },
+    "celltypist_conf_score": {
+      "dtype": "float64",
+      "n_unique": 455370,
+      "n_missing": 0
+    },
+    "manual_celltype_annotation_high": {
+      "dtype": "category",
+      "n_unique": 11,
+      "n_missing": 0,
+      "values": {
+        "CD8 cytotoxic": 160580,
+        "Proliferative T cells": 122294,
+        "CD4 central memory": 89699,
+        "CD4 effector memory": 22000,
+        "CD8 effector memory": 18082,
+        "Ribosomal enriched": 18058,
+        "Regulatory T cells": 12550,
+        "CD8 memory": 8659,
+        "Monocyte-like T cells": 1495,
+        "CD4 cytotoxic": 1026,
+        "Apoptotic T cells": 927
+      }
+    },
+    "_scvi_batch": {
+      "dtype": "int16",
+      "n_unique": 193,
+      "n_missing": 0
+    },
+    "_scvi_labels": {
+      "dtype": "int8",
+      "n_unique": 11,
+      "n_missing": 0,
+      "values": {
+        "4": 160580,
+        "8": 122294,
+        "1": 89699,
+        "3": 22000,
+        "5": 18082,
+        "10": 18058,
+        "9": 12550,
+        "6": 8659,
+        "7": 1495,
+        "2": 1026,
+        "0": 927
+      }
+    },
+    "leiden": {
+      "dtype": "category",
+      "n_unique": 0,
+      "n_missing": 455370,
+      "values": {
+        "nan": 455370,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "0": 0,
+        "4": 0,
+        "5": 0,
+        "7": 0,
+        "6": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "8": 0,
+        "12": 0,
+        "13": 0,
+        "15": 0,
+        "14": 0,
+        "16": 0,
+        "17": 0,
+        "18": 0,
+        "19": 0
+      }
+    },
+    "Norm_Patient_Name": {
+      "dtype": "category",
+      "n_unique": 119,
+      "n_missing": 0
+    },
+    "Sex": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 0,
+      "values": {
+        "M": 272136,
+        "F": 183234
+      }
+    },
+    "Age": {
+      "dtype": "category",
+      "n_unique": 47,
+      "n_missing": 62917
+    },
+    "Age_Range": {
+      "dtype": "category",
+      "n_unique": 4,
+      "n_missing": 62917,
+      "values": {
+        ">60": 201721,
+        "40-60": 119388,
+        "20-40": 68598,
+        "nan": 62917,
+        "<20": 2746
+      }
+    },
+    "Anytime_Response": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 191442,
+      "values": {
+        "Yes": 215011,
+        "nan": 191442,
+        "No": 48917
+      }
+    },
+    "Initial_Response": {
+      "dtype": "category",
+      "n_unique": 3,
+      "n_missing": 191442,
+      "values": {
+        "nan": 191442,
+        "CR": 179828,
+        "NR": 48917,
+        "PR": 35183
+      }
+    },
+    "Max_Response": {
+      "dtype": "category",
+      "n_unique": 3,
+      "n_missing": 191442,
+      "values": {
+        "nan": 191442,
+        "CR": 184867,
+        "NR": 48917,
+        "PR": 30144
+      }
+    },
+    "Anytime_CR": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 191442,
+      "values": {
+        "nan": 191442,
+        "Yes": 184867,
+        "No": 79061
+      }
+    },
+    "Relapse": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 303017,
+      "values": {
+        "nan": 303017,
+        "No": 104861,
+        "Yes": 47492
+      }
+    },
+    "ScFv": {
+      "dtype": "category",
+      "n_unique": 5,
+      "n_missing": 0,
+      "values": {
+        "CD19": 326222,
+        "BCMA": 106206,
+        "HER2": 14777,
+        "APRIL": 7554,
+        "GD2": 611
+      }
+    },
+    "Antigen": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 0,
+      "values": {
+        "Blood": 439982,
+        "Solid": 15388
+      }
+    },
+    "CAR_Construct": {
+      "dtype": "category",
+      "n_unique": 8,
+      "n_missing": 0,
+      "values": {
+        "CD19_CD28_CD3Z": 218514,
+        "BCMA_4-1BB_CD3Z": 106206,
+        "CD19_4-1BB_CD3Z": 84516,
+        "CD19_CD3Z": 16322,
+        "HER2_4-1BB_CD3Z": 14777,
+        "APRIL_CD28_OX40_CD3Z": 7554,
+        "CD19_4-1BB_CD28_CD3Z": 6870,
+        "GD2_CD28_CD3Z": 611
+      }
+    },
+    "CAR_Gen": {
+      "dtype": "category",
+      "n_unique": 3,
+      "n_missing": 0,
+      "values": {
+        "Second": 424624,
+        "First": 16322,
+        "Third": 14424
+      }
+    },
+    "Costim_Domain_1": {
+      "dtype": "category",
+      "n_unique": 3,
+      "n_missing": 0,
+      "values": {
+        "CD28": 226679,
+        "4-1BB": 212369,
+        "NO": 16322
+      }
+    },
+    "Source": {
+      "dtype": "category",
+      "n_unique": 3,
+      "n_missing": 0,
+      "values": {
+        "Peripheral blood": 438490,
+        "Osteosarcoma mouse model CTILs": 14777,
+        "Bone marrow": 2103
+      }
+    },
+    "Person_source_General": {
+      "dtype": "category",
+      "n_unique": 6,
+      "n_missing": 0,
+      "values": {
+        "NHL": 240200,
+        "Healthy donor": 123146,
+        "MM": 40848,
+        "PCL": 25263,
+        "CLL": 23167,
+        "ALL": 2746
+      }
+    },
+    "Person_source_Specific": {
+      "dtype": "category",
+      "n_unique": 7,
+      "n_missing": 19012,
+      "values": {
+        "LBCL": 169148,
+        "Healthy donor": 123146,
+        "FL": 52040,
+        "MM": 40848,
+        "PCL": 25263,
+        "CLL": 23167,
+        "nan": 19012,
+        "ALL": 2746
+      }
+    },
+    "STATUS": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 0,
+      "values": {
+        "DISEASE": 332224,
+        "HEALTHY": 123146
+      }
+    },
+    "Therapy_Toxicities": {
+      "dtype": "category",
+      "n_unique": 4,
+      "n_missing": 212800,
+      "values": {
+        "nan": 212800,
+        "CRS_and_ICANS": 120448,
+        "CRS": 93726,
+        "No_Toxicities": 19769,
+        "ICANS": 8627
+      }
+    },
+    "CRS": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 212800,
+      "values": {
+        "YES": 214174,
+        "nan": 212800,
+        "NO": 28396
+      }
+    },
+    "CRS_Grade": {
+      "dtype": "float64",
+      "n_unique": 5,
+      "n_missing": 212800
+    },
+    "CRS_Grade_Range": {
+      "dtype": "category",
+      "n_unique": 3,
+      "n_missing": 212800,
+      "values": {
+        "nan": 212800,
+        "1-2": 176028,
+        "3-4": 38146,
+        "0": 28396
+      }
+    },
+    "ICANS": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 212800,
+      "values": {
+        "nan": 212800,
+        "YES": 129075,
+        "NO": 113495
+      }
+    },
+    "ICANS_Grade": {
+      "dtype": "float64",
+      "n_unique": 5,
+      "n_missing": 212800
+    },
+    "ICANS_Grade_Range": {
+      "dtype": "category",
+      "n_unique": 3,
+      "n_missing": 212800,
+      "values": {
+        "nan": 212800,
+        "0": 113495,
+        "1-2": 73918,
+        "3-4": 55157
+      }
+    },
+    "Stimulated": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 0,
+      "values": {
+        "NO": 251984,
+        "YES": 203386
+      }
+    },
+    "Stimulation_Location": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 251984,
+      "values": {
+        "nan": 251984,
+        "In_vivo": 132691,
+        "In_vitro": 70695
+      }
+    },
+    "Starting_Point": {
+      "dtype": "category",
+      "n_unique": 2,
+      "n_missing": 0,
+      "values": {
+        "Raw data": 247785,
+        "Count matrix": 207585
+      }
+    },
+    "CAR_Detection_Method": {
+      "dtype": "category",
+      "n_unique": 10,
+      "n_missing": 14777,
+      "values": {
+        "Custom reference (GRCh38_GENCODE_v34 + CAR construct gene)": 121911,
+        "Custom reference (GRCh38_GENCODE_v42 + CAR construct gene)": 70925,
+        "Flow cytometry sorted (mCherry+)": 48493,
+        "Flow cytometry sorted (CAR+)": 40848,
+        "Flow cytometry sorted (BFP+)": 40095,
+        "Flow cytometry sorted (EGFRt+)": 40068,
+        "Flow cytometry sorted": 39311,
+        "Flow cytometry sorted (Fluorescence)": 25263,
+        "nan": 14777,
+        "Commercial product": 6870,
+        "Custom reference (hg38 + CAR construct gene)": 6809
+      }
+    },
+    "Technology": {
+      "dtype": "category",
+      "n_unique": 4,
+      "n_missing": 0,
+      "values": {
+        "10X Genomics 5' Paired end": 184433,
+        "10X Genomics 5' R2-only": 159877,
+        "10X Genomics 3' v2": 97381,
+        "3' scFTD-seq (Library prepared as described in the DropSeq protocol)": 13679
+      }
+    },
+    "Technology_Simplified": {
+      "dtype": "category",
+      "n_unique": 3,
+      "n_missing": 0,
+      "values": {
+        "10X Genomics 5'": 344310,
+        "10X Genomics 3'": 97381,
+        "3' scFTD-seq": 13679
+      }
+    },
+    "CellRanger_Version": {
+      "dtype": "category",
+      "n_unique": 5,
+      "n_missing": 13679,
+      "values": {
+        "7.1.0": 240915,
+        "6.0.0": 121911,
+        "6.0.2": 40848,
+        "6.0.1": 27126,
+        "nan": 13679,
+        "5.0.0": 10891
+      }
+    },
+    "Time_Point": {
+      "dtype": "category",
+      "n_unique": 24,
+      "n_missing": 0,
+      "values": {
+        "Patient_Infusion_Product": 212450,
+        "Healthy_Early": 73025,
+        "Day_7": 53133,
+        "Healthy_Infusion_Product": 50121,
+        "Day_12": 10136,
+        "Day_8": 9779,
+        "Day_15": 8548,
+        "Month_1": 7304,
+        "Month_3": 7161,
+        "Day_29": 7119,
+        "Day_21": 4791,
+        "Day_38": 2523,
+        "Day_102": 2271,
+        "Patient_Early": 1860,
+        "Day_28": 1423,
+        "Day_14": 935,
+        "Year_9": 913,
+        "Day_112": 662,
+        "Day_83": 429,
+        "Year_3": 284,
+        "Year_6.5": 151,
+        "Month_12": 136,
+        "Day_89": 127,
+        "Month_15": 89
+      }
+    },
+    "Time_Point_Ranges": {
+      "dtype": "category",
+      "n_unique": 4,
+      "n_missing": 0,
+      "values": {
+        "Infusion_Product": 262571,
+        "<2_weeks": 148868,
+        "2_weeks-3_months": 39425,
+        ">3_months": 4506
+      }
+    }
+  },
+  "candidate_columns": {
+    "patient": [
+      "Norm_Patient_Name"
+    ],
+    "study": [
+      "_scvi_batch",
+      "Source",
+      "Person_source_General",
+      "Person_source_Specific"
+    ],
+    "response": [
+      "Anytime_Response",
+      "Initial_Response",
+      "Max_Response",
+      "Relapse"
+    ],
+    "icans": [
+      "Therapy_Toxicities",
+      "CRS",
+      "CRS_Grade",
+      "CRS_Grade_Range",
+      "ICANS",
+      "ICANS_Grade",
+      "ICANS_Grade_Range"
+    ],
+    "phenotype": [
+      "orig_ident",
+      "celltypist_over_clustering",
+      "manual_celltype_annotation_high",
+      "leiden"
+    ],
+    "cd48": []
+  }
+}

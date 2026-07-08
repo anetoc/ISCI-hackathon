@@ -1,0 +1,209 @@
+{
+  "n_cells": 455370,
+  "n_genes": 48740,
+  "patient_col": "Norm_Patient_Name",
+  "study_col": "orig_ident",
+  "response_cols": [
+    "Initial_Response",
+    "Max_Response",
+    "Anytime_Response",
+    "Relapse"
+  ],
+  "obsm_keys": [
+    "X_umap"
+  ],
+  "n_studies": 14,
+  "studies": {
+    "Li_X_Cancer_Cell_letter_et_al": 121911,
+    "Boroughs_et_al": 48493,
+    "Jordana_et_al": 40848,
+    "Rodriguez_Marquez_et_al": 40095,
+    "Sheih_et_al": 40068,
+    "Good_et_al": 38017,
+    "Haradvala_et_al": 37149,
+    "Li_X_et_al": 25263,
+    "Deng_et_al": 24111,
+    "Lynn_et_al": 16071,
+    "Wang_et_al": 7554,
+    "Xhangolli_et_al": 6870,
+    "Bai_et_al": 6809,
+    "Melenhorst_et_al": 2111
+  },
+  "within_patient_label_consistency": {
+    "Initial_Response": {
+      "patients_with_>1_value": 0
+    },
+    "Max_Response": {
+      "patients_with_>1_value": 0
+    },
+    "Anytime_Response": {
+      "patients_with_>1_value": 0
+    },
+    "Relapse": {
+      "patients_with_>1_value": 0
+    }
+  },
+  "patients_total": 119,
+  "response_gate": {
+    "Initial_Response": {
+      "n_patients_labeled": 87,
+      "patient_value_counts": {
+        "CR": 49,
+        "NR": 27,
+        "PR": 11
+      },
+      "n_cells_labeled": 263928
+    },
+    "Max_Response": {
+      "n_patients_labeled": 87,
+      "patient_value_counts": {
+        "CR": 51,
+        "NR": 27,
+        "PR": 9
+      },
+      "n_cells_labeled": 263928
+    },
+    "Anytime_Response": {
+      "n_patients_labeled": 87,
+      "patient_value_counts": {
+        "Yes": 60,
+        "No": 27
+      },
+      "n_cells_labeled": 263928
+    },
+    "Relapse": {
+      "n_patients_labeled": 34,
+      "patient_value_counts": {
+        "No": 24,
+        "Yes": 10
+      },
+      "n_cells_labeled": 152353
+    }
+  },
+  "primary_label": "Max_Response",
+  "patient_study_x_response": {
+    "Bai_et_al": {
+      "CR": 1,
+      "NR": 1,
+      "PR": 0
+    },
+    "Deng_et_al": {
+      "CR": 9,
+      "NR": 13,
+      "PR": 1
+    },
+    "Good_et_al": {
+      "CR": 6,
+      "NR": 1,
+      "PR": 2
+    },
+    "Haradvala_et_al": {
+      "CR": 20,
+      "NR": 9,
+      "PR": 2
+    },
+    "Jordana_et_al": {
+      "CR": 2,
+      "NR": 0,
+      "PR": 1
+    },
+    "Li_X_Cancer_Cell_letter_et_al": {
+      "CR": 6,
+      "NR": 3,
+      "PR": 3
+    },
+    "Li_X_et_al": {
+      "CR": 1,
+      "NR": 0,
+      "PR": 0
+    },
+    "Melenhorst_et_al": {
+      "CR": 2,
+      "NR": 0,
+      "PR": 0
+    },
+    "Sheih_et_al": {
+      "CR": 4,
+      "NR": 0,
+      "PR": 0
+    }
+  },
+  "patient_study_x_RvsNR": {
+    "Bai_et_al": {
+      "NR": 1,
+      "R": 1
+    },
+    "Deng_et_al": {
+      "NR": 13,
+      "R": 10
+    },
+    "Good_et_al": {
+      "NR": 1,
+      "R": 8
+    },
+    "Haradvala_et_al": {
+      "NR": 9,
+      "R": 22
+    },
+    "Jordana_et_al": {
+      "NR": 0,
+      "R": 3
+    },
+    "Li_X_Cancer_Cell_letter_et_al": {
+      "NR": 3,
+      "R": 9
+    },
+    "Li_X_et_al": {
+      "NR": 0,
+      "R": 1
+    },
+    "Melenhorst_et_al": {
+      "NR": 0,
+      "R": 2
+    },
+    "Sheih_et_al": {
+      "NR": 0,
+      "R": 4
+    }
+  },
+  "n_studies_with_labeled_patients": 9,
+  "n_studies_with_both_R_and_NR": 5,
+  "iec_gene_coverage": {
+    "persist_memory_stem": {
+      "n": 9,
+      "present": 9,
+      "frac": 1.0,
+      "missing": []
+    },
+    "persist_migration": {
+      "n": 8,
+      "present": 8,
+      "frac": 1.0,
+      "missing": []
+    },
+    "persist_synapse": {
+      "n": 18,
+      "present": 18,
+      "frac": 1.0,
+      "missing": []
+    },
+    "kill": {
+      "n": 7,
+      "present": 7,
+      "frac": 1.0,
+      "missing": []
+    },
+    "resist_exhaustion": {
+      "n": 9,
+      "present": 9,
+      "frac": 1.0,
+      "missing": []
+    },
+    "cd8_identity": {
+      "n": 4,
+      "present": 4,
+      "frac": 1.0,
+      "missing": []
+    }
+  }
+}

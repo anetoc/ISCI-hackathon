@@ -1,0 +1,120 @@
+patient_id,study,disease,n_cells,Initial_Response,Max_Response,Anytime_Response,Relapse,CRS,ICANS
+Bai_CR,Bai_et_al,ALL,1835,CR,CR,Yes,No,YES,NO
+Bai_HD,Bai_et_al,Healthy donor,4063,,,,,,
+Bai_NR,Bai_et_al,ALL,911,NR,NR,No,,YES,NO
+Bor_D1,Boroughs_et_al,Healthy donor,26532,,,,,,
+Bor_D2,Boroughs_et_al,Healthy donor,21961,,,,,,
+Den_Pt_14,Deng_et_al,NHL,1224,CR,CR,Yes,,YES,YES
+Den_Pt_15,Deng_et_al,NHL,1134,NR,NR,No,,YES,NO
+Den_Pt_16,Deng_et_al,NHL,605,NR,NR,No,,YES,YES
+Den_Pt_18,Deng_et_al,NHL,173,NR,NR,No,,YES,YES
+Den_Pt_20,Deng_et_al,NHL,510,CR,CR,Yes,,YES,NO
+Den_Pt_21,Deng_et_al,NHL,461,,,,,YES,YES
+Den_Pt_26,Deng_et_al,NHL,565,CR,CR,Yes,,YES,YES
+Den_Pt_27,Deng_et_al,NHL,806,CR,CR,Yes,,YES,NO
+Den_Pt_28,Deng_et_al,NHL,591,CR,CR,Yes,,YES,YES
+Den_Pt_33,Deng_et_al,NHL,2571,CR,CR,Yes,,YES,NO
+Den_Pt_34,Deng_et_al,NHL,307,NR,NR,No,,YES,YES
+Den_Pt_37,Deng_et_al,NHL,372,CR,CR,Yes,,YES,YES
+Den_Pt_38,Deng_et_al,NHL,1414,NR,NR,No,,YES,NO
+Den_Pt_40,Deng_et_al,NHL,1944,CR,CR,Yes,,YES,YES
+Den_Pt_41,Deng_et_al,NHL,1090,NR,NR,No,,YES,YES
+Den_Pt_42,Deng_et_al,NHL,726,CR,CR,Yes,,YES,YES
+Den_Pt_43,Deng_et_al,NHL,1856,NR,NR,No,,YES,NO
+Den_Pt_49,Deng_et_al,NHL,1083,NR,NR,No,,YES,YES
+Den_Pt_50,Deng_et_al,NHL,1956,NR,NR,No,,YES,YES
+Den_Pt_54,Deng_et_al,NHL,562,PR,PR,Yes,,YES,NO
+Den_Pt_55,Deng_et_al,NHL,1348,NR,NR,No,,YES,YES
+Den_Pt_56,Deng_et_al,NHL,830,NR,NR,No,,YES,YES
+Den_Pt_59,Deng_et_al,NHL,455,NR,NR,No,,YES,YES
+Den_Pt_64,Deng_et_al,NHL,1528,NR,NR,No,,YES,NO
+Goo_Pt_110,Good_et_al,NHL,4807,PR,CR,Yes,No,YES,YES
+Goo_Pt_116,Good_et_al,NHL,3069,CR,CR,Yes,No,YES,YES
+Goo_Pt_125,Good_et_al,NHL,2771,CR,CR,Yes,No,YES,YES
+Goo_Pt_129,Good_et_al,NHL,244,CR,CR,Yes,No,YES,NO
+Goo_Pt_245,Good_et_al,NHL,14113,NR,NR,No,,YES,YES
+Goo_Pt_253,Good_et_al,NHL,6860,CR,CR,Yes,No,YES,YES
+Goo_Pt_263,Good_et_al,NHL,2642,PR,PR,Yes,Yes,YES,NO
+Goo_Pt_276,Good_et_al,NHL,2437,CR,CR,Yes,Yes,YES,YES
+Goo_Pt_282,Good_et_al,NHL,1074,PR,PR,Yes,Yes,YES,YES
+Har_Pat1,Haradvala_et_al,NHL,2149,CR,CR,Yes,,,
+Har_Pat2,Haradvala_et_al,NHL,789,CR,CR,Yes,,,
+Har_Pat3,Haradvala_et_al,NHL,3082,CR,CR,Yes,,,
+Har_Pat4,Haradvala_et_al,NHL,153,CR,CR,Yes,No,,
+Har_Pat5,Haradvala_et_al,NHL,1676,PR,PR,Yes,,,
+Har_Pat6,Haradvala_et_al,NHL,282,CR,CR,Yes,Yes,,
+Har_Pat7,Haradvala_et_al,NHL,1808,CR,CR,Yes,Yes,,
+Har_Pat8,Haradvala_et_al,NHL,795,CR,CR,Yes,,,
+Har_Pat9,Haradvala_et_al,NHL,1573,NR,NR,No,,,
+Har_Pat10,Haradvala_et_al,NHL,583,CR,CR,Yes,Yes,,
+Har_Pat11,Haradvala_et_al,NHL,201,CR,CR,Yes,,,
+Har_Pat12,Haradvala_et_al,NHL,354,CR,CR,Yes,No,,
+Har_Pat13,Haradvala_et_al,NHL,52,CR,CR,Yes,No,,
+Har_Pat14,Haradvala_et_al,NHL,2420,NR,NR,No,,,
+Har_Pat15,Haradvala_et_al,NHL,232,PR,CR,Yes,No,,
+Har_Pat16,Haradvala_et_al,NHL,459,PR,PR,Yes,Yes,,
+Har_Pat18,Haradvala_et_al,NHL,74,NR,NR,No,,,
+Har_Pat19,Haradvala_et_al,NHL,163,CR,CR,Yes,,,
+Har_Pat20,Haradvala_et_al,NHL,242,NR,NR,No,,,
+Har_Pat21,Haradvala_et_al,NHL,2185,CR,CR,Yes,No,,
+Har_Pat22,Haradvala_et_al,NHL,2002,CR,CR,Yes,No,,
+Har_Pat23,Haradvala_et_al,NHL,609,NR,NR,No,,,
+Har_Pat24,Haradvala_et_al,NHL,1733,NR,NR,No,,,
+Har_Pat25,Haradvala_et_al,NHL,1362,NR,NR,No,,,
+Har_Pat26,Haradvala_et_al,NHL,544,CR,CR,Yes,No,,
+Har_Pat27,Haradvala_et_al,NHL,4408,CR,CR,Yes,No,,
+Har_Pat28,Haradvala_et_al,NHL,186,NR,NR,No,,,
+Har_Pat29,Haradvala_et_al,NHL,2003,CR,CR,Yes,No,,
+Har_Pat30,Haradvala_et_al,NHL,342,CR,CR,Yes,No,,
+Har_Pat31,Haradvala_et_al,NHL,1771,NR,NR,No,,,
+Har_Pat32,Haradvala_et_al,NHL,2917,CR,CR,Yes,No,,
+Jor_P1,Jordana_et_al,MM,13026,CR,CR,Yes,No,YES,NO
+Jor_P2,Jordana_et_al,MM,10760,PR,PR,Yes,Yes,YES,NO
+Jor_P3,Jordana_et_al,MM,17062,CR,CR,Yes,Yes,YES,NO
+LiX_Pt_1,Li_X_et_al,PCL,25263,CR,CR,Yes,No,YES,NO
+LiX_ac25,Li_X_Cancer_Cell_letter_et_al,NHL,3319,NR,NR,No,,YES,NO
+LiX_ac26,Li_X_Cancer_Cell_letter_et_al,NHL,3883,NR,NR,No,,NO,NO
+LiX_ac27,Li_X_Cancer_Cell_letter_et_al,NHL,4030,CR,CR,Yes,,NO,NO
+LiX_ac28,Li_X_Cancer_Cell_letter_et_al,NHL,6010,PR,PR,Yes,,YES,YES
+LiX_ac29,Li_X_Cancer_Cell_letter_et_al,NHL,4434,CR,CR,Yes,,YES,YES
+LiX_ac30,Li_X_Cancer_Cell_letter_et_al,NHL,4673,PR,PR,Yes,,YES,YES
+LiX_ac31,Li_X_Cancer_Cell_letter_et_al,NHL,3978,,,,,YES,YES
+LiX_ac32,Li_X_Cancer_Cell_letter_et_al,NHL,2288,PR,PR,Yes,,YES,NO
+LiX_ac33,Li_X_Cancer_Cell_letter_et_al,NHL,6802,CR,CR,Yes,,YES,YES
+LiX_ac34,Li_X_Cancer_Cell_letter_et_al,NHL,1533,CR,CR,Yes,,YES,YES
+LiX_ac36,Li_X_Cancer_Cell_letter_et_al,NHL,6738,,,,,YES,YES
+LiX_ac37,Li_X_Cancer_Cell_letter_et_al,NHL,8167,CR,CR,Yes,,YES,YES
+LiX_ac38,Li_X_Cancer_Cell_letter_et_al,NHL,2942,NR,NR,No,,YES,YES
+LiX_ac39,Li_X_Cancer_Cell_letter_et_al,NHL,5995,CR,CR,Yes,,YES,NO
+LiX_ac40,Li_X_Cancer_Cell_letter_et_al,NHL,6725,,,,,YES,YES
+LiX_ac42,Li_X_Cancer_Cell_letter_et_al,NHL,2272,,,,,,
+LiX_ac44,Li_X_Cancer_Cell_letter_et_al,NHL,2607,,,,,,
+LiX_ac45,Li_X_Cancer_Cell_letter_et_al,NHL,6204,,,,,,
+LiX_ac47,Li_X_Cancer_Cell_letter_et_al,NHL,9169,,,,,,
+LiX_ac49,Li_X_Cancer_Cell_letter_et_al,NHL,5274,,,,,,
+LiX_ac50,Li_X_Cancer_Cell_letter_et_al,NHL,2041,,,,,,
+LiX_ac51,Li_X_Cancer_Cell_letter_et_al,NHL,3803,,,,,,
+LiX_ac52,Li_X_Cancer_Cell_letter_et_al,NHL,1134,,,,,,
+LiX_ac53,Li_X_Cancer_Cell_letter_et_al,NHL,2093,,,,,,
+LiX_ac54,Li_X_Cancer_Cell_letter_et_al,NHL,7134,,,,,,
+LiX_ac55,Li_X_Cancer_Cell_letter_et_al,NHL,657,,,,,,
+LiX_ac57,Li_X_Cancer_Cell_letter_et_al,NHL,6698,,,,,,
+LiX_ac58,Li_X_Cancer_Cell_letter_et_al,NHL,884,,,,,,
+LiX_ac59,Li_X_Cancer_Cell_letter_et_al,NHL,424,,,,,,
+Lyn_D1,Lynn_et_al,Healthy donor,1294,,,,,,
+Lyn_D2,Lynn_et_al,Healthy donor,14777,,,,,,
+Mel_PT1,Melenhorst_et_al,CLL,1138,CR,CR,Yes,No,,
+Mel_PT2,Melenhorst_et_al,CLL,973,CR,CR,Yes,No,,
+Rod_D10,Rodriguez_Marquez_et_al,Healthy donor,15489,,,,,,
+Rod_D14,Rodriguez_Marquez_et_al,Healthy donor,10218,,,,,,
+Rod_D18,Rodriguez_Marquez_et_al,Healthy donor,14388,,,,,,
+She_CLL_1,Sheih_et_al,CLL,11856,CR,CR,Yes,No,NO,NO
+She_CLL_2,Sheih_et_al,CLL,9200,CR,CR,Yes,No,YES,YES
+She_NHL_6,Sheih_et_al,NHL,10385,CR,CR,Yes,Yes,YES,YES
+She_NHL_7,Sheih_et_al,NHL,8627,CR,CR,Yes,No,NO,YES
+Wan_D1,Wang_et_al,Healthy donor,2871,,,,,,
+Wan_D2,Wang_et_al,Healthy donor,1742,,,,,,
+Wan_D3,Wang_et_al,Healthy donor,2941,,,,,,
+Xha_D1,Xhangolli_et_al,Healthy donor,1811,,,,,,
+Xha_D2,Xhangolli_et_al,Healthy donor,2880,,,,,,
+Xha_D3,Xhangolli_et_al,Healthy donor,2179,,,,,,
