@@ -147,6 +147,37 @@ Roadmap for the parts that need more compute or tissue:
 [compute volumetria](reports/compute_volumetria.md),
 [literature gaps](reports/literature_gaps_roadmap.md).
 
+## The property: a Conditional Controllability Invariant (immune-scoped)
+
+The strongest form of the result is not an index on one dataset but a **named,
+falsifiable property** tested for cross-dataset invariance:
+
+> **Conditional Controllability Invariant (CCI):** after conditioning on effect
+> **magnitude**, a reproducible, axis-specific residual signal `C` separates genes
+> that *control* a cell-state transition from genes merely *associated* with it.
+
+Formal definition, null, and falsification criterion:
+[reports/conditional_controllability_invariant.md](reports/conditional_controllability_invariant.md);
+dataset-agnostic protocol: [reports/generalization_spec.md](reports/generalization_spec.md);
+full whitepaper: [reports/property_whitepaper.md](reports/property_whitepaper.md).
+
+![Cross-dataset invariance](figures/cci_invariance_crossdataset.png)
+
+| System | Cell type | Modality | ΔAUPRC (M→M+C) | 95% CI | Verdict |
+|---|---|---|---|---|---|
+| **Marson** | CD4+ T (immune) | CRISPR KD/KO | **+0.229** | [0.072, 0.405] | **PASS** |
+| Schmidt | CD4+ T (immune) | CRISPRa | +0.138 | [−0.029, 0.434] | near-miss (n_pos=10) |
+| **Replogle** | RPE1 (non-immune) | CRISPRi | **+0.060** | [−0.013, 0.204] | **FAIL (robust)** |
+
+**The property is immune-scoped.** It holds in the anchor, shows the same directional
+signal under an opposite modality (CRISPRa; underpowered), and fails cleanly in a
+non-immune proliferation screen — a **demarcated boundary**, not a universal claim. The
+FAIL is mechanistically coherent: in proliferation screens controllers act by dosage on
+a single dominant axis, so magnitude and controllership are collinear and conditioning on
+`M` removes the signal; in immune state transitions, regulators are directional and
+axis-selective independent of size, which is what `C` detects. Both the PASS and the FAIL
+are open and reproducible via the `isci-controllership` skill.
+
 ## Limitations & future work
 
 - **Clinical bridge is a negative result.** T-state signatures do not predict CAR-T response in the current cohort (n = 70 infusion products); only Treg composition is suggestive (uncorrected p = 0.04). Needs a larger, magnitude-independent outcome cohort.
