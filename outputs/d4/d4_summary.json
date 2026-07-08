@@ -1,0 +1,35 @@
+{
+  "cohort": {
+    "patients": 70,
+    "responders": 44,
+    "non_responders": 26,
+    "cells_infusion_product": 117233,
+    "source": "Functional CAR-T atlas Zenodo 19066393"
+  },
+  "signature_scores": {
+    "n_axes_tested": 7,
+    "n_sig_p05": 0,
+    "best_axis": "exhaustion_like",
+    "best_auroc": 0.613,
+    "biological_directions": "non-responders higher exhaustion & terminal cytotoxic (R<NR), consistent w/ literature but n.s."
+  },
+  "composition": {
+    "n_states_tested": 11,
+    "n_sig_p05": 1,
+    "significant": {
+      "state": "Regulatory T cells",
+      "p": 0.0405,
+      "auroc": 0.648,
+      "R_frac": 0.033,
+      "NR_frac": 0.064,
+      "interpretation": "higher Treg fraction in non-responders (more immunosuppression); single uncorrected hit"
+    }
+  },
+  "cross_validated_multivariate": {
+    "signature_only_auroc": 0.556,
+    "composition_only_auroc": 0.518,
+    "full_auroc": 0.53,
+    "verdict": "T-state signature does NOT robustly predict CAR-T response at patient level (CV-AUROC ~chance)"
+  },
+  "honest_conclusion": "Underpowered/negative clinical bridge; only suggestive Treg-fraction signal. T-state mean signatures do not separate responders in cross-validation."
+}
