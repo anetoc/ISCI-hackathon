@@ -12,8 +12,9 @@ TCR signal strength is the **best-established deterministic controller of
 T-cell fate**: strong/sustained signals push cells toward short-lived
 terminal effectors and, ultimately, exhaustion (higher PD-1/LAG-3), while
 attenuated signals favor long-lived memory/stem-like states
-(Front Immunol 2025, 10.3389/fimmu.2025.1562248; CD4 memory, PMC6126666;
-Nur77/Bim epigenetic control, Cell Death Differ 2019).
+(Front Immunol 2025, 10.3389/fimmu.2025.1562248, which shows high TCR signal
+strength raises PD-1/LAG-3 and drives terminal exhaustion; CD4 memory, PMC6126666,
+which shows strong TCR signals favor short-lived effectors over long-lived memory).
 
 So the correct framing is dual, not dismissive:
 
