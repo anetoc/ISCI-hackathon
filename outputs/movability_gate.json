@@ -1,0 +1,98 @@
+{
+  "NR_Treg": {
+    "n_genes": 7,
+    "n_movable": 7,
+    "frac_movable": 1.0,
+    "verdict": "PASS",
+    "movable_genes": [
+      "FOXP3",
+      "IL2RA",
+      "CTLA4",
+      "IKZF2",
+      "TNFRSF18",
+      "TIGIT",
+      "ENTPD1"
+    ]
+  },
+  "NR_exhaustion": {
+    "n_genes": 8,
+    "n_movable": 6,
+    "frac_movable": 0.75,
+    "verdict": "PASS",
+    "movable_genes": [
+      "PDCD1",
+      "HAVCR2",
+      "LAG3",
+      "TIGIT",
+      "ENTPD1",
+      "BATF"
+    ]
+  },
+  "R_memory_stem": {
+    "n_genes": 8,
+    "n_movable": 8,
+    "frac_movable": 1.0,
+    "verdict": "PASS",
+    "movable_genes": [
+      "TCF7",
+      "SELL",
+      "IL7R",
+      "CCR7",
+      "LEF1",
+      "BACH2",
+      "KLF2",
+      "FOXO1"
+    ]
+  },
+  "R_migration": {
+    "n_genes": 8,
+    "n_movable": 7,
+    "frac_movable": 0.875,
+    "verdict": "PASS",
+    "movable_genes": [
+      "CCR7",
+      "SELL",
+      "S1PR1",
+      "ITGAL",
+      "RHOA",
+      "WASF2",
+      "CORO1A"
+    ]
+  },
+  "R_killing": {
+    "n_genes": 7,
+    "n_movable": 6,
+    "frac_movable": 0.857,
+    "verdict": "PASS",
+    "movable_genes": [
+      "GZMB",
+      "PRF1",
+      "NKG7",
+      "GNLY",
+      "IFNG",
+      "FASLG"
+    ]
+  },
+  "toxicity_infl": {
+    "n_genes": 7,
+    "n_movable": 4,
+    "frac_movable": 0.571,
+    "verdict": "PASS",
+    "movable_genes": [
+      "TNF",
+      "CXCL8",
+      "NFKB1",
+      "IL2"
+    ]
+  },
+  "_meta": {
+    "condition": "Stim48hr",
+    "n_perturbations": 11281,
+    "criterion": "z_sd > genome-median AND frac(|z|>2) > genome-median",
+    "pass_threshold": "frac_movable>=0.30",
+    "background": {
+      "z_sd_median": 1.059,
+      "frac_responsive_median": 0.0569
+    }
+  }
+}
