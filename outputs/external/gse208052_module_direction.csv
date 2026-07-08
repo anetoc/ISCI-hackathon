@@ -1,0 +1,7 @@
+module,category,expected,CR_mean,PD_mean,delta,direction_consistent,mannwhitney_p_onesided,genes_used,genes_missing
+NR_Treg,resistance,PD>CR,0.263,-0.329,-0.591,False,0.857,7,[]
+NR_exhaustion,resistance,PD>CR,0.211,-0.264,-0.475,False,0.635,6,[]
+toxicity_infl,resistance,PD>CR,0.062,-0.077,-0.138,False,0.722,4,[]
+R_memory_stem,sensitivity,CR>PD,0.433,-0.541,0.973,True,0.032,8,[]
+R_migration,sensitivity,CR>PD,0.281,-0.351,0.633,True,0.206,7,[]
+R_killing,sensitivity,CR>PD,0.009,-0.012,0.021,True,0.548,6,[]
