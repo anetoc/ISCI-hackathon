@@ -85,9 +85,13 @@ perturbation, then a 1-factor factor analysis on the standardized loading matrix
   measured here is a "reach-and-hold-a-synapse" axis more than a "kill" axis.
 - **TSC is orthogonal to effect magnitude** (Spearman 0.03), exactly like the CCI — it is
   a state property, not an effect-size proxy.
-- The **highest-TSC perturbations are the TCR/synapse machinery** (LAT, ITK, VAV1, LCP2,
-  LCK, PLCG1) — the same TCR-signal-strength axis identified independently, now emerging as
-  the dominant latent factor. This ties TSC directly back to the TCR-rheostat reframe.
+- Among the **top-10 TSC perturbations** (PMVK, KDM1A, LAT, WDR82, ITK, VAV1, LCP2, LCK,
+  PLCG1, HELT), **6 are TCR/synapse machinery** (LAT, ITK, VAV1, LCP2, LCK, PLCG1) — the
+  same TCR-signal-strength axis identified independently. But the two single highest hits
+  are NOT synaptic: **PMVK** (#1, TSC=6.85, mevalonate-pathway kinase — well above the rest)
+  and **KDM1A** (#2, a histone demethylase). So the latent factor is *enriched* for TCR/synapse
+  machinery in its upper tail, but its extreme top is led by a metabolic and a chromatin gene —
+  the tie to the TCR-rheostat reframe is a tendency of the axis, not a clean synapse-only ranking.
 
 Scores: `outputs/generalization/tsc_scores.csv`. This is a transcriptional latent; the
 functional-synapse validation (§5, P3) remains the decisive open test.
