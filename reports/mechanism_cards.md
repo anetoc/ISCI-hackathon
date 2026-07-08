@@ -20,9 +20,12 @@ PPHLN1(46), PHF8(48).
 - **Observed (Marson):** the dominant family among high-ISCI_orthogonal controllers, and
   it is *not* magnitude-driven — RCOR1/HEXIM1/MORF4L1 have mid-range magnitude yet high
   donor-reproducible specificity. This is the family the orthogonal signal was built to surface.
-- **Clinical module (T-REMAP):** after residualizing out magnitude AND TCR-shutdown, the
-  top reversal candidates are chromatin/transcription factors (CXXC1, MED13, TADA2B,
-  IRF2BP1) — specific reversers, not generic activation knobs.
+- **Clinical module (T-REMAP):** after residualizing reversal out against magnitude AND
+  TCR-shutdown (`reversal_resid_tcr` in `results/module_reversal_scores.parquet`), the top
+  candidates are transcription/chromatin factors — HNRNPM(#1), IRF2BP1(#4), MED13(#7),
+  CXXC1(#8), TADA2B(#12) — specific reversers, not generic activation knobs. (The *raw*
+  reversal list in `t_remap_expansion.md` is instead led by TCR-signaling genes; the
+  residualization is what separates specific control from activation shutdown.)
 - **Literature:** SETDB1 (H3K9me3) and KDM1A/LSD1 (CoREST, with RCOR1) enforce
   exhaustion/effector epigenetic programs; USP22 (SAGA) and BRD9 (ncBAF) are active
   immuno-oncology targets.
@@ -37,9 +40,11 @@ PPHLN1(46), PHF8(48).
 
 - **Observed:** high controllership, but this family is the one flagged for the
   **activation-axis confound** — knocking down TCR-proximal genes broadly reduces activation.
-- **Clinical module:** IKBKB (IKK-β) and NFKB1 survive the TCR-shutdown residualization as
-  genuine reversers; the pure TCR-complex members (CD3D/CD3E) drop out — exactly the
-  separation the confounder ledger was built to make.
+- **Clinical module:** after residualizing reversal against magnitude AND TCR-shutdown,
+  **NFKB1 survives as a genuine reverser (residualized rank #11)** while the pure TCR-complex
+  members drop sharply (CD3D #135, CD3E #141, and IKBKB itself falls to #644) — exactly the
+  separation the confounder ledger was built to make: NF-κB transcriptional output is a real
+  reverser, the TCR-proximal machinery is largely an activation artifact.
 - **Literature:** the NF-κB activation window is central to CAR-T persistence vs
   exhaustion; IKK-β is druggable.
 - **Caveat:** CD3D/CD3E signal is largely an activation artifact — do not read as targets.
@@ -64,8 +69,9 @@ PPHLN1(46), PHF8(48).
 **Members:** BCLAF1(3), ZC3H12A/Regnase-1(7), HNRNPA1(27), HNRNPD/AUF1(36), SMG8(47). All novel.
 
 - **Observed:** high donor-coherent specificity; ZC3H12A is a standout novel nomination.
-- **Clinical module:** HNRNPM tops the fully-residualized reversal list — RNA-binding
-  control of state is a genuinely non-obvious hit.
+- **Clinical module:** HNRNPM (an RNA-binding protein, not itself in the top-50 controllers
+  but a T-REMAP reversal candidate) tops the fully-residualized reversal list (`reversal_resid_tcr` #1)
+  — RNA-binding control of state is a genuinely non-obvious hit, echoing this family's theme.
 - **Literature:** Regnase-1 (ZC3H12A) is a validated brake on T-cell effector mRNAs and a
   hot CAR-T engineering target (its deletion boosts persistence).
 - **Caveat:** RNA-level control is inferred from steady-state effect vectors, not from
