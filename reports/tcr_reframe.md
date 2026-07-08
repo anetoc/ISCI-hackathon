@@ -45,7 +45,7 @@ less exhaustion. That is exactly what the CAR-T clinic already shows:
   function in exhausted CAR-T via epigenetic remodeling (PMC8049103).
 - **LCK is dispensable for CAR signaling** (though essential for the TCR);
   LCK-disrupted CAR-T show better memory/persistence and less exhaustion
-  (Cell Rep Med 2023).
+  (Wu et al., Cell Rep Med 2023, PMID 36696897 / PMC9975250).
 - **Regnase-1 / ZC3H12A**, which ISCI recovered independently as a top
   controller, is a validated CAR-T engineering target (its deletion boosts
   persistence).

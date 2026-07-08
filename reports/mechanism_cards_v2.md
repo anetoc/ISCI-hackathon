@@ -48,7 +48,8 @@ PHF8 and others (n=15, largest family). SETDB1 is a known regulator.
   (Card companion: tcr_reframe.md). After residualizing TCR-shutdown, **NFKB1
   survives as a specific reverser** while the pure TCR-complex members drop
   sharply (CD3D/CD3E fall out of the top).
-- **Literature anchor:** dasatinib/rest (PMC8049103), LCK-KO CAR-T (Cell Rep Med 2023).
+- **Literature anchor:** dasatinib/rest (Weber et al., Science 2021, PMC8049103),
+  LCK-KO CAR-T (Wu et al., Cell Rep Med 2023, PMID 36696897).
 - **Intervention direction:** transient inhibition / titratable — NOT permanent KD
   (permanent TCR shutdown is a manufacturing/activation artifact, not a target).
 
