@@ -43,7 +43,7 @@ hypothesis** — not a cure claim.
 
 - **Positive (literature):** TCR signal strength → fate (Front Immunol 2025);
   dasatinib/rest restores memory-like CAR-T (PMC8049103); LCK dispensable for CAR,
-  its loss improves persistence (Cell Rep Med 2023); Regnase-1 deletion boosts
+  its loss improves persistence (Wu et al., Cell Rep Med 2023, PMID 36696897); Regnase-1 deletion boosts
   CAR-T persistence.
 - **Positive (ours):** ISCI recovers known regulators conditional on magnitude;
   sensitivity axis replicates direction in GSE208052 (R_memory_stem p=0.032).
