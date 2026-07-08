@@ -118,7 +118,7 @@ This figure **must land** even if outcome data are weak.
 
 Only after phenotype floor: responder vs non-responder AUROC with study as covariate/holdout.
 
-Benchmark: TCF7/FOXO1-regulon reference. Secondary: Haradhvala GSE151511 if time.
+Benchmark: TCF7/FOXO1-regulon reference. Secondary: Haradhvala GSE197268 or Deng GSE151511 if time.
 
 Report underpowered results honestly.
 

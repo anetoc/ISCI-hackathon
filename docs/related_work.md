@@ -150,8 +150,8 @@ benchmark ISCI (does it rank them high?).
 ### Layer 4 — PATIENT cohorts on T-redirecting therapy (translation; "who responds")
 | Cohort | Disease / Therapy | Access | Signal |
 |---|---|---|---|
-| **Haradhvala 2022** (Nat Med) | LBCL / axi-cel + tisa-cel; 105 samples | **GSE151511** | CAR-Treg in non-responders; memory-like CD8 in responders |
-| **Deng 2020** (Nat Med) | LBCL / anti-CD19 products | GEO | Exhausted CD4/CD8 in PR/PD; LAG3/TIGIT/BATF/ID2 |
+| **Haradhvala 2022** (Nat Med) | LBCL / axi-cel + tisa-cel; 32 pts (IP + PBMC serial) | **GSE197268** (suppl. processado; raw dbGaP) | CAR-Treg in non-responders; memory-like CD8 in responders |
+| **Deng 2020** (Nat Med) | LBCL / anti-CD19 products; 24 infusion products | **GSE151511**, **GSE150992** | Exhausted CD4/CD8 in PR/PD; LAG3/TIGIT/BATF/ID2 |
 | **Good et al.** | LBCL / CD19 CAR-T | (paper) | CD4+HELIOS+ CAR-Treg predicts PD |
 | **Premanufacture CD8** (Blood 2023, PMID 37875502) | DLBCL / CD19/CD20 CAR-T; 58 pts | GEO | Stem-like memory CD8 → durable response |
 | Additional CAR-T | LBCL | GSE241783, GSE253872, GSE273170, GSE243325 | serial/product profiling |
@@ -395,7 +395,7 @@ Benchling, BioMart, CellGuide, bioRxiv/medRxiv, ClinicalTrials.gov, Medidata, an
 - Heumos et al. Nat Methods 2025 s41592-025-02909-7 (pertpy)
 - Andreatta & Carmona Nat Commun 2021 s41467-021-23324-4 (ProjecTILs)
 - Frangieh et al. Nat Genet 2021 00779-1 (Perturb-CITE-seq)
-- Haradhvala et al. Nat Med 2022 (GSE151511); Deng et al. Nat Med 2020 (CAR-T patient scRNA)
+- Haradhvala et al. Nat Med 2022 (GSE197268); Deng et al. Nat Med 2020 (GSE151511 / GSE150992)
 - Geometric coherence, arXiv 2604.16642 (stability)
 - Cancers 2025 PMC12609497; Front Immunol 2026 1861111 (resistance reviews)
 - Dann E. pert2state_model (GitHub); Zhu/Dann Fig. 4 regression model (bioRxiv 2025.12.23.696273)

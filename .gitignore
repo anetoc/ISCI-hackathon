@@ -20,3 +20,6 @@ __pycache__/
 # Env / secrets
 .env
 .env.*
+
+# Transient run logs
+logs/

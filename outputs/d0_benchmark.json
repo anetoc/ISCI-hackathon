@@ -1,0 +1,78 @@
+{
+  "clinical": {
+    "ISCI_core": {
+      "auroc": 0.5186637545914823,
+      "auprc": 0.001289913743803773,
+      "precision_at_20": 0.0,
+      "precision_at_50": 0.0,
+      "n_positives": 14,
+      "n_negatives": 11512,
+      "leave_one_out_axes": true
+    },
+    "DE_magnitude": {
+      "auroc": 0.6000260597637249,
+      "auprc": 0.0021813942079539363,
+      "precision_at_20": 0.0,
+      "precision_at_50": 0.0,
+      "n_positives": 14,
+      "n_negatives": 11512,
+      "leave_one_out_axes": true
+    },
+    "n_downstream": {
+      "auroc": 0.6029143502432245,
+      "auprc": 0.0021901672966594763,
+      "precision_at_20": 0.0,
+      "precision_at_50": 0.0,
+      "n_positives": 14,
+      "n_negatives": 11512,
+      "leave_one_out_axes": true
+    },
+    "ontarget": {
+      "auroc": 0.4266851980542043,
+      "auprc": 0.0010469236016301476,
+      "precision_at_20": 0.0,
+      "precision_at_50": 0.0,
+      "n_positives": 14,
+      "n_negatives": 11512,
+      "leave_one_out_axes": true
+    }
+  },
+  "marson_native": {
+    "ISCI_core": {
+      "auroc": 0.8687071873512552,
+      "auprc": 0.03920331180876549,
+      "precision_at_20": 0.05,
+      "precision_at_50": 0.04,
+      "n_positives": 21,
+      "n_negatives": 11505,
+      "leave_one_out_axes": true
+    },
+    "DE_magnitude": {
+      "auroc": 0.8961838538109724,
+      "auprc": 0.014133148125736229,
+      "precision_at_20": 0.0,
+      "precision_at_50": 0.0,
+      "n_positives": 21,
+      "n_negatives": 11505,
+      "leave_one_out_axes": true
+    },
+    "n_downstream": {
+      "auroc": 0.8964218455743878,
+      "auprc": 0.014134169085412412,
+      "precision_at_20": 0.0,
+      "precision_at_50": 0.0,
+      "n_positives": 21,
+      "n_negatives": 11505,
+      "leave_one_out_axes": true
+    },
+    "ontarget": {
+      "auroc": 0.7535440077812959,
+      "auprc": 0.004736667343590392,
+      "precision_at_20": 0.0,
+      "precision_at_50": 0.0,
+      "n_positives": 21,
+      "n_negatives": 11505,
+      "leave_one_out_axes": true
+    }
+  }
+}

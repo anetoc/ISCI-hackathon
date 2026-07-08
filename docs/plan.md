@@ -79,7 +79,7 @@ isProject: false
 - **T cell fails vs tumor escapes** — Mackall SITC 2021; nosso foco é falha intrínseca do T
 - **Memória/stem-like prediz resposta** — Fraietta Nature Med 2018 [CD27+ memory]; Blood 2023 stem-like CD8; **FOXO1 master regulator** Nature 2024 (TCF7 sozinho insuficiente)
 - **Exaustão epigenética** — DNMT3A KO preserva stemness (Sci Transl Med 2021); TET2/DNMT3A, TOX/NR4A (reviews Molecular Therapy 2024)
-- **CAR-Treg em não-respondedores** — Haradhvala Nat Med 2022 (GSE151511)
+- **CAR-Treg em não-respondedores** — Haradhvala Nat Med 2022 (**GSE197268**)
 - **Biespecíficos (teclistamab)** — não-resposta = falha expansão CD8 + Tregs + exaustão, não perda de antígeno (MajesTEC-1, ResisTec NCT05945524)
 
 ### 2b. Ground-truth de controladores (benchmark positivo)
@@ -146,7 +146,8 @@ ATAC exaustão (Belk PNAS 2021), multiome, CITE-seq Frangieh; **Gladstone hackat
 
 | Coorte                            | Acesso                               | Endpoint                                     |
 | --------------------------------- | ------------------------------------ | -------------------------------------------- |
-| Haradhvala Nat Med 2022           | **GSE151511**                        | LBCL CAR-T; CAR-Treg                         |
+| Haradhvala Nat Med 2022           | **GSE197268**                        | LBCL CAR-T; 32 pts IP+PBMC; CAR-Treg         |
+| Deng Nat Med 2020                 | **GSE151511** / GSE150992            | LBCL CAR-T; 24 infusion products             |
 | Deng Nat Med 2020                 | GEO                                  | Produto anti-CD19                            |
 | Good et al.                       | CyTOF+scRNA                          | CAR-Treg biomarker                           |
 | GSE241783, 253872, 273170, 243325 | GEO                                  | Serial/product profiling                     |
@@ -473,7 +474,7 @@ WHAT I WANT FROM YOU NOW (critical analysis, not just agreement)
 1. Analyze the hackathon and objectives: given the 4 judging criteria and the Gladstone prize, where does this project win and where does it risk losing points? Be specific.
 2. TOOLS inventory: list ALL tools, specialists, connectors, skills and databases you have access to here that are useful for ISCI. For each, say which pipeline stage it serves (M/R/D/A/S, external validation, clinical bridge, evidence cards). Flag tools I did NOT map in the docs.
 3. Gaps and issues: critique method.md and related_work.md. Where is the ISCI math fragile, circular, or non-identifiable? Where could the benchmark leak (train/test contamination)? What would a Nature Methods reviewer attack first?
-4. New datasets: beyond those I listed (Marson, Belk, Schmidt, Frangieh, Haradhvala GSE151511, Functional CAR-T atlas, ProjecTILs), are there datasets in your 60+ databases I should use for (a) defining axes, (b) external validation, (c) clinical bridge to CAR-T/bispecifics? Prioritize by 1-week feasibility.
+4. New datasets: beyond those I listed (Marson, Belk, Schmidt, Frangieh, Haradhvala GSE197268, Deng GSE151511, Functional CAR-T atlas, ProjecTILs), are there datasets in your 60+ databases I should use for (a) defining axes, (b) external validation, (c) clinical bridge to CAR-T/bispecifics? Prioritize by 1-week feasibility.
 5. Method opportunities: are there approaches/models (perturbation foundation models, GRN inference, network control) available here that would strengthen D, A or S without blowing the deadline?
 6. Architecture and dev plan HERE: propose how we build inside Claude Science — order of skills to create, per-artifact provenance, what runs local vs HPC/Modal, and how to generate traceable evidence cards (claim -> citation) for each gene in the ranking. Detail the software architecture (isci/ modules) and the end-to-end data flow.
 7. Phased execution plan (D0->D4) with daily checkpoints until Jul 13, making explicit what is the minimum submission (D0-D2) vs stretch.

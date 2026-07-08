@@ -4,6 +4,8 @@
 > **Escopo hackathon:** preparar material agora; análise mínima viável se D0–D2 fecharem a tempo.  
 > **Última busca:** 2026-07-07 (PubMed, GEO, Cancer Cell, Blood abstracts, Zenodo, tcellMIL).
 
+**Nota factual (verificada):** **GSE151511** = Deng *Nat Med* 2020, **24** produtos de infusão CAR-T (~137k células residuais). **GSE197268** = Haradhvala *Nat Med* 2022, **32** pacientes (IP + PBMC). Não confundir.
+
 ---
 
 ## Recomendação executiva
