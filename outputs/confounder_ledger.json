@@ -1,0 +1,53 @@
+{
+  "description": "Spearman correlation of each score with each confounder. |rho|<0.2 = clean.",
+  "ledger": {
+    "ISCI_orthogonal": {
+      "magnitude": 0.021,
+      "target_baseMean": 0.087,
+      "n_guides": 0.084,
+      "n_cells_target": -0.002,
+      "TCR_shutdown": -0.102
+    },
+    "specificity": {
+      "magnitude": 0.161,
+      "target_baseMean": 0.026,
+      "n_guides": 0.033,
+      "n_cells_target": -0.036,
+      "TCR_shutdown": -0.073
+    },
+    "coh_donor": {
+      "magnitude": 0.073,
+      "target_baseMean": 0.118,
+      "n_guides": 0.105,
+      "n_cells_target": 0.034,
+      "TCR_shutdown": -0.102
+    },
+    "ISCI_combined": {
+      "magnitude": 0.551,
+      "target_baseMean": 0.098,
+      "n_guides": 0.106,
+      "n_cells_target": -0.08,
+      "TCR_shutdown": -0.146
+    },
+    "reversal_raw": {
+      "magnitude": 0.158,
+      "target_baseMean": 0.008,
+      "n_guides": 0.004,
+      "n_cells_target": -0.114,
+      "TCR_shutdown": -0.119
+    },
+    "reversal_resid": {
+      "magnitude": 0.116,
+      "target_baseMean": 0.004,
+      "n_guides": -0.001,
+      "n_cells_target": -0.116,
+      "TCR_shutdown": -0.112
+    }
+  },
+  "interpretation": {
+    "ISCI_orthogonal": "clean on all confounders (max |rho|=0.10) - validates the locked core",
+    "ISCI_combined": "magnitude rho=0.55 - magnitude-dominated, kept as secondary only",
+    "reversal_raw": "weakly confounded (TCR_shutdown rho=-0.12, magnitude 0.16); residualized versions provided",
+    "TCR_shutdown_proxy": "mean -z on 13 TCR/activation genes (CD3D,CD3E,CD3G,CD247,LAT,LCP2...)"
+  }
+}

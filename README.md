@@ -88,6 +88,25 @@ Every output carries a provenance stamp (data SHA-256, conda env, git-SHA, seed)
 
 `isci/` — `io` (backed AnnData + SHA-256 manifest) · `axes` (leave-one-out axis construction) · `movement` (M, NES-style enrichment) · `qc` (Q, on-target validity) · `repro` (R, cross-donor/guide reproducibility) · `network` (causal intervention graph, influence scores) · `index` (rank-product / residualized aggregation) · `baselines` (DE-magnitude, effect-size, centrality) · `validate` (expression-matched negatives, AUPRC/AUROC, conditional LR) · `evidence` (PubMed-cited evidence cards).
 
+## Expansion: T-REMAP (reverse-mapping clinical modules)
+
+Built **on top of** the locked core (see [reports/result_lock.md](reports/result_lock.md)),
+T-REMAP inverts the failed clinical-bridge question. Instead of "does a controller predict
+response?", it asks "which perturbations push T cells *away from* clinical resistance
+programs and *toward* sensitivity programs?"
+
+- **Movability gate** ([outputs/movability_gate.json](outputs/movability_gate.json)) — all 6
+  clinical modules pass: their member genes ARE moved by perturbations (57–100% responsive),
+  unlike the D4 mean-signature that failed.
+- **ClinicalReversalScore** = mean-z(sensitivity modules) − mean-z(resistance modules) per
+  perturbation. Permutation null **p = 0.001**; only weakly magnitude-dependent (ρ = 0.18).
+- **Heatmap** ([figures/module_reversal_heatmap.png](figures/module_reversal_heatmap.png)) —
+  top candidates × 6 modules. Non-obvious hits (KDM1A, CREBBP, GATA3) reverse specific modules
+  without being generic activation knobs; TCR-signaling hits are flagged as a likely
+  activation-axis artifact. See [reports/t_remap_expansion.md](reports/t_remap_expansion.md).
+
+Hypothesis-generating, not a target call — the caveats in the report are load-bearing.
+
 ## Limitations & future work
 
 - **Clinical bridge is a negative result.** T-state signatures do not predict CAR-T response in the current cohort (n = 70 infusion products); only Treg composition is suggestive (uncorrected p = 0.04). Needs a larger, magnitude-independent outcome cohort.

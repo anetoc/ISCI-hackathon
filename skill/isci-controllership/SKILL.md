@@ -63,4 +63,7 @@ signal over magnitude here.
 ## Helpers (loaded into your kernel)
 
 `conditional_lr_test`, `expression_matched_negatives`, `bootstrap_auprc_gain`,
-`controllership_score` — see `kernel.py`. All operate on plain pandas DataFrames.
+`controllership_score` — the core controllership method.
+
+For the T-REMAP extension (reverse-mapping clinical programs onto perturbations):
+`movability_gate` (check a clinical module's genes are actually moved by perturbations before trying to reverse-map it — the gate that separates a viable module from an unreachable one) and `clinical_reversal_score` (ClinicalReversalScore = sensitivity-module push − resistance-module push per perturbation, with a permutation null over module identity). See `kernel.py`. All operate on plain pandas DataFrames / numpy arrays.
