@@ -15,7 +15,7 @@
 
 The original design was a five-component product `ISCI = R·S·geomean(M,D,A)`. Run honestly on the real data, it **failed three times**, and the failures were informative:
 
-1. **The full index lost to a trivial effect-magnitude baseline** under expression-matched negatives (AUPRC 0.72 vs 0.83).
+1. **The full index lost to a trivial effect-magnitude baseline** under expression-matched negatives (AUPRC 0.35 vs 0.41; AUROC 0.72 vs 0.83 — magnitude ahead on both).
 2. **Network influence (PageRank/in-degree) added nothing** over magnitude, even though PageRank is orthogonal to it (ρ ≈ 0.00).
 3. **The clinical bridge did not predict CAR-T response** at the patient level (CV-AUROC ≈ 0.53).
 
