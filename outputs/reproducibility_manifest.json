@@ -1,0 +1,103 @@
+{
+  "project": "ISCI \u2014 Immune-State Controllability Index",
+  "generated_utc": "2026-07-08T01:33:31.919111+00:00",
+  "git_sha": "204d728ac73c9b0658cfba718c4cae78d714ab76",
+  "seeds": {
+    "bootstrap": 0,
+    "null_permutation": 42,
+    "cv": 0
+  },
+  "environment": {
+    "python": "3.12.13",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "numpy": "2.4.6",
+    "scipy": "1.18.0",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.9.0",
+    "statsmodels": "0.14.6",
+    "anndata": "0.12.19",
+    "scanpy": "1.12.1",
+    "networkx": "3.6.1"
+  },
+  "inputs": {
+    "GWCD4i.DE_stats.h5ad": {
+      "size_bytes": 16786240107,
+      "fingerprint_sha256_head1M_tail1M_size": "5e9ea7e2fa9a59a6fb430f6a818d8b4eb74b1bdd71a4eb1fe1f4e24c596e93f8",
+      "note": "fingerprint not full-file hash (16.8GB); size verified against S3 Content-Length 16786240107"
+    }
+  },
+  "outputs": {
+    "outputs/isci_final_ranking.csv": {
+      "sha256": "6f9fe281757d9cd7ab3ed33811b680e1f2b59b6a2f490967362e253350115d72",
+      "bytes": 456369
+    },
+    "outputs/fig_central.png": {
+      "sha256": "635d56257facf1ab757f62f5e408bc7684e41b31fe0251bdae61f569bcbe0d7d",
+      "bytes": 131869
+    },
+    "outputs/evidence_cards.json": {
+      "sha256": "6a96bc47bee931b43939c6563b8ce746555b619ac2e01fda40330adbe7c4397f",
+      "bytes": 23639
+    },
+    "outputs/evidence_cards.md": {
+      "sha256": "b3c05886c3237787a51af53d2c6eed368f9da0b1f4bb05eda08fdb9b354d2efe",
+      "bytes": 16009
+    },
+    "outputs/gene_features.parquet": {
+      "sha256": "5db98a4b325621c072afa46a4918b326084da8b32f8887335c36b59bb671c194",
+      "bytes": 389757
+    },
+    "outputs/isci_residual_scores.parquet": {
+      "sha256": "994b3f54c6c173318f59187815f66a2a78c7ad0b284166bdbc072a4d0cb443ae",
+      "bytes": 230208
+    },
+    "outputs/network_influence.csv": {
+      "sha256": "529d3ea730dfe6b07f58cce2941d628a41285d1ff72720c862fbc01b5ad271a8",
+      "bytes": 615440
+    },
+    "outputs/d4/d4_summary.json": {
+      "sha256": "635ab67da883ee03f5a21deee575ec692ae70c489e9bfa596a44b95f9422b5fa",
+      "bytes": 1204
+    },
+    "outputs/clinical_report.md": {
+      "sha256": "45cf7409d9ed88390f0a920dfd30076280ba8011a1c25e4dda77dd3b63433f9b",
+      "bytes": 2945
+    },
+    "SUMMARY.md": {
+      "sha256": "1dbd593f534fdcf5549b63fad0a27ce4325e205c2caf04968ef3797b79736baf",
+      "bytes": 1157
+    },
+    "README.md": {
+      "sha256": "029520acf7fd7483aad9fc58e04c8111548fef57e147227dd40106d91e5918a2",
+      "bytes": 6443
+    }
+  },
+  "key_results": {
+    "orthogonal_gain_auprc": {
+      "magnitude_only": 0.408,
+      "magnitude_plus_orthogonal": 0.637,
+      "gain": 0.229,
+      "ci95": [
+        0.072,
+        0.405
+      ],
+      "p_gain_gt0": 0.996,
+      "bootstrap_n": 500
+    },
+    "conditional_LR": {
+      "axis_specificity_p": "<1e-4",
+      "donor_coherence_p": "<1e-4"
+    },
+    "cross_condition_replication": {
+      "Rest": "p<1e-3",
+      "Stim8hr": "p<1e-3",
+      "Stim48hr": "p<1e-3"
+    },
+    "clinical_bridge": {
+      "cv_auroc": 0.53,
+      "verdict": "chance/negative",
+      "treg_fraction_p": 0.04
+    }
+  },
+  "git_sha_note": "HEAD at manifest generation; will advance by 1 commit when this manifest + packaging are committed"
+}
