@@ -1,0 +1,472 @@
+[
+  {
+    "gene": "SETDB1",
+    "isci_rank": 1,
+    "isci_score": 0.96,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "SETDB1 ranks #1 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.97, specificity 0.94, coherence 0.97.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": true,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "H3K9me3 methyltransferase; silences endogenous retroviruses and effector programs in T cells (established chromatin controller)."
+    },
+    "literature": [
+      {
+        "pmid": "42210236",
+        "doi": "10.1186/s12943-026-02679-6",
+        "title": "Targeting MORC2 activates transposable element-mediated viral mimicry and potentiates immune checkpoint blockade in triple-negative breast cancer."
+      },
+      {
+        "pmid": "42176657",
+        "doi": "10.1016/j.ejmech.2026.118982",
+        "title": "Targeted degradation of SETDB1 by an Aptamer-CRBNL PROTAC as a novel therapeutic strategy for breast cancer."
+      },
+      {
+        "pmid": "42016321",
+        "doi": "10.1155/humu/6594696",
+        "title": "Multiomics Analysis Identifies Chromosomal Instability-Associated Immune-Related Signatures in Hepatocellular Carcinoma by Integrating Weighted Gene Coexpression Network Analysis (WGCNA) and Machine Learning."
+      }
+    ],
+    "literature_count_pubmed": 29
+  },
+  {
+    "gene": "CD3D",
+    "isci_rank": 2,
+    "isci_score": 0.943,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "CD3D ranks #2 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.99, specificity 0.99, coherence 0.86.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "TCR/CD3 complex subunit (signal transduction, not a state controller per se)."
+    },
+    "literature": [
+      {
+        "pmid": "42238559",
+        "doi": "10.4103/ijem.ijem_397_25",
+        "title": "Correlation between DPP-4 Gene Expression and T-Cell Subset Marker Genes in Chronic Liver Disease Patients in Eastern India: An Observational Study."
+      },
+      {
+        "pmid": "42065189",
+        "doi": "10.1097/MD.0000000000048367",
+        "title": "Exploration of CD2 and CD3D as potential immune-related biomarkers for IORT in breast cancer treatment."
+      },
+      {
+        "pmid": "41367252",
+        "doi": "10.1111/vde.70042",
+        "title": "Assessing D-Squame as a Minimally Invasive Technique to Evaluate the Cutaneous Immune Response mRNA in a Dog Model of Canine Atopic Dermatitis."
+      }
+    ],
+    "literature_count_pubmed": 106
+  },
+  {
+    "gene": "KDM1A",
+    "isci_rank": 3,
+    "isci_score": 0.941,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "KDM1A ranks #3 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.99, specificity 0.99, coherence 0.85.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "LSD1 histone demethylase; regulates T-cell differentiation and effector/memory balance."
+    },
+    "literature": [
+      {
+        "pmid": "42242864",
+        "doi": "10.1136/jitc-2025-014681",
+        "title": "Inhibition of histone demethylase LSD1 suppresses CD47 expression and enhances efficacy of CD47 blockade in breast cancer."
+      },
+      {
+        "pmid": "41951577",
+        "doi": "10.1038/s41419-026-08722-0",
+        "title": "ARID1A deficiency-driven reprogramming of polyamine metabolism promotes endometrial cancer malignancy and immune escape."
+      },
+      {
+        "pmid": "41873712",
+        "doi": "10.1002/adbi.202500639",
+        "title": "Transcriptional Activation of SBNO2 by KDM1A Drives Immune Escape in Lung Cancer."
+      }
+    ],
+    "literature_count_pubmed": 52
+  },
+  {
+    "gene": "GATA3",
+    "isci_rank": 4,
+    "isci_score": 0.931,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "GATA3 ranks #4 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.95, specificity 0.98, coherence 0.86.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": true,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "Master Th2 lineage transcription factor (canonical CD4 state regulator)."
+    },
+    "literature": [
+      {
+        "pmid": "42392819",
+        "doi": "10.19540/j.cnki.cjcmm.20251209.401",
+        "title": "[Effects of Zhuyu Pills on Th1/Th2 and Th17/Treg immune balance in acne model mice via regulation of JAK2/STAT3 signaling pathway]."
+      },
+      {
+        "pmid": "42378251",
+        "doi": "10.1182/blood.2025032507",
+        "title": "A single-cell atlas identifies oncogenic transcriptional programs and immune escape mechanisms in CTCL."
+      },
+      {
+        "pmid": "42366930",
+        "doi": "10.22074/cellj.2026.2059818.1852",
+        "title": "Conditioned Medium from Muramyl Dipeptide-Primed Mesenchymal Stem Cells Enhances Therapeutic Efficacy in Experimental Rheumatoid Arthritis."
+      }
+    ],
+    "literature_count_pubmed": 2676
+  },
+  {
+    "gene": "ARHGAP30",
+    "isci_rank": 5,
+    "isci_score": 0.926,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "ARHGAP30 ranks #5 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.96, specificity 0.96, coherence 0.86.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "Rho GTPase-activating protein; T-cell homeostasis."
+    },
+    "literature": [
+      {
+        "pmid": "40404920",
+        "doi": "10.1038/s41418-025-01529-0",
+        "title": "Thymic egress and peripheral T cell homeostasis regulated by Rho GTPase-activating protein 30."
+      }
+    ],
+    "literature_count_pubmed": 1
+  },
+  {
+    "gene": "CTBP1",
+    "isci_rank": 6,
+    "isci_score": 0.923,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "CTBP1 ranks #6 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.98, specificity 0.82, coherence 0.98.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "Transcriptional corepressor; assembles chromatin-modifying complexes."
+    },
+    "literature": [
+      {
+        "pmid": "38490212",
+        "doi": "10.1016/j.ccell.2024.02.016",
+        "title": "Multimodal stimulation screens reveal unique and shared genes limiting T&#xa0;cell fitness."
+      },
+      {
+        "pmid": "37230466",
+        "doi": "10.1016/j.labinv.2023.100180",
+        "title": "MAT1A Suppression by the CTBP1/HDAC1/HDAC2 Transcriptional Complex Induces Immune Escape and Reduces Ferroptosis in Hepatocellular Carcinoma."
+      },
+      {
+        "pmid": "28807016",
+        "doi": "10.1186/s12885-017-3536-6",
+        "title": "Endogenous controls of gene expression in N-methyl-N-nitrosourea-induced T-cell lymphoma in p53-deficient mice."
+      }
+    ],
+    "literature_count_pubmed": 9
+  },
+  {
+    "gene": "HNRNPA1",
+    "isci_rank": 7,
+    "isci_score": 0.919,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "HNRNPA1 ranks #7 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.94, specificity 0.93, coherence 0.89.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "RNA-binding splicing regulator."
+    },
+    "literature": [
+      {
+        "pmid": "42291265",
+        "doi": "10.1016/j.isci.2026.115999",
+        "title": "Alternative splicing regulatesderived neoantigen presentation and promotes immune evasion in metabolic-associated hepatocellular carcinoma."
+      },
+      {
+        "pmid": "42277033",
+        "doi": "10.1038/s41467-026-74159-w",
+        "title": "HnRNP A1 and A2B1 enforce Ezh2 mRNA splicing to promote germinal center B cell responses."
+      },
+      {
+        "pmid": "42174653",
+        "doi": "10.1186/s13046-026-03741-3",
+        "title": "Extracellular vesicles from chemotherapy-induced senescent tumor cells reprogram hepatic phospholipid metabolism to promote pancreatic cancer liver metastasis."
+      }
+    ],
+    "literature_count_pubmed": 22
+  },
+  {
+    "gene": "PTPRC",
+    "isci_rank": 8,
+    "isci_score": 0.917,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "PTPRC ranks #8 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.98, specificity 0.99, coherence 0.79.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "CD45 phosphatase; sets TCR signaling threshold (pan-leukocyte)."
+    },
+    "literature": [
+      {
+        "pmid": "42406119",
+        "doi": "10.1007/s00011-026-02316-4",
+        "title": "Single-cell transcriptomic analysis identifies a MIF-driven keratinocyte-macrophage-Th2 axis as a key inflammatory circuit in atopic dermatitis."
+      },
+      {
+        "pmid": "42288543",
+        "doi": "10.1038/s41598-026-51092-y",
+        "title": "Whole transcriptome sequencing and ceRNA regulatory network in diabetic peripheral neuropathy."
+      },
+      {
+        "pmid": "41952178",
+        "doi": "10.1186/s12974-026-03794-3",
+        "title": "Single-cell omics and flow cytometry identify distinct immune states of dural and brain-infiltrating IL-17-producing &#x3b3;&#x3b4; T cells after experimental stroke."
+      }
+    ],
+    "literature_count_pubmed": 418
+  },
+  {
+    "gene": "WDR82",
+    "isci_rank": 9,
+    "isci_score": 0.912,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "WDR82 ranks #9 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.97, specificity 0.86, coherence 0.91.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "Component of SET1/COMPASS H3K4 methyltransferase complex."
+    },
+    "literature": [
+      {
+        "pmid": "42328439",
+        "doi": "10.7150/ijbs.135015",
+        "title": "WDR82 suppresses breast cancer progression by inhibiting ERK-driven chemokine expression and neutrophil infiltration."
+      },
+      {
+        "pmid": "17355966",
+        "doi": "10.1074/jbc.M609809200",
+        "title": "Identification and characterization of the human Set1B histone H3-Lys4 methyltransferase complex."
+      }
+    ],
+    "literature_count_pubmed": 2
+  },
+  {
+    "gene": "PTEN",
+    "isci_rank": 10,
+    "isci_score": 0.911,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "PTEN ranks #10 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.98, specificity 0.88, coherence 0.88.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "PI3K/AKT phosphatase; gatekeeper of T-cell activation and Treg stability."
+    },
+    "literature": [
+      {
+        "pmid": "42318078",
+        "doi": "10.2147/DDDT.S584230",
+        "title": "Anlotinib as Third-Line or Later Therapy in Recurrent or Metastatic Head and Neck Squamous Cell Carcinoma: Real-World Efficacy and Safety Outcomes."
+      },
+      {
+        "pmid": "42268362",
+        "doi": "10.1007/s12672-026-04931-3",
+        "title": "Galectin 3 expression in gastrointestinal tumors identified through comprehensive bioinformatic mapping."
+      },
+      {
+        "pmid": "42258564",
+        "doi": "10.1049/syb2.70076",
+        "title": "Integrated Analysis Identifies an Anoikis-Related Gene Signature for Predicting Prognosis in Patients With Triple-Negative Breast Cancer."
+      }
+    ],
+    "literature_count_pubmed": 886
+  },
+  {
+    "gene": "HEXIM1",
+    "isci_rank": 11,
+    "isci_score": 0.91,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "HEXIM1 ranks #11 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.88, specificity 1.00, coherence 0.86.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "P-TEFb inhibitor; controls transcriptional pause-release."
+    },
+    "literature": [
+      {
+        "pmid": "40853519",
+        "doi": "10.1186/s13568-025-01940-3",
+        "title": "Treponema pallidum inhibits CD4+&#x2009;T-cell proliferation through METAP2: insights from Mendelian randomization analysis."
+      },
+      {
+        "pmid": "33234703",
+        "doi": "10.1242/bio.052969",
+        "title": "Harmine enhances the activity of the HIV-1 latency-reversing agents ingenol A and SAHA."
+      },
+      {
+        "pmid": "32228614",
+        "doi": "10.1186/s12977-020-00514-4",
+        "title": "DDX5 potentiates HIV-1 transcription as a co-factor of Tat."
+      }
+    ],
+    "literature_count_pubmed": 17
+  },
+  {
+    "gene": "CD3E",
+    "isci_rank": 12,
+    "isci_score": 0.909,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "CD3E ranks #12 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.99, specificity 0.99, coherence 0.77.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "TCR/CD3 complex subunit (signal transduction, not a state controller per se)."
+    },
+    "literature": [
+      {
+        "pmid": "42395370",
+        "doi": "10.64898/2026.06.18.731665",
+        "title": "Human CD8-iTreg are potent GVHD suppressors and tumoricidal effectors by release of Granzyme-KSupramolecular Attack Particles."
+      },
+      {
+        "pmid": "42346437",
+        "doi": "10.3390/jox16030115",
+        "title": "A Network Toxicology Framework for Identification of Immune System Disruption by Per- and Polyfluoroalkyl Substance (PFAS) Mixture: In Silico Analysis."
+      },
+      {
+        "pmid": "42288543",
+        "doi": "10.1038/s41598-026-51092-y",
+        "title": "Whole transcriptome sequencing and ceRNA regulatory network in diabetic peripheral neuropathy."
+      }
+    ],
+    "literature_count_pubmed": 470
+  },
+  {
+    "gene": "STAT6",
+    "isci_rank": 13,
+    "isci_score": 0.908,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "STAT6 ranks #13 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.85, specificity 1.00, coherence 0.88.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": true,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "IL-4 signaling transducer driving Th2 polarization (canonical)."
+    },
+    "literature": [
+      {
+        "pmid": "42350047",
+        "doi": "10.1136/jitc-2026-015022",
+        "title": "IL4R&#x3b1; blockade inhibits proliferation of malignant lymphocytes and the immunosuppressive tumor microenvironment of mycosis fungoides."
+      },
+      {
+        "pmid": "42317337",
+        "doi": "10.3389/fimmu.2026.1733991",
+        "title": "STAT6 inhibition of M2 macrophages suppresses tumor growth by modulating the tumor microenvironment in colon cancer model."
+      },
+      {
+        "pmid": "42303776",
+        "doi": "10.1038/s43018-026-01189-0",
+        "title": "Targeting PID1 generates oxysterols to switch macrophage cell fates for improved antitumor immunity."
+      }
+    ],
+    "literature_count_pubmed": 1286
+  },
+  {
+    "gene": "PLCG1",
+    "isci_rank": 14,
+    "isci_score": 0.906,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "PLCG1 ranks #14 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.99, specificity 0.95, coherence 0.79.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "Proximal TCR signaling effector; controls activation threshold."
+    },
+    "literature": [
+      {
+        "pmid": "41386109",
+        "doi": "10.1016/j.prp.2025.156327",
+        "title": "Nodal T-follicular helper cell lymphoma with hodgkin/reed-sternberg-like cells: Clinicopathologic and molecular characterization of 11 cases."
+      },
+      {
+        "pmid": "41225024",
+        "doi": "10.1007/s00277-025-06709-z",
+        "title": "Insights into Nodal T-Follicular Helper Cell lymphomas and Peripheral T-Cell Lymphomas, Not Otherwise Specified, in Slovenian Patients: Mutational Landscape, Clinicopathological Characteristics, and Outcomes."
+      },
+      {
+        "pmid": "40796680",
+        "doi": "10.1038/s44319-025-00546-x",
+        "title": "Hyperactive PLCG1 induces cell-autonomous and bystander T cell activation and drug resistance."
+      }
+    ],
+    "literature_count_pubmed": 93
+  },
+  {
+    "gene": "USP22",
+    "isci_rank": 15,
+    "isci_score": 0.906,
+    "claim_observed": {
+      "level": "observed_in_marson_perturbseq",
+      "statement": "USP22 ranks #15 of 2520 by ISCI (magnitude + magnitude-orthogonal axis-specificity + cross-donor reproducibility). Percentiles: magnitude 0.98, specificity 0.97, coherence 0.78.",
+      "source": "GWCD4i.DE_stats (Marson 2025), commit 517a5a9"
+    },
+    "known_regulator_label": false,
+    "biological_context": {
+      "level": "literature_supported",
+      "statement": "Deubiquitinase in SAGA complex; regulates Treg function and chromatin."
+    },
+    "literature": [
+      {
+        "pmid": "42305533",
+        "doi": "10.3389/fimmu.2026.1859310",
+        "title": "Multi-layered functional genomics prioritizes candidate effectors and regulatory mechanisms of ankylosing spondylitis."
+      }
+    ],
+    "literature_count_pubmed": 23
+  }
+]
