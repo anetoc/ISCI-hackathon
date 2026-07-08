@@ -137,7 +137,8 @@ def main():
         json.dump(bench, f, indent=2)
     manifest = isci_io.build_manifest(
         inputs={"DE_stats": de_path}, seeds={"null_permutation": SEED},
-        params={"aggregator": "rank_product(M_pos,Q,R)", "leave_one_out": True, "n_perm": 1000},
+        params={"aggregator": "rank_product(|M|,Q,R)  # |M|=direction-agnostic enrichment; M_pos kept as separate ISCI_therapeutic",
+                "M_metric": "enrichment", "leave_one_out": True, "n_perm": 1000},
         repo_dir=REPO)
     isci_io.write_manifest(OUT / "manifest_d0.json", manifest)
 
