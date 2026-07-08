@@ -37,17 +37,25 @@
 
 ---
 
-## OPTIONAL extended panel — T-REMAP (only for a >3-min cut)
+## OPTIONAL extended panel — the two-layer expansion (for a >3-min cut)
 
 *Splice after 2:35 if making a longer video. Keeps the honest framing.*
 
-> "Building on the locked core, we inverted the question: instead of predicting response,
-> we ask which perturbations push T cells *away from* clinical resistance programs. Every
-> clinical module first passes a movability gate — its genes are actually moved by
-> perturbations. The reversal score has a permutation null at p = 0.001, and after we
-> residualize out both magnitude and TCR-shutdown, the trivial 'turn the TCR off' hits
-> drop away and specific chromatin and RNA-state controllers — KDM1A, CREBBP, Regnase-1 —
-> rise to the top. In an independent CAR-T cohort, the sensitivity axis replicates
-> direction; the resistance axis does not, and we say so."
+> "Building on the locked core, we inverted the question: which perturbations push T cells
+> *away from* clinical resistance programs and *toward* sensitivity? That gives two layers.
+> The first is a **known TCR-signal-strength rheostat** — the raw axis recovers the TCR
+> machinery itself, exactly the axis dasatinib 'rest' and LCK-editing modulate in the CAR-T
+> clinic. The second is a **magnitude-independent layer** of specific controllers: after we
+> residualize out TCR, effect size, and stress, only a handful survive — IRF2BP1, MED13,
+> PDCD10, CXXC1. We're careful here: family enrichment against a matched null is *not*
+> significant, so we call the families descriptive, not proven. And in two independent CAR-T
+> cohorts the memory-stem sensitivity axis replicates direction — while resistance does not,
+> which points to resistance being post-infusion and niche-dependent. We say all of it plainly."
 
-*(On screen: the mechanism map + the reversal heatmap + the confounder ledger.)*
+*(On screen: the TCR convergence figure, the confounder ledger v2, the GSE223655 heatmap.)*
+
+**The one-line pitch for the whole project:**
+> "T-cell controllership has two layers — a known TCR-signal-strength rheostat, and a
+> magnitude-independent layer of reproducible, axis-specific state controllers. ISCI
+> separates control from association; T-REMAP turns controllers into a sensitivity/resistance
+> map — with the confounder controlled and the negatives reported."
