@@ -76,6 +76,22 @@ the primary test is still run in the **CD8+ stratum** as well; the verdict is un
 (TSC AUROC 0.373 there), so the failure is **not** a CD8/CD4 artifact — TSC fails to
 separate killer vs non-killer *within* the CD8 compartment too.
 
+**Authors'-label corroboration (Pseudotime metadata).** The exposed set has no `Cell_type`
+column, but the Pseudotime metadata *does* carry the authors' own CD8/CD4 call (CD8 /
+CD4 IL17− / CD4 IL17+). Its counts matrix is unusable (§6), but the cross-tab is a
+metadata-only operation and is fully evaluable — a real-label check on the same confounder:
+
+| engagement | CD8 | CD4 | CD8 fraction |
+|---|---|---|---|
+| super-engaged | 675 | 336 | **0.668** |
+| medium-exposed | 409 | 357 | 0.534 |
+| never-engaged | 341 | 423 | **0.446** |
+
+Ratio super/never = **1.50×** — again below the 2× threshold, and consistent with the
+expression-derived 1.26× above. Engagement is *modestly* CD8-enriched in both datasets but
+not heavily confounded, so the primary test is not merely recapitulating CD8-ness; and TSC
+loses to the CD8-identity baseline anyway (§5), so the honest reading holds either way.
+
 ## 5. Result — primary test (exposed, super vs never, n = 1969)
 
 | score | AUROC | AUPRC |

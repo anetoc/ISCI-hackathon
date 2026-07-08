@@ -51,6 +51,24 @@
       "cd8frac_super": 0.797644539614561,
       "cd8frac_never": 0.6318840579710145,
       "ratio": 1.2623273677386402
+    },
+    "pseudotime": {
+      "source": "authors Cell_type column (CD8 vs CD4 IL17+/-); metadata-only, counts NOT-EVALUABLE",
+      "crosstab": {
+        "CD8": {
+          "super-engaged": 675,
+          "medium-exposed": 409,
+          "never-engaged": 341
+        },
+        "CD4": {
+          "super-engaged": 336,
+          "medium-exposed": 357,
+          "never-engaged": 423
+        }
+      },
+      "cd8frac_super": 0.6677,
+      "cd8frac_never": 0.4463,
+      "ratio": 1.4961
     }
   },
   "exposed_all": {
