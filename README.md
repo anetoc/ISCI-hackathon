@@ -107,10 +107,51 @@ programs and *toward* sensitivity programs?"
 
 Hypothesis-generating, not a target call — the caveats in the report are load-bearing.
 
+## Multi-omic expansion: two layers of T-cell controllability
+
+Built on the locked core, the expansion tests whether the controllers hold up under
+harder statistics and external cohorts. The headline that emerges:
+
+> **T-cell controllership has two layers: a known TCR-signal-strength rheostat, and a
+> magnitude-independent layer of reproducible, axis-specific state controllers.**
+
+- **Statistical rigor** ([reports/mechanism_cards_v2.md](reports/mechanism_cards_v2.md),
+  [outputs/family_enrichment_matched_null.csv](outputs/family_enrichment_matched_null.csv)):
+  family enrichment tested against **two matched nulls** (with/without TCR-shutdown). Honest
+  negative — chromatin/tx is nominal in the TCR-free null (fold 1.46, p=0.024) but attenuates
+  once TCR is controlled and **nothing survives FDR**. The families are a chromatin-leaning
+  description, not an over-represented signal.
+- **Confounder ledger v2** ([outputs/confounder_ledger_v2.json](outputs/confounder_ledger_v2.json)):
+  ISCI_orthogonal stays clean against all nine confounders (stress, cell-cycle, mitochondrial,
+  IFN added; max |ρ| = 0.10) — the core is confounder-robust.
+- **TCR reframe** ([reports/tcr_reframe.md](reports/tcr_reframe.md),
+  [figures/tcr_reframe_convergence.png](figures/tcr_reframe_convergence.png)): the raw T-REMAP
+  axis recovers the TCR signaling machinery (the rheostat); after full residualization only
+  7/20 reversers survive (IRF2BP1, MED13, PDCD10, CXXC1 robust). TCR signal strength is a
+  biological rheostat **and** a translational confounder — literature-anchored (dasatinib/rest
+  Weber 2021 PMC8049103; LCK Wu 2023 PMID 36696897; Regnase-1 recovered independently).
+- **External direction validation** (patient-level gate, direction-only, no predictor):
+  - **CAR-T GSE208052** (n=9 scRNA) — sensitivity axis replicates (R_memory_stem p=0.032); resistance does not.
+  - **CAR-T GSE223655** (bulk, gate passed 33 CR/32 PD) — **R_memory_stem replicates robustly**
+    (CD8+CAR product p=0.0043, positive in all 6 sorted fractions of the 12-patient pool).
+    Two independent studies now agree on the memory-stem sensitivity axis.
+  - **Compartment hypothesis:** sensitivity is CAR-T-product-visible; resistance appears
+    post-infusion / niche-dependent.
+- **Targetability triage** ([outputs/protein_targetability_matrix.csv](outputs/protein_targetability_matrix.csv)):
+  70 candidates annotated (protein class, localization, druggability), with a
+  `translation_triage_score` and a mandatory `intervention_direction` column — explicitly a
+  hypothesis-generating layer **separate from** the validated core, not a therapeutic target call.
+
+Roadmap for the parts that need more compute or tissue:
+[phospho + spatial](reports/phospho_spatial_roadmap.md),
+[compute volumetria](reports/compute_volumetria.md),
+[literature gaps](reports/literature_gaps_roadmap.md).
+
 ## Limitations & future work
 
 - **Clinical bridge is a negative result.** T-state signatures do not predict CAR-T response in the current cohort (n = 70 infusion products); only Treg composition is suggestive (uncorrected p = 0.04). Needs a larger, magnitude-independent outcome cohort.
-- **External transfer not yet run.** Robustness was established across culture conditions internally; Frangieh/Belk cross-dataset transfer remains future work.
+- **External validation is direction-only, small-N.** Two CAR-T cohorts (GSE208052 n=9, GSE223655 33 CR/32 PD) confirm the *direction* of the memory-stem sensitivity axis (one-sided, uncorrected, no AUROC); this is replication of direction, not a validated response predictor. Resistance-axis validation (GSE197268, post-infusion) is gated on patient-level labels.
+- **Family enrichment is a statistical negative** with broad GO/Reactome sets — the mechanistic families are descriptive, not FDR-significant.
 - **Chromatin layer (borzoi/evo2 on top controllers)** was scoped as cut-first stretch and not reached.
 
 ## Author
