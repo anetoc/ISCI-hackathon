@@ -22,7 +22,7 @@
 > "It survives every leakage control, and replicates across all three culture conditions."
 
 ### 2:00–2:35 — What it nominates + Claude's role
-> "ISCI then ranks 2,520 genes and nominates chromatin and signaling controllers — IRF1, SETDB1, GATA3, RCOR1 — each with an auto-generated evidence card that cites PubMed and honestly flags when the literature is only tangential. Claude ran the whole pipeline: pulled the 17-gigabyte dataset, wrote and red-teamed the benchmark, caught its own leakage, fetched and fact-checked every citation, and welded a reproducibility manifest to every figure."
+> "ISCI then ranks 2,520 genes. As a sanity check it recovers known regulators near the top — IRF1, STAT6, GATA3, SETDB1; as discovery it nominates candidates that are *not* in the label set — IKBKB in NF-κB signaling, ZC3H12A the RNA-degrading brake Regnase-1, the corepressor RCOR1 — each with an evidence card that cites PubMed and honestly flags when the literature is only tangential. Claude ran the whole pipeline: pulled the 17-gigabyte dataset, wrote and red-teamed the benchmark, caught its own leakage, fetched and fact-checked every citation, and welded a reproducibility manifest to every figure."
 
 *(On screen: an evidence card + the provenance manifest.)*
 
