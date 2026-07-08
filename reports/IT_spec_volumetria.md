@@ -25,7 +25,7 @@ públicos** (AWS S3, GEO/NCBI, Zenodo) pela própria máquina, via internet. Ou 
 - Não existe transferência de TBs saindo do meu notebook (o gargalo de "3 dias" não se aplica).
 - O servidor puxa os arquivos direto da fonte pública; dentro de um datacenter com boa
   banda isso é rápido.
-- O volume de trabalho imediato é pequeno (~17 GB + ~44 GB). Só a resolução
+- O volume de trabalho imediato é pequeno (arquivos de ~24 GB e ~44 GB). Só a resolução
   célula-a-célula completa chega a ~1,7 TB — e mesmo essa vem do S3 público direto para o servidor.
 
 ## 2. Por que o laptop não basta
@@ -50,7 +50,7 @@ seu tamanho em disco — daí o pedido de 128–256 GB de RAM.
 | **RAM** | 128 GB | **128 GB ✓ atende** | Carregar/normalizar matrizes single-cell |
 | **CPU** | 16 núcleos | (confirmar nº de cores) | Leitura de h5ad e inferência de rede são multi-thread |
 | **GPU** | 1× (24 GB VRAM) | **48 GB ✓ folgado** | scVI / SCENIC+ / modelos de perturbação |
-| **Disco scratch** | 500 GB–1 TB | (confirmar espaço livre) | Trabalho imediato ~60 GB; célula-a-célula completa ~1,7 TB (opcional) |
+| **Disco scratch** | 500 GB–1 TB | (confirmar espaço livre) | Trabalho imediato ~70 GB (arquivos de 24 GB + 44 GB); célula-a-célula completa ~1,7 TB (opcional) |
 | **Rede** | saída HTTPS/S3 | (confirmar allowlist) | **Baixar dos repos públicos — não upload do notebook** |
 | **SO** | Linux x86-64 | (confirmar) | Compatibilidade com conda/Python |
 
