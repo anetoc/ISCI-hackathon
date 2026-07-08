@@ -1,0 +1,39 @@
+{
+  "generated_utc": "2026-07-08T00:04:26.143564+00:00",
+  "python": "3.12.13",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "git_sha": "6d15bf59f5277ef3138fc3199aa6f4174957d559",
+  "package_versions": {
+    "anndata": "0.12.19",
+    "scanpy": "1.12.1",
+    "numpy": "2.4.6",
+    "pandas": "2.3.3",
+    "scipy": "1.18.0",
+    "sklearn": "1.9.0",
+    "statsmodels": "0.14.6",
+    "pertpy": "1.1.1",
+    "decoupler": "not-installed",
+    "networkx": "3.6.1"
+  },
+  "seeds": {
+    "null_permutation": 42
+  },
+  "params": {
+    "aggregator": "rank_product(M_pos,Q,R)",
+    "leave_one_out": true,
+    "n_perm": 1000
+  },
+  "inputs": {
+    "DE_stats": {
+      "path": "/Users/abelcosta/projetos/claude-life-science-hackatton/data/GWCD4i.DE_stats.h5ad",
+      "sha256": "c355f535ff32cf7ba1edc49cf9c6039fe84f2c9ebe4d005515cba75790cfbb62",
+      "size_bytes": 16786240107
+    }
+  },
+  "_DEPRECATION_NOTICE": {
+    "status": "DEPRECATED \u2014 historical D0 run, NOT the final deliverable",
+    "reason": "aggregator rank_product(M_pos,Q,R) lost to DE-magnitude under expression-matched negatives (AUPRC 0.35 vs 0.41)",
+    "superseded_by": "outputs/isci_final_ranking.csv (primary score = ISCI_orthogonal); see reports/result_lock.md and outputs/reproducibility_manifest.json",
+    "locked_commit": "32e991b"
+  }
+}
