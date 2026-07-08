@@ -43,7 +43,7 @@ Leading genes: **PLCG1, LAT, LCP2, VAV1, CD247, CD3G** (TCR-proximal signaling),
 **GATA3** (strong Treg-module reversal — consistent with Th2/anti-Treg biology),
 **KDM1A, CREBBP, PMVK, KIFAP3**.
 
-![reversal heatmap]({{artifact:art_335990a6-8b4a-4b62-a171-7b11bea3f475}})
+![reversal heatmap](../figures/module_reversal_heatmap.png)
 
 ## Honest caveats (must read before interpreting)
 

@@ -7,7 +7,7 @@ reversal + external replication), **literature context**, **caveats**, and a
 **next experiment**. Families span the full magnitude range — high controllership is
 **not** a magnitude proxy (within-top-50 Spearman ISCI_orthogonal vs magnitude = −0.22).
 
-![mechanism map](figures/controller_mechanism_map.png)
+![mechanism map](../figures/controller_mechanism_map.png)
 
 ---
 
