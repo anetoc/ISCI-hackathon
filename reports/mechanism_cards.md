@@ -22,8 +22,9 @@ PPHLN1(46), PHF8(48).
   donor-reproducible specificity. This is the family the orthogonal signal was built to surface.
 - **Clinical module (T-REMAP):** after residualizing reversal out against magnitude AND
   TCR-shutdown (`reversal_resid_tcr` in `results/module_reversal_scores.parquet`), the top
-  candidates are transcription/chromatin factors — HNRNPM(#1), IRF2BP1(#4), MED13(#7),
-  CXXC1(#8), TADA2B(#12) — specific reversers, not generic activation knobs. (The *raw*
+  candidates are transcription/chromatin/RNA-state factors — HNRNPM(#1, an RNA-binding
+  protein), IRF2BP1(#4), MED13(#7), CXXC1(#8), TADA2B(#12) — specific reversers, not
+  generic activation knobs. (The *raw*
   reversal list in `t_remap_expansion.md` is instead led by TCR-signaling genes; the
   residualization is what separates specific control from activation shutdown.)
 - **Literature:** SETDB1 (H3K9me3) and KDM1A/LSD1 (CoREST, with RCOR1) enforce
