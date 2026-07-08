@@ -17,9 +17,11 @@ and that torch sees the GPU (`torch.cuda.is_available()`).
    of this brief is cell-level, so: stream/subsample to ~200k cells (scanpy `sc.pp.subsample`
    after backed read, or read a single lane). If even one file is intractable in RAM (125 GB),
    report the practical limit and fall back to the largest tractable subsample — do NOT fabricate.
-2. **Functional CAR-T atlas** (Zenodo record 19066393 / DOI 10.5281/zenodo.17213452) —
-   the CD3+CAR+ subset (~414k cells). This is also used in Brief 03; download once, cache under
-   /mnt/dados2/abel-tsc/data_public/cart/.
+2. **Functional CAR-T atlas** (ML4BM-Lab / Univ Navarra) — the CD3+CAR+ subset (~414k cells,
+   UNCONFIRMED). Resolve the real Zenodo/GitHub source in **Brief 03 first** (it verifies the
+   record ID, DOI, and file list against the live page); reuse whatever Brief 03 confirmed.
+   Do not hardcode a record/DOI here — take it from Brief 03's verified structure report.
+   Cache under /mnt/dados2/abel-tsc/data_public/cart/.
 
 ## Protocol
 1. **scVI latent space per dataset** (batch key = donor/patient): train scVI (default 10–30

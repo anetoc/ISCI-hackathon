@@ -5,12 +5,18 @@
 analysis. This is a feasibility + label gate, deliberately separate from the test itself so we
 never build a predictor on labels that don't exist.
 
-## Data source (verify first)
-- Zenodo record **19066393** (concept DOI 10.5281/zenodo.17213452), ML4BM-Lab / Univ Navarra,
-  bioRxiv 2025.10.11.681788. GitHub: ML4BM-Lab/Functional-cart-atlas.
-- Expected: >1M cells across 13 studies; ~414k CD3+CAR+ after QC; 11 phenotypes; a trained scVI
-  model; clinical-response + ICANS metadata. **Verify these against the actual download — do
-  not trust the numbers above; report what the files actually contain.**
+## Data source — RESOLVE AND VERIFY FIRST (do not trust the strings below)
+The "Functional CAR-T atlas" (ML4BM-Lab / Univ Navarra) is the target, but the exact
+identifiers below are **unverified leads to confirm yourself**, not established fact:
+- Candidate Zenodo record ~19066393 / concept DOI ~10.5281/zenodo.17213452; candidate
+  preprint bioRxiv ~2025.10.11.681788; candidate GitHub ML4BM-Lab/Functional-cart-atlas.
+- **Step 0a — resolve the real source:** search Zenodo/GitHub for "Functional CAR-T atlas
+  ML4BM-Lab", confirm the actual record ID, DOI, and file list from the live page, and
+  record what you found. If these candidate IDs are wrong or dead, find the correct ones and
+  report the discrepancy — do not proceed on an unconfirmed link.
+- Expected content to verify against the real download (all UNCONFIRMED): ~>1M cells,
+  ~414k CD3+CAR+ after QC, phenotypes, a scVI model, clinical-response + ICANS metadata.
+  **Report what the files actually contain; trust nothing in this brief as a number.**
 
 ## Environment
 pip venv from `envs/requirements_machine.txt` + scanpy/anndata. Download **server-side** with

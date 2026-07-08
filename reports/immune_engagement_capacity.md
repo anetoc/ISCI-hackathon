@@ -73,6 +73,34 @@ Each axis, and the capacity as a whole, is **falsifiable**. Pre-registered crite
   biomarker — and we say so. This has failed once already (D4, T-state signature,
   CV-AUROC ~chance, underpowered n=9/n=65); the atlas test (Phase 2) is the powered retry.
 
+## 3a. Orthogonality pre-test (pseudobulk, done local) — 2.5 axes, not 3
+
+Before the GPU cell-level run (Brief 02), we tested axis orthogonality on the Marson
+pseudobulk (per-perturbation module z-scores) across all three culture conditions. Result
+(`outputs/iec_latent/iec_axis_scores_pseudobulk_stim48.csv`, figure below):
+
+![IEC axis orthogonality](figures/iec_axis_orthogonality_pseudobulk.png)
+
+| pair | Rest | Stim8hr | Stim48hr | verdict |
+|---|---|---|---|---|
+| persist ↔ kill | −0.23 | −0.12 | −0.07 | **orthogonal** (\|ρ\|<0.5) ✓ |
+| persist ↔ resist | +0.14 | +0.03 | −0.01 | **orthogonal** ✓ |
+| **kill ↔ resist** | **−0.42** | **−0.44** | **−0.50** | **entangled** — fails the \|0.5\| null at 48hr |
+| each vs magnitude | — | — | \|ρ\|≤0.13 | all orthogonal to magnitude ✓ |
+
+**Finding:** persistence is a clean, independent axis (orthogonal to both others and to
+magnitude, in all three conditions). But **killing and exhaustion-resistance are NOT
+independent** — they anti-correlate at ρ≈−0.42 to −0.50 and cross the collapse threshold at
+48 hr. Biologically this is the well-known **effector↔exhaustion coupling**: the cytotoxic
+program and the terminal-exhaustion program are two ends of one activation-driven continuum,
+not separate dials. So IEC is honestly **2.5 axes**: a clean *persistence* axis, plus a
+single coupled *effector/exhaustion* axis (killing high ⇄ exhaustion-resistance low). This is
+a real structural result, not a modeling failure — and it sharpens the definition: we do not
+claim three independent dials when the data show the effector and exhaustion programs are one.
+
+The cell-level scVI run (Brief 02) tests whether this 2.5-axis structure holds at single-cell
+resolution and replicates in the CAR-T atlas — the pseudobulk pre-test says it should.
+
 ## 4. What would CONFIRM IEC as more than a redescription
 
 - Each axis is orthogonal to the others and to magnitude ✓ (partially shown; to be
