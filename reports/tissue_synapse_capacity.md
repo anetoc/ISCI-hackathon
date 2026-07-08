@@ -63,6 +63,35 @@ factor analysis / probabilistic PCA on the per-perturbation loading matrix), and
 identifies its controllers. This is measurable **from the transcriptome alone** with
 tools already in hand.
 
+## 3a. TSC estimated as a measured latent factor (done, Marson Stim48hr)
+
+We ran the estimation on the 1,260 detectable Marson perturbations: score L1–L4 per
+perturbation, then a 1-factor factor analysis on the standardized loading matrix.
+
+![TSC latent factor](figures/tsc_latent_factor.png)
+
+| Loading | On TSC factor |
+|---|---|
+| L2 tissue access (migration) | **+0.99** |
+| L3 synapse assembly (actin/cytoskeleton) | **+0.61** |
+| L1 durable state (memory − exhaustion) | **+0.37** |
+| L4 serial killing | −0.09 |
+
+- **A single latent factor explains 37% of the variance** of L1–L4 — a real shared
+  capacity, not noise.
+- The factor is **dominated by tissue-access + synapse-assembly + durable-state**, which
+  load together and positively. **Serial killing loads near-zero** — an honest structural
+  finding: the killing readout is largely *independent* of the shared capacity, so TSC as
+  measured here is a "reach-and-hold-a-synapse" axis more than a "kill" axis.
+- **TSC is orthogonal to effect magnitude** (Spearman 0.03), exactly like the CCI — it is
+  a state property, not an effect-size proxy.
+- The **highest-TSC perturbations are the TCR/synapse machinery** (LAT, ITK, VAV1, LCP2,
+  LCK, PLCG1) — the same TCR-signal-strength axis identified independently, now emerging as
+  the dominant latent factor. This ties TSC directly back to the TCR-rheostat reframe.
+
+Scores: `outputs/generalization/tsc_scores.csv`. This is a transcriptional latent; the
+functional-synapse validation (§5, P3) remains the decisive open test.
+
 ## 4. How to measure TSC computationally — the pipeline (tools available here)
 
 1. **Loading scores** per perturbation/cell: score L1–L4 module sets on any Perturb-seq
