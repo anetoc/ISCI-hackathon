@@ -126,10 +126,9 @@ TSC makes **specific, testable predictions**:
   set or a dedicated synapse GMT would test it properly.
 - **P3 (function, the decisive one):** a TSC score predicts *functional* synapse quality —
   serial-killing rate, synapse-formation efficiency, MTOC polarization — better than
-  magnitude. **This requires a functional dataset we do NOT have here** (live-imaging /
-  serial-killing CAR-T screens; ProteomeXchange phospho for synapse signaling). This is
-  the honest gap: TSC as a transcriptional latent is measurable now; TSC as a predictor
-  of physical synapse function needs data on the institutional-compute / collaboration roadmap.
+  magnitude. The **definitive** per-cell perturbation→killing test still needs data we do
+  not have (see §5c). But a **correlational proxy IS now done** (§5b, BEHAV3D) and it is
+  informative: it shows what TSC is *not*.
 
 ## 5a. Scope test extended to a third system — TSC P1 confirmed, graded (done)
 
@@ -156,26 +155,58 @@ property that defines controllers in the immune system. This refines the propert
 axis-selective component of controllership (S) is what is immune-specific**; reproducibility
 alone can carry weak signal in a non-immune differentiation program.
 
-## 5b. Is the decisive functional test (P3) reachable? (scouted)
+## 5b. P3 correlational proxy — DONE (BEHAV3D GSE172325): TSC is a state axis, not a kill axis
 
-We scouted for data to test P3 (does a TSC transcriptional score predict *functional*
-synapse/killing?). Finding (see `outputs/generalization/synapse_functional_scout.md`):
+We ran the reachable proxy: does the TSC transcriptional score separate functional
+killer (super-engaged) from non-killer (never-engaged) engineered T cells in BEHAV3D
+(Nat Biotechnol 2022, PMID 35879361; solid-tumor organoid TEGs — *not* hematologic CAR-T;
+authors' engagement-sort label, imaging reference in BioImage Archive S-BIAD448). Full
+report + code in `outputs/behav3d_p3/`.
 
-- **The gold standard exists but is gated:** dbGaP phs002966 (Nat Cancer 2024, PMID
-  38750245) pairs TIMING nanowell serial-killing + scRNA-seq on the same clinical LBCL
-  CAR-T products — but is controlled-access (DAC approval = weeks–months, not
-  hackathon-feasible).
-- **A local-feasible correlational proxy exists:** BEHAV3D (GSE172325, Nat Biotechnol
-  2022 — accession confirmed against the paper's data-availability statement) links a
-  live-imaging killing-behavior reference to scRNA-seq of engineered T cells (TEGs) in
-  **solid-tumor organoids** — testable in ≤1 week to ask whether a TSC score tracks the
-  serial-killing gene signature and beats magnitude/activation baselines. Caveats: it is a
-  **correlational surrogate** (not a per-cell perturbation→killing test), the system is
-  **solid-tumor TEGs, not hematologic CAR-T**, and the imaging reference lives separately
-  in BioImage Archive S-BIAD448 (the transcriptome↔behavior link is at the signature level).
-- **Honest verdict:** the decisive P3 (perturbation-anchored score → functional per-cell
-  killing) needs controlled-access data or a wet-lab collaboration. The correlational proxy
-  is the reachable next step.
+![BEHAV3D P3 proxy](outputs/behav3d_p3/behav3d_p3.png)
+
+**Verdict: NULL/FAIL (pre-registered), and it is informative.** On the balanced exposed set
+(super vs never, n=1969) the composite TSC score does **not** beat any baseline:
+
+| score | AUROC | AUPRC |
+|---|---|---|
+| TSC | 0.350 | 0.374 |
+| activation | 0.991 | 0.989 |
+| CD8-identity | 0.848 | 0.829 |
+| total counts | 0.727 | 0.696 |
+
+All bootstrap ΔCIs (TSC − baseline) are negative and exclude 0. The per-loading breakdown
+explains *why* — and it is the key scientific result:
+
+| TSC loading | AUROC (super=positive) |
+|---|---|
+| **L4 killing** | **0.947** (near-perfect) |
+| L1 durable state | 0.303 |
+| L3 synapse assembly | 0.298 |
+| L2 migration | 0.154 |
+
+The **killing loading alone separates almost perfectly**, but L1/L2/L3 (memory/stem, egress,
+TCR machinery — all down-regulated in activated effectors) run the opposite way and, averaged
+equally, pull the composite below chance. **This confirms, rather than contradicts, §3a**: in
+the Marson latent factor killing loaded ≈0 on TSC, so TSC is a *reach-and-hold-a-synapse
+state/persistence* axis, **not** a killing-behavior axis — and here it indeed fails to predict
+killing. Two independent analyses (latent structure + functional proxy) agree.
+
+**Confounder guard passed:** engagement is only modestly CD8-enriched (expression-derived
+super/never CD8 ratio 1.26×; authors' CD8/CD4 label from the Pseudotime metadata 1.50× —
+both below the 2× "heavy confound" threshold), and TSC also fails *within* the CD8+ stratum
+(AUROC 0.373), so the failure is not a CD8-identity artifact. The pre-registered **replication
+is NOT-EVALUABLE**: the Pseudotime counts matrix on GEO is in fact the Non-exposed matrix
+(barcode collisions carry contradictory labels), so joining it would attach wrong expression —
+refused per hard-rule 1 rather than fabricated.
+
+## 5c. The decisive P3 still needs data we don't have
+
+The definitive test — does a *perturbation-anchored* TSC score causally set *per-cell* killing
+capacity — needs paired perturbation→function data. Gold standard: dbGaP phs002966 (Nat Cancer
+2024, PMID 38750245; TIMING nanowell serial-killing + scRNA on clinical LBCL CAR-T), which is
+controlled-access (DAC approval = weeks–months). That is the honest roadmap item for the
+institutional-compute / collaboration phase, not something reachable this week.
 
 ## 6. Positioning
 
@@ -187,6 +218,13 @@ synapse/killing?). Finding (see `outputs/generalization/synapse_functional_scout
   hypothesis, not result, to avoid over-claim — which is itself the credibility posture
   that makes the whole project defensible.
 
+**Sharpened by the P3 proxy:** TSC is specifically a **state/persistence axis** (reach, hold,
+and sustain a synaptic engagement) — measurable now, orthogonal to effect magnitude, and
+**explicitly not** a killing-execution axis (killing is a separable dimension: it loads ≈0 on
+the latent factor and is captured by activation/effector genes instead). Naming this internal
+boundary is what turns TSC from a slogan into a falsifiable property.
+
 **One-line framing:** *The Conditional Controllability Invariant is the control axis of a
-broader latent property — Tissue Synapse Capacity — and it holds exactly where cell state
-is built from the capacity to synapse with the tissue.*
+broader latent property — Tissue Synapse Capacity, a reach-and-hold-the-synapse state axis
+distinct from killing execution — and it holds exactly where cell state is built from the
+capacity to synapse with the tissue.*
