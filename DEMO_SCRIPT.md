@@ -34,3 +34,20 @@
 ---
 
 **Recording notes:** screen-record the central figure zoom, the evidence-card markdown, and one `git log` scroll showing the timestamped commit history (New-Work-Only compliance). Keep narration at the pace above — it lands at ~470 words ≈ 3 min at 155 wpm.
+
+---
+
+## OPTIONAL extended panel — T-REMAP (only for a >3-min cut)
+
+*Splice after 2:35 if making a longer video. Keeps the honest framing.*
+
+> "Building on the locked core, we inverted the question: instead of predicting response,
+> we ask which perturbations push T cells *away from* clinical resistance programs. Every
+> clinical module first passes a movability gate — its genes are actually moved by
+> perturbations. The reversal score has a permutation null at p = 0.001, and after we
+> residualize out both magnitude and TCR-shutdown, the trivial 'turn the TCR off' hits
+> drop away and specific chromatin and RNA-state controllers — KDM1A, CREBBP, Regnase-1 —
+> rise to the top. In an independent CAR-T cohort, the sensitivity axis replicates
+> direction; the resistance axis does not, and we say so."
+
+*(On screen: the mechanism map + the reversal heatmap + the confounder ledger.)*
