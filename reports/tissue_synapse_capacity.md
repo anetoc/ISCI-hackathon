@@ -166,10 +166,13 @@ synapse/killing?). Finding (see `outputs/generalization/synapse_functional_scout
   CAR-T products — but is controlled-access (DAC approval = weeks–months, not
   hackathon-feasible).
 - **A local-feasible correlational proxy exists:** BEHAV3D (GSE172325, Nat Biotechnol
-  2022) links live-imaging killing behavior to scRNA-seq of the same engineered T cells —
-  testable in ≤1 week to ask whether a TSC score tracks killing-behavior classes and beats
-  magnitude/activation baselines. This is a **correlational surrogate**, not the decisive
-  per-cell perturbation→killing test.
+  2022 — accession confirmed against the paper's data-availability statement) links a
+  live-imaging killing-behavior reference to scRNA-seq of engineered T cells (TEGs) in
+  **solid-tumor organoids** — testable in ≤1 week to ask whether a TSC score tracks the
+  serial-killing gene signature and beats magnitude/activation baselines. Caveats: it is a
+  **correlational surrogate** (not a per-cell perturbation→killing test), the system is
+  **solid-tumor TEGs, not hematologic CAR-T**, and the imaging reference lives separately
+  in BioImage Archive S-BIAD448 (the transcriptome↔behavior link is at the signature level).
 - **Honest verdict:** the decisive P3 (perturbation-anchored score → functional per-cell
   killing) needs controlled-access data or a wet-lab collaboration. The correlational proxy
   is the reachable next step.
