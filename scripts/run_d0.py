@@ -81,7 +81,7 @@ def main():
         uv_g = axesmod.build_axis_vectors(cfg, gene_names, suppl_dir=DATA / "emdann", leave_one_out=g)
         for axis, u in uv_g.items():
             for ri in rows:
-                mr = movement.cosine_projection(Z[ri], u)
+                mr = movement.enrichment_projection(Z[ri], u)  # match primary M metric
                 mask = ((M["perturbation"] == g) & (M["axis"] == axis) &
                         (M["condition"] == cond_arr[ri]))
                 M.loc[mask, "m_raw"] = mr
