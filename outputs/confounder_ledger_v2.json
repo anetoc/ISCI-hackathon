@@ -1,0 +1,57 @@
+{
+  "ISCI_orthogonal": {
+    "magnitude": 0.021,
+    "target_baseMean": 0.087,
+    "n_guides": 0.084,
+    "n_cells_target": -0.002,
+    "tcr_shutdown": -0.102,
+    "stress_apoptosis": 0.001,
+    "cell_cycle": 0.039,
+    "mitochondrial": -0.087,
+    "ifn_global": 0.048
+  },
+  "ISCI_combined": {
+    "magnitude": 0.551,
+    "target_baseMean": 0.098,
+    "n_guides": 0.106,
+    "n_cells_target": -0.08,
+    "tcr_shutdown": -0.146,
+    "stress_apoptosis": 0.079,
+    "cell_cycle": -0.01,
+    "mitochondrial": -0.072,
+    "ifn_global": 0.086
+  },
+  "reversal_raw": {
+    "magnitude": 0.158,
+    "target_baseMean": 0.008,
+    "n_guides": 0.004,
+    "n_cells_target": -0.114,
+    "tcr_shutdown": -0.119,
+    "stress_apoptosis": 0.084,
+    "cell_cycle": 0.117,
+    "mitochondrial": -0.111,
+    "ifn_global": 0.171
+  },
+  "reversal_resid": {
+    "magnitude": 0.116,
+    "target_baseMean": 0.004,
+    "n_guides": -0.001,
+    "n_cells_target": -0.116,
+    "tcr_shutdown": -0.112,
+    "stress_apoptosis": 0.078,
+    "cell_cycle": 0.121,
+    "mitochondrial": -0.109,
+    "ifn_global": 0.163
+  },
+  "reversal_resid_tcr": {
+    "magnitude": 0.008,
+    "target_baseMean": -0.008,
+    "n_guides": -0.015,
+    "n_cells_target": -0.112,
+    "tcr_shutdown": -0.005,
+    "stress_apoptosis": 0.061,
+    "cell_cycle": 0.141,
+    "mitochondrial": -0.063,
+    "ifn_global": 0.117
+  }
+}
