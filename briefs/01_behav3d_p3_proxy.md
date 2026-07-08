@@ -14,8 +14,10 @@ decisive TSC prediction P3. This is NOT the definitive per-cell perturbation→k
 
 ## Step 0 — verify the dataset before downloading
 
-1. Confirm GSE172325 on GEO is BEHAV3D (Nat Biotechnol 2022, PMID 35879361,
-   DOI 10.1038/s41587-022-01397-w). Record the exact supplementary file names + sizes.
+1. Confirm on GEO that GSE172325 is the BEHAV3D scRNA-seq series (Nat Biotechnol 2022,
+   DOI 10.1038/s41587-022-01397-w — verified against the journal page). Look up and record
+   the PMID from the GEO record / PubMed yourself; do NOT trust a PMID quoted in this brief.
+   Record the exact supplementary file names + sizes from the GEO record.
 2. Confirm it has: (a) a scRNA-seq count matrix of the engineered T cells, and (b) metadata
    assigning cells to **behavioral clusters** (killing/engagement behavior) or a killing/
    effector signature. If (b) is absent -> **STOP, report NOT-EVALUABLE** (no functional label).
