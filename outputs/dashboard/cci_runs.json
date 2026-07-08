@@ -1,0 +1,62 @@
+[
+  {
+    "id": "marson_cd4",
+    "label": "Marson CD4+ (primary)",
+    "system": "immune",
+    "perturbation": "KD/KO",
+    "n_pos": 19,
+    "delta_auprc": 0.229,
+    "ci_lo": 0.072,
+    "ci_hi": 0.405,
+    "lr_p": 0.0001,
+    "verdict": "PASS",
+    "spearman_mag": 0.02,
+    "source": "CZI genome-scale Perturb-seq",
+    "report": "reports/result_lock.md"
+  },
+  {
+    "id": "schmidt_crispra",
+    "label": "Schmidt GSE190604",
+    "system": "immune",
+    "perturbation": "CRISPRa",
+    "n_pos": 10,
+    "delta_auprc": 0.138,
+    "ci_lo": -0.029,
+    "ci_hi": 0.434,
+    "lr_p": null,
+    "verdict": "NEAR-MISS",
+    "spearman_mag": 0.054,
+    "source": "GSE190604",
+    "report": "outputs/generalization/near_immune_cci_report.md"
+  },
+  {
+    "id": "norman_k562",
+    "label": "Norman & Weissman K562",
+    "system": "non-immune",
+    "perturbation": "CRISPRa (differentiation)",
+    "n_pos": null,
+    "delta_auprc": 0.138,
+    "ci_lo": -0.033,
+    "ci_hi": 0.37,
+    "lr_p": 0.013,
+    "verdict": "FAIL",
+    "spearman_mag": null,
+    "source": "Norman 2019",
+    "report": "outputs/generalization/third_system_cci_report.md"
+  },
+  {
+    "id": "replogle_rpe1",
+    "label": "Replogle RPE1 (essential)",
+    "system": "non-immune",
+    "perturbation": "CRISPRi (proliferation)",
+    "n_pos": 33,
+    "delta_auprc": 0.06,
+    "ci_lo": -0.013,
+    "ci_hi": 0.204,
+    "lr_p": 0.195,
+    "verdict": "FAIL",
+    "spearman_mag": -0.005,
+    "source": "Replogle 2022 scPerturb",
+    "report": "outputs/generalization/far_nonimmune_cci_report.md"
+  }
+]

@@ -1,0 +1,74 @@
+# CCI dataset registry
+# ---------------------
+# To test a NEW dataset, add ONE block here. The runner (isci/run_cci.py) reads this,
+# loads the dataset via its adapter, runs the magnitude-conditional CCI test, and writes a
+# canonical outputs/<id>/cci_result.json that the dashboard picks up automatically.
+#
+# Adding a dataset = adding a block. No code changes needed for standard Perturb-seq inputs.
+
+schema_version: 1
+
+# Which axis/label to test controllership against, and how positives are defined.
+defaults:
+  effect_layer: zscore            # layer used for effect size / axis scoring
+  magnitude_col: n_total_de_genes # per-perturbation effect-magnitude proxy
+  detectable_quantile: 0.5        # gate: keep perturbations with magnitude >= this quantile
+  donor_col: null                 # set per-dataset if cross-donor coherence is computable
+  n_bootstrap: 1000
+  seed: 0
+
+datasets:
+  - id: marson_cd4
+    label: "Marson CD4+ (primary)"
+    system: immune                 # immune | non-immune  (drives the scope prediction)
+    perturbation: "KD/KO"
+    path: data/GWCD4i.DE_stats.h5ad
+    adapter: marson                # -> isci.adapters.marson
+    donor_col: donor
+    condition_col: culture_condition
+    conditions: [Rest, Stim8hr, Stim48hr]
+    positives: known_regulators    # ground-truth positive set for regulator recovery
+    status: done                   # done | queued | gated
+    expected_verdict: PASS
+
+  - id: schmidt_crispra
+    label: "Schmidt GSE190604"
+    system: immune
+    perturbation: "CRISPRa"
+    path: data_public/schmidt/GSE190604.h5ad
+    adapter: generic_perturbseq
+    positives: known_regulators
+    status: done
+    expected_verdict: NEAR-MISS
+
+  - id: norman_k562
+    label: "Norman & Weissman K562"
+    system: non-immune
+    perturbation: "CRISPRa (differentiation)"
+    path: data_public/norman/norman2019_k562.h5ad
+    adapter: generic_perturbseq
+    positives: curated
+    status: done
+    expected_verdict: FAIL
+
+  - id: replogle_rpe1
+    label: "Replogle RPE1 (essential)"
+    system: non-immune
+    perturbation: "CRISPRi (proliferation)"
+    path: data_public/replogle/replogle_rpe1_essential.h5ad
+    adapter: generic_perturbseq
+    positives: hart_essentials
+    status: done
+    expected_verdict: FAIL
+
+  # ---- TEMPLATE for a new dataset (copy, fill, set status: queued) ----
+  # - id: my_new_screen
+  #   label: "My new immune Perturb-seq"
+  #   system: immune
+  #   perturbation: "KO"
+  #   path: data_public/mine/screen.h5ad
+  #   adapter: generic_perturbseq       # or write isci/adapters/<name>.py for odd formats
+  #   donor_col: donor                  # omit if single-donor
+  #   positives: known_regulators       # known_regulators | curated | hart_essentials | custom:<file>
+  #   status: queued
+  #   expected_verdict: null            # your pre-registered prediction (PASS/FAIL) — falsifiable!
