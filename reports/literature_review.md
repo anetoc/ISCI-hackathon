@@ -70,6 +70,29 @@ nothing over effect magnitude — is worth stating against this backdrop: it is 
 topology-derived "influence" can be magnitude-confounded unless explicitly deconfounded, which is
 the same trap our conditional test is built to avoid.
 
+### 3.1 The closest prior art: geometric coherence (Shesha)
+
+The nearest neighbor to our core method is not a network-control paper but a very recent geometric
+one. Raju (2026, arXiv 2604.16642) introduces *perturbation stability* (Sₚ), the directional
+coherence of a perturbation measured as the mean cosine similarity between individual cells' shift
+vectors and the mean perturbation direction. Across five CRISPR datasets, stability correlates
+strongly with magnitude (Spearman ρ = 0.75–0.97), yet the discordant cases expose regulatory
+architecture — pleiotropic regulators pay a "geometric tax" (large but incoherent shifts) — and Sₚ
+provides *incremental* prediction of pathway activation and of split-half directional
+reproducibility **after controlling for magnitude**. This is, in its general form, the same
+diagnosis we make (magnitude is a confound; coherence conditional on magnitude carries real signal)
+and it predates our work. We regard this as **convergent validation, not a threat**: two independent
+groups identifying the same magnitude trap in the same year strengthens the phenomenon's
+credibility. What remains distinct in our work is orthogonal to Shesha on four axes — (i) our
+coherence is *cross-donor* reproducibility across human donors, not *cell-to-cell* coherence within
+a perturbation; (ii) we add *axis-specificity* onto defined T-cell functional axes rather than
+generic dispersion; (iii) we state and test an *immune-scoped falsifiable boundary* (PASS in immune,
+FAIL in non-immune systems); and (iv) we separate controllership from therapeutic desirability and
+report an honest clinical null. The correct positioning of our contribution is therefore not "we
+discovered that magnitude is a confound" (Shesha and we found this convergently) but "we define a
+cross-donor, axis-specific, immune-scoped controllability property and map its falsifiable
+boundary."
+
 ## 4. Predicting perturbation outcomes: foundation models
 
 A parallel line attacks the problem by learning, rather than testing. Perturbation-prediction

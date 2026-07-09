@@ -92,8 +92,20 @@ inference. Foundation models such as GEARS ([Roohani 2024](https://doi.org/10.10
 and scGPT ([Cui 2024](https://doi.org/10.1038/s41592-024-02201-0)) predict *what a perturbation
 does*, a different question than *whether a gene controls an axis independent of how much it does*.
 
+A very recent geometric approach is closer still: Raju (2026) shows that perturbation *stability* —
+directional coherence of single cells within a perturbation — correlates with magnitude yet carries
+incremental signal after controlling for it, exposing regulatory architecture through the
+"geometric tax" paid by pleiotropic regulators. We regard this as convergent validation of the
+magnitude-confound diagnosis rather than a competing claim, and are explicit that our contribution
+is not the general observation that magnitude confounds hit-calling (which Raju and we reach
+independently) but the specific, immune-scoped, cross-donor, axis-specific property defined below and
+its falsifiable boundary.
+
 We take a third path. We define controllership **conditional on magnitude**: among perturbations of
 matched effect size, which produce effects that are *axis-specific* and *cross-donor reproducible*?
+Our coherence is measured across human donors rather than across single cells, and is combined with
+axis-specificity onto defined functional axes — quantities distinct from within-perturbation
+geometric coherence.
 We show this signal is orthogonal to magnitude yet nearly doubles regulator recovery; that it
 behaves as a falsifiable, immune-scoped property across four perturbation systems; that the
 immune-engagement phenotype it scores decomposes into a measurable multi-axis capacity; and — the
@@ -310,6 +322,16 @@ defensible conditional statement that, *among perturbations of matched effect si
 reproducibility add signal. This distinction matters because it is what makes the claim
 non-circular.
 
+The closest prior art is Raju's geometric-coherence framework (Shesha; 2026), which independently
+and slightly earlier established that magnitude confounds perturbation hit-calling and that
+directional coherence carries incremental, magnitude-conditional signal. That two groups reached the
+same diagnosis in the same year is corroboration, and we position our work accordingly: our
+differentiated contribution is not the magnitude-confound observation but a cross-donor,
+axis-specific controllership property with a falsifiable immune-scoped boundary, a
+controller-versus-desirability separation, and an honest clinical null — none of which are in the
+geometric-coherence work, whose coherence is within-perturbation (cell-to-cell) rather than
+cross-donor and whose endpoint is generic pathway stress rather than defined immune axes.
+
 Three features distinguish this from neighboring approaches. First, unlike network-control methods
 that derive driver nodes from an *inferred* GRN ([Wang 2023](https://doi.org/10.1038/s41467-023-44103-3)),
 our controllership is read directly from *observed causal perturbation effects*, avoiding the
@@ -426,6 +448,13 @@ named papers.*
    GEARS.** *Nature Biotechnology* 2024. https://doi.org/10.1038/s41587-023-01905-6
 9. Cui H, et al. **scGPT: toward building a foundation model for single-cell multi-omics using
    generative AI.** *Nature Methods* 2024. https://doi.org/10.1038/s41592-024-02201-0
+10. Raju PC. **Geometric coherence of single-cell CRISPR perturbations reveals regulatory
+    architecture and predicts cellular stress.** *arXiv* 2026; 2604.16642. https://arxiv.org/abs/2604.16642
+11. Kamimoto K, et al. **Dissecting cell identity via network inference and in silico gene
+    perturbation (CellOracle).** *Nature* 2023. https://doi.org/10.1038/s41586-022-05688-9
+12. Adamson B, et al. **A multiplexed single-cell CRISPR screening platform enables systematic
+    dissection of the unfolded protein response (Perturb-seq).** *Cell* 2016.
+    https://doi.org/10.1016/j.cell.2016.11.048
 
 *A grounded narrative synthesis of this literature, with the project's position relative to each
 strand, is in `reports/literature_review.md`.*
