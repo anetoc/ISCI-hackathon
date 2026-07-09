@@ -275,10 +275,28 @@ circular with the IFN-regulator labels), the native surface-PD-L1 readout recove
 regulators (AUROC 0.77), with CMTM6 — the canonical PD-L1 protein stabilizer, invisible to a
 transcriptional axis — among the top hits. These are recovery tests over partly expected biology, not
 a matched-negative controllership PASS, and the load-bearing content is the cross-layer concordance
-and the native-layer rescue rather than the AUROC magnitude; a full protein-level CCI (magnitude-
-matched negatives at the protein layer plus a ≥2-layer concordance gate) is the pre-specified next
-step. What the exercise establishes is architectural: the controllership operator is layer-agnostic,
-and evaluability is a property of the *layer*, not only the dataset.
+and the native-layer rescue rather than the AUROC magnitude.
+
+**Full protein-level CCI (pre-specified test, now run): a FAIL that sharpens the thesis.** We then ran
+the complete magnitude-conditional operator on the protein layer — totalVI joint RNA+protein model
+(87,965 cells, CPU), protein axis-specificity and coherence residualized against protein-effect
+magnitude, expression-matched negatives, the same `bootstrap_auprc_gain` and conditional-LR. The raw
+gain was large (ΔAUPRC +0.584) and a direction-agnostic reading would have called it a PASS — but
+inspection showed the positives have *lower* residual protein coherence than non-regulators (median
+0.059 vs 0.565), i.e. the gain is driven by an **inverted** feature, the opposite of the RNA/Marson
+controllership sign. A high AUPRC from an inverted feature is not a controllership PASS; the
+verdict, corrected to be direction-aware, is **FAIL** (`adds_over_rna = False`; Spearman C_prot vs
+C_rna = −0.32). The biology is clean: IFN/antigen-presentation knockouts produce ceiling-level,
+magnitude-dominated effects on a coarse 24-marker surface panel, so after residualizing on magnitude
+the controllership signal collapses — protein regulator identity here is captured by direct readout
+(cross-layer surface-shift AUROC 0.90), not by a magnitude-independent residual. This is fully
+consistent with the three-coherence finding: coherence on a coarse, high-magnitude substrate collapses
+onto magnitude. The tensor gains an honest **PROTEIN FAIL** slice — the layer was *tested, not
+assumed*, exactly as PageRank and the clinical null were before it. The reading is that
+magnitude-independence is an RNA / cross-donor-reproducibility property, not a universal-across-layers
+one; the honesty guard catching a would-be PASS is the point, not a disappointment. What the whole
+exercise establishes is architectural: the controllership operator is layer-agnostic, and evaluability
+is a property of the *layer*, not only the dataset.
 
 ### 3.3a Robustness: gate-insensitive, but positive-set-dependent
 
@@ -457,9 +475,10 @@ exhaustion trajectories is a natural next step.
 
 Stated as negatives so the boundary is unambiguous: this work does **not** claim a validated clinical
 biomarker (the cross-study clinical test is a null), a therapeutic recommendation (controllership
-ranks steerability, not treatment), a magnitude-conditional PASS for every modality (the protein
-cross-layer and three-coherence analyses are concordance and positioning evidence, not controllership
-verdicts), generality beyond canonical regulators (the gain attenuates on the axis-marker ablation),
+ranks steerability, not treatment), a magnitude-conditional PASS for every modality (the full
+protein-level CCI was run and returns an honest FAIL — magnitude-independence is an RNA/cross-donor
+property, not universal across layers), generality beyond canonical regulators (the gain attenuates on
+the axis-marker ablation),
 or a formal external pre-registration ("pre-specified" means fixed-in-code before adjudication). What
 it does claim is the single property named in the conclusion.
 

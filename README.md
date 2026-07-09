@@ -17,7 +17,7 @@ To keep the scope honest and legible:
 
 - **Not a validated clinical biomarker.** No axis predicts CAR-T response under honest cross-study CV — that test returned a well-powered null (§ clinical), and nothing here is medical advice.
 - **Not a therapeutic recommendation.** Controllership ranks *where the axis is steerable*, not what to give a patient; the drugability layer is experimental triage, not a treatment list.
-- **Not a magnitude-conditional PASS for every layer.** The protein cross-layer and three-coherence results are concordance/positioning evidence, not controllership verdicts; a full protein-level CCI is pre-specified future work.
+- **Not a magnitude-conditional PASS for every layer.** The full protein-level CCI was run and returns an honest **FAIL** — magnitude-independence is an RNA/cross-donor property that collapses onto magnitude on a coarse surface-protein panel; the tensor carries it as a tested FAIL slice, not a PASS.
 - **Not proven beyond canonical regulators.** The gain attenuates when axis-defining master TFs are removed from the (small, n≈13) positive set — an underpowered, honestly-reported limitation, not a demonstrated null.
 - **Not a formal pre-registration.** "Pre-specified" means criteria were fixed in code before the adjudicated result was computed, not filed on an external registry.
 
