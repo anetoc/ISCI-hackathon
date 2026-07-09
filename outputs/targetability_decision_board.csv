@@ -1,0 +1,71 @@
+gene,board_category,family,class,intervention_direction,penalty_flags,druggability_tier,n_chembl_drugs,chembl_moa,translation_triage_score,ISCI_primary_rank,known_regulator,robust_reverser
+CXXC1,A_manufacturing_modulation,reverser,manufacturing_modulation,titratable,none,chembl_target,0,,0.946,,False,True
+KDM1A,A_manufacturing_modulation,chromatin/tx,manufacturing_modulation,transient_inhibition,none,clinical_drug,1,Lysine-specific histone demethylase 1 inhibitor,0.9,21.0,False,False
+PPP1R15B,A_manufacturing_modulation,reverser,reverser_only,titratable,none,chembl_target,0,,0.845,,False,True
+PDCD10,A_manufacturing_modulation,reverser,reverser_only,titratable,none,chembl_target,0,,0.845,,False,True
+TADA1,A_manufacturing_modulation,reverser,manufacturing_modulation,titratable,none,no_chembl_target,0,,0.82,,False,True
+SETDB1,A_manufacturing_modulation,chromatin/tx,manufacturing_modulation,transient_inhibition,none,chembl_target,0,,0.761,11.0,True,False
+POGK,A_manufacturing_modulation,reverser,reverser_only,titratable,none,no_chembl_target,0,,0.719,,False,True
+IFI27L1,A_manufacturing_modulation,reverser,reverser_only,titratable,none,no_chembl_target,0,,0.719,,False,True
+TNRC6A,A_manufacturing_modulation,reverser,reverser_only,titratable,none,no_chembl_target,0,,0.719,,False,True
+RBSN,A_manufacturing_modulation,reverser,reverser_only,titratable,none,no_chembl_target,0,,0.719,,False,True
+COMMD8,A_manufacturing_modulation,reverser,reverser_only,titratable,none,no_chembl_target,0,,0.719,,False,True
+UNCX,A_manufacturing_modulation,reverser,reverser_only,titratable,none,no_chembl_target,0,,0.719,,False,True
+CCDC28B,A_manufacturing_modulation,reverser,reverser_only,titratable,none,no_chembl_target,0,,0.719,,False,True
+WBP4,A_manufacturing_modulation,reverser,reverser_only,titratable,none,no_chembl_target,0,,0.719,,False,True
+COMMD10,A_manufacturing_modulation,reverser,reverser_only,titratable,none,no_chembl_target,0,,0.719,,False,True
+RCOR1,A_manufacturing_modulation,chromatin/tx,manufacturing_modulation,transient_inhibition,none,no_chembl_target,0,,0.654,9.0,False,False
+MORF4L1,A_manufacturing_modulation,chromatin/tx,manufacturing_modulation,titratable,none,chembl_target,0,,0.651,16.0,False,False
+SETD1B,A_manufacturing_modulation,chromatin/tx,manufacturing_modulation,titratable,none,chembl_target,0,,0.61,22.0,False,False
+BRD9,A_manufacturing_modulation,chromatin/tx,manufacturing_modulation,transient_inhibition,none,chembl_target,0,,0.569,28.0,False,False
+SAMD1,A_manufacturing_modulation,chromatin/tx,manufacturing_modulation,titratable,none,no_chembl_target,0,,0.533,15.0,False,False
+CBX5,A_manufacturing_modulation,chromatin/tx,manufacturing_modulation,transient_inhibition,none,chembl_target,0,,0.51,30.0,False,False
+PPHLN1,A_manufacturing_modulation,chromatin/tx,manufacturing_modulation,titratable,none,chembl_target,0,,0.397,46.0,False,False
+PHF8,A_manufacturing_modulation,chromatin/tx,manufacturing_modulation,transient_inhibition,none,chembl_target,0,,0.384,48.0,False,False
+CTBP1,A_manufacturing_modulation,chromatin/tx,manufacturing_modulation,transient_inhibition,none,no_chembl_target,0,,0.333,34.0,False,False
+MAP3K5,B_engineering_candidate,apoptosis/survival,engineering_candidate,transient_inhibition,none,clinical_drug,1,Mitogen-activated protein kinase kinase kinase 5 inhibitor,0.789,29.0,False,False
+IRF2BP1,B_engineering_candidate,reverser,reverser_only,KD_harmful_suggests_OE,none,no_chembl_target,0,,0.719,,False,True
+INPP5D,B_engineering_candidate,Treg/brake,engineering_candidate,KD_harmful_suggests_OE,none,clinical_drug,1,"Phosphatidylinositol-3,4,5-trisphosphate 5-phosphatase 1 activator",0.697,41.0,False,False
+ARHGAP30,B_engineering_candidate,cytoskeleton/synapse,engineering_candidate,titratable,none,no_chembl_target,0,,0.462,26.0,False,False
+USP22,B_engineering_candidate,chromatin/tx,engineering_candidate,transient_inhibition,none,chembl_target,0,,0.409,44.0,False,False
+MYO9A,B_engineering_candidate,cytoskeleton/synapse,engineering_candidate,titratable,none,no_chembl_target,0,,0.367,32.0,False,False
+BCLAF1,C_probe_only,RNA/post-tx,probe_only,titratable,none,chembl_target,0,,0.785,3.0,False,False
+PDCD5,C_probe_only,apoptosis/survival,probe_only,titratable,none,chembl_target,0,,0.73,6.0,False,False
+HEXIM1,C_probe_only,chromatin/tx,probe_only,titratable,none,chembl_target,0,,0.728,13.0,False,False
+STAT6,C_probe_only,IFN/Th1,probe_only,titratable,none,chembl_target,0,,0.694,8.0,True,False
+TFAP4,C_probe_only,IFN/Th1,probe_only,titratable,none,no_chembl_target,0,,0.65,4.0,False,False
+CYB561D2,C_probe_only,other,probe_only,titratable,none,no_chembl_target,0,,0.621,5.0,False,False
+ZC3H12A,C_probe_only,RNA/post-tx,probe_only,transient_inhibition,none,no_chembl_target,0,,0.576,7.0,False,False
+TWF1,C_probe_only,cytoskeleton/synapse,probe_only,titratable,none,no_chembl_target,0,,0.515,12.0,False,False
+NR4A3,C_probe_only,Treg/brake,probe_only,KD_harmful_suggests_OE,none,chembl_target,0,,0.495,25.0,False,False
+HNRNPA1,C_probe_only,RNA/post-tx,probe_only,titratable,none,chembl_target,0,,0.475,27.0,False,False
+GATA3,C_probe_only,IFN/Th1,probe_only,titratable,none,no_chembl_target,0,,0.433,14.0,True,False
+DDIT4,C_probe_only,apoptosis/survival,probe_only,transient_inhibition,none,no_chembl_target,0,,0.407,18.0,False,False
+OSR1,C_probe_only,other,probe_only,titratable,none,chembl_target,0,,0.384,33.0,False,False
+GSTCD,C_probe_only,other,probe_only,titratable,none,no_chembl_target,0,,0.376,24.0,False,False
+HNRNPD,C_probe_only,RNA/post-tx,probe_only,titratable,none,chembl_target,0,,0.334,36.0,False,False
+ZNF785,C_probe_only,other,probe_only,titratable,none,no_chembl_target,0,,0.202,37.0,False,False
+BLZF1,C_probe_only,other,probe_only,titratable,none,no_chembl_target,0,,0.195,38.0,False,False
+KLF13,C_probe_only,IFN/Th1,probe_only,titratable,none,no_chembl_target,0,,0.144,50.0,False,False
+IKBKB,D_dangerous_rheostat,NF-kB/TCR,engineering_candidate,transient_inhibition,TCR/signaling-proximal,clinical_drug,7,Inhibitor of nuclear factor kappa B kinase beta subunit inhibitor,1.0,2.0,False,False
+PRKDC,D_dangerous_rheostat,apoptosis/survival,engineering_candidate,transient_inhibition,broadly-essential,clinical_drug,1,DNA-dependent protein kinase inhibitor,0.838,10.0,False,False
+CDC25B,D_dangerous_rheostat,reverser,engineering_candidate,transient_inhibition,broadly-essential,chembl_target,0,,0.729,,False,True
+CNOT9,D_dangerous_rheostat,reverser,reverser_only,transient_inhibition,broadly-essential,chembl_target,0,,0.628,,False,True
+RFT1,D_dangerous_rheostat,reverser,reverser_only,transient_inhibition,broadly-essential,chembl_target,0,,0.628,,False,True
+MED13,D_dangerous_rheostat,reverser,manufacturing_modulation,transient_inhibition,broadly-essential,no_chembl_target,0,,0.603,,False,True
+CHORDC1,D_dangerous_rheostat,reverser,reverser_only,transient_inhibition,broadly-essential,no_chembl_target,0,,0.502,,False,True
+MAU2,D_dangerous_rheostat,reverser,reverser_only,transient_inhibition,broadly-essential,no_chembl_target,0,,0.502,,False,True
+PTPRC,D_dangerous_rheostat,NF-kB/TCR,engineering_candidate,transient_inhibition,TCR/signaling-proximal,clinical_drug,2,Leukocyte common antigen binding agent,0.499,30.0,False,False
+IL2RB,D_dangerous_rheostat,IFN/Th1,engineering_candidate,transient_inhibition,TCR/signaling-proximal,clinical_drug,2,Interleukin-2 receptor beta chain inhibitor,0.438,35.0,False,False
+PPM1D,D_dangerous_rheostat,apoptosis/survival,engineering_candidate,transient_inhibition,broadly-essential,chembl_target,0,,0.416,19.0,False,False
+IRF1,D_dangerous_rheostat,IFN/Th1,toxicity_risk,titratable,tumor-suppressor(KD-oncogenic-risk),no_chembl_target,0,,0.361,1.0,True,False
+RBCK1,D_dangerous_rheostat,NF-kB/TCR,engineering_candidate,transient_inhibition,TCR/signaling-proximal,no_chembl_target,0,,0.21,20.0,False,False
+WDR82,D_dangerous_rheostat,chromatin/tx,manufacturing_modulation,transient_inhibition,broadly-essential,chembl_target,0,,0.202,41.0,False,False
+DDA1,D_dangerous_rheostat,other,probe_only,transient_inhibition,broadly-essential,no_chembl_target,0,,0.162,23.0,False,False
+CD3E,D_dangerous_rheostat,NF-kB/TCR,avoid_permanent_TCR_shutdown,avoid,TCR/signaling-proximal,clinical_drug,7,T-cell surface glycoprotein CD3 epsilon chain binding agent; T-cell surface glycoprotein CD3 epsilon chain cross-linking agent; T-cell surface glycoprotein CD3 epsilon chain inhibitor,0.15,40.0,False,False
+CD3D,D_dangerous_rheostat,NF-kB/TCR,avoid_permanent_TCR_shutdown,avoid,TCR/signaling-proximal,no_chembl_target,0,,0.15,17.0,False,False
+UFM1,D_dangerous_rheostat,other,probe_only,transient_inhibition,broadly-essential,chembl_target,0,,0.083,45.0,False,False
+PAXIP1,D_dangerous_rheostat,chromatin/tx,manufacturing_modulation,transient_inhibition,broadly-essential,no_chembl_target,0,,0.078,39.0,False,False
+CASP3,D_dangerous_rheostat,apoptosis/survival,toxicity_risk,transient_inhibition,broadly-essential; tumor-suppressor(KD-oncogenic-risk),chembl_target,0,,0.0,49.0,False,False
+SMG8,D_dangerous_rheostat,RNA/post-tx,probe_only,transient_inhibition,broadly-essential,no_chembl_target,0,,0.0,47.0,False,False
+PTEN,D_dangerous_rheostat,Treg/brake,toxicity_risk,KD_harmful_suggests_OE,tumor-suppressor(KD-oncogenic-risk),chembl_target,0,,0.0,43.0,False,False
