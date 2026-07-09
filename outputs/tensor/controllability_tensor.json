@@ -1,0 +1,62 @@
+{
+  "schema": "controllability_tensor.v1",
+  "axes": [
+    "gene",
+    "axis",
+    "system",
+    "modality"
+  ],
+  "invariants": [
+    "magnitude-residualized entries only",
+    "rank-of-residuals late fusion (no raw averaging)",
+    "per-modality slice always shown next to any aggregate"
+  ],
+  "slices": [
+    {
+      "slice_id": "norman_k562",
+      "system": "non-immune",
+      "modality": "RNA_coherence",
+      "axis": "Norman & Weissman K562",
+      "verdict": "FAIL",
+      "delta_auprc": 0.138,
+      "ci_lo": -0.033,
+      "ci_hi": 0.37,
+      "spearman_vs_magnitude": 0.052,
+      "adds_over_prior_modality": null,
+      "n_pos": 13,
+      "source": "outputs/norman_k562/cci_result.json"
+    },
+    {
+      "slice_id": "replogle_rpe1",
+      "system": "non-immune",
+      "modality": "RNA_coherence",
+      "axis": "Replogle RPE1 (essential)",
+      "verdict": "FAIL",
+      "delta_auprc": 0.06,
+      "ci_lo": -0.013,
+      "ci_hi": 0.204,
+      "spearman_vs_magnitude": -0.005,
+      "adds_over_prior_modality": null,
+      "n_pos": 33,
+      "source": "outputs/replogle_rpe1/cci_result.json"
+    },
+    {
+      "slice_id": "frangieh_perturbcite",
+      "system": "immune",
+      "modality": "RNA_coherence",
+      "axis": "Frangieh 2021 Perturb-CITE-seq (melanoma + autologous TIL co-culture)",
+      "verdict": "FAIL",
+      "delta_auprc": 0.1177,
+      "ci_lo": -0.0184,
+      "ci_hi": 0.3363,
+      "spearman_vs_magnitude": 0.03128594271510436,
+      "adds_over_prior_modality": null,
+      "n_pos": 10,
+      "source": "outputs/external_tcell/frangieh_perturbcite_cci_result.json"
+    }
+  ],
+  "n_slices": 3,
+  "modalities_present": [
+    "RNA_coherence"
+  ]
+}

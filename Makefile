@@ -4,7 +4,7 @@
 
 PY ?= python
 
-.PHONY: reproduce-core dashboard cci clean-cache help
+.PHONY: reproduce-core dashboard cci tensor clean-cache help
 
 help:
 	@echo "make reproduce-core  - run the CCI test across the dataset registry + build the dashboard"
@@ -16,6 +16,9 @@ reproduce-core: cci dashboard
 	@echo ""
 	@echo "Core reproduced. Locked anchor: Marson CD4+ PASS (canonical dAUPRC +0.229, result_lock.md)."
 	@echo "Method smoke-test: outputs/marson_cd4/cci_method_check.json ; dashboard: outputs/dashboard/"
+
+tensor:
+	$(PY) isci/run_layer.py
 
 cci:
 	$(PY) isci/run_cci.py
