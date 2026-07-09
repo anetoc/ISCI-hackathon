@@ -381,6 +381,18 @@ controller-versus-desirability separation, and an honest clinical null — none 
 geometric-coherence work, whose coherence is within-perturbation (cell-to-cell) rather than
 cross-donor and whose endpoint is generic pathway stress rather than defined immune axes.
 
+We can make this separation quantitative rather than rhetorical. On Frangieh (229 targets) we computed
+all three candidate coordinates side by side against effect magnitude: Shesha's cell-to-cell
+coherence Sₚ, our cross-guide reproducibility R, and our axis-specificity S. Sₚ correlates with
+magnitude at Spearman ρ = 0.97 — essentially an effect-size proxy, and an independent replication of
+Shesha's own reported 0.75–0.97 coupling on a dataset they did not use — whereas our coordinates are
+magnitude-orthogonal (R ρ = 0.008, matching the Marson ~0.02; S ρ = 0.19, below the 0.3 proxy
+threshold). Controlling for magnitude, Sₚ partials strongly onto both of ours (Sₚ~R\|M = −0.71,
+Sₚ~S\|M = +0.67). The reading is direct: Shesha's coordinate collapses onto the magnitude axis, while
+the signal we test — cross-donor/cross-guide reproducibility and functional-axis specificity — is the
+orthogonal plane the geometric-coherence framework does not capture. This is the quantitative answer
+to "is this Shesha for T cells?": no, it measures a different, magnitude-independent axis.
+
 Three features distinguish this from neighboring approaches. First, unlike network-control methods
 that derive driver nodes from an *inferred* GRN ([Wang 2023](https://doi.org/10.1038/s41467-023-44103-3)),
 our controllership is read directly from *observed causal perturbation effects*, avoiding the
