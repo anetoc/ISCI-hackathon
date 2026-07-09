@@ -11,6 +11,11 @@
 
 ![Central result](outputs/fig_central.png)
 
+> **Interactive:** open [`docs/tctrl_live_demo.html`](docs/tctrl_live_demo.html) — a self-contained
+> live decision board (Controller × Convergence map with per-gene hover, class distribution, top-12
+> decision cards, the PASS/FAIL/NULL claim contract, and the threshold-stability proof). No server, no
+> install; open in any browser.
+
 ## What the framework actually delivers — an adjudication table
 
 The deliverable is not the ranking; it is a system that returns an honest verdict for each question,
