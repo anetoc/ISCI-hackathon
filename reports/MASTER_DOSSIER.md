@@ -212,7 +212,9 @@ For the controllers of the property, we built a targetability matrix (70 genes; 
 Targets/HPA): **35 druggable**, with an explicit **intervention-direction** column
 (titratable 35 / transient-inhibition 29 / KD-harmful-suggests-OE 4 / avoid 2) — never framed
 as a therapeutic recommendation. Mechanism annotations in `reports/mechanism_cards_v2.md`.
-This will be re-focused onto the controllers of whichever axis proves clinically relevant (§5).
+Because the clinical-prediction test returned a well-powered NULL (§5), this layer is **not**
+re-focused onto a "clinically validated" axis — none was found. It stays a hypothesis-generating
+experimental triage over the locked controllers, independent of the clinical claim.
 
 The 70 controllers are also recast into a **4-category safety-first decision board**
 (`outputs/targetability_decision_board.csv`): A — manufacturing modulation (24, titratable/
