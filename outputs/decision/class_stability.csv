@@ -1,0 +1,13 @@
+gene,ref_class,modal_class,stability,n_distinct,classes
+IRF1,E,E,100%,1,E
+IKBKB,D,D,100%,1,D
+PRKDC,D,D,100%,1,D
+RCOR1,B,B,100%,1,B
+BCLAF1,B,B,67%,2,"B,C"
+TFAP4,B,B,100%,1,B
+PDCD5,B,B,100%,1,B
+ZC3H12A,C,C,67%,2,"B,C"
+GATA3,B,B,100%,1,B
+STAT6,C,C,100%,1,C
+SETDB1,C,C,100%,1,C
+CYB561D2,E,E,67%,2,"C,E"
