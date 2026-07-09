@@ -51,9 +51,9 @@
 > capacity** — persistence, killing, resistance as separable axes? At single-cell pseudobulk,
 > persistence is a clean axis but killing and resistance stay entangled — about **2.5 axes**, not
 > 3, and we report the half. Then the hard test: does any axis predict CAR-T response in a
-> 70-patient, >1-million-cell atlas? Under honest leave-one-**study**-out cross-validation the
-> answer is **no** — the patient-level signal collapses to chance, and a trivial CD8-fraction
-> baseline beats every axis. We report that as a **well-powered null**, because a confounded
+> 1-million-cell atlas — 87 response-labeled patients across 9 studies? Under honest
+> leave-one-**study**-out cross-validation the answer is **no** — the patient-level signal
+> collapses to chance, and a trivial CD8-fraction baseline beats every axis. We report that as a **well-powered null**, because a confounded
 > positive would be worse than an honest negative.
 >
 > Finally, mechanism without overclaim: NF-κB and Treg-brake gene sets enrich in controllership

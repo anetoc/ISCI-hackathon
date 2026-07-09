@@ -5,6 +5,15 @@ mechanism* without overclaiming. Neither touches the locked core.
 
 ## Phase 8 — curated gene-set enrichment along the continuous score
 
+**Relationship to the earlier family-enrichment negative (important — different test):** an
+earlier analysis tested *broad-family membership among the top-50 genes* against a matched null
+(chromatin/tx fold 1.46, p=0.024 in the TCR-free null, attenuating to p=0.085 with TCR controlled)
+— **nothing survived FDR** there, and that honest negative stands. The test below is **not** that
+test: it uses **narrow curated sets** scored **rank-based along the full continuous score** (all
+2,520 genes), not top-50 membership, and is magnitude-guarded per set. The two are complementary,
+not contradictory — broad membership among top hits is not enriched; specific curated mechanisms
+graded along the whole score are.
+
 **Why not GO/Reactome:** broad GO families are too wide for small T-regulator sets and nothing
 survived FDR in the earlier top-50 family analysis. Instead we pre-registered **6 narrow,
 T-cell-relevant curated sets** and tested **rank-based enrichment along the continuous
