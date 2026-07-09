@@ -53,10 +53,25 @@
       "adds_over_prior_modality": null,
       "n_pos": 10,
       "source": "outputs/external_tcell/frangieh_perturbcite_cci_result.json"
+    },
+    {
+      "slice_id": "frangieh_protein",
+      "system": "immune",
+      "modality": "PROTEIN_coherence",
+      "axis": "immune_evasion",
+      "verdict": "FAIL",
+      "delta_auprc": 0.5837,
+      "ci_lo": 0.2624,
+      "ci_hi": 0.7758,
+      "spearman_vs_magnitude": 0.16359060285304416,
+      "adds_over_prior_modality": 0.00027270663193050836,
+      "n_pos": 8,
+      "source": "outputs/layers/frangieh_protein/protein_cci_result.json"
     }
   ],
-  "n_slices": 3,
+  "n_slices": 4,
   "modalities_present": [
+    "PROTEIN_coherence",
     "RNA_coherence"
   ]
 }

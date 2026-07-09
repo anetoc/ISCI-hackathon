@@ -2,3 +2,4 @@ slice_id,system,modality,axis,verdict,delta_auprc,ci_lo,ci_hi,spearman_vs_magnit
 norman_k562,non-immune,RNA_coherence,Norman & Weissman K562,FAIL,0.138,-0.033,0.37,0.052,,13,outputs/norman_k562/cci_result.json
 replogle_rpe1,non-immune,RNA_coherence,Replogle RPE1 (essential),FAIL,0.06,-0.013,0.204,-0.005,,33,outputs/replogle_rpe1/cci_result.json
 frangieh_perturbcite,immune,RNA_coherence,Frangieh 2021 Perturb-CITE-seq (melanoma + autologous TIL co-culture),FAIL,0.1177,-0.0184,0.3363,0.03128594271510436,,10,outputs/external_tcell/frangieh_perturbcite_cci_result.json
+frangieh_protein,immune,PROTEIN_coherence,immune_evasion,FAIL,0.5837,0.2624,0.7758,0.16359060285304416,0.00027270663193050836,8,outputs/layers/frangieh_protein/protein_cci_result.json

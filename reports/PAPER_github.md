@@ -49,7 +49,10 @@ signal was per-study batch structure, not transportable biology.
 immune-scoped property of T-cell state, distinct from effect size and from network topology. It
 decomposes into a measurable multi-axis engagement capacity but is *not*, at current power, a CAR-T
 response biomarker. We report the clinical result as a well-powered negative rather than an
-un-transportable positive.
+un-transportable positive. Rigor is enforced by construction: a **direction-aware verdict rule**
+caught a large protein-layer gain (ΔAUPRC +0.584) that a metric-only reading would have called a
+PASS but which was an inverted-feature artifact — the pipeline is built to reject its own false
+positives, and several of its headline results are honest negatives.
 
 **Keywords:** Perturb-seq · T-cell state · controllability · CAR-T · exhaustion · persistence ·
 cross-study validation · effect-magnitude confound
@@ -253,6 +256,21 @@ near-miss whose residual signal comes from cross-guide reproducibility rather th
 across four variants). The ordering matches the pre-stated prediction: immune PASS > non-immune
 differentiation near-miss > non-immune proliferation FAIL. The property is **immune-scoped** — a
 demarcated boundary, not a universal law.
+
+The sharpest boundary test asks whether the property is *T-cell-scoped* or *immune-lineage-scoped*.
+We pre-registered a test in a **non-T immune** lineage — THP-1 myeloid cells (GSE221321, LPS-stimulated
+CRISPRi of the NF-κB/inflammatory axis, 21 positives, 120 expression-matched negatives) — with the
+explicit rule that PASS would widen the property to immune-wide and FAIL would tighten it to T-cell
+state. The verdict is an honest **near-miss**: ΔAUPRC +0.166 [−0.006, 0.374], p(gain>0) = 0.97,
+direction-correct (median residual coherence 0.79 in positives vs 0.50 in negatives). The
+decomposition is the informative part and it is the **mirror image of the K562 result**: here the
+*axis-specificity* component transfers cleanly (LR p = 6.7×10⁻⁵) while cross-guide reproducibility
+does not (p = 0.47) — whereas in K562 reproducibility carried the residual and specificity did not.
+The CI includes zero only because the screen has two replicates; this is a power limit, not a
+biological one, and we call it a near-miss rather than a PASS. The reading is that the
+axis-specificity half of the property extends from T cells to a myeloid inflammatory lineage,
+nudging the boundary from "T-cell-scoped" toward "immune-lineage-scoped" — stated as a directional,
+pre-registered near-miss, with a ≥3-replicate myeloid screen named as the test that would settle it.
 
 A third immune system tests the boundary from the sensitivity side. Frangieh Perturb-CITE-seq
 (melanoma with autologous tumor-infiltrating lymphocyte co-culture) shows the same
