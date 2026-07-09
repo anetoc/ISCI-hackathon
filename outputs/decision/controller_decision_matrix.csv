@@ -1,0 +1,1261 @@
+gene,ISCI_primary_rank,ISCI_orthogonal,controller_verdict,therapeutic_convergence,convergence_verdict,board_category,druggability_tier,intervention_direction,penalty_flags,clinical_relevance_grade,decision_class
+IRF1,1.0,0.9509920634920634,top-controller,-0.20744542227568,unfavorable,D_dangerous_rheostat,no_chembl_target,titratable,tumor-suppressor(KD-oncogenic-risk),L1 (axis literature),"E — Wrong-way controller (mechanism, not target)"
+IKBKB,2.0,0.9488095238095238,top-controller,0.1698474106899846,favorable,D_dangerous_rheostat,clinical_drug,transient_inhibition,TCR/signaling-proximal,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+BCLAF1,3.0,0.9240079365079366,top-controller,0.1538794483119022,favorable,C_probe_only,chembl_target,titratable,none,L0 (no direct clinical evidence),B — Engineering candidate (favorable + controllable)
+TFAP4,4.0,0.922420634920635,top-controller,0.488826269603658,favorable,C_probe_only,no_chembl_target,titratable,none,L0 (no direct clinical evidence),B — Engineering candidate (favorable + controllable)
+CYB561D2,5.0,0.9166666666666669,top-controller,-0.1596201699790721,unfavorable,C_probe_only,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"E — Wrong-way controller (mechanism, not target)"
+PDCD5,6.0,0.9132936507936508,top-controller,0.2052607736603649,favorable,C_probe_only,chembl_target,titratable,none,L0 (no direct clinical evidence),B — Engineering candidate (favorable + controllable)
+ZC3H12A,7.0,0.9077380952380952,top-controller,0.124229030748462,neutral,C_probe_only,no_chembl_target,transient_inhibition,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+STAT6,8.0,0.9061507936507937,top-controller,-0.0621758756826415,neutral,C_probe_only,chembl_target,titratable,none,L1 (axis literature),"C — Probe-only biology (controls axis, direction unclear)"
+RCOR1,9.0,0.9031746031746032,top-controller,0.901560731438578,favorable,A_manufacturing_modulation,no_chembl_target,transient_inhibition,none,L0 (no direct clinical evidence),B — Engineering candidate (favorable + controllable)
+PRKDC,10.0,0.9023809523809524,top-controller,0.4299003112308772,favorable,D_dangerous_rheostat,clinical_drug,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+SETDB1,11.0,0.8994047619047619,top-controller,0.0265035347604921,neutral,A_manufacturing_modulation,chembl_target,transient_inhibition,none,L1 (axis literature),"C — Probe-only biology (controls axis, direction unclear)"
+TWF1,12.0,0.8956349206349207,top-controller,0.1158492245633735,neutral,C_probe_only,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+HEXIM1,13.0,0.8928571428571429,top-controller,0.1178657866145742,neutral,C_probe_only,chembl_target,titratable,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+GATA3,14.0,0.8793650793650793,top-controller,1.7030326596874754,favorable,C_probe_only,no_chembl_target,titratable,none,L1 (axis literature),B — Engineering candidate (favorable + controllable)
+SAMD1,15.0,0.8791666666666667,top-controller,-0.2281517419824403,unfavorable,A_manufacturing_modulation,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"E — Wrong-way controller (mechanism, not target)"
+MORF4L1,16.0,0.8775793650793651,top-controller,-0.0466005629361644,neutral,A_manufacturing_modulation,chembl_target,titratable,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+CD3D,17.0,0.8767857142857143,top-controller,1.3210507207820417,favorable,D_dangerous_rheostat,no_chembl_target,avoid,TCR/signaling-proximal,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+DDIT4,18.0,0.8742063492063492,top-controller,-0.105359958229189,neutral,C_probe_only,no_chembl_target,transient_inhibition,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+PPM1D,19.0,0.8738095238095238,top-controller,0.0210937321701074,neutral,D_dangerous_rheostat,chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+RBCK1,20.0,0.8724206349206349,top-controller,0.9609214159128854,favorable,D_dangerous_rheostat,no_chembl_target,transient_inhibition,TCR/signaling-proximal,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+KDM1A,21.0,0.8718253968253968,top-controller,1.4000438596964948,favorable,A_manufacturing_modulation,clinical_drug,transient_inhibition,none,L0 (no direct clinical evidence),B — Engineering candidate (favorable + controllable)
+SETD1B,22.0,0.8694444444444445,top-controller,0.1771669771940457,favorable,A_manufacturing_modulation,chembl_target,titratable,none,L0 (no direct clinical evidence),B — Engineering candidate (favorable + controllable)
+DDA1,23.0,0.8686507936507937,top-controller,-0.1632864280952789,unfavorable,D_dangerous_rheostat,no_chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),"E — Wrong-way controller (mechanism, not target)"
+GSTCD,24.0,0.8680555555555556,top-controller,-0.298019851115459,unfavorable,C_probe_only,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"E — Wrong-way controller (mechanism, not target)"
+NR4A3,25.0,0.8666666666666667,top-controller,0.1733101736572766,favorable,C_probe_only,chembl_target,KD_harmful_suggests_OE,none,L0 (no direct clinical evidence),B — Engineering candidate (favorable + controllable)
+ARHGAP30,26.0,0.8650793650793651,top-controller,-0.347667985463352,unfavorable,B_engineering_candidate,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"E — Wrong-way controller (mechanism, not target)"
+HNRNPA1,27.0,0.8626984126984127,top-controller,0.1136128999910016,neutral,C_probe_only,chembl_target,titratable,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+BRD9,28.0,0.8613095238095239,top-controller,-0.2626545578817593,unfavorable,A_manufacturing_modulation,chembl_target,transient_inhibition,none,L0 (no direct clinical evidence),"E — Wrong-way controller (mechanism, not target)"
+MAP3K5,29.0,0.8498015873015873,top-controller,0.3914637392654754,favorable,B_engineering_candidate,clinical_drug,transient_inhibition,none,L0 (no direct clinical evidence),B — Engineering candidate (favorable + controllable)
+CBX5,30.0,0.8496031746031746,top-controller,0.0060492092086509,neutral,A_manufacturing_modulation,chembl_target,transient_inhibition,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+PTPRC,30.0,0.8496031746031746,top-controller,0.2495362789474826,favorable,D_dangerous_rheostat,clinical_drug,transient_inhibition,TCR/signaling-proximal,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+MYO9A,32.0,0.8462301587301587,top-controller,0.000186162841956,neutral,B_engineering_candidate,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+OSR1,33.0,0.8446428571428571,top-controller,0.0838330853036306,neutral,C_probe_only,chembl_target,titratable,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+CTBP1,34.0,0.839484126984127,top-controller,0.0856715565874896,neutral,A_manufacturing_modulation,no_chembl_target,transient_inhibition,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+IL2RB,35.0,0.8374999999999999,top-controller,1.296311759776482,favorable,D_dangerous_rheostat,clinical_drug,transient_inhibition,TCR/signaling-proximal,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+HNRNPD,36.0,0.8347222222222221,top-controller,0.4719450987852776,favorable,C_probe_only,chembl_target,titratable,none,L0 (no direct clinical evidence),B — Engineering candidate (favorable + controllable)
+ZNF785,37.0,0.833531746031746,top-controller,-0.0703937919297077,neutral,C_probe_only,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+BLZF1,38.0,0.8321428571428571,top-controller,0.1466830965955446,neutral,C_probe_only,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+PAXIP1,39.0,0.8319444444444444,top-controller,-0.1360847073427403,neutral,D_dangerous_rheostat,no_chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+CD3E,40.0,0.8317460317460318,top-controller,1.2040022044281165,favorable,D_dangerous_rheostat,clinical_drug,avoid,TCR/signaling-proximal,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+INPP5D,41.0,0.831547619047619,top-controller,0.022562458187608,neutral,B_engineering_candidate,clinical_drug,KD_harmful_suggests_OE,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+WDR82,41.0,0.831547619047619,top-controller,0.9022956865478816,favorable,D_dangerous_rheostat,chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+PTEN,43.0,0.8301587301587301,top-controller,-0.1076570892123716,neutral,D_dangerous_rheostat,chembl_target,KD_harmful_suggests_OE,tumor-suppressor(KD-oncogenic-risk),L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+USP22,44.0,0.829563492063492,top-controller,1.1878109523799825,favorable,B_engineering_candidate,chembl_target,transient_inhibition,none,L0 (no direct clinical evidence),B — Engineering candidate (favorable + controllable)
+UFM1,45.0,0.8279761904761904,top-controller,0.3959420551844501,favorable,D_dangerous_rheostat,chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+PPHLN1,46.0,0.8271825396825396,top-controller,0.1518612756790003,favorable,A_manufacturing_modulation,chembl_target,titratable,none,L0 (no direct clinical evidence),B — Engineering candidate (favorable + controllable)
+SMG8,47.0,0.825595238095238,top-controller,-0.1601624335786196,unfavorable,D_dangerous_rheostat,no_chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),"E — Wrong-way controller (mechanism, not target)"
+PHF8,48.0,0.8246031746031746,top-controller,-0.1340505957142934,neutral,A_manufacturing_modulation,chembl_target,transient_inhibition,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+CASP3,49.0,0.8236111111111111,top-controller,0.1346632703397703,neutral,D_dangerous_rheostat,chembl_target,transient_inhibition,broadly-essential; tumor-suppressor(KD-oncogenic-risk),L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+KLF13,50.0,0.8222222222222222,top-controller,0.1110522503091305,neutral,C_probe_only,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"C — Probe-only biology (controls axis, direction unclear)"
+ZRANB2,50.0,0.8222222222222222,top-controller,-0.282910575603147,unfavorable,,,,,L0 (no direct clinical evidence),"E — Wrong-way controller (mechanism, not target)"
+PLCG1,52.0,0.8202380952380952,near,2.2247960831346876,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IL4R,53.0,0.8198412698412698,near,0.304268998900377,favorable,,,,,L1 (axis literature),"F — Phenotype-associated, weak controller"
+TBX22,53.0,0.8198412698412698,near,0.2627055394826715,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COQ6,55.0,0.8192460317460317,near,0.42629707887635,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MLST8,56.0,0.8188492063492063,near,0.0943850750888678,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FOXK1,57.0,0.8182539682539682,near,0.3811865264489558,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IRF2BP1,58.0,0.8178571428571428,near,0.7023994939406851,favorable,B_engineering_candidate,no_chembl_target,KD_harmful_suggests_OE,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+WDR44,59.0,0.816468253968254,near,0.3102241717034033,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FBXO28,60.0,0.8162698412698413,near,-0.0822115495945102,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CAMSAP1,61.0,0.8150793650793651,near,0.3770374475573997,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UBA5,62.0,0.8146825396825397,near,0.5033992730475455,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+STAT3,63.0,0.814484126984127,near,-0.0608907862490536,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF274,64.0,0.8134920634920635,near,0.0855087171275713,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+L2HGDH,65.0,0.8132936507936508,near,0.6243720506855427,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+THOC6,66.0,0.8117063492063492,near,0.1667941927006,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GALNT6,67.0,0.8111111111111111,near,-0.2049338945003726,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TASOR,68.0,0.8109126984126984,near,0.2913763368890831,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+POGK,69.0,0.8097222222222222,near,0.429330294805381,favorable,A_manufacturing_modulation,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EP300,70.0,0.8095238095238095,near,0.1968288593128054,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SMARCE1,71.0,0.8075396825396826,near,0.6532817655988844,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SHLD1,72.0,0.8057539682539683,near,0.7051164456409217,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GAS2L1,73.0,0.8053571428571429,near,0.5486791496660203,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CBFA2T2,74.0,0.8047619047619048,near,0.2246314434204983,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SP1,75.0,0.8041666666666667,near,-0.030611373321121,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+IST1,76.0,0.8025793650793651,near,0.7281853305155798,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CD28,77.0,0.8021825396825397,near,0.7590730657739516,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+STAT5A,78.0,0.801984126984127,near,0.6529839442182879,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GOLGA8A,79.0,0.7998015873015873,near,-0.2872461893211103,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPS23,79.0,0.7998015873015873,near,0.4336319428973283,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SMARCC1,81.0,0.7992063492063493,near,0.2856247102163571,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CBLB,82.0,0.7990079365079366,near,-0.2535240339361455,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TMX1,83.0,0.7984126984126985,near,1.3662259706083606,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MED24,84.0,0.7982142857142858,near,-0.4879001231945374,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TMED10,85.0,0.7958333333333334,near,0.3442979685515983,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DHX36,86.0,0.7948412698412699,near,0.8176836596048416,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TBX21,87.0,0.7946428571428571,near,0.4964145031708944,favorable,,,,,L1 (axis literature),"F — Phenotype-associated, weak controller"
+TAF13,88.0,0.7936507936507937,near,0.5613173283663724,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+WRAP53,89.0,0.7926587301587302,near,-0.0005374329810169,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RIPK1,90.0,0.7916666666666667,near,0.0219313432123574,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PAK2,91.0,0.791468253968254,near,0.1515055218632638,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SLC9A5,92.0,0.7912698412698413,near,0.0147082866847388,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NUBPL,93.0,0.7892857142857144,near,0.1808286346491615,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SRRD,94.0,0.7884920634920635,near,-0.0675327600139141,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SCO2,95.0,0.7867063492063492,near,0.1406008537064584,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ETNK1,96.0,0.7861111111111111,near,0.3232897470110181,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PIBF1,97.0,0.7819444444444444,near,0.1443716302137971,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PARP3,98.0,0.7813492063492063,near,0.4835182463058982,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DCLRE1A,100.0,0.780952380952381,near,0.4245294143163665,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TMEM263,100.0,0.780952380952381,near,0.0628360450320162,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UQCRC2,100.0,0.780952380952381,near,0.1817382871213878,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COA7,102.0,0.7793650793650794,near,0.4106179326325621,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+VEZT,103.0,0.7773809523809524,near,0.0533169430917125,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KIFAP3,104.0,0.7748015873015873,near,1.6568078323144335,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TIAL1,104.0,0.7748015873015873,near,0.2641523098200423,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SCO1,106.0,0.7742063492063491,near,0.3846925744066305,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CFAP20,107.0,0.7738095238095238,near,1.2623397949141362,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DEF8,108.0,0.7728174603174602,near,0.356571643792049,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NDUFA6,109.0,0.7712301587301588,near,0.2295244647273865,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BEX3,110.0,0.7698412698412698,near,0.3364321799314131,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PPP3R1,111.0,0.769047619047619,near,0.1259044266810957,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SMG9,111.0,0.769047619047619,near,0.0086061756383968,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FCHO1,113.0,0.7682539682539682,near,-0.0111515008480013,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TCEAL3,113.0,0.7682539682539682,near,0.1035689514780497,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FRS3,115.0,0.7674603174603174,near,-0.119464687660461,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SKA2,116.0,0.7668650793650793,near,0.1383906375104498,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CHD4,117.0,0.7658730158730158,near,0.1589251084756435,favorable,,,,,L1 (axis literature),"F — Phenotype-associated, weak controller"
+WASF2,118.0,0.7656746031746031,near,-0.833410813419341,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CD247,119.0,0.7654761904761904,near,1.5635048722215206,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UBAP2L,120.0,0.7646825396825396,near,-0.370046643998437,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PDCD10,121.0,0.7634920634920634,near,0.7791453358191228,favorable,A_manufacturing_modulation,chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COA5,122.0,0.7632936507936507,near,0.5317157364112775,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BRAT1,123.0,0.7626984126984127,near,-0.1526441288432363,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SAMD4B,124.0,0.7625,near,-0.0414687397390132,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TWNK,125.0,0.7611111111111111,near,0.9990205547699348,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FBXW7,126.0,0.760515873015873,near,0.0673379197142653,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZFX,127.0,0.7597222222222222,near,0.3393809023178285,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BTAF1,128.0,0.7589285714285714,near,0.3756982621007849,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LRBA,129.0,0.7587301587301587,near,1.0191839407232546,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EIF3H,130.0,0.7583333333333333,near,0.0551148201017044,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NAB2,131.0,0.7579365079365079,near,-0.4174916559080308,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ACOT7,132.0,0.7577380952380952,near,0.3336999962691394,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SFTPC,132.0,0.7577380952380952,near,-0.4530777929139031,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PGGT1B,134.0,0.756547619047619,near,1.4598093913356898,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MBIP,135.0,0.7563492063492063,near,0.5748187151800441,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NKX2-3,135.0,0.7563492063492063,near,-0.172345092373227,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DSEL,137.0,0.7557539682539682,near,0.1492227756928988,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AEBP2,137.0,0.7557539682539682,near,0.6933203111878304,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FAM118B,139.0,0.7547619047619047,near,0.3866858392994328,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MTMR10,140.0,0.7541666666666667,near,0.2886942477933628,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PHF23,141.0,0.7533730158730159,near,0.1607498406549388,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TNFRSF10B,141.0,0.7533730158730159,near,-0.0938800546837983,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+LAT,143.0,0.7529761904761905,near,1.983190615487368,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LEO1,144.0,0.7511904761904762,near,0.3269204574256758,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SLC16A1,144.0,0.7511904761904762,near,1.0631720272962404,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LARS2,146.0,0.7507936507936508,near,0.4601754798913116,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GCN1,147.0,0.7492063492063492,near,0.4954755435506948,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FLCN,148.0,0.7490079365079365,near,-0.0699003511087379,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MALT1,149.0,0.7488095238095238,near,1.1223524518250867,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+STXBP4,149.0,0.7488095238095238,near,0.4407850182840837,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RFT1,151.0,0.7468253968253968,near,0.7686093485224887,favorable,D_dangerous_rheostat,chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+BPTF,152.0,0.745436507936508,near,0.1836387412654084,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CLASRP,153.0,0.7444444444444445,near,0.8989213547058968,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ELP3,153.0,0.7444444444444445,near,-0.5141202223427431,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GNAS,155.0,0.7424603174603175,near,0.0765411829176599,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MTCH2,156.0,0.7416666666666667,near,0.4213359383648423,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+B4GALT7,157.0,0.7408730158730159,near,0.1362513878253825,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PPP4C,158.0,0.7398809523809524,near,0.5456633031607762,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TSC1,159.0,0.7396825396825397,near,0.3281137901201894,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ATXN2L,160.0,0.739484126984127,near,0.2681518825658258,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ARID1A,161.0,0.7382936507936508,near,0.3797655046717361,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RNF8,162.0,0.736904761904762,near,0.6260681903280699,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TMEM167A,163.0,0.7359126984126985,near,-0.27816026612305,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ATG14,164.0,0.7355158730158731,near,-0.0369417033621834,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TSTD2,165.0,0.7351190476190477,near,0.6051581320935197,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SND1,166.0,0.7343253968253969,near,0.3958792576485915,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ACTB,167.0,0.732936507936508,near,0.4375674630262685,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RRAGA,168.0,0.7305555555555555,near,-0.313854165830939,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MAU2,169.0,0.7293650793650793,near,0.5716535800608104,favorable,D_dangerous_rheostat,no_chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),D — Dangerous rheostat (control/avoid)
+NDFIP2,169.0,0.7293650793650793,near,0.7166425592159223,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EPC1,171.0,0.728968253968254,near,-0.4602259295367434,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CD3G,172.0,0.7287698412698413,near,1.5368791535760644,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ANKRD49,173.0,0.7271825396825398,near,0.1078248523650098,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+COX4I1,173.0,0.7271825396825398,near,0.6301100468214177,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ACSL6,175.0,0.7257936507936509,near,-0.0951020786918392,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PAGR1,176.0,0.7250000000000001,near,0.0099564804379208,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPS5,177.0,0.7246031746031747,near,0.2003647809462506,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+METTL1,178.0,0.7242063492063493,near,-0.1030052422785257,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TTC39C,179.0,0.7238095238095239,near,-0.018019895019518,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MLYCD,180.0,0.7238095238095238,near,0.1920010361172226,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CEP89,181.0,0.7234126984126984,near,0.1937819107580589,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZCRB1,182.0,0.7232142857142857,near,0.1227731809518857,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CTSF,183.0,0.7222222222222222,near,0.0208204145724838,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TTC5,184.0,0.7218253968253968,near,0.4144256481892754,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ARNT,185.0,0.721031746031746,near,0.7211493680390603,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PPP1R15B,186.0,0.7202380952380952,near,0.4278927316970391,favorable,A_manufacturing_modulation,chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SIK3,187.0,0.7192460317460317,near,0.2033268406949008,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TRMT10C,188.0,0.719047619047619,near,0.3860435424041892,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DET1,189.0,0.7186507936507937,near,-0.0438039086470578,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPL18,190.0,0.718452380952381,near,0.047509696528206,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ADAT3,191.0,0.7178571428571429,near,0.1159494021051549,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ARID4B,192.0,0.7172619047619048,near,-0.0650430093084832,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+XPR1,193.0,0.7170634920634921,near,0.9314924622558096,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ATM,194.0,0.7160714285714285,near,0.657336209094613,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SMARCB1,195.0,0.7158730158730159,near,0.7751213830227952,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SNAP23,196.0,0.7152777777777778,near,0.8300933043011587,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ATXN7L3,197.0,0.7142857142857143,near,0.4167090863909,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ACTR8,198.0,0.7126984126984126,near,0.7477527882304701,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+KAT14,199.0,0.7123015873015873,near,0.3678882345663266,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RNF111,200.0,0.7119047619047619,near,0.0878638766272637,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+BCL3,201.0,0.7097222222222223,unsupported,0.162727391151854,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DPH1,202.0,0.7095238095238096,unsupported,0.4001448695800768,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CREBBP,203.0,0.7089285714285715,unsupported,1.6728962413113375,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SMARCA4,204.0,0.7081349206349206,unsupported,0.3319462374371416,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ADAT2,205.0,0.7079365079365079,unsupported,-0.1272112543822868,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MEN1,206.0,0.7077380952380952,unsupported,0.3599323019045898,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ACSS1,207.0,0.7075396825396826,unsupported,0.4930086917487012,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+QRSL1,207.0,0.7075396825396826,unsupported,0.5722233815144845,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+KMT2A,209.0,0.7069444444444444,unsupported,-0.0580640394916122,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ATP2A2,210.0,0.706547619047619,unsupported,-0.8745592346336156,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UBR1,211.0,0.7061507936507936,unsupported,0.3956080109373072,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SMG7,212.0,0.7059523809523809,unsupported,0.1595480759294319,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ATRX,213.0,0.7057539682539682,unsupported,0.0391902003751107,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CD2,214.0,0.7055555555555555,unsupported,0.3172424654878854,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MTHFD1,215.0,0.7027777777777777,unsupported,0.5637340469743425,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+USP7,216.0,0.7021825396825396,unsupported,-0.456868237194669,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPS35,217.0,0.7001984126984127,unsupported,0.4973507283195455,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZC3H10,218.0,0.6996031746031746,unsupported,0.1513811512611837,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MTA2,219.0,0.6994047619047619,unsupported,0.7345480200466546,favorable,,,,,L1 (axis literature),"F — Phenotype-associated, weak controller"
+CSK,220.0,0.6990079365079365,unsupported,-0.2302430089754879,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPL37,221.0,0.6982142857142857,unsupported,0.4623761565015793,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+INTS12,222.0,0.698015873015873,unsupported,-0.0871936825029732,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SP2,223.0,0.6978174603174603,unsupported,0.1532258752941812,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UNC45A,224.0,0.6972222222222222,unsupported,0.6714265219619833,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COLGALT1,225.0,0.6968253968253968,unsupported,-0.0620106780637482,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SOCS4,226.0,0.6946428571428571,unsupported,0.556237972962944,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LCP2,227.0,0.6944444444444444,unsupported,1.7079133231796988,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRRF,227.0,0.6944444444444444,unsupported,0.1584747058129475,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BCL10,229.0,0.6936507936507936,unsupported,0.5998224610362433,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ATP2B1,230.0,0.6934523809523809,unsupported,-0.3010498635000488,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NUDCD1,231.0,0.6932539682539682,unsupported,0.822939633781735,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CPNE7,232.0,0.6930555555555555,unsupported,0.0989799496030501,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+IMPDH2,232.0,0.6930555555555555,unsupported,0.5779439146171117,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BCL11B,234.0,0.6906746031746032,unsupported,0.8475959107455066,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZAP70,235.0,0.6902777777777778,unsupported,1.26340980472487,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CD5,236.0,0.6898809523809524,unsupported,-0.4839742299015498,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZEB1,237.0,0.689484126984127,unsupported,-0.1248697003562934,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+IWS1,238.0,0.6886904761904762,unsupported,0.0581126280038433,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UCHL5,239.0,0.6880952380952381,unsupported,0.4917156307936248,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TAF11,240.0,0.6875,unsupported,0.1989633338325586,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NKX2-2,241.0,0.6873015873015873,unsupported,-0.0099472267791223,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CARD11,243.0,0.6867063492063492,unsupported,0.2169227308278751,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CDCA3,243.0,0.6867063492063492,unsupported,0.0901994860024098,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+COX10,243.0,0.6867063492063492,unsupported,0.5492607861983071,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LRPPRC,245.0,0.6859126984126984,unsupported,0.3324433427418388,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ISCA2,246.0,0.685515873015873,unsupported,0.6694103891824237,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+VAV1,247.0,0.6851190476190476,unsupported,1.6435047429638665,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ITPR1,248.0,0.6845238095238095,unsupported,0.0583889507505682,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DOLPP1,249.0,0.6843253968253968,unsupported,0.3956550103129979,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PAN3,250.0,0.6819444444444445,unsupported,-0.3775426981666964,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPL33,251.0,0.6813492063492064,unsupported,-0.2807958655586182,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FITM2,252.0,0.6803571428571429,unsupported,1.178971565197245,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TCEA1,253.0,0.6799603174603175,unsupported,-0.0687891459298978,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPS17,254.0,0.6795634920634921,unsupported,0.8924714004706488,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ABI3,255.0,0.6793650793650794,unsupported,-0.0862083829618228,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EARS2,256.0,0.678968253968254,unsupported,0.4905698549785908,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SKIC8,257.0,0.6783730158730159,unsupported,0.5470618826714682,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PDSS2,258.0,0.6777777777777778,unsupported,0.1976490842760628,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DNAAF2,259.0,0.676984126984127,unsupported,0.321369356281196,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TMED2,260.0,0.6765873015873016,unsupported,0.2107715802751888,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GSS,261.0,0.6761904761904762,unsupported,0.4296466652578286,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SLC4A1AP,262.0,0.6757936507936508,unsupported,0.1477490344158107,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ERCC6L2,263.0,0.675,unsupported,0.2399382657561087,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SHQ1,264.0,0.6742063492063493,unsupported,0.246413095005286,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRC2,265.0,0.6740079365079366,unsupported,0.0408420580671508,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PSMC1,266.0,0.6728174603174604,unsupported,-0.4679798887662123,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KMT2C,267.0,0.6718253968253969,unsupported,-0.0267823314267799,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ASXL1,268.0,0.6716269841269842,unsupported,0.155116062550913,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+STK11,269.0,0.6710317460317461,unsupported,0.1461167802463933,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CRTC2,270.0,0.670436507936508,unsupported,0.0847299552931425,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KGD4,271.0,0.6700396825396826,unsupported,0.4296194336974553,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PCGF1,272.0,0.6698412698412698,unsupported,-0.3389530116227336,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DPM1,273.0,0.6666666666666667,unsupported,0.1786942928713238,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EIF3K,274.0,0.6662698412698413,unsupported,-0.0671787143356278,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+H2AZ1,275.0,0.6660714285714285,unsupported,-0.061146434626877,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AUP1,276.0,0.6650793650793652,unsupported,0.076296347976262,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KDM3B,277.0,0.6642857142857143,unsupported,0.0701341715003452,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AMBRA1,278.0,0.6634920634920635,unsupported,0.5118039272867825,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+VPS8,279.0,0.6632936507936508,unsupported,0.1811399121047605,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GJC1,280.0,0.6625,unsupported,0.4603227941028973,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BCAT2,281.0,0.6623015873015873,unsupported,0.6322481805797717,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CALCOCO2,282.0,0.6619047619047619,unsupported,0.7822749366453849,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GDAP2,283.0,0.6617063492063492,unsupported,0.6835907829437445,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PARL,284.0,0.6609126984126985,unsupported,0.1033648416885002,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PMVK,285.0,0.6609126984126984,unsupported,1.7135888036872833,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HELT,286.0,0.6607142857142858,unsupported,1.018918197654277,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCNA2,288.0,0.6607142857142857,unsupported,0.0603687903722766,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MED12,288.0,0.6607142857142857,unsupported,0.8000770653148862,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NPC2,288.0,0.6607142857142857,unsupported,1.1016782985824791,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BHLHE40,290.0,0.660515873015873,unsupported,0.1897108879697254,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PEX5,291.0,0.6597222222222222,unsupported,0.2183370333606427,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF641,292.0,0.6593253968253968,unsupported,-0.2716835878112892,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KEAP1,293.0,0.6591269841269841,unsupported,0.0112435902680492,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PTP4A1,293.0,0.6591269841269841,unsupported,0.1011387183586683,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+STK19,295.0,0.6589285714285714,unsupported,0.2855555379178529,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RHOC,295.0,0.6589285714285714,unsupported,0.2647034329404434,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BATF,297.0,0.6583333333333333,unsupported,0.6065280125310535,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SHOC2,298.0,0.657936507936508,unsupported,0.923537822528704,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CEP57,299.0,0.6579365079365079,unsupported,-0.214576497529773,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PGP,300.0,0.6571428571428571,unsupported,0.5475620669150144,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+WAPL,301.0,0.6569444444444444,unsupported,0.1550854281471233,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DOHH,302.0,0.6561507936507937,unsupported,0.3764287967515911,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ECSIT,302.0,0.6561507936507937,unsupported,0.4188901218244554,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LETM2,304.0,0.6553571428571429,unsupported,0.5541418729997224,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CHMP1A,305.0,0.6549603174603175,unsupported,0.1443190446132165,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DDRGK1,306.0,0.6543650793650794,unsupported,0.7505063057821272,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NFAT5,307.0,0.653968253968254,unsupported,0.0997949636917304,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UBR5,307.0,0.653968253968254,unsupported,0.112450695971808,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TMEM140,309.0,0.6537698412698413,unsupported,0.6639959708442643,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+G3BP1,310.0,0.6535714285714286,unsupported,0.2107751403177926,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CDS2,311.0,0.6533730158730159,unsupported,0.3957025118610255,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FBXO11,312.0,0.6527777777777778,unsupported,0.3465370479382414,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CDK2,313.0,0.6525793650793651,unsupported,0.2937545469553005,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPS34,314.0,0.6519841269841269,unsupported,0.3329775492651299,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CFAP97,315.0,0.6492063492063492,unsupported,0.3755080022259771,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+AHR,316.0,0.6490079365079364,unsupported,0.311482166790111,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PCYT2,317.0,0.6488095238095237,unsupported,-0.1165450939921643,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UQCRQ,318.0,0.6484126984126983,unsupported,0.7884347850710975,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZCCHC8,319.0,0.647420634920635,unsupported,0.0259608808118914,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ARIH1,320.0,0.6472222222222223,unsupported,0.6499490557886788,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PKNOX1,321.0,0.6456349206349206,unsupported,0.054732956435511,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPL43,322.0,0.6448412698412698,unsupported,0.2024974928727523,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UQCRB,323.0,0.6440476190476191,unsupported,0.3060999305112442,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SETD2,324.0,0.6436507936507936,unsupported,0.3868171039660326,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+INO80B,325.0,0.6434523809523809,unsupported,0.5245967005103169,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+POLG,326.0,0.6422619047619048,unsupported,0.4107513407826293,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TIPARP,326.0,0.6422619047619048,unsupported,-0.089898076698859,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+WDR59,328.0,0.6418650793650793,unsupported,-0.4337022611368512,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SEC14L1,329.0,0.6406746031746031,unsupported,0.7010667273066424,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GTF3C5,330.0,0.640079365079365,unsupported,-0.4672757847667911,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ACAD11,331.0,0.6398809523809523,unsupported,0.5250652918919749,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EXOSC1,331.0,0.6398809523809523,unsupported,0.3295611967242371,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TRAF3,333.0,0.6396825396825396,unsupported,0.3088495904654273,favorable,,,,,L1 (axis literature),"F — Phenotype-associated, weak controller"
+RASAL3,333.0,0.6396825396825396,unsupported,-0.5327363577341324,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CBFB,335.0,0.6394841269841269,unsupported,0.5341447174272753,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+OTUB1,336.0,0.6392857142857142,unsupported,0.2164026604828079,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RNF19B,337.0,0.6384920634920634,unsupported,0.4178315341554023,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TMEM45B,338.0,0.638095238095238,unsupported,0.0042315695483322,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZBED3,338.0,0.638095238095238,unsupported,1.3531915963621814,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SRR,340.0,0.6373015873015873,unsupported,0.2614510018987174,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RPUSD3,341.0,0.6367063492063492,unsupported,0.3387930065726617,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COX11,342.0,0.6351190476190476,unsupported,0.7459807907980233,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DLAT,343.0,0.6347222222222222,unsupported,0.6756648654144944,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ATAD5,344.0,0.6337301587301587,unsupported,0.5470814473434157,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CARS2,345.0,0.6321428571428571,unsupported,0.3375090524872372,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SENP1,346.0,0.6317460317460317,unsupported,0.4474196319350734,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TNRC6A,347.0,0.631547619047619,unsupported,1.0322819623490107,favorable,A_manufacturing_modulation,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SYVN1,348.0,0.6309523809523809,unsupported,-0.2359673878855714,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF512B,349.0,0.6305555555555555,unsupported,0.383585432260767,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IL21,350.0,0.6303571428571428,unsupported,0.3193274864115398,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COX19,352.0,0.6299603174603174,unsupported,0.4268565428414262,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HCCS,352.0,0.6299603174603174,unsupported,0.582530917540604,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ANP32B,352.0,0.6299603174603174,unsupported,0.4180510177023382,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CAND1,352.0,0.6299603174603174,unsupported,-0.1551416190638129,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZW10,355.0,0.6293650793650793,unsupported,-0.2246146707817814,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KMT5B,356.0,0.6287698412698413,unsupported,0.1755729561510667,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZBTB14,357.0,0.6277777777777778,unsupported,0.2045140660086224,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+STAT5B,358.0,0.626984126984127,unsupported,1.0648270344472588,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ERCC1,359.0,0.6263888888888889,unsupported,0.3796322749828376,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NRBP1,360.0,0.6255952380952381,unsupported,-0.1358782773755267,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RPRD1B,361.0,0.6253968253968254,unsupported,0.377770231883949,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PPP1R11,362.0,0.6246031746031746,unsupported,0.5260168613872195,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MIPEP,362.0,0.6246031746031746,unsupported,0.4646258946680892,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GPALPP1,364.0,0.6242063492063492,unsupported,-0.0819353039339925,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NDUFA8,365.0,0.6238095238095238,unsupported,0.4094301620200405,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+KLF2,366.0,0.6220238095238095,unsupported,-0.0935087957579228,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FLI1,367.0,0.6216269841269841,unsupported,0.2496390194813459,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PDCL,368.0,0.6208333333333333,unsupported,0.1511214610861942,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ACAD9,369.0,0.6196428571428572,unsupported,0.3301412238146322,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+C1D,370.0,0.6194444444444445,unsupported,0.4864796920450728,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EXOC8,371.0,0.6192460317460318,unsupported,0.4387715925615721,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CTPS1,372.0,0.6186507936507937,unsupported,0.713962457315831,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FIGNL1,373.0,0.6180555555555556,unsupported,0.4361182444772666,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RELL2,374.0,0.6178571428571429,unsupported,0.2879480681038314,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPL46,375.0,0.6174603174603175,unsupported,0.1331406764957368,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CTDSPL2,376.0,0.6172619047619048,unsupported,0.376323585407057,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FOSL2,376.0,0.6172619047619048,unsupported,0.0324245600209075,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CASK,378.0,0.6168650793650794,unsupported,0.147008231941959,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RPS6KA1,379.0,0.6152777777777778,unsupported,0.4232252726946821,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SRSF10,380.0,0.6146825396825397,unsupported,0.2364719479840059,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UHRF1,380.0,0.6146825396825397,unsupported,0.3291682819607351,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CPSF6,382.0,0.6142857142857143,unsupported,-0.0675558084548175,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FANCL,383.0,0.6140873015873016,unsupported,0.4848579350919906,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+C11orf54,384.0,0.6132936507936508,unsupported,0.2025239536960946,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TTC4,385.0,0.6125,unsupported,-0.2185319859327951,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+BCS1L,386.0,0.6123015873015873,unsupported,0.5661829123536161,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UPF2,386.0,0.6123015873015873,unsupported,-0.2461334566413011,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPS26,388.0,0.6115079365079366,unsupported,0.6605881246032232,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+C2orf15,389.0,0.6113095238095239,unsupported,0.2787620363574072,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MED23,390.0,0.6109126984126985,unsupported,0.0316581899822046,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ID2,391.0,0.6105158730158731,unsupported,0.8275264026692274,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EMC4,392.0,0.6101190476190477,unsupported,-0.5631718788435838,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF837,393.0,0.609920634920635,unsupported,0.2102231863347997,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NSD1,393.0,0.609920634920635,unsupported,0.6872210240101585,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ITGB2,395.0,0.608531746031746,unsupported,0.058140343386717,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SACM1L,396.0,0.6069444444444444,unsupported,0.2083935884346809,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COX5A,397.0,0.6065476190476191,unsupported,0.0717059908510029,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MED1,397.0,0.6065476190476191,unsupported,0.6770950311567866,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FOXO1,399.0,0.603968253968254,unsupported,-0.5033109321269761,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NSUN6,401.0,0.6037698412698412,unsupported,0.1128030688725853,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UBR4,401.0,0.6037698412698412,unsupported,0.602022384299066,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZC3H4,401.0,0.6037698412698412,unsupported,0.1602748280923223,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPL39,403.0,0.603373015873016,unsupported,0.3719710729864845,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RBM5,404.0,0.6029761904761906,unsupported,-0.5149219667092441,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PHGR1,404.0,0.6029761904761906,unsupported,0.4389288432521378,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DDX60L,406.0,0.6029761904761904,unsupported,0.2324506656177039,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+H3C11,407.0,0.6025793650793652,unsupported,-0.3659307098639902,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RPE,408.0,0.602579365079365,unsupported,-0.0390774830373603,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TMED9,409.0,0.6023809523809525,unsupported,0.0338275745887267,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UBE3D,410.0,0.6011904761904763,unsupported,0.168620854497814,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UBE2I,411.0,0.6009920634920636,unsupported,0.1915617556655668,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BRD1,412.0,0.6005952380952381,unsupported,0.789338841022516,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SLC25A10,413.0,0.6003968253968254,unsupported,0.3543347194941506,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RXRB,414.0,0.6001984126984127,unsupported,0.031925313697968,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RNASEH1,415.0,0.6000000000000001,unsupported,0.0577415694677472,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NFKB1,416.0,0.6,unsupported,0.6464402849131053,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LRP5,417.0,0.5996031746031746,unsupported,0.5197565899681726,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LCK,418.0,0.5992063492063492,unsupported,1.2114763355735951,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GTF2H5,419.0,0.5986111111111111,unsupported,0.2206070011062032,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DIS3L,420.0,0.5984126984126984,unsupported,-0.0101163541755511,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PSIP1,421.0,0.5976190476190476,unsupported,-0.3316765346703428,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MICOS10,423.0,0.5970238095238095,unsupported,0.2990240456895014,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SYK,423.0,0.5970238095238095,unsupported,0.1171328802936712,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FLT1,423.0,0.5970238095238095,unsupported,0.1562779242769832,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF221,425.0,0.5964285714285714,unsupported,0.1944274270214918,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GNE,426.0,0.5956349206349206,unsupported,0.2706898742096555,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ING5,427.0,0.5952380952380952,unsupported,-0.0089923968017825,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+WAC,428.0,0.5938492063492063,unsupported,0.2964046205187612,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RBM10,429.0,0.5924603174603175,unsupported,0.3933682395428575,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZRSR2,430.0,0.5920634920634921,unsupported,-0.185270240227744,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NKAPD1,431.0,0.5916666666666667,unsupported,0.1008791950182535,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TFAM,432.0,0.5910714285714286,unsupported,0.5651804830553102,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GIGYF2,433.0,0.5906746031746032,unsupported,0.1895612617127057,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CFD,433.0,0.5906746031746032,unsupported,0.2366116115387584,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ELP4,436.0,0.5904761904761905,unsupported,0.0791853196378921,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SLC25A51,436.0,0.5904761904761905,unsupported,0.3582049640883489,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TLN1,436.0,0.5904761904761905,unsupported,0.5329049269944829,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPL3,438.0,0.5900793650793651,unsupported,0.5844330459479843,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPS24,439.0,0.5896825396825397,unsupported,0.4739617559544761,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PPP2R1A,439.0,0.5896825396825397,unsupported,0.6172664063049902,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPS2,441.0,0.5888888888888889,unsupported,0.4740598071693947,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ELP2,442.0,0.5884920634920634,unsupported,0.2148115927835336,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+VENTX,443.0,0.5882936507936508,unsupported,0.269156291320539,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SLC24A1,443.0,0.5882936507936508,unsupported,0.0766511128489651,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CMTR1,445.0,0.5878968253968254,unsupported,0.232157228139939,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SSBP1,445.0,0.5878968253968254,unsupported,0.4726601667781739,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FANCB,447.0,0.5876984126984127,unsupported,0.2975022322967285,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PRKAR1A,448.0,0.5873015873015873,unsupported,0.1657991991964277,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MCM8,449.0,0.5869047619047618,unsupported,0.2395486506521601,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HSD11B2,450.0,0.5867063492063492,unsupported,0.267448327049407,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FAM3C,451.0,0.5865079365079365,unsupported,-0.2769173106462896,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CSNK2A1,452.0,0.586111111111111,unsupported,0.5500174897632694,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DOT1L,453.0,0.5857142857142857,unsupported,0.465424648461249,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RHBDD3,454.0,0.585515873015873,unsupported,-0.0201773397500858,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RC3H1,455.0,0.5849206349206348,unsupported,0.2562886604030038,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FAM161B,456.0,0.5843253968253967,unsupported,0.422939262217677,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DNTTIP1,457.0,0.584126984126984,unsupported,0.1905765267708875,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DENND2D,458.0,0.5837301587301587,unsupported,-0.0836628024014513,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KAT6A,459.0,0.583531746031746,unsupported,0.1717287769402024,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PTPN2,460.0,0.5817460317460317,unsupported,0.4015417301188935,favorable,,,,,L1 (axis literature),"F — Phenotype-associated, weak controller"
+SUPT20H,461.0,0.5811507936507936,unsupported,1.2503022512655917,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SP100,461.0,0.5811507936507936,unsupported,0.15308004672462,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CHORDC1,463.0,0.5809523809523809,unsupported,0.8082475188945798,favorable,D_dangerous_rheostat,no_chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PPIH,464.0,0.5805555555555555,unsupported,0.4422846771825342,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPS15,465.0,0.5803571428571428,unsupported,0.2957041055276514,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PTBP1,465.0,0.5803571428571428,unsupported,0.2303757112650983,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TADA3,467.0,0.5797619047619047,unsupported,0.0716040138018986,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RO60,468.0,0.5793650793650793,unsupported,0.2413546213197478,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CDK13,469.0,0.5779761904761905,unsupported,-0.006412367796343,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+THG1L,470.0,0.5777777777777777,unsupported,0.2613011396752618,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RICTOR,471.0,0.577579365079365,unsupported,0.1667444937456239,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IL23R,472.0,0.5771825396825397,unsupported,0.1268456060644721,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TIGAR,473.0,0.5771825396825396,unsupported,-0.3055260560850777,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPL2,474.0,0.5765873015873015,unsupported,0.8241933415176259,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PGS1,474.0,0.5765873015873015,unsupported,0.2516136923769883,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DCK,476.0,0.5761904761904761,unsupported,0.0808362214068449,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+JUNB,477.0,0.575595238095238,unsupported,-0.2907927480117138,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SLC25A1,478.0,0.5740079365079365,unsupported,0.6645303479994834,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PRSS21,479.0,0.5734126984126984,unsupported,-0.0787595151852336,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+BRK1,480.0,0.573015873015873,unsupported,-0.2060278857963546,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PTMA,481.0,0.5722222222222222,unsupported,-0.2988386810433007,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HAPSTR1,482.0,0.5708333333333333,unsupported,0.1697122259678248,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MCFD2,483.0,0.5704365079365079,unsupported,0.1349656152707234,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HSD17B10,484.0,0.5698412698412698,unsupported,0.601327012185899,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COMMD5,485.0,0.5696428571428571,unsupported,0.5204310693365869,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+INSIG1,485.0,0.5696428571428571,unsupported,-0.0442409638164543,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ATP1B3,487.0,0.5688492063492063,unsupported,0.2284095544982466,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COA3,488.0,0.5686507936507936,unsupported,0.5640669254647893,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LRP6,489.0,0.5674603174603174,unsupported,0.4413114816924757,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+L3MBTL2,490.0,0.5666666666666667,unsupported,-0.2062164097037517,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+STIP1,491.0,0.566468253968254,unsupported,0.6693772318408389,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+AIP,492.0,0.5660714285714286,unsupported,0.142688261011278,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KMT2E,493.0,0.5658730158730159,unsupported,0.1072068030425987,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ARF1,494.0,0.5652777777777778,unsupported,-0.1440961553731485,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RBM18,495.0,0.5648809523809524,unsupported,-0.0069139927664776,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DNAJB9,496.0,0.5646825396825397,unsupported,0.044417814820985,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CLCC1,497.0,0.564484126984127,unsupported,0.1096001598940314,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ADPRM,498.0,0.5636904761904762,unsupported,-0.015149742173991,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GEN1,499.0,0.5632936507936508,unsupported,0.10237076807261,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+LAMTOR3,499.0,0.5632936507936508,unsupported,-0.3220534820166687,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HUWE1,501.0,0.5630952380952381,unsupported,0.2208749739368908,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DCAF5,502.0,0.5621031746031746,unsupported,0.4010891899179319,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RPTOR,503.0,0.5615079365079365,unsupported,-0.1730445441738688,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MPG,504.0,0.5607142857142857,unsupported,0.0134078015007701,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+STAG2,505.0,0.560515873015873,unsupported,0.0342572886315385,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UBE2E2,506.0,0.5595238095238095,unsupported,0.7426834430982915,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PUM1,507.0,0.5593253968253968,unsupported,0.1588590202079769,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NDUFA9,509.0,0.558531746031746,unsupported,0.1736115640985616,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+POLG2,509.0,0.558531746031746,unsupported,0.0794899062472338,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TSC2,509.0,0.558531746031746,unsupported,0.1344385713840079,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CEP43,511.0,0.5581349206349207,unsupported,0.3153962030098051,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+A2M,512.0,0.557936507936508,unsupported,0.1508104730976422,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BRD8,513.0,0.5577380952380953,unsupported,-0.0586774049133346,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MBD3,514.0,0.5575396825396826,unsupported,0.2514880519339384,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SLC39A6,514.0,0.5575396825396826,unsupported,0.2557976320982965,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RCOR3,516.0,0.5573412698412699,unsupported,0.3649732675350792,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ERCC4,517.0,0.5571428571428572,unsupported,0.4248740998847084,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TP53,518.0,0.5569444444444445,unsupported,-0.3913871340439686,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ALG1,519.0,0.555952380952381,unsupported,0.2966942469031911,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IPO9,520.0,0.5557539682539683,unsupported,0.4688577494357873,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SLC35B1,521.0,0.5553571428571429,unsupported,0.641085873640331,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ARPC4-TTLL3,522.0,0.5551587301587302,unsupported,0.3186586665972655,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SARS2,523.0,0.5547619047619048,unsupported,0.2727810538585059,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+YEATS2,524.0,0.5543650793650794,unsupported,0.4721504056269753,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NSD2,525.0,0.5541666666666667,unsupported,0.4518140900873661,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RASA2,525.0,0.5541666666666667,unsupported,-0.4382485700230305,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ACYP2,527.0,0.5525793650793651,unsupported,-0.1616993847418209,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RIDA,528.0,0.551984126984127,unsupported,0.8993863969060492,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RBM12,529.0,0.5517857142857143,unsupported,0.626377101237923,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MMGT1,530.0,0.5507936507936508,unsupported,0.0994108315003228,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UFL1,531.0,0.5503968253968254,unsupported,0.4036790063162128,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPL11,532.0,0.5501984126984127,unsupported,0.3938776069718379,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+KATNIP,533.0,0.5484126984126985,unsupported,0.1495320850193279,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+VARS2,534.0,0.547420634920635,unsupported,0.2504872252715888,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FAM89B,535.0,0.5470238095238096,unsupported,0.0807924312202882,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HDAC7,536.0,0.5462301587301587,unsupported,0.415261127932796,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TAF5L,537.0,0.546031746031746,unsupported,0.3093950567456486,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCDC93,538.0,0.5456349206349207,unsupported,0.6661359379561184,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TMEM30A,539.0,0.545436507936508,unsupported,0.2275330876932731,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PGK1,540.0,0.5454365079365079,unsupported,0.6146115997025239,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DPH5,541.0,0.5450396825396826,unsupported,0.1917652998415626,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EMC2,542.0,0.5450396825396825,unsupported,0.3982715460799553,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+KRBA2,543.0,0.5448412698412698,unsupported,0.2049531724164434,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GZMB,544.0,0.5444444444444445,unsupported,0.2052062405012249,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PPP6C,544.0,0.5444444444444445,unsupported,-0.3956261565720896,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+E2F1,546.0,0.5428571428571429,unsupported,-0.342933619328144,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TADA1,547.0,0.5428571428571428,unsupported,0.9751045109624222,favorable,A_manufacturing_modulation,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PLEK2,548.0,0.5424603174603174,unsupported,0.9205446838933976,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TRMT61A,549.0,0.5422619047619048,unsupported,-0.1678853532130702,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PITRM1,550.0,0.5420634920634921,unsupported,0.1602163865738023,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NCAPG2,551.0,0.5416666666666666,unsupported,0.2452543903348068,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPL16,552.0,0.5414682539682539,unsupported,0.3636071525216575,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MSL2,553.0,0.5412698412698412,unsupported,-0.0597243403505987,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SEC24A,554.0,0.5410714285714285,unsupported,-0.109748889135708,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CUL3,555.0,0.5406746031746033,unsupported,0.4218347332068548,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCDC22,556.0,0.5404761904761906,unsupported,0.0059230088659073,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+INTS13,557.0,0.5402777777777777,unsupported,0.4379886218814734,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DAPK2,558.0,0.5382936507936508,unsupported,-0.1157915818717407,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DEFA6,558.0,0.5382936507936508,unsupported,0.0129165131632,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SCAF8,560.0,0.5375000000000001,unsupported,0.7339557665729797,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MEMO1,561.0,0.5363095238095238,unsupported,0.8709682769076258,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ARHGAP27,562.0,0.5359126984126984,unsupported,0.8423969664915919,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PPP1R7,563.0,0.5349206349206349,unsupported,0.3047140580786372,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CTU2,565.0,0.5341269841269841,unsupported,0.0754375095813175,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MIOS,565.0,0.5341269841269841,unsupported,-0.6954930771429583,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RNF20,565.0,0.5341269841269841,unsupported,0.2169546530867801,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CSDE1,567.0,0.5333333333333333,unsupported,0.2394785722109766,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GATAD1,568.0,0.5331349206349206,unsupported,-0.0465184910493602,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+C1orf115,569.0,0.5329365079365079,unsupported,0.4803104610041958,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GPI,570.0,0.5321428571428571,unsupported,0.0315584364948048,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+POLR2M,571.0,0.531547619047619,unsupported,0.342706465051457,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NFU1,572.0,0.5311507936507937,unsupported,-0.0519131164949178,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TARDBP,572.0,0.5311507936507937,unsupported,-0.0003859712597737,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PPP1R13L,574.0,0.530952380952381,unsupported,0.4321036655997721,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CROT,575.0,0.5303571428571429,unsupported,-0.2401321775839575,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SZRD1,575.0,0.5303571428571429,unsupported,0.1984982566674619,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IFI27L1,577.0,0.528968253968254,unsupported,0.6728654004183564,favorable,A_manufacturing_modulation,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ATF7IP2,578.0,0.5279761904761905,unsupported,-0.2729577706945665,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EXT2,578.0,0.5279761904761905,unsupported,0.5427318488387952,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IMMT,580.0,0.5277777777777778,unsupported,-0.2566491859460919,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNHIT3,581.0,0.5273809523809524,unsupported,0.3273534556326613,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TAF6L,581.0,0.5273809523809524,unsupported,0.9210494901480304,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SSB,583.0,0.5267857142857143,unsupported,-0.0706648578806668,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DLG4,584.0,0.5259920634920635,unsupported,0.1299175984068709,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPS18B,584.0,0.5259920634920635,unsupported,0.1301040125372103,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SUGT1,586.0,0.5255952380952381,unsupported,0.1336716999392205,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FBXO32,587.0,0.5253968253968254,unsupported,-0.2574451291483708,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SEL1L,587.0,0.5253968253968254,unsupported,0.2975878658741493,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ERN1,589.0,0.525,unsupported,-0.1385425607220646,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PKM,590.0,0.5246031746031746,unsupported,0.1703724825638844,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CXXC1,590.0,0.5246031746031746,unsupported,0.9666581665580968,favorable,A_manufacturing_modulation,chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NR2E1,592.0,0.5238095238095238,unsupported,0.0471797037082668,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RPUSD1,593.0,0.5234126984126984,unsupported,0.4734666067263753,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SOS2,594.0,0.5232142857142857,unsupported,0.1058623389087982,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NASP,595.0,0.5222222222222223,unsupported,0.5303345651477515,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SCYL3,596.0,0.521626984126984,unsupported,1.0195159350878753,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+INTS15,598.0,0.5214285714285715,unsupported,0.4668462314516644,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPS25,598.0,0.5214285714285715,unsupported,0.5298799783028691,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PIGH,598.0,0.5214285714285715,unsupported,0.0493879498836811,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SNUPN,600.0,0.5208333333333333,unsupported,0.13238005351767,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ATF4,601.0,0.5206349206349207,unsupported,0.0450235315164015,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MTA3,602.0,0.5192460317460318,unsupported,0.6394913252393956,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NDUFB11,603.0,0.5192460317460317,unsupported,-0.1687347582164074,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SH3GL1,604.0,0.519047619047619,unsupported,0.0050927951468431,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MED13,605.0,0.5188492063492064,unsupported,0.7536372403247361,favorable,D_dangerous_rheostat,no_chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CNOT4,606.0,0.5184523809523809,unsupported,0.2128280794231161,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCNC,607.0,0.5178571428571429,unsupported,0.3598687590432948,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SGF29,608.0,0.5176587301587302,unsupported,0.7276404058257807,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DHX9,609.0,0.5176587301587301,unsupported,0.3184271842642138,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EXOSC6,610.0,0.5162698412698413,unsupported,0.1562180755701466,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CRLS1,611.0,0.5154761904761904,unsupported,0.4842380002763951,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UVRAG,612.0,0.5148809523809524,unsupported,0.2825466927426771,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NFRKB,613.0,0.5148809523809523,unsupported,0.6923623956328604,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ELOF1,614.0,0.5146825396825396,unsupported,0.6492214201682248,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LAMP1,615.0,0.5142857142857142,unsupported,0.2009529856462337,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PHF12,616.0,0.5140873015873015,unsupported,0.2709033535380171,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CTU1,617.0,0.5136904761904761,unsupported,-0.3278914563476311,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GGA3,618.0,0.5125,unsupported,0.0042506092259001,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+LSM12,618.0,0.5125,unsupported,0.6371025109330185,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CYC1,620.0,0.5123015873015873,unsupported,0.3825031449845704,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+WAS,621.0,0.5121031746031746,unsupported,0.3447963749342769,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPS31,622.0,0.5111111111111111,unsupported,0.4230184579913041,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MCAT,623.0,0.5107142857142857,unsupported,0.2328383160096314,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ALDH18A1,624.0,0.5103174603174603,unsupported,-0.116098990807695,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+IMPA2,625.0,0.5099206349206349,unsupported,-0.0326822985220929,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CCNQ,626.0,0.5095238095238095,unsupported,0.1756506596807573,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TARS2,627.0,0.5093253968253968,unsupported,0.3695546591813221,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IBA57,628.0,0.5091269841269841,unsupported,0.5541662221826845,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZMYM2,630.0,0.5089285714285714,unsupported,0.2057028408473389,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IRF4,630.0,0.5089285714285714,unsupported,0.8054462016071252,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BAP1,630.0,0.5089285714285714,unsupported,0.4977351831925435,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MMAB,632.0,0.5087301587301587,unsupported,0.7460290899959716,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COASY,634.0,0.5079365079365079,unsupported,0.8184339879818139,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COQ3,634.0,0.5079365079365079,unsupported,0.1543067248678218,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PCBP2,634.0,0.5079365079365079,unsupported,0.3344329146896833,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+KIF20A,636.0,0.5073412698412698,unsupported,0.096890604816508,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FASTKD5,637.0,0.5063492063492063,unsupported,0.2334024204693243,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PDHA1,638.0,0.5051587301587301,unsupported,0.1675278785901333,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GATB,639.0,0.5043650793650793,unsupported,0.1498649037127664,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+WDR48,640.0,0.5035714285714286,unsupported,-0.2663337581907086,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MYB,641.0,0.5031746031746032,unsupported,-0.1114383506742926,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+IPMK,642.0,0.5029761904761905,unsupported,0.1363273218819874,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ATAD3A,643.0,0.5027777777777778,unsupported,-0.0373433994041508,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ENTR1,643.0,0.5027777777777778,unsupported,0.0161279230742032,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+COX18,646.0,0.501984126984127,unsupported,-0.1105672169583011,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ENO1,646.0,0.501984126984127,unsupported,0.429895740331967,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HEATR3,646.0,0.501984126984127,unsupported,0.1075326845945933,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HSPBAP1,648.0,0.5015873015873016,unsupported,0.3627685166278478,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DOP1A,648.0,0.5015873015873016,unsupported,0.3517655105780279,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COX5B,650.0,0.5011904761904762,unsupported,-0.1105767999992809,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NDUFAF3,650.0,0.5011904761904762,unsupported,0.2333379657282275,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LIG1,652.0,0.5009920634920635,unsupported,-0.0387487926974025,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PTCH1,654.0,0.5007936507936508,unsupported,-0.3653850652846326,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SLC25A22,654.0,0.5007936507936508,unsupported,0.1644656319883017,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+STRAP,654.0,0.5007936507936508,unsupported,0.2812786148630992,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HPS1,656.0,0.4998015873015873,unsupported,0.0736313973544078,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TPD52,658.0,0.4994047619047619,unsupported,0.2526338717429296,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZBTB7A,658.0,0.4994047619047619,unsupported,-0.0482044009177486,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TADA2B,658.0,0.4994047619047619,unsupported,1.167721895705888,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TGDS,660.0,0.4986111111111111,unsupported,-0.3080660982576474,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DCP2,661.0,0.4984126984126984,unsupported,0.4471419621169096,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EHMT2,662.0,0.4968253968253968,unsupported,-0.037020123629554,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ELP1,663.0,0.4966269841269841,unsupported,0.1669533017743654,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HOXB4,663.0,0.4966269841269841,unsupported,0.1112603124872864,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TMEM79,665.0,0.4952380952380952,unsupported,0.1962487799597275,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PTPA,666.0,0.4946428571428571,unsupported,-0.1604254705067666,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CNBP,666.0,0.4946428571428571,unsupported,0.0934224880269843,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MCTS1,668.0,0.4936507936507937,unsupported,0.0536925748674724,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SENP5,669.0,0.493452380952381,unsupported,0.2253041866559764,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PARS2,670.0,0.4932539682539683,unsupported,0.5008200530253615,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RRM2B,670.0,0.4932539682539683,unsupported,-0.242146034539726,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CDKN2AIP,672.0,0.4924603174603174,unsupported,-0.1896363526632408,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+BRPF1,673.0,0.4922619047619048,unsupported,0.6497125350883007,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPL52,674.0,0.4922619047619047,unsupported,0.3548583128702911,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LAGE3,675.0,0.4918650793650793,unsupported,-0.2081029161217703,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RCC1L,676.0,0.4904761904761904,unsupported,0.0064452072221798,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TATDN2,677.0,0.489484126984127,unsupported,0.1059473833777866,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+WARS2,678.0,0.4888888888888889,unsupported,0.3259873843892948,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COX15,679.0,0.4882936507936508,unsupported,0.188881618187273,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ELOC,680.0,0.4878968253968254,unsupported,-0.3014030895655874,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UBE2N,681.0,0.4876984126984127,unsupported,0.1602446922088037,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+XRCC2,682.0,0.4873015873015872,unsupported,0.9907814489428138,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TENT2,683.0,0.4863095238095238,unsupported,0.2408165485401846,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF142,684.0,0.485515873015873,unsupported,0.1513868385328488,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RBSN,685.0,0.4853174603174602,unsupported,0.7994342202029099,favorable,A_manufacturing_modulation,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GLS,686.0,0.4837301587301587,unsupported,-0.0340613871259228,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TBCA,687.0,0.4837301587301587,unsupported,-0.024855736156565,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+XRRA1,688.0,0.483531746031746,unsupported,0.5803797110544283,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ARPC3,689.0,0.4833333333333333,unsupported,0.1850144154344558,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GET3,690.0,0.4827380952380952,unsupported,-0.1183089763939761,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GNS,690.0,0.4827380952380952,unsupported,-0.2900591923815774,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+C11orf68,692.0,0.4827380952380952,unsupported,-0.0443994833898866,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ICOS,693.0,0.4825396825396825,unsupported,-0.3020720427099921,unfavorable,,,,,L1 (axis literature),C — Probe-only biology
+HP1BP3,694.0,0.4819444444444444,unsupported,-0.0958846504550879,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+COX6C,695.0,0.4813492063492063,unsupported,0.380834133219474,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPS9,696.0,0.4811507936507936,unsupported,0.6843404870242447,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TRRAP,697.0,0.4807539682539682,unsupported,-0.1276454503073636,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+USP13,698.0,0.4805555555555555,unsupported,0.1391710032616297,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GMEB1,699.0,0.4799603174603175,unsupported,0.2597669915436855,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MED14,700.0,0.4799603174603174,unsupported,0.1157676071206414,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TUFM,701.0,0.4791666666666666,unsupported,0.6839340543195543,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CS,702.0,0.4781746031746031,unsupported,0.4757064530847465,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UBXN1,702.0,0.4781746031746031,unsupported,0.1126621226936112,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NAA40,704.0,0.4779761904761904,unsupported,0.1294942173476135,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+POLR3H,704.0,0.4779761904761904,unsupported,0.064520746619057,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TBL1XR1,706.0,0.4777777777777778,unsupported,0.2370189070413033,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TFDP1,706.0,0.4777777777777778,unsupported,-0.2247923693734395,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SLC31A1,708.0,0.4773809523809524,unsupported,0.7725388055083675,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GDF9,709.0,0.4765873015873016,unsupported,-0.1457105529511983,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+P4HB,710.0,0.4763888888888888,unsupported,0.2772477022485132,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CBX3,711.0,0.4761904761904761,unsupported,-0.1359703041399584,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CHD7,711.0,0.4761904761904761,unsupported,0.3027696044467627,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FMC1-LUC7L2,713.0,0.4753968253968254,unsupported,-0.0653488318230347,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ITK,714.0,0.475,unsupported,0.9227059802947212,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DDX6,715.0,0.4742063492063492,unsupported,0.2817096304840557,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+C16orf87,716.0,0.4738095238095238,unsupported,0.3069494880224179,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MED15,717.0,0.4736111111111111,unsupported,0.0251076432815472,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPS12,718.0,0.4728174603174603,unsupported,0.5535888108293016,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MBD2,719.0,0.4726190476190476,unsupported,0.4948009754195439,favorable,,,,,L1 (axis literature),"F — Phenotype-associated, weak controller"
+ZSWIM4,719.0,0.4726190476190476,unsupported,0.0809305867124885,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GRSF1,721.0,0.4724206349206349,unsupported,0.2786527572943063,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RNFT2,722.0,0.4722222222222222,unsupported,-0.1872522577697923,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+YY1,722.0,0.4722222222222222,unsupported,0.5801032032884028,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DCAKD,724.0,0.4712301587301587,unsupported,0.2568844412086618,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HOXB2,725.0,0.4704365079365079,unsupported,-0.0330104723573833,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KDM8,726.0,0.4684523809523809,unsupported,0.4137008003376168,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCAR1,727.0,0.4682539682539682,unsupported,0.5788159716956165,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+METAP2,728.0,0.4666666666666667,unsupported,-0.2593139172790145,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NLRX1,728.0,0.4666666666666667,unsupported,-0.2272794962062579,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CACHD1,730.0,0.4662698412698413,unsupported,-0.3434195785499465,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PDIA6,731.0,0.4648809523809524,unsupported,0.0667427942835788,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UBE2V2,732.0,0.4646825396825397,unsupported,-0.2832916141177488,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPS21,733.0,0.464484126984127,unsupported,0.2932743034627537,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TMEM214,733.0,0.464484126984127,unsupported,0.3395948113997658,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EGR2,735.0,0.4642857142857143,unsupported,-0.2521601324364655,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CYB5RL,736.0,0.4638888888888888,unsupported,0.2434422145407707,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SLTM,737.0,0.4636904761904762,unsupported,0.2299937009231217,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DAP,738.0,0.4625,unsupported,0.2431809128766514,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DHPS,739.0,0.4623015873015872,unsupported,0.5443297287754105,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PDSS1,740.0,0.4619047619047619,unsupported,0.3250154296241945,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCNK,741.0,0.4615079365079365,unsupported,0.2461903383715437,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ALG8,742.0,0.4613095238095238,unsupported,-0.0358461446051207,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF710,742.0,0.4613095238095238,unsupported,0.3106031550137726,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TARBP2,744.0,0.4609126984126984,unsupported,0.2880345650465798,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FBXO42,745.0,0.4607142857142857,unsupported,-0.4572517641308389,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DUSP12,746.0,0.4603174603174603,unsupported,0.5438956886593398,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TSFM,747.0,0.4597222222222222,unsupported,-0.0842041499665952,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+USO1,748.0,0.4593253968253968,unsupported,0.7578038784170887,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZMAT1,749.0,0.4593253968253968,unsupported,0.3311253211336831,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TP53INP2,750.0,0.4591269841269841,unsupported,0.8816591230039595,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZBTB1,750.0,0.4591269841269841,unsupported,0.0696817624323073,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MEAF6,752.0,0.4589285714285714,unsupported,0.0370824755121224,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DPH6,753.0,0.4581349206349207,unsupported,-0.007306358094454,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NDUFB4,754.0,0.4577380952380952,unsupported,0.1091664814223575,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+H2BC10,755.0,0.4571428571428571,unsupported,0.3516394698331113,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ORMDL2,756.0,0.4569444444444444,unsupported,0.0614465217784153,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+COPS8,757.0,0.4561507936507937,unsupported,-0.3650884395259517,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CCDC12,758.0,0.4559523809523809,unsupported,0.1579253381238277,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SCAP,758.0,0.4559523809523809,unsupported,0.1299611114353629,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PPP1R2,760.0,0.4551587301587301,unsupported,-0.18073541102921,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CLDN7,761.0,0.4543650793650794,unsupported,0.0172021433132624,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CUL4B,762.0,0.4539682539682539,unsupported,-0.1259090742419851,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MYCN,763.0,0.4537698412698412,unsupported,0.7394704185167971,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TMEM265,764.0,0.4527777777777778,unsupported,0.2504805303062463,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+THRA,765.0,0.4521825396825397,unsupported,-0.0964431318728881,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF790,766.0,0.4521825396825397,unsupported,0.1308997574720421,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TFB1M,767.0,0.451984126984127,unsupported,-0.1126366507298354,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TNK1,768.0,0.4517857142857143,unsupported,0.2786311746357395,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TADA2A,769.0,0.4515873015873016,unsupported,0.1393314471698353,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SLC35C2,770.0,0.4505952380952381,unsupported,-0.0365606445624721,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RHOF,771.0,0.4503968253968254,unsupported,0.0758060333479322,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZCCHC4,772.0,0.45,unsupported,-0.1179337248217968,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+LMTK2,773.0,0.4492063492063492,unsupported,0.352068841546321,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EML2,774.0,0.4488095238095237,unsupported,0.3976662447634407,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NDUFS5,775.0,0.4484126984126984,unsupported,0.2164565834718785,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TMEM126B,775.0,0.4484126984126984,unsupported,0.2279574277758591,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HACD2,777.0,0.4482142857142857,unsupported,0.3191718969832365,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UBA2,778.0,0.448015873015873,unsupported,-0.2150411920468282,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AMD1,779.0,0.4476190476190476,unsupported,-0.1651744145164096,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+INO80,780.0,0.4468253968253968,unsupported,0.7479799372007916,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PPAT,781.0,0.4458333333333333,unsupported,0.6919965052514372,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FAM98B,782.0,0.4456349206349206,unsupported,0.134656390184669,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+LAMTOR2,783.0,0.4450396825396825,unsupported,-0.195512017109114,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+VHL,784.0,0.4448412698412698,unsupported,0.1665083135726534,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ACLY,785.0,0.4446428571428571,unsupported,0.9424108836317426,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FAF2,786.0,0.4444444444444444,unsupported,-0.2728521225378497,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MBTPS1,787.0,0.4442460317460318,unsupported,0.2258738770930735,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CARM1,788.0,0.4442460317460317,unsupported,-0.1805422234712073,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SLC38A6,789.0,0.444047619047619,unsupported,0.2734505676926837,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ADO,790.0,0.4438492063492063,unsupported,-0.2202104146370124,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZBTB9,790.0,0.4438492063492063,unsupported,-0.1678040473810779,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF649,792.0,0.4432539682539682,unsupported,0.1901052155278621,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DMRTA2,793.0,0.4430555555555556,unsupported,0.2381305092895693,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DGKH,794.0,0.4422619047619047,unsupported,0.721506651848182,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SRSF11,795.0,0.4416666666666666,unsupported,-0.037422412811013,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SPTBN1,796.0,0.4402777777777777,unsupported,-0.0322791186636391,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PAPSS1,797.0,0.4396825396825397,unsupported,0.1911939374383865,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+INTS14,798.0,0.4392857142857143,unsupported,-0.3815749305774079,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TP73,798.0,0.4392857142857143,unsupported,0.1829849345784298,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MTHFD1L,800.0,0.4388888888888889,unsupported,0.5075415630977599,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SMG1,801.0,0.4386904761904762,unsupported,-0.0588691669581524,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CABIN1,803.0,0.4382936507936508,unsupported,0.5942649919198634,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DOCK2,803.0,0.4382936507936508,unsupported,0.3290735916140082,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PPIF,803.0,0.4382936507936508,unsupported,-0.0503813437807883,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+URM1,805.0,0.4378968253968254,unsupported,-0.4106507981941751,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KPNA1,806.0,0.4369047619047619,unsupported,0.076481608907494,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MOB1A,807.0,0.4365079365079365,unsupported,0.1880342287612902,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RAC2,808.0,0.4363095238095238,unsupported,0.384482824547437,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TIMM8B,809.0,0.4361111111111111,unsupported,0.2212418023874189,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF70,810.0,0.4345238095238095,unsupported,0.0602960798093513,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HDAC3,811.0,0.4343253968253968,unsupported,0.8536761353670541,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPL42,812.0,0.4325396825396825,unsupported,0.4401518015903989,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HMBS,813.0,0.4319444444444444,unsupported,0.0127564226042428,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PPP1R3B,813.0,0.4319444444444444,unsupported,0.0727936658708966,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RRAGC,815.0,0.4319444444444444,unsupported,-0.1691030178697884,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NCKAP1L,816.0,0.4313492063492063,unsupported,-0.2128947805317725,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TPGS2,817.0,0.4309523809523809,unsupported,-4.932933077206325e-05,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+INPP5K,818.0,0.4307539682539683,unsupported,0.2915384788060612,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MOCS3,820.0,0.4291666666666666,unsupported,-0.0265561299867624,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPS7,820.0,0.4291666666666666,unsupported,0.2239992055724784,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PRAM1,820.0,0.4291666666666666,unsupported,-0.1877108172330747,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+COMMD8,822.0,0.4287698412698413,unsupported,0.6127763583456268,favorable,A_manufacturing_modulation,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ATPAF2,823.0,0.4285714285714285,unsupported,-0.1992914521307322,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF644,824.0,0.4283730158730159,unsupported,-0.3697728400266675,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SCAF4,825.0,0.4279761904761905,unsupported,0.3531570966338636,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MBD5,826.0,0.4257936507936508,unsupported,0.8271179530697924,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IRF2,827.0,0.4251984126984127,unsupported,0.0145688441706712,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZFPM1,828.0,0.4246031746031746,unsupported,0.9358018606332844,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ARPC2,829.0,0.4244047619047619,unsupported,0.3709436264197235,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FBXL3,830.0,0.4236111111111111,unsupported,0.2688941659451301,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TFG,831.0,0.4236111111111111,unsupported,-0.1004780144762851,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GNB1L,832.0,0.4234126984126984,unsupported,0.1527203223850355,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NMRAL1,833.0,0.422420634920635,unsupported,0.3846841914094272,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CARMIL2,834.0,0.4222222222222222,unsupported,0.8959796919227729,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DTX4,835.0,0.4220238095238095,unsupported,0.0313924919535238,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ACACA,836.0,0.4212301587301587,unsupported,0.0656500742553637,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RBM27,837.0,0.4202380952380952,unsupported,-0.1800103105685634,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PDPK1,838.0,0.4198412698412698,unsupported,0.136554047053118,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CLPB,839.0,0.4184523809523809,unsupported,0.0721660194561609,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MITD1,840.0,0.4184523809523809,unsupported,0.2601203429161252,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+B4GALNT3,841.0,0.4182539682539682,unsupported,-0.0293836653409558,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NATD1,841.0,0.4182539682539682,unsupported,0.2940789892810494,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+N6AMT1,843.0,0.4178571428571428,unsupported,0.2260607961929544,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PHF3,844.0,0.4176587301587302,unsupported,0.0902432269073875,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MTG1,844.0,0.4176587301587302,unsupported,0.7297544692704315,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+KCTD21,846.0,0.4172619047619048,unsupported,0.086489675146021,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+POGLUT3,847.0,0.417063492063492,unsupported,0.2228369616450668,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CYB5R4,848.0,0.4160714285714285,unsupported,0.0734833150935327,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NFKB2,849.0,0.4154761904761904,unsupported,0.1556539435013216,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ANKRD61,850.0,0.4146825396825397,unsupported,0.429278771848806,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+INO80C,851.0,0.4142857142857143,unsupported,-0.4240963439699247,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DYNC2H1,852.0,0.413095238095238,unsupported,0.3787884277207527,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPL21,853.0,0.4121031746031746,unsupported,0.455221262148117,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PHF19,854.0,0.4117063492063492,unsupported,-0.1747694006168547,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CNOT9,855.0,0.4111111111111111,unsupported,0.7362169961389501,favorable,D_dangerous_rheostat,chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SIN3B,855.0,0.4111111111111111,unsupported,-0.0035309309557274,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RAB11FIP1,857.0,0.410515873015873,unsupported,0.0017684447473107,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MAN1A2,858.0,0.4099206349206349,unsupported,0.4711806538018636,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NCOR1,859.0,0.4095238095238095,unsupported,0.1295847749317955,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KCNA2,860.0,0.4081349206349206,unsupported,0.7236616743388672,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+VPS35,861.0,0.4075396825396825,unsupported,0.0385105241389883,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FARS2,862.0,0.4071428571428571,unsupported,-0.0680482352544237,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GABARAPL1,863.0,0.406547619047619,unsupported,0.1220324049168291,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+LZTS1,863.0,0.406547619047619,unsupported,-0.1499756589374987,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RASGRP1,865.0,0.4063492063492063,unsupported,-0.3714025426554769,unfavorable,,,,,L1 (axis literature),C — Probe-only biology
+TRIP12,866.0,0.4057539682539682,unsupported,0.0027165326582481,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+INSR,867.0,0.4055555555555555,unsupported,0.2794804665803531,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HNRNPM,868.0,0.4053571428571428,unsupported,0.8893850097465736,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EHMT1,869.0,0.403968253968254,unsupported,-0.2143244227928427,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+WDR24,870.0,0.4037698412698413,unsupported,-0.2861699314577017,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+LRRC25,871.0,0.4021825396825397,unsupported,0.3754432577048443,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+STYXL1,872.0,0.4017857142857143,unsupported,0.0206548951725522,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MVB12B,873.0,0.4015873015873016,unsupported,0.0978931096982198,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ORAI1,874.0,0.4013888888888889,unsupported,-0.0367630174957104,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SLC3A2,875.0,0.4011904761904762,unsupported,0.3882585082309455,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FLAD1,876.0,0.4005952380952381,unsupported,0.3141641229948874,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SRF,877.0,0.4003968253968254,unsupported,-0.1450082524054569,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TPT1,878.0,0.3998015873015872,unsupported,0.2786869709579676,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+WIZ,879.0,0.3992063492063492,unsupported,-0.1818155281166455,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FKBP2,880.0,0.3990079365079365,unsupported,-0.1764272425335852,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ABHD13,881.0,0.3986111111111111,unsupported,0.2192119577355621,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PCNX4,882.0,0.3970238095238095,unsupported,-0.0612214491364206,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TEP1,883.0,0.3962301587301587,unsupported,-0.311932920542221,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+C6orf62,884.0,0.396031746031746,unsupported,0.2177849710058984,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IL12RB2,885.0,0.396031746031746,unsupported,-0.0654480919338243,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RBM33,886.0,0.3954365079365079,unsupported,0.4090980526942849,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DNAJC24,887.0,0.3952380952380953,unsupported,-0.0703512277794183,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+USP10,888.0,0.3948412698412699,unsupported,-0.0094331319893189,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SUPT4H1,889.0,0.3946428571428572,unsupported,0.1858279388816532,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MTERF3,890.0,0.3942460317460318,unsupported,0.1587985360102113,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FBRS,891.0,0.3936507936507936,unsupported,-0.0099283786692991,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GADD45GIP1,892.0,0.393452380952381,unsupported,0.1625178011785993,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GPATCH8,892.0,0.393452380952381,unsupported,0.0996169012534217,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DOP1B,894.0,0.3934523809523809,unsupported,0.291298254510232,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCND2,894.0,0.3934523809523809,unsupported,-0.2654999519742286,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DNAH3,896.0,0.3924603174603174,unsupported,0.1444951542646801,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+THRAP3,897.0,0.392063492063492,unsupported,-0.4759147061366526,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CHURC1,898.0,0.3910714285714286,unsupported,0.2604083701374717,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+BRMS1,899.0,0.3908730158730158,unsupported,-0.0531387581883413,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UBL7,900.0,0.3906746031746032,unsupported,0.3003457092951401,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TNPO1,901.0,0.389484126984127,unsupported,0.3074355237985332,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NR2C2,902.0,0.3892857142857143,unsupported,0.1594325591380106,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DR1,903.0,0.3888888888888889,unsupported,0.4012682490461261,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EBF3,904.0,0.3882936507936508,unsupported,0.3940339782037426,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+R3HCC1L,905.0,0.3882936507936507,unsupported,0.3843497517601566,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+AKR1C1,906.0,0.3871031746031746,unsupported,0.0612417737767586,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HOXC10,906.0,0.3871031746031746,unsupported,0.1829282534533478,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MED19,908.0,0.3869047619047619,unsupported,0.5704315795673933,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CASP9,909.0,0.386111111111111,unsupported,-0.0239650852425919,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PAX7,910.0,0.385515873015873,unsupported,0.1706433152162518,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EIF4G2,911.0,0.3851190476190476,unsupported,0.9898845534939932,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ERCC6L,911.0,0.3851190476190476,unsupported,0.2979577647995944,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RPS6KB1,913.0,0.3849206349206349,unsupported,0.1131621412955381,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EIF1,914.0,0.3849206349206349,unsupported,0.1702274368302094,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DNAJC3,914.0,0.3849206349206349,unsupported,0.3543426164753314,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SFXN1,916.0,0.3847222222222222,unsupported,-0.1768081731712008,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PYGM,917.0,0.3843253968253968,unsupported,-0.3622770883122133,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CPOX,918.0,0.3837301587301587,unsupported,0.5964200305179475,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RPRD2,919.0,0.3827380952380952,unsupported,0.1521667525791359,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF92,920.0,0.3825396825396825,unsupported,-0.4785116188859526,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ABHD12,921.0,0.3823412698412698,unsupported,0.291925896328092,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TESPA1,922.0,0.3821428571428571,unsupported,-0.1589704685380924,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ST7L,923.0,0.3819444444444445,unsupported,0.0972340790964172,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SLC7A6,924.0,0.3813492063492063,unsupported,-0.2670620130730113,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ACTR2,925.0,0.3811507936507936,unsupported,0.4888586289815346,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCS,925.0,0.3811507936507936,unsupported,-0.2896556987451652,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ATP5PO,927.0,0.3807539682539683,unsupported,0.5372329804648426,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SEC14L2,928.0,0.3793650793650793,unsupported,0.4592498651711154,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCDC28B,929.0,0.3785714285714285,unsupported,0.7393107658613549,favorable,A_manufacturing_modulation,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EFHC1,930.0,0.3777777777777777,unsupported,0.0769720829569084,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KTI12,931.0,0.376984126984127,unsupported,-0.2790683939887651,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MTPAP,932.0,0.3767857142857143,unsupported,0.1679239889130277,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CASC3,933.0,0.3744047619047619,unsupported,0.4533477061579432,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LBH,934.0,0.3736111111111111,unsupported,-0.2200746247795006,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DAXX,936.0,0.3734126984126984,unsupported,-0.3616776800932643,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ELAVL1,936.0,0.3734126984126984,unsupported,0.1585337092585926,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TIPRL,936.0,0.3734126984126984,unsupported,-0.0289947211062578,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HEY1,938.0,0.3732142857142857,unsupported,0.3330571064005191,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RAF1,939.0,0.3728174603174603,unsupported,-0.3845496589040972,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SNAP29,939.0,0.3728174603174603,unsupported,-0.1355031153378148,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FBXL15,941.0,0.3714285714285714,unsupported,0.3945684664677406,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RANBP3,942.0,0.3714285714285714,unsupported,-0.1532558253639485,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPS6,943.0,0.3706349206349206,unsupported,0.4020571120212067,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF71,944.0,0.3692460317460317,unsupported,0.5236211548417552,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HNF4A,944.0,0.3692460317460317,unsupported,0.2230410457148353,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF280D,946.0,0.3686507936507937,unsupported,0.3766340887671216,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPL49,947.0,0.3678571428571429,unsupported,0.3500682108248446,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPS11,948.0,0.3670634920634921,unsupported,0.2718749668216829,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HACD4,949.0,0.3668650793650793,unsupported,0.3166897130208942,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+THAP2,950.0,0.3656746031746032,unsupported,0.3651690104452156,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SEC63,951.0,0.365079365079365,unsupported,0.300901623943855,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZHX1-C8orf76,952.0,0.3648809523809523,unsupported,-0.0240066743090503,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF662,953.0,0.3638888888888889,unsupported,0.1009487405907177,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KDM2A,954.0,0.3636904761904762,unsupported,-0.2965615294498745,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+WBP4,954.0,0.3636904761904762,unsupported,0.8339898691460776,favorable,A_manufacturing_modulation,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PSMF1,956.0,0.3634920634920635,unsupported,-0.0766965965085836,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZBTB44,957.0,0.3630952380952381,unsupported,0.2664479626007345,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ATP5PF,958.0,0.3628968253968254,unsupported,-0.06082715699729,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GCSH,959.0,0.3626984126984127,unsupported,0.0465318514256604,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AASDH,960.0,0.3625,unsupported,0.2441394780824149,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PDAP1,961.0,0.3621031746031746,unsupported,0.0783391916430388,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF554,962.0,0.3617063492063492,unsupported,0.3731216206916813,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCDC136,962.0,0.3617063492063492,unsupported,-0.0790286273995803,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MRPL14,964.0,0.3613095238095238,unsupported,0.3024047192006795,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LIN37,965.0,0.3599206349206349,unsupported,0.2077831458132844,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GPS2,966.0,0.3597222222222222,unsupported,0.070094067129364,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GABPB1,967.0,0.3579365079365079,unsupported,-0.0391457018813855,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EXOC7,968.0,0.3571428571428571,unsupported,-0.0180106691359516,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CHTF18,969.0,0.3549603174603175,unsupported,0.0826499251756994,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ELP5,970.0,0.3547619047619048,unsupported,-0.0876653959611948,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FHL1,971.0,0.3541666666666667,unsupported,0.018431671496594,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ARRDC4,972.0,0.3533730158730158,unsupported,0.0027118095988664,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PCBP1,973.0,0.3527777777777778,unsupported,-0.1326829069250809,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ADCY4,974.0,0.3521825396825397,unsupported,-0.272120354433736,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MPI,975.0,0.3517857142857142,unsupported,0.1889301612059822,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GNA13,976.0,0.3513888888888888,unsupported,-0.1565770707334789,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DENR,977.0,0.3503968253968254,unsupported,0.0818723194099222,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PARP2,978.0,0.3498015873015873,unsupported,0.1465475628298228,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZBTB39,979.0,0.3482142857142857,unsupported,0.2742231946768783,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZFC3H1,980.0,0.3474206349206349,unsupported,0.3038332155321946,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SMARCA5,981.0,0.3470238095238095,unsupported,-0.1427444796519306,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TIMM10,982.0,0.3466269841269841,unsupported,-0.0378850505753419,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AMER1,983.0,0.3464285714285714,unsupported,0.0516263168354599,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MIA2,984.0,0.3456349206349206,unsupported,0.095205525215158,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UNCX,984.0,0.3456349206349206,unsupported,0.467650580607994,favorable,A_manufacturing_modulation,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CDK5RAP3,986.0,0.3450396825396825,unsupported,0.1861843768061431,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+XRN1,986.0,0.3450396825396825,unsupported,0.2065346499176781,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPL50,988.0,0.3444444444444444,unsupported,0.1169853968067134,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TBL1X,989.0,0.344047619047619,unsupported,0.2694415571735964,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RTRAF,990.0,0.3436507936507936,unsupported,0.0660917090206967,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NUP188,991.0,0.3418650793650793,unsupported,-0.3933231487664466,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PPCS,991.0,0.3418650793650793,unsupported,0.4323682805982736,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DHX30,993.0,0.3416666666666667,unsupported,-0.2156180204173043,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NPHP4,994.0,0.3406746031746032,unsupported,0.1189469664399393,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MGA,995.0,0.3404761904761905,unsupported,-0.204287726686676,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EWSR1,996.0,0.3390873015873016,unsupported,0.4045115970461164,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ITSN1,997.0,0.3390873015873015,unsupported,0.3576370105966046,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCNF,998.0,0.3388888888888889,unsupported,0.073295575008025,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SOCS3,998.0,0.3388888888888889,unsupported,0.2993004432093443,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SS18L2,1000.0,0.3382936507936508,unsupported,0.1445320070537226,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EIF3J,1001.0,0.3373015873015873,unsupported,-0.147468147665475,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PIGF,1001.0,0.3373015873015873,unsupported,-0.1528447961443841,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+C1S,1003.0,0.335515873015873,unsupported,0.1112306445832981,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SOCS5,1004.0,0.3353174603174603,unsupported,0.4273120210979344,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPS16,1005.0,0.3327380952380952,unsupported,0.2241352682823793,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LAMTOR4,1006.0,0.3321428571428571,unsupported,0.1244386336335887,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MYC,1006.0,0.3321428571428571,unsupported,0.3222485103329707,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CYP4V2,1008.0,0.3315476190476191,unsupported,-0.3587620045664334,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SPTLC2,1009.0,0.3311507936507936,unsupported,0.6728397617928463,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CREB1,1010.0,0.3309523809523809,unsupported,0.3164704691988624,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SBNO1,1011.0,0.3307539682539682,unsupported,-0.2490484079264988,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+STK40,1012.0,0.3305555555555555,unsupported,0.265540202066921,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PHOSPHO2,1012.0,0.3305555555555555,unsupported,0.3798573381557564,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HEXD,1014.0,0.329563492063492,unsupported,-0.0752100355807212,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PRPF38B,1014.0,0.329563492063492,unsupported,0.1382226024783095,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EIPR1,1016.0,0.3275793650793651,unsupported,0.1362854175854975,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UGDH,1017.0,0.326984126984127,unsupported,0.2581027397748551,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IL7R,1018.0,0.3263888888888889,unsupported,0.4309446844138591,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PPIL1,1019.0,0.3253968253968253,unsupported,-0.038865585142771,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PTCD2,1019.0,0.3253968253968253,unsupported,0.2038752759575129,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ELOB,1021.0,0.3251984126984126,unsupported,0.1681529580318801,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DNAJC8,1022.0,0.3244047619047618,unsupported,0.1880885583576938,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+XBP1,1023.0,0.3238095238095237,unsupported,0.4530303319143431,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TSPAN9,1024.0,0.3202380952380952,unsupported,0.34779429075724,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TSPYL5,1025.0,0.3186507936507936,unsupported,0.1736255607794495,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TRAPPC3,1026.0,0.3182539682539682,unsupported,0.1158642138829379,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NAA25,1027.0,0.3172619047619047,unsupported,0.3079275669236546,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RPS25,1028.0,0.3166666666666666,unsupported,0.2528123069242883,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PACSIN2,1029.0,0.3164682539682539,unsupported,0.1856792253212499,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZC3H3,1030.0,0.3162698412698412,unsupported,-0.0598807592754049,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EIF4A1,1031.0,0.3160714285714285,unsupported,0.3123727013096958,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF574,1032.0,0.315079365079365,unsupported,0.1179142814624258,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FNBP4,1032.0,0.315079365079365,unsupported,-0.3888638656227194,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FUBP1,1034.0,0.3148809523809524,unsupported,-0.1716289425304256,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HSDL2,1035.0,0.3140873015873016,unsupported,0.2753879060334528,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MIA3,1036.0,0.3138888888888889,unsupported,-0.2114913345699468,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RAD54L2,1037.0,0.3136904761904762,unsupported,-0.0059319986436355,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RASA4B,1037.0,0.3136904761904762,unsupported,-0.1595062982353104,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CCDC138,1039.0,0.3134920634920635,unsupported,-0.0979368989959077,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PRPF39,1040.0,0.3123015873015873,unsupported,0.3551910605386217,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NFIX,1041.0,0.3103174603174603,unsupported,0.418409709214679,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UBE2G2,1042.0,0.3101190476190476,unsupported,-0.0129521859373264,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RPL36A-HNRNPH2,1043.0,0.3095238095238095,unsupported,0.293665988049774,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+OXA1L,1044.0,0.3091269841269841,unsupported,0.3426038269251525,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HMGN5,1045.0,0.3073412698412698,unsupported,-0.3163487028648789,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PNPT1,1046.0,0.3063492063492063,unsupported,0.275876843481116,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SAP130,1047.0,0.3061507936507937,unsupported,0.315382187107125,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MTHFD2,1048.0,0.3045634920634921,unsupported,0.416746376892007,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+HSD17B12,1049.0,0.3037698412698413,unsupported,0.0231750689072976,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF776,1050.0,0.3035714285714286,unsupported,-0.0202280945611948,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ECHS1,1051.0,0.3035714285714285,unsupported,0.0387666976712236,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GZF1,1052.0,0.3023809523809523,unsupported,-0.0238498541621479,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+LTB4R,1053.0,0.3017857142857142,unsupported,-0.362592227187303,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+VPS41,1054.0,0.3011904761904762,unsupported,0.0438609099649012,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RAD50,1055.0,0.3005952380952381,unsupported,0.1679021976827104,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+INTS10,1056.0,0.3,unsupported,0.4495134782255303,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CCDC6,1057.0,0.2986111111111111,unsupported,0.1638396799358103,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SPTSSA,1058.0,0.298015873015873,unsupported,0.3054660970836045,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RGPD6,1059.0,0.2976190476190476,unsupported,-0.3840103470515941,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF613,1060.0,0.2974206349206349,unsupported,0.0322712515189814,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RAVER1,1061.0,0.2970238095238095,unsupported,0.1352663954956257,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+WDR54,1062.0,0.2968253968253968,unsupported,-0.1750643646888511,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+IMPG2,1063.0,0.2964285714285714,unsupported,-0.1501758184424577,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FZD6,1064.0,0.296031746031746,unsupported,0.5130796290195129,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SUPT7L,1064.0,0.296031746031746,unsupported,1.060251278619851,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+QNG1,1066.0,0.2958333333333333,unsupported,-0.0667716351006273,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+WNT9A,1067.0,0.2954365079365079,unsupported,-0.2083999626762156,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TRAK1,1068.0,0.2942460317460317,unsupported,0.2496453022791925,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UBC,1069.0,0.2928571428571428,unsupported,0.0365257264115572,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+COL6A1,1070.0,0.292063492063492,unsupported,0.1535838168265539,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PLEKHG1,1071.0,0.2904761904761904,unsupported,0.3411936450693812,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GANAB,1071.0,0.2904761904761904,unsupported,0.5759656755923899,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RMND5A,1073.0,0.290079365079365,unsupported,0.0063266310478329,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HIP1R,1074.0,0.2896825396825396,unsupported,-0.0559529104237215,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NAA30,1075.0,0.2884920634920634,unsupported,-0.1384634052777159,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NAA20,1076.0,0.2869047619047619,unsupported,-0.11934040809445,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+YTHDF2,1077.0,0.2863095238095238,unsupported,-0.444729661626493,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RWDD2A,1078.0,0.2861111111111111,unsupported,-0.3504793720417573,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MAX,1079.0,0.2853174603174603,unsupported,0.0572056035270739,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+THAP11,1080.0,0.2845238095238095,unsupported,0.4700645155778466,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RFX1,1081.0,0.2839285714285714,unsupported,0.1951371365785435,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MORC2,1081.0,0.2839285714285714,unsupported,0.2544543636253159,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+OTUD1,1083.0,0.2823412698412698,unsupported,-0.063511888250069,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AIRIM,1084.0,0.2821428571428571,unsupported,0.3489454747869229,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CIP2A,1084.0,0.2821428571428571,unsupported,-0.2698316703280881,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DIS3,1086.0,0.279563492063492,unsupported,0.1633739819811374,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LIG3,1086.0,0.279563492063492,unsupported,0.2856539586199114,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF304,1088.0,0.278968253968254,unsupported,-0.0253512066908579,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SUPT3H,1089.0,0.2777777777777778,unsupported,0.0745105145506833,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+IMMP1L,1090.0,0.2763888888888889,unsupported,0.3316222934483603,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+VPS29,1091.0,0.2755952380952381,unsupported,-0.1499423113766111,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GABPA,1092.0,0.2748015873015873,unsupported,0.2121697017981819,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RIPOR1,1093.0,0.2718253968253968,unsupported,-0.0948512475739345,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CD274,1094.0,0.2708333333333333,unsupported,0.2703444002233205,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+APEX1,1095.0,0.2700396825396825,unsupported,-0.1930730109406136,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+APPL2,1096.0,0.2678571428571428,unsupported,0.3921258568255152,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LAMTOR5,1097.0,0.267063492063492,unsupported,0.1903455681396584,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+REST,1098.0,0.2636904761904762,unsupported,0.0060650898372544,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+POLRMT,1099.0,0.2632936507936508,unsupported,0.1806968948824737,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CDIPT,1100.0,0.2626984126984127,unsupported,-0.2008628397681801,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SMIM7,1101.0,0.2621031746031746,unsupported,0.1178375834831216,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SRD5A1,1102.0,0.2619047619047619,unsupported,-0.1524394312951711,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CCR10,1103.0,0.2617063492063492,unsupported,0.3371431468016665,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RBFA,1104.0,0.2601190476190476,unsupported,0.1366822536213813,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EFR3A,1105.0,0.2591269841269841,unsupported,0.1250361769324312,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SP140L,1106.0,0.256547619047619,unsupported,0.1714496882761716,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+UBE2H,1107.0,0.2563492063492063,unsupported,-0.0832214479769084,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+STARD10,1108.0,0.2553571428571428,unsupported,-0.0217091917020233,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NELFCD,1109.0,0.2547619047619047,unsupported,0.1136343953940436,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ACTR3,1110.0,0.2543650793650793,unsupported,-0.032035311492838,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ALG6,1111.0,0.2541666666666666,unsupported,-0.0426889310590033,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CAP1,1112.0,0.252579365079365,unsupported,0.5485813015973048,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EIF3L,1113.0,0.2507936507936508,unsupported,-0.1897427678281117,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MTIF2,1114.0,0.2482142857142857,unsupported,-0.0570425917928654,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GNG5,1115.0,0.2452380952380952,unsupported,-0.0550375877523291,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MANEA,1115.0,0.2452380952380952,unsupported,-0.2430174548724643,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ATP5MF,1117.0,0.2448412698412698,unsupported,-0.0022910237233977,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+LAT2,1118.0,0.2442460317460317,unsupported,-0.0670754605855001,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+C8orf33,1119.0,0.244047619047619,unsupported,-0.1394738683856775,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ACTR5,1120.0,0.2430555555555555,unsupported,0.2345925115030941,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DIS3L2,1121.0,0.242063492063492,unsupported,-0.0543984912140991,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HYKK,1122.0,0.2416666666666666,unsupported,0.0594264077971884,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EIF4H,1123.0,0.2390873015873015,unsupported,0.0751286930443193,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RNASEH2C,1124.0,0.2376984126984127,unsupported,0.0982974996756947,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GID8,1125.0,0.2373015873015873,unsupported,0.44602902759161,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+GPR15,1125.0,0.2373015873015873,unsupported,0.0946214191333764,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FDX1,1127.0,0.2349206349206349,unsupported,0.0001306826508016,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+COG5,1128.0,0.2337301587301587,unsupported,-0.2346158357243279,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SMAD7,1128.0,0.2337301587301587,unsupported,0.0170288258906758,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CCR6,1130.0,0.2329365079365079,unsupported,0.4660968610003113,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+COP1,1131.0,0.2317460317460317,unsupported,-0.1933302357690926,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GTPBP10,1132.0,0.2297619047619047,unsupported,0.3785900908643041,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EDC3,1133.0,0.2283730158730159,unsupported,-0.1547555488283279,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CDC25B,1134.0,0.227579365079365,unsupported,0.6304626893175155,favorable,D_dangerous_rheostat,chembl_target,transient_inhibition,broadly-essential,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ATP5F1E,1135.0,0.2269841269841269,unsupported,0.1208526396440482,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AVPR2,1136.0,0.2246031746031746,unsupported,0.2683169489999091,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TPD52L1,1137.0,0.2244047619047619,unsupported,-0.1271940389525891,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RAB19,1138.0,0.2238095238095238,unsupported,-0.3224209173687247,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FOXN2,1139.0,0.2220238095238095,unsupported,0.0202841369844914,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AIFM1,1140.0,0.2212301587301587,unsupported,-0.0887863247783856,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RB1CC1,1141.0,0.221031746031746,unsupported,-0.0017486400358622,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MAPKAP1,1142.0,0.2206349206349206,unsupported,-0.3141837378506495,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EPB41L3,1143.0,0.2204365079365079,unsupported,-0.2969542446925701,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PEX6,1144.0,0.2192460317460317,unsupported,0.319606266453624,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+DDX17,1145.0,0.219047619047619,unsupported,-0.18701435786638,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HNRNPA2B1,1146.0,0.2186507936507936,unsupported,-0.2180179011497164,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PPCDC,1147.0,0.2178571428571428,unsupported,0.605286941772139,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+FGFR1OP2,1148.0,0.2168650793650793,unsupported,0.2664657707945108,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SMG5,1149.0,0.2158730158730158,unsupported,-0.1125950098789455,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF470,1150.0,0.2134920634920634,unsupported,0.3224397632443029,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MFHAS1,1151.0,0.2119047619047619,unsupported,0.0346608302928131,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CKAP4,1152.0,0.2109126984126984,unsupported,0.2968423776950777,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SLC25A26,1153.0,0.208531746031746,unsupported,0.0613587771443449,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PFDN5,1154.0,0.208531746031746,unsupported,0.1189422850973037,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ENO3,1155.0,0.2075396825396825,unsupported,-0.0467827177508701,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ENDOG,1156.0,0.2073412698412698,unsupported,-0.1284940642799002,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PDLIM2,1157.0,0.202579365079365,unsupported,-0.0537248997622851,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EID2,1158.0,0.2021825396825396,unsupported,0.7537831702488398,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+EIF1AX,1159.0,0.2015873015873016,unsupported,-0.0007460121513916,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GPRASP1,1160.0,0.2007936507936508,unsupported,0.1597756643356013,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MAEA,1161.0,0.1994047619047619,unsupported,-0.1685101625349868,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ATP5F1A,1162.0,0.1992063492063492,unsupported,0.4792209233199727,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+KAT7,1163.0,0.1988095238095238,unsupported,0.4902477402859362,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+MRPL45,1164.0,0.1954365079365079,unsupported,0.2358037372853279,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF703,1165.0,0.1952380952380952,unsupported,0.2748899877468759,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PXMP4,1166.0,0.1948412698412698,unsupported,-0.4895387752249604,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AK3,1167.0,0.1930555555555555,unsupported,-0.0660013967460586,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+COPRS,1168.0,0.190079365079365,unsupported,0.2710086829701095,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ANKAR,1169.0,0.1896825396825396,unsupported,0.0298643736840138,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AFG3L2,1170.0,0.1894841269841269,unsupported,-0.0536302845019668,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NCBP3,1171.0,0.1890873015873015,unsupported,-0.2022404341105904,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PTPN1,1171.0,0.1890873015873015,unsupported,-0.0243018826901232,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+THAP12,1173.0,0.1884920634920635,unsupported,0.3979315220471112,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+PROX2,1174.0,0.1876984126984127,unsupported,-0.1252422095970956,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NRG2,1175.0,0.1875,unsupported,0.203581813773358,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TXNL4B,1175.0,0.1875,unsupported,-0.1010175217512135,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZFYVE21,1177.0,0.1871031746031746,unsupported,0.1495785999132767,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KHDRBS1,1178.0,0.1865079365079365,unsupported,-0.3466094981561229,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PPM1L,1179.0,0.1861111111111111,unsupported,-0.0430957545014311,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ATP5ME,1180.0,0.1859126984126984,unsupported,0.0353163469398168,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CCR4,1181.0,0.1847222222222222,unsupported,-0.065515487216145,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DNAJC2,1182.0,0.1845238095238095,unsupported,0.3634145564184178,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+RTN4IP1,1183.0,0.1831349206349206,unsupported,-0.039847186647694,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PSMB9,1184.0,0.1779761904761904,unsupported,0.7239099737420026,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NSUN4,1185.0,0.1767857142857142,unsupported,0.2139695546412036,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NDUFS8,1186.0,0.1757936507936507,unsupported,-0.1137366698888398,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+WNK1,1187.0,0.1746031746031746,unsupported,-0.0310271314353802,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FITM1,1188.0,0.1740079365079365,unsupported,-0.2112936583061925,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ATP8B1,1189.0,0.1716269841269841,unsupported,-0.1056795254845789,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CNOT11,1190.0,0.171031746031746,unsupported,0.4924647870828953,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+IMMP2L,1191.0,0.1702380952380952,unsupported,0.3555543101876483,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+KLHDC10,1192.0,0.1698412698412698,unsupported,0.2606517852579926,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TCEAL1,1193.0,0.1696428571428571,unsupported,0.0861420023434112,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MEST,1194.0,0.1676587301587301,unsupported,0.0747146004043232,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MFN2,1195.0,0.166468253968254,unsupported,0.2655840554946879,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+KRCC1,1196.0,0.1642857142857142,unsupported,0.0208488032432585,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TNNC1,1196.0,0.1642857142857142,unsupported,-0.1854462793428265,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ARID2,1198.0,0.1638888888888889,unsupported,0.0664903014077673,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+POLDIP3,1199.0,0.1634920634920635,unsupported,-0.2643806134065988,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SLC17A5,1200.0,0.1615079365079365,unsupported,0.0245004390987724,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PPDPF,1201.0,0.1589285714285714,unsupported,0.2233161194260907,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+APC,1202.0,0.1587301587301587,unsupported,0.2989397025520243,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+C1orf21,1203.0,0.1583333333333333,unsupported,-0.0580506459512546,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PARP14,1204.0,0.1482142857142857,unsupported,-0.0402813817496671,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EMC6,1205.0,0.1466269841269841,unsupported,-0.3159619508302074,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+CRYZL1,1206.0,0.1464285714285714,unsupported,-0.2952660861680925,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TMEM131L,1207.0,0.1448412698412698,unsupported,-0.0905043587002563,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GDF11,1208.0,0.1436507936507936,unsupported,-0.2492525918370261,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ATG12,1209.0,0.1428571428571428,unsupported,0.1078461226357314,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MOV10,1210.0,0.1408730158730158,unsupported,0.0226630157482037,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GLIPR2,1211.0,0.1373015873015873,unsupported,0.0256309746592615,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PAK1,1212.0,0.131547619047619,unsupported,0.1187981282721176,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+EZH2,1213.0,0.1281746031746031,unsupported,-0.0165920612015686,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MOSPD2,1214.0,0.1253968253968254,unsupported,0.4221996487314067,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NAF1,1215.0,0.1246031746031746,unsupported,0.0672661678712365,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+HSD17B13,1216.0,0.1242063492063492,unsupported,-0.469670578343391,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+SLC7A11,1217.0,0.123015873015873,unsupported,0.4442340923338785,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+NABP1,1218.0,0.1222222222222222,unsupported,0.1823732671868162,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF93,1219.0,0.1172619047619047,unsupported,-0.0210277203283603,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+APOBEC3B,1220.0,0.117063492063492,unsupported,0.3133395400971232,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+TRIM2,1220.0,0.117063492063492,unsupported,-0.0456370819349876,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+COMMD10,1222.0,0.1166666666666666,unsupported,0.7351982139532325,favorable,A_manufacturing_modulation,no_chembl_target,titratable,none,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+ZNF518A,1223.0,0.113095238095238,unsupported,0.0263655385604478,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+GIPC3,1224.0,0.1128968253968254,unsupported,-0.0265321285060187,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ALKBH2,1225.0,0.1125,unsupported,0.2188468558080939,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SLC5A6,1226.0,0.1079365079365079,unsupported,0.0663898902988096,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TIA1,1227.0,0.1075396825396825,unsupported,-0.1504415372850317,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RWDD2B,1228.0,0.1053571428571428,unsupported,0.0161724563120026,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PDCD2L,1229.0,0.1049603174603174,unsupported,0.0869883400899223,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NIPBL,1230.0,0.1029761904761904,unsupported,-0.3396737631420365,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MMP9,1231.0,0.0996031746031746,unsupported,0.1353397838292992,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ADAM19,1232.0,0.0990079365079365,unsupported,0.0166794743400355,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TXNL1,1233.0,0.0982142857142857,unsupported,0.126933824500805,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ZNF148,1234.0,0.098015873015873,unsupported,0.2610109208403887,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+LRRC8A,1235.0,0.0938492063492063,unsupported,-0.1474213269480615,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+BAHD1,1236.0,0.0916666666666666,unsupported,-0.1408387860904202,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PIGB,1237.0,0.0906746031746031,unsupported,-0.038274467078237,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+UBE2L3,1238.0,0.0904761904761904,unsupported,-0.0865379059465603,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+DRAP1,1239.0,0.0884920634920635,unsupported,0.4373179256720522,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+CBLL1,1240.0,0.0869047619047619,unsupported,0.0206125228129292,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+TM2D1,1241.0,0.0869047619047619,unsupported,-0.2419378963543937,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RHEB,1242.0,0.0827380952380952,unsupported,0.1121768642016873,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+STX16,1243.0,0.0781746031746031,unsupported,0.508420087441179,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SINHCAF,1244.0,0.0753968253968254,unsupported,0.2058644546755138,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SLC25A27,1245.0,0.0740079365079365,unsupported,-0.1755736860420908,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PELO,1246.0,0.0738095238095238,unsupported,-0.157479976785191,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+COG6,1247.0,0.073015873015873,unsupported,0.0587531531896201,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NFKBIL1,1248.0,0.0698412698412698,unsupported,-0.1247313640219179,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+IL4I1,1249.0,0.0684523809523809,unsupported,-0.1570708907551471,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+AP1S2,1250.0,0.0517857142857142,unsupported,-0.1661760368068415,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+ERGIC3,1251.0,0.0507936507936507,unsupported,-0.1252185760441664,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+FAM161A,1251.0,0.0507936507936507,unsupported,0.0498183969464392,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+USP28,1253.0,0.0488095238095238,unsupported,0.1263511401222397,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+RNFT1,1254.0,0.0394841269841269,unsupported,0.6603065219333716,favorable,,,,,L0 (no direct clinical evidence),"F — Phenotype-associated, weak controller"
+SMAD3,1255.0,0.0380952380952381,unsupported,-0.4804380181040379,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+NRAS,1256.0,0.035515873015873,unsupported,0.1051585137055236,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+PDIA3,1257.0,0.0349206349206349,unsupported,-0.1854910361863036,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+LRP2BP,1258.0,0.0323412698412698,unsupported,-0.1554685252314419,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+KIF16B,1259.0,0.0279761904761904,unsupported,-0.0330664667900873,neutral,,,,,L0 (no direct clinical evidence),C — Probe-only biology
+MTMR3,1260.0,0.0265873015873015,unsupported,-0.1726908619469828,unfavorable,,,,,L0 (no direct clinical evidence),C — Probe-only biology
