@@ -93,6 +93,15 @@ discovered that magnitude is a confound" (Shesha and we found this convergently)
 cross-donor, axis-specific, immune-scoped controllability property and map its falsifiable
 boundary."
 
+We make this separation quantitative on Frangieh (229 targets), computing all three candidate
+coordinates against effect magnitude side by side. Shesha's cell-to-cell coherence Sₚ correlates with
+magnitude at Spearman ρ = 0.97 — essentially an effect-size proxy, and an independent replication of
+Shesha's own reported 0.75–0.97 coupling on a dataset they did not use — whereas our coordinates are
+magnitude-orthogonal (cross-guide reproducibility R, ρ = 0.008; axis-specificity S, ρ = 0.19).
+Controlling for magnitude, Sₚ partials strongly onto both of ours (Sₚ~R\|M = −0.71, Sₚ~S\|M = +0.67).
+Shesha's coordinate thus collapses onto the magnitude axis, while the signal we test occupies the
+orthogonal plane — the same magnitude-trap diagnosis, a different and complementary axis.
+
 ## 4. Predicting perturbation outcomes: foundation models
 
 A parallel line attacks the problem by learning, rather than testing. Perturbation-prediction

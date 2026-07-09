@@ -8,7 +8,7 @@ commit/md5 given inline).
 
 > **Reading guide.** The project has **one locked, demonstrated result** (the immune-scoped
 > controllability property), **one vision layer** built on top of it (a multi-axis immune
-> capacity), and **one high-risk open test** (clinical response prediction). We are deliberate
+> capacity), and **one completed high-risk test with a NULL verdict** (clinical response prediction). We are deliberate
 > about which is which. Nothing below overstates a hypothesis as a result.
 
 ---
@@ -83,7 +83,7 @@ positives recovered). The list mixes recovered known regulators with novel candi
 > surviving leakage controls, and replicating across all three culture conditions.
 
 **Explicitly NOT claimed here:** universal clinical resistance mechanisms; CAR-T response
-prediction (that is §5, still open).
+prediction (that is §5, completed; no IEC axis is a transportable CAR-T response biomarker in the current atlas).
 
 ---
 
@@ -155,7 +155,7 @@ definition (we do not claim three independent axes when the data show two).
 
 ---
 
-## 5. The clinical bridge — HIGH RISK, OPEN (`briefs/04_iec_clinical_prediction.md`)
+## 5. The clinical bridge — COMPLETED, verdict NULL (`briefs/04_iec_clinical_prediction.md`)
 
 **The question:** does any IEC axis predict CAR-T response at patient-level power?
 
@@ -252,7 +252,7 @@ the most convergent. See `reports/signed_perturbation_graph.md`.
 | Magnitude-conditional signal adds regulator information | **DEMONSTRATED** | AUPRC 0.722 vs 0.415; bootstrap CI excludes 0; 3-condition replication |
 | The signal is an immune-scoped property (CCI) | **DEMONSTRATED** (with boundary) | 4-system PASS/FAIL ordering matches prediction |
 | Persistence and killing are separate axes | **DEMONSTRATED** | latent factor (L4≈0) + BEHAV3D functional proxy agree |
-| IEC is a measurable multi-axis capacity (2.5 axes) | **SHOWN in pseudobulk**; cell-level pending | orthogonality pre-test; Brief 02 (scVI) to confirm |
+| IEC is a measurable multi-axis capacity (2.5 axes) | **CONFIRMED at pseudobulk and CAR-T atlas single-cell resolution** (455,370 cells) | orthogonality pre-test + Phase 5 single-cell (persist orthogonal, kill↔resist entangled ρ=−0.53, survives CD8 control) |
 | Some IEC axis predicts CAR-T response | **NULL (well-powered, cross-study)** | leave-study-out AUROC 0.53, CI incl. 0.5; CD8-frac baseline beats all axes; n=87 |
 | Controllers are druggable | **Descriptive** | targetability matrix, direction-annotated |
 | Specific mechanisms enrich in controllership beyond magnitude | **DEMONSTRATED** | NF-κB + Treg/brake enriched in ISCI (q<0.02), n.s. in magnitude (p>0.35) |
@@ -284,4 +284,4 @@ the most convergent. See `reports/signed_perturbation_graph.md`.
 
 *This dossier is a living document; §5 (clinical verdict) and the cell-level confirmation
 (§4.2, Brief 02) will be filled in as machine results arrive. Its scope discipline — one
-locked result, one vision, one honest open test — is itself the submission's central posture.*
+locked result, one vision, one completed honest test with a NULL verdict — is itself the submission's central posture.*

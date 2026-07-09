@@ -7,7 +7,7 @@
 
 ## The result, in one sentence
 
-**Among perturbations with the same effect magnitude, known T-cell-state regulators produce effects that are more *state-specific* (concentrated on a functional axis) and more *reproducible across donors* — a signal orthogonal to effect size that nearly doubles regulator recovery (AUPRC 0.41 → 0.64, bootstrap gain +0.23 [95% CI 0.07–0.40], P>0 = 99.6%).**
+**Among perturbations with the same effect magnitude, known T-cell-state regulators produce effects that are more *state-specific* (concentrated on a functional axis) and more *reproducible across donors* — a signal orthogonal to effect size that nearly doubles regulator recovery (on the detectable set, AUPRC 0.415 → 0.722; bootstrap gain +0.229 [95% CI 0.072–0.405], P>0 = 99.6%).**
 
 ![Central result](outputs/fig_central.png)
 
@@ -27,7 +27,7 @@ The original design was a five-component product `ISCI = R·S·geomean(M,D,A)`. 
 
 1. **The full index lost to a trivial effect-magnitude baseline** under expression-matched negatives (AUPRC 0.35 vs 0.41; AUROC 0.72 vs 0.83 — magnitude ahead on both).
 2. **Network influence (PageRank/in-degree) added nothing** over magnitude, even though PageRank is orthogonal to it (ρ ≈ 0.00).
-3. **The clinical bridge did not predict CAR-T response** — now tested as a **well-powered null** on a 70-patient, >1M-cell atlas (n=87 patients with labels): under honest leave-one-**study**-out CV, the best axis (A_persist) collapses from patient-out AUROC 0.643 to study-out 0.533 (CI includes 0.5), and a trivial CD8-fraction baseline beats every axis. Reported as an honest negative, not buried.
+3. **The clinical bridge did not predict CAR-T response** — tested as a **well-powered null** on the Functional CAR-T atlas (455,370 CD3+CAR+ cells, 119 patients, 87 response-labeled; test run at patient level): under honest leave-one-**study**-out CV, the best axis (A_persist) collapses from patient-out AUROC 0.643 to study-out 0.533 (CI includes 0.5), and a trivial CD8-fraction baseline beats every axis. Reported as an honest negative, not buried.
 
 The common cause: **the ground truth is confounded by magnitude.** Known regulators have ~99× more differential-expression effect than non-regulators (Mann–Whitney p = 2.6e-10), so *any* test of "index vs magnitude" is rigged — magnitude wins by construction.
 
