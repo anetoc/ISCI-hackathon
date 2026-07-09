@@ -1,0 +1,82 @@
+{
+  "dataset": "frangieh_perturbcite",
+  "label": "Frangieh 2021 Perturb-CITE-seq (melanoma + autologous TIL co-culture)",
+  "system": "immune",
+  "n_targets": 238,
+  "n_detectable": 119,
+  "n_positives": 10,
+  "n_negatives": 22,
+  "positives": [
+    "B2M",
+    "HLA-B",
+    "HLA-E",
+    "IFNGR1",
+    "IFNGR2",
+    "IRF3",
+    "JAK1",
+    "JAK2",
+    "STAT1",
+    "TAPBP"
+  ],
+  "negatives": [
+    "CHCHD2",
+    "ATP1B1",
+    "CKS1B",
+    "JPT1",
+    "NEAT1",
+    "SSR2",
+    "ATP5MD",
+    "CST3",
+    "NPC1",
+    "BZW2",
+    "CDKN1A",
+    "C19orf48",
+    "DDX17",
+    "CDKN2A",
+    "CCND2",
+    "APOD",
+    "CCND1",
+    "EIF3K",
+    "TXNDC17",
+    "ACSL3",
+    "TM4SF1",
+    "NONO"
+  ],
+  "magnitude_balance_MW_p": 0.28131133592839463,
+  "spearman_C_magnitude": 0.03128594271510436,
+  "lr": [
+    {
+      "feature": "S_resid",
+      "lr_stat": 3.0001159467984095,
+      "p_value": 0.08325855798864294,
+      "coef": 0.8842724067628772,
+      "adds": false
+    },
+    {
+      "feature": "C",
+      "lr_stat": 2.0713745539085338,
+      "p_value": 0.15008619859291766,
+      "coef": 0.6952604979101681,
+      "adds": false
+    },
+    {
+      "feature": "R_resid",
+      "lr_stat": 0.8459234838803553,
+      "p_value": 0.357708128250285,
+      "coef": 0.4105949181659168,
+      "adds": false
+    }
+  ],
+  "bootstrap_dAUPRC_C": {
+    "base_auprc": 0.6094812611826864,
+    "full_auprc": 0.7272211133948363,
+    "gain": 0.11773985221214973,
+    "ci95": [
+      -0.018351291478129694,
+      0.3362990054151299
+    ],
+    "p_gain_gt0": 0.862,
+    "n_boot": 1000
+  },
+  "verdict": "FAIL"
+}
