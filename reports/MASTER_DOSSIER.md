@@ -175,7 +175,34 @@ which could score by memorizing batch). Pre-registered verdict rule: PASS only i
 leave-study-out beats all baselines (magnitude, CD8-fraction, depth, permutation null) AND
 bootstrap CI excludes 0.5 AND perm-p < 0.05. Anything else = NULL.
 
-**Status:** brief pre-registered and ready to run on CPU (does not need the GPU); result pending.
+### 5.1 RESULT — VERDICT = NULL (well-powered) — `outputs/iec_clinical/`
+The test ran on CPU (87 patients, 60R/27NR, 9 studies / 5 with both classes). The decisive
+finding is a textbook batch-vs-biology dissociation:
+
+| IEC axis (agg) | leave-**patient**-out AUROC | leave-**study**-out AUROC (decisive) | perm-p (study) |
+|---|---|---|---|
+| **A_persist (mean)** — primary | 0.643 [0.512, 0.767] | **0.533** [0.408, 0.650] | 0.138 |
+| A_persist (frac-hi) | 0.633 | 0.576 [0.455, 0.699] | 0.075 |
+| A_eff_exh (mean) | 0.535 | 0.507 | 0.228 |
+| A_eff_exh (frac-hi) | 0.544 | 0.520 | 0.214 |
+| **CD8-fraction baseline** | 0.615 | **0.585** | — |
+
+**A_persist scores 0.643 under leave-patient-out but collapses to 0.533 under leave-study-out**
+— i.e. the apparent signal was per-study batch structure, not a transportable predictor
+(exactly the failure mode the brief anticipated). Every IEC axis's leave-study-out CI includes
+0.5; every perm-p > 0.05; and the **CD8-fraction baseline (0.585) beats every IEC axis**.
+NULL replicates in the NHL stratum (n=77, A_persist study-out 0.489) and the infusion-product
+compartment (n=73, 0.516). Figure `outputs/iec_clinical/iec_prediction.png`.
+
+**Interpretation (honest scope):** at real power — 87 patients vs the old n=70 D4 negative — 
+**no IEC axis is a transcriptional response biomarker for CAR-T under honest cross-study CV.**
+Per the IEC "clinical null" falsification criterion (§3), IEC is a *descriptive* multi-axis
+capacity, **not** a response predictor. This **bounds the clinical claim** and, crucially, does
+**not** touch the locked immune-scoped CCI controllership result (§2–3), which is causal
+perturbation biology, not a clinical biomarker. A powered, pre-registered negative is a real
+result. *Caveat honestly flagged:* a heterogeneous 14-study public atlas with only 5
+informative studies leaves leave-study-out CI half-widths ≈0.12 — a single-protocol
+prospective cohort could still reveal a small true effect this test cannot resolve.
 
 ---
 
@@ -197,7 +224,7 @@ This will be re-focused onto the controllers of whichever axis proves clinically
 | The signal is an immune-scoped property (CCI) | **DEMONSTRATED** (with boundary) | 4-system PASS/FAIL ordering matches prediction |
 | Persistence and killing are separate axes | **DEMONSTRATED** | latent factor (L4≈0) + BEHAV3D functional proxy agree |
 | IEC is a measurable multi-axis capacity (2.5 axes) | **SHOWN in pseudobulk**; cell-level pending | orthogonality pre-test; Brief 02 (scVI) to confirm |
-| Some IEC axis predicts CAR-T response | **OPEN, high-risk** | Brief 04, pre-registered, explicit negative prior |
+| Some IEC axis predicts CAR-T response | **NULL (well-powered, cross-study)** | leave-study-out AUROC 0.53, CI incl. 0.5; CD8-frac baseline beats all axes; n=87 |
 | Controllers are druggable | **Descriptive** | targetability matrix, direction-annotated |
 
 ---

@@ -67,11 +67,16 @@ Each axis, and the capacity as a whole, is **falsifiable**. Pre-registered crite
 - **Controllership null (per axis).** If the CCI test for an axis has bootstrap ΔAUPRC CI
   including 0 AND conditional-LR n.s., that axis has no identifiable controllers beyond
   magnitude — report NULL for that axis (as we did for non-immune systems).
-- **Clinical null (the decisive, high-risk test).** If no axis predicts treatment response
-  under honest patient-level cross-validation better than baselines (magnitude, subset
-  fraction, CD8-identity), then IEC is a descriptive capacity but **not** a response
-  biomarker — and we say so. This has failed once already (D4, T-state signature,
-  CV-AUROC ~chance, underpowered n=9/n=65); the atlas test (Phase 2) is the powered retry.
+- **Clinical null (the decisive, high-risk test) — TESTED, verdict NULL.** On the Functional
+  CAR-T atlas (n=87, honest leave-one-STUDY-out CV), **no IEC axis beats baselines**: primary
+  A_persist leave-study-out AUROC 0.53 (CI includes 0.5), the CD8-fraction baseline (0.585)
+  beats every axis, and NULL replicates in the NHL and infusion-product strata. A_persist did
+  separate responders at leave-*patient*-out (0.643) but collapsed under leave-*study*-out —
+  i.e. per-study batch, not transportable biology. Per this criterion, **IEC is a descriptive
+  multi-axis capacity, NOT a response biomarker** — and this bounds the clinical claim without
+  touching the locked CCI result. Full result: §5.1 of `MASTER_DOSSIER.md`,
+  `outputs/iec_clinical/`. (The earlier D4 negative, n=70, is now superseded by this
+  better-controlled, better-powered confirmation.)
 
 ## 3a. Orthogonality pre-test (pseudobulk, done local) — 2.5 axes, not 3
 
