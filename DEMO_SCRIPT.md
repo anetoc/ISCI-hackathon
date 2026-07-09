@@ -60,7 +60,16 @@
 > *independent of* effect size; a signed perturbation graph shows therapeutic direction is a third
 > axis — the #1 controller, IRF1, actually points the wrong way. And the 70 controllers are sorted
 > into a safety-first board where the two most drug-like genes land in the **dangerous** category.
-> Every layer carries its own scope line."
+> Every layer carries its own scope line.
+>
+> \"One question a reviewer always asks: isn't this just the recent geometric-coherence work
+> (Shesha)? We answer it quantitatively. On Frangieh we put all three coordinates side by side:
+> Shesha's cell-to-cell coherence tracks effect magnitude almost perfectly — correlation 0.97,
+> which actually replicates their own finding — while our two coordinates, cross-donor
+> reproducibility and axis-specificity, sit in the magnitude-orthogonal plane. Same magnitude-trap
+> diagnosis, different and complementary axis. And we are honest about the bound: remove the
+> canonical master TFs from the positive set and the gain weakens — underpowered, not proven gone,
+> and we say so."
 
 *(On screen: the 4-system CCI forest plot, the IEC orthogonality heatmap, the leave-study-out
 null figure, the curated-enrichment quadrants, the signed-graph heatmap.)*
