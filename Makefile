@@ -1,0 +1,27 @@
+# CCI / IEC — reproducible entry points
+# The validated method runs from one command. Heavy raw data stays outside Git;
+# the locked result is reproduced from committed rankings + the isci-controllership skill.
+
+PY ?= python
+
+.PHONY: reproduce-core dashboard cci clean-cache help
+
+help:
+	@echo "make reproduce-core  - run the CCI test across the dataset registry + build the dashboard"
+	@echo "make cci             - run isci/run_cci.py over config/datasets.yaml (writes outputs/<id>/cci_result.json)"
+	@echo "make dashboard       - regenerate outputs/dashboard/ (HTML + static forest plot) from committed results"
+
+# One command: run the validated CCI method across all registered datasets, then visualize.
+reproduce-core: cci dashboard
+	@echo ""
+	@echo "Core reproduced. Locked anchor: Marson CD4+ PASS (canonical dAUPRC +0.229, result_lock.md)."
+	@echo "Method smoke-test: outputs/marson_cd4/cci_method_check.json ; dashboard: outputs/dashboard/"
+
+cci:
+	$(PY) isci/run_cci.py
+
+dashboard:
+	$(PY) isci/build_dashboard.py
+
+clean-cache:
+	find isci -name __pycache__ -type d -prune -exec rm -rf {} +

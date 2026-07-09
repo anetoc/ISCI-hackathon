@@ -1,0 +1,14 @@
+{
+  "id": "norman_k562",
+  "label": "Norman & Weissman K562",
+  "system": "non-immune",
+  "perturbation": "CRISPRa (differentiation)",
+  "n_pos": 13,
+  "delta_auprc": 0.138,
+  "ci_lo": -0.033,
+  "ci_hi": 0.37,
+  "lr_p": 0.0128,
+  "spearman_mag": 0.052,
+  "verdict": "FAIL",
+  "report": "outputs/generalization/third_system_cci_summary.csv"
+}

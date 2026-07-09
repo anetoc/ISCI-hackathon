@@ -1,4 +1,15 @@
-"""S — target-state stability / geometric coherence of post-perturbation state."""
+"""DEPRECATED — legacy multi-component ISCI (M/R/D/A/S).
+
+This module belonged to the ORIGINAL ISCI-core index (movement/reproducibility/network/
+in-silico/stability), which LOST to the trivial effect-magnitude baseline under
+expression-matched negatives and was abandoned. The validated method is the
+magnitude-conditional CCI test, implemented in the `isci-controllership` skill helpers
+(conditional_lr_test, expression_matched_negatives, bootstrap_auprc_gain) and driven by
+`isci/run_cci.py`. See reports/result_lock.md and reports/conditional_controllability_invariant.md.
+
+Kept for provenance only. The NotImplementedError stubs below were never completed BY DESIGN —
+this code path is not part of the locked result. Do not implement them; use run_cci.py.
+"""
 
 from __future__ import annotations
 

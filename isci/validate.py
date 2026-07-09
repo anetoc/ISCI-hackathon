@@ -99,8 +99,10 @@ def ablation_curve(
     variants: dict[str, pd.DataFrame],
     positives: Sequence[str],
 ) -> pd.DataFrame:
-    """Compare recovery metrics across ISCI full and ablated variants."""
-    raise NotImplementedError("Implement in Claude Science build (D2)")
+    """DEPRECATED (legacy M/R/D/A/S ablation). The validated ablation is the bootstrap
+    ΔAUPRC of magnitude vs magnitude+C, done by bootstrap_auprc_gain in the
+    isci-controllership skill and reported in result_lock.md. Not part of the locked path."""
+    raise NotImplementedError("Deprecated: use bootstrap_auprc_gain (skill) / run_cci.py")
 
 
 def project_clinical_signature(
@@ -108,5 +110,7 @@ def project_clinical_signature(
     cohort_path: str,
     outcome_column: str,
 ) -> dict[str, float]:
-    """D4: test responder vs non-responder separation (AUROC)."""
-    raise NotImplementedError("Implement in Claude Science build (D4)")
+    """DEPRECATED (legacy D4 single-signature bridge). The validated clinical test is the
+    patient-level leave-one-STUDY-out CV in briefs/04 / outputs/iec_clinical (verdict NULL,
+    well-powered). This naive AUROC projection is superseded. Not part of the locked path."""
+    raise NotImplementedError("Deprecated: see outputs/iec_clinical (leave-study-out CV)")
