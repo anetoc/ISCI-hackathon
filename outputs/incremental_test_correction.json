@@ -1,0 +1,28 @@
+{
+  "issue": "audit finding: bootstrap_auprc_gain with score_col compares C-vs-M (direct), not the pre-specified M+C-vs-M (incremental)",
+  "expression_matched_negatives": true,
+  "n_pos": 13,
+  "n_neg": 20,
+  "n_boot": 1000,
+  "C_vs_M_direct": {
+    "base_auprc": 0.5389196845409715,
+    "full_auprc": 0.78644309314249,
+    "gain": 0.24752340860151845,
+    "ci95": [
+      -0.04332369327849871,
+      0.467013198225493
+    ],
+    "p_gain_gt0": 0.953
+  },
+  "M_plus_C_vs_M_incremental": {
+    "base_auprc": 0.5389196845409715,
+    "full_auprc": 0.8960783079605353,
+    "gain": 0.35715862341956384,
+    "ci95": [
+      0.11696726190476188,
+      0.5377215058685058
+    ],
+    "p_gain_gt0": 1.0
+  },
+  "resolution": "The pre-specified incremental test (M+C vs M, logistic on magnitude + residual axis-specificity + residual donor-coherence) gives gain +0.357 [+0.117,+0.538], P>0=1.000 \u2014 CI excludes zero, STRONGER than the direct C-vs-M comparison (+0.248 [-0.043,+0.467]) that was previously reported as the headline. Correcting the test to the one actually pre-specified does not weaken the result; it strengthens it. Headline should be M+C-vs-M."
+}

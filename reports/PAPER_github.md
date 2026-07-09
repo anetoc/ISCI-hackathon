@@ -32,11 +32,16 @@ axes (Immune Engagement Capacity, IEC) at single-cell pseudobulk resolution, and
 axis predicts CAR-T clinical response on a >1-million-cell, 87-patient atlas under honest
 leave-one-study-out cross-validation.
 
-**Results.** The magnitude-conditional signal nearly **doubles regulator recovery** within the
-detectable set (AUPRC 0.722 vs 0.415 for magnitude), is orthogonal to magnitude by construction
-(Spearman ρ = +0.02), and the bootstrap gain is **+0.229 AUPRC (95% CI [0.072, 0.405], P>0 =
-99.6%)**. It survives leakage controls, replicates on independent structural positives, and
-replicates across all three culture conditions. Tested across four perturbation systems the
+**Results.** The pre-specified test is *incremental*: does controllership add to a model that
+already contains magnitude (M → M+C)? It does — a logistic model on magnitude plus the two residual
+components lifts regulator recovery from AUPRC 0.539 to 0.896, an incremental **+0.357 (95% CI
+[+0.117, +0.538], P>0 = 1.000)** over magnitude alone (expression-matched negatives). Reported as a
+direct descriptive comparison, the orthogonal score alone versus magnitude alone gives AUPRC 0.722
+vs 0.415 (gain +0.229 [0.072, 0.405] three-condition aggregate; +0.248 [−0.043, 0.467] single
+condition). The near-zero Spearman of the residual score with magnitude (ρ = +0.02) is a
+construction check confirming successful residualization — not independent evidence. The signal
+survives leakage controls and replicates across all three culture conditions; its boundary is
+mapped explicitly below (it does *not* extend to a broad external functional-regulator set). Tested across four perturbation systems the
 property is **immune-scoped**: it holds in the Marson CD4+ anchor (PASS), shows the same directional
 signal under an opposite modality (CRISPRa; underpowered near-miss), and fails in two non-immune
 screens (K562, RPE1). Decomposing the phenotype, **persistence is a clean axis** while killing and
@@ -228,10 +233,16 @@ negatives, the original five-component index **loses** to the magnitude baseline
 0.41) — an honest negative that reset the project.
 
 Conditioning on magnitude reverses the picture. Within the detectable set, `ISCI_orthogonal` —
-built only from magnitude-residualized axis-specificity and cross-donor coherence — recovers
-regulators at **AUPRC 0.722 versus 0.415 for magnitude**, while being orthogonal to magnitude by
-construction (Spearman ρ = +0.02). The bootstrap gain is **+0.229 AUPRC (95% CI [0.072, 0.405],
-P(gain>0) = 99.6%)**. Conditional likelihood-ratio tests confirm that both components add
+built only from magnitude-residualized axis-specificity and cross-donor coherence.
+The **pre-specified primary test is incremental** (M → M+C): a logistic model on magnitude plus the
+two residual components versus magnitude alone, both evaluated on expression-matched negatives. It
+gives a bootstrap incremental gain of **+0.357 AUPRC (0.539 → 0.896; 95% CI [+0.117, +0.538],
+P(gain>0) = 1.000)** — the residual controllership components add real, magnitude-independent
+information. As a direct descriptive comparison the orthogonal score alone versus magnitude alone
+recovers regulators at **AUPRC 0.722 versus 0.415** (single-condition gain +0.248 [−0.043, 0.467];
++0.229 [0.072, 0.405] as the three-condition aggregate). The near-zero Spearman of the residual
+score with magnitude (ρ = +0.02) is a residualization *construction check*, not a third independent
+line of evidence. Conditional likelihood-ratio tests confirm that both components add
 information for regulator status *beyond* magnitude (axis-specificity coefficient +1.59, coherence
 +1.17, both p < 10⁻⁴). The signal survives a leakage control (removing axis-marker regulators),
 replicates on independent structural positives (ARID1A, INO80, IKZF1), and replicates across all
