@@ -20,7 +20,7 @@ Design is locked *before* looking at the result: endpoint `Max_Response` R vs NR
 **leave-one-STUDY-out as the decisive test** (severe study confound: 22/27 NR from 2 studies),
 baselines study/disease/CD8/magnitude, within-NHL primary. **Either outcome strengthens the
 submission:** a PASS that survives leave-study-out is a real biomarker signal; a well-powered
-NULL (n=87 vs the old n=9) retires the D4 negative honestly and confirms CCI is causal
+NULL (n=87 vs the old n=70) retires the D4 negative honestly and confirms CCI is causal
 biology, not a clinical predictor. *Runs on CPU — does not wait for the GPU.*
 
 **A2. Reproducibility (Gap 5) — but the honest fix is DEPRECATE, not implement.**
