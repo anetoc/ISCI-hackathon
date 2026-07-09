@@ -1,4 +1,14 @@
-# Brief 06 (Layer 1) — Protein-level controllership slice on Frangieh (totalVI, GPU)
+# Brief 06 (Layer 1) — Protein-level controllership slice on Frangieh (totalVI, CPU)
+
+> **Compute posture (read first): this runs on CPU. Do NOT wait for the GPU.** totalVI trains in
+> minibatches, so it runs fine on CPU — the GPU only makes training *faster per epoch*, it is not
+> required. Everything else in this brief (feature construction, the CCI test) is CPU-only already.
+> The RTX 6000 is usually saturated by other users' jobs (llama-server, MedRax) — do not kill them
+> and do not block on them. Force `accelerator="cpu"` and subsample to ~80–100k cells (Step 1). At
+> ~10 positives the power is set by the positive count, not the cell count, so the subsample costs
+> almost nothing. Expected wall time on the 48-core machine: ~15–30 min end to end. If a GPU window
+> opens and someone wants full fidelity later, the same script runs unchanged with
+> `accelerator="gpu"` — but the submission does not depend on that.
 
 **Goal.** Fill the **first non-RNA slice** of the controllability tensor:
 `T[gene, immune_evasion_axis, Frangieh, PROTEIN_coherence]`. Ask one falsifiable question with the
@@ -10,8 +20,10 @@ This is Layer 1 of `reports/INTEGRATION_ARCHITECTURE.md`. Read that §2.1 + §3.
 is the SAME `isci-controllership` skill used for RNA — do **not** invent a new test.
 
 ## Environment
-GPU machine (vuno-idor, RTX 6000, `/mnt/dados2/abel-tsc/venv-tsc`). totalVI ships in scvi-tools
-(already used for Phase 5). Confirm `import scvi; torch.cuda.is_available()` before starting.
+vuno-idor, `/mnt/dados2/abel-tsc/venv-tsc` (or the dedicated scvi-tools venv already installing).
+totalVI ships in scvi-tools (already used for Phase 5). **Run on CPU — do not check for or require
+CUDA.** 48 cores / 125 GB RAM is more than enough for a subsampled totalVI. Just confirm
+`import scvi, anndata` imports cleanly; ignore `torch.cuda.is_available()`.
 
 ## Step 0 — GET THE PROTEIN MATRIX (the RNA run did not use it)
 The Phase-6 run used `data_public/external_perturb/FrangiehIzar2021_RNA.h5ad` — **RNA only**.
@@ -23,15 +35,24 @@ Perturb-CITE-seq has a companion **protein/ADT** matrix. Obtain it:
   RNA object exists, **STOP and report NOT-EVALUABLE for the protein slice** — do not fabricate a
   protein layer from RNA. Report which files you found.
 
-## Step 1 — totalVI joint latent (protein readout)
+## Step 1 — totalVI joint latent (protein readout), CPU + subsample
 1. Build a paired AnnData: RNA counts in `.X`/`layers['counts']`, protein counts in
    `.obsm['protein_expression']`, cell barcodes intersected with the RNA object used in Phase 6.
    Batch key = `perturbation_2` (the 3 conditions Control/IFNγ/Co-culture) or sample, matching the
    RNA run's `sample_col`.
-2. `scvi.model.TOTALVI.setup_anndata(...)`, train (GPU; ~10–30 min for this size). Save the model +
-   the **denoised protein expression** (`get_normalized_expression(..., protein_list=...)`) per cell.
-3. Sanity: confirm protein panel identity and that denoised protein tracks known markers (e.g. HLA/
-   B2M surface loss under the positives). Report the panel size and mapped antibodies.
+2. **Subsample to ~80–100k cells before training** — stratify by perturbation so every positive/
+   negative target keeps enough cells for a stable per-perturbation protein effect (e.g. keep all
+   cells for perturbations with < 400 cells, cap the rest at 400). Record the exact n_cells kept and
+   the per-perturbation counts. This is a power-neutral speedup: the test has ~10 positives, so cell
+   count is not the binding constraint.
+3. `scvi.model.TOTALVI.setup_anndata(...)`; **train on CPU**:
+   `model.train(accelerator="cpu", max_epochs=200, early_stopping=True)` (early stopping usually
+   halts well before 200; ~10–20 min on 48 cores at this size). Do **not** pass a GPU device. Save
+   the model + the **denoised protein expression**
+   (`get_normalized_expression(..., protein_list=..., n_samples=25)`) per cell.
+4. Sanity: confirm protein panel identity and that denoised protein tracks known markers (e.g. HLA/
+   B2M surface loss under the positives). Report the panel size, mapped antibodies, and the n_cells
+   used after subsampling.
 
 ## Step 2 — protein feature X, then the SAME operator
 For each perturbation, compute the protein analogues of the RNA features, then run the locked test:
@@ -71,7 +92,8 @@ The headline is not "does protein pass" alone; it is **does protein add over RNA
 - `outputs/layers/frangieh_protein/protein_scores.csv` — per-gene S_prot, R_prot, resid, C_prot,
   joined to RNA C.
 - `outputs/layers/frangieh_protein/protein_slice_report.md` — verdict + the incremental-over-RNA
-  finding + honest caveats + panel description.
+  finding + honest caveats + panel description + **compute provenance line** (CPU, n_cells after
+  subsample, per-perturbation counts, epochs to early-stop).
 - `outputs/layers/frangieh_protein/totalvi_model/` — saved model (provenance).
 - Commit: `Layer 1: Frangieh protein controllership slice (totalVI) — <verdict>, adds/redundant over RNA`.
 
