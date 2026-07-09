@@ -1,0 +1,46 @@
+[load]
+/mnt/dados2/abel-tsc/tsc-venv/lib/python3.10/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+[cells] 218331 singlets+control; IFNγ=87590
+[targets with all 3 coherences] 229
+{
+  "dataset": "Frangieh Perturb-CITE-seq (IFN\u03b3)",
+  "n_targets": 229,
+  "spearman_matrix": {
+    "Sp": {
+      "Sp": 1.0,
+      "R": -0.151,
+      "S": 0.332,
+      "M": 0.974
+    },
+    "R": {
+      "Sp": -0.151,
+      "R": 1.0,
+      "S": -0.769,
+      "M": 0.008
+    },
+    "S": {
+      "Sp": 0.332,
+      "R": -0.769,
+      "S": 1.0,
+      "M": 0.187
+    },
+    "M": {
+      "Sp": 0.974,
+      "R": 0.008,
+      "S": 0.187,
+      "M": 1.0
+    }
+  },
+  "vs_magnitude": {
+    "Sp": 0.974,
+    "R": 0.008,
+    "S": 0.187
+  },
+  "partial_controlling_M": {
+    "Sp~R|M": -0.706,
+    "Sp~S|M": 0.674,
+    "R~S|M": -0.785
+  },
+  "interpretation_rule": "coordinates are INDEPENDENT if pairwise |partial rho|M| < 0.5; Shesha reports Sp strongly tracks magnitude (0.75-0.97) - we test whether R and S add beyond magnitude and beyond Sp."
+}
