@@ -1,0 +1,72 @@
+{
+  "axis_markers_excluded": [
+    "GATA3",
+    "IRF1",
+    "STAT6",
+    "TBX21"
+  ],
+  "external_screen_test": {
+    "name": "EXTERNAL functional-screen (independent, non-marker)",
+    "n_pos": 20.0,
+    "n_neg": 71.0,
+    "gain": -0.2807275893767807,
+    "ci": [
+      -0.47638489435959946,
+      -0.07342890735600327
+    ],
+    "p_gain": 0.005,
+    "lr_p": 0.19016586988561499,
+    "verdict": "FAIL",
+    "base_auprc": 0.5802687606714533,
+    "full_auprc": 0.2995411712946726
+  },
+  "external_positives": [
+    "ARID1A",
+    "ARID2",
+    "BCL10",
+    "CARD11",
+    "CBLB",
+    "CD5",
+    "ELOB",
+    "EZH2",
+    "ID2",
+    "ITK",
+    "LCP2",
+    "MALT1",
+    "MYB",
+    "NR4A3",
+    "PTPN2",
+    "RASA2",
+    "RASGRP1",
+    "SMARCA4",
+    "SOCS3",
+    "ZAP70"
+  ],
+  "nonmarker_own_test": {
+    "name": "NON-MARKER own set (known_reg minus 4 axis TFs)",
+    "n_pos": 9.0,
+    "n_neg": 26.0,
+    "gain": -0.1164142487218951,
+    "ci": [
+      -0.40905486224510534,
+      0.19828170739935438
+    ],
+    "p_gain": 0.235,
+    "lr_p": 0.00433047060094054,
+    "verdict": "FAIL",
+    "base_auprc": 0.6164297174374146,
+    "full_auprc": 0.5000154687155195
+  },
+  "nonmarker_positives": [
+    "CHD4",
+    "ICOS",
+    "IL4R",
+    "MBD2",
+    "MTA2",
+    "PTPN2",
+    "RASGRP1",
+    "SETDB1",
+    "TRAF3"
+  ],
+  "interpretation": "On an independent external functional-screen positive set, ISCI_orthogonal does NOT beat magnitude (\u0394AUPRC -0.281, CI excludes 0). External functional regulators are magnitude-visible; the orthogonal signal is specific to canonical axis-defining regulators. This bounds the claim: CCI recovers axis-defining regulators, not the broad functional-regulator class."
+}

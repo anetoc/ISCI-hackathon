@@ -311,7 +311,21 @@ interval is wide ([−0.25, +0.33]) and still includes the original effect, so t
 *underpowered and inconclusive*, not a demonstrated absence of signal — but it means that at the
 current positive-set size the magnitude-conditional signal cannot be cleanly separated from the
 best-characterized axis-defining regulators. A larger, independently-curated positive set is the
-right way to resolve this, and it is stated openly as future work rather than smoothed over.
+right way to resolve this. **We ran that test.** We assembled an independent positive set of 20
+detectable non-marker T-cell functional regulators drawn from published CRISPR screens
+(Shifrut, Schmidt, Belk — signaling nodes, negative regulators, epigenetic factors; only 2 overlap
+our curated set), with expression-matched negatives and the identical adjudication. The verdict is a
+clean **FAIL**: ΔAUPRC = −0.281 [−0.476, −0.073], CI excluding zero on the *negative* side. Removing
+only the four axis TFs from our own curated set likewise fails (−0.116 [−0.409, +0.198]). The
+interpretation is precise and is the sharpest boundary in this work: external functional-screen
+regulators are already *magnitude-visible* (magnitude alone reaches AUPRC 0.58 on them), so
+residualizing magnitude removes rather than adds signal. The magnitude-conditional property is
+therefore specific to **canonical, axis-defining state regulators** — not the broad
+functional-regulator class. This narrows the claim honestly: CCI separates axis-defining regulators
+from magnitude-matched noise; it does not generalize to every gene a functional screen would call a
+regulator (Figure 2c).
+
+![Figure 2c. Positive-set stress test. On an independent external functional-screen positive set (20 non-marker T-cell regulators, expression-matched negatives), ISCI_orthogonal does not beat magnitude — ΔAUPRC −0.281 [−0.476, −0.073], CI excluding zero. The non-marker subset of our own curated set also fails. The orthogonal signal is specific to canonical axis-defining regulators; external functional-screen regulators are magnitude-visible. This is the honest upper bound on generality.](../figures/positive_set_stress_test.png)
 
 ![Figure 2b. Robustness of the magnitude-conditional gain. Left: ΔAUPRC gain over magnitude is stable (+0.25 to +0.33) across detectable-effect gates from top-40% to 100% of perturbations by magnitude, so the effect is not a threshold artifact. Right: removing the four axis-defining master TFs (GATA3, TBX21, STAT6, IRF1) attenuates the point gain from +0.25 to +0.03 at n=9, with a wide CI that still includes the original effect — an underpowered, honestly-reported limitation rather than a demonstrated null.](../figures/robustness_ablation_gate.png)
 
