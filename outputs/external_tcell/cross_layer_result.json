@@ -1,0 +1,45 @@
+{
+  "frangieh": {
+    "dataset": "Frangieh (RNA<->protein)",
+    "n_targets_joined": 238,
+    "n_pos": 13,
+    "protein_recovery_absSurfShift_AUROC_AUPRC": [
+      0.900854700854701,
+      0.7592679183165011
+    ],
+    "protein_recovery_Sprot_AUROC_AUPRC": [
+      0.5904273504273504,
+      0.4929570714902504
+    ],
+    "spearman_Srna_Sprot": 0.24049297702238573,
+    "spearman_Crna_absSurfShift": NaN,
+    "pos_surf_shift_median": -0.26766430512731365,
+    "neg_surf_shift_median": 0.014849154856883354,
+    "pos_vs_neg_surfshift_MW_p": 1.1993173153630484e-06,
+    "top5_protein_controllers_by_absSurfShift": [
+      "STAT1",
+      "CD274",
+      "B2M",
+      "IFNGR2",
+      "IFNGR1"
+    ]
+  },
+  "papalexi": {
+    "dataset": "Papalexi (native protein PD-L1)",
+    "n_targets": 25,
+    "n_pos": 15,
+    "pdl1_recovery_AUROC": 0.7733333333333333,
+    "pdl1_recovery_AUPRC": 0.8705696840139564,
+    "pos_pdl1_shift_median": -0.028717661062084954,
+    "neg_pdl1_shift_median": 0.013347160322097706,
+    "MW_p_pos_vs_neg": 0.024669709460034658,
+    "top5_pdl1_reducers": [
+      "JAK2",
+      "IFNGR2",
+      "IFNGR1",
+      "STAT1",
+      "CMTM6"
+    ],
+    "note": "RNA layer was NOT-EVALUABLE (circular axis); native protein readout (PD-L1) gives a clean functional recovery test."
+  }
+}
