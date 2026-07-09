@@ -171,7 +171,7 @@ study=`orig_ident`, response=`Max_Response` (R={CR,PR}).
 **The critical methodological control:** response is **severely study-confounded** — 22/27
 non-responders come from just 2 studies (Deng, Haradvala), and several studies are 100%
 responder. So **leave-one-STUDY-out CV is the primary, decisive test** (not leave-patient-out,
-which could score by memorizing batch). Pre-registered verdict rule: PASS only if
+which could score by memorizing batch). Pre-specified verdict rule: PASS only if
 leave-study-out beats all baselines (magnitude, CD8-fraction, depth, permutation null) AND
 bootstrap CI excludes 0.5 AND perm-p < 0.05. Anything else = NULL.
 
@@ -199,7 +199,7 @@ compartment (n=73, 0.516). Figure `outputs/iec_clinical/iec_prediction.png`.
 Per the IEC "clinical null" falsification criterion (§3), IEC is a *descriptive* multi-axis
 capacity, **not** a response predictor. This **bounds the clinical claim** and, crucially, does
 **not** touch the locked immune-scoped CCI controllership result (§2–3), which is causal
-perturbation biology, not a clinical biomarker. A powered, pre-registered negative is a real
+perturbation biology, not a clinical biomarker. A powered, pre-specified negative is a real
 result. *Caveat honestly flagged:* a heterogeneous 14-study public atlas with only 5
 informative studies leaves leave-study-out CI half-widths ≈0.12 — a single-protocol
 prospective cohort could still reveal a small true effect this test cannot resolve.
@@ -228,7 +228,7 @@ TCR-proximal, PRKDC broadly essential). See `reports/mechanism_and_triage.md`.
 ## 6.5 Mechanism decomposition (curated enrichment + signed perturbation graph)
 
 **Curated gene-set enrichment** (`figures/curated_enrichment.png`): along the continuous
-`ISCI_orthogonal` score (2,520 genes), 6 pre-registered T-cell gene sets tested rank-based with a
+`ISCI_orthogonal` score (2,520 genes), 6 pre-specified T-cell gene sets tested rank-based with a
 magnitude guard. **4/6 survive BH-FDR**, and the guard separates two kinds of controller:
 **NF-κB activation** and **Treg/brake/apoptosis** are enriched in controllership but **NOT in
 magnitude** (the magnitude-independent finding); TCR-proximal and chromatin enrich in both (TCR is

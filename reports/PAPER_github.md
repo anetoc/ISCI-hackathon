@@ -1,4 +1,4 @@
-# A magnitude-conditional controllability signal defines an immune-scoped property of T-cell state, decomposes into a multi-axis engagement capacity, and returns an honest null against CAR-T clinical response
+# Conditional controllability of T-cell state: a magnitude-deconfounded, immune-scoped property
 
 **Running title:** Conditional controllability of T-cell state
 
@@ -148,7 +148,10 @@ yielding magnitude-orthogonal components. The primary score is
 
 evaluated only on perturbations with a **detectable effect** (n-DE ≥ dataset median), because
 specificity and coherence are undefined for perturbations with no measurable effect. This
-eligibility gate is pre-registered, not tuned.
+eligibility gate is pre-specified, not tuned. Throughout, "pre-specified" means the criterion —
+threshold, verdict rule, positive/negative definition, or expected system label — was fixed in the
+analysis code and written down before the result it adjudicates was computed; it does not denote a
+formal external pre-registration (e.g. OSF), which was not filed.
 
 ### 2.3 Benchmark: expression-matched negatives
 
@@ -166,7 +169,7 @@ and re-test; (ii) independent structural positives (ARID1A, INO80, IKZF1) not us
 
 The CCI is stated as a falsifiable, immune-scoped property: it should hold in immune perturbation
 systems and fail in non-immune ones. Each dataset in a registry (`config/datasets.yaml`) carries a
-**pre-registered expected verdict** keyed on its system label (immune vs non-immune). The same
+**pre-specified expected verdict** keyed on its system label (immune vs non-immune). The same
 magnitude-conditional test and matched-negative benchmark are applied to each; a PASS requires a
 positive bootstrap gain with a lower CI above zero and a significant conditional likelihood-ratio
 test.
@@ -183,7 +186,7 @@ whether a persistence-loaded latent factor also captures killing.
 ### 2.6 Mechanism decomposition
 
 Two magnitude-guarded analyses probe mechanism without overclaiming. (i) **Curated-set enrichment:**
-six pre-registered narrow T-cell gene sets are tested by rank-based Mann–Whitney along the
+six pre-specified narrow T-cell gene sets are tested by rank-based Mann–Whitney along the
 *continuous* `ISCI_orthogonal` score over all 2,520 detectable genes, with BH-FDR correction, and
 each is re-tested against magnitude as a guard. (ii) **Signed perturbation→module graph:** for each
 perturbation we compute the signed effect on each of six functional modules (Stim 48 h z-score
@@ -198,7 +201,7 @@ fraction-high summaries) and ask whether any axis predicts response (CR/PR vs NR
 is **leave-one-study-out** cross-validation (train on all studies but one, predict the held-out
 study), contrasted with the optimistic **leave-one-patient-out** CV. Significance is assessed by a
 label-permutation null; a CD8-fraction compositional baseline is evaluated on the identical splits.
-The clinical-null criterion is pre-registered: if the leave-study-out CI includes 0.5 and the
+The clinical-null criterion is pre-specified: if the leave-study-out CI includes 0.5 and the
 permutation p > 0.05, IEC is declared a descriptive capacity, not a response biomarker.
 
 ### 2.8 Reproducibility and provenance
@@ -238,7 +241,7 @@ a magnitude-controlled criterion*, not as validated therapeutic targets.
 
 A signal that merely fit the anchor would not be a property. We therefore stated the CCI as a
 falsifiable prediction — hold in immune systems, fail in non-immune ones — and tested four
-perturbation systems with pre-registered expected verdicts (Figure 1).
+perturbation systems with pre-specified expected verdicts (Figure 1).
 
 ![Figure 1. Four-system CCI scope. The magnitude-conditional controllability gain (ΔAUPRC, M→M+C) with 95% CIs across four perturbation systems: Marson CD4+ T (PASS), Schmidt CD4+ CRISPRa (directional near-miss), Norman K562 (non-immune, FAIL near-miss), Replogle RPE1 (non-immune, robust FAIL). The property holds in immune systems and fails in non-immune ones, demarcating a boundary rather than a universal claim.](../figures/cci_scope_4systems.png)
 
@@ -254,7 +257,7 @@ demarcated boundary, not a universal law.
 A third immune system tests the boundary from the sensitivity side. Frangieh Perturb-CITE-seq
 (melanoma with autologous tumor-infiltrating lymphocyte co-culture) shows the same
 specificity-led, magnitude-independent directionality (Spearman C-vs-magnitude +0.03; magnitude
-balance p = 0.28), but at n_pos = 10 it is underpowered and does not clear the pre-registered bar
+balance p = 0.28), but at n_pos = 10 it is underpowered and does not clear the pre-specified bar
 (ΔAUPRC +0.118, 95% CI [−0.018, 0.336]; conditional LR non-significant, S_resid p = 0.08). We report
 it honestly as a **directional near-miss**, not a clean replication — the magnitude-independence of
 the signal now holds across three immune systems (Marson, Schmidt, Frangieh) while formal power is
@@ -273,7 +276,7 @@ regulators (AUROC 0.77), with CMTM6 — the canonical PD-L1 protein stabilizer, 
 transcriptional axis — among the top hits. These are recovery tests over partly expected biology, not
 a matched-negative controllership PASS, and the load-bearing content is the cross-layer concordance
 and the native-layer rescue rather than the AUROC magnitude; a full protein-level CCI (magnitude-
-matched negatives at the protein layer plus a ≥2-layer concordance gate) is the pre-registered next
+matched negatives at the protein layer plus a ≥2-layer concordance gate) is the pre-specified next
 step. What the exercise establishes is architectural: the controllership operator is layer-agnostic,
 and evaluability is a property of the *layer*, not only the dataset.
 
@@ -323,7 +326,7 @@ magnitude-independent finding. TCR-proximal phosphorylation and chromatin modifi
 high-effect but not axis-specific. This is a mechanistic prioritization, not a claim of causal
 family membership.
 
-![Figure 3. Curated-set enrichment separates controllership from magnitude. Six pre-registered T-cell gene sets scored along the continuous ISCI_orthogonal (rank-based MWU, BH-FDR) versus a magnitude guard. NF-κB and Treg-brake sets enrich in controllership but not in magnitude (magnitude-independent controllers); TCR-proximal enriches in both (high-effect positive control).](../figures/curated_enrichment.png)
+![Figure 3. Curated-set enrichment separates controllership from magnitude. Six pre-specified T-cell gene sets scored along the continuous ISCI_orthogonal (rank-based MWU, BH-FDR) versus a magnitude guard. NF-κB and Treg-brake sets enrich in controllership but not in magnitude (magnitude-independent controllers); TCR-proximal enriches in both (high-effect positive control).](../figures/curated_enrichment.png)
 
 A signed perturbation→module graph replaces PPI centrality — which added nothing over magnitude —
 with causal perturbation edges (Figure 4). Therapeutic convergence (coherent movement in the
@@ -354,7 +357,7 @@ IEC axis**. The null replicates in an NHL-only stratum (n = 77) and an infusion-
 ![Figure 5. Well-powered clinical null. IEC axes do not predict CAR-T response under leave-one-study-out cross-validation. The persistence axis' apparent patient-out signal (0.643) collapses to chance across studies (0.533, CI includes 0.5); a CD8-fraction baseline outperforms every axis. The patient-level signal was per-study batch structure, not transportable biology.](../outputs/iec_clinical/iec_prediction.png)
 
 The interpretation is unambiguous: the patient-out signal was **per-study batch structure, not
-transportable biology**. Per the pre-registered criterion, IEC is a descriptive multi-axis capacity,
+transportable biology**. Per the pre-specified criterion, IEC is a descriptive multi-axis capacity,
 **not** a CAR-T response biomarker. This bounds the clinical claim and does not touch the locked CCI
 core, which is a statement about perturbation biology, not patient outcome.
 
@@ -449,6 +452,16 @@ discovering a small transportable effect if one exists. The mechanism analyses a
 generating prioritizations, not causal claims, and the decision board carries no therapeutic
 recommendation. Finally, the CCI is demonstrated in CD4+ T cells; extension to CD8+ effector and
 exhaustion trajectories is a natural next step.
+
+### 4.1a Scope of claims
+
+Stated as negatives so the boundary is unambiguous: this work does **not** claim a validated clinical
+biomarker (the cross-study clinical test is a null), a therapeutic recommendation (controllership
+ranks steerability, not treatment), a magnitude-conditional PASS for every modality (the protein
+cross-layer and three-coherence analyses are concordance and positioning evidence, not controllership
+verdicts), generality beyond canonical regulators (the gain attenuates on the axis-marker ablation),
+or a formal external pre-registration ("pre-specified" means fixed-in-code before adjudication). What
+it does claim is the single property named in the conclusion.
 
 ### 4.2 Conclusion
 

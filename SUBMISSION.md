@@ -47,10 +47,10 @@ the tool was used for science, not salesmanship.
 ### Depth (20%)
 The analysis spans magnitude-conditional benchmarking with bootstrapped CIs and conditional
 likelihood-ratio tests; leakage controls and independent-positive replication; a four-system
-falsifiability test with pre-registered verdicts; a multi-axis capacity decomposition validated
+falsifiability test with pre-specified verdicts; a multi-axis capacity decomposition validated
 against a functional-killing proxy; magnitude-guarded curated enrichment; a signed
 perturbation→module graph establishing therapeutic direction as a third independent axis; and a
-pre-registered leave-one-study-out clinical test with a permutation null and a compositional
+pre-specified leave-one-study-out clinical test with a permutation null and a compositional
 baseline. Every headline number is reproducible from committed artifacts.
 
 ### Demo (30%)
@@ -59,11 +59,11 @@ conditional fix and the doubled recovery → the four-system immune-scoped bound
 clinical null → mechanism without overclaim. On-screen: the four-system forest plot, the axis-
 orthogonality heatmap, the leave-study-out null, the curated-enrichment quadrants, and the signed
 graph. The interactive dashboard (`outputs/dashboard/`) lets a viewer see each dataset's verdict
-against its pre-registered prediction.
+against its pre-specified prediction.
 
 ### Gladstone prize (greatest potential to advance the field)
 The reusable object is a **falsifiable property with a one-command test**: add a dataset as a config
-block, get a PASS/FAIL against its pre-registered prediction. That turns "is this signal real?" into
+block, get a PASS/FAIL against its pre-specified prediction. That turns "is this signal real?" into
 a runnable experiment, and the immune-scoped boundary plus the well-powered clinical null give the
 community a calibrated, non-overclaimed foundation to build on.
 

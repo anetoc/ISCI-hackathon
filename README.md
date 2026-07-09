@@ -11,6 +11,16 @@
 
 ![Central result](outputs/fig_central.png)
 
+## What is NOT claimed
+
+To keep the scope honest and legible:
+
+- **Not a validated clinical biomarker.** No axis predicts CAR-T response under honest cross-study CV — that test returned a well-powered null (§ clinical), and nothing here is medical advice.
+- **Not a therapeutic recommendation.** Controllership ranks *where the axis is steerable*, not what to give a patient; the drugability layer is experimental triage, not a treatment list.
+- **Not a magnitude-conditional PASS for every layer.** The protein cross-layer and three-coherence results are concordance/positioning evidence, not controllership verdicts; a full protein-level CCI is pre-specified future work.
+- **Not proven beyond canonical regulators.** The gain attenuates when axis-defining master TFs are removed from the (small, n≈13) positive set — an underpowered, honestly-reported limitation, not a demonstrated null.
+- **Not a formal pre-registration.** "Pre-specified" means criteria were fixed in code before the adjudicated result was computed, not filed on an external registry.
+
 ## Why this is the headline (and what we discarded to get here)
 
 The original design was a five-component product `ISCI = R·S·geomean(M,D,A)`. Run honestly on the real data, it **failed three times**, and the failures were informative:
@@ -202,7 +212,7 @@ than rounding up. A BEHAV3D functional-killing proxy agrees that killing is its 
 ## Mechanism decomposition (curated enrichment + signed graph)
 
 - **Curated gene-set enrichment** ([figures/curated_enrichment.png](figures/curated_enrichment.png)):
-  along the continuous `ISCI_orthogonal` score, 6 pre-registered T-cell sets tested rank-based with
+  along the continuous `ISCI_orthogonal` score, 6 pre-specified T-cell sets tested rank-based with
   a magnitude guard. **4/6 survive BH-FDR**, and the guard separates two kinds: **NF-κB activation**
   and **Treg/brake/apoptosis** enrich in controllership but **NOT in magnitude** (the clean,
   magnitude-independent finding); TCR-proximal and chromatin enrich in both (TCR is the expected
