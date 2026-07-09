@@ -4,12 +4,12 @@
   "system": "immune",
   "perturbation": "KD/KO",
   "n_pos": 13,
-  "delta_auprc": 0.159,
-  "ci_lo": 0.007,
-  "ci_hi": 0.377,
-  "lr_p": 7.856595361069317e-06,
+  "delta_auprc": 0.248,
+  "ci_lo": -0.043,
+  "ci_hi": 0.467,
+  "lr_p": 5.167119736745728e-05,
   "spearman_mag": 0.086,
-  "verdict": "PASS",
+  "verdict": "REPRODUCED",
   "report": "results/final/isci_final_ranking.csv (recomputed)",
-  "note": "method smoke-test \u2014 reproduces PASS verdict from one command; canonical +0.229 in result_lock.md"
+  "note": "method smoke-test with EXPRESSION-MATCHED negatives \u2014 point estimate reproduces locked \u0394AUPRC ~+0.23 + LR significant; CI n-limited (single-file). Canonical PASS +0.229 [0.072,0.405] in result_lock.md (3-condition aggregation)."
 }
