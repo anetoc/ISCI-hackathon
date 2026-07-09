@@ -1,0 +1,37 @@
+{
+  "memory_stem": {
+    "present": 9,
+    "total": 9,
+    "missing": []
+  },
+  "migration": {
+    "present": 8,
+    "total": 8,
+    "missing": []
+  },
+  "synapse": {
+    "present": 18,
+    "total": 18,
+    "missing": []
+  },
+  "kill": {
+    "present": 7,
+    "total": 7,
+    "missing": []
+  },
+  "exhaustion": {
+    "present": 9,
+    "total": 9,
+    "missing": []
+  },
+  "cd8": {
+    "present": 2,
+    "total": 2,
+    "missing": []
+  },
+  "cd4": {
+    "present": 1,
+    "total": 1,
+    "missing": []
+  }
+}

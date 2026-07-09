@@ -44,3 +44,4 @@ logs/*.log
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store
+outputs/iec_clinical/cell_axis_scores.parquet
