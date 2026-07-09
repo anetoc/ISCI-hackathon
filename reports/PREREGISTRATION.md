@@ -106,8 +106,18 @@ Results do not exist at this commit. Criteria and directional predictions are lo
 ---
 
 ## 4. Deviations log
-*(Append any protocol deviation here with date + reason. Empty at registration.)*
-- none.
+*(Append any protocol deviation here with date + reason.)*
+- none (protocol followed exactly).
+
+## 5. Outcomes log (results appended AFTER the pre-registered run — no criteria changed)
+- **B1 (THP-1 myeloid, GSE221321 KD/CRISPRi) — NEAR-MISS.** ΔAUPRC +0.166 [−0.006, 0.374]
+  (base 0.239 → full 0.405), conditional LR p(C)=0.009, Spearman(C,M)=+0.10, direction-correct
+  (C 0.787 vs 0.498). Strict PASS bar **not** met (CI grazes 0). Decomposition: **S p=7e-5**
+  (immune-specific axis-specificity component transfers to non-T immune), **R p=0.47** (2-replicate
+  reproducibility underpowered). Reading vs the locked prediction: leans **immune-wide** for the S
+  component rather than T-cell-specific, but formally a near-miss, not a clean PASS. The prediction
+  was recorded as PASS; the honest outcome is a near-miss and is reported as such — goalposts
+  unchanged. Full: `outputs/generalization/b1_myeloid_gse221321/b1_myeloid_report.md`.
 
 ---
 

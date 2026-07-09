@@ -58,5 +58,20 @@
     "spearman_mag": -0.005,
     "source": "Replogle 2022 scPerturb",
     "report": "outputs/generalization/far_nonimmune_cci_report.md"
+  },
+  {
+    "id": "b1_myeloid_gse221321",
+    "label": "THP-1 macrophage (GSE221321)",
+    "system": "immune (non-T: myeloid)",
+    "perturbation": "CRISPRi / LPS",
+    "n_pos": 21,
+    "delta_auprc": 0.166,
+    "ci_lo": -0.006,
+    "ci_hi": 0.374,
+    "lr_p": 0.0094,
+    "verdict": "NEAR-MISS",
+    "spearman_mag": 0.104,
+    "source": "GSE221321 (Yao et al. Nat Biotechnol 2023)",
+    "report": "outputs/generalization/b1_myeloid_gse221321/b1_myeloid_report.md"
   }
 ]

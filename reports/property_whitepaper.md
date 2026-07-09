@@ -97,8 +97,16 @@ association in perturbation data, and a reusable, dataset-agnostic protocol
 - **Two non-immune systems tested (differentiation + proliferation), both FAIL.** Norman
   K562 differentiation and Replogle RPE1 proliferation are two distinct non-immune state
   axes; both fail, and the Norman decomposition (signal from R, not S) localizes *which*
-  component is immune-specific. A non-T **immune** screen (myeloid/DC/NK) is the natural
-  next test of whether the boundary is T-cell-specific or immune-wide.
+  component is immune-specific.
+- **Non-T immune far-test — near-miss, leaning immune-wide (pre-registered).** THP-1 macrophage
+  CRISPRi (GSE221321, LPS/NF-κB axis, 21 regulator positives): ΔAUPRC **+0.166 [−0.006, 0.374]**
+  (base 0.239 → 0.405), conditional LR p=0.009, orthogonal (ρ=+0.10), direction-correct. It does
+  **not** clear the strict PASS bar (the CI grazes 0), but the decomposition is the point: the
+  **axis-specificity component S transfers to a non-T immune lineage (S p=7e-5)** while
+  reproducibility R is underpowered at 2 replicates (R p=0.47) — the mirror image of Norman (R
+  yes, S no). This localizes the immune-specific part of controllership to **immune lineage, not
+  T-cell identity**, pending a myeloid screen with more replicates to power R. See
+  `outputs/generalization/b1_myeloid_gse221321/`.
 - **All external tests are magnitude-matched, leave-marker-out, and label-honest**; no
   labels were invented, and the far FAIL is reported as a genuine boundary.
 
