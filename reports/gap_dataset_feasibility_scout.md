@@ -15,11 +15,11 @@ Candidates surfaced by a web_search for "CD8 T cell CRISPR Perturb-seq exhaustio
 (titles as returned; system/accession details NOT independently verified here and must be confirmed
 against GEO before any Paper-2 download):
 
-| Candidate (search-result title) | Why it does NOT drop in |
+| Candidate (search-result title, verbatim; venue/year/system NOT verified here) | Why it does NOT drop in |
 |----------------------------------|--------------------------|
-| "Genome-wide CRISPR screens of T cell exhaustion identify chromatin remodeling factors that limit T cell persistence" (Belk, Cancer Cell 2022) | genome-wide exhaustion screen; the single-cell/Perturb-seq arm is not a ready per-perturbation effect matrix with matched negatives |
-| "KLF2 maintains lineage fidelity and suppresses CD8 T cell exhaustion during acute LCMV infection" (Science) | in-vivo LCMV CD8; small TF set, no matched-negative structure ready |
-| "In vitro modeling of CD8+ T cell exhaustion enables CRISPR screening to reveal a role for BHLHE40" (Science Immunology) | RNA/ATAC screen, not a per-gene single-cell effect matrix |
+| "Genome-wide CRISPR screens of T cell exhaustion identify chromatin remodeling factors that limit T cell persistence" | genome-wide exhaustion screen; the single-cell/Perturb-seq arm is not a ready per-perturbation effect matrix with matched negatives |
+| "KLF2 maintains lineage fidelity and suppresses CD8 T cell exhaustion during acute LCMV infection" | in-vivo LCMV CD8; small TF set, no matched-negative structure ready |
+| "In vitro modeling of CD8+ T cell exhaustion enables CRISPR screening to reveal a role for BHLHE40" | RNA/ATAC screen, not a per-gene single-cell effect matrix |
 | "Transcriptional and epigenetic regulators of human CD8+ T cell function identified through orthogonal CRISPR screens" | human CD8, but scRNA is targeted characterization of hits, not genome-scale Perturb-seq |
 | "Single-cell CRISPR screens in vivo map T cell fate regulomes in cancer" | in-vivo scCRISPR; effect matrix would need rebuild from raw |
 
