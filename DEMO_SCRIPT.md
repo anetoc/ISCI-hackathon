@@ -1,82 +1,86 @@
-# ISCI — 3-minute demo script
+# ISCI — 3-minute demo: screen-by-screen shot list
 
-**Total: 3:00. One central figure, one honest story, one reusable lesson.**
+**One message:** *A good scientific agent knows when NOT to call PASS.*
+**Total 3:00 · ~470 words @ 155 wpm · 6 screens.** Numbers below are the locked, current values —
+read them exactly.
 
----
-
-### 0:00–0:25 — The question (hook)
-> "Genome-scale Perturb-seq tells us which genes *change* a T cell's state. It does **not** tell us which genes *control* it. For CAR-T and T-cell engagers, that difference is everything — you want to engineer the controller, not chase a bystander. We built ISCI to separate the two, on Alex Marson's genome-scale CD4+ T-cell screen, entirely inside Claude for Life Sciences."
-
-*(On screen: title + the Marson dataset, 33,983 perturbations × 10,282 genes.)*
-
-### 0:25–1:05 — The honest failure (credibility)
-> "Our first index failed — three times. It lost to a trivial baseline: just count how many genes a perturbation moves. When we dug in, the reason was subtle and important: **the ground truth is confounded by effect size.** Known regulators have about 99-fold larger effects, so *any* test of 'our index versus magnitude' is rigged. Magnitude wins by construction."
-
-*(On screen: the three negatives, then the Mann–Whitney p = 2.6e-10 magnitude gap.)*
-
-### 1:05–2:00 — The fix + the result (payoff)
-> "The fix wasn't a fancier index — it was the right question. Instead of asking 'does our signal beat magnitude?', we asked 'does it add anything **conditional on** magnitude?' And there it was: among perturbations with the *same* effect size, real regulators produce effects that are more **state-specific** and more **reproducible across donors**. That orthogonal signal nearly **doubles** regulator recovery — AUPRC 0.41 to 0.64, bootstrap gain +0.23, positive in 99.6% of resamples."
-
-*(On screen: the central figure — panel A the AUPRC jump with CIs, panel B the specificity separation p = 2.8e-6.)*
-
-> "It survives every leakage control, and replicates across all three culture conditions."
-
-### 2:00–2:35 — What it nominates + Claude's role
-> "ISCI then ranks 2,520 genes. As a sanity check it recovers known regulators near the top — IRF1, STAT6, GATA3, SETDB1; as discovery it nominates candidates that are *not* in the label set — IKBKB in NF-κB signaling, ZC3H12A the RNA-degrading brake Regnase-1, the corepressor RCOR1 — each with an evidence card that cites PubMed and honestly flags when the literature is only tangential. Claude ran the whole pipeline: pulled the 17-gigabyte dataset, wrote and red-teamed the benchmark, caught its own leakage, fetched and fact-checked every citation, and welded a reproducibility manifest to every figure."
-
-*(On screen: an evidence card + the provenance manifest.)*
-
-### 2:35–3:00 — The lesson (impact)
-> "We also tested the clinical bridge to CAR-T response — and report it as an honest negative. But the methodological result stands on its own: **in-dataset controllability benchmarks are magnitude-confounded, and only a conditional or external test can tell control from association.** That's a reusable caution for the whole perturbation-genomics field — and it's packaged as an open, reproducible Claude skill anyone can run."
-
-*(On screen: repo + MIT license + skill.)*
+Central pitch (say it, then prove it):
+> **Not every controller is a target. Not every targetable gene is safe. Not every biological axis
+> is clinically predictive. We built the framework that adjudicates all four — and returns FAIL/NULL
+> when the evidence doesn't support a claim.**
 
 ---
 
-**Recording notes:** screen-record the central figure zoom, the evidence-card markdown, and one `git log` scroll showing the timestamped commit history (New-Work-Only compliance). Keep narration at the pace above — it lands at ~470 words ≈ 3 min at 155 wpm.
+## SCREEN 1 — 0:00–0:25 · The question (hook)
+**On screen:** title card → Marson dataset stat (33,983 perturbations × 10,282 genes, primary human CD4+ T).
+**Say:**
+> "Genome-scale Perturb-seq tells us which genes *change* a T cell's state. It does not tell us which
+> genes *control* it. For CAR-T and T-cell engagers that difference is everything — you engineer the
+> controller, not a bystander. We built this entirely inside Claude for Life Sciences, on Alex
+> Marson's genome-scale CD4+ screen."
+
+## SCREEN 2 — 0:25–1:05 · The honest failure (credibility)
+**On screen:** the three FAIL baselines, then the Mann–Whitney p = 2.6e-10 magnitude gap.
+**Say:**
+> "Our first index failed — three times. It lost to a trivial baseline: count how many genes a
+> perturbation moves. The reason matters: the ground truth is confounded by effect size. Known
+> regulators have roughly 99-fold larger effects, so any 'our-score-versus-magnitude' test is rigged.
+> Magnitude wins by construction."
+
+## SCREEN 3 — 1:05–1:45 · The fix + the locked result (payoff)
+**On screen:** central figure — AUPRC 0.415 → 0.722 with CIs; specificity separation panel.
+**Say:**
+> "The fix wasn't a fancier index — it was the right question. Not 'does our signal beat magnitude?'
+> but 'does it add anything *conditional on* magnitude?' And there it is: among perturbations with the
+> *same* effect size, real regulators are more state-specific and more reproducible across donors.
+> That orthogonal signal nearly doubles regulator recovery — AUPRC 0.415 to 0.722, bootstrap gain
+> +0.229, positive in 99.6% of resamples, and it replicates across all three culture conditions."
+
+## SCREEN 4 — 1:45–2:20 · The scope map (the differentiator: knows where it fails)
+**On screen:** `figures/layer_verdict_map.png` (the 7-verdict table).
+**Say:**
+> "But the contribution isn't a universal score — it's a tested *scope map*. We ran the same
+> adjudication everywhere the claim could break. It PASSES in the RNA anchor. It FAILS in non-immune
+> systems. It FAILS on an independent external gene set — those regulators are magnitude-visible. As a
+> protein-layer test it FAILS, direction-aware — a high score from an inverted feature is not a PASS.
+> Every verdict is honest, including the negatives."
+
+## SCREEN 5 — 2:20–2:45 · Controller ≠ target (the 4D framework)
+**On screen:** `figures/controller_convergence_quadrant.png` — point at IRF1.
+**Say:**
+> "So we built a decision framework that keeps four questions separate: does it control, does it point
+> the right way, is it safely targetable, does it matter clinically? The lesson is one picture: IRF1
+> is our #1 controller — and it points the *wrong* way. Strong control is not a therapeutic target.
+> The framework says so out loud, and the classes are stable across every threshold we tried."
+
+## SCREEN 6 — 2:45–3:00 · The clinical null + the lesson (impact)
+**On screen:** clinical NULL line (study-out AUROC 0.533) → repo + MIT license + Claude skill.
+**Say:**
+> "We even tested it as a CAR-T response biomarker across 87 patients — and report a well-powered
+> null, because a confounded positive is worse than an honest negative. That discipline is the
+> product. A good scientific agent knows when *not* to call PASS — and every step here is a
+> reproducible, open Claude skill anyone can run."
 
 ---
 
-## OPTIONAL extended panel — property, capacity, and the honest null (for a >3-min cut)
+## Recording notes
+- Screen-record each figure at full resolution; zoom on the AUPRC jump (Screen 3) and on IRF1 (Screen 5).
+- One `git log --oneline` scroll somewhere in Screen 6 shows the timestamped commit history.
+- Pace ~155 wpm; the 6 blocks land at 3:00. If long, trim Screen 2 first (the failure can be one sentence).
+- Figures to have open, in order: (2) three-negatives / magnitude gap → (3) `outputs/fig_central.png` →
+  (4) `figures/layer_verdict_map.png` → (5) `figures/controller_convergence_quadrant.png` →
+  (6) clinical null + repo.
 
-*Splice after 2:35 if making a longer video. Keeps the honest framing.*
-
-> "The conditional result isn't just a Marson finding — it's a **property**. We tested it as a
-> falsifiable prediction across four perturbation systems: it should hold in immune cells and
-> fail outside. It does — PASS in Marson CD4+, a directional near-miss in a second T-cell screen,
-> and honest FAILs in K562 and RPE1. We call it the **Conditional Controllability Invariant**, and
-> it is immune-scoped by evidence, not by assumption.
->
-> Around that locked core we asked a bigger question: is there a measurable **immune engagement
-> capacity** — persistence, killing, resistance as separable axes? At single-cell pseudobulk,
-> persistence is a clean axis but killing and resistance stay entangled — about **2.5 axes**, not
-> 3, and we report the half. Then the hard test: does any axis predict CAR-T response in a
-> 1-million-cell atlas — 87 response-labeled patients across 9 studies? Under honest
-> leave-one-**study**-out cross-validation the answer is **no** — the patient-level signal
-> collapses to chance, and a trivial CD8-fraction baseline beats every axis. We report that as a **well-powered null**, because a confounded
-> positive would be worse than an honest negative.
->
-> Finally, mechanism without overclaim: NF-κB and Treg-brake gene sets enrich in controllership
-> *independent of* effect size; a signed perturbation graph shows therapeutic direction is a third
-> axis — the #1 controller, IRF1, actually points the wrong way. And the 70 controllers are sorted
-> into a safety-first board where the two most drug-like genes land in the **dangerous** category.
-> Every layer carries its own scope line.
->
-> \"One question a reviewer always asks: isn't this just the recent geometric-coherence work
-> (Shesha)? We answer it quantitatively. On Frangieh we put all three coordinates side by side:
-> Shesha's cell-to-cell coherence tracks effect magnitude almost perfectly — correlation 0.97,
-> which actually replicates their own finding — while our two coordinates, cross-donor
-> reproducibility and axis-specificity, sit in the magnitude-orthogonal plane. Same magnitude-trap
-> diagnosis, different and complementary axis. And we are honest about the bound: remove the
-> canonical master TFs from the positive set and the gain weakens — underpowered, not proven gone,
-> and we say so."
-
-*(On screen: the 4-system CCI forest plot, the IEC orthogonality heatmap, the leave-study-out
-null figure, the curated-enrichment quadrants, the signed-graph heatmap.)*
-
-**The one-line pitch for the whole project:**
-> "One locked result — a magnitude-conditional controllability signal that nearly doubles
-> regulator recovery — hardened into an immune-scoped **property**, extended into a multi-axis
-> **capacity**, and stress-tested against a clinical outcome where we report an honest,
-> well-powered null. Claude ran every step, caught its own leakage, and welded provenance to every
-> figure."
+## 100–200 word written summary (for the submission form)
+> ISCI separates genes that *control* T-cell state from genes whose perturbation merely produces a
+> large effect, on Marson's genome-scale CD4+ Perturb-seq. A first multiplicative index failed —
+> beaten by effect-magnitude, because the known-regulator ground truth is magnitude-confounded. The
+> fix was a conditional test: among equal-magnitude perturbations, real regulators are more
+> axis-specific and more donor-reproducible — a signal orthogonal to effect size that lifts regulator
+> recovery from AUPRC 0.415 to 0.722 (bootstrap gain +0.229, P>0 99.6%), replicated across three
+> conditions. Crucially, the deliverable is a *tested scope map*, not a universal score: the property
+> FAILS in non-immune systems, on an external gene set, and at the protein layer (direction-aware),
+> and returns a well-powered NULL as a CAR-T response biomarker. A 4D decision framework
+> (controller → convergence → targetability → clinical relevance) shows the #1 controller, IRF1,
+> points the wrong way — control is not a target. Claude ran every step, caught its own leakage, and
+> welded provenance to every figure. The lesson: a good scientific agent knows when not to call PASS.
