@@ -21,7 +21,8 @@ is the SAME `isci-controllership` skill used for RNA — do **not** invent a new
 
 ## Environment
 vuno-idor, `/mnt/dados2/abel-tsc/venv-tsc` (or the dedicated scvi-tools venv already installing).
-totalVI ships in scvi-tools (already used for Phase 5). **Run on CPU — do not check for or require
+totalVI ships in scvi-tools (the same library used in Phase 5, which trained the RNA-only **scVI**
+model — totalVI is its joint RNA+protein sibling, used here for the first time). **Run on CPU — do not check for or require
 CUDA.** 48 cores / 125 GB RAM is more than enough for a subsampled totalVI. Just confirm
 `import scvi, anndata` imports cleanly; ignore `torch.cuda.is_available()`.
 
@@ -63,8 +64,9 @@ For each perturbation, compute the protein analogues of the RNA features, then r
   condition/replicate structure (`perturbation_2`).
 - **Residualize both against protein-effect magnitude** (protein n-DE or total protein shift) with the
   locked `residualize`/percentile helpers.
-- **Matched negatives:** reuse the Phase-6 positive set (canonical IFNγ/antigen-presentation
-  regulators: B2M, HLA-B, HLA-E, IFNGR1/2, IRF3, JAK1/2, STAT1, TAPBP) and draw
+- **Matched negatives:** reuse the **exact** Phase-6 positive set from `frangieh_config.py`
+  `CONFIG['positives']` — all 13 genes: B2M, CD274, HLA-A, HLA-B, HLA-C, HLA-E, IFNGR1, IFNGR2,
+  IRF3, JAK1, JAK2, STAT1, TAPBP. Read the config, do not retype from this list. Then draw
   **expression/power-matched negatives** with the locked `expression_matched_negatives` (match on
   n_cells / base expression — protein-appropriate covariate).
 - **Verdict:** run `bootstrap_auprc_gain` + `conditional_lr_test` (the locked CondInfo). Report
