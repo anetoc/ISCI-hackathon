@@ -414,6 +414,14 @@ the signal we test — cross-donor/cross-guide reproducibility and functional-ax
 orthogonal plane the geometric-coherence framework does not capture. This is the quantitative answer
 to "is this Shesha for T cells?": no, it measures a different, magnitude-independent axis.
 
+| Shesha / Raju (2026) | This work (CCI) |
+|----------------------|-----------------|
+| Cell-to-cell coherence *within* a perturbation | Cross-donor / cross-guide reproducibility |
+| Generic geometric stability | T-cell functional-axis specificity |
+| Magnitude-coupled (Sₚ~magnitude ρ = 0.97) | Magnitude-orthogonal (R ρ = 0.008, S ρ = 0.19) |
+| General CRISPR geometry, all systems | Immune-scoped PASS/FAIL boundary |
+| Regulatory architecture / hit prioritization | Controller ≠ therapeutic intervention; clinical NULL guardrail |
+
 Three features distinguish this from neighboring approaches. First, unlike network-control methods
 that derive driver nodes from an *inferred* GRN ([Wang 2023](https://doi.org/10.1038/s41467-023-44103-3)),
 our controllership is read directly from *observed causal perturbation effects*, avoiding the
