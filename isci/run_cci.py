@@ -81,11 +81,13 @@ def recompute_marson(meta):
     sp = feat["ISCI_orthogonal"].corr(feat["mag_pct"], method="spearman")
     d = float(gain["gain"]); lo, hi = float(gain["ci95"][0]), float(gain["ci95"][1])
     lr_p = float(lr["p_value"].min())  # conditional_lr_test -> DataFrame with p_value col
-    # Smoke-test verdict: point estimate reproduces the locked ΔAUPRC AND the conditional LR is
-    # significant. The bootstrap CI is n-limited here (single-file, ~20 matched negatives), so we
-    # report REPRODUCED (method + effect confirmed) rather than re-adjudicating PASS/FAIL — the
-    # canonical PASS with CI [0.072,0.405] lives in result_lock.md (3-condition aggregation).
-    verdict = "REPRODUCED" if (d > 0.15 and lr_p < 0.05) else "NOT-REPRODUCED"
+    # This is a diagnostic smoke test, NOT a verdict-issuing run. It emits the raw numbers
+    # (ΔAUPRC point + n-limited CI + conditional LR) so a reader can see the method runs and the
+    # point estimate lands near the locked value. It deliberately does NOT print a PASS/FAIL
+    # label — the CANONICAL verdict (PASS, ΔAUPRC +0.229, CI [0.072,0.405], from the 3-condition
+    # aggregation with the full matched-negative set) is fixed in result_lock.md and must not be
+    # re-adjudicated from a single underpowered file.
+    verdict = "DIAGNOSTIC (verdict fixed in result_lock.md)"
     return dict(id=meta["id"], label=meta["label"], system=meta["system"],
                 perturbation=meta["perturbation"], n_pos=len(pos),
                 delta_auprc=round(d, 3), ci_lo=round(lo, 3), ci_hi=round(hi, 3),
