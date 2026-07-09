@@ -447,7 +447,8 @@ qualified physician with full patient context.
 
 ## References
 
-*All references were retrieved and title-matched against PubMed during this work; DOIs resolve to the
+*References were retrieved from PubMed; each DOI was confirmed against its exact-title PubMed record
+(a keyword first-hit was not treated as confirmation, and mismatched candidates were discarded). DOIs resolve to the
 named papers.*
 
 1. Schmidt R, et al. **CRISPR activation and interference screens decode stimulation responses in

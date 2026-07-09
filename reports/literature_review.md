@@ -138,7 +138,9 @@ positive.
 
 ---
 
-*Reference set retrieved via PubMed this session; nine title-DOI-paired anchors span the substrate,
+*Reference set retrieved via PubMed; most anchors were title-DOI paired from a single PubMed record,
+and the scGPT and CellOracle DOIs were confirmed against their exact-title PubMed records (PMID
+38409223 and the CellOracle Nature entry respectively) rather than a keyword first-hit. Anchors span the substrate,
 the axis biology, the control-theoretic and foundation-model neighbors, and the translation gap.
 The review is intentionally scoped to load-bearing anchors rather than an exhaustive bibliography;
 additional recent primary papers surfaced in retrieval but are not cited where they would not change
