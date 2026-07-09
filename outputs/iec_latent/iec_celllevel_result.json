@@ -1,0 +1,54 @@
+{
+  "system": "CAR-T atlas (cell-level)",
+  "n_cells": 455370,
+  "coverage": {
+    "memory_stem": "9/9",
+    "migration": "8/8",
+    "synapse": "18/18",
+    "kill": "7/7",
+    "exhaustion": "9/9",
+    "cd8": "2/2",
+    "cd4": "1/1"
+  },
+  "preregistered": "distinct iff pairwise |rho|<0.5 AND vs-magnitude |rho|<0.3",
+  "axis_axis_spearman": {
+    "A_persist__A_kill": -0.117,
+    "A_persist__A_resist": -0.007,
+    "A_kill__A_resist": -0.526
+  },
+  "axis_vs_magnitude": {
+    "A_persist": -0.064,
+    "A_kill": -0.295,
+    "A_resist": 0.201
+  },
+  "axis_vs_cd8_identity": {
+    "A_persist": -0.034,
+    "A_kill": 0.574,
+    "A_resist": -0.319
+  },
+  "cd8_guard": {
+    "kill_vs_cd8_raw": 0.574,
+    "kill_vs_persist_partial_ctrl_cd8": -0.119,
+    "kill_vs_resist_partial_ctrl_cd8": -0.441
+  },
+  "verdicts_axis_axis": {
+    "A_persist__A_kill": "orthogonal",
+    "A_persist__A_resist": "orthogonal",
+    "A_kill__A_resist": "ENTANGLED"
+  },
+  "verdicts_vs_magnitude": {
+    "A_persist": "ok(<0.3)",
+    "A_kill": "ok(<0.3)",
+    "A_resist": "ok(<0.3)"
+  },
+  "marson_pseudobulk": {
+    "persist__kill": -0.075,
+    "persist__resist": -0.007,
+    "kill__resist": -0.498,
+    "columns_used": [
+      "A_persist",
+      "A_kill",
+      "A_resist"
+    ]
+  }
+}
