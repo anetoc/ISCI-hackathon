@@ -11,19 +11,23 @@ provide all three without multi-day integration.
 
 Candidates scouted (public):
 
-| Dataset | System | Why it does NOT drop in |
-|---------|--------|--------------------------|
-| Belk 2022 (GSE, genome-wide Tex screen + in vivo Perturb-seq) | mouse OT-I CD8 | mouse→human ortholog mapping; Perturb-seq arm is in-vivo TIL, few perturbations with per-gene effect |
-| KLF2 / Differentiation-Space-Map (Science 2024) | mouse LCMV CD8 | ~40 TFs, mouse; in-vivo acute+chronic, no matched-negative structure ready |
-| Chen 2021 in vivo scCRISPR (Nat Immunol) | mouse OT-I CD8 | 180 curated TFs + NTCs, mouse; effect matrix would need rebuild from raw |
-| Legut 2022 orthogonal screens (Nature) | human CD8 | scRNA is targeted characterization of a few hits, not genome-scale Perturb-seq |
-| BHLHE40 in-vitro Tex (GSE211015) | mouse | RNA/ATAC screen, not a per-gene single-cell effect matrix |
+Candidates surfaced by a web_search for "CD8 T cell CRISPR Perturb-seq exhaustion GEO dataset"
+(titles as returned; system/accession details NOT independently verified here and must be confirmed
+against GEO before any Paper-2 download):
 
-Conclusion: the clean human CD8/CAR-T Perturb-seq with (a) a per-perturbation effect matrix, (b)
-expression-matched negatives, and (c) a defined functional axis does not exist off-the-shelf. The
-mouse OT-I resources (Belk, Chen, KLF2) are the right Paper-2 target but require ortholog mapping and
-effect-matrix construction — a multi-day job. **Verdict: NOT-FEASIBLE-BY-DEADLINE; highest-priority
-Paper-2 external immune replication.**
+| Candidate (search-result title) | Why it does NOT drop in |
+|----------------------------------|--------------------------|
+| "Genome-wide CRISPR screens of T cell exhaustion identify chromatin remodeling factors that limit T cell persistence" (Belk, Cancer Cell 2022) | genome-wide exhaustion screen; the single-cell/Perturb-seq arm is not a ready per-perturbation effect matrix with matched negatives |
+| "KLF2 maintains lineage fidelity and suppresses CD8 T cell exhaustion during acute LCMV infection" (Science) | in-vivo LCMV CD8; small TF set, no matched-negative structure ready |
+| "In vitro modeling of CD8+ T cell exhaustion enables CRISPR screening to reveal a role for BHLHE40" (Science Immunology) | RNA/ATAC screen, not a per-gene single-cell effect matrix |
+| "Transcriptional and epigenetic regulators of human CD8+ T cell function identified through orthogonal CRISPR screens" | human CD8, but scRNA is targeted characterization of hits, not genome-scale Perturb-seq |
+| "Single-cell CRISPR screens in vivo map T cell fate regulomes in cancer" | in-vivo scCRISPR; effect matrix would need rebuild from raw |
+
+Conclusion: none of these is a drop-in human CD8/CAR-T Perturb-seq with (a) a per-perturbation effect
+matrix, (b) expression-matched negatives, and (c) a defined functional axis. Several are mouse and/or
+in-vivo and would require ortholog mapping and effect-matrix construction from raw — a multi-day job,
+and each accession/system label must be verified against GEO first. **Verdict:
+NOT-FEASIBLE-BY-DEADLINE; highest-priority Paper-2 external immune replication.**
 
 ## Gap 12 — spatial (resistance-niche localization)
 
