@@ -46,3 +46,4 @@ __pycache__/
 .DS_Store
 outputs/iec_clinical/cell_axis_scores.parquet
 outputs/iec_latent/iec_axis_scores_celllevel.csv
+outputs/layers/frangieh_protein/totalvi_model/
