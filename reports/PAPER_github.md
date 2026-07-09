@@ -260,6 +260,23 @@ it honestly as a **directional near-miss**, not a clean replication — the magn
 the signal now holds across three immune systems (Marson, Schmidt, Frangieh) while formal power is
 reached only in the Marson anchor.
 
+**Cross-layer check (multiomic, first exercise).** Because Frangieh is Perturb-CITE-seq, the same
+controllership logic can be run on its surface-protein (ADT) layer. This is a *concordance and
+native-layer confirmation*, not a new magnitude-conditional test: the RNA-called controllers produce
+the expected protein phenotype (loss of surface MHC-I/PD-L1), RNA and protein axis-specificities are
+positively concordant (Spearman = +0.24), and the evasion axis is far cleaner in its native protein
+layer (recovery AUROC 0.90, positives-vs-negatives surface shift p = 1.2×10⁻⁶) than in RNA (near-miss
++0.118) — consistent with killing/evasion being a protein phenotype. In a second CITE dataset
+(Papalexi) whose RNA axis is not evaluable (all cells IFN-treated, so any transcriptional axis is
+circular with the IFN-regulator labels), the native surface-PD-L1 readout recovers known PD-L1
+regulators (AUROC 0.77), with CMTM6 — the canonical PD-L1 protein stabilizer, invisible to a
+transcriptional axis — among the top hits. These are recovery tests over partly expected biology, not
+a matched-negative controllership PASS, and the load-bearing content is the cross-layer concordance
+and the native-layer rescue rather than the AUROC magnitude; a full protein-level CCI (magnitude-
+matched negatives at the protein layer plus a ≥2-layer concordance gate) is the pre-registered next
+step. What the exercise establishes is architectural: the controllership operator is layer-agnostic,
+and evaluability is a property of the *layer*, not only the dataset.
+
 ### 3.3 The phenotype decomposes into ~2.5 axes
 
 If immune engagement is a capacity, its axes should be partly separable. At pseudobulk, persistence
