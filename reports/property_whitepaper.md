@@ -1,7 +1,9 @@
 # The Conditional Controllability Invariant — a scoped property of perturbation genomics
 
 **Whitepaper. Anchoring system: Marson genome-scale CD4+ Perturb-seq. Cross-dataset
-test: one immune (Schmidt CRISPRa) and one non-immune (Replogle RPE1) screen.**
+test across four systems: one same-domain immune modality (Schmidt CRISPRa) and two
+non-immune screens (Norman K562 differentiation, Replogle RPE1 proliferation) — a
+graded boundary, not a single far test.**
 
 ---
 
@@ -12,10 +14,13 @@ conditioning on effect **magnitude**, a reproducible, axis-specific residual sig
 `C` separates genes that **control** a cell-state transition from genes merely
 **associated** with it. In the anchoring immune system the property holds strongly
 and is orthogonal to magnitude (bootstrap ΔAUPRC +0.229, 95% CI [0.072, 0.405],
-conditional LR p<1e-4). We then tested cross-dataset invariance. The property is
-**immune-scoped**: it shows the same directional signal under an opposite
-perturbation modality (CRISPRa; underpowered near-miss) but does **not** transfer to
-a non-immune proliferation screen (Replogle RPE1: ΔAUPRC +0.060 [−0.013, 0.204],
+conditional LR p<1e-4). We then tested cross-dataset invariance across four systems.
+The property is **immune-scoped**: it shows the same directional signal under an
+opposite perturbation modality (CRISPRa; underpowered near-miss) but does **not**
+transfer to non-immune screens — neither a differentiation screen, where the residual
+signal comes from cross-guide reproducibility rather than the immune-specific
+axis-specificity component (Norman K562: ΔAUPRC +0.138 [−0.033, 0.370], LR p=0.013,
+FAIL), nor a proliferation screen (Replogle RPE1: ΔAUPRC +0.060 [−0.013, 0.204],
 LR p=0.195, robust across four variants). The boundary is mechanistically coherent
 and is the scientific contribution: we demarcate exactly where control is separable
 from association, and where it collapses into magnitude.
@@ -39,7 +44,8 @@ system where it fails defines the property's boundary, reported as such.
 |---|---|---|---|---|---|---|---|---|
 | **Marson** | CD4+ T (immune) | CRISPR KD/KO | 19 | **+0.229** | [0.072, 0.405] | <1e-4 | +0.02 | **PASS** |
 | Schmidt | CD4+ T (immune) | **CRISPRa** | 10 | +0.138 | [−0.029, 0.434] | n.s. | +0.05 | near-miss |
-| **Replogle** | RPE1 (non-immune) | CRISPRi | 33 | **+0.060** | [−0.013, 0.204] | 0.195 | −0.01 | **FAIL** |
+| Norman | K562 (non-immune, differentiation) | CRISPRa | 13 | +0.138 | [−0.033, 0.370] | 0.013 | +0.05 | **FAIL** (near-miss) |
+| **Replogle** | RPE1 (non-immune, proliferation) | CRISPRi | 33 | **+0.060** | [−0.013, 0.204] | 0.195 | −0.01 | **FAIL** (robust) |
 
 - **Marson (anchor):** the property holds strongly; orthogonal to magnitude; replicates
   across all three culture conditions and survives leave-marker-out and independent positives.
@@ -47,6 +53,11 @@ system where it fails defines the property's boundary, reported as such.
   estimate positive (+0.138) — but only 10 positives, so the CI crosses 0 and the LR is
   n.s. An **underpowered near-miss**, not a contradiction. The signal points the same way
   under CRISPR *activation* as under *knock-down/out*.
+- **Norman (non-immune differentiation, decomposing):** ΔAUPRC +0.138 but a **FAIL** — and
+  informative about *why*. The residual signal here is carried by cross-guide reproducibility
+  (R, p=0.0009), **not** axis-specificity (S, p=0.17). The immune-specific part of `C` is
+  precisely the axis-selective component S; in a non-immune differentiation screen only the
+  generic reproducibility component survives, which is not enough to distinguish controllers.
 - **Replogle (far, decisive):** a **robust FAIL** — fully admissible dataset (247,914 cells,
   2,394 perturbations, proliferation axis + cell-cycle-machinery labels, 33 positives, 219
   magnitude-matched negatives), test run to completion, ΔAUPRC stable at +0.04–0.07 across
@@ -83,9 +94,19 @@ association in perturbation data, and a reusable, dataset-agnostic protocol
   immunology (CD8, other T-cell screens, myeloid) is the natural next set of PASS/FAIL tests.
 - **Near-transfer is underpowered.** Schmidt's 10 positives cannot settle significance;
   a larger immune CRISPRa screen would resolve whether the near result is PASS or FAIL.
-- **One non-immune system tested.** RPE1 proliferation is a strong far test but a single
-  point; other non-immune state axes (differentiation, stress) could be probed for whether
-  *any* non-immune state shows the property.
+- **Two non-immune systems tested (differentiation + proliferation), both FAIL.** Norman
+  K562 differentiation and Replogle RPE1 proliferation are two distinct non-immune state
+  axes; both fail, and the Norman decomposition (signal from R, not S) localizes *which*
+  component is immune-specific.
+- **Non-T immune far-test — near-miss, leaning immune-wide (pre-registered).** THP-1 macrophage
+  CRISPRi (GSE221321, LPS/NF-κB axis, 21 regulator positives): ΔAUPRC **+0.166 [−0.006, 0.374]**
+  (base 0.239 → 0.405), conditional LR p=0.009, orthogonal (ρ=+0.10), direction-correct. It does
+  **not** clear the strict PASS bar (the CI grazes 0), but the decomposition is the point: the
+  **axis-specificity component S transfers to a non-T immune lineage (S p=7e-5)** while
+  reproducibility R is underpowered at 2 replicates (R p=0.47) — the mirror image of Norman (R
+  yes, S no). This localizes the immune-specific part of controllership to **immune lineage, not
+  T-cell identity**, pending a myeloid screen with more replicates to power R. See
+  `outputs/generalization/b1_myeloid_gse221321/`.
 - **All external tests are magnitude-matched, leave-marker-out, and label-honest**; no
   labels were invented, and the far FAIL is reported as a genuine boundary.
 
@@ -95,6 +116,8 @@ The field routinely ranks perturbation hits by effect size and calls the top one
 "drivers." We show that (a) this is confounded — known regulators simply have larger
 effects — and (b) a magnitude-conditional test recovers a real, orthogonal
 controllership signal **in immune state transitions**, while (c) that signal does not
-exist beyond magnitude in a non-immune proliferation screen. The separation of control
+exist beyond magnitude in two non-immune screens (differentiation and proliferation),
+where only the generic reproducibility component — not the immune-specific
+axis-specificity — carries over. The separation of control
 from association, and its demonstrated domain boundary, is the property we contribute —
 with the protocol and the negative result both open and reproducible.

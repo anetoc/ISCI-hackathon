@@ -1,0 +1,63 @@
+{
+  "task": "Brief 07 / Gap 13 \u2014 scGPT zero-shot embedding-separation triangulation",
+  "verdict": "NOT-EVALUABLE",
+  "verdict_scope": "on current machine state (not a scientific null); test is deferrable, not refuted",
+  "generated_utc": "2026-07-09T13:01:11.199300+00:00",
+  "git_sha": "2d60583f415f9a9a2ef0757b3c6cf5c1a4d4dc45",
+  "why_not_evaluable": {
+    "primary_gate": "STEP-0 (data) FAILED",
+    "step0_reason": "scGPT embeds per-cell/per-perturbation EXPRESSION PROFILES, not gene names. The required input \u2014 one pseudobulk expression vector per perturbation (GWCD4i.pseudobulk_merged.h5ad) \u2014 is NOT present on the machine. Only SUMMARY STATISTICS are local: per-perturbation IEC axis z-scores (outputs/iec_latent/iec_axis_scores_pseudobulk_stim48.csv: perturbation, A_persist, A_kill, A_resist, magnitude) and the ISCI ranking (results/final/isci_final_ranking.csv: magnitude/specificity/ranks). The brief's Step-0 gate explicitly forbids substituting gene tokens for expression profiles, so with only summary stats available the honest call is NOT-EVALUABLE. No gene-token embedding was attempted.",
+    "negatives_blocker": "The locked expression_matched_negatives helper matches on ['target_baseMean','n_cells_target'] per perturbation. Neither column exists in any local table (they live in the un-downloaded GWCD4i .obs), so the pre-registered matched-negative set cannot be constructed locally either.",
+    "concurrent_compute_blocker": "RTX 6000 Ada is saturated by other users' jobs \u2014 only 1246 MiB free vs the >=24 GB the released scGPT human checkpoint needs. A subsample cannot fit the free VRAM either. Per the brief's compute posture this is a legitimate stop; no foreign job was touched. (Secondary: scGPT is not installed in any venv, and venv-scvi's torch cannot initialise CUDA against the current driver \u2014 driver 12.6 vs torch cu130 build.)"
+  },
+  "data_availability": {
+    "expression_matrix_on_machine": false,
+    "obtainable_public": true,
+    "s3_bucket": "genome-scale-tcell-perturb-seq",
+    "s3_keys_verified_via_HEAD": {
+      "marson2025_data/GWCD4i.pseudobulk_merged.h5ad": "44.6 GB (one profile per perturbation \u2014 the scGPT input)",
+      "marson2025_data/GWCD4i.DE_stats.h5ad": "16.8 GB (per-perturbation x gene logFC/zscore/baseMean; provides target_baseMean for negatives)"
+    },
+    "local_summary_stats_only": [
+      "outputs/iec_latent/iec_axis_scores_pseudobulk_stim48.csv (11281 perts x {A_persist,A_kill,A_resist,magnitude})",
+      "results/final/isci_final_ranking.csv (2520 genes; 1260 detectable)"
+    ]
+  },
+  "pre_registered_design_not_run": {
+    "positives": "top-30 controllers by ISCI_primary_rank among detectable (feasible from local ranking; e.g. IRF1, IKBKB, BCLAF1, TFAP4, ...)",
+    "negatives": "expression/power-matched via locked expression_matched_negatives (target_baseMean + n_cells_target), 8 per positive",
+    "metrics": "silhouette(pos vs neg); logistic-regression LOO-AUROC + CI on 512-dim X_scGPT; permutation null (1000x) p-value; direction concordance Spearman(observed IEC loading, embedding-projected direction) + perm null",
+    "pass_criterion": "silhouette>0 AND LOO-AUROC CI excludes 0.5 AND perm p<0.05"
+  },
+  "metrics": {
+    "silhouette": null,
+    "loo_auroc": null,
+    "loo_auroc_ci": null,
+    "permutation_p": null,
+    "direction_concordance_spearman": null,
+    "direction_concordance_perm_p": null,
+    "n_positive": null,
+    "n_negative": null
+  },
+  "compute_provenance": {
+    "checkpoint_id": "scGPT released human checkpoint \u2014 NOT obtained (no embedding run)",
+    "gpu_snapshot": {
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "memory_total_MiB": 49140,
+      "memory_used_MiB": 47285,
+      "memory_free_MiB": 1246,
+      "compute_apps": [
+        "3389844, /mnt/dados2/llama.cpp/llama.cpp/build/bin/llama-server, 24510",
+        "3415862, /root/anaconda3/envs/MedRax/bin/python3.12, 22728"
+      ]
+    },
+    "subsample": "n/a \u2014 no embedding attempted",
+    "no_foreign_job_touched": true
+  },
+  "how_to_make_evaluable": [
+    "Download GWCD4i.pseudobulk_merged.h5ad (44.6 GB) [+ DE_stats.h5ad 16.8 GB for target_baseMean] server-side from the public S3 bucket.",
+    "Install scGPT into a venv with a torch matching the CUDA 12.6 driver; use_fast_transformer=False if flash_attn does not import.",
+    "Run embed_data on CPU (zero GPU footprint \u2014 most considerate while the card is full) OR on GPU once >=24 GB frees, then run the pre-registered separation + direction-concordance tests above."
+  ],
+  "triangulation_framing": "This is external corroboration, not proof. Because it did not run, it neither corroborates nor refutes the locked RNA-CCI result (Marson ISCI_orthogonal PASS +0.229). A future scGPT null would still not refute the CCI result (different representation); a PASS would be independent-model corroboration."
+}

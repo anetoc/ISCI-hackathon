@@ -49,7 +49,10 @@ signal was per-study batch structure, not transportable biology.
 immune-scoped property of T-cell state, distinct from effect size and from network topology. It
 decomposes into a measurable multi-axis engagement capacity but is *not*, at current power, a CAR-T
 response biomarker. We report the clinical result as a well-powered negative rather than an
-un-transportable positive.
+un-transportable positive. Rigor is enforced by construction: a **direction-aware verdict rule**
+caught a large protein-layer gain (ΔAUPRC +0.584) that a metric-only reading would have called a
+PASS but which was an inverted-feature artifact — the pipeline is built to reject its own false
+positives, and several of its headline results are honest negatives.
 
 **Keywords:** Perturb-seq · T-cell state · controllability · CAR-T · exhaustion · persistence ·
 cross-study validation · effect-magnitude confound

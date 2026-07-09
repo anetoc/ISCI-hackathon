@@ -32,4 +32,8 @@ with it.
 
 ## Methodology honesty
 
-- "Pre-specified" = criteria fixed in code before the adjudicated result was computed. **Not** a formal external pre-registration (no OSF/Zenodo timestamped protocol).
+- "Pre-specified" = criteria fixed in code before the adjudicated result was computed. For the
+  **completed** tests this is a pre-specification, honestly **not** a formal pre-registration.
+  Tests **not yet run** (B1 non-T immune, CD8/CAR-T replication, functional P3) ARE genuinely
+  pre-registered in `reports/PREREGISTRATION.md` — criteria + directional predictions locked, with
+  the git commit SHA as the timestamp (Zenodo DOI mintable via a GitHub release; maintainer step).

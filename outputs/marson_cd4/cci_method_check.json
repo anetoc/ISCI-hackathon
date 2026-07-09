@@ -7,7 +7,7 @@
   "delta_auprc": 0.248,
   "ci_lo": -0.043,
   "ci_hi": 0.467,
-  "lr_p": 5.167119736745728e-05,
+  "lr_p": 5.16711973674573e-05,
   "spearman_mag": 0.086,
   "verdict": "DIAGNOSTIC (verdict fixed in result_lock.md)",
   "report": "results/final/isci_final_ranking.csv (recomputed)",
