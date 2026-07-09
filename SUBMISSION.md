@@ -72,8 +72,9 @@ community a calibrated, non-overclaimed foundation to build on.
 ## Where we are honest about limits
 - Few positives (12–21); bootstrap-stabilized and cross-condition-replicated, but a fully
   independent external positive set is future work.
-- Foundation-model triangulation (scGPT) and cell-level scVI confirmation of the 2.5-axis structure
-  are scoped (briefs in `briefs/`) but pending GPU execution.
+- Cell-level confirmation of the 2.5-axis structure is **done** (single-cell replication on the
+  455k-cell CAR-T atlas, CD8-controlled). Foundation-model triangulation (scGPT) remains scoped
+  (brief in `briefs/`) but pending GPU execution.
 - The clinical result is a **negative**; nothing here is a validated biomarker or medical advice.
 
 ## Links

@@ -251,6 +251,15 @@ across four variants). The ordering matches the pre-stated prediction: immune PA
 differentiation near-miss > non-immune proliferation FAIL. The property is **immune-scoped** — a
 demarcated boundary, not a universal law.
 
+A third immune system tests the boundary from the sensitivity side. Frangieh Perturb-CITE-seq
+(melanoma with autologous tumor-infiltrating lymphocyte co-culture) shows the same
+specificity-led, magnitude-independent directionality (Spearman C-vs-magnitude +0.03; magnitude
+balance p = 0.28), but at n_pos = 10 it is underpowered and does not clear the pre-registered bar
+(ΔAUPRC +0.118, 95% CI [−0.018, 0.336]; conditional LR non-significant, S_resid p = 0.08). We report
+it honestly as a **directional near-miss**, not a clean replication — the magnitude-independence of
+the signal now holds across three immune systems (Marson, Schmidt, Frangieh) while formal power is
+reached only in the Marson anchor.
+
 ### 3.3 The phenotype decomposes into ~2.5 axes
 
 If immune engagement is a capacity, its axes should be partly separable. At pseudobulk, persistence
@@ -258,7 +267,13 @@ is a **clean axis** (|ρ| < 0.08 with the other axes), but killing and resistanc
 (ρ ≈ −0.45): about **2.5 separable axes, not 3** (Figure 2). We report the half rather than rounding
 up. A BEHAV3D functional-killing proxy agrees that killing is its own axis — a persistence-loaded
 latent factor loads ≈0 on functional killing — so the entanglement is a real feature of the
-transcriptional readout, not an artifact of gene-set overlap.
+transcriptional readout, not an artifact of gene-set overlap. This structure is not a pseudobulk
+artifact: it replicates at single-cell resolution on the 455,370-cell CAR-T atlas (persistence
+ρ = −0.12 vs killing and −0.01 vs resistance; killing↔resistance ρ = −0.53; all axes
+magnitude-independent, |ρ| < 0.3), and the effector/exhaustion entanglement survives
+partial-correlation control for CD8 fraction (ρ = −0.44 after control, versus a raw killing–CD8
+correlation of +0.57), confirming it is biological coupling rather than a lineage-composition
+artifact.
 
 ![Figure 2. IEC axis orthogonality at pseudobulk. Pairwise correlation of persistence, killing, and resistance axis scores across perturbations (Stim 48 h). Persistence is orthogonal to both other axes (|ρ|<0.08) while killing and resistance are entangled (ρ≈−0.45), yielding ~2.5 separable axes.]({{artifact:art_d0d3182a-3b52-43a7-a99c-ee087be45d5c}})
 
@@ -368,9 +383,15 @@ not a proxy for either effect size or clinical desirability.
 
 Positives are few (12–21 depending on set); the signal is bootstrap-stabilized and
 cross-condition-replicated, but a fully independent external positive set remains future work. The
-axes are defined from curated marker sets and are therefore only as good as those sets; the
-foundation-model triangulation (scGPT gene-embedding concordance) and cell-level scVI confirmation
-of the 2.5-axis structure are scoped but not yet executed. The clinical atlas, though large in cells,
+axes are defined from curated marker sets and are therefore only as good as those sets. The
+2.5-axis structure, established at pseudobulk, is now **confirmed at single-cell resolution** on the
+455,370-cell CAR-T atlas: persistence is orthogonal to both other axes (ρ = −0.12 vs killing, −0.01
+vs resistance) while killing and resistance stay entangled (ρ = −0.53), and all three axes are
+magnitude-independent (|ρ| < 0.3). Killing correlates with CD8 identity (ρ = 0.57), but the
+killing↔resistance entanglement survives partial-correlation control for CD8 fraction (ρ = −0.44),
+so it is a real effector/exhaustion coupling rather than a lineage artifact. The foundation-model
+triangulation (scGPT gene-embedding concordance) remains scoped but not yet executed. The clinical
+atlas, though large in cells,
 has 87 labeled patients across 9 studies — well-powered for a leave-study-out null but not for
 discovering a small transportable effect if one exists. The mechanism analyses are hypothesis-
 generating prioritizations, not causal claims, and the decision board carries no therapeutic

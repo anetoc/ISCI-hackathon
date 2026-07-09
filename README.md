@@ -223,7 +223,7 @@ than rounding up. A BEHAV3D functional-killing proxy agrees that killing is its 
 - **External validation is direction-only, small-N.** Two CAR-T cohorts (GSE208052 n=9, GSE223655 33 CR/32 PD) confirm the *direction* of the memory-stem sensitivity axis (one-sided, uncorrected, no AUROC); this is replication of direction, not a validated response predictor. Resistance-axis validation (GSE197268, post-infusion) is gated on patient-level labels.
 - **Broad GO/Reactome family enrichment is a statistical negative** — but *curated* T-cell gene sets tested continuously along the score **do** survive FDR (4/6), with NF-κB and Treg/brake enriched independent of magnitude (see Mechanism decomposition above). The lesson: set granularity matters; broad ontologies wash out the signal.
 - **Foundation-model triangulation** (perturbation FMs / sequence models on top controllers) is scoped for the GPU machine (`briefs/`), not yet run.
-- **IEC cell-level confirmation** (scVI 2.5-axis test) is scoped for the GPU machine and pending.
+- **IEC cell-level confirmation** (2.5-axis test) is **done**: the pseudobulk structure replicates at single-cell resolution on the 455,370-cell CAR-T atlas (persistence orthogonal, ρ=−0.12/−0.01; killing↔resistance entangled, ρ=−0.53; all axes magnitude-independent; entanglement survives CD8-fraction control, ρ=−0.44).
 
 ## Author
 
