@@ -42,9 +42,9 @@ is transparent and dangerous flags override everything.
 
 | Category | n | What it means | Top members (by triage score) |
 |---|---|---|---|
-| **A — manufacturing modulation** | 24 | titratable/transient in manufacturing (epigenetic/reverser); NOT systemic inhibition | KDM1A, CXXC1, RCOR1, PPP1R15B, SAMD1 |
-| **B — engineering candidates** | 6 | clear KD/OE direction, viability-safe; need expansion/killing/persistence assays | MAP3K5, IRF2BP1, INPP5D, NR4A3, ARHGAP30 |
-| **C — probe-only biology** | 18 | understand mechanism, not a target | BCLAF1, HEXIM1, PDCD5, STAT6, CYB561D2, TWF1 |
+| **A — manufacturing modulation** | 24 | titratable/transient in manufacturing (epigenetic/reverser); NOT systemic inhibition | CXXC1, KDM1A, PPP1R15B, PDCD10, TADA1 |
+| **B — engineering candidates** | 6 | clear KD/OE direction, viability-safe; need expansion/killing/persistence assays | MAP3K5, IRF2BP1, INPP5D, ARHGAP30, USP22 |
+| **C — probe-only biology** | 18 | understand mechanism, not a target | BCLAF1, PDCD5, HEXIM1, STAT6, TFAP4 |
 | **D — dangerous / positive-control rheostats** | 22 | TCR-proximal, broadly-essential, oncogenic-risk → axis controls or titrated only | IKBKB, PRKDC, MED13, CDC25B |
 
 **The overclaim guard, made structural:** the genes a naive reader might call "targets" —
