@@ -93,7 +93,8 @@ discovered that magnitude is a confound" (Shesha and we found this convergently)
 cross-donor, axis-specific, immune-scoped controllability property and map its falsifiable
 boundary."
 
-We make this separation quantitative on Frangieh (229 targets), computing all three candidate
+We make this separation quantitative on Frangieh (229 targets) in a dedicated analysis
+(`outputs/three_coherence/three_coherence_result.json`), computing all three candidate
 coordinates against effect magnitude side by side. Shesha's cell-to-cell coherence Sₚ correlates with
 magnitude at Spearman ρ = 0.97 — essentially an effect-size proxy, and an independent replication of
 Shesha's own reported 0.75–0.97 coupling on a dataset they did not use — whereas our coordinates are
@@ -147,9 +148,10 @@ positive.
 
 ---
 
-*Reference set retrieved via PubMed; most anchors were title-DOI paired from a single PubMed record,
-and the scGPT and CellOracle DOIs were confirmed against their exact-title PubMed records (PMID
-38409223 and the CellOracle Nature entry respectively) rather than a keyword first-hit. Anchors span the substrate,
+*Reference set retrieved via PubMed; most anchors were title-DOI paired from a single PubMed record.
+The scGPT DOI was confirmed against its exact-title PubMed record (PMID 38409223); the remaining DOIs
+(CellOracle, CEFCON, GEARS, Adamson) are the widely-cited canonical identifiers but were not each
+re-verified against PubMed in this pass. Anchors span the substrate,
 the axis biology, the control-theoretic and foundation-model neighbors, and the translation gap.
 The review is intentionally scoped to load-bearing anchors rather than an exhaustive bibliography;
 additional recent primary papers surfaced in retrieval but are not cited where they would not change

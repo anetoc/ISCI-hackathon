@@ -40,8 +40,10 @@ killing↔exhaustion coupling the single-cell analysis showed is otherwise tight
 **4. Which controllers are RNA/chromatin/NF-κB rather than TCR-activation?**
 `ZC3H12A` (Regnase-1, RNA decay), `RCOR1`/`SETDB1` (chromatin), `IKBKB` (NF-κB) — these move IEC axes
 without being TCR-proximal signaling nodes, so they are mechanistically distinct handles from the
-TCR rheostat. `ZC3H12A` in particular is persistence-favorable and an RNA-level brake, a non-obvious
-lever.
+TCR rheostat. `ZC3H12A` (Regnase-1) in particular is a non-obvious RNA-level lever — its computed
+IEC signature is killing-dominant/mixed (not one of the two persistence-favorable decouplers, which
+are GATA3 and RCOR1), but its mechanistic distinctness from TCR signaling is the reason it is flagged
+for the panel.
 
 ## Contrast exemplar (kept deliberately)
 `IRF1` — the #1 controller — has a mixed/weak translational direction and is a **dangerous-rheostat**

@@ -397,6 +397,26 @@ core, which is a statement about perturbation biology, not patient outcome.
 
 ## 4. Discussion
 
+**The contribution is a tested scope map, not a universal score.** Every adjudicated test is
+summarized in Figure 4: the property PASSes in the RNA Marson CD4+ anchor, shows directional immune
+support (Schmidt/Frangieh near-miss), FAILs in non-immune systems, FAILs as a direct protein-layer
+CCI on a coarse ADT panel, FAILs on an independent external non-marker positive set, returns a NULL
+as a cross-study CAR-T response biomarker, and FAILs as network centrality. These bounds are the
+result — they map where magnitude-independent controllership exists and where it does not, which is a
+more reviewer-trustworthy claim than an unbounded positive.
+
+![Figure 4. Layer/test verdict map. Each adjudicated test with its evidence and verdict; the project's contribution is the scope map, not a single PASS. Verdicts are direction-aware.]({{artifact:art_573ec4b9-d3de-4287-a974-c5f563255f4f}})
+
+**A direction-aware verdict rule.** The protein-layer test exposed a failure mode of metric-only
+benchmarking: AUPRC can be high for the wrong reason when the informative feature is oppositely
+oriented (positives had *lower* residual protein coherence than matched negatives, yet the
+direction-agnostic bootstrap read a large gain). We therefore require every PASS to satisfy not only
+ΔAUPRC and conditional-LR criteria and low Spearman(C, magnitude), but also the *expected biological
+direction*: median residual coherence must be higher in positives than negatives, and the model
+coefficient positive. A high average-precision score with an inverted feature is classified as
+`INVERTED_SIGNAL / FAIL`, never PASS. This rule is what prevented the protein layer from being
+mislabeled as controllership.
+
 We set out to separate genes that *control* T-cell state from genes that merely *move* it, and to do
 so without smuggling effect magnitude back in through the ground truth. The central result is that a
 magnitude-conditional signal — axis-specificity and cross-donor coherence, each residualized against
