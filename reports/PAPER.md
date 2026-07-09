@@ -277,6 +277,23 @@ matched negatives at the protein layer plus a ≥2-layer concordance gate) is th
 step. What the exercise establishes is architectural: the controllership operator is layer-agnostic,
 and evaluability is a property of the *layer*, not only the dataset.
 
+### 3.3a Robustness: gate-insensitive, but positive-set-dependent
+
+Two stress tests bound the primary gain (single-condition diagnostic; the canonical +0.229 is the
+three-condition aggregate). First, the detectable-effect gate is not the driver: sweeping the cutoff
+from the top 40% to 100% of perturbations by magnitude leaves the gain stable between +0.25 and
++0.33 (Figure 2b, left), so the effect is not an artifact of the median threshold. Second — and we
+report this as a genuine limitation — the gain depends on the axis-defining master transcription
+factors in the positive set. Removing the four canonical Th1/Th2 regulators (GATA3, TBX21, STAT6,
+IRF1) drops the point gain from +0.25 to +0.03 at n = 9 positives (Figure 2b, right). The confidence
+interval is wide ([−0.25, +0.33]) and still includes the original effect, so this is
+*underpowered and inconclusive*, not a demonstrated absence of signal — but it means that at the
+current positive-set size the magnitude-conditional signal cannot be cleanly separated from the
+best-characterized axis-defining regulators. A larger, independently-curated positive set is the
+right way to resolve this, and it is stated openly as future work rather than smoothed over.
+
+![Figure 2b. Robustness of the magnitude-conditional gain. Left: ΔAUPRC gain over magnitude is stable (+0.25 to +0.33) across detectable-effect gates from top-40% to 100% of perturbations by magnitude, so the effect is not a threshold artifact. Right: removing the four axis-defining master TFs (GATA3, TBX21, STAT6, IRF1) attenuates the point gain from +0.25 to +0.03 at n=9, with a wide CI that still includes the original effect — an underpowered, honestly-reported limitation rather than a demonstrated null.]({{artifact:art_fa4b89ac-2af2-4e33-a375-3b5e95a67c2c}})
+
 ### 3.3 The phenotype decomposes into ~2.5 axes
 
 If immune engagement is a capacity, its axes should be partly separable. At pseudobulk, persistence
@@ -399,7 +416,13 @@ not a proxy for either effect size or clinical desirability.
 ### 4.1 Limitations
 
 Positives are few (12–21 depending on set); the signal is bootstrap-stabilized and
-cross-condition-replicated, but a fully independent external positive set remains future work. The
+cross-condition-replicated, but a fully independent external positive set remains future work. This
+is not a cosmetic caveat: a positive-set ablation (§3.3a) shows the single-condition gain attenuates
+from +0.25 to +0.03 when the four axis-defining master TFs (GATA3, TBX21, STAT6, IRF1) are removed,
+at n = 9 with a CI that still includes the original effect — underpowered rather than null, but a
+real bound. The gain is, by contrast, insensitive to the detectable-effect gate (stable +0.25 to
++0.33 across cutoffs). The honest reading is that the property is established most strongly around
+canonical axis regulators and needs a larger independent positive set to extend beyond them. The
 axes are defined from curated marker sets and are therefore only as good as those sets. The
 2.5-axis structure, established at pseudobulk, is now **confirmed at single-cell resolution** on the
 455,370-cell CAR-T atlas: persistence is orthogonal to both other axes (ρ = −0.12 vs killing, −0.01

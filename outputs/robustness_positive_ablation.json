@@ -1,0 +1,42 @@
+{
+  "all_positives": {
+    "n_pos": 13,
+    "n_neg": 20,
+    "base_auprc": 0.538,
+    "full_auprc": 0.786,
+    "gain": 0.249,
+    "ci": [
+      -0.037,
+      0.464
+    ],
+    "p_gain": 0.956
+  },
+  "no_axis_markers": {
+    "n_pos": 8,
+    "n_neg": 13,
+    "base_auprc": 0.622,
+    "full_auprc": 0.6,
+    "gain": -0.022,
+    "ci": [
+      -0.32,
+      0.282
+    ],
+    "p_gain": 0.438
+  },
+  "structural_only": {
+    "n_pos": 7,
+    "n_neg": 12,
+    "base_auprc": 0.634,
+    "full_auprc": 0.683,
+    "gain": 0.048,
+    "ci": [
+      -0.242,
+      0.327
+    ],
+    "p_gain": 0.61
+  },
+  "external_only": {
+    "n_pos": 1,
+    "note": "too few positives at this gate"
+  }
+}

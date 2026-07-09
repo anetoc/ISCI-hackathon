@@ -1,0 +1,26 @@
+{
+  "all_positives": {
+    "n_pos": 13,
+    "n_neg": 20,
+    "base_auprc": 0.538,
+    "full_auprc": 0.786,
+    "gain": 0.249,
+    "ci": [
+      -0.037,
+      0.464
+    ],
+    "p_gain": 0.956
+  },
+  "no_axis_defining_TFs": {
+    "n_pos": 9,
+    "n_neg": 13,
+    "base_auprc": 0.608,
+    "full_auprc": 0.641,
+    "gain": 0.034,
+    "ci": [
+      -0.246,
+      0.329
+    ],
+    "p_gain": 0.55
+  }
+}
