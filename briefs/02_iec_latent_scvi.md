@@ -17,11 +17,15 @@ and that torch sees the GPU (`torch.cuda.is_available()`).
    of this brief is cell-level, so: stream/subsample to ~200k cells (scanpy `sc.pp.subsample`
    after backed read, or read a single lane). If even one file is intractable in RAM (125 GB),
    report the practical limit and fall back to the largest tractable subsample — do NOT fabricate.
-2. **Functional CAR-T atlas** (ML4BM-Lab / Univ Navarra) — the CD3+CAR+ subset (~414k cells,
-   UNCONFIRMED). Resolve the real Zenodo/GitHub source in **Brief 03 first** (it verifies the
-   record ID, DOI, and file list against the live page); reuse whatever Brief 03 confirmed.
-   Do not hardcode a record/DOI here — take it from Brief 03's verified structure report.
-   Cache under /mnt/dados2/abel-tsc/data_public/cart/.
+2. **Functional CAR-T atlas** (ML4BM-Lab / Univ Navarra, Zenodo record 19066393, DOI
+   10.5281/zenodo.17213452) — the CD3+CAR+ subset (~414k cells). Cache under
+   /mnt/dados2/abel-tsc/data_public/cart/ (already downloaded in Brief 03/04).
+   **CRITICAL — scVI source:** the *integrated* atlas object does **NOT** contain `X_scVI` in
+   `.obsm`. Do not try to read a pretrained latent from it. Use the dataset's dedicated scVI
+   file (the `Python_scVI_*` / `scVI_hub` artifact from the Zenodo record) if present; otherwise
+   **train scVI yourself** on the CD3+CAR+ subset (batch key = patient/`orig_ident`). Verify
+   `X_scVI` exists and has the expected shape before scoring — if neither route yields a latent,
+   report NOT-EVALUABLE for the atlas arm rather than substituting `X_pca`.
 
 ## Protocol
 1. **scVI latent space per dataset** (batch key = donor/patient): train scVI (default 10–30
@@ -37,6 +41,11 @@ and that torch sees the GPU (`torch.cuda.is_available()`).
 4. **Does the multi-axis structure REPLICATE cross-system?** Compare the correlation structure
    between Marson (CD4+ primary) and the CAR-T atlas (clinical products). The prediction: killing
    stays orthogonal to persistence in BOTH (that is the generalizable claim).
+   **The "2.5-axis" test (pre-registered from pseudobulk):** at pseudobulk we found A_persist is a
+   clean axis (|ρ|<0.08 vs both others) but A_kill and A_resist are **entangled** (ρ≈−0.45). The
+   cell-level prediction is therefore *2.5* separable axes, not 3. Confirm or refute at single-cell
+   resolution: report whether kill↔resist stays ~−0.45 (entangled → 2.5 axes) or separates
+   (|ρ|<0.5 → genuine 3 axes). Either outcome is a real result — state which.
 5. **Confounder guard:** compute a CD8-identity score; report each axis's correlation with it,
    and whether A_kill is separable from CD8-identity (partial correlation controlling CD8).
 
@@ -54,4 +63,10 @@ and that torch sees the GPU (`torch.cuda.is_available()`).
   claim full-data when you ran a subset.
 - Report the orthogonality matrix as-is. If an axis pair is NOT orthogonal (|ρ|>0.5), say so —
   that collapses two axes and is a real finding, not a failure.
-- This is a STRUCTURE test, not a clinical test. No response labels here.
+- This is a STRUCTURE test, not a clinical test. **No response labels here.** The clinical
+  prediction question was already answered in Brief 04 (`outputs/iec_clinical/`): VERDICT = NULL,
+  well-powered — no IEC axis predicts CAR-T response under honest leave-one-study-out CV (A_persist
+  collapses from AUROC 0.643 patient-out to 0.533 study-out; CD8-fraction baseline beats every
+  axis). Do NOT re-run a response predictor or re-open that verdict. This brief only asks whether
+  the capacity has multi-axis STRUCTURE at cell level — a descriptive claim, orthogonal to (and not
+  rescuing) the null clinical result.

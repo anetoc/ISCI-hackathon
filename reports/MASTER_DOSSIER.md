@@ -214,6 +214,33 @@ Targets/HPA): **35 druggable**, with an explicit **intervention-direction** colu
 as a therapeutic recommendation. Mechanism annotations in `reports/mechanism_cards_v2.md`.
 This will be re-focused onto the controllers of whichever axis proves clinically relevant (§5).
 
+The 70 controllers are also recast into a **4-category safety-first decision board**
+(`outputs/targetability_decision_board.csv`): A — manufacturing modulation (24, titratable/
+epigenetic), B — engineering candidates (6, clear KD/OE direction), C — probe-only biology (18),
+D — dangerous / positive-control rheostats (22). The overclaim guard is now structural: the two
+genes a naive reader would call "targets" — **IKBKB, PRKDC** — land in **Category D** (IKBKB is
+TCR-proximal, PRKDC broadly essential). See `reports/mechanism_and_triage.md`.
+
+---
+
+## 6.5 Mechanism decomposition (curated enrichment + signed perturbation graph)
+
+**Curated gene-set enrichment** (`figures/curated_enrichment.png`): along the continuous
+`ISCI_orthogonal` score (2,520 genes), 6 pre-registered T-cell gene sets tested rank-based with a
+magnitude guard. **4/6 survive BH-FDR**, and the guard separates two kinds of controller:
+**NF-κB activation** and **Treg/brake/apoptosis** are enriched in controllership but **NOT in
+magnitude** (the magnitude-independent finding); TCR-proximal and chromatin enrich in both (TCR is
+the expected high-effect rheostat / positive control); cytoskeleton and RNA-decay are high-effect
+but not axis-specific.
+
+**Signed perturbation→module graph** (`figures/signed_perturbation_graph.png`): replaces PPI
+centrality (which added nothing over magnitude) with causal perturbation edges — each KD's signed
+effect on each functional module (11,281 × 6). **Therapeutic convergence** (coherent movement in
+the desirable direction) is a **third, independent axis**: Spearman +0.24 vs controllership, +0.18
+vs magnitude. The sharpest read: **IRF1**, the #1 controller, has *negative* convergence (−0.21) —
+strong controllership does not imply a desirable intervention. GATA3 (+1.70) and RCOR1 (+0.90) are
+the most convergent. See `reports/signed_perturbation_graph.md`.
+
 ---
 
 ## 7. What is demonstrated vs hypothesized (the credibility ledger)
@@ -226,10 +253,20 @@ This will be re-focused onto the controllers of whichever axis proves clinically
 | IEC is a measurable multi-axis capacity (2.5 axes) | **SHOWN in pseudobulk**; cell-level pending | orthogonality pre-test; Brief 02 (scVI) to confirm |
 | Some IEC axis predicts CAR-T response | **NULL (well-powered, cross-study)** | leave-study-out AUROC 0.53, CI incl. 0.5; CD8-frac baseline beats all axes; n=87 |
 | Controllers are druggable | **Descriptive** | targetability matrix, direction-annotated |
+| Specific mechanisms enrich in controllership beyond magnitude | **DEMONSTRATED** | NF-κB + Treg/brake enriched in ISCI (q<0.02), n.s. in magnitude (p>0.35) |
+| Therapeutic direction is separable from controllership | **DEMONSTRATED** | signed graph: convergence ρ=+0.24 vs ISCI; IRF1 top controller, negative convergence |
+| Controllers map to safe experimental categories | **Descriptive** | 4-category board; IKBKB/PRKDC structurally flagged dangerous |
 
 ---
 
 ## 8. Reproducibility & provenance
+
+- **One-command reproduction:** `make reproduce-core` runs the validated CCI method across the
+  dataset registry (`config/datasets.yaml`) via `isci/run_cci.py` and rebuilds the dashboard.
+  Marson is recomputed from the committed ranking + locked helpers with **expression-matched
+  negatives** (point estimate +0.248 reproduces locked +0.229); other datasets aggregate from
+  committed reports. The legacy M/R/D/A/S modules are **deprecated** (they lost to magnitude and
+  were abandoned) — the driver, not those stubs, is the reproduction path.
 
 - Core result frozen in `reports/result_lock.md` (commit `32e991b`); ranking md5
   `5337113b682c38bd0c2d5755e2078520`.
