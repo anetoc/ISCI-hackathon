@@ -37,25 +37,37 @@
 
 ---
 
-## OPTIONAL extended panel — the two-layer expansion (for a >3-min cut)
+## OPTIONAL extended panel — property, capacity, and the honest null (for a >3-min cut)
 
 *Splice after 2:35 if making a longer video. Keeps the honest framing.*
 
-> "Building on the locked core, we inverted the question: which perturbations push T cells
-> *away from* clinical resistance programs and *toward* sensitivity? That gives two layers.
-> The first is a **known TCR-signal-strength rheostat** — the raw axis recovers the TCR
-> machinery itself, exactly the axis dasatinib 'rest' and LCK-editing modulate in the CAR-T
-> clinic. The second is a **magnitude-independent layer** of specific controllers: after we
-> residualize out TCR, effect size, and stress, only a handful survive — IRF2BP1, MED13,
-> PDCD10, CXXC1. We're careful here: family enrichment against a matched null is *not*
-> significant, so we call the families descriptive, not proven. And in two independent CAR-T
-> cohorts the memory-stem sensitivity axis replicates direction — while resistance does not,
-> which points to resistance being post-infusion and niche-dependent. We say all of it plainly."
+> "The conditional result isn't just a Marson finding — it's a **property**. We tested it as a
+> falsifiable prediction across four perturbation systems: it should hold in immune cells and
+> fail outside. It does — PASS in Marson CD4+, a directional near-miss in a second T-cell screen,
+> and honest FAILs in K562 and RPE1. We call it the **Conditional Controllability Invariant**, and
+> it is immune-scoped by evidence, not by assumption.
+>
+> Around that locked core we asked a bigger question: is there a measurable **immune engagement
+> capacity** — persistence, killing, resistance as separable axes? At single-cell pseudobulk,
+> persistence is a clean axis but killing and resistance stay entangled — about **2.5 axes**, not
+> 3, and we report the half. Then the hard test: does any axis predict CAR-T response in a
+> 70-patient, >1-million-cell atlas? Under honest leave-one-**study**-out cross-validation the
+> answer is **no** — the patient-level signal collapses to chance, and a trivial CD8-fraction
+> baseline beats every axis. We report that as a **well-powered null**, because a confounded
+> positive would be worse than an honest negative.
+>
+> Finally, mechanism without overclaim: NF-κB and Treg-brake gene sets enrich in controllership
+> *independent of* effect size; a signed perturbation graph shows therapeutic direction is a third
+> axis — the #1 controller, IRF1, actually points the wrong way. And the 70 controllers are sorted
+> into a safety-first board where the two most drug-like genes land in the **dangerous** category.
+> Every layer carries its own scope line."
 
-*(On screen: the TCR convergence figure, the confounder ledger v2, the GSE223655 heatmap.)*
+*(On screen: the 4-system CCI forest plot, the IEC orthogonality heatmap, the leave-study-out
+null figure, the curated-enrichment quadrants, the signed-graph heatmap.)*
 
 **The one-line pitch for the whole project:**
-> "T-cell controllership has two layers — a known TCR-signal-strength rheostat, and a
-> magnitude-independent layer of reproducible, axis-specific state controllers. ISCI
-> separates control from association; T-REMAP turns controllers into a sensitivity/resistance
-> map — with the confounder controlled and the negatives reported."
+> "One locked result — a magnitude-conditional controllability signal that nearly doubles
+> regulator recovery — hardened into an immune-scoped **property**, extended into a multi-axis
+> **capacity**, and stress-tested against a clinical outcome where we report an honest,
+> well-powered null. Claude ran every step, caught its own leakage, and welded provenance to every
+> figure."
