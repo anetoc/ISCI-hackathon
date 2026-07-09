@@ -1,6 +1,6 @@
 # ISCI — Immune-State Controllability Index
 
-**Built with Claude: Life Sciences** hackathon (Researcher Track) — genome-scale Perturb-seq in primary human CD4+ T cells → separating genes that *control* T-cell state transitions from genes that are merely *associated* with them.
+**Built with Claude: Life Sciences** hackathon (Researcher Track) — a magnitude-conditional framework that *adjudicates* T-cell-state controllership: it separates genes that **control** state from genes whose effect is merely large, and — just as importantly — **maps where that separation holds and where it collapses** (into magnitude, protein layer, external gene sets, or cross-study clinical batch). The product is not a target list; it is a tested scope map. Anchored on genome-scale Perturb-seq in primary human CD4+ T cells.
 
 > **Build environment:** Claude for Life Sciences (CPU-local, Mac 24GB). MIT open source.
 > Every result below was produced during the event; all analysis code is timestamped in the commit history.
@@ -10,6 +10,25 @@
 **Among perturbations with the same effect magnitude, known T-cell-state regulators produce effects that are more *state-specific* (concentrated on a functional axis) and more *reproducible across donors* — a signal orthogonal to effect size that nearly doubles regulator recovery (on the detectable set, AUPRC 0.415 → 0.722; bootstrap gain +0.229 [95% CI 0.072–0.405], P>0 = 99.6%).**
 
 ![Central result](outputs/fig_central.png)
+
+## What the framework actually delivers — an adjudication table
+
+The deliverable is not the ranking; it is a system that returns an honest verdict for each question,
+including the ones where the answer is *no*:
+
+| Question | Verdict |
+|----------|---------|
+| Does the signal recover canonical regulators in the Marson CD4+ RNA anchor? | **PASS** (AUPRC 0.415→0.722) |
+| Is it independent of effect magnitude? | **Yes**, in the anchor (Spearman +0.02) |
+| Is this just "Shesha for T cells"? | **No** — Shesha's coherence tracks magnitude (ρ=0.97); ours is orthogonal (R 0.008, S 0.19) |
+| Does it generalize to broad external functional regulators? | **FAIL** (ΔAUPRC −0.281; those are magnitude-visible) |
+| Does it hold at the protein layer? | **FAIL** (direction-aware; inverted residual on coarse ADT) |
+| Does any axis predict CAR-T clinical response? | **NULL** (well-powered; study-out 0.533, CD8-frac beats all) |
+| Is a controller a therapeutic target? | **No** — convergence is a separate axis (IRF1 = #1 controller, wrong direction) |
+| Are there magnitude-independent mechanisms to prioritize? | **Yes** — NF-κB and Treg-brake enrich in controllership, not magnitude |
+
+That table — where control exists, where it collapses, and where a translational claim would
+overreach — is the contribution. A good scientific agent knows when *not* to call PASS.
 
 ## What is NOT claimed
 
