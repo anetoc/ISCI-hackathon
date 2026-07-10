@@ -1,28 +1,26 @@
 {
-  "test": "pre-specified incremental M->M+C, grouped leave-one-block-out OOF (no leakage)",
-  "design": "each match-block = 1 positive + up to 8 expression-matched negatives; residualization (spec~mag, coh~mag), scaler, and logistic all fit on TRAIN fold only; predictions out-of-fold",
-  "n_blocks": 13,
+  "test": "pre-specified incremental M->M+C, grouped leave-one-positive-out OOF (no leakage)",
+  "design": "each fold holds out one positive; NEGATIVE SELECTION (nearest-neighbour expression matching), residualization (spec~mag, coh~mag), scaling and logistic ALL redone within the training fold only; held-out positive matched to negatives drawn from the pool excluding train-selected negatives; predictions out-of-fold",
+  "correction_note": "v2: negative selection is now redone per-fold (spec 3.2 requirement), not once globally. This is more rigorous and yields a lower, more honest OOF estimate (+0.215 vs the earlier global-matched +0.305).",
   "n_pos": 13,
-  "n_neg_total": 104,
+  "n_neg_per_positive": 8,
   "apparent_gain": 0.3926,
-  "oof_gain": 0.3053,
-  "optimism": 0.0873,
-  "oof_model0_auprc": 0.1944,
-  "oof_model1_auprc": 0.4997,
+  "oof_gain": 0.2151,
+  "optimism": 0.1775,
   "hierarchical_bootstrap": {
-    "mean": 0.3588,
+    "mean": 0.302,
     "ci95": [
-      0.1315,
-      0.6026
+      0.0737,
+      0.5604
     ],
-    "p_gain_gt0": 1.0,
-    "n_boot": 500
+    "p_gain_gt0": 0.99,
+    "n_boot": 400
   },
   "within_block_permutation": {
-    "null_mean": 0.0165,
-    "null_95th": 0.1001,
-    "perm_p": 0.002,
-    "n_perm": 500
+    "null_mean": 0.025,
+    "null_95th": 0.1402,
+    "perm_p": 0.01,
+    "n_perm": 400
   },
-  "interpretation": "The incremental controllership signal survives leakage-free out-of-fold evaluation: OOF gain +0.305 (optimism only +0.087 vs apparent +0.393), hierarchical block-bootstrap CI [+0.131,+0.603] excludes 0, within-block permutation p=0.002. This is the Phase-0 confirmatory gate from the TCR-RescueMap spec; the +0.357 apparent incremental estimate is now backed by an OOF-hardened +0.305 [+0.131,+0.603]."
+  "interpretation": "Incremental controllership survives leakage-free OOF with per-fold negative selection: OOF gain +0.215 (optimism +0.178 vs apparent +0.393), hierarchical bootstrap CI [+0.074,+0.560] excludes 0 (P>0=0.99), within-block permutation p=0.010. Weaker than the earlier global-matched estimate; the honest OOF number is +0.215 [+0.074,+0.560]. The apparent +0.357/+0.393 carries ~0.18 optimism."
 }
