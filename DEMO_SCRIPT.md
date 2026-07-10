@@ -33,8 +33,18 @@ Central pitch (say it, then prove it):
 > "The fix wasn't a fancier index — it was the right question. Not 'does our signal beat magnitude?'
 > but 'does it add anything *conditional on* magnitude?' And there it is: among perturbations with the
 > *same* effect size, real regulators are more state-specific and more reproducible across donors.
-> That orthogonal signal nearly doubles regulator recovery — AUPRC 0.415 to 0.722, bootstrap gain
-> +0.229, positive in 99.6% of resamples, and it replicates across all three culture conditions."
+> That orthogonal signal nearly doubles regulator recovery — AUPRC 0.415 to 0.722. And when we ask the
+> question we pre-specified — does controllership add to a model that already knows magnitude? — it
+> does, even out-of-fold: an honest, leakage-free gain of +0.215, confidence interval above zero."
+
+**Number cascade (say the level that fits your pacing; all three are in the paper):**
+- **On-screen headline (most intuitive):** regulator recovery AUPRC **0.415 → 0.722**.
+- **Authoritative pre-specified test (M → M+C incremental):** bootstrap gain **+0.357 [+0.117, +0.538]**, P>0 = 1.000, expression-matched negatives.
+- **Leakage-free / reviewer-proof (out-of-fold, everything refit per fold):** **+0.215 [+0.074, +0.560]**, permutation p = 0.010 — the conservative number, ~0.18 of the apparent gain is optimism, and we say so.
+
+*Judge-question readiness:* if asked "isn't that overfit on 13 positives?" the answer is Screen 3's
+third bullet — we already ran the out-of-fold test and reported the shrinkage honestly. That exchange
+*is* the "knows when not to call PASS" thesis in miniature.
 
 ## SCREEN 4 — 1:45–2:20 · The scope map (the differentiator: knows where it fails)
 **On screen:** `figures/layer_verdict_map.png` (the 7-verdict table).
@@ -77,8 +87,10 @@ Central pitch (say it, then prove it):
 > beaten by effect-magnitude, because the known-regulator ground truth is magnitude-confounded. The
 > fix was a conditional test: among equal-magnitude perturbations, real regulators are more
 > axis-specific and more donor-reproducible — a signal orthogonal to effect size that lifts regulator
-> recovery from AUPRC 0.415 to 0.722 (bootstrap gain +0.229, P>0 99.6%), replicated across three
-> conditions. Crucially, the deliverable is a *tested scope map*, not a universal score: the property
+> recovery from AUPRC 0.415 to 0.722. The pre-specified incremental test (does controllership add to a
+> model that already knows magnitude?) gives +0.357 [+0.117, +0.538]; hardened out-of-fold, with every
+> step refit per fold, it holds at a leakage-free +0.215 [+0.074, +0.560] (permutation p = 0.010) —
+> we report the shrinkage rather than hide it. Crucially, the deliverable is a *tested scope map*, not a universal score: the property
 > FAILS in non-immune systems, on an external gene set, and at the protein layer (direction-aware),
 > and returns a well-powered NULL as a CAR-T response biomarker. A 4D decision framework
 > (controller → convergence → targetability → clinical relevance) shows the #1 controller, IRF1,
