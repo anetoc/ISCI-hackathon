@@ -249,8 +249,12 @@ time and redoing *everything* — nearest-neighbour negative selection, magnitud
 scaling and the logistic model — within the training fold only. The gain survives leakage-free but
 with substantial optimism exposed: OOF +0.215 (optimism +0.178 versus the apparent +0.393),
 hierarchical bootstrap CI [+0.074, +0.560] still excluding zero (P>0 = 0.99), within-block
-permutation p = 0.010 (`outputs/isci_oof_incremental.json`). The honest out-of-fold estimate is
-therefore **+0.215 [+0.074, +0.560]**; the apparent +0.357 carries roughly 0.18 of optimism. The signal survives a leakage control (removing axis-marker regulators),
+permutation p = 0.010 (`outputs/isci_oof_incremental.json`). Here "apparent" is the in-sample
+baseline of this same OOF procedure (fit and predicted on all folds, +0.393); the optimism of +0.178
+is 0.393 − 0.215 within this procedure. The honest out-of-fold estimate is therefore **+0.215
+[+0.074, +0.560]**. (This is a distinct, more conservative procedure from the full-sample
+bootstrap incremental test reported above at +0.357 [+0.117, +0.538]; the two are not the same
+quantity.) The signal survives a leakage control (removing axis-marker regulators),
 replicates on independent structural positives (ARID1A, INO80, IKZF1), and replicates across all
 three culture conditions. The top-ranked candidates recover known regulators as a sanity check
 (IRF1 #1, STAT6 #8, SETDB1 #11, GATA3 #14) and nominate candidates outside the label set (IKBKB,

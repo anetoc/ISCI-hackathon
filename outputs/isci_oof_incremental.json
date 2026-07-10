@@ -22,5 +22,5 @@
     "perm_p": 0.01,
     "n_perm": 400
   },
-  "interpretation": "Incremental controllership survives leakage-free OOF with per-fold negative selection: OOF gain +0.215 (optimism +0.178 vs apparent +0.393), hierarchical bootstrap CI [+0.074,+0.560] excludes 0 (P>0=0.99), within-block permutation p=0.010. Weaker than the earlier global-matched estimate; the honest OOF number is +0.215 [+0.074,+0.560]. The apparent +0.357/+0.393 carries ~0.18 optimism."
+  "interpretation": "Incremental controllership survives leakage-free OOF with per-fold negative selection: OOF gain +0.215, in-sample baseline of this same procedure +0.393, so optimism = 0.393-0.215 = +0.178. Hierarchical bootstrap CI [+0.074,+0.560] excludes 0 (P>0=0.99); within-block permutation p=0.010. This OOF procedure is DISTINCT from (and more conservative than) the full-sample bootstrap incremental test reported in the paper at +0.357 [+0.117,+0.538] - the two numbers are not the same quantity and the 0.178 optimism is internal to the OOF procedure only. Honest OOF estimate: +0.215 [+0.074,+0.560]."
 }
