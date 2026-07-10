@@ -15,7 +15,9 @@ _Locked: 2026-07-08. Core commit: `32e991b` (see `git log`)._
 | **Eligibility** | `detectable_effect == True` (perturbation effect magnitude ≥ dataset median n-DE) |
 | **Decorrelation from magnitude** | Spearman ρ = +0.02 (residualization construction-check, NOT independent evidence) |
 | **PRIMARY — incremental test (M → M+C)** | +0.357 AUPRC (0.539 → 0.896), 95% CI [+0.117, +0.538], P(gain>0) = 1.000; expression-matched negatives. **This is the authoritative pre-specified test.** |
-| **Descriptive — score alone vs magnitude alone (C-vs-M)** | AUPRC 0.722 vs 0.415; gain +0.248 [−0.043, 0.467] single-condition / +0.229 [0.072, 0.405] three-condition aggregate. Direct comparison, reported for context; CI crosses 0 single-condition. |
+| **Descriptive (a) — full detectable-set AUPRC** | Score alone 0.722 vs magnitude alone 0.415 (all detectable regulators vs all other detectable genes; ranking-quality point comparison, no bootstrap, no matched negatives). |
+| **Descriptive (b) — matched-negative bootstrap gain (C-vs-M)** | +0.248 [−0.043, 0.467] single-condition / +0.229 [0.072, 0.405] three-condition aggregate (n_pos = 13–21 vs 8× expression-matched negatives; CI crosses 0 single-condition). |
+| **Note** | (a) and (b) are **different populations and methods** — the 0.722−0.415 point gap is NOT the bootstrap gain in (b), and neither is the authoritative test, which is the incremental M→M+C row above. |
 | **Ranking file** | `outputs/isci_final_ranking.csv` (md5 `5337113b682c38bd0c2d5755e2078520`) |
 | **Central figure** | `outputs/fig_central.png` |
 | **Evidence cards** | `outputs/evidence_cards.md` (v3, relevance-tagged) |
