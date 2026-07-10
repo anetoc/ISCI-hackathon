@@ -13,9 +13,9 @@ _Locked: 2026-07-08. Core commit: `32e991b` (see `git log`)._
 | **Primary score** | `ISCI_orthogonal` |
 | **Definition** | mean of magnitude-**residualized** percentiles of (axis-specificity, cross-donor coherence) |
 | **Eligibility** | `detectable_effect == True` (perturbation effect magnitude ≥ dataset median n-DE) |
-| **Decorrelation from magnitude** | Spearman ρ = +0.02 (orthogonal by construction) |
-| **Regulator recovery (detectable set)** | AUPRC 0.722 vs magnitude 0.415 |
-| **Bootstrap gain (full residual set)** | +0.229 AUPRC, 95% CI [0.072, 0.405], P(gain>0) = 99.6% |
+| **Decorrelation from magnitude** | Spearman ρ = +0.02 (residualization construction-check, NOT independent evidence) |
+| **PRIMARY — incremental test (M → M+C)** | +0.357 AUPRC (0.539 → 0.896), 95% CI [+0.117, +0.538], P(gain>0) = 1.000; expression-matched negatives. **This is the authoritative pre-specified test.** |
+| **Descriptive — score alone vs magnitude alone (C-vs-M)** | AUPRC 0.722 vs 0.415; gain +0.248 [−0.043, 0.467] single-condition / +0.229 [0.072, 0.405] three-condition aggregate. Direct comparison, reported for context; CI crosses 0 single-condition. |
 | **Ranking file** | `outputs/isci_final_ranking.csv` (md5 `5337113b682c38bd0c2d5755e2078520`) |
 | **Central figure** | `outputs/fig_central.png` |
 | **Evidence cards** | `outputs/evidence_cards.md` (v3, relevance-tagged) |
