@@ -244,7 +244,12 @@ recovers regulators at **AUPRC 0.722 versus 0.415** (single-condition gain +0.24
 score with magnitude (ρ = +0.02) is a residualization *construction check*, not a third independent
 line of evidence. Conditional likelihood-ratio tests confirm that both components add
 information for regulator status *beyond* magnitude (axis-specificity coefficient +1.59, coherence
-+1.17, both p < 10⁻⁴). The signal survives a leakage control (removing axis-marker regulators),
++1.17, both p < 10⁻⁴). To rule out overfitting we re-ran the incremental test **out-of-fold**: match
+blocks (one positive plus its expression-matched negatives) held out one at a time, with
+residualization, scaling and the logistic model all fit on the training folds only. The gain
+survives leakage-free — OOF +0.305 (optimism only +0.087 versus the apparent +0.393), hierarchical
+block-bootstrap CI [+0.131, +0.603] excluding zero, within-block permutation p = 0.002
+(`outputs/isci_oof_incremental.json`). The signal survives a leakage control (removing axis-marker regulators),
 replicates on independent structural positives (ARID1A, INO80, IKZF1), and replicates across all
 three culture conditions. The top-ranked candidates recover known regulators as a sanity check
 (IRF1 #1, STAT6 #8, SETDB1 #11, GATA3 #14) and nominate candidates outside the label set (IKBKB,

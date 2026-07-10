@@ -1,0 +1,28 @@
+{
+  "test": "pre-specified incremental M->M+C, grouped leave-one-block-out OOF (no leakage)",
+  "design": "each match-block = 1 positive + up to 8 expression-matched negatives; residualization (spec~mag, coh~mag), scaler, and logistic all fit on TRAIN fold only; predictions out-of-fold",
+  "n_blocks": 13,
+  "n_pos": 13,
+  "n_neg_total": 104,
+  "apparent_gain": 0.3926,
+  "oof_gain": 0.3053,
+  "optimism": 0.0873,
+  "oof_model0_auprc": 0.1944,
+  "oof_model1_auprc": 0.4997,
+  "hierarchical_bootstrap": {
+    "mean": 0.3588,
+    "ci95": [
+      0.1315,
+      0.6026
+    ],
+    "p_gain_gt0": 1.0,
+    "n_boot": 500
+  },
+  "within_block_permutation": {
+    "null_mean": 0.0165,
+    "null_95th": 0.1001,
+    "perm_p": 0.002,
+    "n_perm": 500
+  },
+  "interpretation": "The incremental controllership signal survives leakage-free out-of-fold evaluation: OOF gain +0.305 (optimism only +0.087 vs apparent +0.393), hierarchical block-bootstrap CI [+0.131,+0.603] excludes 0, within-block permutation p=0.002. This is the Phase-0 confirmatory gate from the TCR-RescueMap spec; the +0.357 apparent incremental estimate is now backed by an OOF-hardened +0.305 [+0.131,+0.603]."
+}
