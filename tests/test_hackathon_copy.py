@@ -28,3 +28,11 @@ def test_every_judge_card_has_evidence_limitation_and_overclaim_boundary():
     assert text.count("**Limitation:**") == 10
     assert text.count("**Do not say:**") == 10
 
+
+def test_submission_summary_stays_within_form_limit():
+    """The submission copy should not be truncated by a 150-word field."""
+
+    text = (ROOT / "SUBMISSION.md").read_text()
+    summary = text.split("## 150-word summary", 1)[1].split("---", 1)[0]
+    words = re.findall(r"\b[\w+→-]+\b", summary)
+    assert 140 <= len(words) <= 150

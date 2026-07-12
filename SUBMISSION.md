@@ -1,72 +1,61 @@
 # Submission — Built with Claude: Life Sciences (Researcher Track)
 
 ## Title
-**Conditional controllability of T-cell state: a magnitude-deconfounded, falsifiable, immune-scoped property — with an honest CAR-T clinical null**
+**ISCI: Claude as an auditable scientific judge for T-cell controllability**
 
 ## One-line pitch
-A magnitude-conditional signal that nearly doubles regulator recovery in genome-scale T-cell
-Perturb-seq, hardened into a falsifiable immune-scoped *property*, extended into a multi-axis
-engagement *capacity*, and stress-tested against CAR-T response where we report a well-powered
-negative — every step run and self-audited by Claude.
+An auditable scientific-judgment workflow, demonstrated on genome-scale T-cell Perturb-seq, that
+challenged a failed score, rebuilt the leakage controls and returns explicit PASS, FAIL, NULL or
+NOT-EVALUABLE verdicts with provenance.
 
 ## 150-word summary
-Perturbation screens call "hits" by effect size, so a gene that shifts many transcripts looks like a
-regulator whether or not it *controls* a state axis. In a genome-scale Perturb-seq atlas of primary
-human CD4+ T cells, known regulators have ~100× more effect than non-regulators, so magnitude wins
-by construction. We define controllership *conditional on magnitude* — axis-specificity plus
-cross-donor coherence, each residualized against effect size — and show it is orthogonal to
-magnitude. The authoritative M→M+C test gains +0.357 AUPRC (0.539→0.896; 95% CI
-[+0.117,+0.538]); a fully refit leakage-free OOF estimate remains +0.215
-([+0.074,+0.560], permutation p=0.010). The simpler ranking view is 0.415→0.722. It behaves as a falsifiable, immune-scoped property (PASS in immune, FAIL in
-non-immune systems), decomposes into ~2.5 engagement axes, and — tested honestly across studies —
-does **not** predict CAR-T response (a well-powered null; a CD8-fraction baseline beats every axis).
-Claude ran every computation and caught its own leakage and overclaims.
+Perturbation screens call hits by effect size, so a gene that shifts many transcripts can mimic
+state control. In human CD4+ T cells, our first index lost
+to magnitude (AUPRC 0.35 versus 0.41). Claude-guided scientific critique separated reach, precision
+and repeatability and required native matched negatives, leave-one-marker-out axes and fully refit
+out-of-fold evaluation. Among detectable-effect, canonical axis-defining regulators, the
+authoritative M→M+C gain is +0.357 AUPRC (95% CI [+0.117,+0.538]); leakage-free OOF remains +0.215
+([+0.074,+0.560], permutation p=0.010). Descriptive: 0.415→0.722. Deterministic gates
+also return FAIL on an external non-marker regulator set, NULL for CAR-T response prediction and
+NOT-EVALUABLE for scGPT when required inputs are absent. Claude critiques and explains; versioned
+code computes every metric and verdict. ISCI is not a universal score or target list, but an
+auditable way to know whether a bounded biological claim survives.
 
 ---
 
 ## How the project maps to the judging criteria
 
 ### Impact (25%)
-The contribution is a **method the field lacks**: an operational, magnitude-deconfounded definition
-of a *controller* that is falsifiable on held-out perturbation systems, plus a discipline for the
-CAR-T translation question. The most impactful output is arguably the **honest clinical null** — it
-tells hematologists precisely where the transcriptional-state hypothesis pays off (controllership as
-perturbation biology) and where it does not (cross-study response prediction), redirecting effort
-toward composition and cross-study design. For onco-hematology (CAR-T failure, T-cell-engager
-resistance), a demarcated boundary is more useful than an un-transportable positive.
+The contribution is a workflow the field lacks: a magnitude-controlled definition of a bounded
+state controller plus an executable discipline for deciding whether evidence supports, refutes,
+fails to improve or cannot validly evaluate a claim. It protects perturbation biology from false
+controller calls and makes negative or structurally blocked results useful rather than invisible.
 
 ### Claude Use (25%)
-Claude was the scientist-operator, not a code assistant. It: ingested the data and literature;
-proposed and repeatedly **red-teamed its own method**, discovering that the original five-component
-index lost to a trivial magnitude baseline and pivoting to the conditional test; caught train/test
-leakage and re-ran with expression-matched negatives; built a one-command reproducible pipeline,
-a dataset registry, and a visual dashboard; retrieved and title-verified every literature citation
-to avoid fabrication; and wrote the manuscript, decision board, and this submission. Multiple
-adversarial self-audit rounds are visible in the commit history — the negative results are the proof
-the tool was used for science, not salesmanship.
+Claude was the scientific critic and evidence operator, not merely a code assistant. It challenged
+the failed five-component index, separated estimands, exposed leakage risks, demanded stronger
+controls, maintained the claim ledger and explained bounded verdicts. Deterministic, versioned code
+still computes all metrics and applies the frozen gates. The preserved FAIL, NULL and
+NOT-EVALUABLE cases demonstrate scientific abstention rather than salesmanship.
 
 ### Depth (20%)
-The analysis spans magnitude-conditional benchmarking with bootstrapped CIs and conditional
-likelihood-ratio tests; leakage controls and independent-positive replication; a four-system
-falsifiability test with pre-specified verdicts; a multi-axis capacity decomposition validated
-against a functional-killing proxy; magnitude-guarded curated enrichment; a signed
-perturbation→module graph establishing therapeutic direction as a third independent axis; and a
-pre-specified leave-one-study-out clinical test with a permutation null and a compositional
-baseline. Every headline number is reproducible from committed artifacts.
+The analysis includes magnitude-conditional benchmarking, native expression-matched negatives,
+leave-one-marker-out axes, hierarchical bootstrap, grouped OOF with every learnable step refit,
+permutation nulls, independent negative stress tests, a multi-study clinical null and explicit
+non-evaluable gates. Every stage claim is content-addressed in
+`outputs/hackathon/claim_manifest.json`.
 
 ### Demo (30%)
-A 3-minute narrated demo (script in `DEMO_SCRIPT.md`) walks the arc: the magnitude confound → the
-conditional fix and the doubled recovery → the four-system immune-scoped boundary → the honest
-clinical null → mechanism without overclaim. On-screen: the four-system forest plot, the axis-
-orthogonality heatmap, the leave-study-out null, the curated-enrichment quadrants, and the signed
-graph. The interactive dashboard (`outputs/dashboard/`) lets a viewer see each dataset's verdict
-against its pre-specified prediction.
+A 2:30 deterministic offline demo (`docs/hackathon_judge_demo.html`) walks one primary claim through
+evidence, leakage controls, a frozen gate, PASS and an explicit scope boundary. A compact trust
+matrix then shows FAIL, NULL and NOT-EVALUABLE before ending on a prospective donor-resolved
+Gladstone experiment. Six Full-HD static fallbacks are committed in `demo_assets/hackathon/`.
 
 ### Gladstone prize (greatest potential to advance the field)
-The reusable object is a **falsifiable property with a one-command test**: add a dataset as a config
-block, get a PASS/FAIL against its pre-specified prediction. That turns "is this signal real?" into
-a runnable experiment, and the immune-scoped boundary plus the well-powered clinical null give the
-community a calibrated, non-overclaimed foundation to build on.
+The next falsification is already designed: 54 guides across 25 target genes, paired no-stim and
+stimulated contexts and 8–12 independent donors. Fifty-three guide identities are confirmed;
+PAPOLG-1 remains low-support, and synthesis is explicitly blocked pending reference, off-target,
+on-target and vector-compatibility QC. The analysis and promotion gates are frozen in advance.
 
 ---
 
@@ -74,9 +63,8 @@ community a calibrated, non-overclaimed foundation to build on.
 - Few positives (12–21); bootstrap-stabilized and cross-condition-replicated. A fully independent
   external functional-regulator set was tested and failed, bounding the claim to canonical,
   axis-defining regulators.
-- Cell-level confirmation of the 2.5-axis structure is **done** (single-cell replication on the
-  455k-cell CAR-T atlas, CD8-controlled). Foundation-model triangulation (scGPT) remains scoped
-  (brief in `briefs/`) but pending GPU execution.
+- Foundation-model triangulation is currently **NOT-EVALUABLE**, because the required perturbation
+  expression profiles were absent locally; no gene-token substitute or fabricated metric was used.
 - The clinical result is a **negative**; nothing here is a validated biomarker or medical advice.
 
 ## Links
