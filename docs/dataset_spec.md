@@ -77,6 +77,24 @@ evidence and must not enter the ISCI result tables. Its YAML declares donor-, gu
 benchmark-capable inputs, but physical inspection correctly downgrades it to `DIAGNOSTIC_ONLY`
 because it contains only 2 observed positives, 2 donors and 1 condition.
 
+## Command-line interface
+
+After `uv sync`, the same boundary is available without writing Python:
+
+```bash
+isci validate examples/dataset_spec/mini_long_effects.yaml
+isci validate queued_dataset.yaml --structure-only
+isci inspect examples/dataset_spec/mini_long_effects.yaml
+isci inspect dataset.yaml \
+  --report outputs/my_dataset/inspection.json \
+  --canonical-output outputs/my_dataset/canonical.parquet
+```
+
+Exit code `0` means the requested validation/inspection completed; `2` means the spec, YAML or
+output request is invalid; `3` means the physical dataset is `NOT_EVALUABLE`. A diagnostic or
+benchmark-ready dataset still exits `0` because the capability is reported explicitly and no
+confirmatory verdict is implied.
+
 ## Physical tabular inspection
 
 The CSV/Parquet adapter:
@@ -105,6 +123,5 @@ ISCI biological `PASS`.
 
 ## What comes next
 
-The next implementation slices are the CLI (`validate` and `inspect`) and the AnnData effect-matrix
-adapter. The notebook should call these public interfaces rather than contain dataset-specific
-branching.
+The next implementation slices are the AnnData effect-matrix adapter and the researcher notebook.
+The notebook should call these public interfaces rather than contain dataset-specific branching.

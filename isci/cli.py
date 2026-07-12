@@ -1,0 +1,191 @@
+"""Command-line boundary for validating and inspecting external ISCI datasets."""
+
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+from typing import Any, Sequence
+
+import yaml
+
+from isci.adapters import RuntimeCapability, load_tabular_dataset
+from isci.dataset_spec import DatasetSpecError, load_dataset_spec, validate_dataset_spec
+
+
+EXIT_SUCCESS = 0
+EXIT_INVALID_SPEC = 2
+EXIT_NOT_EVALUABLE = 3
+
+
+def _repo_root(spec_path: Path, explicit_root: str | None) -> Path:
+    """Find a stable repository root instead of depending on the caller's shell directory."""
+
+    if explicit_root:
+        return Path(explicit_root).resolve()
+    resolved = spec_path.resolve()
+    for candidate in (resolved.parent, *resolved.parents):
+        if (candidate / "pyproject.toml").exists():
+            return candidate
+    return resolved.parent
+
+
+def _print_json(payload: dict[str, Any]) -> None:
+    print(json.dumps(payload, indent=2, sort_keys=True))
+
+
+def _write_json(path: str, payload: dict[str, Any]) -> None:
+    destination = Path(path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+
+
+def _config_error(command: str, code: str, message: str) -> dict[str, Any]:
+    """Return one predictable error shape for file, YAML and contract failures."""
+
+    return {
+        "command": command,
+        "ok": False,
+        "error": {"code": code, "message": message},
+    }
+
+
+def _load_raw_yaml(path: Path, command: str) -> tuple[Any | None, dict[str, Any] | None]:
+    try:
+        return yaml.safe_load(path.read_text()), None
+    except FileNotFoundError:
+        return None, _config_error(command, "SPEC_NOT_FOUND", "DatasetSpec file does not exist")
+    except yaml.YAMLError as exc:
+        return None, _config_error(command, "INVALID_YAML", type(exc).__name__)
+    except OSError as exc:
+        return None, _config_error(command, "SPEC_READ_ERROR", type(exc).__name__)
+
+
+def _validate(args: argparse.Namespace) -> int:
+    spec_path = Path(args.spec)
+    raw, error = _load_raw_yaml(spec_path, "validate")
+    if error is not None:
+        _print_json(error)
+        return EXIT_INVALID_SPEC
+
+    root = _repo_root(spec_path, args.repo_root)
+    report = validate_dataset_spec(raw, repo_root=root, check_paths=not args.structure_only)
+    payload = {
+        "command": "validate",
+        "ok": report.valid,
+        "report": report.to_dict(),
+    }
+    _print_json(payload)
+    return EXIT_SUCCESS if report.valid else EXIT_INVALID_SPEC
+
+
+def _save_canonical(path: str, table) -> None:
+    destination = Path(path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    if destination.suffix.lower() == ".csv":
+        table.to_csv(destination, index=False)
+        return
+    if destination.suffix.lower() == ".parquet":
+        table.to_parquet(destination, index=False)
+        return
+    raise ValueError("canonical output must end in .csv or .parquet")
+
+
+def _inspect(args: argparse.Namespace) -> int:
+    spec_path = Path(args.spec)
+    root = _repo_root(spec_path, args.repo_root)
+    try:
+        spec = load_dataset_spec(spec_path, repo_root=root, check_paths=True)
+    except FileNotFoundError:
+        _print_json(_config_error("inspect", "SPEC_NOT_FOUND", "DatasetSpec file does not exist"))
+        return EXIT_INVALID_SPEC
+    except yaml.YAMLError as exc:
+        _print_json(_config_error("inspect", "INVALID_YAML", type(exc).__name__))
+        return EXIT_INVALID_SPEC
+    except DatasetSpecError as exc:
+        payload = {
+            "command": "inspect",
+            "ok": False,
+            "error": {"code": "INVALID_SPEC", "message": "DatasetSpec validation failed"},
+            "report": exc.report.to_dict(),
+        }
+        _print_json(payload)
+        return EXIT_INVALID_SPEC
+
+    result = load_tabular_dataset(spec, repo_root=root)
+    inspection = result.inspection.to_dict()
+    payload = {
+        "command": "inspect",
+        "ok": result.inspection.evaluable,
+        "inspection": inspection,
+        "canonical_columns": list(result.table.columns),
+    }
+    if args.canonical_output and Path(args.canonical_output).suffix.lower() not in {
+        ".csv",
+        ".parquet",
+    }:
+        payload = _config_error(
+            "inspect", "INVALID_OUTPUT_FORMAT", "canonical output must end in .csv or .parquet"
+        )
+        _print_json(payload)
+        return EXIT_INVALID_SPEC
+    try:
+        if args.report:
+            _write_json(args.report, payload)
+        if args.canonical_output and result.inspection.evaluable:
+            _save_canonical(args.canonical_output, result.table)
+    except OSError as exc:
+        payload = _config_error("inspect", "OUTPUT_WRITE_ERROR", type(exc).__name__)
+        _print_json(payload)
+        return EXIT_INVALID_SPEC
+    _print_json(payload)
+    if result.inspection.runtime_capability == RuntimeCapability.NOT_EVALUABLE:
+        return EXIT_NOT_EVALUABLE
+    return EXIT_SUCCESS
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="isci",
+        description="Validate and inspect Perturb-seq datasets against DatasetSpec v1.",
+    )
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    validate_parser = subparsers.add_parser(
+        "validate", help="validate the DatasetSpec contract and declared paths"
+    )
+    validate_parser.add_argument("spec", help="path to DatasetSpec YAML")
+    validate_parser.add_argument(
+        "--repo-root", help="repository root for resolving contract-relative paths"
+    )
+    validate_parser.add_argument(
+        "--structure-only",
+        action="store_true",
+        help="validate structure without requiring data files to exist",
+    )
+    validate_parser.set_defaults(handler=_validate)
+
+    inspect_parser = subparsers.add_parser(
+        "inspect", help="open a tabular dataset and infer its observed capability"
+    )
+    inspect_parser.add_argument("spec", help="path to DatasetSpec YAML")
+    inspect_parser.add_argument(
+        "--repo-root", help="repository root for resolving contract-relative paths"
+    )
+    inspect_parser.add_argument("--report", help="optional JSON inspection report output")
+    inspect_parser.add_argument(
+        "--canonical-output", help="optional canonical .csv or .parquet output"
+    )
+    inspect_parser.set_defaults(handler=_inspect)
+    return parser
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Run the CLI and return a stable process exit code for notebooks and automation."""
+
+    args = build_parser().parse_args(argv)
+    return int(args.handler(args))
+
+
+if __name__ == "__main__":  # pragma: no cover - exercised through the installed command.
+    raise SystemExit(main())

@@ -22,6 +22,9 @@ dependencies = [
     "pert2state_model @ git+https://github.com/emdann/pert2state_model.git@main",
 ]
 
+[project.scripts]
+isci = "isci.cli:main"
+
 [project.optional-dependencies]
 insilico = [
     "celloracle>=0.21",

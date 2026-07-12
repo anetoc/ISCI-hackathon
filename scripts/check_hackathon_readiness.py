@@ -41,6 +41,8 @@ DECK = ROOT / "outputs" / "isci_hackathon_medical_deck.pptx"
 DATASET_SPEC_CODE = ROOT / "isci" / "dataset_spec.py"
 DATASET_ADAPTER_CODE = ROOT / "isci" / "adapters" / "tabular.py"
 DATASET_ADAPTER_EXPORTS = ROOT / "isci" / "adapters" / "__init__.py"
+DATASET_CLI_CODE = ROOT / "isci" / "cli.py"
+PYPROJECT = ROOT / "pyproject.toml"
 DATASET_SPEC_SCHEMA = ROOT / "contracts" / "dataset_spec.schema.json"
 DATASET_SPEC_DOC = ROOT / "docs" / "dataset_spec.md"
 DATASET_SPEC_EXAMPLE = ROOT / "examples" / "dataset_spec" / "mini_long_effects.yaml"
@@ -81,6 +83,7 @@ def main() -> None:
     dataset_adapter = load_tabular_dataset(dataset_spec, repo_root=ROOT)
     demo_html = DEMO.read_text()
     readme = (ROOT / "README.md").read_text()
+    pyproject = PYPROJECT.read_text()
     submission = (ROOT / "SUBMISSION.md").read_text()
     summary = submission.split("## 150-word summary", 1)[1].split("---", 1)[0]
     stage_script = (ROOT / "DEMO_SCRIPT.md").read_text()
@@ -126,6 +129,7 @@ def main() -> None:
         and dataset_spec_report.capability == DatasetCapability.CONFIRMATORY_DECLARED
         and dataset_adapter.inspection.runtime_capability == RuntimeCapability.DIAGNOSTIC_ONLY
         and dataset_adapter.inspection.canonical_rows == 8,
+        "dataset_cli_registered": 'isci = "isci.cli:main"' in pyproject,
         "demo_is_offline": "https://" not in demo_html and "http://" not in demo_html,
         "submission_summary_within_limit": 140 <= word_count(summary) <= 150,
         "spoken_script_within_budget": 300 <= word_count(spoken) <= 380,
@@ -151,6 +155,8 @@ def main() -> None:
         DATASET_SPEC_CODE,
         DATASET_ADAPTER_CODE,
         DATASET_ADAPTER_EXPORTS,
+        DATASET_CLI_CODE,
+        PYPROJECT,
         DATASET_SPEC_SCHEMA,
         DATASET_SPEC_EXAMPLE,
         DATASET_SPEC_FIXTURE,
