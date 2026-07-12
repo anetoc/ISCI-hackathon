@@ -2,7 +2,10 @@ import math
 
 import pandas as pd
 
-from isci.feature_extraction import extract_controller_features
+from isci.feature_extraction import (
+    extract_controller_features,
+    extract_controller_features_from_group_blocks,
+)
 
 
 AXES = {
@@ -163,3 +166,42 @@ def test_nonpositive_internal_weights_are_rejected():
 
     assert result.status == "NOT_EVALUABLE"
     assert result.issues[0].code == "INVALID_WEIGHTS"
+
+
+def test_group_block_extraction_matches_materialized_long_table():
+    x = pd.DataFrame(_rows("X", [{"A": 1.0, "B": 2.0, "C": 3.0}] * 2))
+    y = pd.DataFrame(_rows("Y", [{"A": -1.0, "B": -2.0, "C": -3.0}] * 2))
+    blocks = [
+        (("stim", "X"), x[x["donor"] == "D0"]),
+        (("stim", "X"), x[x["donor"] == "D1"]),
+        (("stim", "Y"), y),
+    ]
+
+    materialized = extract_controller_features(pd.concat([x, y], ignore_index=True), AXES)
+    streamed = extract_controller_features_from_group_blocks(blocks, AXES)
+
+    pd.testing.assert_frame_equal(materialized.features, streamed.features)
+    pd.testing.assert_frame_equal(materialized.axis_scores, streamed.axis_scores)
+    assert streamed.methods["streaming_grouped"] is True
+    assert streamed.methods["peak_summary_buffer_rows"] < len(pd.concat([x, y]))
+
+
+def test_stream_excludes_nonfinite_rows_with_explicit_counts():
+    block = pd.DataFrame(_rows("X", [{"A": 1.0, "B": 2.0, "C": 3.0}] * 2))
+    block.loc[0, "effect"] = float("nan")
+
+    result = extract_controller_features_from_group_blocks([(("stim", "X"), block)], AXES)
+
+    assert result.methods["excluded_nonfinite_rows"] == 1
+    assert "NONFINITE_ROWS_EXCLUDED" in {issue.code for issue in result.issues}
+
+
+def test_noncontiguous_stream_group_is_rejected():
+    x = pd.DataFrame(_rows("X", [{"A": 1.0, "B": 1.0, "C": 1.0}] * 2))
+    y = pd.DataFrame(_rows("Y", [{"A": 1.0, "B": 1.0, "C": 1.0}] * 2))
+    blocks = [(("stim", "X"), x), (("stim", "Y"), y), (("stim", "X"), x)]
+
+    result = extract_controller_features_from_group_blocks(blocks, AXES)
+
+    assert result.status == "NOT_EVALUABLE"
+    assert result.issues[0].code == "NONCONTIGUOUS_GROUP"

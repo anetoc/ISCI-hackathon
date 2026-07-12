@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from itertools import combinations
-from typing import Any
+from typing import Any, Iterable
 
 import numpy as np
 import pandas as pd
@@ -344,5 +344,140 @@ def extract_controller_features(
         "min_overlap_genes": min_overlap_genes,
         "leave_one_marker_out": True,
         "biological_verdict": "NOT_ISSUED",
+    }
+    return FeatureExtractionResult(status, features, axis_scores, tuple(issues), methods)
+
+
+def _summarize_effect_block(block: pd.DataFrame) -> tuple[pd.DataFrame, int]:
+    working = block.copy()
+    working["effect"] = pd.to_numeric(working["effect"], errors="coerce")
+    working["standardized_effect"] = pd.to_numeric(working["standardized_effect"], errors="coerce")
+    valid = np.isfinite(working["effect"]) & np.isfinite(working["standardized_effect"])
+    excluded = int((~valid).sum())
+    working = working.loc[valid]
+    if working.empty:
+        return pd.DataFrame(), excluded
+
+    keys = ["condition", "perturbation", "feature"]
+    keys.extend(column for column in ("donor", "guide") if column in working)
+    aggregations: dict[str, str] = {
+        "effect": "mean",
+        "standardized_effect": "mean",
+    }
+    for optional in ("target_expression", "n_guides", "n_cells"):
+        if optional in working:
+            working[optional] = pd.to_numeric(working[optional], errors="coerce")
+            aggregations[optional] = "mean"
+    if "benchmark_positive" in working:
+        aggregations["benchmark_positive"] = "max"
+    summary = (
+        working.groupby(keys, as_index=False, observed=True, sort=True, dropna=False)
+        .agg(aggregations)
+        .reset_index(drop=True)
+    )
+    weights = working.groupby(keys, observed=True, sort=True, dropna=False).size().to_numpy()
+    summary["_weight"] = weights
+    return summary, excluded
+
+
+def extract_controller_features_from_group_blocks(
+    group_blocks: Iterable[tuple[tuple[str, str], pd.DataFrame]],
+    axes_config: dict[str, Any],
+    *,
+    min_axis_genes: int = 3,
+    min_overlap_genes: int = 3,
+) -> FeatureExtractionResult:
+    """Extract features from contiguous H5AD group blocks with bounded screen-level memory."""
+
+    feature_frames = []
+    axis_frames = []
+    issues: list[FeatureExtractionIssue] = []
+    seen: set[tuple[str, str]] = set()
+    current_key: tuple[str, str] | None = None
+    summaries: list[pd.DataFrame] = []
+    source_rows = 0
+    excluded_rows = 0
+    peak_buffer_rows = 0
+    base_methods: dict[str, Any] = {}
+
+    def finalize_group() -> None:
+        nonlocal summaries, base_methods, peak_buffer_rows
+        if current_key is None:
+            return
+        if not summaries:
+            issues.append(
+                FeatureExtractionIssue(
+                    "GROUP_NO_FINITE_EFFECTS",
+                    "WARNING",
+                    current_key[1],
+                    current_key[0],
+                    "all effect rows in this group were non-finite",
+                )
+            )
+            return
+        peak_buffer_rows = max(peak_buffer_rows, sum(len(frame) for frame in summaries))
+        result = extract_controller_features(
+            pd.concat(summaries, ignore_index=True),
+            axes_config,
+            min_axis_genes=min_axis_genes,
+            min_overlap_genes=min_overlap_genes,
+        )
+        feature_frames.append(result.features)
+        axis_frames.append(result.axis_scores)
+        issues.extend(result.issues)
+        base_methods = result.methods
+        summaries = []
+
+    for key, block in group_blocks:
+        key = (str(key[0]), str(key[1]))
+        if current_key is not None and key != current_key:
+            finalize_group()
+            seen.add(current_key)
+            if key in seen:
+                issue = FeatureExtractionIssue(
+                    "NONCONTIGUOUS_GROUP",
+                    "ERROR",
+                    key[1],
+                    key[0],
+                    "streamed groups must be contiguous to preserve bounded memory",
+                )
+                return FeatureExtractionResult(
+                    "NOT_EVALUABLE", pd.DataFrame(), pd.DataFrame(), (issue,), {}
+                )
+        current_key = key
+        source_rows += len(block)
+        summary, excluded = _summarize_effect_block(block)
+        excluded_rows += excluded
+        if not summary.empty:
+            summaries.append(summary)
+    finalize_group()
+
+    if not feature_frames:
+        issue = FeatureExtractionIssue(
+            "EMPTY_INPUT", "ERROR", None, None, "stream contained no finite effect groups"
+        )
+        return FeatureExtractionResult(
+            "NOT_EVALUABLE", pd.DataFrame(), pd.DataFrame(), tuple([*issues, issue]), {}
+        )
+    if excluded_rows:
+        issues.append(
+            FeatureExtractionIssue(
+                "NONFINITE_ROWS_EXCLUDED",
+                "WARNING",
+                None,
+                None,
+                f"excluded {excluded_rows} of {source_rows} streamed effect rows",
+            )
+        )
+    features = pd.concat(feature_frames, ignore_index=True)
+    axis_scores = pd.concat(axis_frames, ignore_index=True)
+    complete = features[["magnitude", "specificity", "reproducibility"]].notna().all(axis=1)
+    status = "COMPLETE" if complete.all() else "PARTIAL" if complete.any() else "NOT_EVALUABLE"
+    methods = {
+        **base_methods,
+        "streaming_grouped": True,
+        "streamed_effect_rows": source_rows,
+        "excluded_nonfinite_rows": excluded_rows,
+        "peak_summary_buffer_rows": peak_buffer_rows,
     }
     return FeatureExtractionResult(status, features, axis_scores, tuple(issues), methods)

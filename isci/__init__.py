@@ -14,7 +14,11 @@ from isci.analysis_runner import (
     run_dataset,
     save_dataset_run,
 )
-from isci.feature_extraction import FeatureExtractionResult, extract_controller_features
+from isci.feature_extraction import (
+    FeatureExtractionResult,
+    extract_controller_features,
+    extract_controller_features_from_group_blocks,
+)
 from isci.adapters import (
     AnnDataAdapterError,
     AnnDataInspectionResult,
@@ -49,6 +53,7 @@ __all__ = [
     "iter_anndata_effect_blocks",
     "iter_anndata_group_effect_blocks",
     "extract_controller_features",
+    "extract_controller_features_from_group_blocks",
     "load_dataset_spec",
     "load_tabular_dataset",
     "run_controller_features",
