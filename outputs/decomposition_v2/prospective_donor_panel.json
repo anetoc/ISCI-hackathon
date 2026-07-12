@@ -1,0 +1,136 @@
+{
+  "status": "DESIGN_READY_SEQUENCE_VALIDATION_REQUIRED",
+  "selection": {
+    "primary_positives": [
+      "PRKD2",
+      "CD27",
+      "TRAF3IP2",
+      "PIK3AP1",
+      "GRAP",
+      "TNFRSF9",
+      "IL2RB",
+      "IL2RG"
+    ],
+    "matched_negatives": [
+      "ABCB10",
+      "APOBEC3C",
+      "APOBEC3D",
+      "APOL2",
+      "BICDL2",
+      "FOSL1",
+      "FOXL2NB",
+      "INPPL1",
+      "LHX4",
+      "LTBR",
+      "MUC1",
+      "OTUD7B",
+      "PAPOLG",
+      "SLA2",
+      "TNFRSF1B"
+    ],
+    "mechanistic_sentinels": [
+      "GATA3",
+      "TBX21"
+    ],
+    "non_target_controls": [
+      "NO-TARGET-3",
+      "NO-TARGET-1",
+      "NO-TARGET-4",
+      "NO-TARGET-5"
+    ],
+    "role_counts": {
+      "PRIMARY_POSITIVE": {
+        "targets": 8,
+        "guides": 16
+      },
+      "MATCHED_NEGATIVE": {
+        "targets": 15,
+        "guides": 30
+      },
+      "MECHANISTIC_SENTINEL": {
+        "targets": 2,
+        "guides": 4
+      },
+      "NON_TARGET_CONTROL": {
+        "targets": 1,
+        "guides": 4
+      }
+    },
+    "n_target_genes": 25,
+    "n_guide_constructs": 54
+  },
+  "selection_boundary": {
+    "used": [
+      "frozen is_positive and is_matched_negative labels",
+      "singleton guide-assignment coverage by public guide ID and context"
+    ],
+    "not_used": [
+      "effect reach",
+      "signed axis projections or precision",
+      "repeatability",
+      "GSE190604 replication or context-interaction outcomes"
+    ],
+    "sentinels_counted_in_primary_metric": false
+  },
+  "resource_assumptions": {
+    "paired_contexts_per_donor": 2,
+    "usable_cells_per_guide_donor_context": 50,
+    "usable_fraction": 0.6,
+    "recovered_cells_per_channel": 20000,
+    "channel_capacity_boundary": "configurable planning unit, not a vendor guarantee"
+  },
+  "resource_scenarios": [
+    {
+      "donors": 8,
+      "contexts": 2,
+      "n_guides": 54,
+      "usable_cells_per_guide_donor_context": 50,
+      "usable_fraction": 0.6,
+      "usable_cells": 43200,
+      "captured_cells": 72000,
+      "recovered_cells_per_channel": 20000,
+      "planning_channels": 4
+    },
+    {
+      "donors": 10,
+      "contexts": 2,
+      "n_guides": 54,
+      "usable_cells_per_guide_donor_context": 50,
+      "usable_fraction": 0.6,
+      "usable_cells": 54000,
+      "captured_cells": 90000,
+      "recovered_cells_per_channel": 20000,
+      "planning_channels": 5
+    },
+    {
+      "donors": 12,
+      "contexts": 2,
+      "n_guides": 54,
+      "usable_cells_per_guide_donor_context": 50,
+      "usable_fraction": 0.6,
+      "usable_cells": 64800,
+      "captured_cells": 108000,
+      "recovered_cells_per_channel": 20000,
+      "planning_channels": 6
+    }
+  ],
+  "ordering_gate": {
+    "status": "BLOCKED_PENDING_GUIDE_SEQUENCE_VALIDATION",
+    "reason": "the public local artifact contains guide IDs and assignments but no validated protospacer sequences",
+    "required_before_order": [
+      "map each guide ID to an authoritative sequence source",
+      "confirm CRISPR modality and vector compatibility",
+      "score on-target activity and sequence-specific off-target risk",
+      "approve substitutions and regenerate this manifest with an audit trail"
+    ]
+  },
+  "analysis_boundary": "Design and costing artifact only. Donor is the biological replicate; guides, wells, channels, and libraries do not increase the donor count.",
+  "provenance": {
+    "git_sha": "2c7e6c09e19305d5db43682471acc64ba146db39",
+    "data_sha256": "{\"data/external/gse190604/guidecalls.txt.gz\": \"ffd5a3050a69d013ddc09a43fae63642a7659cdb778f78c865e0829207e17b7c\", \"outputs/generalization/near_immune_scores.csv\": \"2f9c94a22d0205ab6bcbdecffcefa9509a8478f893d487eef8b4fc743b97ba75\"}",
+    "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+    "timestamp": "2026-07-12T14:56:09.705381-03:00",
+    "command": "python scripts/build_prospective_donor_panel.py",
+    "method_version": "prospective_donor_panel_v1"
+  }
+}
