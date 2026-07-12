@@ -202,9 +202,11 @@ def main() -> None:
         str(path.resolve().relative_to(ROOT)) if path.resolve().is_relative_to(ROOT) else path.name: sha256(path)
         for path in required
     }
+    # Tables carry one compact digest; the JSON summary retains the complete per-input mapping.
+    input_hash_manifest = json.dumps(input_hashes, sort_keys=True)
     provenance = {
         "git_sha": git_sha,
-        "data_sha256": json.dumps(input_hashes, sort_keys=True),
+        "data_sha256": hashlib.sha256(input_hash_manifest.encode()).hexdigest(),
         "axes_sha256": sha256(args.axes),
         "timestamp": timestamp,
         "command": shlex.join(["python", *sys.argv]),
@@ -259,6 +261,7 @@ def main() -> None:
             "run sequence-specific on-target and off-target assessment",
             "independent review before oligo ordering",
         ],
+        "input_sha256": input_hashes,
         "provenance": provenance,
     }
 
