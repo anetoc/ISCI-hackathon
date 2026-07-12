@@ -185,7 +185,7 @@
     {
       "id": "craftseq_baglaenko",
       "name": "CRAFTseq IL2RA state-dependent editing",
-      "accession": "Zenodo 15425510",
+      "accession": "Zenodo 15425510 (software only)",
       "external_independent": true,
       "primary_human_t_cells": true,
       "single_cell_perturbation": true,
@@ -196,11 +196,12 @@
       "matched_controls": true,
       "eligible_positive_count": 0,
       "eligible_negative_count": 0,
-      "public_processed_data": true,
-      "relevance": "Best donor/context design, but it tests one IL2RA variant rather than a controller panel.",
+      "public_processed_data": false,
+      "relevance": "Best donor/context design, but it tests one IL2RA variant and its cell-level Th1/Treg data are not in the public data deposit.",
       "sources": [
         "https://www.nature.com/articles/s41586-025-09313-3",
-        "https://doi.org/10.5281/zenodo.15425510"
+        "https://doi.org/10.5281/zenodo.15425510",
+        "https://doi.org/10.5281/zenodo.15935857"
       ],
       "decision": "DIAGNOSTIC_ONLY",
       "gates": {
@@ -214,12 +215,13 @@
         "matched_controls": true,
         "positive_coverage": false,
         "negative_coverage": false,
-        "public_processed_data": true
+        "public_processed_data": false
       },
       "failed_gates": [
         "at_least_six_donors",
         "positive_coverage",
-        "negative_coverage"
+        "negative_coverage",
+        "public_processed_data"
       ],
       "unknown_gates": []
     },
@@ -268,8 +270,8 @@
     }
   ],
   "provenance": {
-    "git_sha": "61d891308e6b7cdc8e54246481b9a2606dd32059",
-    "timestamp": "2026-07-12T14:43:43.958277-03:00",
+    "git_sha": "c432d89872757391ac100e5d7f6e3fa451e6db95",
+    "timestamp": "2026-07-12T14:44:51.403572-03:00",
     "command": "python scripts/build_donor_dataset_inventory.py"
   }
 }
