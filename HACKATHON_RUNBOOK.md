@@ -14,7 +14,7 @@ make hackathon-package
 Expected terminal result:
 
 ```text
-AUTOMATED_GATES_PASS_HUMAN_GATES_PENDING: 13/13 automated gates passed
+AUTOMATED_GATES_PASS_HUMAN_GATES_PENDING: 14/14 automated gates passed
 ```
 
 The status deliberately remains `HUMAN_GATES_PENDING` until the narrated rehearsals, PI wording
