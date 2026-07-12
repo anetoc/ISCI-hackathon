@@ -30,6 +30,7 @@ def cell_level_raw():
     raw["mapping"] = {
         "perturbation": "perturbation",
         "guide": "guide_id",
+        "guide_count": "nperts",
         "replicate": "replicate_id",
         "condition": "condition",
         "donor": "donor_id",
@@ -115,6 +116,7 @@ def test_cell_level_contract_is_explicitly_preprocessing_only(tmp_path):
             "preprocessing.normalization",
         ),
         (lambda raw: raw["mapping"].pop("replicate"), "mapping.replicate"),
+        (lambda raw: raw["mapping"].pop("guide_count"), "mapping.guide_count"),
     ],
 )
 def test_cell_level_contract_rejects_ambiguous_preprocessing(mutation, expected_path):

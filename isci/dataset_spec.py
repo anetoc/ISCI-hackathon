@@ -171,6 +171,7 @@ _MAPPING_FIELDS = {
     "condition",
     "donor",
     "guide",
+    "guide_count",
     "replicate",
     "control",
     "magnitude",
@@ -558,7 +559,7 @@ def validate_dataset_spec(
         if not isinstance(value, str) or not value.strip():
             _add(issues, "INVALID_TYPE", f"mapping.{key}", "must be a non-empty column name")
     layout_requirements = {
-        "anndata_cells": {"perturbation", "guide", "replicate"},
+        "anndata_cells": {"perturbation", "guide", "guide_count", "replicate"},
         "anndata_effects": {"perturbation"},
         "long_effects": {"perturbation", "feature", "effect", "standardized_effect"},
         "controller_features": {

@@ -130,6 +130,9 @@
         "guide": {
           "$ref": "#/$defs/columnName"
         },
+        "guide_count": {
+          "$ref": "#/$defs/columnName"
+        },
         "replicate": {
           "$ref": "#/$defs/columnName"
         },
@@ -532,6 +535,7 @@
             "required": [
               "perturbation",
               "guide",
+              "guide_count",
               "replicate"
             ]
           },
