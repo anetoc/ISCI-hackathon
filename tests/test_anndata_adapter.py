@@ -23,6 +23,7 @@ from isci.dataset_spec import (
 )
 from isci.cli import EXIT_INVALID_SPEC, EXIT_SUCCESS, main
 from isci.analysis_runner import run_dataset
+from isci.effect_builder import build_anndata_effects
 
 ad = pytest.importorskip("anndata")
 
@@ -39,6 +40,7 @@ def _write_h5ad(
     standardized=None,
     positives=("IRF1", "STAT6"),
     var_names=("STATE_A", "STATE_B", "STATE_C"),
+    x=None,
 ):
     obs = obs.copy()
     obs.index = [f"obs_{index}" for index in range(len(obs))]
@@ -51,7 +53,8 @@ def _write_h5ad(
         else np.arange(n_obs * n_vars).reshape(n_obs, n_vars) / 10
     )
     standardized = np.asarray(standardized) if standardized is not None else effect / 0.25
-    adata = ad.AnnData(X=np.zeros((n_obs, n_vars)), obs=obs, var=var)
+    x = np.asarray(x) if x is not None else np.zeros((n_obs, n_vars))
+    adata = ad.AnnData(X=x, obs=obs, var=var)
     adata.layers["log_fc"] = effect
     adata.layers["zscore"] = standardized
     adata.write_h5ad(tmp_path / "effects.h5ad")
@@ -120,8 +123,11 @@ def _cell_obs(*, cells_per_stratum=10, include_donor=True):
     return pd.DataFrame(rows)
 
 
-def _cell_preflight_spec(tmp_path, observations, *, include_donor=True):
-    spec = _write_h5ad(tmp_path, observations, positives=())
+def _cell_preflight_spec(tmp_path, observations, *, include_donor=True, x=None):
+    spec = _write_h5ad(tmp_path, observations, positives=(), x=x)
+    config = tmp_path / "config"
+    config.mkdir(exist_ok=True)
+    (config / "axes.yaml").write_text((ROOT / "config" / "axes.yaml").read_text())
     mapping = {
         "perturbation": "target",
         "condition": "condition",
@@ -223,6 +229,64 @@ def test_cell_preflight_rejects_absent_controls_or_source_layer(tmp_path):
     assert any(issue.code == "CONTROLS_NOT_OBSERVED" for issue in control_result.issues)
     assert layer_result.status == CellPreflightStatus.NOT_EVALUABLE
     assert any(issue.code == "SOURCE_LAYER_MISSING" for issue in layer_result.issues)
+
+
+def test_effect_builder_writes_a_valid_generated_effect_spec(tmp_path):
+    observations = _cell_obs()
+    profiles = {
+        "NT": [10.0, 10.0, 10.0],
+        "CTRL_A": [30.0, 10.0, 10.0],
+        "CTRL_B": [10.0, 30.0, 10.0],
+    }
+    x = np.asarray([profiles[target] for target in observations["target"]])
+    spec = _cell_preflight_spec(tmp_path, observations, x=x)
+    output = tmp_path / "outputs" / "effects"
+
+    result = build_anndata_effects(
+        spec,
+        repo_root=tmp_path,
+        output_dir=output,
+        block_rows=3,
+    )
+
+    assert result.completed
+    assert result.status == "EFFECTS_BUILT"
+    assert result.n_effect_rows == 4
+    assert result.n_features == 3
+    generated = load_dataset_spec(result.generated_spec_path, repo_root=tmp_path, check_paths=True)
+    inspected = inspect_anndata_dataset(
+        generated, repo_root=tmp_path, scan_values=True, block_rows=2
+    )
+    assert inspected.inspection.evaluable
+    assert inspected.invalid_effect_values == 0
+    built = ad.read_h5ad(result.effects_path)
+    assert set(built.layers) == {"effect", "standardized_effect"}
+    assert np.allclose(np.asarray(built.layers["standardized_effect"]).mean(axis=0), 0.0)
+
+
+def test_effect_builder_stops_when_preflight_has_no_controls(tmp_path):
+    observations = _cell_obs().assign(target="CTRL_A")
+    spec = _cell_preflight_spec(tmp_path, observations)
+    output = tmp_path / "outputs"
+
+    result = build_anndata_effects(spec, repo_root=tmp_path, output_dir=output)
+
+    assert result.status == "PREFLIGHT_FAILED"
+    assert not output.exists()
+
+
+def test_effect_builder_rejects_values_that_are_not_raw_counts(tmp_path):
+    observations = _cell_obs()
+    x = np.ones((len(observations), 3))
+    x[0, 0] = -1.0
+    spec = _cell_preflight_spec(tmp_path, observations, x=x)
+    output = tmp_path / "outputs"
+
+    result = build_anndata_effects(spec, repo_root=tmp_path, output_dir=output, block_rows=4)
+
+    assert result.status == "SOURCE_VALUES_INVALID"
+    assert result.report["reason"] == "SOURCE_NOT_RAW_COUNTS"
+    assert not output.exists()
 
 
 def test_full_value_scan_detects_nonfinite_effects(tmp_path):

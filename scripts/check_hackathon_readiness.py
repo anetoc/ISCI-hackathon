@@ -46,6 +46,7 @@ CELL_PREFLIGHT_CODE = ROOT / "isci" / "adapters" / "anndata_cells.py"
 DATASET_CLI_CODE = ROOT / "isci" / "cli.py"
 DATASET_RUNNER_CODE = ROOT / "isci" / "analysis_runner.py"
 FEATURE_EXTRACTION_CODE = ROOT / "isci" / "feature_extraction.py"
+EFFECT_BUILDER_CODE = ROOT / "isci" / "effect_builder.py"
 LOCKED_KERNEL = ROOT / "skills" / "isci-controllership" / "kernel.py"
 LOCKED_METHOD = ROOT / "skills" / "isci-controllership" / "SKILL.md"
 RESEARCHER_NOTEBOOK = ROOT / "notebooks" / "ISCI_Researcher_Track_Walkthrough.ipynb"
@@ -99,6 +100,7 @@ def main() -> None:
     cell_preflight_source = CELL_PREFLIGHT_CODE.read_text()
     dataset_runner_source = DATASET_RUNNER_CODE.read_text()
     feature_extraction_source = FEATURE_EXTRACTION_CODE.read_text()
+    effect_builder_source = EFFECT_BUILDER_CODE.read_text()
     dataset_cli_source = DATASET_CLI_CODE.read_text()
     notebook = json.loads(RESEARCHER_NOTEBOOK.read_text())
     notebook_code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
@@ -175,6 +177,10 @@ def main() -> None:
         in feature_extraction_source
         and "leave_one_marker_out" in feature_extraction_source
         and "run_dataset" in dataset_runner_source,
+        "cell_effect_builder_present": "build_anndata_effects" in effect_builder_source
+        and "SOURCE_NOT_RAW_COUNTS" in effect_builder_source
+        and "def _standardize" in effect_builder_source
+        and '"biological_verdict": "NOT_ISSUED"' in effect_builder_source,
         "researcher_notebook_executed": len(notebook_code_cells) >= 8
         and all(cell.get("execution_count") is not None for cell in notebook_code_cells)
         and not notebook_errors,
@@ -208,6 +214,7 @@ def main() -> None:
         DATASET_CLI_CODE,
         DATASET_RUNNER_CODE,
         FEATURE_EXTRACTION_CODE,
+        EFFECT_BUILDER_CODE,
         LOCKED_KERNEL,
         LOCKED_METHOD,
         RESEARCHER_NOTEBOOK,

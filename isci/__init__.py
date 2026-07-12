@@ -20,6 +20,7 @@ from isci.feature_extraction import (
     extract_controller_features,
     extract_controller_features_from_group_blocks,
 )
+from isci.effect_builder import EffectBuildResult, build_anndata_effects
 from isci.adapters import (
     AnnDataAdapterError,
     AnnDataInspectionResult,
@@ -46,6 +47,7 @@ __all__ = [
     "DatasetSpecError",
     "DatasetRunResult",
     "FeatureExtractionResult",
+    "EffectBuildResult",
     "AnnDataAdapterError",
     "AnnDataInspectionResult",
     "AdapterIssue",
@@ -61,6 +63,7 @@ __all__ = [
     "iter_anndata_group_effect_blocks",
     "extract_controller_features",
     "extract_controller_features_from_group_blocks",
+    "build_anndata_effects",
     "load_dataset_spec",
     "load_tabular_dataset",
     "preflight_anndata_cells",
