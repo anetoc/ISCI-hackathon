@@ -133,8 +133,9 @@ clinical response prediction, therapeutic direction or therapeutic desirability.
 
 1. **Acquire multi-donor resolution:** the target-paired diagnostic was directional but missed its
    swap-null gate (p=0.091). GSE190604 donor recovery is a confirmatory no-go: ~154.2 GB of raw mRNA
-   downloads would resolve only two donors. Prioritize a matched donor-resolved dataset with at
-   least six evaluable donors, then use cross-classified held-gene/held-donor validation.
+   downloads would resolve only two donors. A source-backed search of six public candidates found
+   no confirmatory GO. Prioritize a prospective matched donor-resolved experiment, then use
+   cross-classified held-gene/held-donor validation.
 2. **Independent Th2 replication:** freeze labels and overlap/matching rules before an untouched,
    broader polarization perturbation dataset; GSE190604 was targeted and previously inspected.
 3. **Signed control:** separate direction from precision using KD/CRISPRa pairs or a signed rescue

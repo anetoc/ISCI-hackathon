@@ -15,6 +15,14 @@ both individuals, but cannot estimate between-donor variation well enough to con
 context interaction. The scientific return does not justify a local download or cloud spend as the
 next confirmatory step.
 
+## Acquisition outcome
+
+The source-backed search completed on 2026-07-12 found six diagnostically useful datasets and no
+confirmatory `GO`. The adjudication is recorded in `reports/DONOR_DATASET_ACQUISITION_REPORT.md` and
+`outputs/decomposition_v2/donor_dataset_inventory.json`. In particular, the five-individual
+CRAFTseq Th1/Treg experiment edits only one IL2RA variant and its cell-level IL2RA dataset is not in
+the public Zenodo deposits. It cannot be used as a small external controller panel.
+
 ## Preferred acquisition target
 
 Find or generate a CD4/T-cell perturbation dataset satisfying all gates below:
