@@ -12,7 +12,8 @@ def test_readiness_report_passes_automated_gates_without_faking_human_approval()
     report = json.loads(REPORT.read_text())
     assert report["status"] == "AUTOMATED_GATES_PASS_HUMAN_GATES_PENDING"
     assert all(report["checks"].values())
-    assert len(report["checks"]) == 12
+    assert len(report["checks"]) == 13
     assert len(report["human_gates_pending"]) == 5
     assert report["details"]["local_path_violations"] == []
     assert report["details"]["forbidden_tracked_files"] == []
+    assert len(report["details"]["medical_deck_sha256"]) == 64

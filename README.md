@@ -25,6 +25,10 @@ versions of one number; the hierarchy is frozen in `reports/result_lock.md`.
 > [`MP4 fallback`](demo_assets/hackathon/hackathon_fallback_2m30.mp4). Both are generated from the
 > same frozen claim and timing manifests and run fully offline.
 
+> **Medical-language presentation:** [`outputs/isci_hackathon_medical_deck.pptx`](outputs/isci_hackathon_medical_deck.pptx)
+> explains the question, evidence, limits and Gladstone experiment with the project's real figures.
+> See [`DELIVERABLE.md`](DELIVERABLE.md) for a plain-language map of the complete artifact.
+
 ## What the framework actually delivers — an adjudication table
 
 The deliverable is not the ranking; it is a system that returns an honest verdict for each question,

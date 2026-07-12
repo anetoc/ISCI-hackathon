@@ -25,6 +25,7 @@ VIDEO = ROOT / "demo_assets" / "hackathon" / "hackathon_fallback_2m30.mp4"
 VIDEO_MANIFEST = ROOT / "outputs" / "hackathon" / "video_manifest.json"
 SCREENSHOT_MANIFEST = ROOT / "outputs" / "hackathon" / "screenshot_manifest.json"
 DEMO = ROOT / "docs" / "hackathon_judge_demo.html"
+DECK = ROOT / "outputs" / "isci_hackathon_medical_deck.pptx"
 PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
 
 
@@ -65,6 +66,7 @@ def main() -> None:
         ROOT / "SUBMISSION.md",
         ROOT / "DEMO_SCRIPT.md",
         ROOT / "JUDGE_QA.md",
+        ROOT / "DELIVERABLE.md",
         DEMO,
     ]
     local_paths = [str(path.relative_to(ROOT)) for path in public_surfaces if "/Users/" in path.read_text()]
@@ -87,6 +89,7 @@ def main() -> None:
         ),
         "video_matches_manifest": VIDEO.exists() and sha256(VIDEO) == video_manifest["output_sha256"],
         "video_is_150_seconds": video_manifest["duration_seconds"] == 150.0,
+        "medical_deck_present": DECK.exists() and DECK.stat().st_size > 100_000,
         "demo_is_offline": "https://" not in demo_html and "http://" not in demo_html,
         "submission_summary_within_limit": 140 <= word_count(summary) <= 150,
         "spoken_script_within_budget": 300 <= word_count(spoken) <= 380,
@@ -108,6 +111,7 @@ def main() -> None:
         VIDEO_MANIFEST,
         SCREENSHOT_MANIFEST,
         DEMO,
+        DECK,
         *public_surfaces,
     ]
     report = {
@@ -117,6 +121,7 @@ def main() -> None:
         "details": {
             "submission_summary_words": word_count(summary),
             "spoken_script_words": word_count(spoken),
+            "medical_deck_sha256": sha256(DECK) if DECK.exists() else None,
             "local_path_violations": local_paths,
             "forbidden_tracked_files": forbidden_tracked,
         },

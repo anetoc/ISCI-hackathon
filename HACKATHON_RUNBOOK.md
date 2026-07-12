@@ -14,7 +14,7 @@ make hackathon-package
 Expected terminal result:
 
 ```text
-AUTOMATED_GATES_PASS_HUMAN_GATES_PENDING: 12/12 automated gates passed
+AUTOMATED_GATES_PASS_HUMAN_GATES_PENDING: 13/13 automated gates passed
 ```
 
 The status deliberately remains `HUMAN_GATES_PENDING` until the narrated rehearsals, PI wording
@@ -26,6 +26,8 @@ approval and logged-out public-link checks are completed.
 2. **Autoplay rehearsal:** open `docs/hackathon_judge_demo.html?autoplay=1`.
 3. **Timed offline fallback:** open `demo_assets/hackathon/hackathon_fallback_2m30.mp4`.
 4. **Manual static fallback:** present `demo_assets/hackathon/01_*.png` through `06_*.png`.
+5. **Medical-language deck:** open `outputs/isci_hackathon_medical_deck.pptx`; slides 1–8 form
+   the core narrative and slides 9–10 are the judge appendix.
 
 Never invoke a remote model during the stage presentation. The Claude contribution is visible in
 the scientific correction history and explanation layer; statistics and gates remain deterministic.
