@@ -110,13 +110,26 @@
     "verified_record": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE190604",
     "verified_at": "2026-07-12"
   },
+  "donor_design": {
+    "status": "PAIRED_DESIGN_DONOR_MIXED_NOT_RESOLVED",
+    "n_donors": 2,
+    "design": "cells from the two blood donors were split across no-stim and stimulated conditions, then normalized and mixed 1:1 before droplet loading",
+    "well_interpretation": "four 10x replicate wells per condition contain the donor mixture; well number is not a donor identifier",
+    "processed_matrix_has_donor_id": false,
+    "basis": "official GEO extraction protocols for GSM5726254 and GSM5726258 state that sorted cells from two blood donors were normalized and mixed 1:1 for each condition; the treatment protocol states that cells were split into the two conditions",
+    "verified_records": [
+      "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5726254",
+      "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5726258"
+    ],
+    "verified_at": "2026-07-12"
+  },
   "replication_design": {
     "status": "TARGETED_PANEL_METHOD_REQUIRED",
     "reason": "74 targets cannot support five disjoint negatives for each of 23 positives; use gene-level overlap weighting and nested OOF instead of disjoint blocks"
   },
   "matrix_intake": {
     "compressed_bytes": 996264242,
-    "free_bytes": 19267981312,
+    "free_bytes": 15416745984,
     "download_safe_at_12_gib_floor": true,
     "processing": "two-pass streaming MatrixMarket; never materialize decompressed MTX"
   },
@@ -134,5 +147,5 @@
       "sha256": "ffd5a3050a69d013ddc09a43fae63642a7659cdb778f78c865e0829207e17b7c"
     }
   },
-  "timestamp": "2026-07-12T13:28:56.126609-03:00"
+  "timestamp": "2026-07-12T14:22:46.343112-03:00"
 }

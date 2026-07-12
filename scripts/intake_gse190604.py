@@ -84,6 +84,30 @@ def main() -> None:
             "verified_record": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE190604",
             "verified_at": "2026-07-12",
         },
+        "donor_design": {
+            "status": "PAIRED_DESIGN_DONOR_MIXED_NOT_RESOLVED",
+            "n_donors": 2,
+            "design": (
+                "cells from the two blood donors were split across no-stim and stimulated "
+                "conditions, then normalized and mixed 1:1 before droplet loading"
+            ),
+            "well_interpretation": (
+                "four 10x replicate wells per condition contain the donor mixture; well number "
+                "is not a donor identifier"
+            ),
+            "processed_matrix_has_donor_id": False,
+            "basis": (
+                "official GEO extraction protocols for GSM5726254 and GSM5726258 state that "
+                "sorted cells from two blood donors were normalized and mixed 1:1 for each "
+                "condition; the treatment protocol states that cells were split into the two "
+                "conditions"
+            ),
+            "verified_records": [
+                "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5726254",
+                "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5726258",
+            ],
+            "verified_at": "2026-07-12",
+        },
         "replication_design": {
             "status": "TARGETED_PANEL_METHOD_REQUIRED",
             "reason": (
