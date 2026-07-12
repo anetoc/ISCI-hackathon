@@ -182,8 +182,8 @@ def main() -> None:
         "p_context_swap": p_swap,
         "null_median": float(np.median(null)),
         "boundary": (
-            "Post-result target-paired diagnostic; not donor-paired, mechanistic or "
-            "independent replication."
+            "Post-result target-paired diagnostic from a donor-mixed matrix; not "
+            "donor-resolved, mechanistic or independent replication."
         ),
         "provenance": provenance,
     }

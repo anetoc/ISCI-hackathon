@@ -73,7 +73,9 @@ gate (p=0.091; null median +0.010). The verdict is **DIRECTIONAL_UNCERTAIN**.
 
 Thus the observed contrast is stable to resampling this target panel but is not yet rare enough
 under context exchange. This increases the priority of a paired context experiment; it does not
-establish a stimulation interaction. The available analysis is target-paired, not donor-paired.
+establish a stimulation interaction. The original experiment used the same two blood donors across
+conditions, mixed 1:1 before droplet loading, but the processed matrix has no donor identity. The
+available analysis is therefore target-paired and donor-mixed, not donor-resolved.
 
 ## Topology-conditional null: resolving the previously non-evaluable axes
 
@@ -129,9 +131,9 @@ clinical response prediction, therapeutic direction or therapeutic desirability.
 
 ## Highest-value next experiments
 
-1. **Resolve the stimulation interaction at donor level:** the target-paired diagnostic was
-   directional but missed its swap-null gate (p=0.091). Use matched donor-level
-   unstimulated/stimulated arms and an explicit donor-clustered context×precision interaction.
+1. **Recover donor resolution:** the target-paired diagnostic was directional but missed its
+   swap-null gate (p=0.091). Assess genotype-based demultiplexing from raw GSE190604 reads, then fit
+   a donor-clustered context×precision interaction. Do not treat well number as donor identity.
 2. **Independent Th2 replication:** freeze labels and overlap/matching rules before an untouched,
    broader polarization perturbation dataset; GSE190604 was targeted and previously inspected.
 3. **Signed control:** separate direction from precision using KD/CRISPRa pairs or a signed rescue

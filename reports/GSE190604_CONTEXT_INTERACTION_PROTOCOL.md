@@ -19,8 +19,10 @@ stimulation than under stimulation in the same targeted CRISPRa panel?
 - Require at least eight positive and fifteen negative complete gene pairs.
 - The unit of resampling and context exchange is the gene, never a target×context row.
 
-The public files available to this analysis support target pairing but do not establish donor
-pairing. The result cannot be described as a donor-level interaction.
+The official GEO protocols establish a paired biological design with two blood donors: cells were
+split across conditions and the two donors were then mixed 1:1 before droplet loading. The processed
+matrix does not carry donor identity, and each of the four wells is a replicate of the donor mixture,
+not one donor. The current result therefore cannot be described as a donor-resolved interaction.
 
 ## Statistic
 
@@ -56,7 +58,7 @@ The same seed and sorted gene order are used in both contexts, so fold membershi
 - `NOT_EVALUABLE`: pair-count, finitude or class-count gate fails.
 
 Even `POSTHOC_CONTEXT_SUPPORT` means only that the already observed GSE190604 divergence survives a
-paired diagnostic. It does not establish a stimulation mechanism, donor-level transport,
+paired diagnostic. It does not establish a stimulation mechanism, donor-resolved transport,
 therapeutic direction or independent replication.
 
 ## Executed result
