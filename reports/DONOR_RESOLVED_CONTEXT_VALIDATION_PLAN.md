@@ -39,6 +39,30 @@ Find or generate a CD4/T-cell perturbation dataset satisfying all gates below:
 Datasets failing gates 1–5 may be used for method development or descriptive diagnostics, not for
 claim promotion.
 
+## Prospective panel readiness
+
+The outcome-blind design is now executable and versioned in
+`outputs/decomposition_v2/prospective_donor_panel.csv` and its JSON summary. The primary inference
+panel contains PRKD2, CD27, TRAF3IP2, PIK3AP1, GRAP, TNFRSF9, IL2RB and IL2RG plus all fifteen
+frozen matched negatives. GATA3 and TBX21 are mechanistic sentinels outside the primary metric.
+With two guide candidates per target and four non-targeting candidates, the design has 25 target
+genes and 54 guide constructs.
+
+At the default target of 50 usable cells per guide×donor×context and a conservative 60% combined
+usable fraction, the planning scenarios are:
+
+| donors | usable cells | captured cells | planning channels at 20k recovered cells |
+|---:|---:|---:|---:|
+| 8 | 43,200 | 72,000 | 4 |
+| 10 | 54,000 | 90,000 | 5 |
+| 12 | 64,800 | 108,000 | 6 |
+
+The 20k channel capacity is a configurable costing unit, not a vendor guarantee. Oligo ordering
+remains blocked because the local public artifact contains guide IDs but not validated protospacer
+sequences. The sequence mapping, CRISPRa/vector compatibility, on-target activity and
+sequence-specific off-target review must close before synthesis. The governing selection and
+substitution rules are frozen in `reports/PROSPECTIVE_DONOR_PANEL_PROTOCOL.md`.
+
 ## Frozen analysis shape for a suitable dataset
 
 - Build target×donor×context pseudobulk effects against donor/context-matched controls.

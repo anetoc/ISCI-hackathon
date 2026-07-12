@@ -37,15 +37,28 @@ does not mean that the dataset may be substituted into the confirmatory controll
 ## Recommended execution path
 
 The next decisive step is a prospective targeted CRISPRa experiment rather than another broad
-public-data reanalysis:
+public-data reanalysis. Its computational design slice is now complete:
 
-- frozen minimum panel: eight positive regulators and fifteen matched negatives;
-- two guides per target plus shared non-targeting controls;
+- frozen primary panel: PRKD2, CD27, TRAF3IP2, PIK3AP1, GRAP, TNFRSF9, IL2RB and IL2RG plus all
+  fifteen matched negatives;
+- GATA3 and TBX21 as mechanistic sentinels outside the primary metric;
+- two guide candidates per target plus four non-targeting candidates, totaling 54 constructs;
 - matched no-stim and stimulated arms for every donor;
 - 8–12 donors as a planning range, with final n determined from pilot donor-contrast variance;
 - target×guide×donor×context pseudobulk and on-target QC;
 - cross-classified held-gene/held-donor evaluation defined in
   `reports/DONOR_RESOLVED_CONTEXT_VALIDATION_PLAN.md`.
+
+The generated manifest and resource plan are
+`outputs/decomposition_v2/prospective_donor_panel.csv` and
+`outputs/decomposition_v2/prospective_donor_panel.json`. At 50 usable cells per
+guide×donor×context and a 60% combined usable fraction, the 8/10/12-donor scenarios require
+72,000/90,000/108,000 captured cells. These figures are planning assumptions, not assay-yield
+guarantees.
+
+The next gate is sequence resolution, not oligo ordering. Public GSE190604 guide IDs must be mapped
+to authoritative protospacer sequences and pass CRISPRa/vector, on-target and sequence-specific
+off-target validation. No sequence should be inferred from the identifier alone.
 
 Until pilot donor-level variance exists, presenting a precise power-derived donor count would be
 false precision. A power-planning utility is now implemented for the first real pilot:
