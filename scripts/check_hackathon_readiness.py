@@ -46,6 +46,7 @@ DATASET_CLI_CODE = ROOT / "isci" / "cli.py"
 DATASET_RUNNER_CODE = ROOT / "isci" / "analysis_runner.py"
 LOCKED_KERNEL = ROOT / "skills" / "isci-controllership" / "kernel.py"
 LOCKED_METHOD = ROOT / "skills" / "isci-controllership" / "SKILL.md"
+RESEARCHER_NOTEBOOK = ROOT / "notebooks" / "ISCI_Researcher_Track_Walkthrough.ipynb"
 PYPROJECT = ROOT / "pyproject.toml"
 DATASET_SPEC_SCHEMA = ROOT / "contracts" / "dataset_spec.schema.json"
 DATASET_SPEC_DOC = ROOT / "docs" / "dataset_spec.md"
@@ -91,6 +92,14 @@ def main() -> None:
     anndata_adapter_source = ANNDATA_ADAPTER_CODE.read_text()
     dataset_runner_source = DATASET_RUNNER_CODE.read_text()
     dataset_cli_source = DATASET_CLI_CODE.read_text()
+    notebook = json.loads(RESEARCHER_NOTEBOOK.read_text())
+    notebook_code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
+    notebook_errors = [
+        output
+        for cell in notebook_code_cells
+        for output in cell.get("outputs", [])
+        if output.get("output_type") == "error"
+    ]
     submission = (ROOT / "SUBMISSION.md").read_text()
     summary = submission.split("## 150-word summary", 1)[1].split("---", 1)[0]
     stage_script = (ROOT / "DEMO_SCRIPT.md").read_text()
@@ -103,6 +112,7 @@ def main() -> None:
         ROOT / "JUDGE_QA.md",
         ROOT / "DELIVERABLE.md",
         DATASET_SPEC_DOC,
+        RESEARCHER_NOTEBOOK,
         DEMO,
     ]
     local_paths = [
@@ -143,6 +153,9 @@ def main() -> None:
         "dataset_runner_bounded": "run_controller_features" in dataset_runner_source
         and '"biological_verdict": "NOT_ISSUED"' in dataset_runner_source
         and '"run"' in dataset_cli_source,
+        "researcher_notebook_executed": len(notebook_code_cells) >= 8
+        and all(cell.get("execution_count") is not None for cell in notebook_code_cells)
+        and not notebook_errors,
         "demo_is_offline": "https://" not in demo_html and "http://" not in demo_html,
         "submission_summary_within_limit": 140 <= word_count(summary) <= 150,
         "spoken_script_within_budget": 300 <= word_count(spoken) <= 380,
@@ -173,6 +186,7 @@ def main() -> None:
         DATASET_RUNNER_CODE,
         LOCKED_KERNEL,
         LOCKED_METHOD,
+        RESEARCHER_NOTEBOOK,
         PYPROJECT,
         DATASET_SPEC_SCHEMA,
         DATASET_SPEC_EXAMPLE,
@@ -194,6 +208,8 @@ def main() -> None:
             "dataset_spec_example_capability": dataset_spec_report.capability.value,
             "dataset_spec_example_runtime": dataset_adapter.inspection.runtime_capability.value,
             "locked_kernel_sha256": sha256(LOCKED_KERNEL),
+            "researcher_notebook_sha256": sha256(RESEARCHER_NOTEBOOK),
+            "researcher_notebook_code_cells": len(notebook_code_cells),
             "local_path_violations": local_paths,
             "forbidden_tracked_files": forbidden_tracked,
         },

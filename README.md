@@ -29,6 +29,10 @@ versions of one number; the hierarchy is frozen in `reports/result_lock.md`.
 > explains the question, evidence, limits and Gladstone experiment with the project's real figures.
 > See [`DELIVERABLE.md`](DELIVERABLE.md) for a plain-language map of the complete artifact.
 
+> **Researcher notebook:** [`notebooks/ISCI_Researcher_Track_Walkthrough.ipynb`](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb)
+> is the executed, judge-facing walkthrough of the finding, falsification tests, Claude Science
+> correction loop and bring-your-own-Perturb-seq framework.
+
 ## What the framework actually delivers — an adjudication table
 
 The deliverable is not the ranking; it is a system that returns an honest verdict for each question,
