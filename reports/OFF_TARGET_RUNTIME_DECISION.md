@@ -1,7 +1,7 @@
 # Off-target reference and runtime decision
 
-**Status:** human reference frozen; search engine and parameters not frozen; no off-target search
-has been executed.
+**Status:** human reference and pilot engine/parameters frozen; no off-target search has been
+executed.
 
 ## Decision
 
@@ -11,8 +11,8 @@ These identifiers are explicit package inputs rather than tool defaults.
 
 The current Apple Silicon workstation is a `NO_GO` environment for the first full-genome run.
 This is an infrastructure decision, not a biological result and not evidence that any guide is
-safe or unsafe. The search engine, mismatch/bulge parameters and promotion thresholds remain
-blocked until a small positive-control pilot is frozen and validated.
+safe or unsafe. A source-backed pilot is now frozen in `config/off_target_pilot.yaml` and
+`reports/OFF_TARGET_PILOT_PROTOCOL.md`; execution and promotion thresholds remain blocked.
 
 ## Why this reference
 
@@ -42,16 +42,24 @@ Sources:
 
 ### CRISPRitz
 
-CRISPRitz is the preferred engine to validate on a disposable Linux x86-64 scratch environment
+CRISPRitz is the selected pilot engine for a disposable Linux scratch environment
 because its documented surface includes mismatches, DNA/RNA bulges, variant-aware searches,
 scoring and genomic annotation. The official Conda workflow is Linux-only; macOS is supported via
 Docker. The current Docker image is amd64 and approximately 1.03 GB compressed, while the selected
 human assembly is approximately 3.10 Gbp before indexes and outputs. With about 13 GiB free on this
 workstation, running the full package locally creates avoidable disk and emulation risk.
 
+Source refresh on 2026-07-12 found CRISPRitz `2.7.0` and versioned Bioconda builds for both
+`linux-64` and `linux-aarch64`. The pilot pins the `linux-64` Python 3.9 build and its published
+SHA-256. The Docker image remains excluded because its metadata predates the 2.7.0 release.
+
 Sources:
 
 - official CRISPRitz README: <https://github.com/pinellolab/CRISPRitz>
+- official CRISPRitz 2.7.0 release:
+  <https://github.com/pinellolab/CRISPRitz/releases/tag/v2.7.0>
+- Bioconda 2.7.0 release metadata:
+  <https://api.anaconda.org/release/bioconda/crispritz/2.7.0>
 - official Docker image metadata:
   <https://hub.docker.com/v2/repositories/pinellolab/crispritz/tags/latest>
 
@@ -59,10 +67,12 @@ Sources:
 
 - Frozen now: `GCF_000001405.40` / `GRCh38.p14` and
   `GCF_000001405.40-RS_2025_08`.
-- Not frozen: search engine version, PAM variants, mismatch ceiling, bulge policy, scoring method,
-  genomic annotation categories and pass/fail thresholds.
+- Frozen for the technical pilot only: CRISPRitz 2.7.0, SpCas9/NGG, mismatch ceiling 4 and the
+  staged one-DNA/one-RNA-bulge sensitivity run.
+- Not frozen: annotation categories, score interpretation, variant-aware policy and guide
+  promotion thresholds.
 - No guide is promoted, replaced or approved for synthesis by this decision.
-- Preferred next execution: a version-pinned CRISPRitz pilot on external Linux x86-64 scratch,
+- Preferred next execution: the version-pinned CRISPRitz pilot on external Linux scratch,
   first with known positive controls and a small subset, followed by the 78-candidate package only
   after expected hits, deterministic output and resource use are verified.
 - Cas-OFFinder remains a fallback on an OpenCL-compatible host for independent mismatch-only
