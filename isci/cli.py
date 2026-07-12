@@ -10,6 +10,7 @@ from typing import Any, Sequence
 import yaml
 
 from isci.adapters import RuntimeCapability, inspect_anndata_dataset, load_tabular_dataset
+from isci.analysis_runner import run_controller_features
 from isci.dataset_spec import DatasetSpecError, load_dataset_spec, validate_dataset_spec
 
 
@@ -173,6 +174,42 @@ def _inspect(args: argparse.Namespace) -> int:
     return EXIT_SUCCESS
 
 
+def _run(args: argparse.Namespace) -> int:
+    spec_path = Path(args.spec)
+    root = _repo_root(spec_path, args.repo_root)
+    try:
+        spec = load_dataset_spec(spec_path, repo_root=root, check_paths=True)
+    except FileNotFoundError:
+        _print_json(_config_error("run", "SPEC_NOT_FOUND", "DatasetSpec file does not exist"))
+        return EXIT_INVALID_SPEC
+    except yaml.YAMLError as exc:
+        _print_json(_config_error("run", "INVALID_YAML", type(exc).__name__))
+        return EXIT_INVALID_SPEC
+    except DatasetSpecError as exc:
+        payload = {
+            "command": "run",
+            "ok": False,
+            "error": {"code": "INVALID_SPEC", "message": "DatasetSpec validation failed"},
+            "report": exc.report.to_dict(),
+        }
+        _print_json(payload)
+        return EXIT_INVALID_SPEC
+
+    output_dir = Path(args.output_dir) if args.output_dir else root / "outputs" / spec.dataset.id
+    result = run_controller_features(spec, repo_root=root, output_dir=output_dir)
+    report_path = output_dir / "analysis_report.json"
+    report = json.loads(report_path.read_text()) if report_path.is_file() else result.report
+    payload = {
+        "command": "run",
+        "ok": result.completed,
+        "status": result.status,
+        "biological_verdict": result.biological_verdict,
+        "report": report,
+    }
+    _print_json(payload)
+    return EXIT_SUCCESS if result.completed else EXIT_NOT_EVALUABLE
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="isci",
@@ -217,6 +254,19 @@ def build_parser() -> argparse.ArgumentParser:
         help="H5AD observation rows per scan block (default: 64)",
     )
     inspect_parser.set_defaults(handler=_inspect)
+
+    run_parser = subparsers.add_parser(
+        "run", help="rank a controller_features dataset with the frozen conditional method"
+    )
+    run_parser.add_argument("spec", help="path to DatasetSpec YAML")
+    run_parser.add_argument(
+        "--repo-root", help="repository root for resolving contract-relative paths"
+    )
+    run_parser.add_argument(
+        "--output-dir",
+        help="output directory (default: outputs/<dataset_id> under the repository root)",
+    )
+    run_parser.set_defaults(handler=_run)
     return parser
 
 

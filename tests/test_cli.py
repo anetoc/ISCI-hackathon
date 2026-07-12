@@ -3,7 +3,7 @@ from pathlib import Path
 
 import yaml
 
-from isci.cli import EXIT_INVALID_SPEC, EXIT_SUCCESS, main
+from isci.cli import EXIT_INVALID_SPEC, EXIT_NOT_EVALUABLE, EXIT_SUCCESS, main
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLE = ROOT / "examples" / "dataset_spec" / "mini_long_effects.yaml"
@@ -115,3 +115,23 @@ def test_missing_spec_is_reported_without_traceback(capsys):
 
     assert exit_code == EXIT_INVALID_SPEC
     assert payload["error"]["code"] == "SPEC_NOT_FOUND"
+
+
+def test_run_refuses_effect_layout_until_feature_extraction_exists(tmp_path, capsys):
+    output = tmp_path / "run"
+    exit_code = main(
+        [
+            "run",
+            str(EXAMPLE),
+            "--repo-root",
+            str(ROOT),
+            "--output-dir",
+            str(output),
+        ]
+    )
+    payload = _stdout_json(capsys)
+
+    assert exit_code == EXIT_NOT_EVALUABLE
+    assert payload["status"] == "FEATURE_EXTRACTION_REQUIRED"
+    assert payload["biological_verdict"] == "NOT_ISSUED"
+    assert not output.exists()

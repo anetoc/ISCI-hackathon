@@ -43,6 +43,9 @@ DATASET_ADAPTER_CODE = ROOT / "isci" / "adapters" / "tabular.py"
 DATASET_ADAPTER_EXPORTS = ROOT / "isci" / "adapters" / "__init__.py"
 ANNDATA_ADAPTER_CODE = ROOT / "isci" / "adapters" / "anndata_effects.py"
 DATASET_CLI_CODE = ROOT / "isci" / "cli.py"
+DATASET_RUNNER_CODE = ROOT / "isci" / "analysis_runner.py"
+LOCKED_KERNEL = ROOT / "skills" / "isci-controllership" / "kernel.py"
+LOCKED_METHOD = ROOT / "skills" / "isci-controllership" / "SKILL.md"
 PYPROJECT = ROOT / "pyproject.toml"
 DATASET_SPEC_SCHEMA = ROOT / "contracts" / "dataset_spec.schema.json"
 DATASET_SPEC_DOC = ROOT / "docs" / "dataset_spec.md"
@@ -86,6 +89,8 @@ def main() -> None:
     readme = (ROOT / "README.md").read_text()
     pyproject = PYPROJECT.read_text()
     anndata_adapter_source = ANNDATA_ADAPTER_CODE.read_text()
+    dataset_runner_source = DATASET_RUNNER_CODE.read_text()
+    dataset_cli_source = DATASET_CLI_CODE.read_text()
     submission = (ROOT / "SUBMISSION.md").read_text()
     summary = submission.split("## 150-word summary", 1)[1].split("---", 1)[0]
     stage_script = (ROOT / "DEMO_SCRIPT.md").read_text()
@@ -135,6 +140,9 @@ def main() -> None:
         "anndata_streaming_adapter_present": 'backed="r"' in anndata_adapter_source
         and "iter_anndata_effect_blocks" in anndata_adapter_source
         and '"anndata>=0.10"' in pyproject,
+        "dataset_runner_bounded": "run_controller_features" in dataset_runner_source
+        and '"biological_verdict": "NOT_ISSUED"' in dataset_runner_source
+        and '"run"' in dataset_cli_source,
         "demo_is_offline": "https://" not in demo_html and "http://" not in demo_html,
         "submission_summary_within_limit": 140 <= word_count(summary) <= 150,
         "spoken_script_within_budget": 300 <= word_count(spoken) <= 380,
@@ -162,6 +170,9 @@ def main() -> None:
         DATASET_ADAPTER_EXPORTS,
         ANNDATA_ADAPTER_CODE,
         DATASET_CLI_CODE,
+        DATASET_RUNNER_CODE,
+        LOCKED_KERNEL,
+        LOCKED_METHOD,
         PYPROJECT,
         DATASET_SPEC_SCHEMA,
         DATASET_SPEC_EXAMPLE,
@@ -182,6 +193,7 @@ def main() -> None:
             "dataset_spec_schema_sha256": sha256(DATASET_SPEC_SCHEMA),
             "dataset_spec_example_capability": dataset_spec_report.capability.value,
             "dataset_spec_example_runtime": dataset_adapter.inspection.runtime_capability.value,
+            "locked_kernel_sha256": sha256(LOCKED_KERNEL),
             "local_path_violations": local_paths,
             "forbidden_tracked_files": forbidden_tracked,
         },

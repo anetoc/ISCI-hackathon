@@ -89,6 +89,7 @@ isci inspect dataset.yaml \
   --report outputs/my_dataset/inspection.json \
   --canonical-output outputs/my_dataset/canonical.parquet
 isci inspect effect_matrix.yaml --scan-values --block-rows 64
+isci run controller_features.yaml --output-dir outputs/my_dataset
 ```
 
 Exit code `0` means the requested validation/inspection completed; `2` means the spec, YAML or
@@ -111,6 +112,27 @@ for block in iter_anndata_effect_blocks(spec, repo_root=".", block_rows=64):
 
 Non-finite values are preserved in streamed blocks so downstream exclusions must be counted and
 reported rather than happening silently.
+
+## Scientific runner
+
+`isci run` currently accepts `controller_features`. It aggregates replicate rows by perturbation and
+condition, computes balanced and magnitude-orthogonal rankings with the frozen
+`isci-controllership` kernel, matches negatives within each condition, and runs conditional LR plus
+a fixed-score bootstrap when at least 8 positives and 15 negatives are available.
+
+It writes:
+
+```text
+outputs/<dataset_id>/
+├── controller_ranking.csv
+├── condition_metrics.json
+└── analysis_report.json
+```
+
+The report binds input, axes, Git, kernel and output hashes. Its biological verdict is always
+`NOT_ISSUED`: the generic runner does not convert a descriptive AUPRC gain into a dataset-specific
+scientific `PASS`. The bootstrap is explicitly labeled descriptive and is not presented as the
+leakage-free OOF estimand used in the frozen Marson result.
 
 ## Physical tabular inspection
 
@@ -140,6 +162,6 @@ ISCI biological `PASS`.
 
 ## What comes next
 
-The next implementation slices are the analysis runner over canonical blocks and the researcher
-notebook. The notebook should call these public interfaces rather than contain dataset-specific
-branching.
+The next implementation slices are feature extraction from long/H5AD effect blocks and the
+researcher notebook. The notebook should call these public interfaces rather than contain
+dataset-specific branching.
