@@ -381,3 +381,77 @@ def build_replacement_shortlist(
                 }
             )
     return pd.DataFrame(rows)
+
+
+def build_off_target_screening_input(
+    resolved_panel: pd.DataFrame, shortlist: pd.DataFrame
+) -> pd.DataFrame:
+    """Package current and fallback sequences without silently choosing genome defaults."""
+
+    required_panel = {
+        "guide_id",
+        "target",
+        "role",
+        "protospacer_20nt",
+        "basic_sequence_flags",
+        "source_identity_status",
+        "synthesis_status",
+    }
+    required_shortlist = {
+        "target",
+        "role",
+        "replacement_priority",
+        "fallback_rank",
+        "fallback_sequence",
+        "basic_sequence_flags",
+        "fallback_status",
+    }
+    if missing := required_panel - set(resolved_panel.columns):
+        raise ValueError(f"resolved panel missing columns: {sorted(missing)}")
+    if missing := required_shortlist - set(shortlist.columns):
+        raise ValueError(f"shortlist missing columns: {sorted(missing)}")
+
+    rows: list[dict[str, object]] = []
+    for guide in resolved_panel.itertuples(index=False):
+        rows.append(
+            {
+                "candidate_id": str(guide.guide_id),
+                "target": str(guide.target),
+                "role": str(guide.role),
+                "candidate_kind": "CURRENT_GUIDE",
+                "protospacer_20nt": str(guide.protospacer_20nt),
+                "basic_sequence_flags": str(guide.basic_sequence_flags),
+                "source_identity_status": str(guide.source_identity_status),
+                "replacement_priority": "CURRENT_MANIFEST",
+                "pre_screen_status": str(guide.synthesis_status),
+            }
+        )
+    for fallback in shortlist.itertuples(index=False):
+        rows.append(
+            {
+                "candidate_id": f"{fallback.target}-FALLBACK-{fallback.fallback_rank}",
+                "target": str(fallback.target),
+                "role": str(fallback.role),
+                "candidate_kind": "FALLBACK_CANDIDATE",
+                "protospacer_20nt": str(fallback.fallback_sequence),
+                "basic_sequence_flags": str(fallback.basic_sequence_flags),
+                "source_identity_status": "CALABRESE_SOURCE_CANDIDATE",
+                "replacement_priority": str(fallback.replacement_priority),
+                "pre_screen_status": str(fallback.fallback_status),
+            }
+        )
+    result = pd.DataFrame(rows)
+    if result["candidate_id"].duplicated().any():
+        raise RuntimeError("off-target candidate IDs must be unique")
+    if not result["protospacer_20nt"].str.fullmatch(r"[ACGT]{20}").all():
+        raise ValueError("every off-target candidate requires a 20-base DNA protospacer")
+
+    result["modality"] = "CRISPRa"
+    result["nuclease_family"] = "SpCas9"
+    result["pam_contract"] = "NGG"
+    result["reference_build"] = "UNSELECTED"
+    result["transcript_tss_annotation"] = "UNSELECTED"
+    result["search_engine"] = "UNSELECTED"
+    result["search_parameters"] = "UNSELECTED"
+    result["off_target_status"] = "BLOCKED_REFERENCE_AND_ENGINE_NOT_FROZEN"
+    return result

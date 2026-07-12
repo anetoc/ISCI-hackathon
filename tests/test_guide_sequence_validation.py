@@ -4,6 +4,7 @@ import pandas as pd
 
 from isci.guide_sequence_validation import (
     build_replacement_shortlist,
+    build_off_target_screening_input,
     build_calabrese_candidates,
     extract_guide_sequence_evidence,
     normalize_direct_capture_barcode,
@@ -143,4 +144,39 @@ def test_replacement_shortlist_prefers_clean_same_target_candidates():
     ]
     assert shortlist["replacement_priority"].eq(
         "HIGH_ALL_CURRENT_GUIDES_REVIEW"
+    ).all()
+
+
+def test_off_target_input_keeps_reference_and_engine_blocked():
+    resolved = pd.DataFrame(
+        {
+            "guide_id": ["G1-1"],
+            "target": ["G1"],
+            "role": ["PRIMARY_POSITIVE"],
+            "protospacer_20nt": ["ACGTACGTACGTACGTACGT"],
+            "basic_sequence_flags": ["NONE"],
+            "source_identity_status": ["SOURCE_IDENTITY_CONFIRMED"],
+            "synthesis_status": ["BLOCKED_PENDING_ON_OFF_TARGET_AND_VECTOR_QC"],
+        }
+    )
+    shortlist = pd.DataFrame(
+        {
+            "target": ["G1"],
+            "role": ["PRIMARY_POSITIVE"],
+            "replacement_priority": ["BACKUP_ONLY"],
+            "fallback_rank": [1],
+            "fallback_sequence": ["CACACACACACACACACACA"],
+            "basic_sequence_flags": ["NONE"],
+            "fallback_status": ["REQUIRES_ON_OFF_TARGET_AND_VECTOR_QC"],
+        }
+    )
+    screening = build_off_target_screening_input(resolved, shortlist)
+    assert screening["candidate_kind"].tolist() == [
+        "CURRENT_GUIDE",
+        "FALLBACK_CANDIDATE",
+    ]
+    assert screening["reference_build"].eq("UNSELECTED").all()
+    assert screening["search_engine"].eq("UNSELECTED").all()
+    assert screening["off_target_status"].eq(
+        "BLOCKED_REFERENCE_AND_ENGINE_NOT_FROZEN"
     ).all()
