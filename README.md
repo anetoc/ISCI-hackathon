@@ -164,9 +164,12 @@ LOO axis specificity and donor/guide reproducibility before writing the auditabl
 Precomputed `controller_features` remain supported. No path issues an automatic biological
 verdict.
 
-Cell-by-feature H5AD files from scPerturb first use metadata-only `isci preflight-cells`; expression
-values are not read and effect construction remains a separate next step. The external smoke test
-and preprocessing contract are documented in
+Cell-by-feature H5AD files from scPerturb use `isci preflight-cells` followed by
+`isci build-effects`. The first command audits metadata without reading expression; the second
+constructs matched-control pseudobulk effects in bounded blocks and emits a generated
+`anndata_effects` spec for the unchanged runner. A public 20,729-cell smoke test completed this
+pipeline and then correctly stopped as `NOT_EVALUABLE` because its four-protein THP-1 panel does
+not cover the frozen CD4+ axes. The external smoke test and preprocessing contract are documented in
 [`reports/EXTERNAL_H5AD_SMOKE_TEST.md`](reports/EXTERNAL_H5AD_SMOKE_TEST.md).
 
 > **Deprecated** (kept for provenance only): `stability` / `insilico` / `network` were the original five-component index (M·R·D·A·S). It lost to the effect-magnitude baseline under expression-matched negatives and was abandoned; the validated method is the magnitude-conditional test in the `isci-controllership` skill, driven by `run_cci`.

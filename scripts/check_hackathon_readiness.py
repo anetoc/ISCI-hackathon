@@ -56,6 +56,7 @@ DATASET_SPEC_DOC = ROOT / "docs" / "dataset_spec.md"
 DATASET_SPEC_EXAMPLE = ROOT / "examples" / "dataset_spec" / "mini_long_effects.yaml"
 CELL_SPEC_EXAMPLE = ROOT / "examples" / "dataset_spec" / "scperturb_cell_h5ad.yaml"
 CELL_PREFLIGHT_SMOKE = ROOT / "outputs" / "hackathon" / "cell_preflight_smoke.json"
+CELL_EFFECT_BUILD_SMOKE = ROOT / "outputs" / "hackathon" / "cell_effect_build_smoke.json"
 DATASET_SPEC_FIXTURE = ROOT / "examples" / "dataset_spec" / "mini_long_effects.csv"
 DATASET_SPEC_POSITIVES = ROOT / "examples" / "dataset_spec" / "mini_positives.txt"
 PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
@@ -92,6 +93,7 @@ def main() -> None:
     )
     cell_spec_report = validate_dataset_spec(yaml.safe_load(CELL_SPEC_EXAMPLE.read_text()))
     cell_preflight_smoke = json.loads(CELL_PREFLIGHT_SMOKE.read_text())["preflight"]
+    cell_effect_build_smoke = json.loads(CELL_EFFECT_BUILD_SMOKE.read_text())
     dataset_adapter = load_tabular_dataset(dataset_spec, repo_root=ROOT)
     demo_html = DEMO.read_text()
     readme = (ROOT / "README.md").read_text()
@@ -180,7 +182,17 @@ def main() -> None:
         "cell_effect_builder_present": "build_anndata_effects" in effect_builder_source
         and "SOURCE_NOT_RAW_COUNTS" in effect_builder_source
         and "def _standardize" in effect_builder_source
-        and '"biological_verdict": "NOT_ISSUED"' in effect_builder_source,
+        and '"biological_verdict": "NOT_ISSUED"' in effect_builder_source
+        and '"build-effects"' in dataset_cli_source
+        and cell_effect_build_smoke["status"] == "DIAGNOSTIC_EFFECTS_BUILT"
+        and cell_effect_build_smoke["biological_verdict"] == "NOT_ISSUED"
+        and cell_effect_build_smoke["build"]["effect_rows"] == 207
+        and cell_effect_build_smoke["build"]["invalid_effect_values"] == 0
+        and cell_effect_build_smoke["downstream"]["generated_spec_valid"] is True
+        and cell_effect_build_smoke["downstream"]["missing_specificity_rows"] == 72
+        and cell_effect_build_smoke["downstream"]["missing_reproducibility_rows"] == 0
+        and cell_effect_build_smoke["downstream"]["runner_status"]
+        == "FEATURE_EXTRACTION_NOT_EVALUABLE",
         "researcher_notebook_executed": len(notebook_code_cells) >= 8
         and all(cell.get("execution_count") is not None for cell in notebook_code_cells)
         and not notebook_errors,
@@ -223,6 +235,7 @@ def main() -> None:
         DATASET_SPEC_EXAMPLE,
         CELL_SPEC_EXAMPLE,
         CELL_PREFLIGHT_SMOKE,
+        CELL_EFFECT_BUILD_SMOKE,
         DATASET_SPEC_FIXTURE,
         DATASET_SPEC_POSITIVES,
         *public_surfaces,
@@ -244,6 +257,11 @@ def main() -> None:
             "cell_preflight_smoke_status": cell_preflight_smoke["status"],
             "cell_preflight_smoke_ready_units": cell_preflight_smoke[
                 "perturbation_conditions_ready"
+            ],
+            "cell_effect_build_smoke_status": cell_effect_build_smoke["status"],
+            "cell_effect_build_smoke_rows": cell_effect_build_smoke["build"]["effect_rows"],
+            "cell_effect_downstream_status": cell_effect_build_smoke["downstream"][
+                "runner_status"
             ],
             "locked_kernel_sha256": sha256(LOCKED_KERNEL),
             "researcher_notebook_sha256": sha256(RESEARCHER_NOTEBOOK),

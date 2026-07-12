@@ -1,0 +1,42 @@
+{
+  "schema_version": "isci_external_effect_build_smoke_v1",
+  "dataset_id": "papalexi_eccite_protein_preflight",
+  "status": "DIAGNOSTIC_EFFECTS_BUILT",
+  "biological_verdict": "NOT_ISSUED",
+  "build": {
+    "source_cells": 20729,
+    "source_features": 4,
+    "preflight_eligible_strata": 216,
+    "preflight_ready_perturbation_units": 72,
+    "effect_rows": 207,
+    "effect_features": 4,
+    "normalization": "log1p_cpm",
+    "contrast": "pseudobulk_difference",
+    "standardization": "gene_wise_zscore_within_condition",
+    "invalid_effect_values": 0,
+    "git_sha": "d1771a42118c294d9b01d85f2230eb63c8e5b320",
+    "timestamp": "2026-07-12T23:48:02.705521+00:00",
+    "command": "isci build-effects examples/dataset_spec/scperturb_cell_h5ad.yaml --repo-root . --output-dir tmp/external-smoke/papalexi_build_d1771a4 --block-rows 64"
+  },
+  "downstream": {
+    "generated_spec_valid": true,
+    "runtime_capability": "DIAGNOSTIC_ONLY",
+    "feature_extraction_status": "NOT_EVALUABLE",
+    "runner_status": "FEATURE_EXTRACTION_NOT_EVALUABLE",
+    "controller_feature_rows": 72,
+    "ranking_eligible_rows": 0,
+    "missing_specificity_rows": 72,
+    "missing_reproducibility_rows": 0,
+    "reason": "The public THP-1 protein panel has only four features and does not cover the frozen CD4+ axes; no biological ranking was issued.",
+    "git_sha": "055a377fc448ee5d0f6eef6b7ba0595c9dd8aa9d",
+    "timestamp": "2026-07-12T23:55:49.938950+00:00",
+    "command": "isci run tmp/external-smoke/papalexi_build_d1771a4/dataset.effects.yaml --repo-root . --output-dir tmp/external-smoke/papalexi_run_055a377 --block-rows 32"
+  },
+  "input_sha256": "e1e293c75dfebe09301bf32093703cfd5f50c17d6fb53144d8213e52e0e4e150",
+  "output_sha256": "b785698855586e9643cee068ef11e0c5ac1a3c053d5f67fbf969da43e00b664d",
+  "generated_spec_sha256": "12f6a0db2db45e8aa331158ab1684f027088298b5ba08cff33d16def6fea4742",
+  "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+  "git_sha": "055a377fc448ee5d0f6eef6b7ba0595c9dd8aa9d",
+  "timestamp": "2026-07-12T23:55:49.938950+00:00",
+  "command": "See build.command and downstream.command for the two-stage smoke test."
+}

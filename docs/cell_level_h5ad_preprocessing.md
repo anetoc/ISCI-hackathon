@@ -1,4 +1,4 @@
-# Cell-level H5AD preprocessing contract — draft v0
+# Cell-level H5AD preprocessing contract — v1
 
 ## Purpose
 
@@ -61,12 +61,26 @@ Return `NOT_EVALUABLE` instead of producing effects when:
 - the source signal or normalization state is unknown;
 - the standardization universe would be learned using benchmark labels.
 
-## Implemented preflight
+## Implemented pipeline
 
 `isci preflight-cells dataset.yaml` now inspects `obs`, `var`, `X/layers` in backed mode without
 reading matrix values. It audits missing metadata and multi-guide exclusions, matches perturbation
 and control cell support within declared strata, counts replicate- and donor-resolved ready units,
 and emits `READY_FOR_EFFECT_CONSTRUCTION`, `DIAGNOSTIC_ONLY`, or `NOT_EVALUABLE`.
 
-The next implementation slice is pseudobulk effect construction. It must consume only specs whose
-preflight report has `can_construct_effects=true`.
+`isci build-effects dataset.yaml --output-dir outputs/<dataset>/effects` repeats that preflight and
+only continues when `can_construct_effects=true`. For each eligible
+condition/donor/replicate/guide stratum it:
+
+1. rejects non-finite values and rejects fractional or negative values declared as raw counts;
+2. aggregates raw counts and applies log1p counts-per-million, or averages a source explicitly
+   declared as normalized;
+3. subtracts the matched control pseudobulk from the perturbation pseudobulk;
+4. standardizes each feature across perturbations within condition;
+5. writes `effect` and `standardized_effect` layers plus aggregate observation metadata;
+6. emits a generated `anndata_effects` DatasetSpec and a provenance-bound preprocessing report.
+
+The source matrix is read in bounded cell-row blocks. A build can be `DIAGNOSTIC_EFFECTS_BUILT`
+when donor coverage or other confirmatory evidence is absent. The downstream runner can still
+return `FEATURE_EXTRACTION_NOT_EVALUABLE` when the measured features do not cover the frozen axes;
+this is a safety property, not an execution error.

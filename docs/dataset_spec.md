@@ -14,19 +14,21 @@ The machine-readable contract is `contracts/dataset_spec.schema.json`; the Pytho
 
 ## Supported inputs in v1
 
-DatasetSpec v1 supports perturbation-level evidence and a metadata-only preflight for cell-level
-H5AD. Cell-level expression is not converted to effects yet.
+DatasetSpec v1 supports perturbation-level evidence and an audited preprocessing lane for
+cell-level H5AD. The lane performs metadata preflight first and only then converts declared cell
+signals into matched-control pseudobulk effects.
 
 | `input.layout` | Physical format | Required mapping | Intended use |
 |---|---|---|---|
-| `anndata_cells` | H5AD | `perturbation`, `guide`, `guide_count`, `replicate`; explicit `preprocessing` | Backed metadata preflight before pseudobulk construction |
+| `anndata_cells` | H5AD | `perturbation`, `guide`, `guide_count`, `replicate`; explicit `preprocessing` | Backed preflight and matched-control pseudobulk construction |
 | `anndata_effects` | H5AD | `perturbation`; `input.layers.effect`; `input.layers.standardized_effect` | Perturbation-by-feature effect matrices |
 | `long_effects` | CSV or Parquet | `perturbation`, `feature`, `effect`, `standardized_effect` | Portable long-form perturbation effects |
 | `controller_features` | CSV or Parquet | `perturbation`, `magnitude`, `specificity`, `reproducibility` | Compute-light analysis from precomputed controller features |
 
-`anndata_cells` does not make raw expression directly runnable. It validates controls, replication,
-guide multiplicity and cell support without reading `X`; a later effect-construction command must
-still produce `anndata_effects`.
+`anndata_cells` does not make raw expression directly rankable. It first validates controls,
+replication, guide multiplicity and cell support without reading `X`. `isci build-effects` then
+reads the declared signal in bounded row blocks and produces an ordinary `anndata_effects`
+artifact. That generated artifact must still satisfy axis coverage and reproducibility gates.
 
 ## Capability is conservative
 
@@ -90,6 +92,7 @@ After `uv sync`, the same boundary is available without writing Python:
 isci validate examples/dataset_spec/mini_long_effects.yaml
 isci validate examples/dataset_spec/scperturb_cell_h5ad.yaml --structure-only
 isci preflight-cells cell_dataset.yaml --report outputs/my_dataset/preflight.json
+isci build-effects cell_dataset.yaml --output-dir outputs/my_dataset/effects --block-rows 64
 isci validate queued_dataset.yaml --structure-only
 isci inspect examples/dataset_spec/mini_long_effects.yaml
 isci inspect dataset.yaml \
@@ -140,9 +143,20 @@ AnnData object. Cell-level inputs require the separately specified preprocessing
 raw expression `X` as a perturbation effect.
 
 For `anndata_cells`, `isci inspect` returns `USE_PREFLIGHT_CELLS` and `isci run` returns
-`CELL_PREPROCESSING_REQUIRED`. `isci preflight-cells` is the only accepted first operation. Exit
-code `0` means at least one perturbation-condition is ready for diagnostic effect construction;
-the report separately identifies whether donor-resolved coverage is sufficient.
+`CELL_PREPROCESSING_REQUIRED`. `isci preflight-cells` is the required first operation. Exit code
+`0` means at least one perturbation-condition is ready for diagnostic effect construction; the
+report separately identifies whether donor-resolved coverage is sufficient. `isci build-effects`
+repeats that preflight, enforces the declared source-value constraints, and writes:
+
+```text
+outputs/<dataset_id>/effects/
+├── effects.h5ad
+├── dataset.effects.yaml
+└── preprocessing_report.json
+```
+
+The generated spec is the hand-off to `isci inspect` and `isci run`. A successful build is an
+engineering and preprocessing result, not a biological verdict.
 
 It writes:
 
@@ -189,7 +203,6 @@ ISCI biological `PASS`.
 
 ## What comes next
 
-Implement `isci build-effects` for specs that pass `preflight-cells`. It must pseudobulk within the
-declared strata, compare against matched controls, write `effect` and `standardized_effect` layers,
-and emit a generated `anndata_effects` DatasetSpec. The frozen ISCI runner remains downstream and
-unchanged.
+Exercise this complete lane on an independent public Perturb-seq RNA H5AD with broad gene coverage,
+donor/replicate metadata, and a compatible public license. That dataset can test whether the frozen
+CD4+ axes are measurable; it must not be selected because its outcome is favorable.

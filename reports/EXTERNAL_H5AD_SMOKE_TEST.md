@@ -26,7 +26,7 @@ The file was downloaded only to `tmp/external-smoke/` and is not a release artif
   perturbation-level `effect` and `standardized_effect` layers required by
   `input.layout=anndata_effects`.
 
-## Verdict
+## Initial boundary verdict
 
 **PREPROCESSING_REQUIRED — not a biological failure.**
 
@@ -55,9 +55,32 @@ column `nperts`:
 Final preflight status: **`DIAGNOSTIC_ONLY` with `can_construct_effects=true`**. Matrix values were
 not scanned and the biological verdict remained `NOT_ISSUED`.
 
-## Implemented boundary and required next adapter
+## Effect construction and downstream gate
 
-The metadata-only `anndata_cells` preflight is now implemented under the preprocessing contract in
-[`docs/cell_level_h5ad_preprocessing.md`](../docs/cell_level_h5ad_preprocessing.md). It does not read
-`X` or create effects. The remaining adapter must emit an ordinary `anndata_effects` artifact and
-provenance report, so the frozen feature extraction and conditional ranking code remain unchanged.
+The same unchanged public file then ran through:
+
+```bash
+isci build-effects examples/dataset_spec/scperturb_cell_h5ad.yaml \
+  --repo-root . \
+  --output-dir tmp/external-smoke/papalexi_build_d1771a4 \
+  --block-rows 64
+```
+
+The builder produced 207 matched-control effect rows across 4 proteins, with 0 invalid effect
+values. There are fewer effect rows than the 216 preflight-eligible strata because the builder
+retains only perturbation units that also pass the declared two-replicate requirement. The output
+H5AD SHA-256 was
+`b785698855586e9643cee068ef11e0c5ac1a3c053d5f67fbf969da43e00b664d`.
+
+The generated DatasetSpec validated and reopened through the existing `anndata_effects` adapter as
+`DIAGNOSTIC_ONLY`. Running the unchanged feature extractor produced 72 controller-feature rows but
+0 ranking-eligible rows. Reproducibility was measurable for all 72 units after preserving replicate
+identity; axis specificity was not measurable for any unit because the four proteins do not overlap
+the frozen CD4+ axes sufficiently. Final status: **`FEATURE_EXTRACTION_NOT_EVALUABLE`**, biological
+verdict **`NOT_ISSUED`**.
+
+This is the intended behavior. The file proves that another researcher can supply a conventional
+cell-level public H5AD and obtain audited effects. It cannot validate CD4+ T-cell controllership
+because it is a THP-1 assay with only four proteins. The aggregate machine-readable record is
+[`outputs/hackathon/cell_effect_build_smoke.json`](../outputs/hackathon/cell_effect_build_smoke.json);
+raw H5AD and generated large artifacts remain outside Git.
