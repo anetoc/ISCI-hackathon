@@ -1,5 +1,10 @@
 # CCI / IEC — full phased roadmap (deadline-agnostic)
 
+> **Status note (2026-07-12):** this document preserves the original phased strategy, but several
+> `[HERE]` labels are now historical because the corresponding analyses were completed. The live
+> inventory of unfinished work is `reports/PROJECT_PENDING_REGISTER.md`; scientific verdicts remain
+> governed by `reports/CLAIM_LEDGER.md` and `reports/result_lock.md`.
+
 **Framing (yours):** don't triage by Sunday; lay out every phase, ordered, and run as far as
 we get — AI compresses each phase hard. So this is the complete arc: what is **done**, what is
 **executable here** (with the data + tools in this environment), and what is a genuine

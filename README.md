@@ -90,6 +90,7 @@ The common cause: **the ground truth is confounded by magnitude.** Known regulat
 | [docs/related_work.md](docs/related_work.md) | Literature, datasets, connectors |
 | [docs/plan.md](docs/plan.md) | Full strategic plan (D0–D6) |
 | [docs/claude_science_prompt.md](docs/claude_science_prompt.md) | Master prompt (initial critique; fixes now in method.md) |
+| [reports/PROJECT_PENDING_REGISTER.md](reports/PROJECT_PENDING_REGISTER.md) | Live pending register: prospective blockers, release debt and non-blocking scientific extensions |
 
 ## Primary data (not in git — download locally)
 

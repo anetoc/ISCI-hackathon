@@ -42,6 +42,7 @@ with it.
 
 - "Pre-specified" = criteria fixed in code before the adjudicated result was computed. For the
   **completed** tests this is a pre-specification, honestly **not** a formal pre-registration.
-  Tests **not yet run** (B1 non-T immune, CD8/CAR-T replication, functional P3) ARE genuinely
-  pre-registered in `reports/PREREGISTRATION.md` — criteria + directional predictions locked, with
-  the git commit SHA as the timestamp (Zenodo DOI mintable via a GitHub release; maintainer step).
+  B1 was genuinely pre-registered and later completed as a near-miss. Tests **not yet run** (B2
+  CD8/CAR-T replication and B3 functional P3) remain genuinely pre-registered in
+  `reports/PREREGISTRATION.md` — criteria + directional predictions locked, with the git commit SHA
+  as the timestamp (Zenodo DOI mintable via a GitHub release; maintainer step).
