@@ -41,6 +41,7 @@ DECK = ROOT / "outputs" / "isci_hackathon_medical_deck.pptx"
 DATASET_SPEC_CODE = ROOT / "isci" / "dataset_spec.py"
 DATASET_ADAPTER_CODE = ROOT / "isci" / "adapters" / "tabular.py"
 DATASET_ADAPTER_EXPORTS = ROOT / "isci" / "adapters" / "__init__.py"
+ANNDATA_ADAPTER_CODE = ROOT / "isci" / "adapters" / "anndata_effects.py"
 DATASET_CLI_CODE = ROOT / "isci" / "cli.py"
 PYPROJECT = ROOT / "pyproject.toml"
 DATASET_SPEC_SCHEMA = ROOT / "contracts" / "dataset_spec.schema.json"
@@ -84,6 +85,7 @@ def main() -> None:
     demo_html = DEMO.read_text()
     readme = (ROOT / "README.md").read_text()
     pyproject = PYPROJECT.read_text()
+    anndata_adapter_source = ANNDATA_ADAPTER_CODE.read_text()
     submission = (ROOT / "SUBMISSION.md").read_text()
     summary = submission.split("## 150-word summary", 1)[1].split("---", 1)[0]
     stage_script = (ROOT / "DEMO_SCRIPT.md").read_text()
@@ -130,6 +132,9 @@ def main() -> None:
         and dataset_adapter.inspection.runtime_capability == RuntimeCapability.DIAGNOSTIC_ONLY
         and dataset_adapter.inspection.canonical_rows == 8,
         "dataset_cli_registered": 'isci = "isci.cli:main"' in pyproject,
+        "anndata_streaming_adapter_present": 'backed="r"' in anndata_adapter_source
+        and "iter_anndata_effect_blocks" in anndata_adapter_source
+        and '"anndata>=0.10"' in pyproject,
         "demo_is_offline": "https://" not in demo_html and "http://" not in demo_html,
         "submission_summary_within_limit": 140 <= word_count(summary) <= 150,
         "spoken_script_within_budget": 300 <= word_count(spoken) <= 380,
@@ -155,6 +160,7 @@ def main() -> None:
         DATASET_SPEC_CODE,
         DATASET_ADAPTER_CODE,
         DATASET_ADAPTER_EXPORTS,
+        ANNDATA_ADAPTER_CODE,
         DATASET_CLI_CODE,
         PYPROJECT,
         DATASET_SPEC_SCHEMA,

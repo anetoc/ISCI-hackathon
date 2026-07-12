@@ -9,11 +9,15 @@ from isci.dataset_spec import (
     validate_dataset_spec,
 )
 from isci.adapters import (
+    AnnDataAdapterError,
+    AnnDataInspectionResult,
     AdapterIssue,
     AdapterResult,
     DatasetInspection,
     IssueSeverity,
     RuntimeCapability,
+    inspect_anndata_dataset,
+    iter_anndata_effect_blocks,
     load_tabular_dataset,
 )
 
@@ -23,12 +27,16 @@ __all__ = [
     "DatasetCapability",
     "DatasetSpec",
     "DatasetSpecError",
+    "AnnDataAdapterError",
+    "AnnDataInspectionResult",
     "AdapterIssue",
     "AdapterResult",
     "DatasetInspection",
     "IssueSeverity",
     "RuntimeCapability",
     "SpecValidationReport",
+    "inspect_anndata_dataset",
+    "iter_anndata_effect_blocks",
     "load_dataset_spec",
     "load_tabular_dataset",
     "validate_dataset_spec",

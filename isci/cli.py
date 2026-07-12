@@ -9,7 +9,7 @@ from typing import Any, Sequence
 
 import yaml
 
-from isci.adapters import RuntimeCapability, load_tabular_dataset
+from isci.adapters import RuntimeCapability, inspect_anndata_dataset, load_tabular_dataset
 from isci.dataset_spec import DatasetSpecError, load_dataset_spec, validate_dataset_spec
 
 
@@ -112,14 +112,43 @@ def _inspect(args: argparse.Namespace) -> int:
         _print_json(payload)
         return EXIT_INVALID_SPEC
 
-    result = load_tabular_dataset(spec, repo_root=root)
+    if spec.input.layout == "anndata_effects":
+        result = inspect_anndata_dataset(
+            spec,
+            repo_root=root,
+            scan_values=args.scan_values,
+            block_rows=args.block_rows,
+        )
+        adapter_name = "anndata_effects"
+        adapter_details = {
+            "matrix_shape": list(result.matrix_shape) if result.matrix_shape else None,
+            "effect_layer": result.effect_layer,
+            "standardized_effect_layer": result.standardized_effect_layer,
+            "values_scanned": result.values_scanned,
+            "invalid_effect_values": result.invalid_effect_values,
+        }
+    else:
+        result = load_tabular_dataset(spec, repo_root=root)
+        adapter_name = "tabular"
+        adapter_details = None
     inspection = result.inspection.to_dict()
     payload = {
         "command": "inspect",
         "ok": result.inspection.evaluable,
+        "adapter": adapter_name,
         "inspection": inspection,
         "canonical_columns": list(result.table.columns),
     }
+    if adapter_details is not None:
+        payload["adapter_details"] = adapter_details
+    if spec.input.layout == "anndata_effects" and args.canonical_output:
+        payload = _config_error(
+            "inspect",
+            "STREAM_REQUIRED",
+            "H5AD effects must be consumed with iter_anndata_effect_blocks; inspect does not materialize them",
+        )
+        _print_json(payload)
+        return EXIT_INVALID_SPEC
     if args.canonical_output and Path(args.canonical_output).suffix.lower() not in {
         ".csv",
         ".parquet",
@@ -175,6 +204,17 @@ def build_parser() -> argparse.ArgumentParser:
     inspect_parser.add_argument("--report", help="optional JSON inspection report output")
     inspect_parser.add_argument(
         "--canonical-output", help="optional canonical .csv or .parquet output"
+    )
+    inspect_parser.add_argument(
+        "--scan-values",
+        action="store_true",
+        help="scan both H5AD effect layers blockwise for non-finite values",
+    )
+    inspect_parser.add_argument(
+        "--block-rows",
+        type=int,
+        default=64,
+        help="H5AD observation rows per scan block (default: 64)",
     )
     inspect_parser.set_defaults(handler=_inspect)
     return parser
