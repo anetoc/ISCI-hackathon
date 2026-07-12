@@ -180,3 +180,42 @@ def test_off_target_input_keeps_reference_and_engine_blocked():
     assert screening["off_target_status"].eq(
         "BLOCKED_REFERENCE_AND_ENGINE_NOT_FROZEN"
     ).all()
+
+
+def test_off_target_input_can_freeze_reference_without_claiming_engine_readiness():
+    resolved = pd.DataFrame(
+        {
+            "guide_id": ["G1-1"],
+            "target": ["G1"],
+            "role": ["PRIMARY_POSITIVE"],
+            "protospacer_20nt": ["ACGTACGTACGTACGTACGT"],
+            "basic_sequence_flags": ["NONE"],
+            "source_identity_status": ["SOURCE_IDENTITY_CONFIRMED"],
+            "synthesis_status": ["BLOCKED_PENDING_ON_OFF_TARGET_AND_VECTOR_QC"],
+        }
+    )
+    shortlist = pd.DataFrame(
+        columns=[
+            "target",
+            "role",
+            "replacement_priority",
+            "fallback_rank",
+            "fallback_sequence",
+            "basic_sequence_flags",
+            "fallback_status",
+        ]
+    )
+    screening = build_off_target_screening_input(
+        resolved,
+        shortlist,
+        reference_build="GCF_000001405.40_GRCh38.p14",
+        transcript_tss_annotation="GCF_000001405.40-RS_2025_08",
+    )
+    assert screening["reference_build"].eq("GCF_000001405.40_GRCh38.p14").all()
+    assert screening["transcript_tss_annotation"].eq(
+        "GCF_000001405.40-RS_2025_08"
+    ).all()
+    assert screening["search_engine"].eq("UNSELECTED").all()
+    assert screening["off_target_status"].eq(
+        "BLOCKED_ENGINE_AND_PARAMETERS_NOT_FROZEN"
+    ).all()

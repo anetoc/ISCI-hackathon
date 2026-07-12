@@ -49,10 +49,12 @@ The generated screening package contains all 54 current guides plus the fallback
 - intended modality `CRISPRa`;
 - nuclease family `SpCas9` and PAM contract `NGG` inherited from the Calabrese/SAM system;
 - source evidence and basic motif flags;
-- explicit empty fields for reference build, transcript/TSS annotation and off-target result.
+- explicit versioned reference/annotation fields and blocked engine/parameter/result fields.
 
 Reference build and transcript/TSS annotation must be selected in a dedicated, source-backed
 decision before scoring. Empty fields are a blocking state, not permission to use a tool default.
+The selected decision and its local-runtime boundary are recorded in
+`reports/OFF_TARGET_RUNTIME_DECISION.md`.
 
 ## Promotion gate
 
@@ -67,4 +69,3 @@ A fallback may replace a current guide only after all of:
 - independent review and regenerated panel manifest.
 
 No prospective outcome may be inspected before the substitution decision is frozen.
-

@@ -28,6 +28,8 @@ DEFAULT_AXES = ROOT / "config/axes.yaml"
 DEFAULT_SHORTLIST = ROOT / "outputs/decomposition_v2/guide_replacement_shortlist.csv"
 DEFAULT_SCREENING = ROOT / "outputs/decomposition_v2/off_target_screening_input.csv"
 DEFAULT_SUMMARY = ROOT / "outputs/decomposition_v2/guide_qc_triage.json"
+REFERENCE_BUILD = "GCF_000001405.40_GRCh38.p14"
+TRANSCRIPT_TSS_ANNOTATION = "GCF_000001405.40-RS_2025_08"
 
 
 def sha256(path: Path) -> str:
@@ -72,7 +74,12 @@ def main() -> None:
         candidates,
         candidates_per_target=args.candidates_per_target,
     )
-    screening = build_off_target_screening_input(panel, shortlist)
+    screening = build_off_target_screening_input(
+        panel,
+        shortlist,
+        reference_build=REFERENCE_BUILD,
+        transcript_tss_annotation=TRANSCRIPT_TSS_ANNOTATION,
+    )
 
     git_sha = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
@@ -105,7 +112,7 @@ def main() -> None:
         .tolist()
     )
     payload = {
-        "status": "OFF_TARGET_PACKAGE_READY_REFERENCE_NOT_FROZEN",
+        "status": "OFF_TARGET_PACKAGE_READY_ENGINE_NOT_FROZEN",
         "current_panel": {
             "n_guides": int(panel["guide_id"].nunique()),
             "n_guides_in_basic_or_source_review": len(review_guides),
@@ -125,10 +132,10 @@ def main() -> None:
             "n_fallback_candidates": int(
                 (screening["candidate_kind"] == "FALLBACK_CANDIDATE").sum()
             ),
-            "reference_build": "UNSELECTED",
-            "transcript_tss_annotation": "UNSELECTED",
+            "reference_build": REFERENCE_BUILD,
+            "transcript_tss_annotation": TRANSCRIPT_TSS_ANNOTATION,
             "search_engine": "UNSELECTED",
-            "status": "BLOCKED_REFERENCE_AND_ENGINE_NOT_FROZEN",
+            "status": "BLOCKED_ENGINE_AND_PARAMETERS_NOT_FROZEN",
         },
         "boundary": (
             "Technical backup ordering only. No current guide is replaced, no controller label "

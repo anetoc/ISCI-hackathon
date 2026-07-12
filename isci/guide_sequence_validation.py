@@ -384,9 +384,15 @@ def build_replacement_shortlist(
 
 
 def build_off_target_screening_input(
-    resolved_panel: pd.DataFrame, shortlist: pd.DataFrame
+    resolved_panel: pd.DataFrame,
+    shortlist: pd.DataFrame,
+    *,
+    reference_build: str = "UNSELECTED",
+    transcript_tss_annotation: str = "UNSELECTED",
+    search_engine: str = "UNSELECTED",
+    search_parameters: str = "UNSELECTED",
 ) -> pd.DataFrame:
-    """Package current and fallback sequences without silently choosing genome defaults."""
+    """Package current and fallback sequences with explicit versioned search decisions."""
 
     required_panel = {
         "guide_id",
@@ -449,9 +455,21 @@ def build_off_target_screening_input(
     result["modality"] = "CRISPRa"
     result["nuclease_family"] = "SpCas9"
     result["pam_contract"] = "NGG"
-    result["reference_build"] = "UNSELECTED"
-    result["transcript_tss_annotation"] = "UNSELECTED"
-    result["search_engine"] = "UNSELECTED"
-    result["search_parameters"] = "UNSELECTED"
-    result["off_target_status"] = "BLOCKED_REFERENCE_AND_ENGINE_NOT_FROZEN"
+    decisions = {
+        "reference_build": reference_build,
+        "transcript_tss_annotation": transcript_tss_annotation,
+        "search_engine": search_engine,
+        "search_parameters": search_parameters,
+    }
+    if any(not value.strip() for value in decisions.values()):
+        raise ValueError("off-target search decisions cannot be blank; use UNSELECTED")
+    for field, value in decisions.items():
+        result[field] = value
+    if reference_build == "UNSELECTED" or transcript_tss_annotation == "UNSELECTED":
+        status = "BLOCKED_REFERENCE_AND_ENGINE_NOT_FROZEN"
+    elif search_engine == "UNSELECTED" or search_parameters == "UNSELECTED":
+        status = "BLOCKED_ENGINE_AND_PARAMETERS_NOT_FROZEN"
+    else:
+        status = "READY_FOR_OFF_TARGET_RUN"
+    result["off_target_status"] = status
     return result
