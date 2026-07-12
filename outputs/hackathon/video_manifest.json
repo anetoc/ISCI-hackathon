@@ -1,0 +1,24 @@
+{
+  "schema_version": "hackathon_video_manifest_v1",
+  "generated_at": "2026-07-12T20:21:14.432847+00:00",
+  "git_sha": "19c092af545f766515f5bca0c66220f7ac87fc0c",
+  "command": "python scripts/build_hackathon_video.py",
+  "timing_path": "config/hackathon_timing.json",
+  "timing_sha256": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
+  "source_sha256": {
+    "demo_assets/hackathon/01_problem.png": "338d658914a55610d895194596f63a341eb56fe50c7055ad3e1507dc8200e8b9",
+    "demo_assets/hackathon/02_self_correction.png": "96d1fa774ee93093f228b7c32d1a9f551a979878e12ab0863307e7ce4f1316d8",
+    "demo_assets/hackathon/03_controllability.png": "8bbf254c937ebfe393bc66569442c69ca659ab2b7dd0c2026a20168d76a85ee6",
+    "demo_assets/hackathon/04_primary_judgment.png": "c3564d25fdf45f838d13efec2dd689b8bc109f18df8f7feaa21f936ca91858e9",
+    "demo_assets/hackathon/05_trust_proof.png": "65f39a3cd5faa9f215b3989a1105d5377a5a923bfbb16470e0f1060c83da7db3",
+    "demo_assets/hackathon/06_gladstone_bridge.png": "9347e1189429137593e6847a67917d0a06c70ac76a2cbb00fc968adfcaa8443a"
+  },
+  "output_path": "demo_assets/hackathon/hackathon_fallback_2m30.mp4",
+  "output_sha256": "d8cb5d0001e6dac25e92aa979edc225a3a6e4df6b98baf06ea4874e5accf0c0e",
+  "duration_seconds": 150.0,
+  "width": 1920,
+  "height": 1080,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "audio_content": "silence"
+}

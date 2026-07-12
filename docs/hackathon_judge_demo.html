@@ -125,6 +125,7 @@
     .fatal { position: absolute; inset: 0; z-index: 100; display: none; place-items: center; padding: 8cqw; background: #190b0b; color: white; text-align: center; }
     .fatal.visible { display: grid; }
     body.static-mode .controls { display: none; }
+    body.hero-scene-active #provenance { visibility: hidden; }
     @media (max-width: 1440px) { .scene { padding-inline: 5cqw; } }
     @media (max-width: 1024px) { .failure-grid, .judge-grid, .experiment-grid { gap: 3cqw; } .flow-step { min-height: 13cqh; } }
     @media (max-width: 768px) { .trust-row { grid-template-columns: 1fr 1.55fr 0.65fr; } .topbar, .bottombar { letter-spacing: 0.04em; } }
@@ -319,6 +320,7 @@
       current = bounded;
       document.getElementById("scene-label").textContent =
         `${String(current + 1).padStart(2, "0")} / ${scenes[current].dataset.label}`;
+      document.body.classList.toggle("hero-scene-active", current === 2);
       if (current > 0 && !startTime && !staticMode) {
         startTime = Date.now();
         timerHandle = window.setInterval(updateTimer, 250);

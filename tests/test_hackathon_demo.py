@@ -33,6 +33,7 @@ def test_demo_is_offline_and_contains_six_stage_states():
     assert 'params.get("static") === "1"' in html
     assert 'params.get("scene")' in html
     assert 'params.get("autoplay") === "1"' in html
+    assert 'classList.toggle("hero-scene-active", current === 2)' in html
 
 
 def test_demo_embeds_the_frozen_verdict_contract_and_numbers():
