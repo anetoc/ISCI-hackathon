@@ -14,6 +14,7 @@ from isci.decomposition import (
     condition_transport_delta,
     delta_auprc,
     match_unique_blocks,
+    pareto_front_mask,
     leave_one_condition_out_predictions,
     permute_positive_within_blocks,
     validate_blocks,
@@ -189,3 +190,16 @@ def test_bh_and_frozen_verdicts():
     assert component_verdict(gain=0.1, coefficient=0.2, ci_low=-0.01, q_value=0.01) == "DIRECTIONAL_UNCERTAIN"
     assert component_verdict(gain=-0.1, coefficient=0.2, ci_low=-0.2, q_value=0.5) == "UNSUPPORTED"
     assert component_verdict(gain=1, coefficient=1, ci_low=1, q_value=0, evaluable=False) == "NOT_EVALUABLE"
+
+
+def test_pareto_front_keeps_tradeoffs_and_removes_dominated_rows():
+    values = np.asarray(
+        [
+            [1.0, 0.2, 0.2],
+            [0.2, 1.0, 0.2],
+            [0.2, 0.2, 1.0],
+            [0.1, 0.1, 0.1],
+            [0.8, 0.8, 0.8],
+        ]
+    )
+    np.testing.assert_array_equal(pareto_front_mask(values), [True, True, True, False, True])

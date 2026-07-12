@@ -427,3 +427,18 @@ def component_verdict(
     if ci_low > 0 and q_value < 0.05:
         return "SUPPORTED"
     return "DIRECTIONAL_UNCERTAIN"
+
+
+def pareto_front_mask(values: np.ndarray) -> np.ndarray:
+    """Identify non-dominated rows when every profile dimension is maximized."""
+
+    matrix = np.asarray(values, dtype=float)
+    if matrix.ndim != 2 or matrix.shape[1] < 2:
+        raise ValueError("Pareto profiles require a two-dimensional matrix with >=2 columns")
+    if not np.isfinite(matrix).all():
+        raise ValueError("Pareto profile values must be finite")
+    front = np.ones(len(matrix), dtype=bool)
+    for index, row in enumerate(matrix):
+        dominates = np.all(matrix >= row, axis=1) & np.any(matrix > row, axis=1)
+        front[index] = not dominates.any()
+    return front
