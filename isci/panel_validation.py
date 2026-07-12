@@ -132,3 +132,123 @@ def stratified_gene_bootstrap(
         )
         values[iteration] = overlap_weighted_delta(predictions.iloc[indices])
     return values
+
+
+def paired_context_oof(
+    frame: pd.DataFrame,
+    *,
+    gene_col: str,
+    context_col: str,
+    contexts: tuple[str, str],
+    label_col: str,
+    effect_col: str,
+    component_col: str,
+    overlap_cols: list[str],
+    n_splits: int = 5,
+    n_repeats: int = 10,
+    seed: int = 20260712,
+) -> dict[str, pd.DataFrame]:
+    """Fit identical gene-ordered OOF pipelines for two complete contexts."""
+
+    first, second = contexts
+    subset = frame[frame[context_col].isin(contexts)].copy()
+    counts = subset.groupby(gene_col, observed=True)[context_col].nunique()
+    genes = sorted(counts[counts == 2].index.astype(str))
+    if not genes:
+        raise ValueError("paired context validation requires complete gene pairs")
+    outputs: dict[str, pd.DataFrame] = {}
+    reference_labels: np.ndarray | None = None
+    for context in (first, second):
+        context_frame = subset[subset[context_col] == context].copy()
+        if context_frame[gene_col].duplicated().any():
+            raise ValueError("each gene must have one row per context")
+        context_frame[gene_col] = context_frame[gene_col].astype(str)
+        context_frame = context_frame.set_index(gene_col).loc[genes]
+        labels = context_frame[label_col].to_numpy(dtype=int)
+        if reference_labels is not None and not np.array_equal(labels, reference_labels):
+            raise ValueError("paired gene labels differ between contexts")
+        reference_labels = labels
+        outputs[context] = repeated_overlap_oof(
+            context_frame,
+            label_col=label_col,
+            effect_col=effect_col,
+            component_col=component_col,
+            overlap_cols=overlap_cols,
+            n_splits=n_splits,
+            n_repeats=n_repeats,
+            seed=seed,
+        )
+    return outputs
+
+
+def paired_context_delta(
+    predictions: dict[str, pd.DataFrame], *, contexts: tuple[str, str]
+) -> float:
+    """Return the first-minus-second incremental weighted-AUPRC contrast."""
+
+    first, second = (predictions[context] for context in contexts)
+    if not first.index.equals(second.index) or not np.array_equal(
+        first["label"].to_numpy(), second["label"].to_numpy()
+    ):
+        raise ValueError("context predictions must contain aligned gene labels")
+    return overlap_weighted_delta(first) - overlap_weighted_delta(second)
+
+
+def stratified_paired_gene_bootstrap(
+    predictions: dict[str, pd.DataFrame],
+    *,
+    contexts: tuple[str, str],
+    n_resamples: int = 1_000,
+    seed: int = 20260712,
+) -> np.ndarray:
+    """Bootstrap the context contrast with identical gene draws in both contexts."""
+
+    first, second = (predictions[context] for context in contexts)
+    if not first.index.equals(second.index) or not np.array_equal(
+        first["label"].to_numpy(), second["label"].to_numpy()
+    ):
+        raise ValueError("context predictions must contain aligned gene labels")
+    rng = np.random.default_rng(seed)
+    labels = first["label"].to_numpy(dtype=int)
+    positive = np.flatnonzero(labels == 1)
+    negative = np.flatnonzero(labels == 0)
+    values = np.empty(n_resamples, dtype=float)
+    for iteration in range(n_resamples):
+        indices = np.concatenate(
+            [rng.choice(positive, len(positive), replace=True), rng.choice(negative, len(negative), replace=True)]
+        )
+        sampled = {
+            contexts[0]: first.iloc[indices],
+            contexts[1]: second.iloc[indices],
+        }
+        values[iteration] = paired_context_delta(sampled, contexts=contexts)
+    return values
+
+
+def swap_paired_context_features(
+    frame: pd.DataFrame,
+    *,
+    gene_col: str,
+    context_col: str,
+    contexts: tuple[str, str],
+    feature_cols: list[str],
+    swap_mask: np.ndarray,
+) -> pd.DataFrame:
+    """Swap complete feature bundles between contexts for selected paired genes."""
+
+    wide = frame.set_index([gene_col, context_col]).sort_index()
+    genes = sorted(frame[gene_col].astype(str).unique())
+    if len(swap_mask) != len(genes):
+        raise ValueError("swap mask length must equal the number of genes")
+    first, second = contexts
+    for gene, should_swap in zip(genes, swap_mask, strict=True):
+        if not should_swap:
+            continue
+        try:
+            first_values = wide.loc[(gene, first), feature_cols].copy()
+            second_values = wide.loc[(gene, second), feature_cols].copy()
+        except KeyError as error:
+            raise ValueError("context swap requires complete gene pairs") from error
+        wide.loc[(gene, first), feature_cols] = second_values.to_numpy()
+        wide.loc[(gene, second), feature_cols] = first_values.to_numpy()
+    return wide.reset_index()
