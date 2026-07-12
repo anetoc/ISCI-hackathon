@@ -473,3 +473,77 @@ def build_off_target_screening_input(
         status = "READY_FOR_OFF_TARGET_RUN"
     result["off_target_status"] = status
     return result
+
+
+def build_off_target_pilot_manifest(
+    screening_input: pd.DataFrame,
+    replacement_shortlist: pd.DataFrame,
+) -> pd.DataFrame:
+    """Select the highest-risk project guides for the first version-pinned search."""
+
+    required_screening = {
+        "candidate_id",
+        "target",
+        "role",
+        "candidate_kind",
+        "protospacer_20nt",
+        "basic_sequence_flags",
+        "reference_build",
+        "transcript_tss_annotation",
+        "off_target_status",
+    }
+    required_shortlist = {"target", "replacement_priority"}
+    if missing := required_screening - set(screening_input.columns):
+        raise ValueError(f"screening input missing columns: {sorted(missing)}")
+    if missing := required_shortlist - set(replacement_shortlist.columns):
+        raise ValueError(f"replacement shortlist missing columns: {sorted(missing)}")
+
+    priority_targets = sorted(
+        replacement_shortlist.loc[
+            replacement_shortlist["replacement_priority"].eq(
+                "HIGH_ALL_CURRENT_GUIDES_REVIEW"
+            ),
+            "target",
+        ]
+        .astype(str)
+        .unique()
+    )
+    if not priority_targets:
+        raise ValueError("pilot requires at least one high-priority replacement target")
+
+    pilot = screening_input[
+        screening_input["target"].astype(str).isin(priority_targets)
+    ].copy()
+    if pilot.empty:
+        raise ValueError("screening input has no candidates for high-priority targets")
+    if pilot["candidate_id"].duplicated().any():
+        raise ValueError("pilot candidate IDs must be unique")
+    if pilot["protospacer_20nt"].duplicated().any():
+        raise ValueError("pilot protospacers must be unique for deterministic result mapping")
+    if not pilot["protospacer_20nt"].astype(str).str.fullmatch(r"[ACGT]{20}").all():
+        raise ValueError("pilot candidates require 20-base DNA protospacers")
+    if pilot["reference_build"].eq("UNSELECTED").any():
+        raise ValueError("pilot requires a frozen reference build")
+    if pilot["transcript_tss_annotation"].eq("UNSELECTED").any():
+        raise ValueError("pilot requires a frozen annotation release")
+
+    pilot["crispritz_guide"] = pilot["protospacer_20nt"].astype(str) + "NNN"
+    pilot["pilot_stage"] = "S1_PRIORITY_REFERENCE_SEARCH"
+    pilot["pilot_status"] = "READY_INPUT_EXECUTION_NOT_RUN"
+    columns = [
+        "candidate_id",
+        "target",
+        "role",
+        "candidate_kind",
+        "protospacer_20nt",
+        "crispritz_guide",
+        "basic_sequence_flags",
+        "reference_build",
+        "transcript_tss_annotation",
+        "off_target_status",
+        "pilot_stage",
+        "pilot_status",
+    ]
+    return pilot[columns].sort_values(
+        ["target", "candidate_kind", "candidate_id"], kind="mergesort"
+    ).reset_index(drop=True)

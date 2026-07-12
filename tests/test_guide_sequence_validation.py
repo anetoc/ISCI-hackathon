@@ -3,6 +3,7 @@ from pathlib import Path
 import pandas as pd
 
 from isci.guide_sequence_validation import (
+    build_off_target_pilot_manifest,
     build_replacement_shortlist,
     build_off_target_screening_input,
     build_calabrese_candidates,
@@ -219,3 +220,36 @@ def test_off_target_input_can_freeze_reference_without_claiming_engine_readiness
     assert screening["off_target_status"].eq(
         "BLOCKED_ENGINE_AND_PARAMETERS_NOT_FROZEN"
     ).all()
+
+
+def test_off_target_pilot_selects_all_guides_for_high_priority_targets():
+    screening = pd.DataFrame(
+        {
+            "candidate_id": ["G1-1", "G1-FALLBACK-1", "G2-1"],
+            "target": ["G1", "G1", "G2"],
+            "role": ["PRIMARY_POSITIVE"] * 3,
+            "candidate_kind": ["CURRENT_GUIDE", "FALLBACK_CANDIDATE", "CURRENT_GUIDE"],
+            "protospacer_20nt": [
+                "ACGTACGTACGTACGTACGT",
+                "CACACACACACACACACACA",
+                "TGCATGCATGCATGCATGCA",
+            ],
+            "basic_sequence_flags": ["NONE"] * 3,
+            "reference_build": ["GCF_000001405.40_GRCh38.p14"] * 3,
+            "transcript_tss_annotation": ["GCF_000001405.40-RS_2025_08"] * 3,
+            "off_target_status": ["BLOCKED_ENGINE_AND_PARAMETERS_NOT_FROZEN"] * 3,
+        }
+    )
+    shortlist = pd.DataFrame(
+        {
+            "target": ["G1", "G2"],
+            "replacement_priority": [
+                "HIGH_ALL_CURRENT_GUIDES_REVIEW",
+                "BACKUP_ONLY",
+            ],
+        }
+    )
+    pilot = build_off_target_pilot_manifest(screening, shortlist)
+    assert pilot["candidate_id"].tolist() == ["G1-1", "G1-FALLBACK-1"]
+    assert pilot["crispritz_guide"].str.fullmatch(r"[ACGT]{20}NNN").all()
+    assert pilot["pilot_status"].eq("READY_INPUT_EXECUTION_NOT_RUN").all()
