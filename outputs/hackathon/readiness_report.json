@@ -1,0 +1,36 @@
+{
+  "schema_version": "hackathon_readiness_v1",
+  "status": "AUTOMATED_GATES_PASS_HUMAN_GATES_PENDING",
+  "checks": {
+    "four_verdicts_frozen": true,
+    "timing_is_150_seconds": true,
+    "six_full_hd_fallbacks_present": true,
+    "screenshots_match_current_demo": true,
+    "video_matches_manifest": true,
+    "video_is_150_seconds": true,
+    "demo_is_offline": true,
+    "submission_summary_within_limit": true,
+    "spoken_script_within_budget": true,
+    "no_absolute_local_paths_on_public_surfaces": true,
+    "no_forbidden_raw_or_secret_files_tracked": true
+  },
+  "details": {
+    "submission_summary_words": 148,
+    "spoken_script_words": 352,
+    "local_path_violations": [],
+    "forbidden_tracked_files": []
+  },
+  "human_gates_pending": [
+    "PI approves final bounded scientific wording",
+    "three consecutive narrated rehearsals finish at or below 2:30",
+    "microphone and screen recording are reviewed end-to-end",
+    "public repository and uploaded video URLs are opened in a logged-out browser",
+    "submission form is previewed before final irreversible submit"
+  ],
+  "git_sha": "66e668f1a64887d50aa97d917e7511206dd650a3",
+  "branch": "codex/controllability-decomposition",
+  "data_sha256": "91aae2560664197eaf23fb310f4ee777d669506428b3d34065b8d7ff5f42cc05",
+  "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+  "timestamp": "2026-07-12T20:27:20.833187+00:00",
+  "command": "python scripts/check_hackathon_readiness.py"
+}
