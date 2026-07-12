@@ -249,7 +249,8 @@ def main() -> None:
 
     zscore, z_mean, z_std, expression, targets, genes = load_matrix_and_metadata()
     print("[T1] computing exact gene-gene correlation matrix", flush=True)
-    correlation = (zscore.T @ zscore) / max(1, zscore.shape[0] - 1)
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        correlation = (zscore.T @ zscore) / max(1, zscore.shape[0] - 1)
     if not np.isfinite(correlation).all():
         raise RuntimeError("gene-gene correlation matrix contains non-finite values")
     np.abs(correlation, out=correlation)
@@ -306,8 +307,11 @@ def main() -> None:
             continue
         weights = np.column_stack([real_vector, *pseudo]).astype(np.float64)
         raw_weights = z_std[:, None] * weights
-        projections = zscore @ raw_weights
-        projections += (z_mean @ weights)[None, :]
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            projections = zscore @ raw_weights
+            projections += (z_mean @ weights)[None, :]
+        if not np.isfinite(projections).all():
+            raise RuntimeError(f"non-finite axis projections for {axis_name}")
         precision = aggregate_gene_precision(
             projections,
             weights,
@@ -320,6 +324,7 @@ def main() -> None:
         )
         gains: list[float] = []
         coefficients: list[float] = []
+        accepted_audit = [row for row in audit if "mean_abs_correlation" in row]
         for candidate_index in range(weights.shape[1]):
             analysis = ranking[["magnitude"]].copy()
             analysis["axis_precision"] = precision[:, candidate_index]
@@ -343,9 +348,9 @@ def main() -> None:
                     "delta_auprc_oof": gain,
                     "mean_component_coefficient": coefficient,
                     "mean_abs_correlation": (
-                        audit[candidate_index - 1]["mean_abs_correlation"]
+                        accepted_audit[candidate_index - 1]["mean_abs_correlation"]
                         if candidate_index > 0
-                        else audit[0]["real_mean_abs_correlation"]
+                        else accepted_audit[0]["real_mean_abs_correlation"]
                     ),
                 }
             )
