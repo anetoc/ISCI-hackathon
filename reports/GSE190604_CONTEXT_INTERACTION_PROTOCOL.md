@@ -1,6 +1,6 @@
 # GSE190604 target-paired context interaction protocol
 
-**Status:** locked before computing the interaction statistic
+**Status:** locked before computing the interaction statistic; executed without amendment
 
 **Motivation boundary:** this follow-up was motivated by the already observed divergence between
 the no-stim and stimulated Th2 tests. It is therefore a post-result explanatory test, not a formal
@@ -58,3 +58,15 @@ The same seed and sorted gene order are used in both contexts, so fold membershi
 Even `POSTHOC_CONTEXT_SUPPORT` means only that the already observed GSE190604 divergence survives a
 paired diagnostic. It does not establish a stimulation mechanism, donor-level transport,
 therapeutic direction or independent replication.
+
+## Executed result
+
+All 69 targets formed complete pairs (23 positive, 46 negative). The no-stim minus stimulated
+ΔAUPRC contrast was +0.190, with a paired-gene bootstrap interval of [+0.046,+0.370]. However,
+90 of 1,000 context-swap null statistics were at least as large as observed, giving p=0.091 after
+the finite-sample correction. The frozen verdict is therefore `DIRECTIONAL_UNCERTAIN`, not
+`POSTHOC_CONTEXT_SUPPORT`.
+
+The positive bootstrap interval says the contrast is stable to resampling the current target panel;
+the non-significant exchange null says it is not yet sufficiently unusual under reassignment of
+context within genes. These answer different uncertainty questions and neither result is discarded.

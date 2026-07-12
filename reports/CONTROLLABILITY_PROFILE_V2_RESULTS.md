@@ -63,6 +63,18 @@ but this CRISPRa-only panel cannot establish that higher absolute precision move
 desirable state. The dataset is external to Marson but was a previously inspected targeted panel,
 so this is not treated as untouched prospective replication.
 
+### Target-paired interaction follow-up
+
+The same 69 genes were then compared across contexts using a separately frozen, explicitly
+post-result protocol. The paired interaction statistic was ΔAUPRC_no-stim − ΔAUPRC_stim = **+0.190**.
+Its stratified paired-gene bootstrap interval excluded zero ([+0.046,+0.370]; 99.8% of bootstrap
+contrasts positive), but the full within-gene context-exchange null did not cross the pre-specified
+gate (p=0.091; null median +0.010). The verdict is **DIRECTIONAL_UNCERTAIN**.
+
+Thus the observed contrast is stable to resampling this target panel but is not yet rare enough
+under context exchange. This increases the priority of a paired context experiment; it does not
+establish a stimulation interaction. The available analysis is target-paired, not donor-paired.
+
 ## Topology-conditional null: resolving the previously non-evaluable axes
 
 The original rejection sampler could not generate enough correlation-matched alternatives for
@@ -117,8 +129,9 @@ clinical response prediction, therapeutic direction or therapeutic desirability.
 
 ## Highest-value next experiments
 
-1. **Resolve the stimulation interaction:** test the same frozen Th2 contrast in a dataset with
-   matched donor-level unstimulated/stimulated arms and an explicit context×precision interaction.
+1. **Resolve the stimulation interaction at donor level:** the target-paired diagnostic was
+   directional but missed its swap-null gate (p=0.091). Use matched donor-level
+   unstimulated/stimulated arms and an explicit donor-clustered context×precision interaction.
 2. **Independent Th2 replication:** freeze labels and overlap/matching rules before an untouched,
    broader polarization perturbation dataset; GSE190604 was targeted and previously inspected.
 3. **Signed control:** separate direction from precision using KD/CRISPRa pairs or a signed rescue
@@ -134,6 +147,7 @@ clinical response prediction, therapeutic direction or therapeutic desirability.
 - topology null: `python scripts/run_topology_null_v2.py --n-samples 200 --n-random 10000`
 - external features: `python scripts/build_gse190604_features.py`
 - external replication: `python scripts/run_gse190604_replication.py --n-resamples 1000 --n-repeats 10`
+- paired context diagnostic: `python scripts/run_gse190604_context_interaction.py --n-resamples 1000 --n-repeats 10`
 - figure: `python scripts/plot_controllability_profile_v2.py`
 - machine-readable artifacts: `outputs/decomposition_v2/`
 
