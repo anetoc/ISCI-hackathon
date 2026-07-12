@@ -73,6 +73,21 @@ def _rms(values: pd.Series) -> float:
     return float(np.sqrt(np.mean(finite**2))) if finite.size else float("nan")
 
 
+def _weighted_feature_mean(frame: pd.DataFrame, column: str) -> pd.Series:
+    values = pd.to_numeric(frame[column], errors="coerce")
+    weights = (
+        pd.to_numeric(frame["_weight"], errors="coerce")
+        if "_weight" in frame
+        else pd.Series(1.0, index=frame.index)
+    )
+    valid = values.notna() & np.isfinite(values) & weights.notna() & (weights > 0)
+    working = frame.loc[valid, ["feature"]].copy()
+    working["_weighted_value"] = values.loc[valid] * weights.loc[valid]
+    working["_weight"] = weights.loc[valid]
+    grouped = working.groupby("feature", observed=True, sort=True).sum()
+    return grouped["_weighted_value"] / grouped["_weight"]
+
+
 def _axis_specificity(
     mean_effect: pd.Series,
     perturbation: str,
@@ -129,13 +144,22 @@ def _reproducibility(frame: pd.DataFrame, min_overlap_genes: int) -> tuple[float
     labels = _replicate_labels(frame)
     if labels is None:
         return float("nan"), 0, 0
-    working = frame.assign(_replicate=labels)
-    matrix = working.pivot_table(
-        index="_replicate",
-        columns="feature",
-        values="standardized_effect",
-        aggfunc="mean",
+    working = frame.assign(_replicate=labels).copy()
+    working["_weight"] = (
+        pd.to_numeric(working["_weight"], errors="coerce") if "_weight" in working else 1.0
     )
+    working["standardized_effect"] = pd.to_numeric(working["standardized_effect"], errors="coerce")
+    valid = (
+        np.isfinite(working["standardized_effect"])
+        & np.isfinite(working["_weight"])
+        & (working["_weight"] > 0)
+    )
+    working = working.loc[valid]
+    working["_weighted_value"] = working["standardized_effect"] * working["_weight"]
+    grouped = working.groupby(["_replicate", "feature"], observed=True, sort=True)[
+        ["_weighted_value", "_weight"]
+    ].sum()
+    matrix = (grouped["_weighted_value"] / grouped["_weight"]).unstack("feature")
     if len(matrix) < 2:
         return float("nan"), len(matrix), 0
     similarities = []
@@ -160,7 +184,15 @@ def _aggregate_optional(frame: pd.DataFrame, column: str) -> Any:
     if column == "benchmark_positive":
         return bool(frame[column].fillna(False).astype(bool).any())
     numeric = pd.to_numeric(frame[column], errors="coerce")
-    return float(numeric.mean()) if numeric.notna().any() else None
+    weights = (
+        pd.to_numeric(frame["_weight"], errors="coerce")
+        if "_weight" in frame
+        else pd.Series(1.0, index=frame.index)
+    )
+    valid = numeric.notna() & np.isfinite(numeric) & weights.notna() & (weights > 0)
+    return (
+        float(np.average(numeric.loc[valid], weights=weights.loc[valid])) if valid.any() else None
+    )
 
 
 def extract_controller_features(
@@ -218,6 +250,19 @@ def extract_controller_features(
             (issue,),
             {},
         )
+    if "_weight" in long_effects:
+        weights = pd.to_numeric(long_effects["_weight"], errors="coerce")
+        if weights.isna().any() or (~np.isfinite(weights)).any() or (weights <= 0).any():
+            issue = FeatureExtractionIssue(
+                "INVALID_WEIGHTS",
+                "ERROR",
+                None,
+                None,
+                "internal row weights must be finite and greater than zero",
+            )
+            return FeatureExtractionResult(
+                "NOT_EVALUABLE", pd.DataFrame(), pd.DataFrame(), (issue,), {}
+            )
 
     data = long_effects.copy()
     if "condition" not in data:
@@ -228,7 +273,7 @@ def extract_controller_features(
     for (condition, perturbation), frame in data.groupby(
         ["condition", "perturbation"], observed=True, sort=True
     ):
-        mean_standardized = frame.groupby("feature", observed=True)["standardized_effect"].mean()
+        mean_standardized = _weighted_feature_mean(frame, "standardized_effect")
         specificity, best_axis, signed_axis_score, scores = _axis_specificity(
             mean_standardized,
             str(perturbation),
@@ -260,7 +305,7 @@ def extract_controller_features(
             "perturbation": str(perturbation),
             "condition": str(condition),
             "magnitude": _rms(mean_standardized),
-            "magnitude_sensitivity": _rms(frame.groupby("feature", observed=True)["effect"].mean()),
+            "magnitude_sensitivity": _rms(_weighted_feature_mean(frame, "effect")),
             "specificity": specificity,
             "reproducibility": reproducibility,
             "best_axis": best_axis,

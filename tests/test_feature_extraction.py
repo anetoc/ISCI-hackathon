@@ -127,3 +127,39 @@ def test_extraction_is_deterministic_for_shuffled_input():
 
     pd.testing.assert_frame_equal(first.features, second.features)
     pd.testing.assert_frame_equal(first.axis_scores, second.axis_scores)
+
+
+def test_weighted_summary_matches_the_same_observations_expanded():
+    table = pd.DataFrame(
+        _rows(
+            "X",
+            [
+                {"A": 1.0, "B": 2.0, "C": 3.0},
+                {"A": 3.0, "B": 2.0, "C": 1.0},
+            ],
+        )
+    )
+    first_replicate = table[table["donor"] == "D0"]
+    second_replicate = table[table["donor"] == "D1"]
+    expanded = pd.concat([first_replicate] * 3 + [second_replicate], ignore_index=True)
+    weighted = table.copy()
+    weighted["_weight"] = weighted["donor"].map({"D0": 3, "D1": 1})
+
+    expanded_result = extract_controller_features(expanded, AXES)
+    weighted_result = extract_controller_features(weighted, AXES)
+
+    columns = ["magnitude", "magnitude_sensitivity", "specificity", "reproducibility"]
+    pd.testing.assert_series_equal(
+        expanded_result.features.iloc[0][columns],
+        weighted_result.features.iloc[0][columns],
+    )
+
+
+def test_nonpositive_internal_weights_are_rejected():
+    table = pd.DataFrame(_rows("X", [{"A": 1.0, "B": 1.0, "C": 1.0}] * 2))
+    table["_weight"] = 0
+
+    result = extract_controller_features(table, AXES)
+
+    assert result.status == "NOT_EVALUABLE"
+    assert result.issues[0].code == "INVALID_WEIGHTS"
