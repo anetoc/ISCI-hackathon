@@ -127,6 +127,11 @@ and magnitude-orthogonal rankings with the frozen `isci-controllership` kernel, 
 within each condition, and runs conditional LR plus a fixed-score bootstrap when at least 8
 positives and 15 negatives are available.
 
+`anndata_effects` means a perturbation-by-feature effect matrix, not a conventional cell-by-gene
+AnnData object. Cell-level inputs require the separately specified preprocessing contract in
+[`cell_level_h5ad_preprocessing.md`](cell_level_h5ad_preprocessing.md); the runner never interprets
+raw expression `X` as a perturbation effect.
+
 It writes:
 
 ```text

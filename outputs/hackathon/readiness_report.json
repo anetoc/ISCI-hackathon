@@ -42,23 +42,23 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "0aeb6e5b50e4418954775218d070a493c945e202",
+  "git_sha": "01487009c0ea482c4a24e22299ddfaea644bad22",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": true,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "f31c57574030fea667e2e7925e1a1ecf4151bc91ff53276da670360c9bd67f59",
+    "sha256": "e8dcbe1f5b8877d8a0582786fb866b1b9d76dc742cad503a4a36e843fea76f0f",
     "files_sha256": {
       "DELIVERABLE.md": "89e62a2968de1ac17ba9ec2fb9fa5740a86fe552bbff840e0bc6d980ab6091bd",
       "DEMO_SCRIPT.md": "dc359d56482fa114a1c7bf384e74d525f06d955cc97b9840003b6562ab2af08b",
       "JUDGE_QA.md": "e93858d99be0a82bfbdbf3e28076bfc894e45a56ad373e72a2c98f2b83b991e7",
-      "README.md": "d38c2d4ad119b84ea02b574a7c46ab2e7d7281ad28918d9c3a27c6396c3ce385",
+      "README.md": "404d751a7dfa735e1ea206e71033032e8a8fbb716e5487768ff198a9daacbd72",
       "SUBMISSION.md": "4da67f792c17adb09659a32075094e4fb1659e1d5970aa243ce2b12517101967",
       "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
       "config/hackathon_timing.json": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
       "contracts/dataset_spec.schema.json": "99df667dca5baef721ae4a3a883892cac9e116049051d11557f8281e1fd8704e",
       "demo_assets/hackathon/hackathon_fallback_2m30.mp4": "2f5a6dbdce61f0950919f5653674302a71ff0470d48b9fad797f889839461b66",
-      "docs/dataset_spec.md": "059a9e64f7a9e016c4c107a460869803598590353f5de30f7c90aeb90bebbc8a",
+      "docs/dataset_spec.md": "d223d09a3c4b2d976859fd8ee834680750ae4ea1554737a67c5b78e996cca03c",
       "docs/hackathon_judge_demo.html": "45e654a31874efdbfe944388808bc5a47e1afce180249384bce424614a33c6df",
       "examples/dataset_spec/mini_long_effects.csv": "620b54d4ee9834d78bd66123d50cf18522ff392bc2fc5b1200a7730c039e994d",
       "examples/dataset_spec/mini_long_effects.yaml": "537aa837f26ec6c929e041e6877aa3450ea6696af42b293af57d73595799e2f2",
@@ -85,6 +85,6 @@
   "branch": "codex/controllability-decomposition",
   "data_sha256": "56aca8a89b4ee55fdfa24bbf0d912894340d702d496b400542aecca4e8e6daf2",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-12T23:00:30.746615+00:00",
+  "timestamp": "2026-07-12T23:06:16.374155+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }

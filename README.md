@@ -158,10 +158,14 @@ synthetic contract fixture used before any large dataset is opened. The CSV/Parq
 canonicalizes mapped columns, verifies provenance and downgrades claims from observed coverage.
 The H5AD adapter opens effect matrices in backed mode and streams grouped, bounded long-form
 blocks. Use `isci validate <dataset.yaml>` followed by `isci inspect <dataset.yaml>`. For
-CSV/Parquet `long_effects` and H5AD `anndata_effects`, `isci run <dataset.yaml>` extracts magnitude,
+CSV/Parquet `long_effects` and effect-matrix H5AD `anndata_effects`, `isci run <dataset.yaml>` extracts magnitude,
 LOO axis specificity and donor/guide reproducibility before writing the auditable ranking.
 Precomputed `controller_features` remain supported. No path issues an automatic biological
 verdict.
+
+Cell-by-feature H5AD files from scPerturb require an explicit pseudobulk/control preprocessing
+contract before this runner. The external smoke test and draft contract are documented in
+[`reports/EXTERNAL_H5AD_SMOKE_TEST.md`](reports/EXTERNAL_H5AD_SMOKE_TEST.md).
 
 > **Deprecated** (kept for provenance only): `stability` / `insilico` / `network` were the original five-component index (M·R·D·A·S). It lost to the effect-magnitude baseline under expression-matched negatives and was abandoned; the validated method is the magnitude-conditional test in the `isci-controllership` skill, driven by `run_cci`.
 
