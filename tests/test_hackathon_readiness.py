@@ -19,3 +19,4 @@ def test_readiness_report_passes_automated_gates_without_faking_human_approval()
     assert len(report["details"]["medical_deck_sha256"]) == 64
     assert len(report["details"]["dataset_spec_schema_sha256"]) == 64
     assert report["details"]["dataset_spec_example_capability"] == "CONFIRMATORY_DECLARED"
+    assert report["details"]["dataset_spec_example_runtime"] == "DIAGNOSTIC_ONLY"

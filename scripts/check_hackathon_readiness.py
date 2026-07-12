@@ -27,6 +27,7 @@ from isci.dataset_spec import (  # noqa: E402
     load_dataset_spec,
     validate_dataset_spec,
 )
+from isci.adapters import RuntimeCapability, load_tabular_dataset  # noqa: E402
 
 OUTPUT = ROOT / "outputs" / "hackathon" / "readiness_report.json"
 AXES = ROOT / "config" / "axes.yaml"
@@ -38,6 +39,8 @@ SCREENSHOT_MANIFEST = ROOT / "outputs" / "hackathon" / "screenshot_manifest.json
 DEMO = ROOT / "docs" / "hackathon_judge_demo.html"
 DECK = ROOT / "outputs" / "isci_hackathon_medical_deck.pptx"
 DATASET_SPEC_CODE = ROOT / "isci" / "dataset_spec.py"
+DATASET_ADAPTER_CODE = ROOT / "isci" / "adapters" / "tabular.py"
+DATASET_ADAPTER_EXPORTS = ROOT / "isci" / "adapters" / "__init__.py"
 DATASET_SPEC_SCHEMA = ROOT / "contracts" / "dataset_spec.schema.json"
 DATASET_SPEC_DOC = ROOT / "docs" / "dataset_spec.md"
 DATASET_SPEC_EXAMPLE = ROOT / "examples" / "dataset_spec" / "mini_long_effects.yaml"
@@ -75,6 +78,7 @@ def main() -> None:
     dataset_spec_report = validate_dataset_spec(
         yaml.safe_load(DATASET_SPEC_EXAMPLE.read_text()), repo_root=ROOT, check_paths=True
     )
+    dataset_adapter = load_tabular_dataset(dataset_spec, repo_root=ROOT)
     demo_html = DEMO.read_text()
     readme = (ROOT / "README.md").read_text()
     submission = (ROOT / "SUBMISSION.md").read_text()
@@ -119,7 +123,9 @@ def main() -> None:
         "dataset_spec_v1_valid": dataset_spec.schema_version == 1
         and dataset_spec.dataset.id == "mini_cd4_screen"
         and dataset_spec.benchmark is not None
-        and dataset_spec_report.capability == DatasetCapability.CONFIRMATORY_DECLARED,
+        and dataset_spec_report.capability == DatasetCapability.CONFIRMATORY_DECLARED
+        and dataset_adapter.inspection.runtime_capability == RuntimeCapability.DIAGNOSTIC_ONLY
+        and dataset_adapter.inspection.canonical_rows == 8,
         "demo_is_offline": "https://" not in demo_html and "http://" not in demo_html,
         "submission_summary_within_limit": 140 <= word_count(summary) <= 150,
         "spoken_script_within_budget": 300 <= word_count(spoken) <= 380,
@@ -143,6 +149,8 @@ def main() -> None:
         DEMO,
         DECK,
         DATASET_SPEC_CODE,
+        DATASET_ADAPTER_CODE,
+        DATASET_ADAPTER_EXPORTS,
         DATASET_SPEC_SCHEMA,
         DATASET_SPEC_EXAMPLE,
         DATASET_SPEC_FIXTURE,
@@ -161,6 +169,7 @@ def main() -> None:
             "medical_deck_sha256": sha256(DECK) if DECK.exists() else None,
             "dataset_spec_schema_sha256": sha256(DATASET_SPEC_SCHEMA),
             "dataset_spec_example_capability": dataset_spec_report.capability.value,
+            "dataset_spec_example_runtime": dataset_adapter.inspection.runtime_capability.value,
             "local_path_violations": local_paths,
             "forbidden_tracked_files": forbidden_tracked,
         },

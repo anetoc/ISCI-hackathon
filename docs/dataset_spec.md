@@ -8,7 +8,8 @@ large file is opened. The notebook and future CLI consume the same contract.
 by the current runner. It is not the bring-your-own-data contract.
 
 The machine-readable contract is `contracts/dataset_spec.schema.json`; the Python boundary is
-`isci.dataset_spec`.
+`isci.dataset_spec`. CSV and Parquet inputs are physically inspected by
+`isci.adapters.load_tabular_dataset`.
 
 ## Supported inputs in v1
 
@@ -63,10 +64,35 @@ print(report.to_dict())
 
 spec = load_dataset_spec(path, check_paths=True)
 print(spec.dataset.id, spec.input.layout)
+
+from isci import load_tabular_dataset
+
+result = load_tabular_dataset(spec, repo_root=".")
+print(result.inspection.to_dict())
+result.table.head()
 ```
 
 The included example is synthetic and exists only to verify the contract. It is not biological
-evidence and must not enter the ISCI result tables.
+evidence and must not enter the ISCI result tables. Its YAML declares donor-, guide- and
+benchmark-capable inputs, but physical inspection correctly downgrades it to `DIAGNOSTIC_ONLY`
+because it contains only 2 observed positives, 2 donors and 1 condition.
+
+## Physical tabular inspection
+
+The CSV/Parquet adapter:
+
+- resolves paths inside the repository root and blocks symlink escape;
+- verifies a declared SHA-256 before interpreting values;
+- reads only mapped columns and renames them to canonical logical names;
+- excludes invalid required rows with an explicit count;
+- rejects missing columns, mapping collisions and duplicate canonical keys;
+- measures observed positives, negative pool, donors, guides and conditions;
+- emits `CONFIRMATORY_READY`, `BENCHMARK_READY`, `DIAGNOSTIC_ONLY` or `NOT_EVALUABLE` from
+  observed coverage.
+
+`CONFIRMATORY_READY` requires at least 8 observed positives, 15 negatives, 6 donors per positive,
+2 guides per positive and 2 conditions per positive. It is a dataset-readiness decision, not an
+ISCI biological `PASS`.
 
 ## Path and privacy rules
 
@@ -79,7 +105,6 @@ evidence and must not enter the ISCI result tables.
 
 ## What comes next
 
-The next implementation slice is the adapter boundary: validate the physical table/H5AD against
-the declared mappings, emit a canonical perturbation-effect table, and return a structured
-`NOT_EVALUABLE` report when required evidence is missing. The CLI and notebook should call that
-adapter rather than contain dataset-specific branching.
+The next implementation slices are the CLI (`validate` and `inspect`) and the AnnData effect-matrix
+adapter. The notebook should call these public interfaces rather than contain dataset-specific
+branching.

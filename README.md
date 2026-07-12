@@ -150,7 +150,8 @@ the driver, not those stubs, is the reproduction path. Every output carries a pr
 
 **Bring your own Perturb-seq dataset:** [`docs/dataset_spec.md`](docs/dataset_spec.md) defines the
 versioned DatasetSpec v1 contract, supported input layouts, conservative capability tiers and the
-synthetic contract fixture used before any large dataset is opened.
+synthetic contract fixture used before any large dataset is opened. The CSV/Parquet adapter already
+canonicalizes mapped columns, verifies provenance and downgrades claims from observed coverage.
 
 > **Deprecated** (kept for provenance only): `stability` / `insilico` / `network` were the original five-component index (M·R·D·A·S). It lost to the effect-magnitude baseline under expression-matched negatives and was abandoned; the validated method is the magnitude-conditional test in the `isci-controllership` skill, driven by `run_cci`.
 
