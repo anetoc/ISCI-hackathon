@@ -74,14 +74,21 @@ def test_marker_leakage_control_cannot_be_disabled():
     assert any(issue.code == "LOO_REQUIRED" for issue in report.issues)
 
 
-@pytest.mark.parametrize("path", ["/tmp/private.h5ad", "C:\\private\\screen.h5ad"])
-def test_absolute_input_paths_are_rejected(path):
+@pytest.mark.parametrize(
+    ("path", "expected_code"),
+    [
+        ("/tmp/private.h5ad", "NON_PORTABLE_PATH"),
+        ("C:\\private\\screen.h5ad", "NON_PORTABLE_PATH"),
+        ("../outside/screen.h5ad", "PATH_TRAVERSAL"),
+    ],
+)
+def test_unsafe_input_paths_are_rejected(path, expected_code):
     raw = example_raw()
     raw["input"]["path"] = path
     report = validate_dataset_spec(raw)
 
     assert not report.valid
-    assert any(issue.code == "NON_PORTABLE_PATH" for issue in report.issues)
+    assert any(issue.code == expected_code for issue in report.issues)
 
 
 def test_unknown_fields_are_rejected_instead_of_becoming_accidental_api():

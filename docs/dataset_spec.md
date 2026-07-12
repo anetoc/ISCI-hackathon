@@ -70,7 +70,7 @@ evidence and must not enter the ISCI result tables.
 
 ## Path and privacy rules
 
-- Contract paths are repository-relative. Absolute local paths are rejected.
+- Contract paths are repository-relative. Absolute paths and `..` traversal are rejected.
 - `provenance.source_url`, citation, license and data classification are required.
 - DatasetSpec never uploads or opens data during config validation.
 - Raw H5AD/H5MU files remain outside Git.

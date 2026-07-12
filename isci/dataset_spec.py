@@ -228,6 +228,9 @@ def _portable_path(value: Any, path: str, issues: list[ValidationIssue]) -> bool
     if Path(value).is_absolute() or is_windows_absolute:
         _add(issues, "NON_PORTABLE_PATH", path, "absolute paths are not allowed")
         return False
+    if ".." in value.replace("\\", "/").split("/"):
+        _add(issues, "PATH_TRAVERSAL", path, "repository-relative paths cannot contain '..'")
+        return False
     return True
 
 

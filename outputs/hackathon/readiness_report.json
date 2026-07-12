@@ -21,7 +21,7 @@
     "submission_summary_words": 148,
     "spoken_script_words": 352,
     "medical_deck_sha256": "1386feb90d4ddb834ab38c191120ba4c533d820e5f74b673d7435474c5a017f1",
-    "dataset_spec_schema_sha256": "ee84a1b0f8d0b83160f50d785b97b3d76d692e127feb52a01c00349c7f33ad86",
+    "dataset_spec_schema_sha256": "99df667dca5baef721ae4a3a883892cac9e116049051d11557f8281e1fd8704e",
     "dataset_spec_example_capability": "CONFIRMATORY_DECLARED",
     "local_path_violations": [],
     "forbidden_tracked_files": []
@@ -33,12 +33,12 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "0e15567a6bd1bb356ae0971e05b8bc01d27748d2",
+  "git_sha": "85be09878a93d5df95b145e81d9cd71f2616e2e8",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": true,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "de58c6a2a33880093facee199de8157fbe1ccf8da646359c6810eda15f2dae99",
+    "sha256": "b02ab360c4307d40d7b7e0480c16cb6ff60c50465332c1727e737ec4433f926a",
     "files_sha256": {
       "DELIVERABLE.md": "14159146616bc4d8801cfe2ba9dda98e15c7bd77b7ba1981c72b7cd91f25f522",
       "DEMO_SCRIPT.md": "dc359d56482fa114a1c7bf384e74d525f06d955cc97b9840003b6562ab2af08b",
@@ -47,14 +47,14 @@
       "SUBMISSION.md": "4da67f792c17adb09659a32075094e4fb1659e1d5970aa243ce2b12517101967",
       "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
       "config/hackathon_timing.json": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
-      "contracts/dataset_spec.schema.json": "ee84a1b0f8d0b83160f50d785b97b3d76d692e127feb52a01c00349c7f33ad86",
+      "contracts/dataset_spec.schema.json": "99df667dca5baef721ae4a3a883892cac9e116049051d11557f8281e1fd8704e",
       "demo_assets/hackathon/hackathon_fallback_2m30.mp4": "2f5a6dbdce61f0950919f5653674302a71ff0470d48b9fad797f889839461b66",
-      "docs/dataset_spec.md": "75896b6b52df19657de1a98b68658ce1306a291f405c2653a536464b5b596f0b",
+      "docs/dataset_spec.md": "95115d6477382d1c3798792c1bdfb6fc1ad51f4b3404f016e6868b37f8f1b774",
       "docs/hackathon_judge_demo.html": "45e654a31874efdbfe944388808bc5a47e1afce180249384bce424614a33c6df",
       "examples/dataset_spec/mini_long_effects.csv": "620b54d4ee9834d78bd66123d50cf18522ff392bc2fc5b1200a7730c039e994d",
       "examples/dataset_spec/mini_long_effects.yaml": "537aa837f26ec6c929e041e6877aa3450ea6696af42b293af57d73595799e2f2",
       "examples/dataset_spec/mini_positives.txt": "b29a92fb3193bf2ba1dfd6182906f34ad49cf4907657aa3f3cd1bb757a194006",
-      "isci/dataset_spec.py": "f8287f2026a31e11ca5ab4481d5b0a69ab7ecf8fb56fd7b4335471e72988325c",
+      "isci/dataset_spec.py": "d628686705a50fa7a6292a36cff92fa5a365c19375cc4e5427ab9b8001e65cae",
       "outputs/hackathon/claim_manifest.json": "56aca8a89b4ee55fdfa24bbf0d912894340d702d496b400542aecca4e8e6daf2",
       "outputs/hackathon/screenshot_manifest.json": "faff4ee2b9fdad7c62a9da8c9be7de683666e7f3b82b6a5260e44bd586dc73de",
       "outputs/hackathon/video_manifest.json": "0b902969efd3ae89d6aaaa4d4375d44316443d3d63d22f2cc1efb5dccd86c047",
@@ -66,6 +66,6 @@
   "branch": "codex/controllability-decomposition",
   "data_sha256": "56aca8a89b4ee55fdfa24bbf0d912894340d702d496b400542aecca4e8e6daf2",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-12T21:53:24.058582+00:00",
+  "timestamp": "2026-07-12T21:59:23.302707+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }
