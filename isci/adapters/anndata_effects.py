@@ -8,7 +8,11 @@ from typing import Any, Iterator
 
 import numpy as np
 import pandas as pd
-from scipy import sparse
+
+try:
+    from scipy import sparse
+except ImportError:  # Keep the tabular package importable before H5AD dependencies are synced.
+    sparse = None
 
 try:
     import anndata as ad
@@ -208,7 +212,7 @@ def _positive_mask(
 
 
 def _dense(block) -> np.ndarray:
-    return block.toarray() if sparse.issparse(block) else np.asarray(block)
+    return block.toarray() if sparse is not None and sparse.issparse(block) else np.asarray(block)
 
 
 def _scan_layers(
@@ -235,7 +239,7 @@ def inspect_anndata_dataset(
     """Inspect an H5AD in backed mode and optionally scan effect layers blockwise."""
 
     issues: list[AdapterIssue] = []
-    if ad is None:
+    if ad is None or sparse is None:
         issues.append(
             _error(
                 "DEPENDENCY_MISSING",
