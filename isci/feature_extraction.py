@@ -363,7 +363,10 @@ def _summarize_effect_block(block: pd.DataFrame) -> tuple[pd.DataFrame, int]:
         return pd.DataFrame(), excluded
 
     keys = ["condition", "perturbation", "feature"]
-    keys.extend(column for column in ("donor", "guide") if column in working)
+    # Preserve every declared independent-unit field while collapsing matrix blocks. The
+    # downstream label policy decides whether donor or replicate is primary; dropping replicate
+    # here would make donor-free H5AD screens look artificially unreproducible.
+    keys.extend(column for column in ("donor", "replicate", "guide") if column in working)
     aggregations: dict[str, str] = {
         "effect": "mean",
         "standardized_effect": "mean",

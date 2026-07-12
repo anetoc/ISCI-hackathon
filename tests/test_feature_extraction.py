@@ -199,6 +199,25 @@ def test_group_block_extraction_matches_materialized_long_table():
     assert streamed.methods["peak_summary_buffer_rows"] < len(pd.concat([x, y]))
 
 
+def test_group_block_extraction_preserves_replicates_without_donors():
+    table = pd.DataFrame(
+        _rows(
+            "X",
+            [
+                {"A": 1.0, "B": 2.0, "C": 3.0},
+                {"A": 1.0, "B": 2.0, "C": 3.0},
+            ],
+        )
+    ).drop(columns="donor")
+    table["replicate"] = table["guide"].map({"X_g0": "R0", "X_g1": "R1"})
+    table["guide"] = "X_g1"
+
+    result = extract_controller_features_from_group_blocks([(("stim", "X"), table)], AXES)
+
+    assert result.features.iloc[0]["n_replicates"] == 2
+    assert result.features.iloc[0]["reproducibility"] == 1.0
+
+
 def test_stream_excludes_nonfinite_rows_with_explicit_counts():
     block = pd.DataFrame(_rows("X", [{"A": 1.0, "B": 2.0, "C": 3.0}] * 2))
     block.loc[0, "effect"] = float("nan")
