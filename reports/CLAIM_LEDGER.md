@@ -1,6 +1,7 @@
 # Claim ledger — what this project claims, at what status, on what evidence
 
-One row per claim. `status` ∈ {PASS, NULL, FAIL, NOT-EVALUABLE, SUPPORT}. Every "claimed" row has a
+One row per claim. `status` ∈ {PASS, NULL, FAIL, NOT-EVALUABLE, SUPPORT,
+DIRECTIONAL-UNCERTAIN, UNSUPPORTED}. Every "claimed" row has a
 matching "not claimed" boundary. This is the single source of truth; README/PAPER/DOSSIER must agree
 with it.
 
@@ -23,6 +24,9 @@ with it.
 | 8 | Magnitude-conditional controllership holds at the **protein layer** | **FAIL** | Frangieh totalVI protein CCI: raw +0.584 was a direction-agnostic inverted-feature artifact (positives lower residual coherence 0.059 vs 0.565); direction-aware verdict FAIL, adds_over_rna=False | Magnitude-independence is an RNA/cross-donor property, not universal across layers |
 | 9 | Cross-layer RNA→protein concordance | **SUPPORT** | RNA-called controllers produce expected surface phenotype; cross-layer surface-shift AUROC 0.90; Papalexi PD-L1 rescue AUROC 0.77 | Concordance, not a magnitude-conditional protein PASS (see #8) |
 | 10 | Mechanism enrichment (NF-κB, Treg-brake) is causal | **prioritization only** | Curated sets enrich in controllership not magnitude (NFkB q=0.017, Treg q=0.008); broad GO/Reactome negative | Computational prioritization, not causal — needs wet-lab |
+| 11 | Real functional rulers outperform structurally matched pseudo-axes uniformly | **MIXED post-hoc** | Adversarial T1: Th1 +0.181 (p=0.0199) and Th2 +0.253 (p=0.0050) SUPPORT; TCR, memory and Treg UNSUPPORTED; exhaustion/CD4-CTL NOT-EVALUABLE under the ≥90% admissibility gate | Not a universal property of every axis; ontology overlap remains |
+| 12 | Precision and repeatability independently transport after family-wise control | **DIRECTIONAL-UNCERTAIN post-hoc** | T2 Marson precision +0.215 [0.094,0.498], permutation p=0.0070, BH q=0.070; THP-1 precision +0.083 [−0.030,0.259], q=0.185; repeatability weaker; 6/10 planned tests NOT-EVALUABLE | No component is declared confirmed across systems; non-evaluable is not biological absence |
+| 13 | Component support transports across Marson conditions | **NOT-EVALUABLE post-hoc** | Raw file has Rest/Stim8/Stim48 and source fields, but no reusable gene×condition E/S/R + labels + matching-block artifact; no raw recomputation performed | No negative claim about condition transport |
 
 ## Prior-art positioning
 
