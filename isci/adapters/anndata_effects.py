@@ -466,6 +466,7 @@ def iter_anndata_group_effect_blocks(
     *,
     repo_root: Path | str,
     block_rows: int = 64,
+    inspection_result: AnnDataInspectionResult | None = None,
 ) -> Iterator[tuple[tuple[str, str], pd.DataFrame]]:
     """Yield bounded long-form blocks contiguously by condition and perturbation.
 
@@ -475,7 +476,7 @@ def iter_anndata_group_effect_blocks(
     the next one instead of retaining the entire screen in memory.
     """
 
-    inspection = inspect_anndata_dataset(
+    inspection = inspection_result or inspect_anndata_dataset(
         spec, repo_root=repo_root, scan_values=False, block_rows=block_rows
     )
     if not inspection.inspection.evaluable:

@@ -196,7 +196,12 @@ def _run(args: argparse.Namespace) -> int:
         return EXIT_INVALID_SPEC
 
     output_dir = Path(args.output_dir) if args.output_dir else root / "outputs" / spec.dataset.id
-    result = run_dataset(spec, repo_root=root, output_dir=output_dir)
+    result = run_dataset(
+        spec,
+        repo_root=root,
+        output_dir=output_dir,
+        block_rows=args.block_rows,
+    )
     report_path = output_dir / "analysis_report.json"
     report = json.loads(report_path.read_text()) if report_path.is_file() else result.report
     payload = {
@@ -256,7 +261,7 @@ def build_parser() -> argparse.ArgumentParser:
     inspect_parser.set_defaults(handler=_inspect)
 
     run_parser = subparsers.add_parser(
-        "run", help="extract and rank a tabular dataset with the frozen conditional method"
+        "run", help="extract and rank a dataset with the frozen conditional method"
     )
     run_parser.add_argument("spec", help="path to DatasetSpec YAML")
     run_parser.add_argument(
@@ -265,6 +270,12 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument(
         "--output-dir",
         help="output directory (default: outputs/<dataset_id> under the repository root)",
+    )
+    run_parser.add_argument(
+        "--block-rows",
+        type=int,
+        default=64,
+        help="H5AD observation rows per extraction block (default: 64)",
     )
     run_parser.set_defaults(handler=_run)
     return parser

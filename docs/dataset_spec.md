@@ -90,6 +90,7 @@ isci inspect dataset.yaml \
   --canonical-output outputs/my_dataset/canonical.parquet
 isci inspect effect_matrix.yaml --scan-values --block-rows 64
 isci run long_effects.yaml --output-dir outputs/my_dataset
+isci run effect_matrix.yaml --block-rows 32 --output-dir outputs/my_h5ad
 ```
 
 Exit code `0` means the requested validation/inspection completed; `2` means the spec, YAML or
@@ -110,19 +111,21 @@ for block in iter_anndata_effect_blocks(spec, repo_root=".", block_rows=64):
     consume(block)
 ```
 
-Non-finite values are preserved in streamed blocks so downstream exclusions must be counted and
-reported rather than happening silently.
+Non-finite values are preserved in the public stream. During `isci run`, they are excluded with
+explicit source/exclusion counts in `feature_extraction_report.json`. H5AD groups are processed
+contiguously and only `--block-rows` observations are read from the matrix at once; the report also
+records the peak summary buffer.
 
 ## Scientific runner
 
-`isci run` accepts tabular `long_effects` and precomputed `controller_features`. For long effects it
-first computes effect magnitude, marker-restricted LOO axis specificity and donor/guide replicate
-coherence. Rows without sufficient axis coverage or independent replication remain missing and are
-excluded explicitly from ranking. It then computes balanced and magnitude-orthogonal rankings with
-the frozen `isci-controllership` kernel, matches negatives within each condition, and runs
-conditional LR plus a fixed-score bootstrap when at least 8 positives and 15 negatives are
-available. H5AD execution remains a separate bounded-memory streaming lane; inspection is already
-supported.
+`isci run` accepts tabular `long_effects`, H5AD `anndata_effects` and precomputed
+`controller_features`. For effect inputs it first computes effect magnitude, marker-restricted LOO
+axis specificity and donor/guide replicate coherence. Rows without sufficient axis coverage or
+independent replication remain missing and are excluded explicitly from ranking. H5AD uses the
+same feature extractor through a grouped bounded-memory stream. The runner then computes balanced
+and magnitude-orthogonal rankings with the frozen `isci-controllership` kernel, matches negatives
+within each condition, and runs conditional LR plus a fixed-score bootstrap when at least 8
+positives and 15 negatives are available.
 
 It writes:
 
@@ -169,6 +172,6 @@ ISCI biological `PASS`.
 
 ## What comes next
 
-The next implementation slices are feature extraction from long/H5AD effect blocks and the
-researcher notebook. The notebook should call these public interfaces rather than contain
-dataset-specific branching.
+The remaining portability gate is a smoke run on an independent public H5AD that was not used to
+develop the adapter, followed by updating the researcher notebook to demonstrate the same public
+`isci run` interface. This is external validation, not a change to the frozen ISCI method.

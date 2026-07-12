@@ -156,11 +156,12 @@ the driver, not those stubs, is the reproduction path. Every output carries a pr
 versioned DatasetSpec v1 contract, supported input layouts, conservative capability tiers and the
 synthetic contract fixture used before any large dataset is opened. The CSV/Parquet adapter already
 canonicalizes mapped columns, verifies provenance and downgrades claims from observed coverage.
-The H5AD adapter opens effect matrices in backed mode and streams bounded long-form blocks. Use
-`isci validate <dataset.yaml>` followed by `isci inspect <dataset.yaml>`. For CSV/Parquet
-`long_effects`, `isci run <dataset.yaml>` now extracts magnitude, LOO axis specificity and
-donor/guide reproducibility before writing the auditable ranking. Precomputed
-`controller_features` remain supported. Neither path issues an automatic biological verdict.
+The H5AD adapter opens effect matrices in backed mode and streams grouped, bounded long-form
+blocks. Use `isci validate <dataset.yaml>` followed by `isci inspect <dataset.yaml>`. For
+CSV/Parquet `long_effects` and H5AD `anndata_effects`, `isci run <dataset.yaml>` extracts magnitude,
+LOO axis specificity and donor/guide reproducibility before writing the auditable ranking.
+Precomputed `controller_features` remain supported. No path issues an automatic biological
+verdict.
 
 > **Deprecated** (kept for provenance only): `stability` / `insilico` / `network` were the original five-component index (M·R·D·A·S). It lost to the effect-magnitude baseline under expression-matched negatives and was abandoned; the validated method is the magnitude-conditional test in the `isci-controllership` skill, driven by `run_cci`.
 

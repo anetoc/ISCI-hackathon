@@ -151,6 +151,8 @@ def main() -> None:
         "dataset_cli_registered": 'isci = "isci.cli:main"' in pyproject,
         "anndata_streaming_adapter_present": 'backed="r"' in anndata_adapter_source
         and "iter_anndata_effect_blocks" in anndata_adapter_source
+        and "iter_anndata_group_effect_blocks" in anndata_adapter_source
+        and "extract_controller_features_from_group_blocks" in feature_extraction_source
         and '"anndata>=0.10"' in pyproject,
         "dataset_runner_bounded": "run_controller_features" in dataset_runner_source
         and '"biological_verdict": "NOT_ISSUED"' in dataset_runner_source

@@ -19,10 +19,19 @@ from typing import Any
 
 import pandas as pd
 
-from isci.adapters import RuntimeCapability, load_tabular_dataset
+from isci.adapters import (
+    RuntimeCapability,
+    inspect_anndata_dataset,
+    iter_anndata_group_effect_blocks,
+    load_tabular_dataset,
+)
 from isci.axes import load_axes_config
 from isci.dataset_spec import DatasetSpec
-from isci.feature_extraction import FeatureExtractionResult, extract_controller_features
+from isci.feature_extraction import (
+    FeatureExtractionResult,
+    extract_controller_features,
+    extract_controller_features_from_group_blocks,
+)
 
 
 @dataclass(frozen=True)
@@ -373,51 +382,14 @@ def _save_feature_extraction(
     }
 
 
-def run_dataset(
+def _complete_extracted_run(
     spec: DatasetSpec,
-    *,
-    repo_root: Path | str,
-    output_dir: Path | str | None = None,
+    extraction: FeatureExtractionResult,
+    inspection: dict[str, Any],
+    root: Path,
+    output_dir: Path | str | None,
 ) -> DatasetRunResult:
-    """Extract features when needed, then run the frozen conditional ranking method."""
-
-    if spec.input.layout == "controller_features":
-        return run_controller_features(spec, repo_root=repo_root, output_dir=output_dir)
-
-    root = Path(repo_root).resolve()
-    if spec.input.layout != "long_effects":
-        report = _base_report(spec, {}, root)
-        report.update(
-            {
-                "status": "STREAMING_EXTRACTION_REQUIRED",
-                "reason": "anndata_effects requires the bounded-memory streaming extraction lane",
-            }
-        )
-        return DatasetRunResult(
-            spec.dataset.id,
-            "STREAMING_EXTRACTION_REQUIRED",
-            "NOT_ISSUED",
-            pd.DataFrame(),
-            pd.DataFrame(),
-            report,
-        )
-
-    adapter = load_tabular_dataset(spec, repo_root=root)
-    inspection = adapter.inspection.to_dict()
     report = _base_report(spec, inspection, root)
-    if adapter.inspection.runtime_capability == RuntimeCapability.NOT_EVALUABLE:
-        report.update({"status": "NOT_EVALUABLE", "reason": "physical adapter rejected input"})
-        return DatasetRunResult(
-            spec.dataset.id,
-            "NOT_EVALUABLE",
-            "NOT_ISSUED",
-            pd.DataFrame(),
-            pd.DataFrame(),
-            report,
-        )
-
-    axes_config = load_axes_config(root / spec.analysis.axes_path)
-    extraction = extract_controller_features(adapter.table, axes_config)
     extraction_report = extraction.report()
     eligible = extraction.features.dropna(
         subset=["magnitude", "specificity", "reproducibility"]
@@ -458,6 +430,64 @@ def run_dataset(
         output_dir=output_dir,
         report=report,
     )
+
+
+def run_dataset(
+    spec: DatasetSpec,
+    *,
+    repo_root: Path | str,
+    output_dir: Path | str | None = None,
+    block_rows: int = 64,
+) -> DatasetRunResult:
+    """Extract features when needed, then run the frozen conditional ranking method."""
+
+    if spec.input.layout == "controller_features":
+        return run_controller_features(spec, repo_root=repo_root, output_dir=output_dir)
+
+    root = Path(repo_root).resolve()
+    axes_config = load_axes_config(root / spec.analysis.axes_path)
+    if spec.input.layout == "anndata_effects":
+        adapter = inspect_anndata_dataset(
+            spec, repo_root=root, scan_values=False, block_rows=block_rows
+        )
+        inspection = adapter.inspection.to_dict()
+        if adapter.inspection.runtime_capability == RuntimeCapability.NOT_EVALUABLE:
+            report = _base_report(spec, inspection, root)
+            report.update({"status": "NOT_EVALUABLE", "reason": "physical adapter rejected input"})
+            return DatasetRunResult(
+                spec.dataset.id,
+                "NOT_EVALUABLE",
+                "NOT_ISSUED",
+                pd.DataFrame(),
+                pd.DataFrame(),
+                report,
+            )
+        extraction = extract_controller_features_from_group_blocks(
+            iter_anndata_group_effect_blocks(
+                spec,
+                repo_root=root,
+                block_rows=block_rows,
+                inspection_result=adapter,
+            ),
+            axes_config,
+        )
+    else:
+        adapter = load_tabular_dataset(spec, repo_root=root)
+        inspection = adapter.inspection.to_dict()
+        if adapter.inspection.runtime_capability == RuntimeCapability.NOT_EVALUABLE:
+            report = _base_report(spec, inspection, root)
+            report.update({"status": "NOT_EVALUABLE", "reason": "physical adapter rejected input"})
+            return DatasetRunResult(
+                spec.dataset.id,
+                "NOT_EVALUABLE",
+                "NOT_ISSUED",
+                pd.DataFrame(),
+                pd.DataFrame(),
+                report,
+            )
+        extraction = extract_controller_features(adapter.table, axes_config)
+
+    return _complete_extracted_run(spec, extraction, inspection, root, output_dir)
 
 
 def save_dataset_run(result: DatasetRunResult, output_dir: Path | str) -> None:

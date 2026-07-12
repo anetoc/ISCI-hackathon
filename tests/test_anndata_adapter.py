@@ -15,6 +15,7 @@ from isci.adapters import (
 )
 from isci.dataset_spec import BenchmarkSettings, DatasetInput, load_dataset_spec
 from isci.cli import EXIT_SUCCESS, main
+from isci.analysis_runner import run_dataset
 
 ad = pytest.importorskip("anndata")
 
@@ -23,16 +24,27 @@ EXAMPLE = ROOT / "examples" / "dataset_spec" / "mini_long_effects.yaml"
 BASE_SPEC = load_dataset_spec(EXAMPLE, repo_root=ROOT)
 
 
-def _write_h5ad(tmp_path, obs, *, effect=None, standardized=None, positives=("IRF1", "STAT6")):
+def _write_h5ad(
+    tmp_path,
+    obs,
+    *,
+    effect=None,
+    standardized=None,
+    positives=("IRF1", "STAT6"),
+    var_names=("STATE_A", "STATE_B", "STATE_C"),
+):
     obs = obs.copy()
     obs.index = [f"obs_{index}" for index in range(len(obs))]
     n_obs = len(obs)
-    var = pd.DataFrame(index=["STATE_A", "STATE_B", "STATE_C"])
+    var = pd.DataFrame(index=list(var_names))
+    n_vars = len(var_names)
     effect = (
-        np.asarray(effect) if effect is not None else np.arange(n_obs * 3).reshape(n_obs, 3) / 10
+        np.asarray(effect)
+        if effect is not None
+        else np.arange(n_obs * n_vars).reshape(n_obs, n_vars) / 10
     )
     standardized = np.asarray(standardized) if standardized is not None else effect / 0.25
-    adata = ad.AnnData(X=np.zeros((n_obs, 3)), obs=obs, var=var)
+    adata = ad.AnnData(X=np.zeros((n_obs, n_vars)), obs=obs, var=var)
     adata.layers["log_fc"] = effect
     adata.layers["zscore"] = standardized
     adata.write_h5ad(tmp_path / "effects.h5ad")
@@ -233,3 +245,53 @@ def test_cli_dispatches_h5ad_to_low_memory_adapter(tmp_path, capsys):
     assert payload["adapter"] == "anndata_effects"
     assert payload["adapter_details"]["matrix_shape"] == [4, 3]
     assert payload["adapter_details"]["values_scanned"] is True
+
+
+def test_h5ad_run_streams_features_into_the_same_auditable_ranking(tmp_path):
+    observations = pd.DataFrame(
+        {
+            "target": ["CTRL_A", "CTRL_A", "CTRL_B", "CTRL_B", "CTRL_C", "CTRL_C"],
+            "condition": ["stim"] * 6,
+            "donor_id": ["D0", "D1"] * 3,
+            "guide_id": [f"g{index}" for index in range(6)],
+            "target_baseMean": [5.0] * 6,
+            "n_guides": [2] * 6,
+            "n_cells_target": [200] * 6,
+        }
+    )
+    vectors = np.array(
+        [
+            [1.0, 1.0, 1.0, 1.0],
+            [1.0, 1.0, 1.0, 1.0],
+            [1.0, 2.0, 1.0, 2.0],
+            [1.0, 2.0, 1.0, 2.0],
+            [-1.0, -1.0, -1.0, -1.0],
+            [-1.0, -1.0, -1.0, -1.0],
+        ]
+    )
+    spec = _write_h5ad(
+        tmp_path,
+        observations,
+        effect=vectors / 2,
+        standardized=vectors,
+        var_names=("IL2", "IL2RA", "CD69", "TNF"),
+    )
+    spec = replace(spec, benchmark=None)
+    config = tmp_path / "config"
+    config.mkdir()
+    (config / "axes.yaml").write_text((ROOT / "config" / "axes.yaml").read_text())
+    kernel = tmp_path / "skills" / "isci-controllership"
+    kernel.mkdir(parents=True)
+    (kernel / "kernel.py").write_text(
+        (ROOT / "skills" / "isci-controllership" / "kernel.py").read_text()
+    )
+    output = tmp_path / "outputs"
+
+    result = run_dataset(spec, repo_root=tmp_path, output_dir=output, block_rows=1)
+
+    assert result.completed
+    assert len(result.ranking) == 3
+    assert result.report["feature_extraction"]["methods"]["streaming_grouped"] is True
+    assert result.report["feature_extraction"]["methods"]["peak_summary_buffer_rows"] == 8
+    assert (output / "controller_features.csv").is_file()
+    assert (output / "analysis_report.json").is_file()
