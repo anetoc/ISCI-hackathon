@@ -95,6 +95,63 @@ def validate_blocks(
             seen.add(gene)
 
 
+def match_unique_blocks(
+    frame: pd.DataFrame,
+    positives: Sequence[str],
+    candidates: Sequence[str],
+    *,
+    match_cols: Sequence[str],
+    n_negatives: int = 5,
+) -> list[MatchedBlock]:
+    """Create deterministic, non-overlapping blocks from frozen matching covariates.
+
+    Covariates are standardized once solely to freeze the evaluation blocks; none of
+    the predictive features, component values, or outcomes beyond positive membership
+    enter the distance. Positives with the sparsest nearby candidate pool are assigned
+    first to reduce greedy matching failures.
+    """
+
+    positive_genes = [gene for gene in positives if gene in frame.index]
+    candidate_genes = [
+        gene for gene in candidates if gene in frame.index and gene not in set(positive_genes)
+    ]
+    genes = list(dict.fromkeys([*positive_genes, *candidate_genes]))
+    values = frame.loc[genes, list(match_cols)].apply(pd.to_numeric, errors="coerce")
+    complete = values.notna().all(axis=1) & np.isfinite(values.to_numpy(dtype=float)).all(axis=1)
+    values = values.loc[complete]
+    positive_genes = [gene for gene in positive_genes if gene in values.index]
+    candidate_genes = [gene for gene in candidate_genes if gene in values.index]
+    if len(candidate_genes) < len(positive_genes) * n_negatives:
+        raise ValueError(
+            f"need {len(positive_genes) * n_negatives} unique negatives, "
+            f"but only {len(candidate_genes)} complete candidates are available"
+        )
+    scale = values.std(ddof=0).replace(0.0, 1.0)
+    standardized = (values - values.mean()) / scale
+
+    distances = {
+        positive: np.sqrt(
+            ((standardized.loc[candidate_genes] - standardized.loc[positive]) ** 2).sum(axis=1)
+        ).sort_values(kind="mergesort")
+        for positive in positive_genes
+    }
+    # Hardest-to-match positives first; gene name is a deterministic tie-breaker.
+    order = sorted(
+        positive_genes,
+        key=lambda gene: (-float(distances[gene].iloc[n_negatives - 1]), gene),
+    )
+    used: set[str] = set()
+    assigned: dict[str, tuple[str, ...]] = {}
+    for positive in order:
+        available = [gene for gene in distances[positive].index if gene not in used]
+        selected = tuple(available[:n_negatives])
+        if len(selected) < n_negatives:
+            raise ValueError(f"unique matching failed for {positive!r}")
+        assigned[positive] = selected
+        used.update(selected)
+    return [MatchedBlock(positive, assigned[positive]) for positive in positive_genes]
+
+
 def _fit_predict(
     train: pd.DataFrame,
     test: pd.DataFrame,
@@ -103,6 +160,14 @@ def _fit_predict(
     component_col: str,
     seed: int,
 ) -> tuple[np.ndarray, np.ndarray, float]:
+    train = train.copy()
+    test = test.copy()
+    component_median = float(train[component_col].median())
+    if not np.isfinite(component_median):
+        raise ValueError("training fold has no finite component values")
+    # Missing component values are imputed without consulting the held-out block.
+    train[component_col] = train[component_col].fillna(component_median)
+    test[component_col] = test[component_col].fillna(component_median)
     residualizer = RankResidualizer().fit(train[effect_col], train[component_col])
     train_resid = residualizer.transform(train[effect_col], train[component_col])
     test_resid = residualizer.transform(test[effect_col], test[component_col])
@@ -144,10 +209,12 @@ def blocked_oof_predictions(
 
     validate_blocks(frame, blocks, min_negatives=min_negatives)
     required = [effect_col, component_col]
-    if frame[required].isna().any().any():
-        raise ValueError("OOF features must be finite and complete")
-    if not np.isfinite(frame[required].to_numpy(dtype=float)).all():
-        raise ValueError("OOF features must be finite and complete")
+    effect = pd.to_numeric(frame[effect_col], errors="coerce").to_numpy(dtype=float)
+    if not np.isfinite(effect).all():
+        raise ValueError("effect reach must be finite and complete")
+    component = pd.to_numeric(frame[component_col], errors="coerce").to_numpy(dtype=float)
+    if np.isinf(component).any():
+        raise ValueError("component values cannot be infinite")
 
     rows: list[dict[str, object]] = []
     coefficients: list[float] = []
@@ -256,4 +323,3 @@ def component_verdict(
     if ci_low > 0 and q_value < 0.05:
         return "SUPPORTED"
     return "DIRECTIONAL_UNCERTAIN"
-

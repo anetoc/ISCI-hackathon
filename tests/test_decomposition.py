@@ -11,6 +11,7 @@ from isci.decomposition import (
     blocked_oof_predictions,
     component_verdict,
     delta_auprc,
+    match_unique_blocks,
     permute_positive_within_blocks,
     validate_blocks,
 )
@@ -69,6 +70,13 @@ def test_held_block_cannot_change_other_folds_predictions():
     )
 
 
+def test_component_imputation_uses_training_fold_only():
+    frame, blocks = fixture_data()
+    frame.loc[blocks[0].positive, "S"] = np.nan
+    result = blocked_oof_predictions(frame, blocks, effect_col="E", component_col="S")
+    assert np.isfinite(result[["base_prediction", "full_prediction"]]).all().all()
+
+
 def test_blocks_reject_overlap_and_insufficient_negatives():
     frame, blocks = fixture_data(n_blocks=2)
     overlap = [blocks[0], MatchedBlock(blocks[1].positive, blocks[0].negatives)]
@@ -76,6 +84,24 @@ def test_blocks_reject_overlap_and_insufficient_negatives():
         validate_blocks(frame, overlap)
     with pytest.raises(ValueError, match="requires at least 5"):
         validate_blocks(frame, [MatchedBlock("P0", ("N0_0",)), blocks[1]])
+
+
+def test_unique_matching_is_deterministic_and_uses_covariates_only():
+    frame, blocks = fixture_data(n_blocks=3, n_negatives=6)
+    frame["match"] = np.arange(len(frame), dtype=float)
+    positives = [block.positive for block in blocks]
+    candidates = [gene for block in blocks for gene in block.negatives]
+    first = match_unique_blocks(
+        frame, positives, candidates, match_cols=["match"], n_negatives=5
+    )
+    changed = frame.copy()
+    changed[["E", "S"]] *= 1_000
+    second = match_unique_blocks(
+        changed, positives, candidates, match_cols=["match"], n_negatives=5
+    )
+    assert first == second
+    genes = [gene for block in first for gene in block.negatives]
+    assert len(genes) == len(set(genes)) == 15
 
 
 def test_block_permutation_preserves_membership_and_one_positive():
