@@ -1,6 +1,6 @@
 # GSE190604 targeted-panel replication protocol
 
-**Status:** locked before raw matrix analysis  
+**Status:** locked before raw matrix analysis; executed without amendment
 **Dataset:** Schmidt et al. primary human T-cell CRISPRa Perturb-seq, GSE190604  
 **Scope:** external to Marson; targeted-panel reanalysis, not a new unseen dataset
 
@@ -56,3 +56,11 @@ The panel has 74 targets, so five disjoint negatives per positive are impossible
 
 The strongest allowed conclusion is external targeted-panel replication of an axis-conditioned
 signal. This does not establish universality, therapeutic direction or clinical efficacy.
+
+## Executed result
+
+The stimulated Th2 primary endpoint was `DIRECTIONAL_UNCERTAIN` (Δ weighted AUPRC +0.003,
+95% bootstrap CI [−0.096,+0.099], permutation p=0.396, BH q=0.396). The no-stim Th2 secondary was
+`REPLICATED_EXPLORATORY` (+0.193 [+0.057,+0.361], p=0.0070, q=0.028). Stimulated Th1 precision and
+repeatability remained directional-uncertain after multiplicity control. The protocol, labels,
+axes, gates and resampling counts were not changed after feature inspection.

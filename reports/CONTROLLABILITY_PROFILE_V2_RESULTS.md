@@ -41,6 +41,28 @@ pseudo-axes in T1 and transports across all three experimental conditions in T4 
 an axis-conditioned property, not universal controllability. It remains exploratory because axis,
 labels and conditions come from the same screen and share biological ontology.
 
+## External targeted-panel replication: condition-specific result
+
+The frozen GSE190604 analysis tested 69 CRISPRa targets (23 positive, 46 negative) in primary human
+T cells. Raw counts were pseudobulked by target×well, effects used well-matched NO-TARGET controls,
+and every outcome was evaluated with repeated out-of-fold fitting plus expression/cell-count overlap
+weights. The four hypotheses used 1,000 gene bootstraps and 1,000 full nested label permutations.
+
+| test | Δ weighted AUPRC | 95% bootstrap CI | permutation p | BH q | verdict |
+|---|---:|---:|---:|---:|---|
+| **Stimulated Th2 precision (primary)** | **+0.003** | **[−0.096,+0.099]** | **0.396** | **0.396** | **DIRECTIONAL_UNCERTAIN** |
+| No-stim Th2 precision | +0.193 | [+0.057,+0.361] | 0.0070 | 0.028 | REPLICATED_EXPLORATORY |
+| Stimulated Th1 precision | +0.128 | [−0.0001,+0.253] | 0.036 | 0.072 | DIRECTIONAL_UNCERTAIN |
+| Stimulated repeatability | +0.059 | [−0.050,+0.194] | 0.090 | 0.120 | DIRECTIONAL_UNCERTAIN |
+
+The primary prediction did not replicate: under stimulation, Th2 precision added essentially no
+held-out label information beyond effect reach. The no-stim secondary passed its uncertainty and
+multiplicity gates, providing external targeted-panel support for a **context-dependent** Th2
+signal. It does not rescue the primary endpoint. Signed projections were retained as diagnostics,
+but this CRISPRa-only panel cannot establish that higher absolute precision moves cells toward a
+desirable state. The dataset is external to Marson but was a previously inspected targeted panel,
+so this is not treated as untouched prospective replication.
+
 ## Topology-conditional null: resolving the previously non-evaluable axes
 
 The original rejection sampler could not generate enough correlation-matched alternatives for
@@ -86,18 +108,22 @@ These are mechanistic phenotypes, not therapeutic recommendations.
 > In the Marson CD4 perturbation screen, controller identity is better represented as an
 > axis-specific profile than as one universal score. Th2-aligned precision adds information beyond
 > effect reach, survives matched pseudo-axis stress testing, and transports across Rest, Stim8hr and
-> Stim48hr under leakage-safe training. Other axes show distinct evidence states.
+> Stim48hr under leakage-safe training. In an external targeted CRISPRa panel, this signal replicated
+> only without stimulation; the stimulated primary endpoint was null-like. Other axes and contexts
+> therefore retain distinct evidence states.
 
-Do not claim statistical factorization, universal controllability, independent replication,
-clinical response prediction or therapeutic desirability.
+Do not claim statistical factorization, universal controllability, context-invariant replication,
+clinical response prediction, therapeutic direction or therapeutic desirability.
 
 ## Highest-value next experiments
 
-1. **External Th2 replication:** freeze labels and matched blocks before running an independent
-   polarization perturbation dataset. This is the decisive scientific step.
-2. **Signed control:** separate direction from precision using KD/CRISPRa pairs or a signed rescue
+1. **Resolve the stimulation interaction:** test the same frozen Th2 contrast in a dataset with
+   matched donor-level unstimulated/stimulated arms and an explicit context×precision interaction.
+2. **Independent Th2 replication:** freeze labels and overlap/matching rules before an untouched,
+   broader polarization perturbation dataset; GSE190604 was targeted and previously inspected.
+3. **Signed control:** separate direction from precision using KD/CRISPRa pairs or a signed rescue
    assay; absolute alignment cannot distinguish pushing toward from away from a state.
-3. **Archetype panel:** validate 3–4 genes per profile class, not only the top scalar rank. Measure
+4. **Archetype panel:** validate 3–4 genes per profile class, not only the top scalar rank. Measure
    state-axis movement, donor reproducibility and on-target effect separately.
 
 ## Reproducibility
@@ -106,6 +132,8 @@ clinical response prediction or therapeutic desirability.
 - condition transport: `python scripts/run_t4_condition_transport_v2.py --n-resamples 1000`
 - profile: `python scripts/build_controllability_profile_v2.py`
 - topology null: `python scripts/run_topology_null_v2.py --n-samples 200 --n-random 10000`
+- external features: `python scripts/build_gse190604_features.py`
+- external replication: `python scripts/run_gse190604_replication.py --n-resamples 1000 --n-repeats 10`
 - figure: `python scripts/plot_controllability_profile_v2.py`
 - machine-readable artifacts: `outputs/decomposition_v2/`
 

@@ -1,7 +1,7 @@
 # Claim ledger — what this project claims, at what status, on what evidence
 
 One row per claim. `status` ∈ {PASS, NULL, FAIL, NOT-EVALUABLE, SUPPORT,
-DIRECTIONAL-UNCERTAIN, UNSUPPORTED}. Every "claimed" row has a
+SUPPORTED-EXPLORATORY, REPLICATED-EXPLORATORY, DIRECTIONAL-UNCERTAIN, UNSUPPORTED}. Every "claimed" row has a
 matching "not claimed" boundary. This is the single source of truth; README/PAPER/DOSSIER must agree
 with it.
 
@@ -29,6 +29,7 @@ with it.
 | 13 | Component support transports across Marson conditions | **SUPPORTED-EXPLORATORY v2 (Th2 only)** | Raw reconstruction authorized by PI: leakage-safe leave-one-condition-out Th2 precision ΔAUPRC +0.174 [+0.091,+0.364], permutation p=0.0020, BH q=0.016; positive in Rest/Stim8/Stim48. Th1 +0.101, q=0.112 remains directional-uncertain | Within-screen context transport, not independent replication; no universal claim for other axes |
 | 14 | One scalar is the best scientific representation of controllability | **UNSUPPORTED v2** | 1,236-gene component profile yields 7 interpretable archetypes and 66 Pareto-front genes; known regulators occupy distinct reach/precision/repeatability regimes | v1 scalar remains a useful ranking baseline, but v2 does not average trade-offs into a new score |
 | 15 | A topologically coherent functional ruler necessarily discriminates controllers | **FAIL v2** | Exhaustion-like and CD4-CTL are both more correlated than all 10,000 expression-matched random sets (p<10⁻⁴), yet neither beats a converged topology-conditional null for controller recovery (p=0.209/0.522) | Axis coherence is a ruler property, not evidence of controller-label validity |
+| 16 | Th2 precision externally replicates independently of stimulation context | **FAIL boundary / REPLICATED-EXPLORATORY no-stim only** | Frozen GSE190604 targeted CRISPRa analysis: stimulated primary Δ weighted AUPRC +0.003 [−0.096,+0.099], permutation p=0.396, q=0.396; no-stim secondary +0.193 [+0.057,+0.361], p=0.0070, q=0.028 | No context-invariant replication; the secondary does not rescue the failed primary; external to Marson but not an untouched prospective dataset; no therapeutic direction |
 
 ## Prior-art positioning
 
