@@ -256,7 +256,7 @@ def extract_controller_features(
                     f"requires two replicate vectors sharing at least {min_overlap_genes} genes",
                 )
             )
-        row = {
+        row: dict[str, Any] = {
             "perturbation": str(perturbation),
             "condition": str(condition),
             "magnitude": _rms(mean_standardized),
@@ -267,11 +267,10 @@ def extract_controller_features(
             "best_axis_signed_score": signed_axis_score,
             "n_replicates": n_replicates,
             "n_replicate_pairs": n_pairs,
-            "target_expression": _aggregate_optional(frame, "target_expression"),
-            "n_guides": _aggregate_optional(frame, "n_guides"),
-            "n_cells": _aggregate_optional(frame, "n_cells"),
-            "benchmark_positive": _aggregate_optional(frame, "benchmark_positive"),
         }
+        for optional in ("target_expression", "n_guides", "n_cells", "benchmark_positive"):
+            if optional in frame:
+                row[optional] = _aggregate_optional(frame, optional)
         feature_rows.append(row)
         for score in scores:
             axis_rows.append(

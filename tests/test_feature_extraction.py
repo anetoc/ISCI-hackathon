@@ -107,6 +107,17 @@ def test_invalid_or_empty_inputs_are_not_evaluable():
     assert empty.issues[0].code == "EMPTY_INPUT"
 
 
+def test_absent_benchmark_metadata_does_not_create_false_benchmark_columns():
+    table = pd.DataFrame(_rows("X", [{"A": 1.0, "B": 1.0, "C": 1.0}] * 2)).drop(
+        columns=["benchmark_positive", "target_expression", "n_guides", "n_cells"]
+    )
+
+    result = extract_controller_features(table, AXES)
+
+    assert "benchmark_positive" not in result.features
+    assert "target_expression" not in result.features
+
+
 def test_extraction_is_deterministic_for_shuffled_input():
     rows = _rows("X", [{"A": 1.0, "B": 2.0, "C": 3.0}] * 2)
     table = pd.DataFrame(rows)
