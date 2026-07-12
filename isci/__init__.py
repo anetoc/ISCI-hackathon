@@ -25,6 +25,7 @@ from isci.adapters import (
     RuntimeCapability,
     inspect_anndata_dataset,
     iter_anndata_effect_blocks,
+    iter_anndata_group_effect_blocks,
     load_tabular_dataset,
 )
 
@@ -46,6 +47,7 @@ __all__ = [
     "SpecValidationReport",
     "inspect_anndata_dataset",
     "iter_anndata_effect_blocks",
+    "iter_anndata_group_effect_blocks",
     "extract_controller_features",
     "load_dataset_spec",
     "load_tabular_dataset",

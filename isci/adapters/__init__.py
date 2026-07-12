@@ -5,6 +5,7 @@ from isci.adapters.anndata_effects import (
     AnnDataInspectionResult,
     inspect_anndata_dataset,
     iter_anndata_effect_blocks,
+    iter_anndata_group_effect_blocks,
 )
 from isci.adapters.tabular import (
     AdapterIssue,
@@ -25,5 +26,6 @@ __all__ = [
     "RuntimeCapability",
     "inspect_anndata_dataset",
     "iter_anndata_effect_blocks",
+    "iter_anndata_group_effect_blocks",
     "load_tabular_dataset",
 ]

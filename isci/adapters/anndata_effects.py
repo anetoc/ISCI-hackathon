@@ -459,3 +459,62 @@ def iter_anndata_effect_blocks(
     finally:
         if adata.file is not None:
             adata.file.close()
+
+
+def iter_anndata_group_effect_blocks(
+    spec: DatasetSpec,
+    *,
+    repo_root: Path | str,
+    block_rows: int = 64,
+) -> Iterator[tuple[tuple[str, str], pd.DataFrame]]:
+    """Yield bounded long-form blocks contiguously by condition and perturbation.
+
+    The physical H5AD observation order need not be grouped. The adapter first uses only backed
+    observation metadata to find row positions, then reads at most ``block_rows`` matrix rows at a
+    time. Consumers can therefore finalize one perturbation-condition accumulator before starting
+    the next one instead of retaining the entire screen in memory.
+    """
+
+    inspection = inspect_anndata_dataset(
+        spec, repo_root=repo_root, scan_values=False, block_rows=block_rows
+    )
+    if not inspection.inspection.evaluable:
+        raise AnnDataAdapterError(inspection.inspection)
+
+    path = (Path(repo_root).resolve() / spec.input.path).resolve()
+    adata = ad.read_h5ad(path, backed="r")
+    try:
+        effect_layer = spec.input.layers["effect"]
+        standardized_layer = spec.input.layers["standardized_effect"]
+        feature_ids = adata.var_names.astype(str).to_numpy()
+        observations = inspection.observations.copy()
+        if "condition" not in observations:
+            observations["condition"] = "__all__"
+        observations["_row_position"] = np.arange(len(observations))
+
+        grouped = observations.groupby(
+            ["condition", "perturbation"], observed=True, sort=True, dropna=False
+        )
+        for (condition, perturbation), group in grouped:
+            positions = group["_row_position"].to_numpy(dtype=int)
+            for start in range(0, len(positions), block_rows):
+                selected = positions[start : start + block_rows]
+                obs = observations.iloc[selected].drop(columns="_row_position")
+                effect = _dense(adata.layers[effect_layer][selected, :])
+                standardized = _dense(adata.layers[standardized_layer][selected, :])
+                n_observations = len(selected)
+                block = {
+                    column: np.repeat(obs[column].to_numpy(), adata.n_vars)
+                    for column in obs.columns
+                }
+                block.update(
+                    {
+                        "feature": np.tile(feature_ids, n_observations),
+                        "effect": effect.reshape(-1),
+                        "standardized_effect": standardized.reshape(-1),
+                    }
+                )
+                yield (str(condition), str(perturbation)), pd.DataFrame(block)
+    finally:
+        if adata.file is not None:
+            adata.file.close()

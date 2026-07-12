@@ -11,6 +11,7 @@ from isci.adapters import (
     RuntimeCapability,
     inspect_anndata_dataset,
     iter_anndata_effect_blocks,
+    iter_anndata_group_effect_blocks,
 )
 from isci.dataset_spec import BenchmarkSettings, DatasetInput, load_dataset_spec
 from isci.cli import EXIT_SUCCESS, main
@@ -142,6 +143,24 @@ def test_effect_matrix_is_streamed_in_bounded_long_form_blocks(tmp_path):
     ]
     assert combined.loc[0, "feature"] == "STATE_A"
     assert combined.loc[0, "effect"] == 0.0
+
+
+def test_group_stream_is_contiguous_even_when_h5ad_rows_are_interleaved(tmp_path):
+    observations = _small_obs().iloc[[0, 3, 1, 2]].copy()
+    observations["condition"] = "stim"
+    spec = _write_h5ad(tmp_path, observations)
+
+    grouped_blocks = list(iter_anndata_group_effect_blocks(spec, repo_root=tmp_path, block_rows=1))
+
+    keys = [key for key, _ in grouped_blocks]
+    assert keys == [
+        ("stim", "GENE_X"),
+        ("stim", "IRF1"),
+        ("stim", "IRF1"),
+        ("stim", "STAT6"),
+    ]
+    assert all(len(block) == 3 for _, block in grouped_blocks)
+    assert all(block["perturbation"].nunique() == 1 for _, block in grouped_blocks)
 
 
 def test_h5ad_can_reach_confirmatory_ready_only_after_value_scan(tmp_path):
