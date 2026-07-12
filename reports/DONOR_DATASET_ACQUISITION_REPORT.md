@@ -48,8 +48,20 @@ public-data reanalysis:
   `reports/DONOR_RESOLVED_CONTEXT_VALIDATION_PLAN.md`.
 
 Until pilot donor-level variance exists, presenting a precise power-derived donor count would be
-false precision. The software next step is therefore a power-planning utility that consumes pilot
-donor contrasts without changing the analysis gate.
+false precision. A power-planning utility is now implemented for the first real pilot:
+
+```bash
+python scripts/plan_donor_context_power.py \
+  --input donor_contrasts.csv \
+  --donor-counts 6,8,10,12,16 \
+  --effect-scales 0.5,0.75,1.0
+```
+
+The input has exactly `donor,contrast` columns and requires at least four unique donors. The utility
+models empirical residuals and effect shrinkage, then estimates the probability of passing the
+donor-bootstrap, ≥70% positive-donor and leave-one-donor-out gates. It deliberately reports partial
+gate power: gene-label and context-exchange permutations require gene×donor pilot data and are not
+fabricated from donor summaries.
 
 ## Verified primary sources
 

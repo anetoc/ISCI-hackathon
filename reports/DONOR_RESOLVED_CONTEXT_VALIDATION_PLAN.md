@@ -65,6 +65,10 @@ Promotion beyond `DIRECTIONAL_UNCERTAIN` requires all of:
 
 Multiplicity must include any additional axes or contexts opened in the same analysis family.
 
+Pilot power sensitivity is generated with `scripts/plan_donor_context_power.py`. Its output is a
+planning artifact only and cannot promote a claim because donor summaries cannot reproduce the
+gene-label or within-gene×donor context-exchange nulls.
+
 ## Optional GSE190604 donor recovery
 
 Genotype-based demultiplexing of GSE190604 remains a valid diagnostic only if temporary external
