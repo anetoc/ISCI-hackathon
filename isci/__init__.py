@@ -9,6 +9,7 @@ from isci.dataset_spec import (
     validate_dataset_spec,
 )
 from isci.analysis_runner import DatasetRunResult, run_controller_features, save_dataset_run
+from isci.feature_extraction import FeatureExtractionResult, extract_controller_features
 from isci.adapters import (
     AnnDataAdapterError,
     AnnDataInspectionResult,
@@ -29,6 +30,7 @@ __all__ = [
     "DatasetSpec",
     "DatasetSpecError",
     "DatasetRunResult",
+    "FeatureExtractionResult",
     "AnnDataAdapterError",
     "AnnDataInspectionResult",
     "AdapterIssue",
@@ -39,6 +41,7 @@ __all__ = [
     "SpecValidationReport",
     "inspect_anndata_dataset",
     "iter_anndata_effect_blocks",
+    "extract_controller_features",
     "load_dataset_spec",
     "load_tabular_dataset",
     "run_controller_features",
