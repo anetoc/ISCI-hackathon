@@ -20,11 +20,41 @@ def example_raw():
     return yaml.safe_load(EXAMPLE.read_text())
 
 
+def cell_level_raw():
+    raw = example_raw()
+    raw["input"] = {
+        "path": "data/public_cells.h5ad",
+        "format": "h5ad",
+        "layout": "anndata_cells",
+    }
+    raw["mapping"] = {
+        "perturbation": "perturbation",
+        "guide": "guide_id",
+        "replicate": "replicate_id",
+        "condition": "condition",
+        "donor": "donor_id",
+    }
+    raw["preprocessing"] = {
+        "source": {"location": "X", "kind": "raw_counts"},
+        "control": {"column": "perturbation", "labels": ["NT", "non-targeting"]},
+        "normalization": "log1p_cpm",
+        "contrast": "pseudobulk_difference",
+        "standardization": "gene_wise_zscore_within_condition",
+        "min_cells_per_stratum": 25,
+        "min_replicates": 2,
+        "multi_guide_policy": "exclude",
+    }
+    raw.pop("benchmark")
+    return raw
+
+
 def test_machine_readable_schema_is_valid_json_and_frozen_to_v1():
     schema = json.loads((ROOT / "contracts" / "dataset_spec.schema.json").read_text())
     assert schema["$schema"].endswith("2020-12/schema")
     assert schema["properties"]["schema_version"]["const"] == 1
     assert schema["additionalProperties"] is False
+    assert "anndata_cells" in schema["properties"]["input"]["properties"]["layout"]["enum"]
+    assert "cellPreprocessing" in schema["$defs"]
 
 
 def test_example_loads_with_paths_and_declares_confirmatory_inputs():
@@ -53,6 +83,68 @@ def test_valid_spec_without_benchmark_is_diagnostic_only():
     assert report.valid
     assert report.capability == DatasetCapability.DIAGNOSTIC_ONLY
     assert "No independent positive-set benchmark" in report.capability_notes[0]
+
+
+def test_cell_level_contract_is_explicitly_preprocessing_only(tmp_path):
+    raw = cell_level_raw()
+    report = validate_dataset_spec(raw)
+    spec_path = tmp_path / "cells.yaml"
+    spec_path.write_text(yaml.safe_dump(raw, sort_keys=False))
+    spec = load_dataset_spec(spec_path)
+
+    assert report.valid
+    assert report.capability == DatasetCapability.PREPROCESSING_DECLARED
+    assert spec.input.layout == "anndata_cells"
+    assert spec.preprocessing is not None
+    assert spec.preprocessing.control["labels"] == ("NT", "non-targeting")
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected_path"),
+    [
+        (
+            lambda raw: raw["preprocessing"]["control"].update(labels=[]),
+            "preprocessing.control.labels",
+        ),
+        (
+            lambda raw: raw["preprocessing"]["source"].update(location="layer"),
+            "preprocessing.source.layer",
+        ),
+        (
+            lambda raw: raw["preprocessing"].update(normalization="already_normalized"),
+            "preprocessing.normalization",
+        ),
+        (lambda raw: raw["mapping"].pop("replicate"), "mapping.replicate"),
+    ],
+)
+def test_cell_level_contract_rejects_ambiguous_preprocessing(mutation, expected_path):
+    raw = cell_level_raw()
+    mutation(raw)
+
+    report = validate_dataset_spec(raw)
+
+    assert not report.valid
+    assert any(issue.path == expected_path for issue in report.issues)
+
+
+def test_cell_level_benchmark_is_deferred_to_generated_effect_spec():
+    raw = cell_level_raw()
+    raw["benchmark"] = example_raw()["benchmark"]
+
+    report = validate_dataset_spec(raw)
+
+    assert not report.valid
+    assert any(issue.code == "PREPROCESSING_BOUNDARY" for issue in report.issues)
+
+
+def test_preprocessing_block_is_rejected_for_effect_layout():
+    raw = example_raw()
+    raw["preprocessing"] = cell_level_raw()["preprocessing"]
+
+    report = validate_dataset_spec(raw)
+
+    assert not report.valid
+    assert any(issue.code == "INCOMPATIBLE_PREPROCESSING" for issue in report.issues)
 
 
 def test_benchmark_cannot_drop_expression_matching_covariates():

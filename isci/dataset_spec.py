@@ -22,6 +22,7 @@ class DatasetCapability(StrEnum):
 
     CONFIRMATORY_DECLARED = "CONFIRMATORY_DECLARED"
     BENCHMARK_DECLARED = "BENCHMARK_DECLARED"
+    PREPROCESSING_DECLARED = "PREPROCESSING_DECLARED"
     DIAGNOSTIC_ONLY = "DIAGNOSTIC_ONLY"
     NOT_EVALUABLE = "NOT_EVALUABLE"
 
@@ -111,6 +112,18 @@ class ProvenanceSettings:
 
 
 @dataclass(frozen=True)
+class CellPreprocessingSettings:
+    source: dict[str, Any]
+    control: dict[str, Any]
+    normalization: str
+    contrast: str
+    standardization: str
+    min_cells_per_stratum: int
+    min_replicates: int
+    multi_guide_policy: str
+
+
+@dataclass(frozen=True)
 class DatasetSpec:
     """Typed DatasetSpec v1 consumed by future adapters and notebook interfaces."""
 
@@ -121,6 +134,7 @@ class DatasetSpec:
     analysis: AnalysisSettings
     benchmark: BenchmarkSettings | None
     provenance: ProvenanceSettings
+    preprocessing: CellPreprocessingSettings | None = None
     source_path: Path | None = None
 
     def resolve_path(self, relative_path: str, repo_root: Path | str) -> Path:
@@ -135,6 +149,7 @@ _TOP_LEVEL_FIELDS = {
     "input",
     "mapping",
     "analysis",
+    "preprocessing",
     "benchmark",
     "provenance",
 }
@@ -156,6 +171,7 @@ _MAPPING_FIELDS = {
     "condition",
     "donor",
     "guide",
+    "replicate",
     "control",
     "magnitude",
     "specificity",
@@ -182,10 +198,20 @@ _PROVENANCE_FIELDS = {
 }
 _PERTURBATION_MODALITIES = {"CRISPR_KO", "CRISPRI", "CRISPRA", "RNAI", "OTHER"}
 _INPUT_FORMATS = {"h5ad", "csv", "parquet"}
-_LAYOUTS = {"anndata_effects", "long_effects", "controller_features"}
+_LAYOUTS = {"anndata_cells", "anndata_effects", "long_effects", "controller_features"}
 _CLASSIFICATIONS = {"PUBLIC", "INTERNAL", "CONFIDENTIAL", "RESTRICTED"}
 _VERDICTS = {"PASS", "FAIL", "NULL", "NOT_EVALUABLE"}
 _MATCH_FIELDS = {"target_expression", "n_guides", "n_cells", "condition"}
+_PREPROCESSING_FIELDS = {
+    "source",
+    "control",
+    "normalization",
+    "contrast",
+    "standardization",
+    "min_cells_per_stratum",
+    "min_replicates",
+    "multi_guide_policy",
+}
 
 
 def _add(issues: list[ValidationIssue], code: str, path: str, message: str) -> None:
@@ -345,6 +371,105 @@ def _validate_benchmark(
     return True
 
 
+def _validate_cell_preprocessing(
+    value: Any, layout: str | None, issues: list[ValidationIssue]
+) -> None:
+    if layout != "anndata_cells":
+        if value is not None:
+            _add(
+                issues,
+                "INCOMPATIBLE_PREPROCESSING",
+                "preprocessing",
+                "is only valid for input.layout=anndata_cells",
+            )
+        return
+    if value is None:
+        _add(issues, "REQUIRED_FIELD", "preprocessing", "required by anndata_cells")
+        return
+
+    block = _mapping(value, "preprocessing", issues)
+    _unknown_fields(block, _PREPROCESSING_FIELDS, "preprocessing", issues)
+    source = _mapping(block.get("source"), "preprocessing.source", issues)
+    _unknown_fields(source, {"location", "layer", "kind"}, "preprocessing.source", issues)
+    location = _required_string(source, "location", "preprocessing.source", issues)
+    kind = _required_string(source, "kind", "preprocessing.source", issues)
+    if location not in {None, "X", "layer"}:
+        _add(issues, "INVALID_VALUE", "preprocessing.source.location", "must be X or layer")
+    if location == "layer":
+        _required_string(source, "layer", "preprocessing.source", issues)
+    elif "layer" in source:
+        _add(
+            issues,
+            "INVALID_VALUE",
+            "preprocessing.source.layer",
+            "must be omitted when location is X",
+        )
+    if kind not in {None, "raw_counts", "normalized"}:
+        _add(
+            issues,
+            "INVALID_VALUE",
+            "preprocessing.source.kind",
+            "must be raw_counts or normalized",
+        )
+
+    control = _mapping(block.get("control"), "preprocessing.control", issues)
+    _unknown_fields(control, {"column", "labels"}, "preprocessing.control", issues)
+    _required_string(control, "column", "preprocessing.control", issues)
+    labels = control.get("labels")
+    if (
+        not isinstance(labels, list)
+        or not labels
+        or not all(isinstance(label, str) and label.strip() for label in labels)
+        or len(labels) != len(set(labels))
+    ):
+        _add(
+            issues,
+            "INVALID_VALUE",
+            "preprocessing.control.labels",
+            "must be a non-empty list of unique control labels",
+        )
+
+    expected_strings = {
+        "normalization": {"log1p_cpm", "already_normalized"},
+        "contrast": {"pseudobulk_difference"},
+        "standardization": {"gene_wise_zscore_within_condition"},
+        "multi_guide_policy": {"exclude"},
+    }
+    for field, allowed in expected_strings.items():
+        observed = _required_string(block, field, "preprocessing", issues)
+        if observed is not None and observed not in allowed:
+            _add(
+                issues,
+                "INVALID_VALUE",
+                f"preprocessing.{field}",
+                f"must be one of {sorted(allowed)}",
+            )
+    normalization = block.get("normalization")
+    if kind == "raw_counts" and normalization != "log1p_cpm":
+        _add(
+            issues,
+            "INCOMPATIBLE_NORMALIZATION",
+            "preprocessing.normalization",
+            "raw_counts requires log1p_cpm",
+        )
+    if kind == "normalized" and normalization != "already_normalized":
+        _add(
+            issues,
+            "INCOMPATIBLE_NORMALIZATION",
+            "preprocessing.normalization",
+            "normalized input requires already_normalized",
+        )
+    for field, minimum in (("min_cells_per_stratum", 10), ("min_replicates", 2)):
+        observed = block.get(field)
+        if isinstance(observed, bool) or not isinstance(observed, int) or observed < minimum:
+            _add(
+                issues,
+                "INVALID_VALUE",
+                f"preprocessing.{field}",
+                f"must be an integer >= {minimum}",
+            )
+
+
 def validate_dataset_spec(
     raw: Any,
     *,
@@ -397,12 +522,12 @@ def validate_dataset_spec(
         _add(issues, "INVALID_VALUE", "input.format", f"must be one of {sorted(_INPUT_FORMATS)}")
     if layout is not None and layout not in _LAYOUTS:
         _add(issues, "INVALID_VALUE", "input.layout", f"must be one of {sorted(_LAYOUTS)}")
-    if layout == "anndata_effects" and input_format != "h5ad":
+    if layout in {"anndata_cells", "anndata_effects"} and input_format != "h5ad":
         _add(
             issues,
             "INCOMPATIBLE_LAYOUT",
             "input.format",
-            "anndata_effects requires h5ad",
+            f"{layout} requires h5ad",
         )
     if layout in {"long_effects", "controller_features"} and input_format not in {
         "csv",
@@ -433,6 +558,7 @@ def validate_dataset_spec(
         if not isinstance(value, str) or not value.strip():
             _add(issues, "INVALID_TYPE", f"mapping.{key}", "must be a non-empty column name")
     layout_requirements = {
+        "anndata_cells": {"perturbation", "guide", "replicate"},
         "anndata_effects": {"perturbation"},
         "long_effects": {"perturbation", "feature", "effect", "standardized_effect"},
         "controller_features": {
@@ -444,6 +570,8 @@ def validate_dataset_spec(
     }
     for field in sorted(layout_requirements.get(layout, set()) - set(mapping)):
         _add(issues, "REQUIRED_FIELD", f"mapping.{field}", f"required by {layout}")
+
+    _validate_cell_preprocessing(root.get("preprocessing"), layout, issues)
 
     analysis = _mapping(root.get("analysis"), "analysis", issues)
     _unknown_fields(analysis, _ANALYSIS_FIELDS, "analysis", issues)
@@ -479,6 +607,13 @@ def validate_dataset_spec(
         _add(issues, "INVALID_VALUE", "analysis.seed", "must be an integer >= 0")
 
     has_benchmark = _validate_benchmark(root.get("benchmark"), mapping, issues)
+    if layout == "anndata_cells" and root.get("benchmark") is not None:
+        _add(
+            issues,
+            "PREPROCESSING_BOUNDARY",
+            "benchmark",
+            "benchmark belongs to the generated effect DatasetSpec, not cell-level preprocessing",
+        )
 
     provenance = _mapping(root.get("provenance"), "provenance", issues)
     _unknown_fields(provenance, _PROVENANCE_FIELDS, "provenance", issues)
@@ -504,6 +639,11 @@ def validate_dataset_spec(
     if issues:
         capability = DatasetCapability.NOT_EVALUABLE
         notes = ("Fix the contract errors before any data are opened.",)
+    elif layout == "anndata_cells":
+        capability = DatasetCapability.PREPROCESSING_DECLARED
+        notes = (
+            "Cell-level preprocessing is declared but no effect matrix or biological verdict exists.",
+        )
     elif has_benchmark and {"condition", "donor", "guide"}.issubset(mapping):
         capability = DatasetCapability.CONFIRMATORY_DECLARED
         notes = (
@@ -547,6 +687,7 @@ def load_dataset_spec(
     input_block = raw["input"]
     analysis = raw["analysis"]
     benchmark = raw.get("benchmark")
+    preprocessing = raw.get("preprocessing")
     provenance = raw["provenance"]
     return DatasetSpec(
         schema_version=raw["schema_version"],
@@ -592,6 +733,23 @@ def load_dataset_spec(
             license=provenance["license"],
             data_classification=provenance["data_classification"],
             redistributable=provenance["redistributable"],
+        ),
+        preprocessing=(
+            CellPreprocessingSettings(
+                source=dict(preprocessing["source"]),
+                control={
+                    **preprocessing["control"],
+                    "labels": tuple(preprocessing["control"]["labels"]),
+                },
+                normalization=preprocessing["normalization"],
+                contrast=preprocessing["contrast"],
+                standardization=preprocessing["standardization"],
+                min_cells_per_stratum=preprocessing["min_cells_per_stratum"],
+                min_replicates=preprocessing["min_replicates"],
+                multi_guide_policy=preprocessing["multi_guide_policy"],
+            )
+            if preprocessing is not None
+            else None
         ),
         source_path=source_path,
     )

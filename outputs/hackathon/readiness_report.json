@@ -26,7 +26,7 @@
     "submission_summary_words": 148,
     "spoken_script_words": 352,
     "medical_deck_sha256": "1386feb90d4ddb834ab38c191120ba4c533d820e5f74b673d7435474c5a017f1",
-    "dataset_spec_schema_sha256": "99df667dca5baef721ae4a3a883892cac9e116049051d11557f8281e1fd8704e",
+    "dataset_spec_schema_sha256": "8bf169292beb4528e0f63eb4f387071f1736f4111228c062a2e194cf51f4f684",
     "dataset_spec_example_capability": "CONFIRMATORY_DECLARED",
     "dataset_spec_example_runtime": "DIAGNOSTIC_ONLY",
     "locked_kernel_sha256": "75ec60abc153ec06d0c4165aecf05a951000fe05cbd160eaf8f00bb1f23afd6d",
@@ -42,12 +42,12 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "01487009c0ea482c4a24e22299ddfaea644bad22",
+  "git_sha": "4f2390f7217afca91ef6e3d30913964bd5718be3",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": true,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "e8dcbe1f5b8877d8a0582786fb866b1b9d76dc742cad503a4a36e843fea76f0f",
+    "sha256": "5930259f3e4d44c9a306df5a1dab05dde14deedec79e332937d8d796de9b3d75",
     "files_sha256": {
       "DELIVERABLE.md": "89e62a2968de1ac17ba9ec2fb9fa5740a86fe552bbff840e0bc6d980ab6091bd",
       "DEMO_SCRIPT.md": "dc359d56482fa114a1c7bf384e74d525f06d955cc97b9840003b6562ab2af08b",
@@ -56,7 +56,7 @@
       "SUBMISSION.md": "4da67f792c17adb09659a32075094e4fb1659e1d5970aa243ce2b12517101967",
       "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
       "config/hackathon_timing.json": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
-      "contracts/dataset_spec.schema.json": "99df667dca5baef721ae4a3a883892cac9e116049051d11557f8281e1fd8704e",
+      "contracts/dataset_spec.schema.json": "8bf169292beb4528e0f63eb4f387071f1736f4111228c062a2e194cf51f4f684",
       "demo_assets/hackathon/hackathon_fallback_2m30.mp4": "2f5a6dbdce61f0950919f5653674302a71ff0470d48b9fad797f889839461b66",
       "docs/dataset_spec.md": "d223d09a3c4b2d976859fd8ee834680750ae4ea1554737a67c5b78e996cca03c",
       "docs/hackathon_judge_demo.html": "45e654a31874efdbfe944388808bc5a47e1afce180249384bce424614a33c6df",
@@ -68,7 +68,7 @@
       "isci/adapters/tabular.py": "c365b7cc14d55bf40f2f8fb51ad5355d3687445ccdaf3e6ccc838edf73ebd317",
       "isci/analysis_runner.py": "a50e45dd97bfebf4e66e72e486bde9748c42f1c80398fd2c5b889c1e7fe83059",
       "isci/cli.py": "ae7f9dda345fd17909bae2de04a9cba13d6bae7ccba203a8d01b1a9db457f721",
-      "isci/dataset_spec.py": "d628686705a50fa7a6292a36cff92fa5a365c19375cc4e5427ab9b8001e65cae",
+      "isci/dataset_spec.py": "20bf89ffbc3317661133bafa5d7431ebfc65c8a1a2ba900d711cdbcb7f6a73e7",
       "isci/feature_extraction.py": "995b0fd1d86dd8f937623c431cba601b6ba678bffdb02eff526d5ac9248c66b6",
       "notebooks/ISCI_Researcher_Track_Walkthrough.ipynb": "14f2f051e2cfa67c01c923e7c9c2e5087f599e54f8b3dc71067baa5651a44095",
       "outputs/hackathon/claim_manifest.json": "56aca8a89b4ee55fdfa24bbf0d912894340d702d496b400542aecca4e8e6daf2",
@@ -85,6 +85,6 @@
   "branch": "codex/controllability-decomposition",
   "data_sha256": "56aca8a89b4ee55fdfa24bbf0d912894340d702d496b400542aecca4e8e6daf2",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-12T23:06:16.374155+00:00",
+  "timestamp": "2026-07-12T23:25:19.596363+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }

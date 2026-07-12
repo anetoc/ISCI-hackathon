@@ -1,6 +1,7 @@
 """ISCI — Immune-State Controllability Index for T-cell Perturb-seq."""
 
 from isci.dataset_spec import (
+    CellPreprocessingSettings,
     DatasetCapability,
     DatasetSpec,
     DatasetSpecError,
@@ -36,6 +37,7 @@ from isci.adapters import (
 __version__ = "0.1.0"
 
 __all__ = [
+    "CellPreprocessingSettings",
     "DatasetCapability",
     "DatasetSpec",
     "DatasetSpecError",
