@@ -56,9 +56,12 @@ guide×donor×context and a 60% combined usable fraction, the 8/10/12-donor scen
 72,000/90,000/108,000 captured cells. These figures are planning assumptions, not assay-yield
 guarantees.
 
-The next gate is sequence resolution, not oligo ordering. Public GSE190604 guide IDs must be mapped
-to authoritative protospacer sequences and pass CRISPRa/vector, on-target and sequence-specific
-off-target validation. No sequence should be inferred from the identifier alone.
+The sequence-resolution gate is now complete without inferring from guide identifiers: all 54 IDs
+were matched to directly observed Calabrese protospacers, with 53 passing the multi-well evidence
+threshold and `PAPOLG-1` retained as low-support. The next gate is still not oligo ordering. The
+resolved sequences must pass CRISPRa/vector compatibility and sequence-specific on-target/off-target
+validation against a frozen reference build and transcript/TSS annotation. See
+`reports/GUIDE_SEQUENCE_RESOLUTION_RESULTS.md`.
 
 Until pilot donor-level variance exists, presenting a precise power-derived donor count would be
 false precision. A power-planning utility is now implemented for the first real pilot:

@@ -57,11 +57,13 @@ usable fraction, the planning scenarios are:
 | 10 | 54,000 | 90,000 | 5 |
 | 12 | 64,800 | 108,000 | 6 |
 
-The 20k channel capacity is a configurable costing unit, not a vendor guarantee. Oligo ordering
-remains blocked because the local public artifact contains guide IDs but not validated protospacer
-sequences. The sequence mapping, CRISPRa/vector compatibility, on-target activity and
-sequence-specific off-target review must close before synthesis. The governing selection and
-substitution rules are frozen in `reports/PROSPECTIVE_DONOR_PANEL_PROTOCOL.md`.
+The 20k channel capacity is a configurable costing unit, not a vendor guarantee. Public-source
+sequence resolution is now complete for all 54 guide IDs: 53 have multi-well source confirmation
+and `PAPOLG-1` remains low-support. Oligo ordering is still blocked because source identity does not
+establish CRISPRa/vector compatibility, on-target activity or sequence-specific off-target safety.
+The mapping and evidence are recorded in `reports/GUIDE_SEQUENCE_RESOLUTION_RESULTS.md`; governing
+selection and substitution rules remain frozen in `reports/PROSPECTIVE_DONOR_PANEL_PROTOCOL.md` and
+`reports/GUIDE_SEQUENCE_RESOLUTION_PROTOCOL.md`.
 
 ## Frozen analysis shape for a suitable dataset
 
