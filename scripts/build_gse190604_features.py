@@ -161,8 +161,21 @@ def main() -> None:
             for axis_name, axis_vector in axis_vectors.items():
                 vector = np.asarray(axis_vector, dtype=np.float64).copy()
                 vector[target_indices] = 0.0
-                vector /= np.linalg.norm(vector) + 1e-12
-                signed_projection = float(mean_effect @ vector)
+                support = np.flatnonzero(vector)
+                norm = np.linalg.norm(vector[support])
+                if not support.size or not np.isfinite(norm) or norm <= 0:
+                    raise RuntimeError(f"axis {axis_name!r} has no finite support")
+                # Project only on signature genes. Besides being equivalent to the
+                # dense dot product, this prevents irrelevant zero coordinates from
+                # participating in BLAS and makes the numerical contract explicit.
+                signed_projection = float(
+                    np.dot(mean_effect[support], vector[support] / norm)
+                )
+                if not np.isfinite(signed_projection):
+                    raise RuntimeError(
+                        f"non-finite projection for target={target}, "
+                        f"context={context}, axis={axis_name}"
+                    )
                 row[f"signed__{axis_name}"] = signed_projection
                 row[f"precision__{axis_name}"] = abs(signed_projection)
             rows.append(row)
