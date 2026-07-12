@@ -1,20 +1,37 @@
 {
   "schema_version": "hackathon_video_manifest_v1",
-  "generated_at": "2026-07-12T20:27:20.731605+00:00",
-  "git_sha": "66e668f1a64887d50aa97d917e7511206dd650a3",
+  "generated_at": "2026-07-12T20:51:00.580831+00:00",
+  "git_sha": "6bccedcdedcbee0eac2a9bed5d5794976d7df701",
+  "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
+  "source_paths_dirty": true,
+  "source_snapshot": {
+    "schema_version": "isci_source_snapshot_v1",
+    "sha256": "c490cfd2f95a9e54d7f4a640bba674a54e2c361ba134914f5be5e65604679b76",
+    "files_sha256": {
+      "config/hackathon_timing.json": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
+      "demo_assets/hackathon/01_problem.png": "f16bd46be0f0c180f3e421a323dd5570c956617a26ec6aed1828ac2e2d17088e",
+      "demo_assets/hackathon/02_self_correction.png": "36988e0349b5997d01fa40bda1739f81e85106aaa42b98a42a3881ea15516754",
+      "demo_assets/hackathon/03_controllability.png": "ffe7bd2a510f63579ad87b195b66589ab83c2ba73fd02b0faa5c5cb6409c2295",
+      "demo_assets/hackathon/04_primary_judgment.png": "ae387478708f7c3951b2ab25259f67a0e190e154665c3970b16bcce38bcdf43d",
+      "demo_assets/hackathon/05_trust_proof.png": "d76ef32f769ae72a23cc75f251ce347b1db9f9cd5ad0d8fe5e77d8fc96a2f702",
+      "demo_assets/hackathon/06_gladstone_bridge.png": "37974d61830658a1e4f49ae5973e73f3353274ae1b96c02c7975578981746e47",
+      "scripts/build_hackathon_video.py": "4f74bc5802e3e1848bfa5fd3cd9944147090c98492b7f8a8536dba57804b2b01",
+      "scripts/release_provenance.py": "6bb306ad56967cdbb0357f70cca81a2bf5355c0e0ce315154b89d3dbf392b19f"
+    }
+  },
   "command": "python scripts/build_hackathon_video.py",
   "timing_path": "config/hackathon_timing.json",
   "timing_sha256": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
   "source_sha256": {
-    "demo_assets/hackathon/01_problem.png": "93eac8e634cb8d0d561c76149f20d61c958013dd4b5d3ad7a210bb66e7641888",
-    "demo_assets/hackathon/02_self_correction.png": "f9fee134d6f5df75bfc2d78e4d4dae39a3e8b7604a1a34d813df9dbc1902a836",
-    "demo_assets/hackathon/03_controllability.png": "46f29f08990251f9f566221adadb8745be6942cc032c3385ed14d047a43f6bd8",
-    "demo_assets/hackathon/04_primary_judgment.png": "766f6a515a0d3167322f0fb73c59a9ef2df5c511ee1a20a9bd79f74574c6affd",
-    "demo_assets/hackathon/05_trust_proof.png": "5b803451bc036da674b9069ed740d7f3050cf4e37c7952c2b73d9bed080c1199",
-    "demo_assets/hackathon/06_gladstone_bridge.png": "77b7ea22d938ae7f4a7946f3432b1a8e01e0ab7a7a17c10299ea98e7c5f04593"
+    "demo_assets/hackathon/01_problem.png": "f16bd46be0f0c180f3e421a323dd5570c956617a26ec6aed1828ac2e2d17088e",
+    "demo_assets/hackathon/02_self_correction.png": "36988e0349b5997d01fa40bda1739f81e85106aaa42b98a42a3881ea15516754",
+    "demo_assets/hackathon/03_controllability.png": "ffe7bd2a510f63579ad87b195b66589ab83c2ba73fd02b0faa5c5cb6409c2295",
+    "demo_assets/hackathon/04_primary_judgment.png": "ae387478708f7c3951b2ab25259f67a0e190e154665c3970b16bcce38bcdf43d",
+    "demo_assets/hackathon/05_trust_proof.png": "d76ef32f769ae72a23cc75f251ce347b1db9f9cd5ad0d8fe5e77d8fc96a2f702",
+    "demo_assets/hackathon/06_gladstone_bridge.png": "37974d61830658a1e4f49ae5973e73f3353274ae1b96c02c7975578981746e47"
   },
   "output_path": "demo_assets/hackathon/hackathon_fallback_2m30.mp4",
-  "output_sha256": "c9d16cc30350231a9d392832545dccb5b0add989b2d770e18daa96aaf79de94c",
+  "output_sha256": "e191144454c7f0812cc2405de5c99b0ed9b5b910c556f202f8b8268f6a729251",
   "duration_seconds": 150.0,
   "width": 1920,
   "height": 1080,

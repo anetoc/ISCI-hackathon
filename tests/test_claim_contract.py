@@ -35,3 +35,13 @@ def test_cross_system_surfaces_label_the_matched_metric_separately():
         assert "+0.229" in text
         assert "matched" in text.lower()
         assert "+0.357" in text
+
+
+def test_readme_preserves_the_completed_external_scope_boundary():
+    """Do not revive the superseded claim that marker ablation preserved the gain."""
+
+    text = (ROOT / "README.md").read_text()
+    assert "It does **not** survive" in text
+    assert "ΔAUPRC −0.281 [−0.476, −0.073]" in text
+    assert "cross-condition replication is within the same dataset" in text
+    assert "survives removing regulators that are also axis markers" not in text

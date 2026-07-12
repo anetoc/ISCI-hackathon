@@ -10,6 +10,11 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:  # Package import in tests; direct import when run as `python scripts/...`.
+    from .release_provenance import source_paths_dirty, source_snapshot
+except ImportError:  # pragma: no cover - exercised by the release CLI.
+    from release_provenance import source_paths_dirty, source_snapshot
+
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "outputs" / "hackathon" / "readiness_report.json"
@@ -20,6 +25,7 @@ VIDEO = ROOT / "demo_assets" / "hackathon" / "hackathon_fallback_2m30.mp4"
 VIDEO_MANIFEST = ROOT / "outputs" / "hackathon" / "video_manifest.json"
 SCREENSHOT_MANIFEST = ROOT / "outputs" / "hackathon" / "screenshot_manifest.json"
 DEMO = ROOT / "docs" / "hackathon_judge_demo.html"
+PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
 
 
 def sha256(path: Path) -> str:
@@ -48,6 +54,7 @@ def main() -> None:
     video_manifest = json.loads(VIDEO_MANIFEST.read_text())
     screenshot_manifest = json.loads(SCREENSHOT_MANIFEST.read_text())
     demo_html = DEMO.read_text()
+    readme = (ROOT / "README.md").read_text()
     submission = (ROOT / "SUBMISSION.md").read_text()
     summary = submission.split("## 150-word summary", 1)[1].split("---", 1)[0]
     stage_script = (ROOT / "DEMO_SCRIPT.md").read_text()
@@ -83,10 +90,26 @@ def main() -> None:
         "demo_is_offline": "https://" not in demo_html and "http://" not in demo_html,
         "submission_summary_within_limit": 140 <= word_count(summary) <= 150,
         "spoken_script_within_budget": 300 <= word_count(spoken) <= 380,
+        "readme_scope_boundary_locked": "It does **not** survive" in readme
+        and "ΔAUPRC −0.281 [−0.476, −0.073]" in readme
+        and "cross-condition replication is within the same dataset" in readme
+        and "survives removing regulators that are also axis markers" not in readme,
         "no_absolute_local_paths_on_public_surfaces": not local_paths,
         "no_forbidden_raw_or_secret_files_tracked": not forbidden_tracked,
     }
     automated_pass = all(checks.values())
+    source_paths = [
+        Path(__file__),
+        PROVENANCE_HELPER,
+        AXES,
+        CLAIMS,
+        TIMING,
+        VIDEO,
+        VIDEO_MANIFEST,
+        SCREENSHOT_MANIFEST,
+        DEMO,
+        *public_surfaces,
+    ]
     report = {
         "schema_version": "hackathon_readiness_v1",
         "status": "AUTOMATED_GATES_PASS_HUMAN_GATES_PENDING" if automated_pass else "AUTOMATED_GATE_FAIL",
@@ -105,6 +128,9 @@ def main() -> None:
             "submission form is previewed before final irreversible submit",
         ],
         "git_sha": git_output("rev-parse", "HEAD"),
+        "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
+        "source_paths_dirty": source_paths_dirty(source_paths, ROOT),
+        "source_snapshot": source_snapshot(source_paths, ROOT),
         "branch": git_output("branch", "--show-current"),
         "data_sha256": sha256(CLAIMS),
         "axes_sha256": sha256(AXES),

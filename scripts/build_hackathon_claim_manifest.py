@@ -18,11 +18,17 @@ from typing import Any
 
 import yaml
 
+try:  # Package import in tests; direct import when run as `python scripts/...`.
+    from .release_provenance import source_paths_dirty, source_snapshot
+except ImportError:  # pragma: no cover - exercised by the release CLI.
+    from release_provenance import source_paths_dirty, source_snapshot
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT / "config" / "hackathon_claims.yaml"
 DEFAULT_OUTPUT = ROOT / "outputs" / "hackathon" / "claim_manifest.json"
 AXES_PATH = ROOT / "config" / "axes.yaml"
+PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
 
 
 def sha256(path: Path) -> str:
@@ -117,8 +123,10 @@ def build(config_path: Path, output_path: Path) -> dict[str, Any]:
     config = yaml.safe_load(config_path.read_text())
     command = "python scripts/build_hackathon_claim_manifest.py"
     claims = []
+    evidence_paths = []
     for claim in config["claims"]:
         evidence_path = ROOT / claim["evidence_path"]
+        evidence_paths.append(evidence_path)
         payload = selected_payload(claim)
         verdict, metrics = adjudicate(claim, payload)
         claims.append(
@@ -135,12 +143,16 @@ def build(config_path: Path, output_path: Path) -> dict[str, Any]:
             }
         )
 
+    source_paths = [Path(__file__), PROVENANCE_HELPER, config_path, AXES_PATH, *evidence_paths]
     manifest = {
         "schema_version": config["schema_version"],
         "title": config["title"],
         "thesis": config["thesis"],
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "git_sha": git_sha(),
+        "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
+        "source_paths_dirty": source_paths_dirty(source_paths, ROOT),
+        "source_snapshot": source_snapshot(source_paths, ROOT),
         "axes_sha256": sha256(AXES_PATH),
         "config_sha256": sha256(config_path),
         "command": command,
@@ -171,4 +183,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

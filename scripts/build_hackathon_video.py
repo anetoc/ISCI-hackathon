@@ -12,12 +12,18 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:  # Package import in tests; direct import when run as `python scripts/...`.
+    from .release_provenance import source_paths_dirty, source_snapshot
+except ImportError:  # pragma: no cover - exercised by the release CLI.
+    from release_provenance import source_paths_dirty, source_snapshot
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_TIMING = ROOT / "config" / "hackathon_timing.json"
 DEFAULT_ASSETS = ROOT / "demo_assets" / "hackathon"
 DEFAULT_OUTPUT = DEFAULT_ASSETS / "hackathon_fallback_2m30.mp4"
 DEFAULT_MANIFEST = ROOT / "outputs" / "hackathon" / "video_manifest.json"
+PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
 
 
 def sha256(path: Path) -> str:
@@ -144,10 +150,14 @@ def main() -> None:
 
     screenshots, properties = build_video(args.timing, args.assets, args.output)
     command = "python scripts/build_hackathon_video.py"
+    source_paths = [Path(__file__), PROVENANCE_HELPER, args.timing, *screenshots]
     manifest = {
         "schema_version": "hackathon_video_manifest_v1",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "git_sha": git_sha(),
+        "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
+        "source_paths_dirty": source_paths_dirty(source_paths, ROOT),
+        "source_snapshot": source_snapshot(source_paths, ROOT),
         "command": command,
         "timing_path": str(args.timing.relative_to(ROOT)),
         "timing_sha256": sha256(args.timing),
@@ -168,4 +178,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -12,6 +12,11 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:  # Package import in tests; direct import when run as `python scripts/...`.
+    from .release_provenance import source_paths_dirty, source_snapshot
+except ImportError:  # pragma: no cover - exercised by the release CLI.
+    from release_provenance import source_paths_dirty, source_snapshot
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEMO = ROOT / "docs" / "hackathon_judge_demo.html"
@@ -19,6 +24,7 @@ TIMING = ROOT / "config" / "hackathon_timing.json"
 ASSETS = ROOT / "demo_assets" / "hackathon"
 MANIFEST = ROOT / "outputs" / "hackathon" / "screenshot_manifest.json"
 AXES = ROOT / "config" / "axes.yaml"
+PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
 
 
 def sha256(path: Path) -> str:
@@ -79,10 +85,14 @@ def main() -> None:
             raise ValueError(f"Unexpected screenshot size: {output} {png_size(output)}")
         screenshots.append(output)
 
+    source_paths = [Path(__file__), PROVENANCE_HELPER, DEMO, TIMING, AXES]
     manifest = {
         "schema_version": "hackathon_screenshot_manifest_v1",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "git_sha": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
+        "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
+        "source_paths_dirty": source_paths_dirty(source_paths, ROOT),
+        "source_snapshot": source_snapshot(source_paths, ROOT),
         "command": "python scripts/capture_hackathon_screenshots.py",
         "browser": Path(chrome).name,
         "demo_path": str(DEMO.relative_to(ROOT)),
@@ -100,4 +110,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

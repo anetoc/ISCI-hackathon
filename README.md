@@ -20,6 +20,11 @@ versions of one number; the hierarchy is frozen in `reports/result_lock.md`.
 > decision cards, the PASS/FAIL/NULL claim contract, and the threshold-stability proof). No server, no
 > install; open in any browser.
 
+> **Hackathon stage package:** open [`docs/hackathon_judge_demo.html`](docs/hackathon_judge_demo.html)
+> for the deterministic 2:30 judge narrative, or use the committed Full-HD
+> [`MP4 fallback`](demo_assets/hackathon/hackathon_fallback_2m30.mp4). Both are generated from the
+> same frozen claim and timing manifests and run fully offline.
+
 ## What the framework actually delivers — an adjudication table
 
 The deliverable is not the ranking; it is a system that returns an honest verdict for each question,
@@ -69,7 +74,12 @@ The common cause: **the ground truth is confounded by magnitude.** Known regulat
 | network influence (PageRank, in-degree) | structural position | no |
 | guide coherence | same direction across guides | no |
 
-**Robustness:** survives removing regulators that are also axis markers (not leakage); replicates on independent structural positives (ARID1A/INO80/IKZF1, p = 0.013); replicates in **all three** culture conditions (Rest / Stim-8h / Stim-48h, all p < 1e-3).
+**Robustness and boundary:** the gate is stable across effect thresholds and the signal repeats in
+**all three** culture conditions (Rest / Stim-8h / Stim-48h, all p < 1e-3). It does **not** survive
+removing GATA3/TBX21/STAT6/IRF1, and the independent external functional-regulator set returns a
+clean **FAIL** (ΔAUPRC −0.281 [−0.476, −0.073]). The supported scope is therefore canonical,
+axis-defining regulators; cross-condition replication is within the same dataset, not an independent
+cohort.
 
 **The methodological contribution stands on its own:** in-dataset controllability benchmarks are confounded by effect magnitude, and only a magnitude-conditional test (or a magnitude-independent external outcome) can distinguish control from association. This is a reusable caution for the field.
 
