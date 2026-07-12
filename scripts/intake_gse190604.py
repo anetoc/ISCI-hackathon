@@ -108,6 +108,28 @@ def main() -> None:
             ],
             "verified_at": "2026-07-12",
         },
+        "donor_recovery_feasibility": {
+            "status": "NO_GO_LOCAL_CONFIRMATORY",
+            "sra_study": "SRP350148",
+            "raw_mrna_download_gb_reported": 154.2,
+            "raw_guide_download_gb_reported": 63.8,
+            "n_mrna_runs": 8,
+            "n_donors": 2,
+            "current_free_gb": round(free_bytes / 1_000_000_000, 1),
+            "local_full_download_feasible": free_bytes >= 154.2 * 1_000_000_000,
+            "reason": (
+                "raw mRNA downloads exceed current local free space and resolving only two "
+                "donors would provide a consistency diagnostic, not population-level "
+                "confirmation of a context interaction"
+            ),
+            "recommended_use": (
+                "do not download locally for confirmatory inference; prioritize a donor-resolved "
+                "dataset or experiment with enough independent donors to estimate between-donor "
+                "variation"
+            ),
+            "verified_record": "https://www.ncbi.nlm.nih.gov/sra?term=SRP350148",
+            "verified_at": "2026-07-12",
+        },
         "replication_design": {
             "status": "TARGETED_PANEL_METHOD_REQUIRED",
             "reason": (

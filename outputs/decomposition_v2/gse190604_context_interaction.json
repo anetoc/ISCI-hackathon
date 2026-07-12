@@ -13,12 +13,12 @@
   "ci_high": 0.36976249315974463,
   "p_context_swap": 0.09090909090909091,
   "null_median": 0.009707143131978763,
-  "boundary": "Post-result target-paired diagnostic; not donor-paired, mechanistic or independent replication.",
+  "boundary": "Post-result target-paired diagnostic from a donor-mixed matrix; not donor-resolved, mechanistic or independent replication.",
   "provenance": {
-    "git_sha": "84b1738b859bf2b7f2e1f384d360014eaca56971",
+    "git_sha": "9237a538ca53ac9dbbe477c2eecc52f55ae45d74",
     "data_sha256": "9fbb2e0026394d48e1e4c5f74b361cf14b81d88e1b500a8c8201cb82dc2c4e4d",
     "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-    "timestamp": "2026-07-12T14:19:41.847994-03:00",
+    "timestamp": "2026-07-12T14:30:44.751750-03:00",
     "command": "python scripts/run_gse190604_context_interaction.py --n-resamples 1000 --n-repeats 10",
     "seed": 20260712,
     "method_version": "gse190604_target_paired_context_v1"
