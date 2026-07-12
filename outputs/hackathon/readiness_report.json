@@ -28,12 +28,12 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "6bccedcdedcbee0eac2a9bed5d5794976d7df701",
+  "git_sha": "6cab8efafab2f9b1d54f34c55d90967fb47ce78b",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": true,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "ea87a3ccbbdc1d30a53dbfe77cabf6f9a0683d8fcab738a249719068edbbbc05",
+    "sha256": "c0a9f78b30c5f759e89c000a89ac65e747b065e301f7744e2a55a055151020c6",
     "files_sha256": {
       "DEMO_SCRIPT.md": "dc359d56482fa114a1c7bf384e74d525f06d955cc97b9840003b6562ab2af08b",
       "JUDGE_QA.md": "e93858d99be0a82bfbdbf3e28076bfc894e45a56ad373e72a2c98f2b83b991e7",
@@ -41,18 +41,18 @@
       "SUBMISSION.md": "4da67f792c17adb09659a32075094e4fb1659e1d5970aa243ce2b12517101967",
       "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
       "config/hackathon_timing.json": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
-      "demo_assets/hackathon/hackathon_fallback_2m30.mp4": "e191144454c7f0812cc2405de5c99b0ed9b5b910c556f202f8b8268f6a729251",
-      "docs/hackathon_judge_demo.html": "e1d5f54d3d753c07652584ac32f880b9ce8d9cc3e96710cae64a9aef18e262bd",
-      "outputs/hackathon/claim_manifest.json": "62d202c0a561fabf7dc1d7a4f0ccf599958526a093a6163f0f9e6bebee098c7c",
-      "outputs/hackathon/screenshot_manifest.json": "b00592e85b2256822260306109b7eaee47be8786f1946c2437581286dbf6f4a5",
-      "outputs/hackathon/video_manifest.json": "69353568b36c7c4bb781100fab57912e3bc218d06752f92f6f055d45978f8b2e",
+      "demo_assets/hackathon/hackathon_fallback_2m30.mp4": "2f5a6dbdce61f0950919f5653674302a71ff0470d48b9fad797f889839461b66",
+      "docs/hackathon_judge_demo.html": "45e654a31874efdbfe944388808bc5a47e1afce180249384bce424614a33c6df",
+      "outputs/hackathon/claim_manifest.json": "56aca8a89b4ee55fdfa24bbf0d912894340d702d496b400542aecca4e8e6daf2",
+      "outputs/hackathon/screenshot_manifest.json": "faff4ee2b9fdad7c62a9da8c9be7de683666e7f3b82b6a5260e44bd586dc73de",
+      "outputs/hackathon/video_manifest.json": "0b902969efd3ae89d6aaaa4d4375d44316443d3d63d22f2cc1efb5dccd86c047",
       "scripts/check_hackathon_readiness.py": "75102ef3424b6c2ca8eabd3532d41bdbca054fe6f707795777c552c205b4c8a6",
       "scripts/release_provenance.py": "6bb306ad56967cdbb0357f70cca81a2bf5355c0e0ce315154b89d3dbf392b19f"
     }
   },
   "branch": "codex/controllability-decomposition",
-  "data_sha256": "62d202c0a561fabf7dc1d7a4f0ccf599958526a093a6163f0f9e6bebee098c7c",
+  "data_sha256": "56aca8a89b4ee55fdfa24bbf0d912894340d702d496b400542aecca4e8e6daf2",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-12T20:51:00.726760+00:00",
+  "timestamp": "2026-07-12T20:52:58.231650+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }
