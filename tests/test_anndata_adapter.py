@@ -538,3 +538,24 @@ def test_cli_preflight_cells_writes_structured_metadata_report(tmp_path, capsys)
     inspect_payload = json.loads(capsys.readouterr().out)
     assert inspect_exit == EXIT_INVALID_SPEC
     assert inspect_payload["error"]["code"] == "USE_PREFLIGHT_CELLS"
+
+    build_output = tmp_path / "outputs" / "built"
+    build_exit = main(
+        [
+            "build-effects",
+            str(spec_path),
+            "--repo-root",
+            str(tmp_path),
+            "--output-dir",
+            str(build_output),
+            "--block-rows",
+            "3",
+        ]
+    )
+    build_payload = json.loads(capsys.readouterr().out)
+    assert build_exit == EXIT_SUCCESS
+    assert build_payload["status"] == "EFFECTS_BUILT"
+    assert build_payload["biological_verdict"] == "NOT_ISSUED"
+    assert build_payload["outputs"]["effects"] == "outputs/built/effects.h5ad"
+    assert "/Users/" not in json.dumps(build_payload)
+    assert (build_output / "dataset.effects.yaml").is_file()

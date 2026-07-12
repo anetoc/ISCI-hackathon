@@ -20,6 +20,7 @@ from isci.adapters import (
 )
 from isci.analysis_runner import run_dataset
 from isci.dataset_spec import DatasetSpecError, load_dataset_spec, validate_dataset_spec
+from isci.effect_builder import build_anndata_effects
 
 
 EXIT_SUCCESS = 0
@@ -257,6 +258,62 @@ def _preflight_cells(args: argparse.Namespace) -> int:
     return EXIT_SUCCESS if result.can_construct_effects else EXIT_NOT_EVALUABLE
 
 
+def _build_effects(args: argparse.Namespace) -> int:
+    spec_path = Path(args.spec)
+    root = _repo_root(spec_path, args.repo_root)
+    try:
+        spec = load_dataset_spec(spec_path, repo_root=root, check_paths=True)
+    except FileNotFoundError:
+        _print_json(
+            _config_error("build-effects", "SPEC_NOT_FOUND", "DatasetSpec file does not exist")
+        )
+        return EXIT_INVALID_SPEC
+    except yaml.YAMLError as exc:
+        _print_json(_config_error("build-effects", "INVALID_YAML", type(exc).__name__))
+        return EXIT_INVALID_SPEC
+    except DatasetSpecError as exc:
+        payload = {
+            "command": "build-effects",
+            "ok": False,
+            "error": {"code": "INVALID_SPEC", "message": "DatasetSpec validation failed"},
+            "report": exc.report.to_dict(),
+        }
+        _print_json(payload)
+        return EXIT_INVALID_SPEC
+
+    output_dir = (
+        Path(args.output_dir) if args.output_dir else root / "outputs" / spec.dataset.id / "effects"
+    )
+    result = build_anndata_effects(
+        spec,
+        repo_root=root,
+        output_dir=output_dir,
+        block_rows=args.block_rows,
+    )
+
+    def output_label(path: Path | None) -> str | None:
+        if path is None:
+            return None
+        try:
+            return str(path.resolve().relative_to(root))
+        except ValueError:
+            return path.name
+
+    payload = {
+        "command": "build-effects",
+        "ok": result.completed,
+        "status": result.status,
+        "biological_verdict": "NOT_ISSUED",
+        "outputs": {
+            "effects": output_label(result.effects_path),
+            "generated_spec": output_label(result.generated_spec_path),
+        },
+        "report": result.report,
+    }
+    _print_json(payload)
+    return EXIT_SUCCESS if result.completed else EXIT_NOT_EVALUABLE
+
+
 def _run(args: argparse.Namespace) -> int:
     spec_path = Path(args.spec)
     root = _repo_root(spec_path, args.repo_root)
@@ -353,6 +410,26 @@ def build_parser() -> argparse.ArgumentParser:
     )
     preflight_parser.add_argument("--report", help="optional JSON preflight report output")
     preflight_parser.set_defaults(handler=_preflight_cells)
+
+    build_effects_parser = subparsers.add_parser(
+        "build-effects",
+        help="construct matched-control pseudobulk effects from a preflighted cell H5AD",
+    )
+    build_effects_parser.add_argument("spec", help="path to an anndata_cells DatasetSpec YAML")
+    build_effects_parser.add_argument(
+        "--repo-root", help="repository root for resolving contract-relative paths"
+    )
+    build_effects_parser.add_argument(
+        "--output-dir",
+        help="output directory (default: outputs/<dataset_id>/effects)",
+    )
+    build_effects_parser.add_argument(
+        "--block-rows",
+        type=int,
+        default=64,
+        help="cell rows read from the source matrix per aggregation block (default: 64)",
+    )
+    build_effects_parser.set_defaults(handler=_build_effects)
 
     run_parser = subparsers.add_parser(
         "run", help="extract and rank a dataset with the frozen conditional method"
