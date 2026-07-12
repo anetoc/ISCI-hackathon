@@ -162,7 +162,9 @@ def main() -> None:
                 vector = np.asarray(axis_vector, dtype=np.float64).copy()
                 vector[target_indices] = 0.0
                 vector /= np.linalg.norm(vector) + 1e-12
-                row[f"precision__{axis_name}"] = float(abs(mean_effect @ vector))
+                signed_projection = float(mean_effect @ vector)
+                row[f"signed__{axis_name}"] = signed_projection
+                row[f"precision__{axis_name}"] = abs(signed_projection)
             rows.append(row)
     result = pd.DataFrame(rows).sort_values(["gene", "context"], kind="mergesort")
     if result.empty or result.duplicated(["gene", "context"]).any():
