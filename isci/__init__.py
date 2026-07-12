@@ -8,7 +8,12 @@ from isci.dataset_spec import (
     load_dataset_spec,
     validate_dataset_spec,
 )
-from isci.analysis_runner import DatasetRunResult, run_controller_features, save_dataset_run
+from isci.analysis_runner import (
+    DatasetRunResult,
+    run_controller_features,
+    run_dataset,
+    save_dataset_run,
+)
 from isci.feature_extraction import FeatureExtractionResult, extract_controller_features
 from isci.adapters import (
     AnnDataAdapterError,
@@ -45,6 +50,7 @@ __all__ = [
     "load_dataset_spec",
     "load_tabular_dataset",
     "run_controller_features",
+    "run_dataset",
     "save_dataset_run",
     "validate_dataset_spec",
 ]

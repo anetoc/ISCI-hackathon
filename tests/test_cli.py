@@ -117,7 +117,7 @@ def test_missing_spec_is_reported_without_traceback(capsys):
     assert payload["error"]["code"] == "SPEC_NOT_FOUND"
 
 
-def test_run_refuses_effect_layout_until_feature_extraction_exists(tmp_path, capsys):
+def test_run_audits_effect_layout_that_lacks_feature_coverage(tmp_path, capsys):
     output = tmp_path / "run"
     exit_code = main(
         [
@@ -132,6 +132,8 @@ def test_run_refuses_effect_layout_until_feature_extraction_exists(tmp_path, cap
     payload = _stdout_json(capsys)
 
     assert exit_code == EXIT_NOT_EVALUABLE
-    assert payload["status"] == "FEATURE_EXTRACTION_REQUIRED"
+    assert payload["status"] == "FEATURE_EXTRACTION_NOT_EVALUABLE"
     assert payload["biological_verdict"] == "NOT_ISSUED"
-    assert not output.exists()
+    assert payload["report"]["feature_extraction"]["ranking_eligible_rows"] == 0
+    assert (output / "controller_features.csv").is_file()
+    assert (output / "feature_extraction_report.json").is_file()

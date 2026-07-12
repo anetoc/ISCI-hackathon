@@ -20,7 +20,9 @@ from typing import Any
 import pandas as pd
 
 from isci.adapters import RuntimeCapability, load_tabular_dataset
+from isci.axes import load_axes_config
 from isci.dataset_spec import DatasetSpec
+from isci.feature_extraction import FeatureExtractionResult, extract_controller_features
 
 
 @dataclass(frozen=True)
@@ -240,47 +242,20 @@ def _condition_metrics(
     }
 
 
-def run_controller_features(
+def _analyze_controller_table(
     spec: DatasetSpec,
+    table: pd.DataFrame,
+    inspection: dict[str, Any],
+    root: Path,
     *,
-    repo_root: Path | str,
-    output_dir: Path | str | None = None,
+    output_dir: Path | str | None,
+    report: dict[str, Any] | None = None,
 ) -> DatasetRunResult:
-    """Rank a controller-feature table and conditionally benchmark it against magnitude."""
+    """Run the locked ranking kernel on an already canonical controller-feature table."""
 
-    root = Path(repo_root).resolve()
-    adapter = load_tabular_dataset(spec, repo_root=root)
-    inspection = adapter.inspection.to_dict()
-    report = _base_report(spec, inspection, root)
-
-    if spec.input.layout != "controller_features":
-        report.update(
-            {
-                "status": "FEATURE_EXTRACTION_REQUIRED",
-                "reason": "run_controller_features requires input.layout=controller_features",
-            }
-        )
-        return DatasetRunResult(
-            spec.dataset.id,
-            "FEATURE_EXTRACTION_REQUIRED",
-            "NOT_ISSUED",
-            pd.DataFrame(),
-            pd.DataFrame(),
-            report,
-        )
-    if adapter.inspection.runtime_capability == RuntimeCapability.NOT_EVALUABLE:
-        report.update({"status": "NOT_EVALUABLE", "reason": "physical adapter rejected input"})
-        return DatasetRunResult(
-            spec.dataset.id,
-            "NOT_EVALUABLE",
-            "NOT_ISSUED",
-            pd.DataFrame(),
-            pd.DataFrame(),
-            report,
-        )
-
+    report = report or _base_report(spec, inspection, root)
     kernel, kernel_path = _load_locked_kernel(root)
-    features = _aggregate_features(adapter.table)
+    features = _aggregate_features(table)
     rankings = []
     metrics = []
     for condition, frame in features.groupby("condition", observed=True, sort=True):
@@ -329,6 +304,162 @@ def run_controller_features(
     return result
 
 
+def run_controller_features(
+    spec: DatasetSpec,
+    *,
+    repo_root: Path | str,
+    output_dir: Path | str | None = None,
+) -> DatasetRunResult:
+    """Rank a controller-feature table and conditionally benchmark it against magnitude."""
+
+    root = Path(repo_root).resolve()
+    adapter = load_tabular_dataset(spec, repo_root=root)
+    inspection = adapter.inspection.to_dict()
+    report = _base_report(spec, inspection, root)
+
+    if spec.input.layout != "controller_features":
+        report.update(
+            {
+                "status": "FEATURE_EXTRACTION_REQUIRED",
+                "reason": "run_controller_features requires input.layout=controller_features",
+            }
+        )
+        return DatasetRunResult(
+            spec.dataset.id,
+            "FEATURE_EXTRACTION_REQUIRED",
+            "NOT_ISSUED",
+            pd.DataFrame(),
+            pd.DataFrame(),
+            report,
+        )
+    if adapter.inspection.runtime_capability == RuntimeCapability.NOT_EVALUABLE:
+        report.update({"status": "NOT_EVALUABLE", "reason": "physical adapter rejected input"})
+        return DatasetRunResult(
+            spec.dataset.id,
+            "NOT_EVALUABLE",
+            "NOT_ISSUED",
+            pd.DataFrame(),
+            pd.DataFrame(),
+            report,
+        )
+
+    return _analyze_controller_table(
+        spec,
+        adapter.table,
+        inspection,
+        root,
+        output_dir=output_dir,
+        report=report,
+    )
+
+
+def _save_feature_extraction(
+    extraction: FeatureExtractionResult,
+    output_dir: Path | str,
+    report: dict[str, Any],
+) -> dict[str, str]:
+    destination = Path(output_dir)
+    destination.mkdir(parents=True, exist_ok=True)
+    features_path = destination / "controller_features.csv"
+    axes_path = destination / "axis_scores.csv"
+    report_path = destination / "feature_extraction_report.json"
+    extraction.features.to_csv(features_path, index=False)
+    extraction.axis_scores.to_csv(axes_path, index=False)
+    report_path.write_text(json.dumps(report, indent=2, default=str) + "\n")
+    return {
+        features_path.name: _sha256(features_path),
+        axes_path.name: _sha256(axes_path),
+        report_path.name: _sha256(report_path),
+    }
+
+
+def run_dataset(
+    spec: DatasetSpec,
+    *,
+    repo_root: Path | str,
+    output_dir: Path | str | None = None,
+) -> DatasetRunResult:
+    """Extract features when needed, then run the frozen conditional ranking method."""
+
+    if spec.input.layout == "controller_features":
+        return run_controller_features(spec, repo_root=repo_root, output_dir=output_dir)
+
+    root = Path(repo_root).resolve()
+    if spec.input.layout != "long_effects":
+        report = _base_report(spec, {}, root)
+        report.update(
+            {
+                "status": "STREAMING_EXTRACTION_REQUIRED",
+                "reason": "anndata_effects requires the bounded-memory streaming extraction lane",
+            }
+        )
+        return DatasetRunResult(
+            spec.dataset.id,
+            "STREAMING_EXTRACTION_REQUIRED",
+            "NOT_ISSUED",
+            pd.DataFrame(),
+            pd.DataFrame(),
+            report,
+        )
+
+    adapter = load_tabular_dataset(spec, repo_root=root)
+    inspection = adapter.inspection.to_dict()
+    report = _base_report(spec, inspection, root)
+    if adapter.inspection.runtime_capability == RuntimeCapability.NOT_EVALUABLE:
+        report.update({"status": "NOT_EVALUABLE", "reason": "physical adapter rejected input"})
+        return DatasetRunResult(
+            spec.dataset.id,
+            "NOT_EVALUABLE",
+            "NOT_ISSUED",
+            pd.DataFrame(),
+            pd.DataFrame(),
+            report,
+        )
+
+    axes_config = load_axes_config(root / spec.analysis.axes_path)
+    extraction = extract_controller_features(adapter.table, axes_config)
+    extraction_report = extraction.report()
+    eligible = extraction.features.dropna(
+        subset=["magnitude", "specificity", "reproducibility"]
+    ).reset_index(drop=True)
+    extraction_report["ranking_eligible_rows"] = len(eligible)
+    extraction_report["ranking_excluded_rows"] = len(extraction.features) - len(eligible)
+    report["feature_extraction"] = extraction_report
+    report["method"]["feature_extraction"] = extraction.methods
+    if output_dir is not None:
+        report["outputs_sha256"] = _save_feature_extraction(
+            extraction, output_dir, extraction_report
+        )
+
+    if eligible.empty:
+        report.update(
+            {
+                "status": "FEATURE_EXTRACTION_NOT_EVALUABLE",
+                "reason": "no perturbation-condition row has all three controller features",
+            }
+        )
+        result = DatasetRunResult(
+            spec.dataset.id,
+            "FEATURE_EXTRACTION_NOT_EVALUABLE",
+            "NOT_ISSUED",
+            pd.DataFrame(),
+            pd.DataFrame(),
+            report,
+        )
+        if output_dir is not None:
+            save_dataset_run(result, output_dir)
+        return result
+
+    return _analyze_controller_table(
+        spec,
+        eligible,
+        inspection,
+        root,
+        output_dir=output_dir,
+        report=report,
+    )
+
+
 def save_dataset_run(result: DatasetRunResult, output_dir: Path | str) -> None:
     """Write deterministic tables and a report that binds their SHA-256 hashes."""
 
@@ -343,6 +474,7 @@ def save_dataset_run(result: DatasetRunResult, output_dir: Path | str) -> None:
     )
     report = dict(result.report)
     report["outputs_sha256"] = {
+        **report.get("outputs_sha256", {}),
         "controller_ranking.csv": _sha256(ranking_path),
         "condition_metrics.json": _sha256(metrics_path),
     }

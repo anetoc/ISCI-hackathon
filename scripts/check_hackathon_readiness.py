@@ -44,6 +44,7 @@ DATASET_ADAPTER_EXPORTS = ROOT / "isci" / "adapters" / "__init__.py"
 ANNDATA_ADAPTER_CODE = ROOT / "isci" / "adapters" / "anndata_effects.py"
 DATASET_CLI_CODE = ROOT / "isci" / "cli.py"
 DATASET_RUNNER_CODE = ROOT / "isci" / "analysis_runner.py"
+FEATURE_EXTRACTION_CODE = ROOT / "isci" / "feature_extraction.py"
 LOCKED_KERNEL = ROOT / "skills" / "isci-controllership" / "kernel.py"
 LOCKED_METHOD = ROOT / "skills" / "isci-controllership" / "SKILL.md"
 RESEARCHER_NOTEBOOK = ROOT / "notebooks" / "ISCI_Researcher_Track_Walkthrough.ipynb"
@@ -91,6 +92,7 @@ def main() -> None:
     pyproject = PYPROJECT.read_text()
     anndata_adapter_source = ANNDATA_ADAPTER_CODE.read_text()
     dataset_runner_source = DATASET_RUNNER_CODE.read_text()
+    feature_extraction_source = FEATURE_EXTRACTION_CODE.read_text()
     dataset_cli_source = DATASET_CLI_CODE.read_text()
     notebook = json.loads(RESEARCHER_NOTEBOOK.read_text())
     notebook_code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
@@ -153,6 +155,10 @@ def main() -> None:
         "dataset_runner_bounded": "run_controller_features" in dataset_runner_source
         and '"biological_verdict": "NOT_ISSUED"' in dataset_runner_source
         and '"run"' in dataset_cli_source,
+        "long_effect_feature_extraction_present": "extract_controller_features"
+        in feature_extraction_source
+        and "leave_one_marker_out" in feature_extraction_source
+        and "run_dataset" in dataset_runner_source,
         "researcher_notebook_executed": len(notebook_code_cells) >= 8
         and all(cell.get("execution_count") is not None for cell in notebook_code_cells)
         and not notebook_errors,
@@ -184,6 +190,7 @@ def main() -> None:
         ANNDATA_ADAPTER_CODE,
         DATASET_CLI_CODE,
         DATASET_RUNNER_CODE,
+        FEATURE_EXTRACTION_CODE,
         LOCKED_KERNEL,
         LOCKED_METHOD,
         RESEARCHER_NOTEBOOK,

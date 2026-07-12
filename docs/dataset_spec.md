@@ -89,7 +89,7 @@ isci inspect dataset.yaml \
   --report outputs/my_dataset/inspection.json \
   --canonical-output outputs/my_dataset/canonical.parquet
 isci inspect effect_matrix.yaml --scan-values --block-rows 64
-isci run controller_features.yaml --output-dir outputs/my_dataset
+isci run long_effects.yaml --output-dir outputs/my_dataset
 ```
 
 Exit code `0` means the requested validation/inspection completed; `2` means the spec, YAML or
@@ -115,15 +115,22 @@ reported rather than happening silently.
 
 ## Scientific runner
 
-`isci run` currently accepts `controller_features`. It aggregates replicate rows by perturbation and
-condition, computes balanced and magnitude-orthogonal rankings with the frozen
-`isci-controllership` kernel, matches negatives within each condition, and runs conditional LR plus
-a fixed-score bootstrap when at least 8 positives and 15 negatives are available.
+`isci run` accepts tabular `long_effects` and precomputed `controller_features`. For long effects it
+first computes effect magnitude, marker-restricted LOO axis specificity and donor/guide replicate
+coherence. Rows without sufficient axis coverage or independent replication remain missing and are
+excluded explicitly from ranking. It then computes balanced and magnitude-orthogonal rankings with
+the frozen `isci-controllership` kernel, matches negatives within each condition, and runs
+conditional LR plus a fixed-score bootstrap when at least 8 positives and 15 negatives are
+available. H5AD execution remains a separate bounded-memory streaming lane; inspection is already
+supported.
 
 It writes:
 
 ```text
 outputs/<dataset_id>/
+├── controller_features.csv
+├── axis_scores.csv
+├── feature_extraction_report.json
 ├── controller_ranking.csv
 ├── condition_metrics.json
 └── analysis_report.json

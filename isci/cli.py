@@ -10,7 +10,7 @@ from typing import Any, Sequence
 import yaml
 
 from isci.adapters import RuntimeCapability, inspect_anndata_dataset, load_tabular_dataset
-from isci.analysis_runner import run_controller_features
+from isci.analysis_runner import run_dataset
 from isci.dataset_spec import DatasetSpecError, load_dataset_spec, validate_dataset_spec
 
 
@@ -196,7 +196,7 @@ def _run(args: argparse.Namespace) -> int:
         return EXIT_INVALID_SPEC
 
     output_dir = Path(args.output_dir) if args.output_dir else root / "outputs" / spec.dataset.id
-    result = run_controller_features(spec, repo_root=root, output_dir=output_dir)
+    result = run_dataset(spec, repo_root=root, output_dir=output_dir)
     report_path = output_dir / "analysis_report.json"
     report = json.loads(report_path.read_text()) if report_path.is_file() else result.report
     payload = {
@@ -256,7 +256,7 @@ def build_parser() -> argparse.ArgumentParser:
     inspect_parser.set_defaults(handler=_inspect)
 
     run_parser = subparsers.add_parser(
-        "run", help="rank a controller_features dataset with the frozen conditional method"
+        "run", help="extract and rank a tabular dataset with the frozen conditional method"
     )
     run_parser.add_argument("spec", help="path to DatasetSpec YAML")
     run_parser.add_argument(

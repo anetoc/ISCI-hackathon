@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from isci.analysis_runner import run_controller_features
+from isci.analysis_runner import run_controller_features, run_dataset
 from isci.dataset_spec import (
     AnalysisSettings,
     BenchmarkSettings,
@@ -109,6 +109,55 @@ def _controller_spec(tmp_path, *, n_positives=8, n_negatives=15):
     )
 
 
+def _long_effect_spec(tmp_path):
+    _prepare_root(tmp_path)
+    rows = []
+    vectors = {
+        "CTRL_A": {"IL2": 1.0, "IL2RA": 1.0, "CD69": 1.0, "TNF": 1.0},
+        "CTRL_B": {"IL2": 1.0, "IL2RA": 2.0, "CD69": 1.0, "TNF": 2.0},
+        "CTRL_C": {"IL2": -1.0, "IL2RA": -1.0, "CD69": -1.0, "TNF": -1.0},
+    }
+    for perturbation, vector in vectors.items():
+        for replicate in range(2):
+            for feature, value in vector.items():
+                rows.append(
+                    {
+                        "perturbation": perturbation,
+                        "feature": feature,
+                        "condition": "stim",
+                        "donor": f"D{replicate}",
+                        "guide": f"{perturbation}_g{replicate}",
+                        "effect": value / 2,
+                        "standardized_effect": value,
+                    }
+                )
+    pd.DataFrame(rows).to_csv(tmp_path / "long_effects.csv", index=False)
+    return replace(
+        BASE_SPEC,
+        input=DatasetInput(
+            path="long_effects.csv",
+            format="csv",
+            layout="long_effects",
+            sha256=None,
+            layers={},
+        ),
+        mapping={
+            field: field
+            for field in (
+                "perturbation",
+                "feature",
+                "condition",
+                "donor",
+                "guide",
+                "effect",
+                "standardized_effect",
+            )
+        },
+        benchmark=None,
+        source_path=tmp_path / "dataset.yaml",
+    )
+
+
 def test_non_feature_layout_requests_extraction_without_fake_results():
     result = run_controller_features(BASE_SPEC, repo_root=ROOT)
 
@@ -162,3 +211,29 @@ def test_ranking_and_metrics_are_deterministic_for_same_seed(tmp_path):
 
     pd.testing.assert_frame_equal(first.ranking, second.ranking)
     pd.testing.assert_frame_equal(first.condition_metrics, second.condition_metrics)
+
+
+def test_long_effects_run_extracts_features_and_writes_bound_artifacts(tmp_path):
+    spec = _long_effect_spec(tmp_path)
+    output = tmp_path / "outputs"
+
+    result = run_dataset(spec, repo_root=tmp_path, output_dir=output)
+
+    assert result.completed
+    assert len(result.ranking) == 3
+    assert result.condition_metrics.empty
+    report = json.loads((output / "analysis_report.json").read_text())
+    extraction_report = json.loads((output / "feature_extraction_report.json").read_text())
+    assert report["feature_extraction"]["status"] == "COMPLETE"
+    assert report["feature_extraction"]["ranking_eligible_rows"] == 3
+    assert extraction_report["ranking_eligible_rows"] == 3
+    expected_outputs = {
+        "controller_features.csv",
+        "axis_scores.csv",
+        "feature_extraction_report.json",
+        "controller_ranking.csv",
+        "condition_metrics.json",
+    }
+    assert set(report["outputs_sha256"]) == expected_outputs
+    for filename, expected_hash in report["outputs_sha256"].items():
+        assert hashlib.sha256((output / filename).read_bytes()).hexdigest() == expected_hash
