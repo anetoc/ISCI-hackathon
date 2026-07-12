@@ -1,0 +1,107 @@
+{
+  "schema_version": "hackathon_claim_manifest_v1",
+  "title": "ISCI — Claude as an Auditable Scientific Judge",
+  "thesis": "Magnitude says how far a cell moved; controllability asks where it moved, whether it repeated, and whether the evidence deserves a PASS.",
+  "generated_at": "2026-07-12T19:19:41.383534+00:00",
+  "git_sha": "73daa85f16ae58e89d3eec5a82c51e09be7712f6",
+  "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+  "config_sha256": "95b601d803a7a742516870b953dfe91b5e8f7a93fd90c14ba38499d71d5950b8",
+  "command": "python scripts/build_hackathon_claim_manifest.py",
+  "verdict_contract": {
+    "PASS": "Prespecified direction and required gates are met.",
+    "FAIL": "The claim is evaluable but a directional or required gate is violated.",
+    "NULL": "The claim is evaluable but no supported incremental signal is present.",
+    "NOT-EVALUABLE": "A required input or structural gate is absent; no biological conclusion is forced."
+  },
+  "claims": [
+    {
+      "claim_id": "C1-CONTROLLABILITY",
+      "short_label": "Canonical T-cell state controllers",
+      "claim": "Among detectable-effect perturbations, axis-specificity and cross-donor coherence identify canonical T-cell state regulators beyond effect magnitude.",
+      "verdict": "PASS",
+      "metrics": {
+        "authoritative_full_sample": {
+          "discovery_gain": 0.357,
+          "discovery_baseline_auprc": 0.539,
+          "discovery_full_auprc": 0.896,
+          "discovery_ci95": [
+            0.117,
+            0.538
+          ],
+          "oof_gain": 0.215,
+          "oof_ci95": [
+            0.074,
+            0.56
+          ],
+          "permutation_p": 0.01
+        },
+        "leakage_free_oof": {
+          "gain": 0.2151,
+          "ci95": [
+            0.0737,
+            0.5604
+          ],
+          "permutation_p": 0.01,
+          "n_positive": 13,
+          "n_negative_per_positive": 8
+        }
+      },
+      "scope": "Detectable-effect perturbations and canonical axis-defining T-cell regulators.",
+      "prohibited_overclaim": "Broad functional-regulator discovery or therapeutic target nomination.",
+      "evidence_path": "outputs/isci_oof_incremental.json",
+      "data_sha256": "8343980f5c96d07b33880385f2b0e36b457d356de4629f1d90b301d6f8af3266"
+    },
+    {
+      "claim_id": "C2-EXTERNAL-FUNCTIONAL",
+      "short_label": "Broad external functional regulators",
+      "claim": "Magnitude-conditional controllership generalizes to an independent set of non-marker functional regulators.",
+      "verdict": "FAIL",
+      "metrics": {
+        "gain": -0.2807275893767807,
+        "ci95": [
+          -0.47638489435959946,
+          -0.07342890735600327
+        ],
+        "n_positive": 20,
+        "n_negative": 71
+      },
+      "scope": "Twenty external non-marker regulators with matched negatives.",
+      "prohibited_overclaim": "The failed broad class invalidates the bounded canonical-regulator result.",
+      "evidence_path": "outputs/positive_set_stress_test.json",
+      "data_sha256": "733d97ab2526e7c6188c2de4a6739bd3491aa98afd22ae12ae1504b102315fd6"
+    },
+    {
+      "claim_id": "C3-CART-CLINICAL",
+      "short_label": "CAR-T clinical response",
+      "claim": "A perturbational IEC axis transports as a multi-study CAR-T response predictor.",
+      "verdict": "NULL",
+      "metrics": {
+        "study_out_auroc": 0.5327160493827161,
+        "ci95": [
+          0.4082710597826087,
+          0.6501328382230084
+        ],
+        "permutation_p": 0.13786213786213786,
+        "best_baseline_auroc": 0.5845679012345679
+      },
+      "scope": "Eighty-seven labeled patients across nine public studies.",
+      "prohibited_overclaim": "Proof of no biological effect or a validated clinical biomarker.",
+      "evidence_path": "outputs/iec_clinical/verdict.json",
+      "data_sha256": "c77fedee72e40e25498dcdc66126feb911d1ba85525c40cc9401cb702748a548"
+    },
+    {
+      "claim_id": "C4-SCGPT",
+      "short_label": "scGPT zero-shot corroboration",
+      "claim": "scGPT embeddings independently separate controllers from matched negatives.",
+      "verdict": "NOT-EVALUABLE",
+      "metrics": {
+        "primary_gate": "STEP-0 (data) FAILED",
+        "all_metrics_missing": true
+      },
+      "scope": "Current machine state and the pre-specified expression-profile input contract.",
+      "prohibited_overclaim": "A scientific null, failed foundation model, or negative biological result.",
+      "evidence_path": "outputs/layers/scgpt_zeroshot/scgpt_separation_result.json",
+      "data_sha256": "1fc958c50128468afe0272c37edc79ca084c05cedef90bc37b2f6fe5c7f0fb5e"
+    }
+  ]
+}
