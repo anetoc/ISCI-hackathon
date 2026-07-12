@@ -271,6 +271,7 @@
 
   <script type="module">
     const CLAIM_MANIFEST = __CLAIM_MANIFEST__;
+    const TIMING_PLAN = __TIMING_PLAN__;
     const PRETEXT_SOURCE_B64 = "__PRETEXT_BASE64__";
     const expectedVerdicts = ["PASS", "FAIL", "NULL", "NOT-EVALUABLE"];
     const observedVerdicts = CLAIM_MANIFEST.claims.map((claim) => claim.verdict);
@@ -293,6 +294,7 @@
     const dots = [...progress.children];
     const params = new URLSearchParams(window.location.search);
     const staticMode = params.get("static") === "1";
+    const autoplay = params.get("autoplay") === "1";
     const requestedScene = Number.parseInt(params.get("scene") || "1", 10) - 1;
     document.body.classList.toggle("static-mode", staticMode);
     let current = 0;
@@ -338,6 +340,15 @@
       }
     });
     showScene(Number.isFinite(requestedScene) ? requestedScene : 0);
+    if (autoplay) {
+      startTime = Date.now();
+      timerHandle = window.setInterval(updateTimer, 250);
+      let elapsedSeconds = 0;
+      for (let index = 1; index < TIMING_PLAN.scenes.length; index += 1) {
+        elapsedSeconds += TIMING_PLAN.scenes[index - 1].duration_seconds;
+        window.setTimeout(() => showScene(index), elapsedSeconds * 1000);
+      }
+    }
 
     // Pretext is imported from an embedded Blob URL, keeping the demo fully offline.
     const pretextBytes = Uint8Array.from(atob(PRETEXT_SOURCE_B64), (char) => char.charCodeAt(0));

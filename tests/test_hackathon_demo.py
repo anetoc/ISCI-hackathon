@@ -3,7 +3,7 @@ import struct
 from html.parser import HTMLParser
 from pathlib import Path
 
-from scripts.build_hackathon_demo import DEFAULT_MANIFEST, DEFAULT_OUTPUT
+from scripts.build_hackathon_demo import DEFAULT_MANIFEST, DEFAULT_OUTPUT, DEFAULT_TIMING
 
 
 class SceneCounter(HTMLParser):
@@ -32,6 +32,7 @@ def test_demo_is_offline_and_contains_six_stage_states():
     assert ".failure-grid, .judge-grid, .experiment-grid { display: grid;" not in html
     assert 'params.get("static") === "1"' in html
     assert 'params.get("scene")' in html
+    assert 'params.get("autoplay") === "1"' in html
 
 
 def test_demo_embeds_the_frozen_verdict_contract_and_numbers():
@@ -60,3 +61,12 @@ def test_static_fallback_contains_six_full_hd_scenes():
         header = screenshot.read_bytes()[:24]
         assert header[:8] == b"\x89PNG\r\n\x1a\n"
         assert struct.unpack(">II", header[16:24]) == (1920, 1080)
+
+
+def test_autoplay_timing_is_exactly_two_minutes_thirty():
+    """HTML autoplay and video rendering must consume one shared timing contract."""
+
+    timing = json.loads(DEFAULT_TIMING.read_text())
+    assert len(timing["scenes"]) == 6
+    assert sum(scene["duration_seconds"] for scene in timing["scenes"]) == 150
+    assert timing["target_seconds"] == 150
