@@ -57,6 +57,10 @@ These are **pre-specified, not pre-registered** (criteria fixed in code before t
 history is the record). Reported for full transparency; numbers are locked in `result_lock.md` and
 `outputs/dashboard/cci_runs.json`.
 
+The table below uses the standardized matched C-vs-M metric so systems remain comparable. For
+Marson, it is distinct from the authoritative full-sample M→M+C result (+0.357
+[+0.117,+0.538]) and the leakage-free OOF estimate (+0.215 [+0.074,+0.560]).
+
 | System | Domain | Predicted before run | Result | Verdict |
 |---|---|---|---|---|
 | Marson CD4+ | immune (anchor) | property holds | ΔAUPRC +0.229 [0.072,0.405], LR<1e-4, ρ+0.02 | **PASS** |

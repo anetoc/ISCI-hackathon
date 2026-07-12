@@ -15,8 +15,9 @@ regulator whether or not it *controls* a state axis. In a genome-scale Perturb-s
 human CD4+ T cells, known regulators have ~100× more effect than non-regulators, so magnitude wins
 by construction. We define controllership *conditional on magnitude* — axis-specificity plus
 cross-donor coherence, each residualized against effect size — and show it is orthogonal to
-magnitude yet nearly doubles regulator recovery (AUPRC 0.722 vs 0.415; bootstrap gain +0.229, CI
-[0.072, 0.405]). It behaves as a falsifiable, immune-scoped property (PASS in immune, FAIL in
+magnitude. The authoritative M→M+C test gains +0.357 AUPRC (0.539→0.896; 95% CI
+[+0.117,+0.538]); a fully refit leakage-free OOF estimate remains +0.215
+([+0.074,+0.560], permutation p=0.010). The simpler ranking view is 0.415→0.722. It behaves as a falsifiable, immune-scoped property (PASS in immune, FAIL in
 non-immune systems), decomposes into ~2.5 engagement axes, and — tested honestly across studies —
 does **not** predict CAR-T response (a well-powered null; a CD8-fraction baseline beats every axis).
 Claude ran every computation and caught its own leakage and overclaims.
@@ -70,8 +71,9 @@ community a calibrated, non-overclaimed foundation to build on.
 ---
 
 ## Where we are honest about limits
-- Few positives (12–21); bootstrap-stabilized and cross-condition-replicated, but a fully
-  independent external positive set is future work.
+- Few positives (12–21); bootstrap-stabilized and cross-condition-replicated. A fully independent
+  external functional-regulator set was tested and failed, bounding the claim to canonical,
+  axis-defining regulators.
 - Cell-level confirmation of the 2.5-axis structure is **done** (single-cell replication on the
   455k-cell CAR-T atlas, CD8-controlled). Foundation-model triangulation (scGPT) remains scoped
   (brief in `briefs/`) but pending GPU execution.

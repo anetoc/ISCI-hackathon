@@ -74,8 +74,10 @@ Two guards against circularity (both mandatory):
 | Genes scored (detectable subset) | 1260 / 2520 |
 | Known-regulator positives | 19 |
 | Spearman(C, magnitude) | **+0.02** (orthogonal) |
-| AUPRC, magnitude-only → +C (detectable set) | 0.415 → **0.722** |
-| Bootstrap ΔAUPRC | +0.229, 95% CI [0.072, 0.405], P(>0)=0.996 |
+| Authoritative pre-specified M→M+C | 0.539→0.896; **+0.357**, 95% CI [+0.117,+0.538], P(>0)=1.000 |
+| Leakage-free OOF M→M+C | **+0.215**, 95% CI [+0.074,+0.560], permutation p=0.010 |
+| Descriptive ranking-quality AUPRC | magnitude 0.415; orthogonal score **0.722** |
+| Standardized matched C-vs-M aggregate | +0.229, 95% CI [0.072, 0.405], P(>0)=0.996 |
 | Conditional LR test (specificity; coherence) | p < 1e-4; p < 1e-4 |
 | Replication across culture conditions | Rest / Stim-8h / Stim-48h, all p < 1e-3 |
 | Robustness | survives leave-marker-out; independent structural positives p=0.013 |

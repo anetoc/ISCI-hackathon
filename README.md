@@ -7,7 +7,11 @@
 
 ## The result, in one sentence
 
-**Among perturbations with the same effect magnitude, known T-cell-state regulators produce effects that are more *state-specific* (concentrated on a functional axis) and more *reproducible across donors* — a signal orthogonal to effect size that nearly doubles regulator recovery (on the detectable set, AUPRC 0.415 → 0.722; bootstrap gain +0.229 [95% CI 0.072–0.405], P>0 = 99.6%).**
+**Among perturbations with the same effect magnitude, known T-cell-state regulators produce effects that are more *state-specific* and more *reproducible across donors*: the authoritative pre-specified M→M+C test gains +0.357 AUPRC (0.539→0.896; 95% CI +0.117 to +0.538), and the fully refit leakage-free OOF estimate remains positive at +0.215 (95% CI +0.074 to +0.560; permutation p=0.010).**
+
+The simpler ranking-quality view is AUPRC 0.415→0.722. The matched-negative three-condition
+`C`-versus-`M` aggregate is +0.229 [0.072, 0.405]. These are different estimands, not interchangeable
+versions of one number; the hierarchy is frozen in `reports/result_lock.md`.
 
 ![Central result](outputs/fig_central.png)
 
@@ -116,10 +120,12 @@ uv sync   # Python 3.11+, or: pip install -e .
 make reproduce-core   # runs the validated CCI test across the dataset registry + builds the dashboard
 ```
 
-This runs `isci/run_cci.py` over `config/datasets.yaml`: the Marson anchor is recomputed from the
-committed ranking + the locked `isci-controllership` skill helpers with **expression-matched
-negatives** (point estimate +0.248 reproduces the locked +0.229), and the other systems aggregate
-from their committed reports into `outputs/dashboard/`. The legacy five-component modules
+This runs `isci/run_cci.py` over `config/datasets.yaml`: the Marson smoke path is recomputed from
+the committed ranking + the locked `isci-controllership` skill helpers with **expression-matched
+negatives** (single-condition diagnostic +0.248), while other systems aggregate committed heavy-run
+reports into `outputs/dashboard/`. The dashboard uses the standardized matched `C`-versus-`M`
+metric (+0.229 for Marson) for cross-system comparison; it does not replace the authoritative
+full-sample M→M+C result (+0.357) or leakage-free OOF estimate (+0.215). The legacy five-component modules
 (`isci/stability|insilico|network`) are **deprecated** — they lost to magnitude and were abandoned;
 the driver, not those stubs, is the reproduction path. Every output carries a provenance stamp
 (data SHA-256, conda env, git-SHA, seed) via `isci.repro`.
@@ -205,7 +211,7 @@ full whitepaper: [reports/property_whitepaper.md](reports/property_whitepaper.md
 
 ![Cross-dataset invariance](figures/cci_invariance_crossdataset.png)
 
-| System | Cell type | Modality | ΔAUPRC (M→M+C) | 95% CI | Verdict |
+| System | Cell type | Modality | Standardized matched C-vs-M ΔAUPRC | 95% CI | Verdict |
 |---|---|---|---|---|---|
 | **Marson** | CD4+ T (immune) | CRISPR KD/KO | **+0.229** | [0.072, 0.405] | **PASS** |
 | Schmidt | CD4+ T (immune) | CRISPRa | +0.138 | [−0.029, 0.434] | near-miss (n_pos=10) |

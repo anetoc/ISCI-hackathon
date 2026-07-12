@@ -3,7 +3,11 @@
 self-contained HTML dashboard. Re-run after any new dataset finishes:
     python isci/build_dashboard.py
 """
-import json, glob, os, datetime, html
+import datetime
+import glob
+import html
+import json
+import os
 
 VCOLOR = {"PASS": "#2e7d32", "NEAR-MISS": "#f9a825", "FAIL": "#c62828",
           "QUEUED": "#9e9e9e", None: "#9e9e9e"}
@@ -66,10 +70,11 @@ def build():
             "<div class=sub>Generated " + str(datetime.date.today()) + " &middot; " + str(len(runs))
             + " datasets &middot; " + str(npass) + " PASS &middot; immune-scoped property</div>"
             "<div class=key>Each row = one dataset through the identical magnitude-conditional CCI test. "
-            "&Delta;AUPRC = regulator-recovery gain of the orthogonal signal over the effect-magnitude "
-            "baseline; bar shows &Delta;AUPRC (dot) with 95% bootstrap CI (line), dashed = 0 (no gain). "
+            "&Delta;AUPRC = standardized matched C-vs-M regulator-recovery gain for cross-system "
+            "comparison; it is not the primary Marson M&rarr;M+C estimand. The bar shows &Delta;AUPRC "
+            "(dot) with 95% bootstrap CI (line), dashed = 0 (no gain). "
             "<b>Prediction:</b> immune state-transition systems PASS, cell-autonomous systems FAIL.</div></div>"
-            "<table><tr><th>Dataset</th><th>System</th><th>&Delta;AUPRC</th><th>95% CI</th><th>LR p</th>"
+            "<table><tr><th>Dataset</th><th>System</th><th>matched C-vs-M &Delta;AUPRC</th><th>95% CI</th><th>LR p</th>"
             "<th>gain vs magnitude</th><th>verdict</th></tr>")
     doc = (head + rows + "</table><p class=sub>Add a dataset: edit config/datasets.yaml, "
            "run isci/run_cci.py, rebuild this page.</p>")

@@ -26,7 +26,7 @@ now — pre-registered, not faked.
 
 ## PHASE 0 — Lock the project law  **[DONE]**
 The claim taxonomy is frozen so no later phase can drift the story:
-- **Primary claim:** CCI / `ISCI_orthogonal` — magnitude-conditional, immune-scoped, reproducible (AUPRC 0.722 vs 0.415; ΔAUPRC +0.229 [0.072, 0.405]; Spearman vs magnitude +0.02; 3 conditions).
+- **Primary claim:** CCI / `ISCI_orthogonal` — magnitude-conditional and bounded to canonical axis-defining regulators. Authoritative M→M+C +0.357 [+0.117,+0.538]; leakage-free OOF +0.215 [+0.074,+0.560], permutation p=0.010; descriptive AUPRC 0.415→0.722; matched cross-system aggregate +0.229 [0.072,0.405]; Spearman vs magnitude +0.02; 3 conditions.
 - **Secondary claims:** T-REMAP, IEC, targetability, phospho, spatial, clinical bridge.
 - **Hypotheses (never targets):** IKBKB, ZC3H12A, RCOR1, KDM1A, CXXC1, MED13, IRF2BP1, PDCD10…
 - **Not claims:** "predicts CAR-T response", "these are therapeutic targets", "TSC predicts killing", "network/PageRank is essential".
