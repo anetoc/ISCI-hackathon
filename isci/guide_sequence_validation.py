@@ -166,7 +166,7 @@ def _leading_g_shadows(sequence_counts: dict[str, int]) -> set[str]:
     return shadows
 
 
-def _basic_sequence_flags(sequence: str) -> str:
+def basic_sequence_flags(sequence: str) -> str:
     """Report simple synthesis flags without substituting for on/off-target validation."""
 
     flags = []
@@ -268,7 +268,7 @@ def resolve_guide_sequences(
                 "protospacer_20nt": sequence,
                 "sequence_length": len(sequence),
                 "gc_fraction": gc_fraction,
-                "basic_sequence_flags": _basic_sequence_flags(sequence) if sequence else "NOT_EVALUABLE",
+                "basic_sequence_flags": basic_sequence_flags(sequence) if sequence else "NOT_EVALUABLE",
                 "exact_candidate_reads": exact_reads,
                 "support_wells": wells,
                 "runner_up_reads": runner_count,
@@ -284,3 +284,100 @@ def resolve_guide_sequences(
             }
         )
     return pd.concat([result.reset_index(drop=True), pd.DataFrame(resolutions)], axis=1)
+
+
+def build_replacement_shortlist(
+    resolved_panel: pd.DataFrame,
+    candidates: pd.DataFrame,
+    *,
+    candidates_per_target: int = 3,
+) -> pd.DataFrame:
+    """Rank same-target technical backups for targets with a current guide in review."""
+
+    required_panel = {
+        "guide_id",
+        "target",
+        "role",
+        "protospacer_20nt",
+        "basic_sequence_flags",
+        "source_identity_status",
+    }
+    required_candidates = {
+        "target",
+        "sequence",
+        "screen",
+        "screen_rank",
+        "screen_max_lfc",
+    }
+    if missing := required_panel - set(resolved_panel.columns):
+        raise ValueError(f"resolved panel missing columns: {sorted(missing)}")
+    if missing := required_candidates - set(candidates.columns):
+        raise ValueError(f"candidate table missing columns: {sorted(missing)}")
+    if candidates_per_target < 1:
+        raise ValueError("candidates per target must be positive")
+
+    panel = resolved_panel.copy()
+    panel["needs_review"] = panel["source_identity_status"].ne(
+        "SOURCE_IDENTITY_CONFIRMED"
+    ) | panel["basic_sequence_flags"].ne("NONE")
+    review_targets = panel.loc[panel["needs_review"], "target"].drop_duplicates()
+    rows: list[dict[str, object]] = []
+    for target in review_targets:
+        current = panel[panel["target"] == target]
+        triggers = current[current["needs_review"]]
+        used_sequences = set(current["protospacer_20nt"].astype(str))
+        source = candidates[
+            (candidates["target"] == target)
+            & ~candidates["sequence"].astype(str).isin(used_sequences)
+        ].copy()
+        if source.empty:
+            continue
+        source = (
+            source.groupby(["target", "sequence"], observed=True, as_index=False)
+            .agg(
+                best_source_screen_rank=("screen_rank", "min"),
+                max_source_screen_lfc=("screen_max_lfc", "max"),
+                source_screens=("screen", lambda values: "|".join(sorted(set(values)))),
+            )
+        )
+        source["basic_sequence_flags"] = source["sequence"].map(basic_sequence_flags)
+        source["has_basic_flag"] = source["basic_sequence_flags"].ne("NONE")
+        source = source.sort_values(
+            [
+                "has_basic_flag",
+                "best_source_screen_rank",
+                "max_source_screen_lfc",
+                "sequence",
+            ],
+            ascending=[True, True, False, True],
+            kind="mergesort",
+        ).head(candidates_per_target)
+        priority = (
+            "HIGH_ALL_CURRENT_GUIDES_REVIEW"
+            if len(triggers) == len(current)
+            else "BACKUP_ONLY"
+        )
+        trigger_reasons = []
+        for guide in triggers.itertuples(index=False):
+            reasons = [str(guide.source_identity_status)]
+            if guide.basic_sequence_flags != "NONE":
+                reasons.append(str(guide.basic_sequence_flags))
+            trigger_reasons.append(f"{guide.guide_id}:{'+'.join(reasons)}")
+        for fallback_rank, candidate in enumerate(source.itertuples(index=False), start=1):
+            rows.append(
+                {
+                    "target": target,
+                    "role": "|".join(sorted(set(current["role"].astype(str)))),
+                    "trigger_guide_ids": "|".join(triggers["guide_id"].astype(str)),
+                    "trigger_reasons": "|".join(trigger_reasons),
+                    "replacement_priority": priority,
+                    "fallback_rank": fallback_rank,
+                    "fallback_sequence": candidate.sequence,
+                    "basic_sequence_flags": candidate.basic_sequence_flags,
+                    "best_source_screen_rank": int(candidate.best_source_screen_rank),
+                    "max_source_screen_lfc": float(candidate.max_source_screen_lfc),
+                    "source_screens": candidate.source_screens,
+                    "fallback_status": "REQUIRES_ON_OFF_TARGET_AND_VECTOR_QC",
+                }
+            )
+    return pd.DataFrame(rows)

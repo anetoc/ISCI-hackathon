@@ -3,6 +3,7 @@ from pathlib import Path
 import pandas as pd
 
 from isci.guide_sequence_validation import (
+    build_replacement_shortlist,
     build_calabrese_candidates,
     extract_guide_sequence_evidence,
     normalize_direct_capture_barcode,
@@ -102,3 +103,44 @@ def test_resolution_removes_u6_leading_g_shadow_and_preserves_synthesis_gate():
     assert fosl1["synthesis_status"] == "BLOCKED_PENDING_ON_OFF_TARGET_AND_VECTOR_QC"
     assert papolg["source_identity_status"] == "SOURCE_IDENTITY_LOW_SUPPORT"
     assert papolg["synthesis_status"] == "BLOCKED_LOW_SOURCE_SUPPORT"
+
+
+def test_replacement_shortlist_prefers_clean_same_target_candidates():
+    resolved = pd.DataFrame(
+        {
+            "guide_id": ["G1-1", "G1-2", "G2-1", "G2-2"],
+            "target": ["G1", "G1", "G2", "G2"],
+            "role": ["PRIMARY_POSITIVE"] * 4,
+            "protospacer_20nt": [
+                "GGGGGAAAAAAAAAAAAAAA",
+                "TTTTACGTACGTACGTACGT",
+                "ACGTACGTACGTACGTACGT",
+                "TGCATGCATGCATGCATGCA",
+            ],
+            "basic_sequence_flags": ["HOMOPOLYMER_5", "POLY_T4", "NONE", "NONE"],
+            "source_identity_status": ["SOURCE_IDENTITY_CONFIRMED"] * 4,
+        }
+    )
+    candidates = pd.DataFrame(
+        {
+            "target": ["G1", "G1", "G1", "G2"],
+            "sequence": [
+                "CCCCCAAAAAAAAAAAAAAA",
+                "ACACACACACACACACACAC",
+                "CACACACACACACACACACA",
+                "GAGAGAGAGAGAGAGAGAGA",
+            ],
+            "screen": ["IL2", "IL2", "IFNG", "IL2"],
+            "screen_rank": [1, 2, 3, 1],
+            "screen_max_lfc": [3.0, 2.0, 1.0, 5.0],
+        }
+    )
+    shortlist = build_replacement_shortlist(resolved, candidates, candidates_per_target=2)
+    assert shortlist["target"].unique().tolist() == ["G1"]
+    assert shortlist["fallback_sequence"].tolist() == [
+        "ACACACACACACACACACAC",
+        "CACACACACACACACACACA",
+    ]
+    assert shortlist["replacement_priority"].eq(
+        "HIGH_ALL_CURRENT_GUIDES_REVIEW"
+    ).all()
