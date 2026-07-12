@@ -9,21 +9,24 @@ by the current runner. It is not the bring-your-own-data contract.
 
 The machine-readable contract is `contracts/dataset_spec.schema.json`; the Python boundary is
 `isci.dataset_spec`. CSV and Parquet inputs are physically inspected by
-`isci.adapters.load_tabular_dataset`.
+`isci.adapters.load_tabular_dataset`. Cell-level H5AD metadata are inspected by
+`isci.adapters.preflight_anndata_cells`.
 
 ## Supported inputs in v1
 
-DatasetSpec v1 supports perturbation-level evidence, not raw cell-by-gene count matrices.
+DatasetSpec v1 supports perturbation-level evidence and a metadata-only preflight for cell-level
+H5AD. Cell-level expression is not converted to effects yet.
 
 | `input.layout` | Physical format | Required mapping | Intended use |
 |---|---|---|---|
+| `anndata_cells` | H5AD | `perturbation`, `guide`, `guide_count`, `replicate`; explicit `preprocessing` | Backed metadata preflight before pseudobulk construction |
 | `anndata_effects` | H5AD | `perturbation`; `input.layers.effect`; `input.layers.standardized_effect` | Perturbation-by-feature effect matrices |
 | `long_effects` | CSV or Parquet | `perturbation`, `feature`, `effect`, `standardized_effect` | Portable long-form perturbation effects |
 | `controller_features` | CSV or Parquet | `perturbation`, `magnitude`, `specificity`, `reproducibility` | Compute-light analysis from precomputed controller features |
 
-Raw single-cell counts require dataset-specific pseudobulk, differential-expression and QC choices.
-They are deliberately outside v1 until a validated preprocessor exists; accepting them now would
-make the interface look more general than the scientific implementation.
+`anndata_cells` does not make raw expression directly runnable. It validates controls, replication,
+guide multiplicity and cell support without reading `X`; a later effect-construction command must
+still produce `anndata_effects`.
 
 ## Capability is conservative
 
@@ -33,6 +36,8 @@ The validator reports the strongest analysis tier declared by the spec:
   declared. This is not yet a confirmatory biological verdict.
 - `BENCHMARK_DECLARED`: a leakage-controlled benchmark is declared, but full reproducibility
   metadata is absent.
+- `PREPROCESSING_DECLARED`: a cell-level preprocessing contract is complete enough for physical
+  metadata preflight; no effect matrix exists yet.
 - `DIAGNOSTIC_ONLY`: effects can be analysed, but no independent positive benchmark is declared.
 - `NOT_EVALUABLE`: the contract is invalid. No data should be opened and no biological verdict
   should be issued.
@@ -83,6 +88,8 @@ After `uv sync`, the same boundary is available without writing Python:
 
 ```bash
 isci validate examples/dataset_spec/mini_long_effects.yaml
+isci validate examples/dataset_spec/scperturb_cell_h5ad.yaml --structure-only
+isci preflight-cells cell_dataset.yaml --report outputs/my_dataset/preflight.json
 isci validate queued_dataset.yaml --structure-only
 isci inspect examples/dataset_spec/mini_long_effects.yaml
 isci inspect dataset.yaml \
@@ -132,6 +139,11 @@ AnnData object. Cell-level inputs require the separately specified preprocessing
 [`cell_level_h5ad_preprocessing.md`](cell_level_h5ad_preprocessing.md); the runner never interprets
 raw expression `X` as a perturbation effect.
 
+For `anndata_cells`, `isci inspect` returns `USE_PREFLIGHT_CELLS` and `isci run` returns
+`CELL_PREPROCESSING_REQUIRED`. `isci preflight-cells` is the only accepted first operation. Exit
+code `0` means at least one perturbation-condition is ready for diagnostic effect construction;
+the report separately identifies whether donor-resolved coverage is sufficient.
+
 It writes:
 
 ```text
@@ -177,6 +189,7 @@ ISCI biological `PASS`.
 
 ## What comes next
 
-The remaining portability gate is a smoke run on an independent public H5AD that was not used to
-develop the adapter, followed by updating the researcher notebook to demonstrate the same public
-`isci run` interface. This is external validation, not a change to the frozen ISCI method.
+Implement `isci build-effects` for specs that pass `preflight-cells`. It must pseudobulk within the
+declared strata, compare against matched controls, write `effect` and `standardized_effect` layers,
+and emit a generated `anndata_effects` DatasetSpec. The frozen ISCI runner remains downstream and
+unchanged.

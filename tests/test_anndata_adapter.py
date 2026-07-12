@@ -21,7 +21,7 @@ from isci.dataset_spec import (
     DatasetInput,
     load_dataset_spec,
 )
-from isci.cli import EXIT_SUCCESS, main
+from isci.cli import EXIT_INVALID_SPEC, EXIT_SUCCESS, main
 from isci.analysis_runner import run_dataset
 
 ad = pytest.importorskip("anndata")
@@ -109,7 +109,7 @@ def _cell_obs(*, cells_per_stratum=10, include_donor=True):
                     "condition": "stim",
                     "replicate_id": f"R{donor_index}",
                     "guide_id": f"{perturbation}_g1",
-                    "nperts": 1,
+                    "nperts": 0 if perturbation == "NT" else 1,
                     "target_baseMean": 5.0,
                     "n_guides": 1,
                     "n_cells_target": cells_per_stratum,
@@ -414,3 +414,63 @@ def test_h5ad_run_streams_features_into_the_same_auditable_ranking(tmp_path):
     assert result.report["feature_extraction"]["methods"]["peak_summary_buffer_rows"] == 8
     assert (output / "controller_features.csv").is_file()
     assert (output / "analysis_report.json").is_file()
+
+
+def test_cli_preflight_cells_writes_structured_metadata_report(tmp_path, capsys):
+    observations = _cell_obs()
+    _write_h5ad(tmp_path, observations, positives=())
+    (tmp_path / "axes.yaml").write_text((ROOT / "config" / "axes.yaml").read_text())
+    raw = yaml.safe_load(EXAMPLE.read_text())
+    raw["input"] = {
+        "path": "effects.h5ad",
+        "format": "h5ad",
+        "layout": "anndata_cells",
+    }
+    raw["mapping"] = {
+        "perturbation": "target",
+        "condition": "condition",
+        "donor": "donor_id",
+        "replicate": "replicate_id",
+        "guide": "guide_id",
+        "guide_count": "nperts",
+    }
+    raw["preprocessing"] = {
+        "source": {"location": "X", "kind": "raw_counts"},
+        "control": {"column": "target", "labels": ["NT"]},
+        "normalization": "log1p_cpm",
+        "contrast": "pseudobulk_difference",
+        "standardization": "gene_wise_zscore_within_condition",
+        "min_cells_per_stratum": 10,
+        "min_replicates": 2,
+        "multi_guide_policy": "exclude",
+    }
+    raw["analysis"]["axes_path"] = "axes.yaml"
+    raw.pop("benchmark")
+    spec_path = tmp_path / "cells.yaml"
+    spec_path.write_text(yaml.safe_dump(raw, sort_keys=False))
+    report_path = tmp_path / "preflight.json"
+
+    exit_code = main(
+        [
+            "preflight-cells",
+            str(spec_path),
+            "--repo-root",
+            str(tmp_path),
+            "--report",
+            str(report_path),
+        ]
+    )
+    payload = json.loads(capsys.readouterr().out)
+
+    assert exit_code == EXIT_SUCCESS
+    assert payload["preflight"]["status"] == "READY_FOR_EFFECT_CONSTRUCTION"
+    assert payload["preflight"]["biological_verdict"] == "NOT_ISSUED"
+    assert payload["preflight"]["provenance"]["spec_sha256"]
+    assert payload["preflight"]["provenance"]["axes_sha256"]
+    assert "/Users/" not in json.dumps(payload)
+    assert json.loads(report_path.read_text()) == payload
+
+    inspect_exit = main(["inspect", str(spec_path), "--repo-root", str(tmp_path)])
+    inspect_payload = json.loads(capsys.readouterr().out)
+    assert inspect_exit == EXIT_INVALID_SPEC
+    assert inspect_payload["error"]["code"] == "USE_PREFLIGHT_CELLS"

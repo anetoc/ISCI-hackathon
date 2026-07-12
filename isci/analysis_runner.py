@@ -445,6 +445,22 @@ def run_dataset(
         return run_controller_features(spec, repo_root=repo_root, output_dir=output_dir)
 
     root = Path(repo_root).resolve()
+    if spec.input.layout == "anndata_cells":
+        report = _base_report(spec, {}, root)
+        report.update(
+            {
+                "status": "CELL_PREPROCESSING_REQUIRED",
+                "reason": "run 'isci preflight-cells' before constructing an effect matrix",
+            }
+        )
+        return DatasetRunResult(
+            spec.dataset.id,
+            "CELL_PREPROCESSING_REQUIRED",
+            "NOT_ISSUED",
+            pd.DataFrame(),
+            pd.DataFrame(),
+            report,
+        )
     axes_config = load_axes_config(root / spec.analysis.axes_path)
     if spec.input.layout == "anndata_effects":
         adapter = inspect_anndata_dataset(

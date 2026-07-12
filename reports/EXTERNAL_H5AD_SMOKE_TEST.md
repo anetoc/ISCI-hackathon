@@ -38,9 +38,26 @@ cell abundance, baseline expression, library size, and perturbation response.
 This protein-only THP-1 dataset is not an external validation of CD4+ T-cell controllership. It is
 an interface smoke test that exposed the next portability contract.
 
-## Required next adapter
+## Metadata preflight result
 
-Implement `anndata_cells` only after the preprocessing contract in
-[`docs/cell_level_h5ad_preprocessing.md`](../docs/cell_level_h5ad_preprocessing.md) is approved.
-The adapter must emit an ordinary `anndata_effects` artifact and provenance report, so the frozen
-feature extraction and conditional ranking code remain unchanged.
+After implementing `isci preflight-cells`, the unchanged public file was evaluated with the
+declared control label `control`, replicate column `hto`, guide column `guide_id`, and guide-count
+column `nperts`:
+
+- input SHA-256: `e1e293c75dfebe09301bf32093703cfd5f50c17d6fb53144d8213e52e0e4e150`;
+- 20,729 eligible cells and 2,386 observed control cells;
+- 98 non-control perturbations across 5 replicate labels;
+- 216 perturbation/control strata passed the 25-cell threshold;
+- 120 strata were explicitly underpowered;
+- 72 perturbation units passed the two-replicate threshold;
+- 0 donor-resolved units because donor identity is absent.
+
+Final preflight status: **`DIAGNOSTIC_ONLY` with `can_construct_effects=true`**. Matrix values were
+not scanned and the biological verdict remained `NOT_ISSUED`.
+
+## Implemented boundary and required next adapter
+
+The metadata-only `anndata_cells` preflight is now implemented under the preprocessing contract in
+[`docs/cell_level_h5ad_preprocessing.md`](../docs/cell_level_h5ad_preprocessing.md). It does not read
+`X` or create effects. The remaining adapter must emit an ordinary `anndata_effects` artifact and
+provenance report, so the frozen feature extraction and conditional ranking code remain unchanged.

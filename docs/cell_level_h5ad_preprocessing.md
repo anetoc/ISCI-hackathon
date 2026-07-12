@@ -10,7 +10,7 @@ frozen ISCI feature definitions, ranking kernel, axes, or verdict policy.
 
 An `anndata_cells` specification must declare:
 
-1. the perturbation, guide, condition, donor or replicate, and sample columns in `obs`;
+1. the perturbation, guide, guide-count, replicate, and optional condition/donor columns in `obs`;
 2. the control rule, including accepted labels and whether controls are shared or stratum-specific;
 3. the source signal (`X` or a named layer) and whether it contains raw counts or normalized values;
 4. minimum cells per perturbation-control stratum and minimum independent replicate units;
@@ -61,8 +61,12 @@ Return `NOT_EVALUABLE` instead of producing effects when:
 - the source signal or normalization state is unknown;
 - the standardization universe would be learned using benchmark labels.
 
-## First implementation slice
+## Implemented preflight
 
-Build metadata-only `isci preflight-cells dataset.yaml`. It should inspect `obs`, `var`, `X/layers`
-and report whether the preprocessing contract is complete without loading the full matrix. Only
-after that gate passes should pseudobulk effect construction be implemented.
+`isci preflight-cells dataset.yaml` now inspects `obs`, `var`, `X/layers` in backed mode without
+reading matrix values. It audits missing metadata and multi-guide exclusions, matches perturbation
+and control cell support within declared strata, counts replicate- and donor-resolved ready units,
+and emits `READY_FOR_EFFECT_CONSTRUCTION`, `DIAGNOSTIC_ONLY`, or `NOT_EVALUABLE`.
+
+The next implementation slice is pseudobulk effect construction. It must consume only specs whose
+preflight report has `can_construct_effects=true`.

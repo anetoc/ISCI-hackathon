@@ -167,6 +167,20 @@ def test_non_feature_layout_requests_extraction_without_fake_results():
     assert result.condition_metrics.empty
 
 
+def test_cell_level_layout_requires_preflight_before_run():
+    spec = replace(
+        BASE_SPEC,
+        input=replace(BASE_SPEC.input, layout="anndata_cells", format="h5ad"),
+        benchmark=None,
+    )
+
+    result = run_dataset(spec, repo_root=ROOT)
+
+    assert result.status == "CELL_PREPROCESSING_REQUIRED"
+    assert result.biological_verdict == "NOT_ISSUED"
+    assert result.ranking.empty
+
+
 def test_underpowered_feature_table_produces_ranking_but_no_benchmark_claim(tmp_path):
     spec = _controller_spec(tmp_path, n_positives=2, n_negatives=4)
     result = run_controller_features(spec, repo_root=tmp_path)

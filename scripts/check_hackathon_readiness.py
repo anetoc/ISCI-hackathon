@@ -53,6 +53,8 @@ PYPROJECT = ROOT / "pyproject.toml"
 DATASET_SPEC_SCHEMA = ROOT / "contracts" / "dataset_spec.schema.json"
 DATASET_SPEC_DOC = ROOT / "docs" / "dataset_spec.md"
 DATASET_SPEC_EXAMPLE = ROOT / "examples" / "dataset_spec" / "mini_long_effects.yaml"
+CELL_SPEC_EXAMPLE = ROOT / "examples" / "dataset_spec" / "scperturb_cell_h5ad.yaml"
+CELL_PREFLIGHT_SMOKE = ROOT / "outputs" / "hackathon" / "cell_preflight_smoke.json"
 DATASET_SPEC_FIXTURE = ROOT / "examples" / "dataset_spec" / "mini_long_effects.csv"
 DATASET_SPEC_POSITIVES = ROOT / "examples" / "dataset_spec" / "mini_positives.txt"
 PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
@@ -87,6 +89,8 @@ def main() -> None:
     dataset_spec_report = validate_dataset_spec(
         yaml.safe_load(DATASET_SPEC_EXAMPLE.read_text()), repo_root=ROOT, check_paths=True
     )
+    cell_spec_report = validate_dataset_spec(yaml.safe_load(CELL_SPEC_EXAMPLE.read_text()))
+    cell_preflight_smoke = json.loads(CELL_PREFLIGHT_SMOKE.read_text())["preflight"]
     dataset_adapter = load_tabular_dataset(dataset_spec, repo_root=ROOT)
     demo_html = DEMO.read_text()
     readme = (ROOT / "README.md").read_text()
@@ -158,7 +162,12 @@ def main() -> None:
         and '"anndata>=0.10"' in pyproject,
         "cell_level_preflight_present": 'backed="r"' in cell_preflight_source
         and "CellPreflightStatus" in cell_preflight_source
-        and "SIGNAL_VALUES_NOT_SCANNED" in cell_preflight_source,
+        and "SIGNAL_VALUES_NOT_SCANNED" in cell_preflight_source
+        and '"preflight-cells"' in dataset_cli_source
+        and cell_spec_report.capability == DatasetCapability.PREPROCESSING_DECLARED
+        and cell_preflight_smoke["status"] == "DIAGNOSTIC_ONLY"
+        and cell_preflight_smoke["can_construct_effects"] is True
+        and cell_preflight_smoke["biological_verdict"] == "NOT_ISSUED",
         "dataset_runner_bounded": "run_controller_features" in dataset_runner_source
         and '"biological_verdict": "NOT_ISSUED"' in dataset_runner_source
         and '"run"' in dataset_cli_source,
@@ -205,6 +214,8 @@ def main() -> None:
         PYPROJECT,
         DATASET_SPEC_SCHEMA,
         DATASET_SPEC_EXAMPLE,
+        CELL_SPEC_EXAMPLE,
+        CELL_PREFLIGHT_SMOKE,
         DATASET_SPEC_FIXTURE,
         DATASET_SPEC_POSITIVES,
         *public_surfaces,
@@ -222,6 +233,11 @@ def main() -> None:
             "dataset_spec_schema_sha256": sha256(DATASET_SPEC_SCHEMA),
             "dataset_spec_example_capability": dataset_spec_report.capability.value,
             "dataset_spec_example_runtime": dataset_adapter.inspection.runtime_capability.value,
+            "cell_spec_example_capability": cell_spec_report.capability.value,
+            "cell_preflight_smoke_status": cell_preflight_smoke["status"],
+            "cell_preflight_smoke_ready_units": cell_preflight_smoke[
+                "perturbation_conditions_ready"
+            ],
             "locked_kernel_sha256": sha256(LOCKED_KERNEL),
             "researcher_notebook_sha256": sha256(RESEARCHER_NOTEBOOK),
             "researcher_notebook_code_cells": len(notebook_code_cells),

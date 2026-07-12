@@ -3,13 +3,21 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import subprocess
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Sequence
 
 import yaml
 
-from isci.adapters import RuntimeCapability, inspect_anndata_dataset, load_tabular_dataset
+from isci.adapters import (
+    RuntimeCapability,
+    inspect_anndata_dataset,
+    load_tabular_dataset,
+    preflight_anndata_cells,
+)
 from isci.analysis_runner import run_dataset
 from isci.dataset_spec import DatasetSpecError, load_dataset_spec, validate_dataset_spec
 
@@ -48,6 +56,32 @@ def _config_error(command: str, code: str, message: str) -> dict[str, Any]:
         "command": command,
         "ok": False,
         "error": {"code": code, "message": message},
+    }
+
+
+def _preflight_provenance(spec_path: Path, spec, root: Path) -> dict[str, Any]:
+    try:
+        git_sha = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=root,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
+    except (OSError, subprocess.CalledProcessError):
+        git_sha = None
+    try:
+        spec_label = str(spec_path.resolve().relative_to(root))
+    except ValueError:
+        spec_label = spec_path.name
+    axes_path = root / spec.analysis.axes_path
+    return {
+        "git_sha": git_sha,
+        "spec_sha256": hashlib.sha256(spec_path.read_bytes()).hexdigest(),
+        "axes_sha256": hashlib.sha256(axes_path.read_bytes()).hexdigest()
+        if axes_path.is_file()
+        else None,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "command": f"isci preflight-cells {spec_label}",
     }
 
 
@@ -113,6 +147,14 @@ def _inspect(args: argparse.Namespace) -> int:
         _print_json(payload)
         return EXIT_INVALID_SPEC
 
+    if spec.input.layout == "anndata_cells":
+        payload = _config_error(
+            "inspect",
+            "USE_PREFLIGHT_CELLS",
+            "cell-level H5AD requires 'isci preflight-cells' before effect construction",
+        )
+        _print_json(payload)
+        return EXIT_INVALID_SPEC
     if spec.input.layout == "anndata_effects":
         result = inspect_anndata_dataset(
             spec,
@@ -172,6 +214,47 @@ def _inspect(args: argparse.Namespace) -> int:
     if result.inspection.runtime_capability == RuntimeCapability.NOT_EVALUABLE:
         return EXIT_NOT_EVALUABLE
     return EXIT_SUCCESS
+
+
+def _preflight_cells(args: argparse.Namespace) -> int:
+    spec_path = Path(args.spec)
+    root = _repo_root(spec_path, args.repo_root)
+    try:
+        spec = load_dataset_spec(spec_path, repo_root=root, check_paths=True)
+    except FileNotFoundError:
+        _print_json(
+            _config_error("preflight-cells", "SPEC_NOT_FOUND", "DatasetSpec file does not exist")
+        )
+        return EXIT_INVALID_SPEC
+    except yaml.YAMLError as exc:
+        _print_json(_config_error("preflight-cells", "INVALID_YAML", type(exc).__name__))
+        return EXIT_INVALID_SPEC
+    except DatasetSpecError as exc:
+        payload = {
+            "command": "preflight-cells",
+            "ok": False,
+            "error": {"code": "INVALID_SPEC", "message": "DatasetSpec validation failed"},
+            "report": exc.report.to_dict(),
+        }
+        _print_json(payload)
+        return EXIT_INVALID_SPEC
+
+    result = preflight_anndata_cells(spec, repo_root=root)
+    preflight = result.to_dict()
+    preflight["provenance"] = _preflight_provenance(spec_path, spec, root)
+    payload = {
+        "command": "preflight-cells",
+        "ok": result.can_construct_effects,
+        "preflight": preflight,
+    }
+    try:
+        if args.report:
+            _write_json(args.report, payload)
+    except OSError as exc:
+        _print_json(_config_error("preflight-cells", "OUTPUT_WRITE_ERROR", type(exc).__name__))
+        return EXIT_INVALID_SPEC
+    _print_json(payload)
+    return EXIT_SUCCESS if result.can_construct_effects else EXIT_NOT_EVALUABLE
 
 
 def _run(args: argparse.Namespace) -> int:
@@ -259,6 +342,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="H5AD observation rows per scan block (default: 64)",
     )
     inspect_parser.set_defaults(handler=_inspect)
+
+    preflight_parser = subparsers.add_parser(
+        "preflight-cells",
+        help="inspect cell-level H5AD metadata before constructing perturbation effects",
+    )
+    preflight_parser.add_argument("spec", help="path to an anndata_cells DatasetSpec YAML")
+    preflight_parser.add_argument(
+        "--repo-root", help="repository root for resolving contract-relative paths"
+    )
+    preflight_parser.add_argument("--report", help="optional JSON preflight report output")
+    preflight_parser.set_defaults(handler=_preflight_cells)
 
     run_parser = subparsers.add_parser(
         "run", help="extract and rank a dataset with the frozen conditional method"

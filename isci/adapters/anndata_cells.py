@@ -237,17 +237,21 @@ def preflight_anndata_cells(
 
         raw = adata.obs.loc[:, source_columns].copy()
         control_values = raw[control_column].astype(str)
+        declared_control = control_values.isin(spec.preprocessing.control["labels"])
         cells = raw.loc[:, list(spec.mapping.values())].rename(
             columns={source_name: logical for logical, source_name in spec.mapping.items()}
         )
-        identity = ["perturbation", "guide", "guide_count", "replicate"]
+        identity = ["perturbation", "replicate"]
         identity.extend(column for column in ("condition", "donor") if column in cells)
         metadata_valid = pd.Series(True, index=cells.index)
         for column in identity:
             metadata_valid &= cells[column].notna() & cells[column].astype(str).str.strip().ne("")
         guide_count = pd.to_numeric(cells["guide_count"], errors="coerce")
-        multi_guide = guide_count.notna() & guide_count.ne(1)
-        valid = metadata_valid & guide_count.eq(1)
+        guide_present = cells["guide"].notna() & cells["guide"].astype(str).str.strip().ne("")
+        multi_guide = guide_count.notna() & guide_count.gt(1)
+        valid_control = declared_control & guide_count.isin([0, 1])
+        valid_effect = ~declared_control & guide_present & guide_count.eq(1)
+        valid = metadata_valid & (valid_control | valid_effect)
         excluded = int((~valid).sum())
         if excluded:
             issues.append(
@@ -258,7 +262,7 @@ def preflight_anndata_cells(
                 )
             )
         cells = cells.loc[valid].copy()
-        control_mask = control_values.loc[valid].isin(spec.preprocessing.control["labels"])
+        control_mask = declared_control.loc[valid]
         if not control_mask.any():
             issues.append(
                 _error(
