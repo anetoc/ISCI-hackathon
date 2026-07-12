@@ -1,5 +1,7 @@
 import json
+import struct
 from html.parser import HTMLParser
+from pathlib import Path
 
 from scripts.build_hackathon_demo import DEFAULT_MANIFEST, DEFAULT_OUTPUT
 
@@ -28,6 +30,8 @@ def test_demo_is_offline_and_contains_six_stage_states():
     assert "data:image/png;base64," in html
     assert "PRETEXT_SOURCE_B64" in html
     assert ".failure-grid, .judge-grid, .experiment-grid { display: grid;" not in html
+    assert 'params.get("static") === "1"' in html
+    assert 'params.get("scene")' in html
 
 
 def test_demo_embeds_the_frozen_verdict_contract_and_numbers():
@@ -44,3 +48,15 @@ def test_demo_embeds_the_frozen_verdict_contract_and_numbers():
     for value in ("+0.357", "+0.215", "−0.281", "0.533", "p=0.138"):
         assert value in html
     assert manifest["axes_sha256"] in html
+
+
+def test_static_fallback_contains_six_full_hd_scenes():
+    """A failed live path must still leave a projector-ready presentation."""
+
+    assets = Path(__file__).resolve().parents[1] / "demo_assets" / "hackathon"
+    screenshots = sorted(assets.glob("[0-9][0-9]_*.png"))
+    assert len(screenshots) == 6
+    for screenshot in screenshots:
+        header = screenshot.read_bytes()[:24]
+        assert header[:8] == b"\x89PNG\r\n\x1a\n"
+        assert struct.unpack(">II", header[16:24]) == (1920, 1080)
