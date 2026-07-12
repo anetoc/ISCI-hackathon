@@ -35,9 +35,8 @@ Primary artifacts: `config/off_target_pilot.yaml`, `reports/OFF_TARGET_PILOT_PRO
 
 | ID | Pending point | Current evidence | Close condition | Dependency |
 |---|---|---|---|---|
-| DOC-01 | Harmonize the primary-number cascade | `result_lock.md` makes M→M+C `+0.357` authoritative; README/ledger/dashboard often headline the distinct `+0.229` aggregate | Every public surface labels `+0.357`, `0.415→0.722`, `+0.229` and OOF `+0.215` as different estimands | Frozen `result_lock.md`; no formula change |
 | DOC-02 | Synchronize roadmap statuses | `MASTER_ROADMAP.md` still calls several completed phases “HERE” | Roadmap points to this live register and completed phases match the claim ledger | Current committed artifacts |
-| DOC-03 | Re-run claim/overclaim audit after synchronization | Current claim ledger is strong but predates the guide-pilot state and contains a stale preregistration sentence | README, paper, demo, ledger and dashboard agree on claims and boundaries | DOC-01/02 |
+| DOC-03 | Re-run claim/overclaim audit after roadmap synchronization | The number cascade is now tested, but a final end-to-end overclaim review remains | README, paper, demo, ledger and dashboard agree on claims and boundaries | DOC-02 |
 
 ## P1 — reproducibility, quality and release
 
@@ -47,7 +46,7 @@ Primary artifacts: `config/off_target_pilot.yaml`, `reports/OFF_TARGET_PILOT_PRO
 | ENG-02 | Add provenance to every canonical CCI result | Canonical schema in `run_cci.py` omits data/config hashes while README says every output is stamped | Schema and dashboard accept provenance without changing verdicts | ENG-01 |
 | ENG-03 | Pay down global lint debt | `ruff check .` currently reports 163 historical errors; touched guide-pilot files are clean | Scoped cleanup commits bring repository lint to zero or define explicit excludes | Separate engineering PRs |
 | ENG-04 | Reduce test warning debt | Full suite passes but emits sklearn/scipy and pytest-asyncio deprecation warnings | Own warnings fixed or pinned/documented; third-party warnings explicitly bounded | Dependency review |
-| REL-01 | Validate public package and links | MIT license and self-contained demo exist; the working branch is ahead of `origin/main` and has no remote head | Fresh clone reproduces documented smoke path; links and large-file boundary pass | DOC-01–03, ENG-01/02 |
+| REL-01 | Validate public package and links | MIT license and self-contained demo exist; the working branch is ahead of `origin/main` and has no remote head | Fresh clone reproduces documented smoke path; links and large-file boundary pass | DOC-02/03, ENG-01/02 |
 | REL-02 | Push/merge the working branch | `codex/controllability-decomposition` has no remote head | Reviewable branch/PR exists and CI passes | User authorization; do not publish implicitly |
 | REL-03 | Mint immutable release/DOI | Pre-registration records git SHA but no project release DOI | Tagged release archived by Zenodo; badges and ledger updated | Repository-owner GitHub/Zenodo authorization |
 
@@ -73,6 +72,8 @@ Primary artifacts: `config/off_target_pilot.yaml`, `reports/OFF_TARGET_PILOT_PRO
 - stimulated GSE190604 Th2 replication: completed primary `FAIL`, with no-stim
   `REPLICATED-EXPLORATORY` only;
 - myeloid B1 preregistered test: completed `NEAR-MISS`, not a PASS;
+- primary-number cascade: synchronized and test-guarded as authoritative M→M+C `+0.357`, OOF
+  `+0.215`, descriptive `0.415→0.722` and matched cross-system aggregate `+0.229`;
 - curated mechanism enrichment, targetability board and signed perturbation graph: completed
   exploratory overlays;
 - TCR RescueMap: a separate Paper-2/multi-year program, not unfinished work required to close this
@@ -81,8 +82,8 @@ Primary artifacts: `config/off_target_pilot.yaml`, `reports/OFF_TARGET_PILOT_PRO
 ## Recommended execution order
 
 1. Run OT-01 and OT-02 on disposable Linux scratch.
-2. In parallel, close DOC-01 so the public scientific story uses the locked estimand hierarchy.
-3. Derive the annotation BED (OT-03), then run OT-04 and OT-05.
-4. Close PAPOLG/TSS/vector review and freeze the final guide manifest.
+2. Derive the annotation BED (OT-03), then run OT-04 and OT-05.
+3. Close PAPOLG/TSS/vector review and freeze the final guide manifest.
+4. Synchronize historical roadmap statuses and perform the final overclaim audit.
 5. Perform a fresh-clone release rehearsal, then open a reviewable branch/PR.
 6. Start EXP-01 only after guide promotion is frozen; treat SCI-01–08 as independent extensions.
