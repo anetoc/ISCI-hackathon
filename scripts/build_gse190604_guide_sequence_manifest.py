@@ -172,6 +172,13 @@ def main() -> None:
                 }
             )
     evidence = pd.concat(evidence_tables, ignore_index=True)
+    observed_control_sequences = set(
+        evidence.loc[evidence["target"] == "NO-TARGET", "sequence"].astype(str)
+    )
+    candidates_artifact = candidates[
+        candidates["target"].ne("NO-TARGET")
+        | candidates["sequence"].astype(str).isin(observed_control_sequences)
+    ].copy()
 
     # Keep the original panel artifact contract under explicit names before attaching the new one.
     panel_provenance = {
@@ -212,7 +219,7 @@ def main() -> None:
         "command": shlex.join(["python", *sys.argv]),
         "method_version": "gse190604_guide_sequence_resolution_v1",
     }
-    candidates = add_provenance(candidates, provenance)
+    candidates_artifact = add_provenance(candidates_artifact, provenance)
     evidence = add_provenance(evidence, provenance)
     resolved = add_provenance(resolved, provenance)
 
@@ -272,7 +279,7 @@ def main() -> None:
         args.summary_output,
     ]:
         path.parent.mkdir(parents=True, exist_ok=True)
-    candidates.to_csv(args.candidates_output, index=False)
+    candidates_artifact.to_csv(args.candidates_output, index=False)
     evidence.to_csv(args.evidence_output, index=False)
     resolved.to_csv(args.manifest_output, index=False)
     args.summary_output.write_text(json.dumps(payload, indent=2) + "\n")
