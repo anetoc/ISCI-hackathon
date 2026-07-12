@@ -114,6 +114,11 @@ def main() -> None:
                 seed=SEED,
             )
             null[iteration] = overlap_weighted_delta(permuted_predictions)
+            if (iteration + 1) % max(1, args.n_resamples // 10) == 0:
+                print(
+                    f"[GSE190604] {test_name}: permutations {iteration + 1}/{args.n_resamples}",
+                    flush=True,
+                )
         ci_low, ci_high = np.quantile(bootstrap, [0.025, 0.975])
         p_perm = float((1 + np.sum(null >= gain)) / (args.n_resamples + 1))
         signed_diagnostic = {}
