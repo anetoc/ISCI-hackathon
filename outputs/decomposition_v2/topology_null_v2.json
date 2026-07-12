@@ -1,0 +1,83 @@
+{
+  "test": "Topology-conditional axis null v2",
+  "status": "EXPLORATORY_EVOLUTIONARY",
+  "results": [
+    {
+      "axis": "exhaustion_like",
+      "n_axis_genes": 9,
+      "topology_rarity": {
+        "observed": 0.1262888496259164,
+        "null_mean": 0.03788040917048885,
+        "null_std": 0.010406757415032192,
+        "percentile": 1.0,
+        "upper_p": 9.999000099990002e-05,
+        "n_random": 10000
+      },
+      "random_topology_q025": 0.021581905460133104,
+      "random_topology_q975": 0.062214769964025605,
+      "sampler": {
+        "target_correlation": 0.1262888496259164,
+        "lower_bound": 0.10103107970073313,
+        "upper_bound": 0.1515466195510997,
+        "requested_samples": 200,
+        "collected_samples": 200,
+        "initialized_chains": 4,
+        "proposal_acceptance_rate": 0.07542385161570787,
+        "unique_sample_fraction": 1.0,
+        "effective_sample_size": 193.16110185187907,
+        "r_hat": 0.9900433505723478
+      },
+      "real_gain": 0.029091031229814573,
+      "median_conditional_null_gain": -0.00214329791368853,
+      "conditional_null_95th": 0.08367964946401216,
+      "empirical_p": 0.208955223880597,
+      "real_component_coefficient": 0.5139342603587023,
+      "verdict": "UNSUPPORTED"
+    },
+    {
+      "axis": "cd4_ctl_cytotoxic",
+      "n_axis_genes": 5,
+      "topology_rarity": {
+        "observed": 0.3180862738203819,
+        "null_mean": 0.08767761033746722,
+        "null_std": 0.03500052233747876,
+        "percentile": 1.0,
+        "upper_p": 9.999000099990002e-05,
+        "n_random": 10000
+      },
+      "random_topology_q025": 0.03718192494415663,
+      "random_topology_q975": 0.17290013467788015,
+      "sampler": {
+        "target_correlation": 0.3180862738203819,
+        "lower_bound": 0.25446901905630553,
+        "upper_bound": 0.3817035285844583,
+        "requested_samples": 200,
+        "collected_samples": 200,
+        "initialized_chains": 4,
+        "proposal_acceptance_rate": 0.06199827981651376,
+        "unique_sample_fraction": 1.0,
+        "effective_sample_size": 189.05343103848705,
+        "r_hat": 1.022429752008388
+      },
+      "real_gain": 0.03505722466331734,
+      "median_conditional_null_gain": 0.03664047484398476,
+      "conditional_null_95th": 0.20343917931975727,
+      "empirical_p": 0.5223880597014925,
+      "real_component_coefficient": 0.4892749613703418,
+      "verdict": "UNSUPPORTED"
+    }
+  ],
+  "provenance": {
+    "git_sha": "9a7565066d5dc916f72614758fc79b84b4ca413a",
+    "data_sha256": {
+      "data/GWCD4i.DE_stats.h5ad": "c355f535ff32cf7ba1edc49cf9c6039fe84f2c9ebe4d005515cba75790cfbb62",
+      "results/final/isci_final_ranking.csv": "6f9fe281757d9cd7ab3ed33811b680e1f2b59b6a2f490967362e253350115d72",
+      "outputs/marson_obs_matching.parquet": "1d49edaaceb449c7454192849a10bfac94e2200f7512b8e21087bbb31cc2e0a2"
+    },
+    "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+    "timestamp": "2026-07-12T13:16:28.540308-03:00",
+    "command": "python scripts/run_topology_null_v2.py --n-samples 200 --n-random 10000",
+    "seed": 20260712,
+    "method_version": "topology_conditional_null_v2"
+  }
+}
