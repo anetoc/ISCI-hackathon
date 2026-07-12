@@ -67,6 +67,19 @@ def test_opposite_replicate_vectors_map_to_zero_reproducibility():
     assert result.features.iloc[0]["reproducibility"] == 0.0
 
 
+def test_replicate_and_guide_define_independent_units_without_donor():
+    forward = {"B": 1.0, "C": 2.0, "D": 3.0}
+    reverse = {gene: -value for gene, value in forward.items()}
+    table = pd.DataFrame(_rows("A", [forward, reverse])).drop(columns="donor")
+    table["replicate"] = table["guide"].map({"A_g0": "R0", "A_g1": "R1"})
+    table["guide"] = "A_g1"
+
+    result = extract_controller_features(table, AXES)
+
+    assert result.features.iloc[0]["n_replicates"] == 2
+    assert result.features.iloc[0]["reproducibility"] == 0.0
+
+
 def test_missing_replication_remains_missing_and_is_reported():
     table = pd.DataFrame(_rows("X", [{"A": 1.0, "B": 1.0, "C": 1.0}]))
 

@@ -46,12 +46,12 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "28f3f5c576f93788268ca74c965cfa63112533dc",
+  "git_sha": "fc04635c7dc7892d8c650faa72ea6a1158bf9384",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": true,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "d2ad29a599cc4ef1f1941a911aca6c5d0270f9a51dcb9e0968a95012b5a499cc",
+    "sha256": "db433e9cb356098526b13aaba1cb33202398a715314168fab78c442175ac0336",
     "files_sha256": {
       "DELIVERABLE.md": "89e62a2968de1ac17ba9ec2fb9fa5740a86fe552bbff840e0bc6d980ab6091bd",
       "DEMO_SCRIPT.md": "dc359d56482fa114a1c7bf384e74d525f06d955cc97b9840003b6562ab2af08b",
@@ -75,7 +75,7 @@
       "isci/analysis_runner.py": "10daa51284d9f34969ac97e9e62e58fe276ae7b5454b4b4a6a838c124a0ef569",
       "isci/cli.py": "07bb697598aed073909f112bfb2511d1a0da71b18a8d34f1ad9e53540b7b5e9a",
       "isci/dataset_spec.py": "5a9b15e90a56c4325c12247ade3f058ee61a262b83e97e70da930996d743dd47",
-      "isci/feature_extraction.py": "995b0fd1d86dd8f937623c431cba601b6ba678bffdb02eff526d5ac9248c66b6",
+      "isci/feature_extraction.py": "415abf12f886e3009077b19abc7f85c7f57fafd5a196f313d3aaa804c3d3fae3",
       "notebooks/ISCI_Researcher_Track_Walkthrough.ipynb": "524b792e3f57de8014fc6398377589eaa5e3d648dbfafdbfdbc005c66e51cc46",
       "outputs/hackathon/cell_preflight_smoke.json": "7063de4c1853dcf37ff31a50293656a3d4a5d1afa96e48dc3a098560d7af4c93",
       "outputs/hackathon/claim_manifest.json": "56aca8a89b4ee55fdfa24bbf0d912894340d702d496b400542aecca4e8e6daf2",
@@ -92,6 +92,6 @@
   "branch": "codex/controllability-decomposition",
   "data_sha256": "56aca8a89b4ee55fdfa24bbf0d912894340d702d496b400542aecca4e8e6daf2",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-12T23:37:27.257867+00:00",
+  "timestamp": "2026-07-12T23:38:54.129165+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }

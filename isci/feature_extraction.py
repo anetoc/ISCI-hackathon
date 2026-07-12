@@ -133,8 +133,12 @@ def _axis_specificity(
 def _replicate_labels(frame: pd.DataFrame) -> pd.Series | None:
     if "donor" in frame and "guide" in frame:
         return frame["donor"].astype(str) + "::" + frame["guide"].astype(str)
+    if "replicate" in frame and "guide" in frame:
+        return frame["replicate"].astype(str) + "::" + frame["guide"].astype(str)
     if "donor" in frame:
         return frame["donor"].astype(str)
+    if "replicate" in frame:
+        return frame["replicate"].astype(str)
     if "guide" in frame:
         return frame["guide"].astype(str)
     return None
