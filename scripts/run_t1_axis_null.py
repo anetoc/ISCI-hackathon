@@ -115,8 +115,8 @@ def generate_pseudo_axes(
             tolerance = 0.20 * abs(real_correlation)
             if abs(candidate_correlation - real_correlation) <= tolerance:
                 weights = rng.permutation(absolute_weights) * rng.permutation(signs)
-                vector = np.zeros_like(real, dtype=np.float32)
-                vector[selected] = weights.astype(np.float32)
+                vector = np.zeros_like(real, dtype=np.float64)
+                vector[selected] = weights.astype(np.float64)
                 vector /= np.linalg.norm(vector) + 1e-12
                 pseudo.append(vector)
                 audit.append(
@@ -141,20 +141,27 @@ def generate_pseudo_axes(
     return pseudo, audit
 
 
-def load_matrix_and_metadata() -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, list[str]]:
+def load_matrix_and_metadata() -> tuple[
+    np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, list[str]
+]:
     """Load only zscore/baseMean and standardize zscore in-place to bound memory."""
 
     with h5py.File(RAW, "r") as handle:
         z_dataset = handle["layers/zscore"]
         base_dataset = handle["layers/baseMean"]
         n_rows, n_genes = z_dataset.shape
-        zscore = np.empty((n_rows, n_genes), dtype=np.float32)
+        zscore = np.empty((n_rows, n_genes), dtype=np.float64)
+        z_sum = np.zeros(n_genes, dtype=np.float64)
+        z_square_sum = np.zeros(n_genes, dtype=np.float64)
         base_sum = np.zeros(n_genes, dtype=np.float64)
         base_count = np.zeros(n_genes, dtype=np.int64)
         for start in range(0, n_rows, 256):
             stop = min(start + 256, n_rows)
-            z_chunk = np.asarray(z_dataset[start:stop], dtype=np.float32)
-            zscore[start:stop] = np.nan_to_num(z_chunk, nan=0.0)
+            z_chunk = np.asarray(z_dataset[start:stop], dtype=np.float64)
+            z_chunk = np.nan_to_num(z_chunk, nan=0.0, posinf=0.0, neginf=0.0)
+            zscore[start:stop] = z_chunk
+            z_sum += z_chunk.sum(axis=0)
+            z_square_sum += np.square(z_chunk).sum(axis=0)
             base_chunk = np.asarray(base_dataset[start:stop], dtype=np.float64)
             finite = np.isfinite(base_chunk)
             base_sum += np.where(finite, base_chunk, 0.0).sum(axis=0)
@@ -166,11 +173,15 @@ def load_matrix_and_metadata() -> tuple[np.ndarray, np.ndarray, np.ndarray, np.n
     expression = np.divide(
         base_sum, base_count, out=np.zeros_like(base_sum), where=base_count > 0
     )
-    mean = zscore.mean(axis=0, dtype=np.float64).astype(np.float32)
-    std = zscore.std(axis=0, dtype=np.float64).astype(np.float32)
+    mean = z_sum / n_rows
+    variance = np.maximum(z_square_sum / n_rows - np.square(mean), 0.0)
+    std = np.sqrt(variance)
     std[std == 0] = 1.0
     zscore -= mean
     zscore /= std
+    if not np.isfinite(zscore).all():
+        raise RuntimeError("standardized zscore matrix contains non-finite values")
+    print(f"[T1] standardized max_abs={np.max(np.abs(zscore)):.3f}", flush=True)
     return zscore, mean, std, expression, targets, genes
 
 
@@ -187,7 +198,7 @@ def aggregate_gene_precision(
     """Apply target LOO and aggregate max absolute projection over conditions."""
 
     valid_target = target_columns >= 0
-    raw_target = np.zeros(len(target_columns), dtype=np.float32)
+    raw_target = np.zeros(len(target_columns), dtype=np.float64)
     rows = np.flatnonzero(valid_target)
     columns = target_columns[valid_target]
     raw_target[valid_target] = (
@@ -196,10 +207,10 @@ def aggregate_gene_precision(
     projections[valid_target] -= (
         raw_target[valid_target, None] * weights[target_columns[valid_target], :]
     )
-    precision = np.full((n_ranking_genes, projections.shape[1]), np.nan, dtype=np.float32)
+    precision = np.full((n_ranking_genes, projections.shape[1]), np.nan, dtype=np.float64)
     valid_gene = target_gene_codes >= 0
     for column in range(projections.shape[1]):
-        values = np.full(n_ranking_genes, -np.inf, dtype=np.float32)
+        values = np.full(n_ranking_genes, -np.inf, dtype=np.float64)
         np.maximum.at(
             values,
             target_gene_codes[valid_gene],
@@ -239,6 +250,8 @@ def main() -> None:
     zscore, z_mean, z_std, expression, targets, genes = load_matrix_and_metadata()
     print("[T1] computing exact gene-gene correlation matrix", flush=True)
     correlation = (zscore.T @ zscore) / max(1, zscore.shape[0] - 1)
+    if not np.isfinite(correlation).all():
+        raise RuntimeError("gene-gene correlation matrix contains non-finite values")
     np.abs(correlation, out=correlation)
     np.fill_diagonal(correlation, 0.0)
     expression_deciles = pd.qcut(
@@ -276,7 +289,7 @@ def main() -> None:
             break
         print(f"[T1] generating pseudo axes for {axis_name}", flush=True)
         pseudo, audit = generate_pseudo_axes(
-            real_vector.astype(np.float32), expression_deciles, correlation, rng=rng
+            real_vector.astype(np.float64), expression_deciles, correlation, rng=rng
         )
         admissibility = len(pseudo) / N_PSEUDO
         if admissibility < MIN_ADMISSIBILITY:
@@ -291,7 +304,7 @@ def main() -> None:
                 }
             )
             continue
-        weights = np.column_stack([real_vector, *pseudo]).astype(np.float32)
+        weights = np.column_stack([real_vector, *pseudo]).astype(np.float64)
         raw_weights = z_std[:, None] * weights
         projections = zscore @ raw_weights
         projections += (z_mean @ weights)[None, :]
