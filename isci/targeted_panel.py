@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import gzip
 from pathlib import Path
-from typing import Iterator
+from typing import Callable, Iterator
 
 import numpy as np
 import pandas as pd
@@ -57,6 +57,7 @@ def aggregate_matrix_market_groups(
     *,
     n_groups: int,
     chunksize: int = 2_000_000,
+    progress: Callable[[int, int], None] | None = None,
 ) -> sparse.csr_matrix:
     """Aggregate feature×cell raw counts into feature×group counts in bounded memory."""
 
@@ -68,6 +69,8 @@ def aggregate_matrix_market_groups(
     observed_nonzeros = 0
     for chunk in matrix_market_chunks(path, header_lines=header_lines, chunksize=chunksize):
         observed_nonzeros += len(chunk)
+        if progress is not None:
+            progress(observed_nonzeros, expected_nonzeros)
         columns = chunk["column"].to_numpy()
         groups = mapping[columns]
         keep = groups >= 0
