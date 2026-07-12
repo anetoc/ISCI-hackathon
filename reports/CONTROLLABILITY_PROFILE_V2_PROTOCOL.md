@@ -51,6 +51,16 @@ Replace rejection sampling for small/coexpressed axes with a label-blind conditi
 matches expression deciles and correlation topology. Report sampler convergence and effective
 sample size; do not force a verdict when the conditional null has inadequate support.
 
+The first application is restricted to the previously non-evaluable exhaustion-like and CD4-CTL
+axes. The sampler excludes all real-axis genes, preserves exact expression-decile counts and accepts
+only sets whose mean absolute correlation is within 20% of the real axis. Use four chains, 2,000
+burn-in proposals, thinning 100, and up to 50,000 label-blind annealing steps for initialization.
+
+The controller-recovery null is evaluable only with at least 180/200 unique sets, at least three
+initialized chains, proposal acceptance ≥0.001, effective sample size ≥50 and finite R-hat ≤1.10.
+Failure is `TOPOLOGY_SINGULAR`, meaning the ruler lacks an exchangeable conditional null under these
+constraints; it is neither biological absence nor controller support.
+
 ## Provenance and privacy
 
 Every table carries git SHA, data and axes hashes, timestamp, command, seed and method version.
