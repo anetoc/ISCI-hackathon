@@ -262,6 +262,110 @@ def delta_auprc(predictions: pd.DataFrame) -> float:
     )
 
 
+def leave_one_condition_out_predictions(
+    frame: pd.DataFrame,
+    blocks: Sequence[MatchedBlock],
+    *,
+    conditions: Sequence[str],
+    effect_col: str,
+    component_col: str,
+    seed: int = 20260712,
+) -> pd.DataFrame:
+    """Train on all other contexts and predict every fixed block in the held context.
+
+    The same genes occur across conditions by design: this estimates within-screen
+    context transport, not gene-level or dataset-level generalization.
+    """
+
+    required_columns = {"gene", "condition", effect_col, component_col}
+    missing_columns = required_columns - set(frame.columns)
+    if missing_columns:
+        raise ValueError(f"condition table lacks columns: {sorted(missing_columns)}")
+    if frame.duplicated(["gene", "condition"]).any():
+        raise ValueError("condition table must contain one row per gene and condition")
+    validate_blocks(frame.set_index("gene"), blocks, min_negatives=1)
+    expected_conditions = tuple(conditions)
+    block_genes = [gene for block in blocks for gene in block.genes]
+    subset = frame[frame["gene"].isin(block_genes)].copy()
+    observed = subset.groupby("gene", observed=True)["condition"].agg(set)
+    expected = set(expected_conditions)
+    if any(value != expected for value in observed):
+        raise ValueError("every block gene must occur in every planned condition")
+
+    rows: list[dict[str, object]] = []
+    coefficients: dict[str, float] = {}
+    label_by_gene = {
+        gene: int(gene == block.positive) for block in blocks for gene in block.genes
+    }
+    block_by_gene = {gene: block.positive for block in blocks for gene in block.genes}
+    for condition_index, held_condition in enumerate(expected_conditions):
+        train = subset[subset["condition"] != held_condition][
+            ["gene", "condition", effect_col, component_col]
+        ].copy()
+        test = subset[subset["condition"] == held_condition][
+            ["gene", "condition", effect_col, component_col]
+        ].copy()
+        train["_label"] = train["gene"].map(label_by_gene).astype(int)
+        test["_label"] = test["gene"].map(label_by_gene).astype(int)
+        base_pred, full_pred, coefficient = _fit_predict(
+            train,
+            test,
+            effect_col=effect_col,
+            component_col=component_col,
+            seed=seed + condition_index,
+        )
+        coefficients[held_condition] = coefficient
+        for gene, label, base_p, full_p in zip(
+            test["gene"], test["_label"], base_pred, full_pred, strict=True
+        ):
+            rows.append(
+                {
+                    "gene": gene,
+                    "block": block_by_gene[gene],
+                    "condition": held_condition,
+                    "label": int(label),
+                    "base_prediction": float(base_p),
+                    "full_prediction": float(full_p),
+                    "fold_component_coefficient": coefficient,
+                }
+            )
+    result = pd.DataFrame(rows)
+    result.attrs["condition_component_coefficients"] = coefficients
+    result.attrs["mean_component_coefficient"] = float(np.mean(list(coefficients.values())))
+    return result
+
+
+def condition_transport_delta(predictions: pd.DataFrame) -> tuple[float, dict[str, float]]:
+    """Return mean and condition-specific OOF AUPRC gains."""
+
+    gains = {
+        str(condition): delta_auprc(group)
+        for condition, group in predictions.groupby("condition", sort=False)
+    }
+    return float(np.mean(list(gains.values()))), gains
+
+
+def block_bootstrap_transport_delta(
+    predictions: pd.DataFrame,
+    *,
+    n_resamples: int = 1_000,
+    seed: int = 20260712,
+) -> np.ndarray:
+    """Bootstrap complete gene blocks jointly across every held condition."""
+
+    groups = {name: group for name, group in predictions.groupby("block", sort=False)}
+    names = np.asarray(list(groups), dtype=object)
+    if len(names) < 2:
+        raise ValueError("transport bootstrap requires at least two blocks")
+    rng = np.random.default_rng(seed)
+    values = np.empty(n_resamples, dtype=float)
+    for iteration in range(n_resamples):
+        sampled = rng.choice(names, size=len(names), replace=True)
+        replicate = pd.concat([groups[name] for name in sampled], ignore_index=True)
+        values[iteration] = condition_transport_delta(replicate)[0]
+    return values
+
+
 def block_bootstrap_delta(
     predictions: pd.DataFrame,
     *,

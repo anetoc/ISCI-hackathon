@@ -7,11 +7,14 @@ from isci.decomposition import (
     MatchedBlock,
     RankResidualizer,
     benjamini_hochberg,
+    block_bootstrap_transport_delta,
     block_bootstrap_delta,
     blocked_oof_predictions,
     component_verdict,
+    condition_transport_delta,
     delta_auprc,
     match_unique_blocks,
+    leave_one_condition_out_predictions,
     permute_positive_within_blocks,
     validate_blocks,
 )
@@ -29,6 +32,22 @@ def fixture_data(n_blocks: int = 8, n_negatives: int = 5):
         rows.extend((gene, rng.normal(), rng.normal(scale=0.2)) for gene in negatives)
     frame = pd.DataFrame(rows, columns=["gene", "E", "S"]).set_index("gene")
     return frame, blocks
+
+
+def condition_fixture():
+    frame, blocks = fixture_data()
+    rows = []
+    for condition_index, condition in enumerate(["Rest", "Stim8hr", "Stim48hr"]):
+        for gene, row in frame.iterrows():
+            rows.append(
+                {
+                    "gene": gene,
+                    "condition": condition,
+                    "E": row.E + condition_index * 0.1,
+                    "S": row.S + condition_index * 0.05,
+                }
+            )
+    return pd.DataFrame(rows), blocks
 
 
 def test_empirical_ranker_never_refits_on_test_values():
@@ -119,6 +138,48 @@ def test_bootstrap_and_delta_are_deterministic():
     assert np.isfinite(delta_auprc(predictions))
     a = block_bootstrap_delta(predictions, n_resamples=30, seed=4)
     b = block_bootstrap_delta(predictions, n_resamples=30, seed=4)
+    np.testing.assert_array_equal(a, b)
+
+
+def test_condition_transport_covers_every_block_in_every_condition():
+    frame, blocks = condition_fixture()
+    predictions = leave_one_condition_out_predictions(
+        frame,
+        blocks,
+        conditions=["Rest", "Stim8hr", "Stim48hr"],
+        effect_col="E",
+        component_col="S",
+    )
+    assert len(predictions) == len(frame)
+    assert predictions.groupby(["condition", "block"])["label"].sum().eq(1).all()
+    mean_gain, gains = condition_transport_delta(predictions)
+    assert np.isfinite(mean_gain)
+    assert set(gains) == {"Rest", "Stim8hr", "Stim48hr"}
+
+
+def test_held_condition_does_not_change_its_training_coefficient():
+    frame, blocks = condition_fixture()
+    original = leave_one_condition_out_predictions(
+        frame, blocks, conditions=["Rest", "Stim8hr", "Stim48hr"], effect_col="E", component_col="S"
+    )
+    changed = frame.copy()
+    changed.loc[changed.condition == "Rest", "S"] += 10_000
+    rerun = leave_one_condition_out_predictions(
+        changed, blocks, conditions=["Rest", "Stim8hr", "Stim48hr"], effect_col="E", component_col="S"
+    )
+    assert (
+        original.attrs["condition_component_coefficients"]["Rest"]
+        == rerun.attrs["condition_component_coefficients"]["Rest"]
+    )
+
+
+def test_transport_bootstrap_is_blocked_and_deterministic():
+    frame, blocks = condition_fixture()
+    predictions = leave_one_condition_out_predictions(
+        frame, blocks, conditions=["Rest", "Stim8hr", "Stim48hr"], effect_col="E", component_col="S"
+    )
+    a = block_bootstrap_transport_delta(predictions, n_resamples=20, seed=9)
+    b = block_bootstrap_transport_delta(predictions, n_resamples=20, seed=9)
     np.testing.assert_array_equal(a, b)
 
 
