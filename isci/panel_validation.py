@@ -30,10 +30,15 @@ def repeated_overlap_oof(
     """Cross-fit overlap weights, residualization and outcome models inside every fold."""
 
     required = [label_col, effect_col, component_col, *overlap_cols]
-    data = frame[required].apply(pd.to_numeric, errors="coerce")
+    # A boolean outcome plus floating-point covariates otherwise yields an object
+    # NumPy array, on which np.isfinite is undefined. Normalize the complete
+    # validation surface to float before enforcing its numerical contract.
+    data = frame[required].apply(pd.to_numeric, errors="coerce").astype(float)
     if data.isna().any().any() or not np.isfinite(data.to_numpy()).all():
         raise ValueError("panel validation features must be finite and complete")
     y = data[label_col].to_numpy(dtype=int)
+    if not set(np.unique(y)).issubset({0, 1}) or len(np.unique(y)) != 2:
+        raise ValueError("panel validation label must contain both binary classes")
     if min(np.bincount(y)) < n_splits:
         raise ValueError("each class must contain at least n_splits genes")
     splitter = RepeatedStratifiedKFold(

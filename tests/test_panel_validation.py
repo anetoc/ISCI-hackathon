@@ -26,6 +26,7 @@ def panel_fixture():
 
 def test_repeated_overlap_oof_is_deterministic_and_gene_level():
     frame = panel_fixture()
+    frame["label"] = frame["label"].astype(bool)
     kwargs = dict(
         label_col="label",
         effect_col="E",
