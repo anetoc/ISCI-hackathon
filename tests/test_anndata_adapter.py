@@ -8,12 +8,19 @@ import pytest
 import yaml
 
 from isci.adapters import (
+    CellPreflightStatus,
     RuntimeCapability,
     inspect_anndata_dataset,
     iter_anndata_effect_blocks,
     iter_anndata_group_effect_blocks,
+    preflight_anndata_cells,
 )
-from isci.dataset_spec import BenchmarkSettings, DatasetInput, load_dataset_spec
+from isci.dataset_spec import (
+    BenchmarkSettings,
+    CellPreprocessingSettings,
+    DatasetInput,
+    load_dataset_spec,
+)
 from isci.cli import EXIT_SUCCESS, main
 from isci.analysis_runner import run_dataset
 
@@ -92,6 +99,57 @@ def _small_obs():
     )
 
 
+def _cell_obs(*, cells_per_stratum=10, include_donor=True):
+    rows = []
+    for donor_index, donor in enumerate(("D0", "D1")):
+        for perturbation in ("NT", "CTRL_A", "CTRL_B"):
+            for _ in range(cells_per_stratum):
+                row = {
+                    "target": perturbation,
+                    "condition": "stim",
+                    "replicate_id": f"R{donor_index}",
+                    "guide_id": f"{perturbation}_g1",
+                    "nperts": 1,
+                    "target_baseMean": 5.0,
+                    "n_guides": 1,
+                    "n_cells_target": cells_per_stratum,
+                }
+                if include_donor:
+                    row["donor_id"] = donor
+                rows.append(row)
+    return pd.DataFrame(rows)
+
+
+def _cell_preflight_spec(tmp_path, observations, *, include_donor=True):
+    spec = _write_h5ad(tmp_path, observations, positives=())
+    mapping = {
+        "perturbation": "target",
+        "condition": "condition",
+        "replicate": "replicate_id",
+        "guide": "guide_id",
+        "guide_count": "nperts",
+    }
+    if include_donor:
+        mapping["donor"] = "donor_id"
+    preprocessing = CellPreprocessingSettings(
+        source={"location": "X", "kind": "raw_counts"},
+        control={"column": "target", "labels": ("NT",)},
+        normalization="log1p_cpm",
+        contrast="pseudobulk_difference",
+        standardization="gene_wise_zscore_within_condition",
+        min_cells_per_stratum=10,
+        min_replicates=2,
+        multi_guide_policy="exclude",
+    )
+    return replace(
+        spec,
+        input=replace(spec.input, layout="anndata_cells", layers={}),
+        mapping=mapping,
+        preprocessing=preprocessing,
+        benchmark=None,
+    )
+
+
 def test_backed_inspection_validates_structure_without_loading_effect_values(tmp_path):
     spec = _write_h5ad(tmp_path, _small_obs())
     result = inspect_anndata_dataset(spec, repo_root=tmp_path)
@@ -104,6 +162,67 @@ def test_backed_inspection_validates_structure_without_loading_effect_values(tmp
     assert result.inspection.n_perturbations == 3
     assert result.inspection.n_features == 3
     assert any(issue.code == "EFFECT_VALUES_NOT_SCANNED" for issue in result.inspection.issues)
+
+
+def test_cell_preflight_finds_donor_resolved_effect_construction_coverage(tmp_path):
+    spec = _cell_preflight_spec(tmp_path, _cell_obs())
+
+    result = preflight_anndata_cells(spec, repo_root=tmp_path)
+
+    assert result.status == CellPreflightStatus.READY_FOR_EFFECT_CONSTRUCTION
+    assert result.can_construct_effects
+    assert result.matrix_shape == (60, 3)
+    assert result.eligible_effect_strata == 4
+    assert result.underpowered_effect_strata == 0
+    assert result.perturbation_conditions_ready == 2
+    assert result.donor_resolved_conditions_ready == 2
+    assert result.n_controls == 20
+    assert any(issue.code == "SIGNAL_VALUES_NOT_SCANNED" for issue in result.issues)
+
+
+def test_cell_preflight_is_diagnostic_without_donor_identity(tmp_path):
+    observations = _cell_obs(include_donor=False)
+    spec = _cell_preflight_spec(tmp_path, observations, include_donor=False)
+
+    result = preflight_anndata_cells(spec, repo_root=tmp_path)
+
+    assert result.status == CellPreflightStatus.DIAGNOSTIC_ONLY
+    assert result.can_construct_effects
+    assert any(issue.code == "DONOR_COVERAGE_INSUFFICIENT" for issue in result.issues)
+
+
+def test_cell_preflight_audits_multi_guide_exclusion(tmp_path):
+    observations = _cell_obs(cells_per_stratum=11)
+    observations.loc[0, "nperts"] = 2
+    spec = _cell_preflight_spec(tmp_path, observations)
+
+    result = preflight_anndata_cells(spec, repo_root=tmp_path)
+
+    assert result.status == CellPreflightStatus.READY_FOR_EFFECT_CONSTRUCTION
+    assert result.multi_guide_cells == 1
+    assert result.excluded_cells == 1
+
+
+def test_cell_preflight_rejects_absent_controls_or_source_layer(tmp_path):
+    observations = _cell_obs()
+    no_controls = observations.assign(target="CTRL_A")
+    control_spec = _cell_preflight_spec(tmp_path, no_controls)
+    control_result = preflight_anndata_cells(control_spec, repo_root=tmp_path)
+
+    layer_spec = _cell_preflight_spec(tmp_path, observations)
+    layer_spec = replace(
+        layer_spec,
+        preprocessing=replace(
+            layer_spec.preprocessing,
+            source={"location": "layer", "layer": "counts", "kind": "raw_counts"},
+        ),
+    )
+    layer_result = preflight_anndata_cells(layer_spec, repo_root=tmp_path)
+
+    assert control_result.status == CellPreflightStatus.NOT_EVALUABLE
+    assert any(issue.code == "CONTROLS_NOT_OBSERVED" for issue in control_result.issues)
+    assert layer_result.status == CellPreflightStatus.NOT_EVALUABLE
+    assert any(issue.code == "SOURCE_LAYER_MISSING" for issue in layer_result.issues)
 
 
 def test_full_value_scan_detects_nonfinite_effects(tmp_path):

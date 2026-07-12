@@ -25,6 +25,8 @@ from isci.adapters import (
     AnnDataInspectionResult,
     AdapterIssue,
     AdapterResult,
+    CellPreflightResult,
+    CellPreflightStatus,
     DatasetInspection,
     IssueSeverity,
     RuntimeCapability,
@@ -32,6 +34,7 @@ from isci.adapters import (
     iter_anndata_effect_blocks,
     iter_anndata_group_effect_blocks,
     load_tabular_dataset,
+    preflight_anndata_cells,
 )
 
 __version__ = "0.1.0"
@@ -47,6 +50,8 @@ __all__ = [
     "AnnDataInspectionResult",
     "AdapterIssue",
     "AdapterResult",
+    "CellPreflightResult",
+    "CellPreflightStatus",
     "DatasetInspection",
     "IssueSeverity",
     "RuntimeCapability",
@@ -58,6 +63,7 @@ __all__ = [
     "extract_controller_features_from_group_blocks",
     "load_dataset_spec",
     "load_tabular_dataset",
+    "preflight_anndata_cells",
     "run_controller_features",
     "run_dataset",
     "save_dataset_run",

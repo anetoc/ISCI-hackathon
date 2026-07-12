@@ -42,6 +42,7 @@ DATASET_SPEC_CODE = ROOT / "isci" / "dataset_spec.py"
 DATASET_ADAPTER_CODE = ROOT / "isci" / "adapters" / "tabular.py"
 DATASET_ADAPTER_EXPORTS = ROOT / "isci" / "adapters" / "__init__.py"
 ANNDATA_ADAPTER_CODE = ROOT / "isci" / "adapters" / "anndata_effects.py"
+CELL_PREFLIGHT_CODE = ROOT / "isci" / "adapters" / "anndata_cells.py"
 DATASET_CLI_CODE = ROOT / "isci" / "cli.py"
 DATASET_RUNNER_CODE = ROOT / "isci" / "analysis_runner.py"
 FEATURE_EXTRACTION_CODE = ROOT / "isci" / "feature_extraction.py"
@@ -91,6 +92,7 @@ def main() -> None:
     readme = (ROOT / "README.md").read_text()
     pyproject = PYPROJECT.read_text()
     anndata_adapter_source = ANNDATA_ADAPTER_CODE.read_text()
+    cell_preflight_source = CELL_PREFLIGHT_CODE.read_text()
     dataset_runner_source = DATASET_RUNNER_CODE.read_text()
     feature_extraction_source = FEATURE_EXTRACTION_CODE.read_text()
     dataset_cli_source = DATASET_CLI_CODE.read_text()
@@ -154,6 +156,9 @@ def main() -> None:
         and "iter_anndata_group_effect_blocks" in anndata_adapter_source
         and "extract_controller_features_from_group_blocks" in feature_extraction_source
         and '"anndata>=0.10"' in pyproject,
+        "cell_level_preflight_present": 'backed="r"' in cell_preflight_source
+        and "CellPreflightStatus" in cell_preflight_source
+        and "SIGNAL_VALUES_NOT_SCANNED" in cell_preflight_source,
         "dataset_runner_bounded": "run_controller_features" in dataset_runner_source
         and '"biological_verdict": "NOT_ISSUED"' in dataset_runner_source
         and '"run"' in dataset_cli_source,
@@ -190,6 +195,7 @@ def main() -> None:
         DATASET_ADAPTER_CODE,
         DATASET_ADAPTER_EXPORTS,
         ANNDATA_ADAPTER_CODE,
+        CELL_PREFLIGHT_CODE,
         DATASET_CLI_CODE,
         DATASET_RUNNER_CODE,
         FEATURE_EXTRACTION_CODE,
