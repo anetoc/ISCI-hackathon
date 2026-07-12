@@ -41,6 +41,25 @@ pseudo-axes in T1 and transports across all three experimental conditions in T4 
 an axis-conditioned property, not universal controllability. It remains exploratory because axis,
 labels and conditions come from the same screen and share biological ontology.
 
+## Topology-conditional null: resolving the previously non-evaluable axes
+
+The original rejection sampler could not generate enough correlation-matched alternatives for
+exhaustion-like or CD4-CTL. V2 separates ruler-topology rarity from controller-label recovery. A
+constrained four-chain sampler excluded the real marker genes, preserved expression-decile counts
+and sampled only within ±20% of the real mean absolute correlation.
+
+| axis | topology vs 10,000 expression-matched sets | conditional samples | ESS / R-hat | real gain vs conditional null | p | verdict |
+|---|---:|---:|---:|---:|---:|---|
+| Exhaustion-like | percentile 100%; p<10⁻⁴ | 200/200 | 193 / 0.990 | +0.029 vs median −0.002 | 0.209 | UNSUPPORTED |
+| CD4-CTL | percentile 100%; p<10⁻⁴ | 200/200 | 189 / 1.022 | +0.035 vs median +0.037 | 0.522 | UNSUPPORTED |
+
+Both rulers are topologically exceptional: their genes are far more coexpressed than random
+expression-matched sets. But once the null is conditioned on that exceptional topology, neither
+ruler recovers benchmark controllers beyond comparable rulers. This is an important negative
+result: **a biologically coherent marker set is not automatically a controller-discriminating
+ruler**. The axes are now evaluable; their controller-recovery verdict is unsupported rather than
+unknown.
+
 ## Non-scalar controller landscape
 
 The profile contains 1,236 genes and 66 non-dominated genes on the three-dimensional Pareto front:
@@ -76,11 +95,9 @@ clinical response prediction or therapeutic desirability.
 
 1. **External Th2 replication:** freeze labels and matched blocks before running an independent
    polarization perturbation dataset. This is the decisive scientific step.
-2. **Topology-conditional null:** replace rejection sampling for unusually coexpressed small axes
-   with a converged conditional sampler and report effective sample size.
-3. **Signed control:** separate direction from precision using KD/CRISPRa pairs or a signed rescue
+2. **Signed control:** separate direction from precision using KD/CRISPRa pairs or a signed rescue
    assay; absolute alignment cannot distinguish pushing toward from away from a state.
-4. **Archetype panel:** validate 3–4 genes per profile class, not only the top scalar rank. Measure
+3. **Archetype panel:** validate 3–4 genes per profile class, not only the top scalar rank. Measure
    state-axis movement, donor reproducibility and on-target effect separately.
 
 ## Reproducibility
@@ -88,6 +105,7 @@ clinical response prediction or therapeutic desirability.
 - features: `python scripts/build_marson_condition_features.py`
 - condition transport: `python scripts/run_t4_condition_transport_v2.py --n-resamples 1000`
 - profile: `python scripts/build_controllability_profile_v2.py`
+- topology null: `python scripts/run_topology_null_v2.py --n-samples 200 --n-random 10000`
 - figure: `python scripts/plot_controllability_profile_v2.py`
 - machine-readable artifacts: `outputs/decomposition_v2/`
 
