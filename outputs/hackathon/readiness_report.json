@@ -53,18 +53,18 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "17d1d2b99a2e67e9a3a35dde79ae4cc671b2c176",
+  "git_sha": "901c03994939220cc1f9bbd3ea14d9b394ffff40",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": false,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "c19b1cb5461abd7635d8923ab1909d9679b0b0b9215315448bec46d11732672b",
+    "sha256": "f9d596f40aebb3a013321312c97d3d011789e45356669a923be9833116849fdd",
     "files_sha256": {
       "DELIVERABLE.md": "dfb96cce135e4e2af39fbfc11ff62545637c800e382dbc97ebde7ad1453149fe",
       "DEMO_SCRIPT.md": "7277e162c5e9a88b0fa5b7a990ae9afb51fe607d1d0b3bbf97f533a6c7ee4f70",
       "HACKATHON_RUNBOOK.md": "9d8b526298c53ced38fa868127db53c3cb4ef2c032a864aabaacdb3d4585a244",
       "JUDGE_QA.md": "e93858d99be0a82bfbdbf3e28076bfc894e45a56ad373e72a2c98f2b83b991e7",
-      "README.md": "f431c5519453ca5c443b6d5772729871d95607c07d03deba1a12a688e1c74c52",
+      "README.md": "b7c552669a542b962342016e39be8eba98ac907ac2d2205c99c221a6d05b742c",
       "SUBMISSION.md": "b091788d27a021b6928fbbcaa072b771b5a4a54ac14f1db0fce75dde455c6db4",
       "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
       "config/hackathon_timing.json": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
@@ -106,9 +106,9 @@
       "skills/isci-controllership/kernel.py": "75ec60abc153ec06d0c4165aecf05a951000fe05cbd160eaf8f00bb1f23afd6d"
     }
   },
-  "branch": "codex/provenance-public-taxonomy",
+  "branch": "codex/public-onboarding-capsule",
   "data_sha256": "df8ba47b1c2a8c9aad0be85896664112f5804f9f5b053ce780149dad0d56fa15",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-13T13:34:20.142218+00:00",
+  "timestamp": "2026-07-13T14:56:47.534741+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }

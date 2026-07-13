@@ -15,19 +15,25 @@ NULL or NOT-EVALUABLE** — with the evidence and provenance needed to audit it.
 > Genome-scale Perturb-seq in primary human CD4+ T cells · CPU-local on a 24 GB Mac · no raw
 > clinical or large H5AD/H5MU data committed
 
-## Judge quick path
+## Start here
 
-| Time | Start here | What you will see |
-|---:|---|---|
-| **2:30** | [Run the Full-HD visual demo](demo_assets/hackathon/hackathon_fallback_2m30.mp4) | Timed offline visual fallback; the submitted recording adds reviewed narration |
-| **3 min** | [Open the interactive judge demo](https://anetoc.github.io/ISCI-hackathon/) | The same six-scene narrative, generated from frozen claim and timing manifests |
-| **5 min** | [Explore the T-CTRL decision map](https://anetoc.github.io/ISCI-hackathon/tctrl_live_demo.html) | Controller strength × intervention direction, with per-gene evidence and safety classes |
-| **10 min** | [Review the executed notebook](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb) | The result, falsification tests, Claude correction loop and reusable framework |
-| **Deep dive** | [Read the claim ledger](reports/CLAIM_LEDGER.md) | Every claim, status, evidence source and explicit “not claimed” boundary |
+This is a reusable public research project with a short evaluation path for the hackathon. Choose
+the route that matches what you want to do:
 
-For a plain-language map of the complete package, see [DELIVERABLE.md](DELIVERABLE.md). The
-[judge-facing slide deck](outputs/tctrl_hackathon_deck.pptx) uses the project's real
-figures and studies.
+| For | Time | Start here | What you will get |
+|---|---:|---|---|
+| **Hackathon judges** | **3 min** | [Open the interactive overview](https://anetoc.github.io/ISCI-hackathon/) | The scientific question, result, failed tests, reusable workflow and next experiment in six scenes |
+| **New readers** | **5 min** | [Read the plain-language package map](DELIVERABLE.md) | What was built, what is real today and what is deliberately not claimed |
+| **Researchers** | **10 min** | [Review the executed notebook](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb) | The result, falsification tests, Claude correction loop and reusable framework |
+| **Bring your own data** | **15 min** | [Run the DatasetSpec workflow](#run-t-ctrl-on-another-perturb-seq-dataset) | Validate, inspect and analyze a compatible Perturb-seq dataset through the same bounded pipeline |
+| **Scientific reviewers** | **Deep dive** | [Audit the claim ledger](reports/CLAIM_LEDGER.md) and [result provenance](outputs/hackathon/readiness_report.json) | Claim status, evidence, limitations, hashes and explicit overclaim boundaries |
+
+The shortest complete judge route is the [interactive overview](https://anetoc.github.io/ISCI-hackathon/),
+the [evidence-based slide deck](outputs/tctrl_hackathon_deck.pptx) and the
+[executed notebook](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb). The committed
+[2:30 Full-HD MP4](demo_assets/hackathon/hackathon_fallback_2m30.mp4) is a deterministic offline
+visual fallback for presentation continuity. It is not the final orientation video: the public
+submission recording must include reviewed narration and pass the repository's media validator.
 
 ## The result
 
@@ -176,7 +182,7 @@ automated readiness report is [outputs/hackathon/readiness_report.json](outputs/
 Legacy cross-system aggregates are labeled separately when their original reports predate the
 canonical provenance schema. Human narration and PI approval remain explicit manual gates.
 
-## Repository map — three layers
+## Repository map — four layers
 
 | Layer | Start here | Purpose |
 |---|---|---|
