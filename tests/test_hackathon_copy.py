@@ -36,3 +36,21 @@ def test_submission_summary_stays_within_form_limit():
     summary = text.split("## 150-word summary", 1)[1].split("---", 1)[0]
     words = re.findall(r"\b[\w+→-]+\b", summary)
     assert 140 <= len(words) <= 150
+
+
+def test_public_related_work_is_not_mixed_with_portuguese_planning_copy():
+    """Keep the public English document separate from any future pt-BR translation."""
+
+    text = (ROOT / "docs" / "related_work.md").read_text()
+    portuguese_markers = [
+        "Objetivo:",
+        "Pergunta-chave",
+        "Por que importa",
+        "Como abordar",
+        "dúvidas de regras",
+        "obrigatórias para",
+        "prêmio Gladstone",
+        "não são nosso foco",
+        "Parceiros técnicos",
+    ]
+    assert not [marker for marker in portuguese_markers if marker in text]
