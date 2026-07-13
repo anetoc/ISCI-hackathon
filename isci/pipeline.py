@@ -11,7 +11,8 @@ from pathlib import Path
 from typing import Any
 
 from isci.analysis_runner import run_dataset
-from isci.dataset_spec import DatasetSpec
+from isci.dataset_spec import DatasetSpec, load_dataset_spec
+from isci.effect_builder import build_anndata_effects
 
 
 @dataclass(frozen=True)
@@ -68,27 +69,81 @@ def run_pipeline(
     if block_rows < 1 or not destination.is_relative_to(root):
         report = {**base, "status": "INVALID_OUTPUT", "stages": []}
         return PipelineResult(spec.dataset.id, "INVALID_OUTPUT", None, report)
-    if spec.input.layout == "anndata_cells":
-        report = {**base, "status": "CELL_PIPELINE_REQUIRED", "stages": []}
-        return PipelineResult(spec.dataset.id, "CELL_PIPELINE_REQUIRED", None, report)
-
-    run_dir = destination / "run"
-    analysis = run_dataset(spec, repo_root=root, output_dir=run_dir, block_rows=block_rows)
     destination.mkdir(parents=True, exist_ok=True)
     report_path = destination / "pipeline_report.json"
+    stages: list[dict[str, Any]] = [
+        {"name": "contract", "status": "VALIDATED", "layout": spec.input.layout}
+    ]
+    source_data_sha256: str | None = None
+    effective_spec = spec
+    if spec.input.layout == "anndata_cells":
+        effects_dir = destination / "effects"
+        build = build_anndata_effects(
+            spec,
+            repo_root=root,
+            output_dir=effects_dir,
+            block_rows=block_rows,
+        )
+        preflight = build.report.get("preflight", {})
+        stages.extend(
+            [
+                {
+                    "name": "cell_preflight",
+                    "status": preflight.get("status", "NOT_EVALUABLE"),
+                    "can_construct_effects": preflight.get("can_construct_effects", False),
+                },
+                {
+                    "name": "effect_construction",
+                    "status": build.status,
+                    "output_dir": _relative(effects_dir, root),
+                },
+            ]
+        )
+        source_data_sha256 = build.report.get("input_sha256") or preflight.get("data_sha256")
+        if not build.completed or build.generated_spec_path is None:
+            report = {
+                **base,
+                "status": build.status,
+                "stages": stages,
+                "git_sha": _git_sha(root),
+                "data_sha256": source_data_sha256,
+                "axes_sha256": build.report.get("axes_sha256"),
+                "spec_sha256": _sha256(spec.source_path) if spec.source_path else None,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "command": (
+                    f"isci pipeline {spec.source_path.name if spec.source_path else '<dataset.yaml>'}"
+                ),
+            }
+            report_path.write_text(json.dumps(report, indent=2) + "\n")
+            return PipelineResult(spec.dataset.id, build.status, report_path, report)
+        effective_spec = load_dataset_spec(
+            build.generated_spec_path,
+            repo_root=root,
+            check_paths=True,
+        )
+
+    run_dir = destination / "run"
+    analysis = run_dataset(
+        effective_spec,
+        repo_root=root,
+        output_dir=run_dir,
+        block_rows=block_rows,
+    )
+    stages.append(
+        {
+            "name": "analysis",
+            "status": analysis.status,
+            "output_dir": _relative(run_dir, root),
+        }
+    )
+    analysis_data_sha256 = analysis.report.get("input_sha256")
     report = {
         **base,
         "status": analysis.status,
-        "stages": [
-            {"name": "contract", "status": "VALIDATED", "layout": spec.input.layout},
-            {
-                "name": "analysis",
-                "status": analysis.status,
-                "output_dir": _relative(run_dir, root),
-            },
-        ],
+        "stages": stages,
         "git_sha": _git_sha(root),
-        "data_sha256": analysis.report.get("input_sha256"),
+        "data_sha256": source_data_sha256 or analysis_data_sha256,
+        "analysis_data_sha256": analysis_data_sha256,
         "axes_sha256": analysis.report.get("axes_sha256"),
         "spec_sha256": _sha256(spec.source_path) if spec.source_path else None,
         "timestamp": datetime.now(timezone.utc).isoformat(),
