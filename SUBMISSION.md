@@ -1,10 +1,10 @@
 # Submission — Built with Claude: Life Sciences (Researcher Track)
 
 ## Title
-**ISCI: Claude as an auditable scientific judge for T-cell controllability**
+**T-CTRL: Claude as an auditable scientific judge for T-cell controllability**
 
 ## One-line pitch
-An auditable scientific-judgment workflow, demonstrated on genome-scale T-cell Perturb-seq, that
+T-CTRL, powered by the ISCI method, is an auditable scientific-judgment workflow that
 challenged a failed score, rebuilt the leakage controls and returns explicit PASS, FAIL, NULL or
 NOT-EVALUABLE verdicts with provenance.
 

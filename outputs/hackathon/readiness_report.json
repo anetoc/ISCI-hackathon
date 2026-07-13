@@ -53,18 +53,18 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "04f342f9a2e59ba4c6695f0e03e41c552d71c7ae",
+  "git_sha": "d75b352537f19b0abc2a372060d6bc29a93edf9d",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
-  "source_paths_dirty": false,
+  "source_paths_dirty": true,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "19c47ecb4440934cf16655649907a552a337b0f1843322cce1b197f28117b8a4",
+    "sha256": "915e418f0f73d1b2d444c3f536ce85337f6fe40c576a46eb0a290b8e09c116dc",
     "files_sha256": {
-      "DELIVERABLE.md": "89e62a2968de1ac17ba9ec2fb9fa5740a86fe552bbff840e0bc6d980ab6091bd",
+      "DELIVERABLE.md": "b1dc51ade4c17814a092e04a87ea09cc167316ff9d5c4e2dc54f504ab6433a89",
       "DEMO_SCRIPT.md": "dc359d56482fa114a1c7bf384e74d525f06d955cc97b9840003b6562ab2af08b",
       "JUDGE_QA.md": "e93858d99be0a82bfbdbf3e28076bfc894e45a56ad373e72a2c98f2b83b991e7",
-      "README.md": "ef6d0dd725d933f7143d95c137b7b49b0d2dba0e099a86381bbb386855550617",
-      "SUBMISSION.md": "4da67f792c17adb09659a32075094e4fb1659e1d5970aa243ce2b12517101967",
+      "README.md": "950a17281300ab205e44b8d1595e8ac22c55d18538d0916f87f43bd56574c8e1",
+      "SUBMISSION.md": "95c65edea403c0019ab83ef1729a5b8f91767c0ecbf6b9c2788eddb790417f09",
       "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
       "config/hackathon_timing.json": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
       "contracts/dataset_spec.schema.json": "9eb53a04799e4ae784b806c102ef3109b886c10fac665072fe710a7d475265f0",
@@ -94,7 +94,7 @@
       "outputs/hackathon/screenshot_manifest.json": "faff4ee2b9fdad7c62a9da8c9be7de683666e7f3b82b6a5260e44bd586dc73de",
       "outputs/hackathon/video_manifest.json": "0b902969efd3ae89d6aaaa4d4375d44316443d3d63d22f2cc1efb5dccd86c047",
       "outputs/isci_hackathon_medical_deck.pptx": "1386feb90d4ddb834ab38c191120ba4c533d820e5f74b673d7435474c5a017f1",
-      "pyproject.toml": "c73fb16933ccc2b227eb75e28f3e3802e6e4fc663de1b836e712b8a185e50a34",
+      "pyproject.toml": "ae7211c5298b55734c6d4b6a47b2ec1ed04aff84ac74a442edc6bb28563ddb82",
       "scripts/check_hackathon_readiness.py": "d6bc392fe54549f0310fac43997dcd1cb10c0d3896544fa26987496da2cd5172",
       "scripts/release_provenance.py": "6bb306ad56967cdbb0357f70cca81a2bf5355c0e0ce315154b89d3dbf392b19f",
       "skills/isci-controllership/SKILL.md": "632515998051b8b13fcaa400e3da032547c7525fe8bc5307f894b2fb9a46f392",
@@ -104,6 +104,6 @@
   "branch": "codex/controllability-decomposition",
   "data_sha256": "56aca8a89b4ee55fdfa24bbf0d912894340d702d496b400542aecca4e8e6daf2",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-13T00:31:49.123475+00:00",
+  "timestamp": "2026-07-13T00:50:38.153662+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }

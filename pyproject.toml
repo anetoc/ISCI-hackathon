@@ -1,7 +1,7 @@
 [project]
 name = "isci"
 version = "0.1.0"
-description = "Immune-State Controllability Index — Built with Claude: Life Sciences hackathon"
+description = "ISCI, the auditable T-cell controllability method behind T-CTRL"
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.11,<3.14"

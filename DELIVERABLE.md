@@ -1,8 +1,9 @@
-# What we are delivering
+# What T-CTRL delivers
 
-ISCI is not a single Python script and it is not a therapeutic-target list. It is an integrated,
-auditable research package that connects a biological question to deterministic analysis, frozen
-evidence and a judge-facing explanation.
+T-CTRL is the judge-facing experience; ISCI is the scientific method and Python package behind it.
+Together they are not a single script or a therapeutic-target list, but an integrated, auditable
+research package that connects a biological question to deterministic analysis, frozen evidence
+and a judge-facing explanation.
 
 ## The package in plain language
 
