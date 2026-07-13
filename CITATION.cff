@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use T-CTRL or the ISCI method, please cite this software and the underlying datasets."
+title: "T-CTRL, powered by ISCI: auditable T-cell controllability analysis"
+type: software
+authors:
+  - family-names: Costa
+    given-names: Abel
+version: 0.1.0
+date-released: 2026-07-12
+repository-code: "https://github.com/anetoc/ISCI-hackathon"
+license: MIT
+keywords:
+  - Perturb-seq
+  - T-cell
+  - controllability
+  - reproducible research
+  - scientific evaluation
+abstract: >-
+  T-CTRL is a judge-facing, auditable workflow powered by the ISCI method. It tests whether
+  state-specific and reproducible perturbation effects add regulator-recovery signal beyond raw
+  effect magnitude, with leakage controls and explicit PASS, FAIL, NULL and NOT-EVALUABLE verdicts.
+

@@ -84,7 +84,7 @@ Before the GPU cell-level run (Brief 02), we tested axis orthogonality on the Ma
 pseudobulk (per-perturbation module z-scores) across all three culture conditions. Result
 (`outputs/iec_latent/iec_axis_scores_pseudobulk_stim48.csv`, figure below):
 
-![IEC axis orthogonality](figures/iec_axis_orthogonality_pseudobulk.png)
+![IEC axis orthogonality](../figures/iec_axis_orthogonality_pseudobulk.png)
 
 | pair | Rest | Stim8hr | Stim48hr | verdict |
 |---|---|---|---|---|

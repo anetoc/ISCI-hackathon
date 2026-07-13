@@ -267,7 +267,7 @@ A signal that merely fit the anchor would not be a property. We therefore stated
 falsifiable prediction — hold in immune systems, fail in non-immune ones — and tested four
 perturbation systems with pre-specified expected verdicts (Figure 1).
 
-![Figure 1. Four-system CCI scope. The magnitude-conditional controllability gain (ΔAUPRC, M→M+C) with 95% CIs across four perturbation systems: Marson CD4+ T (PASS), Schmidt CD4+ CRISPRa (directional near-miss), Norman K562 (non-immune, FAIL near-miss), Replogle RPE1 (non-immune, robust FAIL). The property holds in immune systems and fails in non-immune ones, demarcating a boundary rather than a universal claim.]({{artifact:art_ea7be455-9af4-4c04-89da-094d738dd9d3}})
+![Figure 1. Four-system CCI scope. The magnitude-conditional controllability gain (ΔAUPRC, M→M+C) with 95% CIs across four perturbation systems: Marson CD4+ T (PASS), Schmidt CD4+ CRISPRa (directional near-miss), Norman K562 (non-immune, FAIL near-miss), Replogle RPE1 (non-immune, robust FAIL). The property holds in immune systems and fails in non-immune ones, demarcating a boundary rather than a universal claim.](../figures/cci_scope_4systems.png)
 
 The Marson CD4+ anchor passes (ΔAUPRC +0.229 [0.072, 0.405]); the Schmidt CD4+ CRISPRa screen shows
 the same directional signal under an opposite perturbation modality but is underpowered (+0.138
@@ -364,9 +364,9 @@ functional-regulator class. This narrows the claim honestly: CCI separates axis-
 from magnitude-matched noise; it does not generalize to every gene a functional screen would call a
 regulator (Figure 2c).
 
-![Figure 2c. Positive-set stress test. On an independent external functional-screen positive set (20 non-marker T-cell regulators, expression-matched negatives), ISCI_orthogonal does not beat magnitude — ΔAUPRC −0.281 [−0.476, −0.073], CI excluding zero. The non-marker subset of our own curated set also fails. The orthogonal signal is specific to canonical axis-defining regulators; external functional-screen regulators are magnitude-visible. This is the honest upper bound on generality.]({{artifact:art_faf87101-687f-46bf-83eb-a748cdceb660}})
+![Figure 2c. Positive-set stress test. On an independent external functional-screen positive set (20 non-marker T-cell regulators, expression-matched negatives), ISCI_orthogonal does not beat magnitude — ΔAUPRC −0.281 [−0.476, −0.073], CI excluding zero. The non-marker subset of our own curated set also fails. The orthogonal signal is specific to canonical axis-defining regulators; external functional-screen regulators are magnitude-visible. This is the honest upper bound on generality.](../figures/positive_set_stress_test.png)
 
-![Figure 2b. Robustness of the magnitude-conditional gain. Left: ΔAUPRC gain over magnitude is stable (+0.25 to +0.33) across detectable-effect gates from top-40% to 100% of perturbations by magnitude, so the effect is not a threshold artifact. Right: removing the four axis-defining master TFs (GATA3, TBX21, STAT6, IRF1) attenuates the point gain from +0.25 to +0.03 at n=9, with a wide CI that still includes the original effect — an underpowered, honestly-reported limitation rather than a demonstrated null.]({{artifact:art_fa4b89ac-2af2-4e33-a375-3b5e95a67c2c}})
+![Figure 2b. Robustness of the magnitude-conditional gain. Left: ΔAUPRC gain over magnitude is stable (+0.25 to +0.33) across detectable-effect gates from top-40% to 100% of perturbations by magnitude, so the effect is not a threshold artifact. Right: removing the four axis-defining master TFs (GATA3, TBX21, STAT6, IRF1) attenuates the point gain from +0.25 to +0.03 at n=9, with a wide CI that still includes the original effect — an underpowered, honestly-reported limitation rather than a demonstrated null.](../figures/robustness_ablation_gate.png)
 
 ### 3.3 The phenotype decomposes into ~2.5 axes
 
@@ -383,7 +383,7 @@ partial-correlation control for CD8 fraction (ρ = −0.44 after control, versus
 correlation of +0.57), confirming it is biological coupling rather than a lineage-composition
 artifact.
 
-![Figure 2. IEC axis orthogonality at pseudobulk. Pairwise correlation of persistence, killing, and resistance axis scores across perturbations (Stim 48 h). Persistence is orthogonal to both other axes (|ρ|<0.08) while killing and resistance are entangled (ρ≈−0.45), yielding ~2.5 separable axes.]({{artifact:art_d0d3182a-3b52-43a7-a99c-ee087be45d5c}})
+![Figure 2. IEC axis orthogonality at pseudobulk. Pairwise correlation of persistence, killing, and resistance axis scores across perturbations (Stim 48 h). Persistence is orthogonal to both other axes (|ρ|<0.08) while killing and resistance are entangled (ρ≈−0.45), yielding ~2.5 separable axes.](../figures/iec_axis_orthogonality_pseudobulk.png)
 
 ### 3.4 Mechanism separates from magnitude
 
@@ -397,7 +397,7 @@ magnitude-independent finding. TCR-proximal phosphorylation and chromatin modifi
 high-effect but not axis-specific. This is a mechanistic prioritization, not a claim of causal
 family membership.
 
-![Figure 3. Curated-set enrichment separates controllership from magnitude. Six pre-specified T-cell gene sets scored along the continuous ISCI_orthogonal (rank-based MWU, BH-FDR) versus a magnitude guard. NF-κB and Treg-brake sets enrich in controllership but not in magnitude (magnitude-independent controllers); TCR-proximal enriches in both (high-effect positive control).]({{artifact:art_6204522c-c99f-4ea7-9ac6-fb0ab129fa70}})
+![Figure 3. Curated-set enrichment separates controllership from magnitude. Six pre-specified T-cell gene sets scored along the continuous ISCI_orthogonal (rank-based MWU, BH-FDR) versus a magnitude guard. NF-κB and Treg-brake sets enrich in controllership but not in magnitude (magnitude-independent controllers); TCR-proximal enriches in both (high-effect positive control).](../figures/curated_enrichment.png)
 
 A signed perturbation→module graph replaces PPI centrality — which added nothing over magnitude —
 with causal perturbation edges (Figure 4). Therapeutic convergence (coherent movement in the
@@ -407,7 +407,7 @@ versus magnitude. The sharpest read is that the #1 controller **IRF1 has negativ
 direction. Controllership and therapeutic desirability are distinct, which is exactly why a naive
 "top controller = target" reading is wrong.
 
-![Figure 4. Signed perturbation→module graph. Each perturbation's signed effect on six functional modules; therapeutic convergence (desirable-direction movement) is independent of both controllership and magnitude. The top controller IRF1 points against the therapeutic direction.]({{artifact:art_b3fb0f8b-9347-4443-9519-6701c1213584}})
+![Figure 4. Signed perturbation→module graph. Each perturbation's signed effect on six functional modules; therapeutic convergence (desirable-direction movement) is independent of both controllership and magnitude. The top controller IRF1 points against the therapeutic direction.](../figures/signed_perturbation_graph.png)
 
 The 70 top controllers are sorted into a safety-first decision board (A manufacturing modulation, 24;
 B engineering candidates, 6; C probe-only, 18; D dangerous rheostats, 22). The overclaim guard is
@@ -425,7 +425,7 @@ same way, and a trivial **CD8-fraction compositional baseline (study-out AUROC 0
 IEC axis**. The null replicates in an NHL-only stratum (n = 77) and an infusion-product-only subset
 (n = 73).
 
-![Figure 5. Well-powered clinical null. IEC axes do not predict CAR-T response under leave-one-study-out cross-validation. The persistence axis' apparent patient-out signal (0.643) collapses to chance across studies (0.533, CI includes 0.5); a CD8-fraction baseline outperforms every axis. The patient-level signal was per-study batch structure, not transportable biology.]({{artifact:art_c657f960-dfe7-4a19-a7f2-903ca21d505d}})
+![Figure 5. Well-powered clinical null. IEC axes do not predict CAR-T response under leave-one-study-out cross-validation. The persistence axis' apparent patient-out signal (0.643) collapses to chance across studies (0.533, CI includes 0.5); a CD8-fraction baseline outperforms every axis. The patient-level signal was per-study batch structure, not transportable biology.](../outputs/iec_clinical/iec_prediction.png)
 
 The interpretation is unambiguous: the patient-out signal was **per-study batch structure, not
 transportable biology**. Per the pre-specified criterion, IEC is a descriptive multi-axis capacity,
@@ -444,7 +444,7 @@ as a cross-study CAR-T response biomarker, and FAILs as network centrality. Thes
 result — they map where magnitude-independent controllership exists and where it does not, which is a
 more reviewer-trustworthy claim than an unbounded positive.
 
-![Figure 4. Layer/test verdict map. Each adjudicated test with its evidence and verdict; the project's contribution is the scope map, not a single PASS. Verdicts are direction-aware.]({{artifact:art_573ec4b9-d3de-4287-a974-c5f563255f4f}})
+![Figure 4. Layer/test verdict map. Each adjudicated test with its evidence and verdict; the project's contribution is the scope map, not a single PASS. Verdicts are direction-aware.](../figures/layer_verdict_map.png)
 
 **A direction-aware verdict rule.** The protein-layer test exposed a failure mode of metric-only
 benchmarking: AUPRC can be high for the wrong reason when the informative feature is oppositely

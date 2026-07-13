@@ -18,9 +18,9 @@ _Locked: 2026-07-08. Core commit: `32e991b` (see `git log`)._
 | **Descriptive (a) — full detectable-set AUPRC** | Score alone 0.722 vs magnitude alone 0.415 (all detectable regulators vs all other detectable genes; ranking-quality point comparison, no bootstrap, no matched negatives). |
 | **Descriptive (b) — matched-negative bootstrap gain (C-vs-M)** | +0.248 [−0.043, 0.467] single-condition / +0.229 [0.072, 0.405] three-condition aggregate (n_pos = 13–21 vs 8× expression-matched negatives; CI crosses 0 single-condition). |
 | **Note** | (a) and (b) are **different populations and methods** — the 0.722−0.415 point gap is NOT the bootstrap gain in (b), and neither is the authoritative test, which is the incremental M→M+C row above. |
-| **Ranking file** | `outputs/isci_final_ranking.csv` (md5 `5337113b682c38bd0c2d5755e2078520`) |
-| **Central figure** | `outputs/fig_central.png` |
-| **Evidence cards** | `outputs/evidence_cards.md` (v3, relevance-tagged) |
+| **Ranking file** | `results/final/isci_final_ranking.csv` (md5 `5337113b682c38bd0c2d5755e2078520`) |
+| **Central figure** | `figures/final/fig_central.png` |
+| **Evidence cards** | `results/final/evidence_cards.md` (v3, relevance-tagged) |
 
 ## Secondary / not-primary
 
@@ -28,7 +28,7 @@ _Locked: 2026-07-08. Core commit: `32e991b` (see `git log`)._
   magnitude-dominated at the top. Kept in the CSV as a labeled secondary column; **not** the headline.
 - **DEPRECATED: `rank_product(M_pos, Q, R)`** — the original D0 aggregator. It lost to
   DE-magnitude under expression-matched negatives (AUPRC 0.35 vs 0.41). Retained only in
-  `outputs/manifest_d0.json` as the historical D0 run; **not** a final deliverable.
+  `archive/d0/manifest_d0.json` as the historical D0 run; **not** a final deliverable.
 
 ## The validated claim (exact wording — do not overstate)
 

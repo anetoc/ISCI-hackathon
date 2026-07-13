@@ -40,7 +40,7 @@ system where it fails defines the property's boundary, reported as such.
 
 ## 2. Cross-dataset test
 
-![Cross-dataset invariance]({{artifact:art_800f8a37-80cb-4a91-9c81-ba37005af1c6}})
+![Cross-dataset scope](../figures/cci_invariance_crossdataset.png)
 
 | System | Cell type | Modality | n_pos | Standardized matched C-vs-M ΔAUPRC | 95% CI | LR p | Spearman(C,M) | Verdict |
 |---|---|---|---|---|---|---|---|---|

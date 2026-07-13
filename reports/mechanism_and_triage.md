@@ -32,7 +32,7 @@ controllership from effect size.
 | cytoskeleton / synapse | 0.52 | 0.22 | 5e-3 | high-magnitude, not a specific controller |
 | RNA-decay brakes | 0.33 | 0.78 | 7e-3 | high-magnitude, not a specific controller |
 
-![Curated enrichment: controllership vs magnitude](figures/curated_enrichment.png)
+![Curated enrichment: controllership vs magnitude](../figures/curated_enrichment.png)
 
 **The clean finding:** **NF-κB activation** and **Treg/brake/apoptosis** are enriched in
 controllership (`ISCI_orthogonal`) but **NOT in magnitude** — these are the families where high

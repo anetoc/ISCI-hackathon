@@ -42,6 +42,6 @@ companion.**
 - Gap 2 (independent positive set): **DONE** — external functional-screen set FAILs, sharpest honest
   boundary (Fig 2c).
 - Gap 13 (foundation-model triangulation): **briefed** for the machine (scGPT zero-shot embedding
-  separation) — `briefs/07_scgpt_zeroshot_concordance.md`.
+  separation) — `outputs/layers/scgpt_zeroshot/scgpt_separation_result.json`.
 - Gaps 9 (phospho-flow) and 8/17 (prospective cohort): wet-lab / clinical — protocol stubs only,
   `reports/experimental_protocols_paper2.md`.

@@ -1,5 +1,5 @@
 {
-  "h5ad": "/mnt/dados2/abel-tsc/data_public/cart/Atlas_integ_scArches_FINAL_V5.h5ad",
+  "h5ad": "data_public/cart/Atlas_integ_scArches_FINAL_V5.h5ad",
   "n_obs": 455370,
   "n_var": 48740,
   "obsm_keys": [

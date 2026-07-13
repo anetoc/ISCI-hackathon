@@ -21,7 +21,7 @@ and a judge-facing explanation.
 
 ## Start here
 
-- **Medical-language deck:** `outputs/isci_hackathon_medical_deck.pptx`
+- **Judge-facing deck:** `outputs/tctrl_hackathon_deck.pptx`
 - **Executed researcher notebook:** `notebooks/ISCI_Researcher_Track_Walkthrough.ipynb`
 - **Live/offline demo:** `docs/hackathon_judge_demo.html`
 - **2:30 video fallback:** `demo_assets/hackathon/hackathon_fallback_2m30.mp4`

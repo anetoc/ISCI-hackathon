@@ -28,7 +28,8 @@ def test_demo_is_offline_and_contains_six_stage_states():
     assert "https://" not in html
     assert "http://" not in html
     assert "data:image/png;base64," in html
-    assert "PRETEXT_SOURCE_B64" in html
+    assert "PRETEXT_SOURCE_B64" not in html
+    assert "~/.claude" not in html
     assert ".failure-grid, .judge-grid, .experiment-grid { display: grid;" not in html
     assert 'params.get("static") === "1"' in html
     assert 'params.get("scene")' in html

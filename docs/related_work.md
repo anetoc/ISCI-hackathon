@@ -4,6 +4,10 @@
 > Purpose: (1) ground the project in the literature, (2) map every dataset/tool we can use,
 > (3) define the novelty gap, (4) list concrete questions for IDOR immunologists and Anthropic office hours.
 > Language: English (repo/judge-facing). Author: Abel Costa (IDOR).
+>
+> **Release note:** this document began as a broad pre-analysis landscape. Proposed D/A/S network,
+> foundation-model and clinical layers are now evidence overlays, not ISCI-core components. The
+> current method and supported claims are governed by `docs/method.md` and `reports/result_lock.md`.
 
 ---
 
@@ -11,10 +15,10 @@
 
 Genome-scale perturbation maps tell us which genes *change* T-cell state, but not which genes
 *control* it in a therapeutically actionable, reproducible way. We define the **Immune-State
-Controllability Index (ISCI)** to separate *controllers* from mere *associates*, validate it against
-known regulators and independent screens, and — as the flagship step — project the resulting
-controllability signature onto **real patient cohorts treated with CAR-T and bispecific/T-cell-engager
-therapies** to test whether it stratifies response vs. resistance and nominates mechanism.
+Controllability Index (ISCI)** to test whether state specificity and biological repeatability add
+regulator-recovery signal after effect magnitude is known. The supported result is bounded to
+canonical axis-defining regulators. Clinical projection was tested separately and returned NULL;
+it is not part of the controller score.
 
 ---
 
@@ -174,32 +178,35 @@ ClinicalTrials.gov (translational context). All available as Claude for Life Sci
 
 | Work | What it does | Overlap with ISCI | How we differ |
 |---|---|---|---|
-| **pert2state_model** (Dann/Marson; `emdann/pert2state_model`, MIT) | Fits **linear regression**: reconstruct an observational state signature as a linear combination of perturbation effect vectors; nominates regulators (Fig. 4 of the Marson preprint) | **Highest overlap** — same dataset, same question ("who moves cells toward a state?") | ISCI adds **reproducibility gating (R)**, **network control (D)**, **in-silico concordance (A)**, **state stability (S)**, explicit **controller vs associate** baselines, and **clinical bridge** to CAR-T/bispecific cohorts. pert2state is the baseline to beat, not ignore. |
-| **CEFCON** (Nat Commun 2023) | GRN + MFVS/MDS driver regulators from scRNA-seq | Overlap on **D** (structural control) | CEFCON is observational scRNA-seq, not genome-scale Perturb-seq; no clinical translation; no stability term. |
+| **pert2state_model** (Dann/Marson; `emdann/pert2state_model`, MIT) | Fits **linear regression**: reconstruct an observational state signature as a linear combination of perturbation effect vectors; nominates regulators (Fig. 4 of the Marson preprint) | **Highest overlap** — same dataset, same question ("who moves cells toward a state?") | ISCI asks whether leave-one-marker-out state specificity and cross-donor repeatability add information conditional on magnitude, with native matched negatives and fully refit OOF evaluation. |
+| **CEFCON** (Nat Commun 2023) | GRN + MFVS/MDS driver regulators from scRNA-seq | Overlap on distinguishing drivers from markers | CEFCON infers drivers from an observational GRN; ISCI evaluates measured perturbations and can explicitly fail by dataset or positive class. |
 | **tcellMIL** (`zinagoodlab/tcellMIL`; Blood 2025-5897; NeurIPS 2025) | Attention-MIL predicts **3-month CAR-T response** from infusion-product scRNA; SCENIC regulons; **in-silico TF perturbation** to nominate edits | Overlap on **clinical prediction** + in-silico perturbation | tcellMIL starts from **patient outcome labels**; ISCI starts from **causal perturbation map** then projects forward. Complementary — we can benchmark ISCI signature vs tcellMIL/SCENIC features on same cohorts. |
 | **tcellNF** (OpenReview uuQjL4L0J9) | Normalizing flows on CAR-T scRNA conditioned on durable response; imputes perturbation effects | Overlap on CAR-T outcome modeling | Generative/flow-based; no explicit controllability index or network control. |
 | **Functional CAR-T atlas** (`ML4BM-Lab/Functional-cart-atlas`; Zenodo 17213452) | >1M cells, 13 studies, 11 phenotypes, response/ICANS metadata | Overlap on **CAR-T product characterization** | Atlas/resource, not a controllability method. Use for phenotype labels + validation of our signature enrichment. |
 | **Augur / pertpy Distance** | Ranks cell types or perturbations by response magnitude | Overlap on "which perturbations matter most" | Phenomenological ranking, not multi-component controllability with clinical bridge. |
 | **Augur-style + Marson regulator coefficients** (shipped in dataset suppl. tables) | Pre-computed polarization/activation regulator ranks per condition | Overlap on Th1/Th2/activation axes | We extend to exhaustion/memory/cytotoxicity + ISCI formalism + patient validation. |
 
-**Positioning sentence for judges:** pert2state_model asks "which perturbations reconstruct this signature?"; ISCI asks "which genes **control** therapeutically relevant state transitions in a **reproducible, structurally grounded, stable, and clinically projectable** way?"
+**Positioning sentence for judges:** pert2state_model asks "which perturbations reconstruct this
+signature?"; ISCI asks whether a perturbation produces a precise, repeatable state shift after its
+effect magnitude is already accounted for.
 
 ---
 
 ## 5. Novelty gap (what nobody has done, feasible in a week)
 
-No prior work unites, over this newly released CD4+ genome-scale map:
-1. **directional movement** along *clinically defined* T-cell axes, weighted by
-2. **reproducibility** (cross-donor/cross-guide, already in the data), plus
-3. **structural network control** (driver-node/FVS-MDS), plus
-4. **in-silico concordance** (CellOracle/GEARS/State), plus
-5. **target-state stability** (geometric coherence) — *novel component*, and then
-6. **cross-validation against independent functional screens**, and
-7. **projection onto patient CAR-T / bispecific cohorts** to predict resistance/sensitivity,
-8. delivered as an **auditable, provenance-tracked Claude Science skill** with per-gene traceable citations.
+The release contribution is a falsifiable measurement and judgment workflow over the newly released
+CD4+ map:
 
-We are not inventing a new inference method from scratch (high risk in 7 days); we are defining a
-**defensible, benchmarked, clinically-bridged controllability index** and proving each component adds signal.
+1. leave-one-marker-out state-axis projections;
+2. cross-donor/guide repeatability;
+3. explicit conditioning on effect magnitude;
+4. native expression/power-matched negatives;
+5. fully refit out-of-fold and permutation evaluation;
+6. independent positive-class and cross-system boundary tests; and
+7. provenance-tracked PASS, FAIL, NULL and NOT-EVALUABLE outcomes.
+
+Network, foundation-model, targetability and clinical analyses remain separate overlays. Their
+negative or non-evaluable results help define scope but do not enter the core ranking.
 
 ---
 

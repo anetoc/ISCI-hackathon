@@ -1,14 +1,8 @@
-# OS
+# OS and local tool state
 .DS_Store
-
-# Cursor internal state (keep plans, drop hook state)
-.cursor/hooks/
-
-# Data (large, downloaded from public sources; not versioned)
-data/*
-!data/README.md
-*.h5ad
-*.h5mu
+.cursor/
+.claude/
+.gstack/
 
 # Python
 __pycache__/
@@ -17,15 +11,13 @@ __pycache__/
 .uv/
 .ipynb_checkpoints/
 
-# Env / secrets
+# Secrets and local configuration
 .env
 .env.*
 
-# Transient run logs
-logs/
-
-# Large datasets and local compute
-data/
+# Large public datasets: download locally; do not version
+data/*
+!data/README.md
 data_public/
 *.h5ad
 *.h5mu
@@ -36,22 +28,21 @@ data_public/
 *.fastq
 *.bam
 *.cram
+
+# Transient compute and logs
 tmp/
 scratch/
-logs/*.log
-.env
-.env.*
-__pycache__/
-.ipynb_checkpoints/
-.DS_Store
+logs/
+*.log
 outputs/iec_clinical/cell_axis_scores.parquet
 outputs/iec_latent/iec_axis_scores_celllevel.csv
 outputs/layers/frangieh_protein/totalvi_model/
-.gstack/
 
-# Local review and inter-tool handoff artifacts (never publish)
+# Local review and inter-tool handoff artifacts
 handoff/
 _view_*.png
+figures/third_system_invariance.png
+outputs/targetability_input.csv
 
 # Hackathon administration material is not part of the scientific deliverable
 Application.docx
