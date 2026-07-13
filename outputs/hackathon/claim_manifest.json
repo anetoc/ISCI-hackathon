@@ -2,16 +2,16 @@
   "schema_version": "hackathon_claim_manifest_v1",
   "title": "T-CTRL, powered by ISCI — Claude as an Auditable Scientific Judge",
   "thesis": "Magnitude says how far a cell moved; controllability asks where it moved, whether it repeated, and whether the evidence deserves a PASS.",
-  "generated_at": "2026-07-13T03:17:44.347940+00:00",
-  "git_sha": "ad120dd3a87d61724bfd0e58c6c65078b849a520",
+  "generated_at": "2026-07-13T13:28:47.573441+00:00",
+  "git_sha": "7e8c10627c3af2daa29534faa53b4ca74f420cfb",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": false,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "c3a261383a3d57e552373213bff9be0d19a5148d836e6b76c07806cd107d3efd",
+    "sha256": "190c547f0ef1b5eb4e0900cf0849a627984f03aca4ee3a886fe41f0bcc82b0fa",
     "files_sha256": {
       "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-      "config/hackathon_claims.yaml": "48daf88b0e5d451fc42d25cf7871054e5c7392fdb399cd9476f7be24aa1552ff",
+      "config/hackathon_claims.yaml": "0198fdd6a217c1a029f7a4db7edb111fa0c12bbc0fb1542f898ffd74b8f1ee3a",
       "outputs/iec_clinical/verdict.json": "c77fedee72e40e25498dcdc66126feb911d1ba85525c40cc9401cb702748a548",
       "outputs/isci_oof_incremental.json": "8343980f5c96d07b33880385f2b0e36b457d356de4629f1d90b301d6f8af3266",
       "outputs/layers/scgpt_zeroshot/scgpt_separation_result.json": "1fc958c50128468afe0272c37edc79ca084c05cedef90bc37b2f6fe5c7f0fb5e",
@@ -21,7 +21,7 @@
     }
   },
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "config_sha256": "48daf88b0e5d451fc42d25cf7871054e5c7392fdb399cd9476f7be24aa1552ff",
+  "config_sha256": "0198fdd6a217c1a029f7a4db7edb111fa0c12bbc0fb1542f898ffd74b8f1ee3a",
   "command": "python scripts/build_hackathon_claim_manifest.py",
   "verdict_contract": {
     "PASS": "Prespecified direction and required gates are met.",
@@ -89,7 +89,7 @@
     {
       "claim_id": "C3-CART-CLINICAL",
       "short_label": "CAR-T clinical response",
-      "claim": "A perturbational IEC axis transports as a multi-study CAR-T response predictor.",
+      "claim": "An ISCI-derived perturbational axis transports as a multi-study CAR-T response predictor.",
       "verdict": "NULL",
       "metrics": {
         "study_out_auroc": 0.5327160493827161,
