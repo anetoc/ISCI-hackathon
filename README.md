@@ -26,7 +26,7 @@ NULL or NOT-EVALUABLE** — with the evidence and provenance needed to audit it.
 | **Deep dive** | [Read the claim ledger](reports/CLAIM_LEDGER.md) | Every claim, status, evidence source and explicit “not claimed” boundary |
 
 For a plain-language map of the complete package, see [DELIVERABLE.md](DELIVERABLE.md). The
-[medical-language slide deck](outputs/isci_hackathon_medical_deck.pptx) uses the project's real
+[judge-facing slide deck](outputs/tctrl_hackathon_deck.pptx) uses the project's real
 figures and studies.
 
 ## The result
@@ -38,7 +38,7 @@ In the authoritative pre-specified test, adding controllership features to magni
 AUPRC by **+0.357** (0.539→0.896; 95% CI +0.117 to +0.538). When every learnable step is refit out
 of fold, the conservative gain remains **+0.215** (95% CI +0.074 to +0.560; permutation p=0.010).
 
-![Central magnitude-controlled result](outputs/fig_central.png)
+![Central magnitude-controlled result](figures/final/fig_central.png)
 
 The project reports four related estimands because they answer different questions; it never
 silently swaps one for another:
@@ -87,7 +87,7 @@ The repository is an integrated research package:
    same audited analysis.
 3. **Versioned evidence** binds results to data, axis and Git hashes.
 4. **Judge artifacts** translate the evidence into an executed notebook, offline demos, video,
-   figures and a medical-language deck.
+   figures and an English judge-facing deck.
 5. **Release gates** check scientific copy, provenance, forbidden raw files and media consistency.
 
 ## Why Claude Science mattered
@@ -104,8 +104,8 @@ Claude was used as a scientific critic and evidence operator, not only as a code
 5. Failed, null and structurally non-evaluable branches were preserved instead of hidden.
 
 The correction trail is visible in the [executed notebook](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb),
-[initial Claude Science prompt](docs/claude_science_prompt.md),
-[execution plan](docs/execution_plan.json) and [claim ledger](reports/CLAIM_LEDGER.md). Deterministic,
+[initial Claude Science prompt](docs/claude_science_prompt.md), the
+[archived failed D0 analysis](archive/d0/README.md) and [claim ledger](reports/CLAIM_LEDGER.md). Deterministic,
 versioned Python — not an LLM assertion — computes every reported metric and gate.
 
 ## Run T-CTRL on another Perturb-seq dataset
@@ -202,7 +202,7 @@ These branches are useful hypotheses or boundary tests. They do not modify the c
   resistance behave like roughly 2.5 separable axes; not a response biomarker.
 - [Mechanism and safety triage](reports/mechanism_and_triage.md): separates controllership,
   intervention direction and targetability.
-- [Prospective Gladstone experiment](reports/TCR_RESCUEMAP_OPS_PLAN.md): donor-resolved,
+- [Prospective Gladstone experiment](reports/PROSPECTIVE_DONOR_PANEL_PROTOCOL.md): donor-resolved,
   stimulation-paired falsification plan with frozen promotion gates.
 
 ## Primary data
@@ -234,4 +234,5 @@ Abel Costa — hematologist / onco-hematologist, IDOR (São Paulo, Brazil)
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Original project software is MIT-licensed; see [LICENSE](LICENSE). Public datasets, publications
+and bundled dependencies retain their own terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

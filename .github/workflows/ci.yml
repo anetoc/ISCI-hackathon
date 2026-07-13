@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Python 3.13 quality gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          version: "0.11.28"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Verify lock file
+        run: uv lock --check
+
+      - name: Install locked contributor environment
+        run: uv sync --locked --extra dev --extra visualization
+
+      - name: Lint supported code
+        run: uv run ruff check isci scripts tests
+
+      - name: Check internal documentation links
+        run: uv run python scripts/check_internal_links.py
+
+      - name: Run tests
+        run: uv run pytest -q
+
+      - name: Execute judge notebook from a clean kernel
+        run: >-
+          uv run jupyter nbconvert --to notebook --execute
+          notebooks/ISCI_Researcher_Track_Walkthrough.ipynb
+          --output /tmp/ISCI_Researcher_Track_Walkthrough.executed.ipynb
+          --ExecutePreprocessor.timeout=600
+
+      - name: Build source and wheel distributions
+        run: uv build --out-dir /tmp/isci-dist
+
+      - name: Verify frozen offline package
+        run: make hackathon-check PY='uv run python'

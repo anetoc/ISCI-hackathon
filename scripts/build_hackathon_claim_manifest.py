@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the stage-demo claim manifest from frozen public-data evidence.
+"""Build the T-CTRL stage-demo claim manifest from frozen public-data evidence.
 
 The script does not recompute scientific results. It validates the already
 adjudicated artifacts, applies the presentation verdict contract, and records

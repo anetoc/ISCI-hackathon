@@ -1,153 +1,85 @@
-# Benchmark & Ablation Design — ISCI
+# ISCI benchmark and leakage-control contract
 
-> Central figure for **Depth (20%)** and **Demo (30%)**. Companion to `method.md` and `docs/execution_plan.json`.
-> **Revision:** incorporates fixes C1–C8 (Jul 7, 2026 peer review).
+This document describes the benchmark that supports the frozen T-CTRL/ISCI claim. Exact results
+and wording are locked in [`reports/result_lock.md`](../reports/result_lock.md).
 
-## Question
+## Primary question
 
-Under **leave-one-out axis construction**, does ISCI recover known T-cell **controllers** better than baselines, and does each component (D, A, residualized S) add measurable signal?
+Among perturbations with detectable effects, do state specificity and cross-replicate
+reproducibility improve recovery of canonical axis-defining T-cell regulators after effect
+magnitude is already known?
 
----
+The comparison is **magnitude M versus magnitude plus controllership C**. It is not the abandoned
+question “does a composite index beat magnitude?”
 
-## C1 — Leave-one-out axes (non-negotiable)
+## Positives and scope
 
-Ground-truth genes (FOXO1, TCF7, TOX, BACH2, …) appear in `config/axes.yaml` marker sets. Scoring them on axes they define is **circular**.
+The supported positive set contains canonical, axis-defining T-cell-state regulators. This is a
+narrow mechanistic class, not every functional regulator. A separate external non-marker positive
+set was evaluated and failed, establishing the upper boundary of the claim.
 
-**Rule:** when scoring gene `g`, rebuild every axis signature **without** `g`. Report **all** headline AUROC/AUPRC only under LOO.
+Positive definitions, exclusions and seeds are frozen before adjudication. Results from different
+positive populations are never pooled or presented as the same estimand.
 
----
+## Native matched negatives
 
-## Ground truth (C2)
+Negatives come from the same perturbation screen and are matched on available expression/power
+covariates, including target expression, guide count, target-cell support and condition. GTEx bulk
+tissue, housekeeping lists and unmatched background genes are not valid primary negatives.
 
-### Primary positives (headline claim)
+## Leave-one-marker-out axes
 
-Independently curated from literature — **not** derived from Marson polarization model:
-
-FOXO1, TCF7, TOX, TOX2, NR4A1, NR4A2, NR4A3, BATF3, IKZF1, ETS1, ARID1A, INO80, BACH2, ID3, PRDM1, IRF4
-
-Sources: Belk 2022, FOXO1 Nature 2024, Zhang Nature 2023, Haradhvala 2022, Marson mechanistic follow-ups.
-
-### Secondary positives (confirmation only)
-
-`known_regulators=True` in Marson supplementary  
-`polarization_prediction_condition_comparison_regulator_coefficients.csv`
-
-**Report separately.** State in write-up: labels derived from same dataset → weaker external test.
-
-### Negatives
-
-- **Expression-matched** non-controllers via GTEx (`mcp-expression`) — fixes "easy negatives" problem
-- High `n_total_de_genes` / `n_downstream` without control evidence
-- Housekeeping genes (GAPDH, ACTB, …) with high perturbation magnitude
-
----
+If gene `g` appears in a functional-axis signature, `g` is removed from that signature before its
+effect is projected. A benchmark positive cannot win by defining its own evaluation axis.
 
 ## Metrics
 
-| Metric | Use |
-|--------|-----|
-| AUROC | Recovery of primary clinical positives (LOO) |
-| AUPRC | Positives are rare (~15–50 genes) |
-| Precision@k | k = 20, 50 — clinical actionability |
-| Rank correlation | Marson → Frangieh/Belk/Schmidt transfer |
+| Metric | Role |
+|---|---|
+| AUPRC gain, M→M+C | Primary metric; positives are rare |
+| Precision@20 and precision@50 | Supporting top-rank utility |
+| Rank stability | Supporting robustness metric |
+| AUROC | Secondary only |
+| Conditional likelihood-ratio test | Tests feature information beyond magnitude |
 
----
+The full-sample, out-of-fold, descriptive and cross-system matched comparisons answer different
+questions and must remain separately labelled.
 
-## Baselines (increasing difficulty)
+## Leakage-free evaluation
 
-1. **DE magnitude** — `n_total_de_genes` or mean `|zscore|`
-2. **Effect size** — `n_downstream`, `ontarget_effect_size`
-3. **Centrality-only** — PageRank on connector-grounded GRN
-4. **pert2state_model** — Marson linear regression (Fig. 4) — **must-beat baseline**
+Inside every held-out fold, the pipeline refits:
 
-All baselines evaluated under **same LOO axis protocol**.
+1. negative matching or sample weighting;
+2. magnitude residualization;
+3. feature scaling/ranking;
+4. component combination; and
+5. the outcome model.
 
----
+Donor, guide, condition or gene blocks are kept together when their dependence would otherwise
+cross the train/test boundary. Permutations respect those same blocks.
 
-## Ablation curve (central demo figure)
+## Required stress tests
 
-Compare AUROC/AUPRC:
+- detectable-effect threshold sensitivity;
+- removal of GATA3, TBX21, STAT6 and IRF1;
+- external non-marker functional-regulator positives;
+- condition-level replication without calling correlated conditions independent cohorts;
+- non-immune and immune-lineage boundary datasets;
+- explicit `NOT-EVALUABLE` outcomes when axis coverage or replication is absent.
 
-| Model | Description |
-|-------|-------------|
-| ISCI-full | M + R + D + A + S (residualized) |
-| ISCI − D | Drop structural control |
-| ISCI − A | Drop pert2state concordance |
-| ISCI − S | Drop stability |
-| ISCI M+R | D0 minimum |
-| Each baseline | Alone |
+## Frozen result hierarchy
 
-**Expected (honest):** full ISCI > pert2state > DE magnitude on primary positives; residualized S adds incremental AUPRC beyond M; raw S would not (C3).
+| Estimand | Result | Interpretation |
+|---|---:|---|
+| Full-sample M→M+C | +0.357 AUPRC [0.117, 0.538] | Authoritative incremental test |
+| Fully refit OOF | +0.215 [0.074, 0.560], p=0.010 | Conservative leakage-free estimate |
+| Descriptive ranking | 0.415→0.722 | Point comparison on the detectable set |
+| Three-condition matched C-vs-M | +0.229 [0.072, 0.405] | Cross-system comparator only |
 
-Include **cross-donor** and **cross-condition** holdout panels if space allows.
+## Prohibited interpretations
 
----
-
-## Robustness checks
-
-- **Holdout ground-truth:** any learned weights fit without canonical controllers in training fold
-- **Cross-donor:** train ranking on 3 donors, evaluate on 4th
-- **Cross-condition:** Stim8hr → Rest/Stim48hr (report context-specificity)
-- **Weight sensitivity:** R weights w1 ∈ {0.3, 0.5, 0.7}; geomean ε ∈ {1e-4, 1e-3, 1e-2}
-
----
-
-## External transfer (D3)
-
-Priority order (feasibility):
-
-1. **Frangieh** — `pertpy` `pt.data.frangieh_2021` (zero download friction)
-2. **Belk 2022** — Gladstone tie-in (ARID1A/INO80); GEO via `mcp-omics-archives`
-3. **Schmidt 2022** — CRISPRa/i primary T
-
-Metric: rank correlation of controllability; recovery of dataset-specific hits vs DE bruto.
-
----
-
-## Clinical bridge (D4)
-
-### Step 1 — Phenotype floor (minimum acceptable result)
-
-Project ISCI controllability signature onto **Functional CAR-T atlas** (Zenodo 10.5281/zenodo.17213452) using **precomputed scVI-hub latent**.
-
-Verify separation: exhaustion-like vs memory/stem-like phenotypes (11 atlas phenotypes). Correct for study/batch (13 studies).
-
-This figure **must land** even if outcome data are weak.
-
-### Step 2 — Outcome test (stretch)
-
-Only after phenotype floor: responder vs non-responder AUROC with study as covariate/holdout.
-
-Benchmark: TCF7/FOXO1-regulon reference. Secondary: Haradhvala GSE197268 or Deng GSE151511 if time.
-
-Report underpowered results honestly.
-
----
-
-## Null models (C6)
-
-Do not use a single label permutation for all components. See `method.md` §5.
-
----
-
-## Reporting rules
-
-- Separate **hypothesis generated** from **evidence supported**
-- Evidence cards: **PubMed + Open Targets + literature-review** (Claude Science) — not Consensus
-- No hallucinated citations
-- Demo spine: **ablation figure** + **one live evidence card** + phenotype-floor or outcome plot
-
----
-
-## Peer-review fix checklist
-
-| ID | Issue | Fix | Status |
-|----|-------|-----|--------|
-| C1 | Axis/ground-truth overlap | LOO axes | Specified |
-| C2 | Marson-native labels circular | Clinical primary, Marson secondary | Specified |
-| C3 | Raw S ≈ magnitude | Residualize via shesha-geometry | Specified |
-| C4 | Geomean zeros genes | ε floor on geomean | Specified |
-| C5 | Binary driver set unstable | Continuous influence D | Specified |
-| C6 | Single null invalid for D,S | Component-appropriate nulls | Specified |
-| C7 | A too costly | pert2state only; descope GEARS/CellOracle | Specified |
-| C8 | New work only | Event-timestamped commits; stubs only pre-event | Specified |
+- universal controllability across genes or cell systems;
+- therapeutic target nomination from controller rank alone;
+- validated CAR-T response biomarker;
+- independent replication when conditions share the same experiment;
+- biological failure when required inputs were missing.

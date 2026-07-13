@@ -1,10 +1,8 @@
 # CCI evidence registry
 # ---------------------
-# This file records the project datasets whose results are already recomputed or aggregated by
-# isci/run_cci.py. It is not yet the public bring-your-own-data interface: the current runner has
-# dataset-specific branches. New external datasets should first declare the versioned contract in
-# docs/dataset_spec.md; the generic adapter will consume that contract in the next implementation
-# slice. Adding a block here alone does not make an arbitrary dataset executable.
+# This registry records legacy cross-system results consumed by isci/run_cci.py. It is separate
+# from the supported bring-your-own-data interface (`DatasetSpec v1` + `isci pipeline`). Adding a
+# block here alone does not make a new dataset executable or eligible for a biological verdict.
 
 schema_version: 1
 
@@ -23,6 +21,8 @@ datasets:
     system: immune                 # immune | non-immune  (drives the scope prediction)
     perturbation: "KD/KO"
     path: data/GWCD4i.DE_stats.h5ad
+    source_url: s3://genome-scale-tcell-perturb-seq/marson2025_data/GWCD4i.DE_stats.h5ad
+    license_note: Not redistributed; verify the dataset authors' current reuse terms.
     adapter: marson                # -> isci.adapters.marson
     donor_col: donor
     condition_col: culture_condition
@@ -36,6 +36,9 @@ datasets:
     system: immune
     perturbation: "CRISPRa"
     path: data_public/schmidt/GSE190604.h5ad
+    accession: GSE190604
+    source_url: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE190604
+    license_note: Not redistributed; reuse remains subject to NCBI and source-publication terms.
     adapter: generic_perturbseq
     positives: known_regulators
     status: done
@@ -46,6 +49,8 @@ datasets:
     system: non-immune
     perturbation: "CRISPRa (differentiation)"
     path: data_public/norman/norman2019_k562.h5ad
+    source_note: Public Norman and Weissman 2019 K562 Perturb-seq release; verify source terms.
+    license_note: Not redistributed.
     adapter: generic_perturbseq
     positives: curated
     status: done
@@ -56,18 +61,20 @@ datasets:
     system: non-immune
     perturbation: "CRISPRi (proliferation)"
     path: data_public/replogle/replogle_rpe1_essential.h5ad
+    source_note: Public Replogle RPE1 essential-screen release; verify source terms.
+    license_note: Not redistributed.
     adapter: generic_perturbseq
     positives: hart_essentials
     status: done
     expected_verdict: FAIL
 
-  # ---- LEGACY registry template; use DatasetSpec v1 for new public integrations ----
+  # ---- Legacy registry example; use DatasetSpec v1 for supported public integrations ----
   # - id: my_new_screen
   #   label: "My new immune Perturb-seq"
   #   system: immune
   #   perturbation: "KO"
   #   path: data_public/mine/screen.h5ad
-  #   adapter: generic_perturbseq       # adapter target; not implemented by run_cci.py yet
+  #   adapter: generic_perturbseq       # legacy dashboard adapter
   #   donor_col: donor                  # omit if single-donor
   #   positives: known_regulators       # known_regulators | curated | hart_essentials | custom:<file>
   #   status: queued

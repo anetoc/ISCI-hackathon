@@ -68,7 +68,7 @@ tools already in hand.
 We ran the estimation on the 1,260 detectable Marson perturbations: score L1–L4 per
 perturbation, then a 1-factor factor analysis on the standardized loading matrix.
 
-![TSC latent factor](figures/tsc_latent_factor.png)
+![TSC latent factor](../figures/tsc_latent_factor.png)
 
 | Loading | On TSC factor |
 |---|---|
@@ -136,7 +136,7 @@ We added a third system to the CCI scope test to test prediction **P1** directly
 **Norman & Weissman 2019 K562 CRISPRa** (non-immune erythroid/megakaryocyte
 *differentiation* program — the wanted non-proliferation far point).
 
-![CCI scope across 4 systems](figures/cci_scope_4systems.png)
+![CCI scope across 4 systems](../figures/cci_scope_4systems.png)
 
 | System | Type | ΔAUPRC | 95% CI | LR p | Verdict |
 |---|---|---|---|---|---|
@@ -163,7 +163,7 @@ killer (super-engaged) from non-killer (never-engaged) engineered T cells in BEH
 authors' engagement-sort label, imaging reference in BioImage Archive S-BIAD448). Full
 report + code in `outputs/behav3d_p3/`.
 
-![BEHAV3D P3 proxy](outputs/behav3d_p3/behav3d_p3.png)
+![BEHAV3D P3 proxy](../outputs/behav3d_p3/behav3d_p3.png)
 
 **Verdict: NULL/FAIL (pre-registered), and it is informative.** On the balanced exposed set
 (super vs never, n=1969) the composite TSC score does **not** beat any baseline:

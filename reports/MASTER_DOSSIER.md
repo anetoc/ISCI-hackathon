@@ -71,7 +71,7 @@ dataset median n-DE; 1,260 / 2,520 genes).
 | Conditional-LR (specificity, coherence) | both p < 1e-4 | session record |
 | Replication | all 3 culture conditions (Rest/Stim8hr/Stim48hr) | session record |
 | Leakage control | survives removal of axis-marker regulators; independent positives ARID1A/INO80/IKZF1 hold | `result_lock.md` |
-| Ranking file | `outputs/isci_final_ranking.csv` (2,520 genes; md5 `5337113b682c38bd0c2d5755e2078520`) | committed |
+| Ranking file | `results/final/isci_final_ranking.csv` (2,520 genes; md5 `5337113b682c38bd0c2d5755e2078520`) | committed |
 
 **Top-15 by `ISCI_primary_rank`:** IRF1\*, IKBKB, BCLAF1, TFAP4, CYB561D2, PDCD5, ZC3H12A,
 STAT6\*, RCOR1, PRKDC, SETDB1\*, TWF1, HEXIM1, GATA3\*, SAMD1 (\* = known regulator; 19 known
@@ -157,7 +157,7 @@ definition (we do not claim three independent axes when the data show two).
 
 ---
 
-## 5. The clinical bridge — COMPLETED, verdict NULL (`briefs/04_iec_clinical_prediction.md`)
+## 5. The clinical bridge — COMPLETED, verdict NULL (`outputs/iec_clinical/verdict.json`)
 
 **The question:** does any IEC axis predict CAR-T response at patient-level power?
 
@@ -277,8 +277,8 @@ the most convergent. See `reports/signed_perturbation_graph.md`.
   `5337113b682c38bd0c2d5755e2078520`.
 - Reusable methods packaged as the `isci-controllership` skill (8 helpers: conditional-LR,
   expression-matched negatives, bootstrap AUPRC gain, movability gate, etc.).
-- Manifest `outputs/reproducibility_manifest.json` (seeds: bootstrap 0 / null 42 / cv 0;
-  python 3.12, numpy 2.4.6).
+- Release manifest `outputs/hackathon/claim_manifest.json` binds the adjudicated evidence, axes and
+  source snapshot.
 - Compute split: property + local analyses on CPU (Mac/sandbox); heavy cell-level and atlas
   work on the institutional RTX 6000 via Claude Code, synced through GitHub. Every machine
   result carries its own committed report under `outputs/`.

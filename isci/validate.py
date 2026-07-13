@@ -71,7 +71,6 @@ def expression_matched_negatives(
 
     Returns a de-duplicated list of matched negative gene symbols.
     """
-    rng = np.random.default_rng(seed)
     per_gene = obs.groupby(gene_col, observed=True)[list(match_cols)].apply(
         lambda d: d.apply(lambda s: np.nanmean(pd.to_numeric(s, errors="coerce")))
     )
@@ -111,6 +110,6 @@ def project_clinical_signature(
     outcome_column: str,
 ) -> dict[str, float]:
     """DEPRECATED (legacy D4 single-signature bridge). The validated clinical test is the
-    patient-level leave-one-STUDY-out CV in briefs/04 / outputs/iec_clinical (verdict NULL,
+    patient-level leave-one-STUDY-out CV in outputs/iec_clinical (verdict NULL,
     well-powered). This naive AUROC projection is superseded. Not part of the locked path."""
     raise NotImplementedError("Deprecated: see outputs/iec_clinical (leave-study-out CV)")

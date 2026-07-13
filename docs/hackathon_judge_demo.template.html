@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <title>ISCI — Auditable Scientific Judgment</title>
+  <title>T-CTRL, powered by ISCI — Auditable Scientific Judgment</title>
   <style>
     :root {
       --bg: #07131f;
@@ -140,9 +140,9 @@
   </style>
 </head>
 <body>
-  <main class="deck" aria-label="ISCI hackathon scientific judgment demo">
+  <main class="deck" aria-label="T-CTRL, powered by ISCI, hackathon scientific judgment demo">
     <header class="topbar">
-      <span class="brand">ISCI · Claude Scientific Judgment</span>
+      <span class="brand">T-CTRL · powered by ISCI · Claude Scientific Judgment</span>
       <span id="scene-label">01 / Problem</span>
     </header>
 
@@ -152,7 +152,7 @@
         <h1 id="scene-1-title" data-pretext>Most perturbation screens confuse movement with control.</h1>
         <div class="accent-line"></div>
         <p class="lead" data-pretext>A large transcriptomic effect is not the same as a precise, repeatable state shift.</p>
-        <p class="thesis" data-pretext>We built an auditable scientific-judgment workflow, demonstrated on ISCI, that knows when evidence deserves a PASS — and when it does not.</p>
+        <p class="thesis" data-pretext>We built T-CTRL, an auditable scientific-judgment workflow powered by ISCI, that knows when evidence deserves a PASS — and when it does not.</p>
       </div>
     </section>
 
@@ -273,7 +273,6 @@
   <script type="module">
     const CLAIM_MANIFEST = __CLAIM_MANIFEST__;
     const TIMING_PLAN = __TIMING_PLAN__;
-    const PRETEXT_SOURCE_B64 = "__PRETEXT_BASE64__";
     const expectedVerdicts = ["PASS", "FAIL", "NULL", "NOT-EVALUABLE"];
     const observedVerdicts = CLAIM_MANIFEST.claims.map((claim) => claim.verdict);
     const fatal = document.getElementById("fatal");
@@ -351,35 +350,6 @@
         window.setTimeout(() => showScene(index), elapsedSeconds * 1000);
       }
     }
-
-    // Pretext is imported from an embedded Blob URL, keeping the demo fully offline.
-    const pretextBytes = Uint8Array.from(atob(PRETEXT_SOURCE_B64), (char) => char.charCodeAt(0));
-    const pretextUrl = URL.createObjectURL(new Blob([pretextBytes], { type: "text/javascript" }));
-    const { prepare, layout } = await import(pretextUrl);
-    URL.revokeObjectURL(pretextUrl);
-    await document.fonts.ready;
-    const editable = params.get("edit") === "1";
-    const prepared = new Map();
-    const textElements = document.querySelectorAll("[data-pretext]");
-    for (const element of textElements) {
-      element.contentEditable = editable ? "true" : "false";
-      prepared.set(element, prepare(element.textContent, getComputedStyle(element).font));
-      if (editable) {
-        new MutationObserver(() => {
-          prepared.set(element, prepare(element.textContent, getComputedStyle(element).font));
-          relayout();
-        }).observe(element, { characterData: true, subtree: true, childList: true });
-      }
-    }
-    function relayout() {
-      for (const [element, handle] of prepared) {
-        const lineHeight = Number.parseFloat(getComputedStyle(element).lineHeight);
-        const result = layout(handle, element.clientWidth, lineHeight);
-        element.style.setProperty("--pretext-height", `${result.height}px`);
-      }
-    }
-    new ResizeObserver(relayout).observe(document.querySelector(".deck"));
-    relayout();
   </script>
 </body>
 </html>

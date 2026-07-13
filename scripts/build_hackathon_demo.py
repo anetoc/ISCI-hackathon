@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the self-contained, deterministic hackathon stage demo."""
+"""Build the self-contained, deterministic T-CTRL hackathon stage demo."""
 
 from __future__ import annotations
 
@@ -15,7 +15,6 @@ DEFAULT_MANIFEST = ROOT / "outputs" / "hackathon" / "claim_manifest.json"
 DEFAULT_TIMING = ROOT / "config" / "hackathon_timing.json"
 DEFAULT_HERO = ROOT / "figures" / "hackathon_hero.png"
 DEFAULT_OUTPUT = ROOT / "docs" / "hackathon_judge_demo.html"
-DEFAULT_PRETEXT = Path.home() / ".claude" / "skills" / "gstack" / "design-html" / "vendor" / "pretext.js"
 
 
 def data_uri(path: Path, media_type: str) -> str:
@@ -30,21 +29,18 @@ def build(
     manifest_path: Path,
     timing_path: Path,
     hero_path: Path,
-    pretext_path: Path,
     output_path: Path,
 ) -> str:
-    """Inject frozen claims, hero art and Pretext into one offline HTML file."""
+    """Inject frozen claims and hero art into one repository-contained offline HTML file."""
 
     manifest = json.loads(manifest_path.read_text())
     timing = json.loads(timing_path.read_text())
     manifest_json = json.dumps(manifest, ensure_ascii=False).replace("</", "<\\/")
     timing_json = json.dumps(timing, ensure_ascii=False).replace("</", "<\\/")
-    pretext_b64 = base64.b64encode(pretext_path.read_bytes()).decode("ascii")
     html = template_path.read_text()
     replacements = {
         "__CLAIM_MANIFEST__": manifest_json,
         "__TIMING_PLAN__": timing_json,
-        "__PRETEXT_BASE64__": pretext_b64,
         "__HERO_DATA_URI__": data_uri(hero_path, "image/png"),
     }
     for marker, value in replacements.items():
@@ -67,10 +63,9 @@ def main() -> None:
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--timing", type=Path, default=DEFAULT_TIMING)
     parser.add_argument("--hero", type=Path, default=DEFAULT_HERO)
-    parser.add_argument("--pretext", type=Path, default=DEFAULT_PRETEXT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
-    build(args.template, args.manifest, args.timing, args.hero, args.pretext, args.output)
+    build(args.template, args.manifest, args.timing, args.hero, args.output)
     print(f"Wrote {args.output} (self-contained, offline)")
 
 

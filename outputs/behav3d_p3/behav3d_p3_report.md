@@ -143,7 +143,7 @@ count matrix on GEO for its engagement metadata.
   `super-engaged` in the exposed metadata are `never-engaged` in the pseudotime metadata; full
   off-diagonal cross-tab in `behav3d_p3_results.json`).
 
-Joining on these barcodes would attach wrong expression to cells, so per CLAUDE.md hard rule 1
+Joining on these barcodes would attach wrong expression to cells, so per the project integrity rule
 we refuse and report **NOT-EVALUABLE** rather than fabricate a replication.
 
 ## 7. Honest verdict

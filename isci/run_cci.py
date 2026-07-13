@@ -20,12 +20,17 @@ Usage:
     python isci/build_dashboard.py        # then refresh the visual
 """
 from __future__ import annotations
-import os, sys, json, argparse
+
+import argparse
+import json
+import os
+import sys
+from pathlib import Path
+
+import pandas as pd
+
 os.environ.setdefault("NUMBA_CACHE_DIR", "/tmp/numba_cache")
 os.makedirs(os.environ["NUMBA_CACHE_DIR"], exist_ok=True)
-from pathlib import Path
-import numpy as np
-import pandas as pd
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
@@ -49,11 +54,12 @@ def recompute_marson(meta):
     benchmark — un-matched negatives reintroduce the magnitude confound). Matching covariates
     come from the DE_stats obs (outputs/marson_obs_matching.parquet, derived once from the
     16.8GB h5ad). This is a single-file smoke test: the point estimate reproduces the locked
-    ΔAUPRC ~+0.23, but the bootstrap CI is wider than the canonical run (which aggregates 3
-    conditions with more matched negatives) — the canonical +0.229 stays in result_lock.md."""
+    ΔAUPRC ~+0.23, but the bootstrap CI is wider than the three-condition matched comparator
+    (which aggregates more matched negatives). The authoritative +0.357 M→M+C result and the
+    comparator +0.229 remain distinct in result_lock.md."""
     import kernel as H  # skill helpers (skills/isci-controllership/kernel.py)
     rank = pd.read_csv(REPO / "results" / "final" / "isci_final_ranking.csv")
-    det = rank[rank["detectable_effect"] == True].copy()
+    det = rank[rank["detectable_effect"].astype(bool)].copy()
     det["is_pos"] = det["known_regulator"].astype(bool)
     pos = det.loc[det["is_pos"], "gene"].tolist()
     # expression/power-matched negatives via the LOCKED helper (not all non-regulators)
@@ -79,14 +85,14 @@ def recompute_marson(meta):
         feat=feat, positives=pos, negatives=neg,
         base_col="mag_pct", feature_cols=["spec_resid_pct", "coh_resid_pct"])
     sp = feat["ISCI_orthogonal"].corr(feat["mag_pct"], method="spearman")
-    d = float(gain["gain"]); lo, hi = float(gain["ci95"][0]), float(gain["ci95"][1])
+    d = float(gain["gain"])
+    lo, hi = float(gain["ci95"][0]), float(gain["ci95"][1])
     lr_p = float(lr["p_value"].min())  # conditional_lr_test -> DataFrame with p_value col
     # This is a diagnostic smoke test, NOT a verdict-issuing run. It emits the raw numbers
     # (ΔAUPRC point + n-limited CI + conditional LR) so a reader can see the method runs and the
     # point estimate lands near the locked value. It deliberately does NOT print a PASS/FAIL
-    # label — the CANONICAL verdict (PASS, ΔAUPRC +0.229, CI [0.072,0.405], from the 3-condition
-    # aggregation with the full matched-negative set) is fixed in result_lock.md and must not be
-    # re-adjudicated from a single underpowered file.
+    # label — the locked PASS is fixed by the authoritative +0.357 M→M+C result in result_lock.md
+    # and must not be re-adjudicated from this single-file matched-comparator smoke test.
     verdict = "DIAGNOSTIC (verdict fixed in result_lock.md)"
     return dict(id=meta["id"], label=meta["label"], system=meta["system"],
                 perturbation=meta["perturbation"], n_pos=len(pos),
@@ -101,8 +107,6 @@ def aggregate_from_summary(meta):
     if not summ.exists():
         return None
     df = pd.read_csv(summ)
-    key = {"schmidt_crispra": None, "norman_k562": "PRIMARY",
-           "replogle_rpe1": "Replogle"}.get(meta["id"])
     row = None
     if meta["id"] == "norman_k562":
         row = df[df["variant"].str.contains("PRIMARY", na=False)]
@@ -134,33 +138,39 @@ def main():
     for did in ids:
         meta = reg.get(did)
         if meta is None:
-            print(f"[skip] {did}: not in registry"); continue
+            print(f"[skip] {did}: not in registry")
+            continue
         try:
             res = run_one(meta)
         except Exception as e:
-            print(f"[fail] {did}: {type(e).__name__}: {e}"); continue
+            print(f"[fail] {did}: {type(e).__name__}: {e}")
+            continue
         if res is None:
-            print(f"[skip] {did}: no committed result to aggregate (needs raw h5ad rerun)"); continue
+            print(f"[skip] {did}: no committed result to aggregate (needs raw h5ad rerun)")
+            continue
         outdir = REPO / "outputs" / did
         outdir.mkdir(parents=True, exist_ok=True)
         payload = {k: res.get(k) for k in CANON_KEYS}
         if did == "marson_cd4":
-            # Marson is the LOCKED anchor: canonical ΔAUPRC +0.229 (expression-matched negatives
-            # + 3-condition aggregation) lives in result_lock.md and the dashboard seed. This
+            # Marson is the locked anchor. The +0.229 expression-matched, three-condition value is
+            # a cross-system comparator in result_lock.md and the dashboard seed. This
             # driver run is a METHOD SMOKE TEST on the committed ranking (simplified
             # detectable-set negatives) — it reproduces the VERDICT (PASS, CI excludes 0,
             # LR p<<0.05), not the exact canonical number. Write to a separate file so it
             # does NOT overwrite the canonical dashboard entry.
             payload["note"] = ("method smoke-test with EXPRESSION-MATCHED negatives — point "
                                "estimate reproduces locked ΔAUPRC ~+0.23 + LR significant; CI "
-                               "n-limited (single-file). Canonical PASS +0.229 [0.072,0.405] in "
-                               "result_lock.md (3-condition aggregation).")
-            json.dump(payload, open(outdir / "cci_method_check.json", "w"), indent=2)
+                               "n-limited (single-file). Matched comparator +0.229 "
+                               "[0.072,0.405] in result_lock.md; authoritative M→M+C gain is "
+                               "+0.357 [0.117,0.538].")
+            with (outdir / "cci_method_check.json").open("w") as handle:
+                json.dump(payload, handle, indent=2)
             print(f"[ok] {did}: METHOD CHECK ΔAUPRC {res['delta_auprc']:+.3f} "
                   f"[{res['ci_lo']:+.3f},{res['ci_hi']:+.3f}] LR_p={res['lr_p']:.2e} -> {res['verdict']} "
-                  f"(expr-matched negatives; canonical +0.229 in result_lock)")
+                  f"(expr-matched negatives; matched comparator in result_lock)")
         else:
-            json.dump(payload, open(outdir / "cci_result.json", "w"), indent=2)
+            with (outdir / "cci_result.json").open("w") as handle:
+                json.dump(payload, handle, indent=2)
             print(f"[ok] {did}: ΔAUPRC {res['delta_auprc']:+.3f} [{res['ci_lo']:+.3f},{res['ci_hi']:+.3f}] "
                   f"LR_p={res['lr_p']:.2e} -> {res['verdict']}  (wrote outputs/{did}/cci_result.json)")
 

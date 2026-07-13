@@ -68,7 +68,7 @@ on-target and vector-compatibility QC. The analysis and promotion gates are froz
 - The clinical result is a **negative**; nothing here is a validated biomarker or medical advice.
 
 ## Links
-- **Repo:** https://github.com/anetoc/ISCI-hackathon *(made public before submission)*
+- **Repo:** https://github.com/anetoc/ISCI-hackathon
 - **Reproduce:** `make reproduce-core`
 - **Manuscript:** `reports/PAPER.md` · **Literature review:** `reports/literature_review.md`
 - **Master dossier:** `reports/MASTER_DOSSIER.md` · **Demo script:** `DEMO_SCRIPT.md`

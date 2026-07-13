@@ -22,7 +22,9 @@ Usage:
     python isci/run_layer.py --validate-only # check contracts, write nothing
 """
 from __future__ import annotations
-import os, sys, json, glob, argparse
+import json
+import glob
+import argparse
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent

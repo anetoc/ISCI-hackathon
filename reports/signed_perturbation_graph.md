@@ -22,7 +22,7 @@ Therapeutic convergence is only weakly correlated with controllership (Spearman 
 controllership asks *whether* a gene controls state, convergence asks *in which direction*, and
 magnitude asks *how large*. Three separable pieces of information.
 
-![Signed perturbation→module graph, top-20 controllers](figures/signed_perturbation_graph.png)
+![Signed perturbation→module graph, top-20 controllers](../figures/signed_perturbation_graph.png)
 
 **Reading (top-20 controllers, ordered by convergence):**
 - **GATA3\*** (+1.70) and **RCOR1** (+0.90) are the most therapeutically convergent controllers

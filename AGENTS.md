@@ -1,54 +1,70 @@
-# ISCI Hackathon — Agent Rules (single specification for all tools)
+# T-CTRL / ISCI — repository rules
 
-Primary goal: a reproducible D0–D2 ISCI-core analysis for "Built with Claude:
-Life Sciences" (Researcher Track). Headline deliverable = an auditable ranking of
-**candidate state-shift controllers** in CD4+ T cells, benchmarked against strong
-baselines under leakage controls.
+T-CTRL is the public, judge-facing experience. ISCI (Immune-State Controllability Index) is the
+scientific method, Python package, CLI and provenance namespace behind it. Introduce both names on
+high-level public surfaces as **“T-CTRL, powered by ISCI.”** Keep metric and column names stable.
 
 ## Sources of truth
-- **Scientific**: Claude Science artifacts + reports; `docs/method.md`; `config/axes.yaml`.
-- **Engineering**: this Git repository; tests must pass before merge.
 
-## The ISCI-core contract (frozen unless PI approves)
-```
-M_signed(g,a,c) : signed directional movement of the perturbation effect vector
-                  onto a frozen, unit-normalized functional axis (zscore primary,
-                  log_fc as sensitivity). NES-style signed projection.
-Q(g,c)          : causal/QC confidence — on-target KD, target expression, guide
-                  count, off-target flags, sample support.
-R(g,c)          : reproducibility across donors and guides.
-C(g,a,c)        : OPTIONAL state-shift coherence across guide-/donor-pair effects
-                  (from by_guide/by_donors), restricted to axis/top-state genes.
-ISCI_core(g,a,c) = rank_product(M_signed_positive, Q, R, C_optional)
-```
-D-lite(g) and A/pert2state are **evidence overlays and benchmark comparators only** —
-they MUST NOT alter the ISCI-core ranking unless explicitly approved by the PI.
+Use these sources in this order when wording or numbers differ:
+
+1. `reports/result_lock.md` — frozen scientific result and estimand hierarchy.
+2. `reports/CLAIM_LEDGER.md` — adjudicated claims, scope and prohibited overclaims.
+3. `docs/method.md` — mathematical and analytical method.
+4. `config/axes.yaml` — frozen functional axes.
+5. `config/hackathon_claims.yaml` — judge-demo presentation contract derived from the sources above.
+
+Generated outputs, historical D0 files and exploratory reports never override this hierarchy.
+
+## Locked scientific contract
+
+For perturbations with a detectable effect:
+
+- `M` is perturbation effect magnitude.
+- `C` is controllership evidence: magnitude-residualized axis specificity plus cross-donor
+  repeatability.
+- `ISCI_orthogonal` is the mean rank percentile of those residualized controllership components.
+- The authoritative test asks whether `C` adds regulator-recovery signal after `M` is already known:
+  **M → M+C**.
+
+The frozen result hierarchy is:
+
+- Primary full-sample incremental gain: **+0.357 AUPRC**, 95% CI **[+0.117,+0.538]**.
+- Leakage-free out-of-fold gain: **+0.215**, 95% CI **[+0.074,+0.560]**, permutation **p=0.010**.
+- Descriptive full detectable-set ranking: **0.415→0.722**.
+- Three-condition matched C-vs-M comparator: **+0.229 [0.072,0.405]**; this is not the primary
+  estimand.
+
+The historical D0 `rank_product(M_pos,Q,R)` score is deprecated. It may be retained only in an
+explicitly labelled historical archive and must never be presented as the final method.
 
 ## Hard rules
-1. Do not change `config/axes.yaml` after freeze without a dedicated PR.
-2. Do not change the ISCI-core formula without updating `docs/method.md` and tests.
-3. Do not commit raw h5ad/h5mu files or large outputs (`.gitignore` enforces this).
-4. No clinical-response claims unless cohort metadata AND endpoint are documented.
-5. Separate observed Perturb-seq evidence from literature / mechanistic / clinical hypotheses.
-6. Every result table carries: `git_sha`, `data_sha256`, `axes_sha256`, timestamp, command.
-7. D / A / clinical overlays never enter ISCI-core unless explicitly approved.
-8. Benchmark negatives are **Marson-native expression-matched** (target_baseMean,
-   n_guides, n_cells_target, condition), NOT GTEx bulk tissue.
-9. A gene that appears in an axis signature cannot count as a benchmark win without
-   leave-one-marker-out (LOO axis reconstruction).
-10. Primary benchmark metrics: precision@20/50, AUPRC, rank-stability. AUROC secondary
-    (few true positives).
 
-## Track ownership (surfaces; no two tools edit the same surface)
-| Track | Surface | Tool |
-|---|---|---|
-| P0 Contracts/skeleton | pyproject, AGENTS.md, schemas, stubs, tests | Claude Code |
-| P1 D0 science core | scripts/, data manifest, real scores, artifacts | **Claude Science** |
-| P2 Package & tests | isci/ modules against fixtures, tests | Codex / Claude Code |
-| P3 Benchmark & leak-control | baselines.py, validate.py, metrics | Codex |
-| P4 Evidence cards | evidence.py, target cards | Claude Science + red-team |
-| P5 Figures/report/demo | plotting.py, report.md, demo assets | Cursor + Claude Code |
-| P6 Stretch | stability/network/clinical branches | optional |
+1. Do not change `config/axes.yaml`, the positive sets, the formula or the claim gates without a
+   dedicated scientific-review change that updates `docs/method.md`, `reports/result_lock.md` and
+   tests together.
+2. Benchmark negatives are native, expression/power matched; do not substitute GTEx or unmatched
+   background genes.
+3. Axis markers cannot count as benchmark wins without leave-one-marker-out reconstruction.
+4. Every result table must carry `git_sha`, `data_sha256`, `axes_sha256`, timestamp and command.
+5. Separate observed Perturb-seq evidence from literature, mechanistic and clinical hypotheses.
+6. Do not claim a universal controller score, therapeutic target or validated biomarker.
+7. `PASS`, `FAIL`, `NULL` and `NOT-EVALUABLE` are distinct valid outcomes; never convert missing
+   inputs into a biological null.
+8. Never commit raw `.h5ad`/`.h5mu`, credentials, environment files or raw clinical text.
+9. Public surfaces are written in English. A Portuguese translation must live in a separately
+   labelled file such as `README.pt-BR.md`.
+10. Tests, lint, build, link checks and hackathon readiness must pass before release.
 
-Merge policy: formula/axes/ground-truth/schema/clinical-claim changes require PI sign-off.
-Tests/CLI/docs/figures-from-existing-data: fast review. No automatic merges.
+## Reproducible commands
+
+```bash
+uv sync --extra dev --extra visualization
+uv run pytest -q
+uv run ruff check isci scripts tests
+uv build
+make hackathon-package
+```
+
+Heavy source datasets are public but intentionally not versioned. Dataset source, accession,
+license and checksum requirements are documented in `data/README.md` and `docs/dataset_spec.md`.
