@@ -340,7 +340,7 @@ def condition_transport_delta(predictions: pd.DataFrame) -> tuple[float, dict[st
 
     gains = {
         str(condition): delta_auprc(group)
-        for condition, group in predictions.groupby("condition", sort=False)
+        for condition, group in predictions.groupby("condition", observed=True, sort=False)
     }
     return float(np.mean(list(gains.values()))), gains
 
@@ -353,7 +353,7 @@ def block_bootstrap_transport_delta(
 ) -> np.ndarray:
     """Bootstrap complete gene blocks jointly across every held condition."""
 
-    groups = {name: group for name, group in predictions.groupby("block", sort=False)}
+    groups = {name: group for name, group in predictions.groupby("block", observed=True, sort=False)}
     names = np.asarray(list(groups), dtype=object)
     if len(names) < 2:
         raise ValueError("transport bootstrap requires at least two blocks")
@@ -374,7 +374,7 @@ def block_bootstrap_delta(
 ) -> np.ndarray:
     """Resample complete blocks; duplicated draws receive unique temporary block IDs."""
 
-    groups = {name: group for name, group in predictions.groupby("block", sort=False)}
+    groups = {name: group for name, group in predictions.groupby("block", observed=True, sort=False)}
     names = np.asarray(list(groups), dtype=object)
     if len(names) < 2:
         raise ValueError("block bootstrap requires at least two blocks")

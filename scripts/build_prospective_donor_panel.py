@@ -104,7 +104,7 @@ def main() -> None:
         panel[key] = value
 
     role_counts = (
-        panel.groupby("role", sort=False)
+        panel.groupby("role", observed=True, sort=False)
         .agg(targets=("target", "nunique"), guides=("guide_id", "nunique"))
         .astype(int)
         .to_dict(orient="index")

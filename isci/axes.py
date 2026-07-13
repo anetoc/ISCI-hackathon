@@ -37,7 +37,7 @@ def _data_native_loadings(
     if "Th2_Th1_polarization" in src and th_path.exists():
         df = pd.read_csv(th_path)
         df = df[df["contrast"].str.contains("Th2_vs_Th1", na=False)]
-        z = df.groupby("variable")["zscore"].mean()
+        z = df.groupby("variable", observed=True)["zscore"].mean()
         if axis_name.startswith("th1"):
             z = -z  # Th1 axis is the negative pole of Th2_vs_Th1
         return z.reindex(gene_index).fillna(0.0)

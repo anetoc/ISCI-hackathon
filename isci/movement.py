@@ -82,7 +82,7 @@ def compute_movement(
             "sign_M": np.sign(raw),
         })
         # percentile-rank |m_raw| within each condition (so M in [0,1] per condition)
-        df["M"] = (df.groupby("condition")["m_raw"]
+        df["M"] = (df.groupby("condition", observed=True)["m_raw"]
                      .transform(lambda s: s.abs().rank(pct=True)))
         rows.append(df)
     return pd.concat(rows, ignore_index=True)
