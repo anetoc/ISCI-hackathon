@@ -62,14 +62,14 @@ The scientific contribution is the tested boundary, not a flattering target list
 | Is the result stable across Rest, Stim-8h and Stim-48h? | **PASS, bounded** | Direction repeats, but cross-condition replication is within the same dataset |
 | Does it generalize to a broad external set of functional regulators? | **FAIL** | ΔAUPRC −0.281 [−0.476, −0.073] |
 | Does magnitude-independent controllership hold on a coarse protein panel? | **FAIL** | Direction-aware protein analysis does not add over RNA |
-| Does an ISCI/IEC axis predict CAR-T clinical response across studies? | **NULL** | Study-out AUROC 0.533; a CD8-fraction baseline performs better |
+| Does an ISCI-derived axis predict CAR-T clinical response across studies? | **NULL** | Study-out AUROC 0.533; a CD8-fraction baseline performs better |
 | Can every new dataset receive a biological verdict? | **NOT-EVALUABLE when required evidence is absent** | Missing axis coverage or replication stops the pipeline instead of inventing a result |
 
 It does **not** survive removing GATA3/TBX21/STAT6/IRF1. Together with the independent
 external FAIL, that bounds the supported claim to canonical, axis-defining regulators. It is not a
 universal controller detector.
 
-## What T-CTRL/ISCI delivers
+## What T-CTRL delivers
 
 ```mermaid
 flowchart LR
@@ -176,31 +176,26 @@ automated readiness report is [outputs/hackathon/readiness_report.json](outputs/
 Legacy cross-system aggregates are labeled separately when their original reports predate the
 canonical provenance schema. Human narration and PI approval remain explicit manual gates.
 
-## Repository map
+## Repository map — three layers
 
-| Path | Purpose |
-|---|---|
-| [`isci/`](isci/) | Dataset contracts, adapters, effect construction, features, analysis and CLI |
-| [`config/axes.yaml`](config/axes.yaml) | Frozen T-cell functional axes |
-| [`contracts/`](contracts/) | Machine-readable DatasetSpec schema |
-| [`examples/dataset_spec/`](examples/dataset_spec/) | Runnable synthetic and H5AD mapping examples |
-| [`notebooks/`](notebooks/) | Executed judge-facing researcher walkthrough |
-| [`outputs/hackathon/`](outputs/hackathon/) | Frozen claims, manifests and readiness evidence |
-| [`reports/CLAIM_LEDGER.md`](reports/CLAIM_LEDGER.md) | Claim-by-claim source of truth |
-| [`reports/PAPER.md`](reports/PAPER.md) | Full scientific manuscript |
-| [`SUBMISSION.md`](SUBMISSION.md) | 150-word copy and judging-criteria mapping |
-| [`JUDGE_QA.md`](JUDGE_QA.md) | Ten evidence/limitation/overclaim-bounded answers |
+| Layer | Start here | Purpose |
+|---|---|---|
+| **Judge experience** | [Interactive demo](https://anetoc.github.io/ISCI-hackathon/), [deck](outputs/tctrl_hackathon_deck.pptx), [notebook](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb) | Understand T-CTRL, the result and its boundaries without learning internal project names |
+| **Frozen science** | [Result lock](reports/result_lock.md), [claim ledger](reports/CLAIM_LEDGER.md), [method](docs/method.md), [axes](config/axes.yaml) | Audit the estimands, gates, formula and prohibited overclaims |
+| **Reusable framework** | [`isci/`](isci/), [DatasetSpec](docs/dataset_spec.md), [`contracts/`](contracts/), [`examples/`](examples/dataset_spec/) | Validate and run a new dataset through the bounded workflow |
+| **Evidence archive** | [Reports map](reports/README.md), [`outputs/`](outputs/), [`figures/`](figures/) | Preserve negative tests, clinical NULL results and hypothesis-generating extensions |
 
-## Scientific extensions — separate from the locked core
+## Evidence extensions — optional deep dive
 
-These branches are useful hypotheses or boundary tests. They do not modify the core ranking:
+These technical branches remain separate from the locked core and are not additional product
+names a judge needs to learn:
 
-- [Conditional Controllability Invariant](reports/conditional_controllability_invariant.md):
-  immune-scoped cross-system property with explicit PASS/FAIL boundaries.
-- [T-REMAP](reports/t_remap_expansion.md): reverse-maps perturbations onto clinical resistance and
-  sensitivity modules; hypothesis-generating, not a target call.
-- [Immune Engagement Capacity](reports/immune_engagement_capacity.md): persistence, killing and
-  resistance behave like roughly 2.5 separable axes; not a response biomarker.
+- [Cross-system controllership property](reports/conditional_controllability_invariant.md):
+  immune-scoped comparison with explicit PASS/FAIL boundaries.
+- [Clinical-module reverse mapping](reports/t_remap_expansion.md): maps perturbations onto resistance
+  and sensitivity programs; hypothesis-generating, not a target call.
+- [Multi-axis immune-state analysis](reports/immune_engagement_capacity.md): persistence, killing
+  and resistance behave like roughly 2.5 separable axes; not a response biomarker.
 - [Mechanism and safety triage](reports/mechanism_and_triage.md): separates controllership,
   intervention direction and targetability.
 - [Prospective Gladstone experiment](reports/PROSPECTIVE_DONOR_PANEL_PROTOCOL.md): donor-resolved,

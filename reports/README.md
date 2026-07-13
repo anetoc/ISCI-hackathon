@@ -24,7 +24,8 @@ These documents specify future falsification work. They are not completed experi
 The remaining reports document external datasets, negative tests, clinical NULL results,
 mechanistic overlays and feasibility decisions. A report may use historical terminology such as
 CCI, IEC, T-REMAP or TSC; none of those overlays changes `ISCI_orthogonal` or the locked primary
-claim.
+claim. These are evidence-archive terms, not additional product names a judge needs to learn; the
+public narrative remains “T-CTRL, powered by ISCI.”
 
 Machine-specific execution briefs, Portuguese planning notes and duplicated manuscript variants
 were removed from the public release. The failed D0 method is preserved separately in

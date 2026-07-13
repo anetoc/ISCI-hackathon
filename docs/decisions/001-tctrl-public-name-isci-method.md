@@ -32,6 +32,9 @@ Use a two-layer naming architecture:
 - Keep the repository name `ISCI-hackathon` through submission so existing links and evidence
   remain stable.
 - Introduce both names together on every high-level public surface: “T-CTRL, powered by ISCI.”
+- Do not introduce CCI, IEC, T-REMAP or TSC as additional brands in judge-stage copy. Describe
+  their evidence function in plain language and retain the original terminology only in technical
+  reports, filenames and stable scientific identifiers.
 - Do not reinterpret or rename frozen scientific metrics. Columns such as `ISCI_orthogonal` retain
   their existing names.
 
@@ -58,6 +61,8 @@ Use a two-layer naming architecture:
 
 - Judges encounter a clear biological promise before technical vocabulary.
 - Scientists retain stable code, metric and provenance identifiers.
+- Judges need to learn one product name and one method name; the evidence archive can remain
+  historically complete without becoming part of the presentation vocabulary.
 - Some surfaces legitimately show both names; this is an intentional product/method distinction,
   not a partial rename.
 - A post-hackathon package or repository rename can be evaluated separately, with redirects and a
