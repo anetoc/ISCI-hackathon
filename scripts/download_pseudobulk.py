@@ -2,7 +2,9 @@
 """Resumable unsigned S3 downloader for the Marson GWCD4i pseudobulk expression
 matrix (one profile per perturbation) -> data/marson/. Needed for Brief 07 scGPT
 zero-shot embedding (the Step-0 input that was missing on the machine)."""
-import os, urllib.request, time
+import os
+import urllib.request
+import time
 
 BUCKET = "genome-scale-tcell-perturb-seq"
 BASE = f"https://{BUCKET}.s3.amazonaws.com"
@@ -27,13 +29,16 @@ def main():
         return
     print(f"Resuming from {have/1e9:.2f} / {total/1e9:.2f} GB", flush=True)
     req = urllib.request.Request(url, headers={"Range": f"bytes={have}-"})
-    t0 = time.time(); last = t0; got = have
+    t0 = time.time()
+    last = t0
+    got = have
     with urllib.request.urlopen(req, timeout=120) as r, open(OUT, "ab") as f:
         while True:
             chunk = r.read(8 * 1024 * 1024)
             if not chunk:
                 break
-            f.write(chunk); got += len(chunk)
+            f.write(chunk)
+            got += len(chunk)
             now = time.time()
             if now - last > 30:
                 rate = (got - have) / (now - t0) / 1e6

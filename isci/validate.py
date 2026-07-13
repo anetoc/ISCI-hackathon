@@ -71,7 +71,6 @@ def expression_matched_negatives(
 
     Returns a de-duplicated list of matched negative gene symbols.
     """
-    rng = np.random.default_rng(seed)
     per_gene = obs.groupby(gene_col, observed=True)[list(match_cols)].apply(
         lambda d: d.apply(lambda s: np.nanmean(pd.to_numeric(s, errors="coerce")))
     )

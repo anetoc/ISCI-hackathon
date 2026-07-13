@@ -20,12 +20,17 @@ Usage:
     python isci/build_dashboard.py        # then refresh the visual
 """
 from __future__ import annotations
-import os, sys, json, argparse
+
+import argparse
+import json
+import os
+import sys
+from pathlib import Path
+
+import pandas as pd
+
 os.environ.setdefault("NUMBA_CACHE_DIR", "/tmp/numba_cache")
 os.makedirs(os.environ["NUMBA_CACHE_DIR"], exist_ok=True)
-from pathlib import Path
-import numpy as np
-import pandas as pd
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
@@ -54,7 +59,7 @@ def recompute_marson(meta):
     comparator +0.229 remain distinct in result_lock.md."""
     import kernel as H  # skill helpers (skills/isci-controllership/kernel.py)
     rank = pd.read_csv(REPO / "results" / "final" / "isci_final_ranking.csv")
-    det = rank[rank["detectable_effect"] == True].copy()
+    det = rank[rank["detectable_effect"].astype(bool)].copy()
     det["is_pos"] = det["known_regulator"].astype(bool)
     pos = det.loc[det["is_pos"], "gene"].tolist()
     # expression/power-matched negatives via the LOCKED helper (not all non-regulators)
@@ -80,7 +85,8 @@ def recompute_marson(meta):
         feat=feat, positives=pos, negatives=neg,
         base_col="mag_pct", feature_cols=["spec_resid_pct", "coh_resid_pct"])
     sp = feat["ISCI_orthogonal"].corr(feat["mag_pct"], method="spearman")
-    d = float(gain["gain"]); lo, hi = float(gain["ci95"][0]), float(gain["ci95"][1])
+    d = float(gain["gain"])
+    lo, hi = float(gain["ci95"][0]), float(gain["ci95"][1])
     lr_p = float(lr["p_value"].min())  # conditional_lr_test -> DataFrame with p_value col
     # This is a diagnostic smoke test, NOT a verdict-issuing run. It emits the raw numbers
     # (ΔAUPRC point + n-limited CI + conditional LR) so a reader can see the method runs and the
@@ -101,8 +107,6 @@ def aggregate_from_summary(meta):
     if not summ.exists():
         return None
     df = pd.read_csv(summ)
-    key = {"schmidt_crispra": None, "norman_k562": "PRIMARY",
-           "replogle_rpe1": "Replogle"}.get(meta["id"])
     row = None
     if meta["id"] == "norman_k562":
         row = df[df["variant"].str.contains("PRIMARY", na=False)]
@@ -134,13 +138,16 @@ def main():
     for did in ids:
         meta = reg.get(did)
         if meta is None:
-            print(f"[skip] {did}: not in registry"); continue
+            print(f"[skip] {did}: not in registry")
+            continue
         try:
             res = run_one(meta)
         except Exception as e:
-            print(f"[fail] {did}: {type(e).__name__}: {e}"); continue
+            print(f"[fail] {did}: {type(e).__name__}: {e}")
+            continue
         if res is None:
-            print(f"[skip] {did}: no committed result to aggregate (needs raw h5ad rerun)"); continue
+            print(f"[skip] {did}: no committed result to aggregate (needs raw h5ad rerun)")
+            continue
         outdir = REPO / "outputs" / did
         outdir.mkdir(parents=True, exist_ok=True)
         payload = {k: res.get(k) for k in CANON_KEYS}
@@ -156,12 +163,14 @@ def main():
                                "n-limited (single-file). Matched comparator +0.229 "
                                "[0.072,0.405] in result_lock.md; authoritative M→M+C gain is "
                                "+0.357 [0.117,0.538].")
-            json.dump(payload, open(outdir / "cci_method_check.json", "w"), indent=2)
+            with (outdir / "cci_method_check.json").open("w") as handle:
+                json.dump(payload, handle, indent=2)
             print(f"[ok] {did}: METHOD CHECK ΔAUPRC {res['delta_auprc']:+.3f} "
                   f"[{res['ci_lo']:+.3f},{res['ci_hi']:+.3f}] LR_p={res['lr_p']:.2e} -> {res['verdict']} "
                   f"(expr-matched negatives; matched comparator in result_lock)")
         else:
-            json.dump(payload, open(outdir / "cci_result.json", "w"), indent=2)
+            with (outdir / "cci_result.json").open("w") as handle:
+                json.dump(payload, handle, indent=2)
             print(f"[ok] {did}: ΔAUPRC {res['delta_auprc']:+.3f} [{res['ci_lo']:+.3f},{res['ci_hi']:+.3f}] "
                   f"LR_p={res['lr_p']:.2e} -> {res['verdict']}  (wrote outputs/{did}/cci_result.json)")
 
