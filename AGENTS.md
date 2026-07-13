@@ -2,7 +2,7 @@
 
 T-CTRL is the public, judge-facing experience. ISCI (Immune-State Controllability Index) is the
 scientific method, Python package, CLI and provenance namespace behind it. Introduce both names on
-high-level public surfaces as **“T-CTRL, powered by ISCI.”** Judge-stage copy must describe older
+high-level public surfaces as **“T-CTRL,” the workflow that computes the ISCI index.** Judge-stage copy must describe older
 project concepts in plain language rather than introducing CCI, IEC, T-REMAP or TSC as additional
 brands. Those historical terms remain valid inside the evidence archive. Keep metric and column
 names stable.
@@ -58,7 +58,7 @@ explicitly labelled historical archive and must never be presented as the final 
 9. Public surfaces are written in English. A Portuguese translation must live in a separately
    labelled file such as `README.pt-BR.md`.
 10. Tests, lint, build, link checks and hackathon readiness must pass before release.
-11. Judge-facing copy uses only “T-CTRL, powered by ISCI”; historical project acronyms belong in
+11. Judge-facing copy uses “T-CTRL” as the project name and refers to ISCI as the controllability index it computes (our own, not a third-party tool); historical project acronyms belong in
     technical reports and must not be required to understand the demo.
 
 ## Reproducible commands

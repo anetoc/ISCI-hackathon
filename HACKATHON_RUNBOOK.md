@@ -2,7 +2,7 @@
 
 ## Release object
 
-The stage product is T-CTRL, powered by ISCI: an auditable scientific-judgment workflow. The live
+The stage product is T-CTRL, which computes ISCI (our Immune-State Controllability Index): an auditable scientific-judgment workflow. The live
 path, autoplay path, MP4 and static PNGs all consume the same frozen claims and timing contract.
 
 ## One-command package gate

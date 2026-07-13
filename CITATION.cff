@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use T-CTRL or the ISCI method, please cite this software and the underlying datasets."
-title: "T-CTRL, powered by ISCI: auditable T-cell controllability analysis"
+title: "T-CTRL: auditable T-cell state controllability analysis (ISCI method)"
 type: software
 authors:
   - family-names: Costa
@@ -16,6 +16,6 @@ keywords:
   - reproducible research
   - scientific evaluation
 abstract: >-
-  T-CTRL is a judge-facing, auditable workflow powered by the ISCI method. It tests whether
+  T-CTRL is a judge-facing, auditable workflow that computes ISCI, our Immune-State Controllability Index. It tests whether
   state-specific and reproducible perturbation effects add regulator-recovery signal beyond raw
   effect magnitude, with leakage controls and explicit PASS, FAIL, NULL and NOT-EVALUABLE verdicts.

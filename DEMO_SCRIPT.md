@@ -1,4 +1,4 @@
-# T-CTRL, powered by ISCI — 2:30 hackathon stage script
+# T-CTRL — 2:30 hackathon stage script
 
 **One message:** *A good scientific agent knows when not to call PASS.*
 
@@ -9,7 +9,7 @@ full-sample, OOF and descriptive estimands. Press `R` before each rehearsal to r
 
 > Most perturbation screens call a gene a controller because it changes many transcripts. But
 > movement is not control. A large effect can be directionless or irreproducible. We built an
-> auditable scientific-judgment workflow, demonstrated through T-CTRL and powered by ISCI, that asks whether the evidence
+> auditable scientific-judgment workflow, demonstrated through T-CTRL, which computes our controllability index (ISCI), that asks whether the evidence
 > deserves a PASS — and knows when it does not.
 
 **Transition:** “It began by rejecting our own result.”

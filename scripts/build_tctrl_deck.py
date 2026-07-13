@@ -89,7 +89,7 @@ def add_footer(slide, number: int, source: str | None = None):
 
     add_text(
         slide,
-        "T-CTRL · powered by ISCI · Built with Claude: Life Sciences",
+        "T-CTRL · ISCI method · Built with Claude: Life Sciences",
         0.52,
         7.17,
         7.1,
@@ -161,7 +161,7 @@ def build() -> Path:
     prs = Presentation()
     prs.slide_width = Inches(13.333)
     prs.slide_height = Inches(7.5)
-    prs.core_properties.title = "T-CTRL, powered by ISCI — Hackathon judge deck"
+    prs.core_properties.title = "T-CTRL — Hackathon judge deck (ISCI method)"
     prs.core_properties.subject = "Auditable T-cell controllability analysis"
     prs.core_properties.author = "Abel Costa"
     prs.core_properties.last_modified_by = "Abel Costa"
@@ -173,7 +173,7 @@ def build() -> Path:
     slide = blank_slide(prs)
     add_text(
         slide,
-        "T-CTRL · POWERED BY ISCI · RESEARCHER TRACK",
+        "T-CTRL · ISCI METHOD · RESEARCHER TRACK",
         0.58,
         0.46,
         6.0,

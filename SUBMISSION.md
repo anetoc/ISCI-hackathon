@@ -4,7 +4,7 @@
 **T-CTRL: Claude as an auditable scientific judge for T-cell controllability**
 
 ## One-line pitch
-T-CTRL, powered by the ISCI method, is an auditable scientific-judgment workflow that
+T-CTRL, which computes the ISCI controllability index, is an auditable scientific-judgment workflow that
 challenged a failed score, rebuilt the leakage controls and returns explicit PASS, FAIL, NULL or
 NOT-EVALUABLE verdicts with provenance.
 
