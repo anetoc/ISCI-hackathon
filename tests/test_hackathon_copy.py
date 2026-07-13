@@ -87,3 +87,25 @@ def test_judge_surfaces_use_one_product_name_and_one_method_name():
         )
     match = secondary_brand.search(slide_xml)
     assert match is None, f"judge deck exposes secondary stage brand {match.group(0)}"
+
+
+def test_readme_is_a_public_entry_point_with_a_bounded_judge_capsule():
+    """Serve judges quickly without making a silent fallback the project's main entry point."""
+
+    text = (ROOT / "README.md").read_text()
+    start_here = text.split("## Start here", 1)[1].split("## The result", 1)[0]
+
+    for audience in (
+        "Hackathon judges",
+        "New readers",
+        "Researchers",
+        "Bring your own data",
+        "Scientific reviewers",
+    ):
+        assert audience in start_here
+
+    judge_row = next(line for line in start_here.splitlines() if "Hackathon judges" in line)
+    assert "interactive overview" in judge_row
+    assert "fallback" not in judge_row.lower()
+    assert "It is not the final orientation video" in start_here
+    assert "## Repository map — four layers" in text
