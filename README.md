@@ -19,9 +19,9 @@ NULL or NOT-EVALUABLE** — with the evidence and provenance needed to audit it.
 
 | Time | Start here | What you will see |
 |---:|---|---|
-| **2:30** | [Watch the Full-HD demo](demo_assets/hackathon/hackathon_fallback_2m30.mp4) | The finding, the failed first model, the leakage controls and the bounded verdict |
-| **3 min** | [Open the offline judge demo](docs/hackathon_judge_demo.html) | The same six-scene narrative, generated from frozen claim and timing manifests |
-| **5 min** | [Explore the T-CTRL decision map](docs/tctrl_live_demo.html) | Controller strength × intervention direction, with per-gene evidence and safety classes |
+| **2:30** | [Run the Full-HD visual demo](demo_assets/hackathon/hackathon_fallback_2m30.mp4) | Timed offline visual fallback; the submitted recording adds reviewed narration |
+| **3 min** | [Open the interactive judge demo](https://anetoc.github.io/ISCI-hackathon/) | The same six-scene narrative, generated from frozen claim and timing manifests |
+| **5 min** | [Explore the T-CTRL decision map](https://anetoc.github.io/ISCI-hackathon/tctrl_live_demo.html) | Controller strength × intervention direction, with per-gene evidence and safety classes |
 | **10 min** | [Review the executed notebook](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb) | The result, falsification tests, Claude correction loop and reusable framework |
 | **Deep dive** | [Read the claim ledger](reports/CLAIM_LEDGER.md) | Every claim, status, evidence source and explicit “not claimed” boundary |
 
@@ -171,9 +171,10 @@ make reproduce-core
 make hackathon-package
 ```
 
-Every result table carries a Git SHA, data SHA-256, axes SHA-256, timestamp and command. The
+Release manifests bind the frozen evidence to Git, data, axis and source-snapshot hashes. The
 automated readiness report is [outputs/hackathon/readiness_report.json](outputs/hackathon/readiness_report.json).
-Human narration and PI approval remain explicit manual gates.
+Legacy cross-system aggregates are labeled separately when their original reports predate the
+canonical provenance schema. Human narration and PI approval remain explicit manual gates.
 
 ## Repository map
 

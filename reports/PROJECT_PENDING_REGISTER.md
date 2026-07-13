@@ -1,12 +1,12 @@
 # Project pending register
 
-**Snapshot:** 2026-07-12. **Scope:** current ISCI/CCI repository and the prospective donor-panel
-path. This register distinguishes unfinished work from completed negative results. A `FAIL`,
+**Snapshot:** 2026-07-13 after public-release merge. **Scope:** current T-CTRL/ISCI repository and
+the prospective donor-panel path. This register distinguishes unfinished work from completed negative results. A `FAIL`,
 `NULL`, `UNSUPPORTED` or `NOT-EVALUABLE` verdict is not automatically a pending task.
 
 Priority definitions:
 
-- **P0:** blocks the prospective experiment or a scientifically consistent public copy;
+- **P0:** blocks the hackathon submission or the prospective experiment;
 - **P1:** engineering/release debt that should close before a durable public release;
 - **P2:** valuable scientific extension that does not block the current claim;
 - **EXTERNAL:** needs a new runtime, wet-lab, controlled-access data or maintainer authorization.
@@ -31,23 +31,22 @@ Primary artifacts: `config/off_target_pilot.yaml`, `reports/OFF_TARGET_PILOT_PRO
 `outputs/decomposition_v2/off_target_pilot_contract.json`, and
 `reports/DONOR_RESOLVED_CONTEXT_VALIDATION_PLAN.md`.
 
-## P0 — scientific consistency before public copy
+## P0 — hackathon human submission gates
 
 | ID | Pending point | Current evidence | Close condition | Dependency |
 |---|---|---|---|---|
-| DOC-02 | Synchronize roadmap statuses | `MASTER_ROADMAP.md` still calls several completed phases “HERE” | Roadmap points to this live register and completed phases match the claim ledger | Current committed artifacts |
-| DOC-03 | Re-run claim/overclaim audit after roadmap synchronization | The number cascade is now tested, but a final end-to-end overclaim review remains | README, paper, demo, ledger and dashboard agree on claims and boundaries | DOC-02 |
+| SUB-01 | Approve bounded scientific wording | Automated copy gates pass; human scientific approval is intentionally not automated | PI approves `SUBMISSION.md`, `DEMO_SCRIPT.md` and Scene 6 language | None |
+| SUB-02 | Complete three narrated rehearsals | The timed visual fallback is 2:30; rehearsal log remains blank | Three consecutive runs ≤2:30 with zero number errors, overclaims or restart faults | SUB-01 |
+| SUB-03 | Record and review the narrated video | The committed MP4 is a deterministic visual fallback with a silent audio bed | Final H.264/AAC recording has audible narration and is watched end-to-end with headphones | SUB-02 |
+| SUB-04 | Validate public URLs logged out | Repository and GitHub Pages are public; uploaded video URL is not yet recorded | Repo, demo, notebook and uploaded video open without authentication | SUB-03 |
+| SUB-05 | Preview and submit the form | Submission copy is frozen at 148 words | Preview preserves symbols/numbers; final receipt is saved before the deadline | SUB-04 |
 
 ## P1 — reproducibility, quality and release
 
 | ID | Pending point | Current evidence | Close condition | Dependency |
 |---|---|---|---|---|
-| ENG-01 | Make the reproduction claim exactly match the driver | `make reproduce-core` recomputes Marson from committed summaries and aggregates other heavy runs; it is not raw-data end-to-end for every dataset | README and pipeline report explicitly distinguish recompute, aggregate and unavailable-raw lanes; canonical outputs carry provenance | No scientific change |
-| ENG-02 | Add provenance to every canonical CCI result | Canonical schema in `run_cci.py` omits data/config hashes while README says every output is stamped | Schema and dashboard accept provenance without changing verdicts | ENG-01 |
-| ENG-03 | Pay down global lint debt | `ruff check .` currently reports 163 historical errors; touched guide-pilot files are clean | Scoped cleanup commits bring repository lint to zero or define explicit excludes | Separate engineering PRs |
-| ENG-04 | Reduce test warning debt | Full suite passes but emits sklearn/scipy and pytest-asyncio deprecation warnings | Own warnings fixed or pinned/documented; third-party warnings explicitly bounded | Dependency review |
-| REL-01 | Validate public package and links | MIT license and self-contained demo exist; the working branch is ahead of `origin/main` and has no remote head | Fresh clone reproduces documented smoke path; links and large-file boundary pass | DOC-02/03, ENG-01/02 |
-| REL-02 | Push/merge the working branch | `codex/controllability-decomposition` has no remote head | Reviewable branch/PR exists and CI passes | User authorization; do not publish implicitly |
+| ENG-02 | Add provenance to every canonical CCI result | Release manifests are content-addressed, but the legacy `run_cci.py` schema still omits per-result data/config hashes | Schema and dashboard accept provenance without changing verdicts | None; post-submission |
+| ENG-03 | Pay down non-release lint debt | CI-supported code is clean; `ruff check .` reports 22 occurrences confined to archived D0, the executed notebook and the distributable skill kernel | Clean those surfaces or codify explicit exclusions in a separate post-submission PR | Separate engineering PR |
 | REL-03 | Mint immutable release/DOI | Pre-registration records git SHA but no project release DOI | Tagged release archived by Zenodo; badges and ledger updated | Repository-owner GitHub/Zenodo authorization |
 
 ## P2 — scientific extensions, not blockers
@@ -76,14 +75,20 @@ Primary artifacts: `config/off_target_pilot.yaml`, `reports/OFF_TARGET_PILOT_PRO
   `+0.215`, descriptive `0.415→0.722` and matched cross-system aggregate `+0.229`;
 - curated mechanism enrichment, targetability board and signed perturbation graph: completed
   exploratory overlays;
+- reproducibility wording: README and dossier now distinguish recomputed Marson summaries,
+  aggregated heavy lanes and unavailable raw-data reruns;
+- public release: PR #3 merged into `main`; repository, MIT license, CI and GitHub Pages are public;
+- roadmap synchronization and final automated overclaim audit: completed in the submission
+  closeout; human approval remains SUB-01;
+- test warning debt: `141 passed` locally without emitted warnings on Python 3.13;
 - TCR RescueMap: a separate Paper-2/multi-year program, not unfinished work required to close this
   repository.
 
 ## Recommended execution order
 
-1. Run OT-01 and OT-02 on disposable Linux scratch.
-2. Derive the annotation BED (OT-03), then run OT-04 and OT-05.
-3. Close PAPOLG/TSS/vector review and freeze the final guide manifest.
-4. Synchronize historical roadmap statuses and perform the final overclaim audit.
-5. Perform a fresh-clone release rehearsal, then open a reviewable branch/PR.
+1. Close SUB-01–05 and preserve the exact submitted video, copy and receipt.
+2. Mint REL-03 only after the accepted submission commit is known.
+3. Run OT-01 and OT-02 on disposable Linux scratch.
+4. Derive the annotation BED (OT-03), then run OT-04 and OT-05.
+5. Close PAPOLG/TSS/vector review and freeze the final guide manifest.
 6. Start EXP-01 only after guide promotion is frozen; treat SCI-01–08 as independent extensions.

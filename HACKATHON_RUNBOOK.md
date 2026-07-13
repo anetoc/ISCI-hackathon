@@ -42,6 +42,15 @@ the scientific correction history and explanation layer; statistics and gates re
 - Read exact confidence intervals from `DEMO_SCRIPT.md`; do not improvise the estimand labels.
 - Export H.264/AAC and watch the complete exported file, not only the editing timeline.
 
+Validate the exported narrated file before upload:
+
+```bash
+uv run python scripts/validate_submission_video.py /absolute/path/to/final_narrated_demo.mp4
+```
+
+This is intentionally separate from `make hackathon-package`: the package rebuilds the silent,
+deterministic visual fallback, while the submission video requires reviewed human narration.
+
 ## Three-rehearsal human gate
 
 | Rehearsal | Duration | Number errors | Overclaims | Technical faults | PASS? |

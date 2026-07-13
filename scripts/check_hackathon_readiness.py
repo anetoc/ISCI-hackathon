@@ -37,6 +37,7 @@ VIDEO = ROOT / "demo_assets" / "hackathon" / "hackathon_fallback_2m30.mp4"
 VIDEO_MANIFEST = ROOT / "outputs" / "hackathon" / "video_manifest.json"
 SCREENSHOT_MANIFEST = ROOT / "outputs" / "hackathon" / "screenshot_manifest.json"
 DEMO = ROOT / "docs" / "hackathon_judge_demo.html"
+PAGES_INDEX = ROOT / "docs" / "index.html"
 DECK = ROOT / "outputs" / "tctrl_hackathon_deck.pptx"
 DATASET_SPEC_CODE = ROOT / "isci" / "dataset_spec.py"
 DATASET_ADAPTER_CODE = ROOT / "isci" / "adapters" / "tabular.py"
@@ -51,6 +52,10 @@ PIPELINE_CODE = ROOT / "isci" / "pipeline.py"
 LOCKED_KERNEL = ROOT / "skills" / "isci-controllership" / "kernel.py"
 LOCKED_METHOD = ROOT / "skills" / "isci-controllership" / "SKILL.md"
 RESEARCHER_NOTEBOOK = ROOT / "notebooks" / "ISCI_Researcher_Track_Walkthrough.ipynb"
+RUNBOOK = ROOT / "HACKATHON_RUNBOOK.md"
+PENDING_REGISTER = ROOT / "reports" / "PROJECT_PENDING_REGISTER.md"
+MASTER_ROADMAP = ROOT / "reports" / "MASTER_ROADMAP.md"
+VIDEO_VALIDATOR = ROOT / "scripts" / "validate_submission_video.py"
 PYPROJECT = ROOT / "pyproject.toml"
 DATASET_SPEC_SCHEMA = ROOT / "contracts" / "dataset_spec.schema.json"
 DATASET_SPEC_DOC = ROOT / "docs" / "dataset_spec.md"
@@ -131,9 +136,13 @@ def main() -> None:
         ROOT / "DEMO_SCRIPT.md",
         ROOT / "JUDGE_QA.md",
         ROOT / "DELIVERABLE.md",
+        RUNBOOK,
+        PENDING_REGISTER,
+        MASTER_ROADMAP,
         DATASET_SPEC_DOC,
         RESEARCHER_NOTEBOOK,
         DEMO,
+        PAGES_INDEX,
     ]
     local_paths = [
         str(path.relative_to(ROOT)) for path in public_surfaces if "/Users/" in path.read_text()
@@ -260,6 +269,7 @@ def main() -> None:
         LOCKED_KERNEL,
         LOCKED_METHOD,
         RESEARCHER_NOTEBOOK,
+        VIDEO_VALIDATOR,
         PYPROJECT,
         DATASET_SPEC_SCHEMA,
         DATASET_SPEC_EXAMPLE,

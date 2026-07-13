@@ -1,9 +1,9 @@
 # CCI / IEC — full phased roadmap (deadline-agnostic)
 
-> **Status note (2026-07-12):** this document preserves the original phased strategy, but several
-> `[HERE]` labels are now historical because the corresponding analyses were completed. The live
-> inventory of unfinished work is `reports/PROJECT_PENDING_REGISTER.md`; scientific verdicts remain
-> governed by `reports/CLAIM_LEDGER.md` and `reports/result_lock.md`.
+> **Status note (2026-07-13):** this document now distinguishes completed hackathon work from
+> bounded outcomes and genuinely external follow-up. The live inventory of unfinished work is
+> `reports/PROJECT_PENDING_REGISTER.md`; scientific verdicts remain governed by
+> `reports/CLAIM_LEDGER.md` and `reports/result_lock.md`.
 
 **Framing (yours):** don't triage by Sunday; lay out every phase, ordered, and run as far as
 we get — AI compresses each phase hard. So this is the complete arc: what is **done**, what is
@@ -12,15 +12,14 @@ we get — AI compresses each phase hard. So this is the complete arc: what is *
 The one rule that governs all of it, from the locked core: **the primary claim never moves;
 every phase builds beside it, never on top of it.**
 
-The thesis every phase serves, in one sentence:
-> *In immune state transitions, real controllers leave a magnitude-independent residual
-> signature (axis-specificity + cross-donor coherence); this property has a domain boundary,
-> fails informatively outside it, and generates a prioritized experimental map for T-cell
-> reprogramming.*
+The bounded thesis every phase tests, in one sentence:
+> *Among detectable-effect, canonical axis-defining CD4+ T-cell regulators, axis-specificity and
+> cross-donor coherence add information beyond perturbation magnitude; external failures prevent
+> extending that result to a universal or immune-wide controller property.*
 
-Legend: **[DONE]** complete & committed · **[HERE]** executable in this environment
-(CPU-local or the RTX 6000 via Claude Code) · **[FRONTIER]** needs data/wet-lab not available
-now — pre-registered, not faked.
+Legend: **[DONE]** complete and committed · **[BOUNDED]** executed but negative, limited or
+structurally non-evaluable · **[FRONTIER]** needs data, compute or wet-lab work not available in
+the hackathon window and is not presented as completed.
 
 ---
 
@@ -44,49 +43,43 @@ null **tested and honest**: on the CAR-T atlas (n=87), A_persist leave-patient-o
 a *descriptive capacity, not a response biomarker*. Bounds the clinical claim; core untouched.
 Artifacts: `immune_engagement_capacity.md`, `MASTER_DOSSIER.md` §5.1, `outputs/iec_clinical/`.
 
-## PHASE 3 — Reproducible & scalable pipeline  **[HERE, in progress]**
-Dataset registry (`config/datasets.yaml`) + canonical `cci_result.json` contract + dashboard
-(HTML + static forest plot). **To finish:** wire `isci/run_cci.py` as the one-command driver
-around the locked skill helpers, and deprecate the legacy M/R/D/A/S stub modules (honest — they
-were the abandoned index). Deliverable: `make reproduce-core` runs the validated method end to
-end. Serves Demo + reproducibility directly. *CPU-local, no dependency — do next.*
+## PHASE 3 — Reproducible & scalable pipeline  **[DONE]**
+Dataset registry (`config/datasets.yaml`), canonical `cci_result.json` contract, dashboard,
+DatasetSpec v1, CLI and bounded H5AD adapters are committed. `make reproduce-core` recomputes the
+Marson method check from committed summaries and aggregates the heavy external lanes; the README
+states this boundary explicitly. The abandoned M/R/D/A/S implementation is preserved under
+`archive/d0/`, not presented as the final method.
 
-## PHASE 4 — Submission package  **[HERE]**
-The 3-min demo (input → core figure → result-lock → evidence card → **honest negative** → next
-gate) + README/writeup + overclaim lock pass (every candidate reads as *titratable
-manufacturing/experimental perturbation hypothesis*, never "inhibit in patient") + make repo
-public with large data outside Git. This is 30% of the rubric and must not be sacrificed to any
-later phase.
+## PHASE 4 — Submission package  **[DONE — HUMAN GATES PENDING]**
+The 2:30 offline demo, README, executed notebook, manuscript, claim ledger, deck, static fallbacks
+and automated overclaim/provenance gates are committed in a public repository. The remaining work
+is human: narrated recording, final wording approval, logged-out link validation and submission
+preview. Those gates are tracked in `HACKATHON_RUNBOOK.md` rather than represented as unfinished
+science.
 
 ---
 ## ── frontier of what's demonstrated; everything below EXTENDS the claim ──
 ---
 
-## PHASE 5 — IEC cell-level structure (the 2.5-axis test)  **[HERE, GPU machine]**
-Brief 02, corrected: the integrated atlas object has **no `X_scVI`** — use the `Python_scVI_*`
-/ `scVI_hub` file. Score A_persist/A_kill/A_resist per cell on Marson subsample + atlas; test
-pairwise Spearman, vs-magnitude, and **whether A_kill is separable from CD8 identity** (partial
-correlation). Pre-registered outcome-agnostic: if kill↔resist stay anti-correlated at cell
-level, the final definition becomes **IEC = [A_persist, A_effector/exhaustion continuum]** —
-that is a discovery, not a failure. Decides if IEC is biological structure or just a useful
-pseudobulk decomposition. *Confirmation/robustness, not headline — pseudobulk pre-test already
-de-risked it.*
+## PHASE 5 — IEC cell-level structure (the 2.5-axis test)  **[DONE]**
+The CAR-T atlas analysis covered 455,370 cells. Persistence remained separable while killing and
+resistance formed an effector/exhaustion continuum (Spearman −0.53; −0.44 after CD8 control).
+This confirms IEC as a descriptive 2.5-axis structure, not a clinical-response predictor. The
+scVI-integrated robustness pass remains optional and does not alter this bounded result.
 
-## PHASE 6 — A better immune external validation than Schmidt  **[HERE if reachable]**
-Schmidt is underpowered (n_pos=10). Priority target: a **CD8 / TIL / CAR / Perturb-CITE-seq**
-screen with a clear functional axis and replicates (candidates to scout: Frangieh
-Perturb-CITE-seq melanoma TIL; a CD8 exhaustion CRISPR screen with donors). Test is not "same
-genes" but "does C add ΔAUPRC conditional on magnitude?". With the Phase-3 registry, adding one
-is a config block. Pre-registered PASS: ΔAUPRC CI excludes 0 + conditional LR significant + C ≈
-orthogonal to magnitude. *One focused attempt; a 4-system boundary + honest "next test" is
-already complete.*
+## PHASE 6 — External immune validation  **[BOUNDED]**
+Schmidt remained a near-miss and the broad external non-marker functional-regulator stress test
+failed against magnitude (ΔAUPRC −0.281 [−0.476, −0.073]). Frangieh protein evidence also failed
+to add direction-aware signal over RNA magnitude. These are completed boundary results, not
+unfinished attempts. A well-powered donor-resolved CD8/CAR-T replication remains prospective.
 
-## PHASE 7 — Sharpen the domain boundary (is CCI T-cell- or immune-scoped?)  **[HERE if reachable]**
-Two orthogonal far-tests, each informative whichever way it lands:
-- **Non-T immune** (myeloid / DC / NK perturbation screen): PASS → claim widens to "immune relational state transitions"; FAIL → claim tightens to "T-cell state controllability".
-- **Non-immune, non-proliferation** (a second stress/differentiation screen): separates "non-immune" from "proliferation is a single axis" — Norman already hints the residual there is carried by reproducibility R, not axis-specificity S.
+## PHASE 7 — Sharpen the domain boundary  **[DONE — NO IMMUNE-WIDE CLAIM]**
+The four-system scope map and myeloid extension were executed. Non-immune systems failed and the
+myeloid preregistered test was a near-miss, so the evidence does not support an immune-wide
+invariant. The public claim remains restricted to detectable-effect, canonical axis-defining
+T-cell regulators in the Marson CD4+ anchor.
 
-## PHASE 8 — Curated mechanism sets + rank-based enrichment  **[HERE]**
+## PHASE 8 — Curated mechanism sets + rank-based enrichment  **[DONE]**
 Replace broad GO/Reactome (too wide for small T-regulator families; nothing survived FDR) with
 **pre-registered curated gene sets**: TCR-proximal/phospho, NF-κB activation window, T-cell
 chromatin modifiers, RNA-decay brakes (Regnase-1/ZC3H12A), cytoskeleton/synapse, Treg/brake.
@@ -95,25 +88,25 @@ tag each gene on three independent axes: **our-data evidence / literature eviden
 tractability** (a gene high in our data + poor in literature = novel candidate; the inverse =
 known marker, not a controller in this system).
 
-## PHASE 9 — Targetability as an experimental decision board  **[HERE]**
+## PHASE 9 — Targetability as an experimental decision board  **[DONE]**
 Recast the targetability matrix into a 4-category triage (never a therapeutic recommendation):
 - **A — manufacturing modulation** (KDM1A, CXXC1, MED13, RCOR1, SETDB1-like): titratable/transient in manufacturing, not systemic inhibition.
 - **B — engineering candidates** (clear KD/OE direction, viability-safe): require expansion/killing/persistence assays.
 - **C — probe-only biology** (BCLAF1, HEXIM1, SAMD1, CYB561D2, TWF1): understand mechanism, not target.
 - **D — dangerous/positive-control rheostats** (TCR-proximal, PRKDC, broad-essential): axis controls or titrated perturbations only.
 
-## PHASE 10 — Signed perturbation graph (network done right)  **[HERE]**
+## PHASE 10 — Signed perturbation graph (network done right)  **[DONE]**
 Drop PPI/PageRank centrality from the core (it added nothing over magnitude — confirmed). Build
 a **perturbation-derived signed graph** (perturbed gene → modules/genes moved) and ask "which
 controllers have convergent effects on persistence/TCR/exhaustion modules?" — not "who is a hub
 in STRING?". Position CEFCON / CellOracle as conceptual baselines; our differentiator is causal
 perturbation + magnitude-conditional testing. Exploratory layer, explicitly not a primary score.
 
-## PHASE 11 — In-silico / foundation-model triangulation  **[HERE, GPU machine]**
-Strict order, each as *triangulation not proof*: linear/pert2state baseline (mandatory) →
-CellOracle/GEARS/scGPT/STATE only if they add **out-of-sample direction concordance** over the
-linear baseline. No in-silico model promotes a target alone. If a model doesn't beat linear,
-that is itself a reportable result. (scVI/scGPT/evo2 are available on the RTX 6000.)
+## PHASE 11 — In-silico / foundation-model triangulation  **[BOUNDED — NOT-EVALUABLE]**
+The locked scGPT branch could not be validly evaluated because the required perturbation
+expression profiles were absent in the available runtime. No gene-token substitute was used and
+no target was promoted. Obtaining the large expression inputs and rerunning the frozen comparator
+remains a non-blocking compute extension.
 
 ---
 ## ── genuine frontier: needs data/assays that do not exist in-window ──
@@ -142,18 +135,17 @@ biology.
 
 ---
 
-## Execution order (what I'd actually run next, here)
-1. **Phase 3 finish** — `run_cci.py` driver + deprecate legacy stubs *(CPU, now)*.
-2. **Phase 4** — demo + writeup + overclaim lock + public repo *(now; protects 30% of score)*.
-3. **Phase 8 + 9** — curated mechanism sets + triage board *(CPU, high value, no new data)*.
-4. **Phase 5** — IEC cell-level on the correct scVI file *(GPU machine, when free)*.
-5. **Phase 6/7** — one better immune external + a boundary far-test *(if a dataset is reachable in a day)*.
-6. **Phase 10/11** — signed perturbation graph + foundation-model triangulation *(closure/robustness)*.
-7. **Phases 12–14** — declared as pre-registered next experiments; not faked in-window.
+## Execution order after the hackathon build
+1. Close the human submission gates: narration, three rehearsals, public-link check and form preview.
+2. Tag the accepted submission and mint an immutable release/DOI if repository authorization permits.
+3. Run the frozen off-target and guide-promotion workflow before any prospective synthesis.
+4. Execute the donor-resolved paired-context experiment only after guide promotion is frozen.
+5. Treat foundation-model, phospho, spatial and broader immune replications as independent
+   extensions; none is required to preserve the locked hackathon claim.
 
-## The line I'd defend to a reviewer (unchanged across every phase)
-> We do not claim a computational score predicts clinical response. We propose and test a
-> falsifiable property: in immune state transitions, real controllers leave a residual signature
-> of axis-specificity and biological coherence that does not reduce to effect magnitude. It has a
-> domain boundary, informative failures, and generates prioritized experimental hypotheses for
-> T-cell reprogramming. Conservative enough to be credible; ambitious enough to matter.
+## The line to defend to a reviewer
+> We do not claim a computational score predicts clinical response. We show that, within
+> detectable-effect canonical CD4+ T-cell regulators, precision and donor repeatability add
+> information after magnitude is known. The property fails on a broader external regulator set,
+> so the contribution is the auditable boundary and the prospective experiment it motivates, not
+> a universal target-discovery claim.

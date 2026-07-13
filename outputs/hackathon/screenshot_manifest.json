@@ -1,16 +1,16 @@
 {
   "schema_version": "hackathon_screenshot_manifest_v1",
-  "generated_at": "2026-07-13T02:01:17.159181+00:00",
-  "git_sha": "16926704c47f4aacfd21fbe1ed606095fba31446",
+  "generated_at": "2026-07-13T03:18:02.780640+00:00",
+  "git_sha": "ad120dd3a87d61724bfd0e58c6c65078b849a520",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
-  "source_paths_dirty": false,
+  "source_paths_dirty": true,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "1685070e0289f8d9689f7b74f7feda26847ac21dac5aa0581b0adc8ef446336a",
+    "sha256": "57600c9dc5fb45fb253836d2937bb005ce8fe5bdfbd631bb75ffaea30d5c5e09",
     "files_sha256": {
       "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
       "config/hackathon_timing.json": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
-      "docs/hackathon_judge_demo.html": "045f78f428b9dc0a74de94b3e308426641e47a0a0c7fe204e9c77e019360cdf4",
+      "docs/hackathon_judge_demo.html": "a067d796a2caee3790983899ce610680d315cd6c364020d67c5da412e934e225",
       "scripts/capture_hackathon_screenshots.py": "f93c5b692d78cdeffeb9bd1bbc8334e4f1103f80ede05a1468362d36b1c9f598",
       "scripts/release_provenance.py": "6bb306ad56967cdbb0357f70cca81a2bf5355c0e0ce315154b89d3dbf392b19f"
     }
@@ -18,17 +18,17 @@
   "command": "python scripts/capture_hackathon_screenshots.py",
   "browser": "Google Chrome",
   "demo_path": "docs/hackathon_judge_demo.html",
-  "demo_sha256": "045f78f428b9dc0a74de94b3e308426641e47a0a0c7fe204e9c77e019360cdf4",
-  "data_sha256": "1838dfaaf782fa09e28c9c47af147020735e348fe1e24fd01bca0ce3253416d8",
+  "demo_sha256": "a067d796a2caee3790983899ce610680d315cd6c364020d67c5da412e934e225",
+  "data_sha256": "ca86b78ea2c7cae25c6ed806419ccd2daa53ffbadca2f6646ef02b329b82296b",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
   "width": 1920,
   "height": 1080,
   "screenshots_sha256": {
-    "demo_assets/hackathon/01_problem.png": "e5b8141fe70f0f32ff96318e52638d2093a09d19824c9684b5eb75f00ac0ab8f",
-    "demo_assets/hackathon/02_self_correction.png": "7aabb003bd1e23d37302abd603c014e8a131dd534294131b831f81223855cc48",
-    "demo_assets/hackathon/03_controllability.png": "337846aecba32d07e4af3ed02250121857ce8271fbf0e24b01a81b8216d17a59",
-    "demo_assets/hackathon/04_primary_judgment.png": "f1d6933a83dcb045314d128f0ce0221d31346455095ce9850d104024f21e3b70",
-    "demo_assets/hackathon/05_trust_proof.png": "ef72d35d25721bdde8bb08e7cb24c4aac9bd000c6309f357e73f93b45f77044a",
-    "demo_assets/hackathon/06_gladstone_bridge.png": "690e03b6440d3792a17ff2eb4c062c8dc818f985081b5fb8dcfeb16767c8fb30"
+    "demo_assets/hackathon/01_problem.png": "f618ed86d53945e4e2fbcc445737094474e758505109ca4072b749c83370abbf",
+    "demo_assets/hackathon/02_self_correction.png": "2a401ffecf47c94e7a8cb3c7a83907df2074a74205d80bbcbf77f026f6ad0c0c",
+    "demo_assets/hackathon/03_controllability.png": "fdc6604ff99145518a4ffc145691167f4722cfbeb89d069471207abc3673565d",
+    "demo_assets/hackathon/04_primary_judgment.png": "fa83fbdb222293292aa9ef3baecf2b84c8605dfeec081289554cfcfbd54b0123",
+    "demo_assets/hackathon/05_trust_proof.png": "22225dc93ddcd50c71f467976d85ee0ede187c9762b060667542aece2892b106",
+    "demo_assets/hackathon/06_gladstone_bridge.png": "03cfb1d66e22e459d22abacfaeec4f6feb7371f2a7a0aac19b16f4d484a3402b"
   }
 }
