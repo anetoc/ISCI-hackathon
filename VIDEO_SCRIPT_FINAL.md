@@ -14,7 +14,7 @@ Telling those apart is the whole game, and most screens can't. A real controller
 
 So we silence one gene in a primary human T cell, read the whole transcriptome, and compare where the cell went across guides, donors and contexts. The key question: does direction add anything after magnitude is already known?
 
-It does. Adding direction and repeatability to a model that already knows magnitude improves recovery of known regulators, by zero point three five seven. <break time="1.0s" /> Thirteen positives is small, so we re-ran it out-of-fold — and the gain shrank to zero point two one five. We show you that shrinkage, because hiding it would be the easy lie.
+It does. In the pre-specified test, adding direction and repeatability to a model that already knows magnitude improves recovery of known regulators, by zero point three five seven. <break time="1.0s" /> And because thirteen positives is a small set, we also ran a separate, stricter test — a fully refit, leakage-free out-of-fold estimate — which lands lower, at zero point two one five. These are two different measurements, not one number shrinking, and we report both, because hiding the more conservative one would be the easy lie.
 
 Here's the part I'm proudest of: we went looking for where it breaks. On a broad external set of regulators, it fails — minus zero point two eight, the whole interval below zero. Remove the four master transcription factors, and the gain collapses. So the honest claim is narrow: canonical, state-defining regulators in T cells.
 
