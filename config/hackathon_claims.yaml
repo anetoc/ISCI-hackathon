@@ -1,5 +1,5 @@
 schema_version: hackathon_claim_manifest_v1
-title: T-CTRL, powered by ISCI — Claude as an Auditable Scientific Judge
+title: T-CTRL — Claude as an Auditable Scientific Judge (ISCI method)
 thesis: >-
   Magnitude says how far a cell moved; controllability asks where it moved,
   whether it repeated, and whether the evidence deserves a PASS.

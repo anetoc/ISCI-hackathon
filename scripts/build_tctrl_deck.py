@@ -451,7 +451,14 @@ def build() -> Path:
         "The property is immune-contextual, not universal.",
         number=6,
     )
-    add_image_contain(slide, ROOT / "figures" / "cci_scope_4systems.png", 0.52, 1.52, 8.35, 4.92)
+    add_image_contain(
+        slide,
+        ROOT / "figures" / "tctrl_scope_4systems.png",
+        0.52,
+        1.52,
+        8.35,
+        4.92,
+    )
     scope = [
         ("MARSON CD4+", "PASS · +0.229 [0.072,0.405]", TEAL),
         (
@@ -478,7 +485,7 @@ def build() -> Path:
         bold=True,
         align=PP_ALIGN.CENTER,
     )
-    add_footer(slide, 6, "Source: figures/cci_scope_4systems.png · CLAIM_LEDGER #2")
+    add_footer(slide, 6, "Source: figures/tctrl_scope_4systems.png · CLAIM_LEDGER #2")
 
     # 7 — Translation limits
     slide = blank_slide(prs)

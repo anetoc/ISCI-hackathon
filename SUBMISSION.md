@@ -1,7 +1,7 @@
 # Submission — Built with Claude: Life Sciences (Researcher Track)
 
 ## Title
-**T-CTRL: Claude as an auditable scientific judge for T-cell controllability**
+**T-CTRL — Which genes actually steer T-cell state?**
 
 ## One-line pitch
 T-CTRL, which computes the ISCI controllability index, is an auditable scientific-judgment workflow that
@@ -75,5 +75,5 @@ on-target and vector-compatibility QC. The analysis and promotion gates are froz
 - **Master dossier:** `reports/MASTER_DOSSIER.md` · **Demo script:** `DEMO_SCRIPT.md`
 
 ## Team
-Abel Costa (hematologist / onco-hematologist, IDOR, Brazil) with Claude Science as the autonomous
-analysis agent.
+Abel Costa (hematologist / onco-hematologist, IDOR, Brazil). Claude Science and Claude Code were
+research and engineering tools; scientific authorship and accountability remain with Abel Costa.

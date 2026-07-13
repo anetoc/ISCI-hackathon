@@ -48,8 +48,20 @@ Validate the exported narrated file before upload:
 uv run python scripts/validate_submission_video.py /absolute/path/to/final_narrated_demo.mp4
 ```
 
+To rebuild the approved 10-slide narrated cut from the reviewed continuous audio:
+
+```bash
+uv run python scripts/build_tctrl_scope_figure.py
+uv run python scripts/finalize_tctrl_hackathon_deck.py
+uv run python scripts/build_final_narrated_video.py \
+  --audio /absolute/path/to/reviewed_narration.mp3 \
+  --output /absolute/path/to/final_narrated_demo.mp4
+```
+
 This is intentionally separate from `make hackathon-package`: the package rebuilds the silent,
 deterministic visual fallback, while the submission video requires reviewed human narration.
+The submitted narrated cut is 2:42 and remains below the form's 3:00 maximum; the deterministic
+offline fallback remains fixed at 2:30.
 
 ## Three-rehearsal human gate
 
@@ -59,7 +71,7 @@ deterministic visual fallback, while the submission video requires reviewed huma
 | 2 |  |  |  |  |  |
 | 3 |  |  |  |  |  |
 
-PASS requires all three runs ≤2:30, zero mixed estimands, zero prohibited overclaims and no technical
+PASS requires all three runs ≤3:00, zero mixed estimands, zero prohibited overclaims and no technical
 fault that requires restarting the presentation.
 
 ## Final scientific language gate
