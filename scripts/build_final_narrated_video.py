@@ -76,7 +76,10 @@ def render_slides(deck: Path, render_dir: Path, soffice: str, pdftoppm: str) -> 
         ],
         check=True,
     )
-    slides = sorted(render_dir.glob("slide-*.png"))
+    slides = sorted(
+        render_dir.glob("slide-*.png"),
+        key=lambda path: int(path.stem.rsplit("-", 1)[1]),
+    )
     if len(slides) != 10:
         raise RuntimeError(f"Expected 10 rendered slides, found {len(slides)}")
     return slides

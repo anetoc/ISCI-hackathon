@@ -6,15 +6,15 @@ from zipfile import ZipFile
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_stage_script_is_six_scenes_and_within_two_thirty_word_budget():
-    """Keep the spoken path short enough to survive normal live-demo pacing."""
+def test_stage_script_matches_the_ten_slide_submitted_narration():
+    """Keep the public script synchronized with the approved 2:42 video deck."""
 
     text = (ROOT / "DEMO_SCRIPT.md").read_text()
     spoken_lines = [line.removeprefix("> ") for line in text.splitlines() if line.startswith("> ")]
     spoken_words = re.findall(r"\b[\w+.–-]+\b", " ".join(spoken_lines))
 
-    assert text.count("## SCENE ") == 6
-    assert 300 <= len(spoken_words) <= 380
+    assert text.count("## SLIDE ") == 10
+    assert 300 <= len(spoken_words) <= 450
     for value in ("+0.357", "+0.215", "0.415→0.722", "+0.229"):
         assert value in text
 

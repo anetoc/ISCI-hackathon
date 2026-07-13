@@ -31,10 +31,10 @@ the route that matches what you want to do:
 The shortest complete judge route is the [2:42 narrated demo](https://youtu.be/7Rz4PpmQZuI),
 followed by the [interactive overview](https://anetoc.github.io/ISCI-hackathon/) for evidence and
 the [executed notebook](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb) for reproducibility. The
-[evidence-based slide deck](outputs/tctrl_hackathon_deck.pptx) and committed
-[2:30 Full-HD MP4](demo_assets/hackathon/hackathon_fallback_2m30.mp4) provide deterministic offline
-fallbacks. The public narrated recording passed the repository's duration, codec, resolution and
-audio-presence validator before upload.
+[evidence-based slide deck](outputs/tctrl_hackathon_deck.pptx), interactive overview and committed
+[2:42 Full-HD MP4](demo_assets/hackathon/hackathon_fallback_2m42.mp4) are deterministic offline
+fallbacks that use the same ten-slide visual sequence. The public narrated recording passed the
+repository's duration, codec, resolution and audio-presence validator before upload.
 
 ## The result
 

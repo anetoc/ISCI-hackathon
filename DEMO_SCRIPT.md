@@ -1,77 +1,75 @@
-# T-CTRL — 2:30 hackathon stage script
+# T-CTRL — submitted 2:42 judge narration
 
-**One message:** *A good scientific agent knows when not to call PASS.*
+**Run contract:** ten slides in `docs/hackathon_judge_demo.html`, synchronized to the submitted
+video and the approved light medical deck. The full-sample, out-of-fold, descriptive and matched
+comparators remain distinct: **+0.357**, **+0.215**, **0.415→0.722** and **+0.229**.
 
-**Run contract:** six scenes in `docs/hackathon_judge_demo.html`; target 2:20–2:30; never mix the
-full-sample, OOF and descriptive estimands. Press `R` before each rehearsal to reset the timer.
+## SLIDE 1 — Title
 
-## SCENE 1 — 0:00–0:20 · The problem
+> I'm a hematologist. Some patients respond to a T-cell therapy, then relapse months later. So we
+> ask a question that sounds simple and isn't: which genes actually steer a T cell into the state
+> we want, and which ones just change the most when we perturb them?
 
-> Most perturbation screens call a gene a controller because it changes many transcripts. But
-> movement is not control. A large effect can be directionless or irreproducible. We built an
-> auditable scientific-judgment workflow, demonstrated through T-CTRL, which computes our controllability index (ISCI), that asks whether the evidence
-> deserves a PASS — and knows when it does not.
+## SLIDE 2 — Clinical question
 
-**Transition:** “It began by rejecting our own result.”
+> Telling those apart is the whole game, and most screens cannot. A real controller answers three
+> questions. How much did the cell move? That is reach. Which state program moved? That is
+> precision. And did independent donors agree? That is repeatability. Magnitude alone is necessary,
+> but nowhere near sufficient.
 
-## SCENE 2 — 0:20–0:45 · The useful failure
+## SLIDE 3 — Perturbation readout
 
-> Our first five-component index failed. Its AUPRC was 0.35; magnitude alone reached 0.41. Claude
-> did not polish the score. It challenged the construct, separated reach, precision and
-> repeatability, demanded native matched negatives, leave-one-marker-out axes and out-of-fold
-> refitting, and preserved the failure in the record.
+> We silence one gene in a primary human T cell, read the whole transcriptome, and compare where
+> the cell went across guides, donors and contexts. The key question is whether direction adds
+> information after magnitude is already known.
 
-**Transition:** “The right question was not whether control beats magnitude.”
+## SLIDE 4 — Primary result
 
-## SCENE 3 — 0:45–1:12 · The bounded result
+> It does. In the pre-specified test, adding direction and repeatability to a model that already
+> knows magnitude improves recovery of known regulators by +0.357 AUPRC. Because thirteen positives
+> is a small set, we also ran a separate, stricter test: a fully refit, leakage-free out-of-fold
+> estimate of +0.215. These are two different measurements, not one number shrinking, and we report
+> both.
 
-> The right question was whether precision and repeatability add information after magnitude is
-> already known. In canonical axis-defining CD4 T-cell regulators, the full-sample M-to-M-plus-C
-> gain is plus 0.357, with confidence interval above zero. In the stricter leakage-free evaluation,
-> every learnable step is refit inside the folds. The gain shrinks honestly to plus 0.215, confidence
-> interval plus 0.074 to plus 0.560, with permutation p equals 0.010.
+## SLIDE 5 — Tests designed to break the result
 
-**Transition:** “Now watch the claim pass through the frozen gate.”
+> We then looked for where the result breaks. On a broad external set of regulators it fails:
+> minus 0.281, with the whole interval below zero. Remove the four master transcription factors and
+> the gain collapses. The honest claim is narrow: canonical, state-defining regulators in T cells.
 
-## SCENE 4 — 1:12–1:42 · Claude scientific judgment
+## SLIDE 6 — Boundary across systems
 
-> One bounded claim enters with public evidence and explicit controls. Deterministic code computes
-> the metrics and applies frozen gates. Claude critiques the claim, identifies missing controls,
-> assembles the evidence and explains the verdict. The OOF interval excludes zero and the
-> permutation test passes, so this claim receives PASS. The boundary matters: canonical
-> axis-defining regulators, not every functional regulator and not therapeutic target nomination.
+> The boundary is graded. Immune T cells pass, a myeloid line is a near-miss, and non-immune cells
+> fail. That is a scope map: it tells us where the property appears and prevents us from calling it
+> a universal invariant.
 
-**Transition:** “Trust comes from the verdicts that were refused.”
+## SLIDE 7 — Translation limits
 
-## SCENE 5 — 1:42–2:05 · The trust proof
+> A controller is not automatically a drug target. Our top controller, IRF1, points in an
+> unfavorable intervention direction. As a CAR-T response predictor, the approach is NULL: a simple
+> CD8-fraction baseline performs better. We report that result plainly.
 
-> Three plausible extensions did not receive PASS. Broad external functional regulators receive
-> FAIL: the conditional score loses to magnitude. CAR-T clinical prediction receives NULL: study-out
-> AUROC is 0.533 and a simple CD8-fraction baseline does better. scGPT receives NOT-EVALUABLE because
-> the required expression profiles were absent. No biological result was fabricated from missing
-> inputs.
+## SLIDE 8 — Judgment
 
-**Transition:** “The next claim should be tested prospectively.”
+> The innovation is judgment. Every FAIL, NULL and NOT-EVALUABLE result came from a correction loop
+> where Claude challenged our headline, exposed a leakage path and forced a stricter test. The code
+> owns the numbers. The skepticism is the science.
 
-## SCENE 6 — 2:05–2:30 · Gladstone bridge
+## SLIDE 9 — Gladstone bridge
 
-> We designed the next falsification experiment: 54 guides, 25 target genes, paired contexts and
-> eight to twelve independent donors. Fifty-three guide identities are confirmed; PAPOLG-1 remains
-> low-support, and all synthesis is blocked until reference, off-target, on-target and vector QC
-> pass. The product is not a target list. It is an auditable way to know whether a biological claim
-> survives — and a concrete experiment Gladstone can now run donor by donor.
+> That correction loop points to a concrete next experiment: a pre-declared, donor-resolved panel
+> designed to falsify the next claim before any guide is promoted.
 
-## Locked number hierarchy
+## SLIDE 10 — Open-source delivery
 
-- Authoritative full-sample M→M+C: **+0.357**, 95% CI **[+0.117,+0.538]**.
-- Leakage-free OOF: **+0.215**, 95% CI **[+0.074,+0.560]**, permutation **p=0.010**.
-- Descriptive ranking only: **0.415→0.722**; use only if asked.
-- Matched cross-system comparator only: **+0.229 [0.072,0.405]**; use only if asked.
+> Everything is open source. Clone it, run one command, and twenty-one of twenty-one automated gates
+> pass. What remains is not a target list. It is a tested scope map with every pass, failure and null
+> written down. A good scientific agent does not just find an answer. It knows when not to call PASS.
 
-## Recording and rehearsal contract
+## Controls
 
-- Record the deterministic local HTML; do not invoke a remote model during the stage demo.
-- Run three consecutive rehearsals at or below 2:30.
-- Keep `figures/hackathon_hero.png` and a PDF/screenshot sequence as offline fallbacks.
-- If time is cut, omit the final sentence of Scenes 2 and 5; never omit the scope boundary.
-- Do not say “universal”, “validated biomarker”, “therapeutic target” or “Claude decided the gate”.
+- `→`, `Space` or `PageDown`: next slide.
+- `←` or `PageUp`: previous slide.
+- `Home` / `End`: first / last slide.
+- `F`: full screen.
+- `R`: reset the timer and return to slide 1.

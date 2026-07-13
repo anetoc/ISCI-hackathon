@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and validate a silent 2:30 Full-HD fallback video with FFmpeg."""
+"""Build and validate a silent Full-HD fallback from the approved judge slides."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ except ImportError:  # pragma: no cover - exercised by the release CLI.
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_TIMING = ROOT / "config" / "hackathon_timing.json"
 DEFAULT_ASSETS = ROOT / "demo_assets" / "hackathon"
-DEFAULT_OUTPUT = DEFAULT_ASSETS / "hackathon_fallback_2m30.mp4"
+DEFAULT_OUTPUT = DEFAULT_ASSETS / "hackathon_fallback_2m42.mp4"
 DEFAULT_MANIFEST = ROOT / "outputs" / "hackathon" / "video_manifest.json"
 PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
 

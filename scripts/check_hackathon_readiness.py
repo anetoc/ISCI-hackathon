@@ -33,7 +33,7 @@ OUTPUT = ROOT / "outputs" / "hackathon" / "readiness_report.json"
 AXES = ROOT / "config" / "axes.yaml"
 CLAIMS = ROOT / "outputs" / "hackathon" / "claim_manifest.json"
 TIMING = ROOT / "config" / "hackathon_timing.json"
-VIDEO = ROOT / "demo_assets" / "hackathon" / "hackathon_fallback_2m30.mp4"
+VIDEO = ROOT / "demo_assets" / "hackathon" / "hackathon_fallback_2m42.mp4"
 VIDEO_MANIFEST = ROOT / "outputs" / "hackathon" / "video_manifest.json"
 SCREENSHOT_MANIFEST = ROOT / "outputs" / "hackathon" / "screenshot_manifest.json"
 DEMO = ROOT / "docs" / "hackathon_judge_demo.html"
@@ -157,17 +157,19 @@ def main() -> None:
     checks = {
         "four_verdicts_frozen": [claim["verdict"] for claim in claims["claims"]]
         == ["PASS", "FAIL", "NULL", "NOT-EVALUABLE"],
-        "timing_is_150_seconds": sum(scene["duration_seconds"] for scene in timing["scenes"])
-        == 150,
-        "six_full_hd_fallbacks_present": len(screenshots) == 6,
-        "screenshots_match_current_demo": screenshot_manifest["demo_sha256"] == sha256(DEMO)
+        "timing_matches_submitted_162_seconds": sum(
+            scene["duration_seconds"] for scene in timing["scenes"]
+        )
+        == 162,
+        "ten_full_hd_slides_present": len(screenshots) == 10,
+        "slides_match_current_deck": screenshot_manifest["deck_sha256"] == sha256(DECK)
         and all(
             sha256(ROOT / path) == expected
             for path, expected in screenshot_manifest["screenshots_sha256"].items()
         ),
         "video_matches_manifest": VIDEO.exists()
         and sha256(VIDEO) == video_manifest["output_sha256"],
-        "video_is_150_seconds": video_manifest["duration_seconds"] == 150.0,
+        "video_is_162_seconds": video_manifest["duration_seconds"] == 162.0,
         "medical_deck_present": DECK.exists() and DECK.stat().st_size > 100_000,
         "dataset_spec_v1_valid": dataset_spec.schema_version == 1
         and dataset_spec.dataset.id == "mini_cd4_screen"
@@ -236,7 +238,7 @@ def main() -> None:
         and not notebook_errors,
         "demo_is_offline": "https://" not in demo_html and "http://" not in demo_html,
         "submission_summary_within_limit": 140 <= word_count(summary) <= 150,
-        "spoken_script_within_budget": 300 <= word_count(spoken) <= 380,
+        "spoken_script_within_budget": 300 <= word_count(spoken) <= 450,
         "readme_scope_boundary_locked": "It does **not** survive" in readme
         and "ΔAUPRC −0.281 [−0.476, −0.073]" in readme
         and "cross-condition replication is within the same dataset" in readme
@@ -318,7 +320,7 @@ def main() -> None:
         },
         "human_gates_pending": [
             "PI approves final bounded scientific wording",
-            "three consecutive narrated rehearsals finish at or below 2:30",
+            "three consecutive narrated rehearsals finish at or below 3:00",
             "microphone and screen recording are reviewed end-to-end",
             "public repository and uploaded video URLs are opened in a logged-out browser",
             "submission form is previewed before final irreversible submit",

@@ -24,7 +24,7 @@ and a judge-facing explanation.
 - **Judge-facing deck:** `outputs/tctrl_hackathon_deck.pptx`
 - **Executed researcher notebook:** `notebooks/ISCI_Researcher_Track_Walkthrough.ipynb`
 - **Live/offline demo:** `docs/hackathon_judge_demo.html`
-- **2:30 video fallback:** `demo_assets/hackathon/hackathon_fallback_2m30.mp4`
+- **2:42 video fallback:** `demo_assets/hackathon/hackathon_fallback_2m42.mp4`
 - **Submission copy:** `SUBMISSION.md`
 - **Locked scientific result:** `reports/result_lock.md`
 - **Claim-by-claim evidence:** `reports/CLAIM_LEDGER.md`

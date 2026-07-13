@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Build the self-contained, deterministic T-CTRL hackathon stage demo."""
+"""Build the self-contained T-CTRL judge demo from the approved ten-slide deck."""
 
 from __future__ import annotations
 
 import argparse
 import base64
 import json
+from html import escape
 from pathlib import Path
 
 
@@ -13,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_TEMPLATE = ROOT / "docs" / "hackathon_judge_demo.template.html"
 DEFAULT_MANIFEST = ROOT / "outputs" / "hackathon" / "claim_manifest.json"
 DEFAULT_TIMING = ROOT / "config" / "hackathon_timing.json"
-DEFAULT_HERO = ROOT / "figures" / "hackathon_hero.png"
+DEFAULT_ASSETS = ROOT / "demo_assets" / "hackathon"
 DEFAULT_OUTPUT = ROOT / "docs" / "hackathon_judge_demo.html"
 
 
@@ -28,20 +29,38 @@ def build(
     template_path: Path,
     manifest_path: Path,
     timing_path: Path,
-    hero_path: Path,
+    assets_path: Path,
     output_path: Path,
 ) -> str:
-    """Inject frozen claims and hero art into one repository-contained offline HTML file."""
+    """Embed the exact approved deck renders and frozen claims in one offline HTML file."""
 
     manifest = json.loads(manifest_path.read_text())
     timing = json.loads(timing_path.read_text())
+    scenes = timing["scenes"]
+    slide_paths = [
+        assets_path / f"{scene['scene']:02d}_{scene['id']}.png" for scene in scenes
+    ]
+    missing = [path for path in slide_paths if not path.is_file()]
+    if missing:
+        raise FileNotFoundError(f"Missing rendered judge slides: {missing}")
+
     manifest_json = json.dumps(manifest, ensure_ascii=False).replace("</", "<\\/")
     timing_json = json.dumps(timing, ensure_ascii=False).replace("</", "<\\/")
+    slides_html = []
+    for scene, slide_path in zip(scenes, slide_paths, strict=True):
+        active = " active" if scene["scene"] == 1 else ""
+        title = escape(scene["title"], quote=True)
+        slides_html.append(
+            f'<section class="slide{active}" data-label="{title}" '
+            f'aria-label="Slide {scene["scene"]}: {title}">'
+            f'<img src="{data_uri(slide_path, "image/png")}" alt="{title}">'
+            "</section>"
+        )
     html = template_path.read_text()
     replacements = {
         "__CLAIM_MANIFEST__": manifest_json,
         "__TIMING_PLAN__": timing_json,
-        "__HERO_DATA_URI__": data_uri(hero_path, "image/png"),
+        "__SLIDES_HTML__": "\n      ".join(slides_html),
     }
     for marker, value in replacements.items():
         if marker not in html:
@@ -62,10 +81,10 @@ def main() -> None:
     parser.add_argument("--template", type=Path, default=DEFAULT_TEMPLATE)
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--timing", type=Path, default=DEFAULT_TIMING)
-    parser.add_argument("--hero", type=Path, default=DEFAULT_HERO)
+    parser.add_argument("--assets", type=Path, default=DEFAULT_ASSETS)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
-    build(args.template, args.manifest, args.timing, args.hero, args.output)
+    build(args.template, args.manifest, args.timing, args.assets, args.output)
     print(f"Wrote {args.output} (self-contained, offline)")
 
 

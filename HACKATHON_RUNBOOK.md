@@ -25,10 +25,10 @@ approval and logged-out public-link checks are completed.
 1. **Submitted narrated demo:** open <https://youtu.be/7Rz4PpmQZuI> (2:42, public).
 2. **Live, presenter-controlled:** open `docs/hackathon_judge_demo.html`; use arrow keys.
 3. **Autoplay rehearsal:** open `docs/hackathon_judge_demo.html?autoplay=1`.
-4. **Timed offline fallback:** open `demo_assets/hackathon/hackathon_fallback_2m30.mp4`.
-5. **Manual static fallback:** present `demo_assets/hackathon/01_*.png` through `06_*.png`.
-6. **Judge deck:** open `outputs/tctrl_hackathon_deck.pptx`; slides 1–8 form
-   the core narrative and slides 9–10 are the judge appendix.
+4. **Timed offline fallback:** open `demo_assets/hackathon/hackathon_fallback_2m42.mp4`.
+5. **Manual static fallback:** present `demo_assets/hackathon/01_*.png` through `10_*.png`.
+6. **Judge deck:** open `outputs/tctrl_hackathon_deck.pptx`; the same ten-slide sequence is used by
+   the public page, static PNGs, fallback MP4 and submitted narrated video.
 
 Never invoke a remote model during the stage presentation. The Claude contribution is visible in
 the scientific correction history and explanation layer; statistics and gates remain deterministic.
@@ -61,8 +61,8 @@ uv run python scripts/build_final_narrated_video.py \
 
 This is intentionally separate from `make hackathon-package`: the package rebuilds the silent,
 deterministic visual fallback, while the submission video requires reviewed human narration.
-The submitted narrated cut is 2:42 and remains below the form's 3:00 maximum; the deterministic
-offline fallback remains fixed at 2:30.
+The submitted narrated cut is 2:42 and remains below the form's 3:00 maximum. The deterministic
+offline fallback uses the same ten slides and the same total duration, without human narration.
 
 ## Three-rehearsal human gate
 

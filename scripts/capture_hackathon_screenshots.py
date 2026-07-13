@@ -1,53 +1,40 @@
 #!/usr/bin/env python3
-"""Capture six deterministic Full-HD stage scenes from the current offline HTML."""
+"""Render the approved ten-slide judge deck to deterministic Full-HD PNG assets."""
 
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
-import os
 import shutil
 import struct
 import subprocess
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
 try:  # Package import in tests; direct import when run as `python scripts/...`.
+    from .build_final_narrated_video import render_slides, require_binary
     from .release_provenance import source_paths_dirty, source_snapshot
 except ImportError:  # pragma: no cover - exercised by the release CLI.
+    from build_final_narrated_video import render_slides, require_binary
     from release_provenance import source_paths_dirty, source_snapshot
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEMO = ROOT / "docs" / "hackathon_judge_demo.html"
+DECK = ROOT / "outputs" / "tctrl_hackathon_deck.pptx"
 TIMING = ROOT / "config" / "hackathon_timing.json"
 ASSETS = ROOT / "demo_assets" / "hackathon"
 MANIFEST = ROOT / "outputs" / "hackathon" / "screenshot_manifest.json"
 AXES = ROOT / "config" / "axes.yaml"
 PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
+RENDER_HELPER = ROOT / "scripts" / "build_final_narrated_video.py"
 
 
 def sha256(path: Path) -> str:
     """Return a content address for HTML and screenshots."""
 
     return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def find_chrome() -> str:
-    """Locate a local Chromium-family browser without downloading anything."""
-
-    candidates = [
-        os.environ.get("CHROME_BIN"),
-        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-        shutil.which("google-chrome"),
-        shutil.which("chromium"),
-        shutil.which("chromium-browser"),
-    ]
-    for candidate in candidates:
-        if candidate and Path(candidate).is_file():
-            return candidate
-    raise RuntimeError("Local Chrome/Chromium not found; set CHROME_BIN explicitly")
 
 
 def png_size(path: Path) -> tuple[int, int]:
@@ -60,7 +47,7 @@ def png_size(path: Path) -> tuple[int, int]:
 
 
 def expected_screenshots(timing: dict[str, object]) -> list[Path]:
-    """Map the frozen timing plan to its six deterministic screenshot paths."""
+    """Map the frozen timing plan to the approved deck screenshot paths."""
 
     return [
         ASSETS / f"{scene['scene']:02d}_{scene['id']}.png"
@@ -68,11 +55,11 @@ def expected_screenshots(timing: dict[str, object]) -> list[Path]:
     ]
 
 
-def validate_screenshots(screenshots: list[Path]) -> None:
-    """Reject partial or incorrectly sized captures before provenance is written."""
+def validate_screenshots(screenshots: list[Path], expected_count: int = 10) -> None:
+    """Reject partial or incorrectly sized deck renders before provenance is written."""
 
-    if len(screenshots) != 6:
-        raise ValueError(f"Expected six screenshots, found {len(screenshots)}")
+    if len(screenshots) != expected_count:
+        raise ValueError(f"Expected {expected_count} screenshots, found {len(screenshots)}")
     for output in screenshots:
         if not output.is_file():
             raise FileNotFoundError(f"Missing screenshot: {output}")
@@ -81,15 +68,14 @@ def validate_screenshots(screenshots: list[Path]) -> None:
 
 
 def main() -> None:
-    """Capture each static scene and write provenance only after all six validate."""
+    """Render each approved slide and write provenance only after all assets validate."""
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--reuse-existing",
         action="store_true",
         help=(
-            "Validate six externally captured Full-HD scenes and rebuild only the manifest. "
-            "Use this after a persistent browser capture on memory-constrained machines."
+            "Validate existing Full-HD deck renders and rebuild only the manifest."
         ),
     )
     args = parser.parse_args()
@@ -97,33 +83,23 @@ def main() -> None:
     ASSETS.mkdir(parents=True, exist_ok=True)
     screenshots = expected_screenshots(timing)
     if args.reuse_existing:
-        browser = "persistent Chrome session"
         manifest_command = "python scripts/capture_hackathon_screenshots.py --reuse-existing"
     else:
-        chrome = find_chrome()
-        browser = Path(chrome).name
         manifest_command = "python scripts/capture_hackathon_screenshots.py"
-        for scene, output in zip(timing["scenes"], screenshots, strict=True):
-            url = f"{DEMO.as_uri()}?static=1&scene={scene['scene']}"
-            command = [
-                chrome,
-                "--headless=new",
-                "--disable-gpu",
-                "--hide-scrollbars",
-                "--allow-file-access-from-files",
-                "--force-device-scale-factor=1",
-                "--window-size=1920,1080",
-                "--virtual-time-budget=1000",
-                f"--screenshot={output}",
-                url,
-            ]
-            subprocess.run(
-                command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-            )
+        soffice = require_binary("soffice")
+        pdftoppm = require_binary("pdftoppm")
+        with tempfile.TemporaryDirectory(prefix="tctrl-judge-slides-") as temporary:
+            rendered = render_slides(DECK, Path(temporary), soffice, pdftoppm)
+            if len(rendered) != len(screenshots):
+                raise ValueError(
+                    f"Timing expects {len(screenshots)} slides, deck rendered {len(rendered)}"
+                )
+            for source, output in zip(rendered, screenshots, strict=True):
+                shutil.copyfile(source, output)
 
-    validate_screenshots(screenshots)
+    validate_screenshots(screenshots, expected_count=len(timing["scenes"]))
 
-    source_paths = [Path(__file__), PROVENANCE_HELPER, DEMO, TIMING, AXES]
+    source_paths = [Path(__file__), PROVENANCE_HELPER, RENDER_HELPER, DECK, TIMING, AXES]
     manifest = {
         "schema_version": "hackathon_screenshot_manifest_v1",
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -132,9 +108,9 @@ def main() -> None:
         "source_paths_dirty": source_paths_dirty(source_paths, ROOT),
         "source_snapshot": source_snapshot(source_paths, ROOT),
         "command": manifest_command,
-        "browser": browser,
-        "demo_path": str(DEMO.relative_to(ROOT)),
-        "demo_sha256": sha256(DEMO),
+        "renderer": "LibreOffice PDF export + pdftoppm 1920x1080",
+        "deck_path": str(DECK.relative_to(ROOT)),
+        "deck_sha256": sha256(DECK),
         "data_sha256": sha256(ROOT / "outputs" / "hackathon" / "claim_manifest.json"),
         "axes_sha256": sha256(AXES),
         "width": 1920,
@@ -143,7 +119,7 @@ def main() -> None:
     }
     MANIFEST.parent.mkdir(parents=True, exist_ok=True)
     MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
-    print(f"Wrote {len(screenshots)} Full-HD screenshots from {DEMO.relative_to(ROOT)}")
+    print(f"Wrote {len(screenshots)} Full-HD screenshots from {DECK.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

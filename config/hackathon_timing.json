@@ -1,13 +1,16 @@
 {
-  "schema_version": "hackathon_timing_v1",
-  "target_seconds": 150,
+  "schema_version": "hackathon_timing_v2",
+  "target_seconds": 162,
   "scenes": [
-    {"scene": 1, "id": "problem", "duration_seconds": 20},
-    {"scene": 2, "id": "self_correction", "duration_seconds": 25},
-    {"scene": 3, "id": "controllability", "duration_seconds": 27},
-    {"scene": 4, "id": "primary_judgment", "duration_seconds": 30},
-    {"scene": 5, "id": "trust_proof", "duration_seconds": 23},
-    {"scene": 6, "id": "gladstone_bridge", "duration_seconds": 25}
+    {"scene": 1, "id": "title", "title": "Which genes actually steer a T cell?", "duration_seconds": 16},
+    {"scene": 2, "id": "clinical_question", "title": "A large effect can still be the wrong answer", "duration_seconds": 19},
+    {"scene": 3, "id": "perturbation_readout", "title": "Where did the T cell go?", "duration_seconds": 14},
+    {"scene": 4, "id": "primary_result", "title": "Direction and repeatability add signal beyond magnitude", "duration_seconds": 30},
+    {"scene": 5, "id": "falsification", "title": "The signal is real and biologically narrow", "duration_seconds": 18},
+    {"scene": 6, "id": "system_boundary", "title": "The property is immune-contextual, not universal", "duration_seconds": 12},
+    {"scene": 7, "id": "translation_limits", "title": "Controller is not target or biomarker", "duration_seconds": 14},
+    {"scene": 8, "id": "judgment", "title": "The product knows when to stop", "duration_seconds": 14},
+    {"scene": 9, "id": "gladstone_bridge", "title": "A prospective experiment can falsify the next claim", "duration_seconds": 7},
+    {"scene": 10, "id": "open_source_delivery", "title": "Executable, reusable, auditable", "duration_seconds": 18}
   ]
 }
-

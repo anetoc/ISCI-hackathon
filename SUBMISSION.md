@@ -46,10 +46,11 @@ non-evaluable gates. Every stage claim is content-addressed in
 `outputs/hackathon/claim_manifest.json`.
 
 ### Demo (30%)
-A 2:30 deterministic offline demo (`docs/hackathon_judge_demo.html`) walks one primary claim through
-evidence, leakage controls, a frozen gate, PASS and an explicit scope boundary. A compact trust
-matrix then shows FAIL, NULL and NOT-EVALUABLE before ending on a prospective donor-resolved
-Gladstone experiment. Six Full-HD static fallbacks are committed in `demo_assets/hackathon/`.
+A 2:42 deterministic offline demo (`docs/hackathon_judge_demo.html`) reproduces the same ten-slide
+sequence used in the submitted narrated video. It walks the clinical question, primary result,
+falsification tests, system boundary, translation limits, PASS/FAIL/NULL/NOT-EVALUABLE judgment,
+prospective Gladstone experiment and reusable open-source delivery. Ten Full-HD static fallbacks are
+committed in `demo_assets/hackathon/`.
 
 ### Gladstone prize (greatest potential to advance the field)
 The next falsification is already designed: 54 guides across 25 target genes, paired no-stim and

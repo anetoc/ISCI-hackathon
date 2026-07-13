@@ -51,7 +51,7 @@ states this boundary explicitly. The abandoned M/R/D/A/S implementation is prese
 `archive/d0/`, not presented as the final method.
 
 ## PHASE 4 — Submission package  **[DONE — HUMAN GATES PENDING]**
-The 2:30 offline demo, README, executed notebook, manuscript, claim ledger, deck, static fallbacks
+The 2:42 offline demo, README, executed notebook, manuscript, claim ledger, deck, static fallbacks
 and automated overclaim/provenance gates are committed in a public repository. The remaining work
 is human: narrated recording, final wording approval, logged-out link validation and submission
 preview. Those gates are tracked in `HACKATHON_RUNBOOK.md` rather than represented as unfinished

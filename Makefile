@@ -31,9 +31,8 @@ dashboard:
 
 hackathon-package:
 	$(PY) scripts/build_hackathon_claim_manifest.py
-	$(PY) scripts/plot_hackathon_hero.py
-	$(PY) scripts/build_hackathon_demo.py
 	$(PY) scripts/capture_hackathon_screenshots.py
+	$(PY) scripts/build_hackathon_demo.py
 	$(PY) scripts/build_hackathon_video.py
 	$(PY) scripts/check_hackathon_readiness.py
 

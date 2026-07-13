@@ -89,7 +89,7 @@ Just say the word and tell me the folder.
 ## Timing check
 - Total spoken ≈ 3:00 at speed 0.95. If the form caps at 3:00 and you run over, cut **s09** entirely
   (it's the optional Gladstone slide) — never cut s04 or s05.
-- A 2:30 fallback MP4 already exists at `demo_assets/hackathon/hackathon_fallback_2m30.mp4`.
+- A 2:42 fallback MP4 matching the approved deck exists at `demo_assets/hackathon/hackathon_fallback_2m42.mp4`.
 
 ## Number pronunciation cheat (already applied above)
 0.357 → "zero point three five seven" · 0.215 → "zero point two one five" ·

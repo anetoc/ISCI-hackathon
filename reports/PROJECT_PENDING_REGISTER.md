@@ -36,7 +36,7 @@ Primary artifacts: `config/off_target_pilot.yaml`, `reports/OFF_TARGET_PILOT_PRO
 | ID | Pending point | Current evidence | Close condition | Dependency |
 |---|---|---|---|---|
 | SUB-01 | Approve bounded scientific wording | Automated copy gates pass; human scientific approval is intentionally not automated | PI approves `SUBMISSION.md`, `DEMO_SCRIPT.md` and Scene 6 language | None |
-| SUB-02 | Complete three narrated rehearsals | The timed visual fallback is 2:30; rehearsal log remains blank | Three consecutive runs ≤2:30 with zero number errors, overclaims or restart faults | SUB-01 |
+| SUB-02 | Complete three narrated rehearsals | The timed visual fallback matches the submitted 2:42 deck; rehearsal log remains blank | Three consecutive runs ≤3:00 with zero number errors, overclaims or restart faults | SUB-01 |
 | SUB-03 | Record and review the narrated video | The committed MP4 is a deterministic visual fallback with a silent audio bed | Final H.264/AAC recording has audible narration and is watched end-to-end with headphones | SUB-02 |
 | SUB-04 | Validate public URLs logged out | Repository and GitHub Pages are public; uploaded video URL is not yet recorded | Repo, demo, notebook and uploaded video open without authentication | SUB-03 |
 | SUB-05 | Preview and submit the form | Submission copy is frozen at 148 words | Preview preserves symbols/numbers; final receipt is saved before the deadline | SUB-04 |
