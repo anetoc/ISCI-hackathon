@@ -2,8 +2,8 @@
   "schema_version": "hackathon_claim_manifest_v1",
   "title": "T-CTRL — Claude as an Auditable Scientific Judge (ISCI method)",
   "thesis": "Magnitude says how far a cell moved; controllability asks where it moved, whether it repeated, and whether the evidence deserves a PASS.",
-  "generated_at": "2026-07-13T23:46:12.901975+00:00",
-  "git_sha": "3904227b1f86b354a23dc5cf2cef10693eb50b38",
+  "generated_at": "2026-07-13T23:48:33.785404+00:00",
+  "git_sha": "215c8f475222ed71e3c05b365ebac787c7a322ae",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": false,
   "source_snapshot": {
