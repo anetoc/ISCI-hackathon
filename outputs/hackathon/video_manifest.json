@@ -1,7 +1,7 @@
 {
   "schema_version": "hackathon_video_manifest_v1",
-  "generated_at": "2026-07-13T01:39:59.817166+00:00",
-  "git_sha": "5e18113f355c1a4b16f7c5eb9149e045ccb04fd9",
+  "generated_at": "2026-07-13T02:02:01.528014+00:00",
+  "git_sha": "f9a5fb7274150118af5af7c8586149d23a00ad58",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": false,
   "source_snapshot": {
