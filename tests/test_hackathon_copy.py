@@ -69,7 +69,9 @@ def test_judge_surfaces_use_one_product_name_and_one_method_name():
         ROOT / "HACKATHON_RUNBOOK.md",
         ROOT / "SUMMARY.md",
         ROOT / "config" / "hackathon_claims.yaml",
+        ROOT / "outputs" / "hackathon" / "claim_manifest.json",
         ROOT / "docs" / "hackathon_judge_demo.template.html",
+        ROOT / "docs" / "hackathon_judge_demo.html",
         ROOT / "docs" / "tctrl_live_demo.html",
     ]
     secondary_brand = re.compile(r"\b(?:CCI|IEC|TSC)\b|T-REMAP")
