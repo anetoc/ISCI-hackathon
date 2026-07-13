@@ -53,7 +53,7 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "abffb6fee7680397d3e9f903b3752b9b11267579",
+  "git_sha": "13c913f7a38bd6b6920f32c9cd1f1e032ab7b284",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": false,
   "source_snapshot": {
@@ -104,6 +104,6 @@
   "branch": "codex/public-release-hardening",
   "data_sha256": "1838dfaaf782fa09e28c9c47af147020735e348fe1e24fd01bca0ce3253416d8",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-13T02:02:50.571439+00:00",
+  "timestamp": "2026-07-13T02:08:19.234514+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }
