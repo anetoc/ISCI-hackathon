@@ -69,6 +69,7 @@ on-target and vector-compatibility QC. The analysis and promotion gates are froz
 
 ## Links
 - **Repo:** https://github.com/anetoc/ISCI-hackathon
+- **Demo video (2:42):** https://youtu.be/7Rz4PpmQZuI
 - **Interactive demo:** https://anetoc.github.io/ISCI-hackathon/
 - **Reproduce:** `make reproduce-core`
 - **Manuscript:** `reports/PAPER.md` · **Literature review:** `reports/literature_review.md`

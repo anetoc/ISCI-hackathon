@@ -22,18 +22,19 @@ the route that matches what you want to do:
 
 | For | Time | Start here | What you will get |
 |---|---:|---|---|
-| **Hackathon judges** | **3 min** | [Open the interactive overview](https://anetoc.github.io/ISCI-hackathon/) | The scientific question, result, failed tests, reusable workflow and next experiment in six scenes |
+| **Hackathon judges** | **3 min** | [Watch the narrated demo](https://youtu.be/7Rz4PpmQZuI) · [Open the interactive overview](https://anetoc.github.io/ISCI-hackathon/) | The scientific question, result, failed tests, reusable workflow and next experiment |
 | **New readers** | **5 min** | [Read the plain-language package map](DELIVERABLE.md) | What was built, what is real today and what is deliberately not claimed |
 | **Researchers** | **10 min** | [Review the executed notebook](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb) | The result, falsification tests, Claude correction loop and reusable framework |
 | **Bring your own data** | **15 min** | [Run the DatasetSpec workflow](#run-t-ctrl-on-another-perturb-seq-dataset) | Validate, inspect and analyze a compatible Perturb-seq dataset through the same bounded pipeline |
 | **Scientific reviewers** | **Deep dive** | [Audit the claim ledger](reports/CLAIM_LEDGER.md) and [result provenance](outputs/hackathon/readiness_report.json) | Claim status, evidence, limitations, hashes and explicit overclaim boundaries |
 
-The shortest complete judge route is the [interactive overview](https://anetoc.github.io/ISCI-hackathon/),
-the [evidence-based slide deck](outputs/tctrl_hackathon_deck.pptx) and the
-[executed notebook](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb). The committed
-[2:30 Full-HD MP4](demo_assets/hackathon/hackathon_fallback_2m30.mp4) is a deterministic offline
-visual fallback for presentation continuity. It is not the final orientation video: the public
-submission recording must include reviewed narration and pass the repository's media validator.
+The shortest complete judge route is the [2:42 narrated demo](https://youtu.be/7Rz4PpmQZuI),
+followed by the [interactive overview](https://anetoc.github.io/ISCI-hackathon/) for evidence and
+the [executed notebook](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb) for reproducibility. The
+[evidence-based slide deck](outputs/tctrl_hackathon_deck.pptx) and committed
+[2:30 Full-HD MP4](demo_assets/hackathon/hackathon_fallback_2m30.mp4) provide deterministic offline
+fallbacks. The public narrated recording passed the repository's duration, codec, resolution and
+audio-presence validator before upload.
 
 ## The result
 

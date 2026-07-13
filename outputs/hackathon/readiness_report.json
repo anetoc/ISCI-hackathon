@@ -53,19 +53,19 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "ffe3f3c106a3edcacc6d50897bc61819275bbd4f",
+  "git_sha": "661d290dab815ddbc53cf45bcd632ffe297b2b8f",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
-  "source_paths_dirty": false,
+  "source_paths_dirty": true,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "d67719db9868f1a304c7945006d46d49fd73b95d291d074462a536c74d3e0ffa",
+    "sha256": "50cbbe14761612f8d33e3bda645d2b3041018dc28dd9888e6778af0a8c3aa3c7",
     "files_sha256": {
       "DELIVERABLE.md": "dfb96cce135e4e2af39fbfc11ff62545637c800e382dbc97ebde7ad1453149fe",
       "DEMO_SCRIPT.md": "58884652f54e6d06b3d28b3ee748fb8f31d5e105ef2f4204d34a6c7327b6bd53",
-      "HACKATHON_RUNBOOK.md": "1b9eab00f0ac0960adfa79de808eafbac7432a0ba2f09a48fdda842e0f6805e7",
+      "HACKATHON_RUNBOOK.md": "07e785df2ba7f9192ac9b63461fe4679d0bcd3aad09f0cc64812aef3459c9ce1",
       "JUDGE_QA.md": "e93858d99be0a82bfbdbf3e28076bfc894e45a56ad373e72a2c98f2b83b991e7",
-      "README.md": "b7c552669a542b962342016e39be8eba98ac907ac2d2205c99c221a6d05b742c",
-      "SUBMISSION.md": "cd5d5928ee96fbf293cf09071b592b140b0cc9ecc86b294766c7552f89220a5a",
+      "README.md": "4c7656fc1d8b637e7e34519a6c89a4a373ed6ab00fff614d0795c8e3a555334d",
+      "SUBMISSION.md": "81929391ef90658f5147d1b4cf947eff8cacaf63b96318272b40cc733d945975",
       "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
       "config/hackathon_timing.json": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
       "contracts/dataset_spec.schema.json": "9eb53a04799e4ae784b806c102ef3109b886c10fac665072fe710a7d475265f0",
@@ -109,6 +109,6 @@
   "branch": "main",
   "data_sha256": "b4897ee90ff24b5c4f175c29fd7568094bd23cbfd0c98f2ed86719778b3a42c8",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-13T22:51:58.436725+00:00",
+  "timestamp": "2026-07-13T23:08:17.118135+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }

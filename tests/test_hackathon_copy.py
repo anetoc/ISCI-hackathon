@@ -90,7 +90,7 @@ def test_judge_surfaces_use_one_product_name_and_one_method_name():
 
 
 def test_readme_is_a_public_entry_point_with_a_bounded_judge_capsule():
-    """Serve judges quickly without making a silent fallback the project's main entry point."""
+    """Serve judges the narrated demo while keeping offline fallbacks clearly secondary."""
 
     text = (ROOT / "README.md").read_text()
     start_here = text.split("## Start here", 1)[1].split("## The result", 1)[0]
@@ -105,7 +105,10 @@ def test_readme_is_a_public_entry_point_with_a_bounded_judge_capsule():
         assert audience in start_here
 
     judge_row = next(line for line in start_here.splitlines() if "Hackathon judges" in line)
+    assert "https://youtu.be/7Rz4PpmQZuI" in judge_row
     assert "interactive overview" in judge_row
     assert "fallback" not in judge_row.lower()
-    assert "It is not the final orientation video" in start_here
+    assert "2:42 narrated demo" in start_here
+    assert "public narrated recording passed" in start_here
+    assert "deterministic offline" in start_here
     assert "## Repository map — four layers" in text

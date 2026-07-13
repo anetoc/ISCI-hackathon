@@ -22,11 +22,12 @@ approval and logged-out public-link checks are completed.
 
 ## Presentation ladder
 
-1. **Live, presenter-controlled:** open `docs/hackathon_judge_demo.html`; use arrow keys.
-2. **Autoplay rehearsal:** open `docs/hackathon_judge_demo.html?autoplay=1`.
-3. **Timed offline fallback:** open `demo_assets/hackathon/hackathon_fallback_2m30.mp4`.
-4. **Manual static fallback:** present `demo_assets/hackathon/01_*.png` through `06_*.png`.
-5. **Judge deck:** open `outputs/tctrl_hackathon_deck.pptx`; slides 1–8 form
+1. **Submitted narrated demo:** open <https://youtu.be/7Rz4PpmQZuI> (2:42, public).
+2. **Live, presenter-controlled:** open `docs/hackathon_judge_demo.html`; use arrow keys.
+3. **Autoplay rehearsal:** open `docs/hackathon_judge_demo.html?autoplay=1`.
+4. **Timed offline fallback:** open `demo_assets/hackathon/hackathon_fallback_2m30.mp4`.
+5. **Manual static fallback:** present `demo_assets/hackathon/01_*.png` through `06_*.png`.
+6. **Judge deck:** open `outputs/tctrl_hackathon_deck.pptx`; slides 1–8 form
    the core narrative and slides 9–10 are the judge appendix.
 
 Never invoke a remote model during the stage presentation. The Claude contribution is visible in
