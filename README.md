@@ -167,11 +167,12 @@ verdict.
 Cell-by-feature H5AD files from scPerturb use `isci preflight-cells` followed by
 `isci build-effects`. The first command audits metadata without reading expression; the second
 constructs matched-control pseudobulk effects in bounded blocks and emits a generated
-`anndata_effects` spec for the unchanged runner. A public 20,729-cell smoke test completed this
-pipeline and then correctly stopped as `NOT_EVALUABLE` because its four-protein THP-1 panel does
-not cover the frozen CD4+ axes. Pooled and arrayed single-guide designs are both explicit, including
-their control-matching fields and guide-ID-to-target normalization. The external smoke test and
-preprocessing contract are documented in
+`anndata_effects` spec for the unchanged runner. A 20,729-cell protein smoke correctly stopped as
+`NOT_EVALUABLE` because four THP-1 proteins do not cover the frozen CD4+ axes. An independent
+39,194-cell arrayed Jurkat RNA smoke then completed all 40 target-condition feature rows while
+remaining `DIAGNOSTIC_ONLY` and issuing no biological verdict. Pooled and arrayed single-guide
+designs are explicit, including control matching and guide-ID-to-target normalization. The external
+smoke tests and preprocessing contract are documented in
 [`reports/EXTERNAL_H5AD_SMOKE_TEST.md`](reports/EXTERNAL_H5AD_SMOKE_TEST.md).
 
 > **Deprecated** (kept for provenance only): `stability` / `insilico` / `network` were the original five-component index (M·R·D·A·S). It lost to the effect-magnitude baseline under expression-matched negatives and was abandoned; the validated method is the magnitude-conditional test in the `isci-controllership` skill, driven by `run_cci`.

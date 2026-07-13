@@ -211,6 +211,6 @@ ISCI biological `PASS`.
 
 ## What comes next
 
-Exercise this complete lane on an independent public Perturb-seq RNA H5AD with broad gene coverage,
-donor/replicate metadata, and a compatible public license. That dataset can test whether the frozen
-CD4+ axes are measurable; it must not be selected because its outcome is favorable.
+The broad-RNA arrayed path is now exercised on an independent public Jurkat screen. The next
+scientific step is a donor-resolved primary T-cell H5AD with broad gene coverage and a compatible
+public license. It must be selected by predeclared eligibility, not because its outcome is favorable.

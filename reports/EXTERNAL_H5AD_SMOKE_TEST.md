@@ -84,3 +84,36 @@ cell-level public H5AD and obtain audited effects. It cannot validate CD4+ T-cel
 because it is a THP-1 assay with only four proteins. The aggregate machine-readable record is
 [`outputs/hackathon/cell_effect_build_smoke.json`](../outputs/hackathon/cell_effect_build_smoke.json);
 raw H5AD and generated large artifacts remain outside Git.
+
+## Independent arrayed RNA path
+
+A second public file was selected before outcome inspection using three technical criteria: broad
+RNA coverage, a download below 100 MB, and explicit replicate wells plus controls. The selected
+`DatlingerBock2021.h5ad` is an independent Jurkat T-cell-line screen from the same scPerturb
+collection (CC-BY-4.0; expected MD5 `5cfbcb4770e9c859a07b2cc44fd12066`). It is not primary CD4+
+evidence and has no donor identity.
+
+Its arrayed design exposed two portability requirements now represented explicitly in DatasetSpec:
+
+- `not_applicable_arrayed` declares one guide per well without misusing `nperts`, which in this file
+  counts CRISPR plus stimulation rather than guide multiplicity;
+- controls are pooled within `condition`, while `strip_trailing_guide_number` converts `ZAP70_1`
+  into target `ZAP70` but preserves the original guide ID for reproducibility and LOO scoring.
+
+The metadata preflight found 39,194 eligible cells, 25,904 genes, 20 targets, 40 guides, two
+conditions, 384 replicate wells, 305 eligible effect strata and 15 underpowered strata. The builder
+then wrote 305 effect rows × 25,904 genes with no invalid values. The unchanged bounded-memory
+runner streamed 7,900,720 effect values and returned:
+
+- feature extraction: **`COMPLETE`**;
+- 40/40 target-condition rows eligible for ranking;
+- 0 rows missing axis specificity;
+- 0 rows missing reproducibility;
+- runner status: **`ANALYSIS_COMPLETE`**;
+- runtime capability: **`DIAGNOSTIC_ONLY`**;
+- biological verdict: **`NOT_ISSUED`**.
+
+This is end-to-end technical generalization, not biological replication. The dataset is Jurkat,
+arrayed and donor-free, and no independent positive benchmark was declared. The aggregate evidence
+is in
+[`outputs/hackathon/arrayed_rna_effect_build_smoke.json`](../outputs/hackathon/arrayed_rna_effect_build_smoke.json).

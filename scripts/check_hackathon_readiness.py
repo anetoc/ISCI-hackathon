@@ -57,6 +57,10 @@ DATASET_SPEC_EXAMPLE = ROOT / "examples" / "dataset_spec" / "mini_long_effects.y
 CELL_SPEC_EXAMPLE = ROOT / "examples" / "dataset_spec" / "scperturb_cell_h5ad.yaml"
 CELL_PREFLIGHT_SMOKE = ROOT / "outputs" / "hackathon" / "cell_preflight_smoke.json"
 CELL_EFFECT_BUILD_SMOKE = ROOT / "outputs" / "hackathon" / "cell_effect_build_smoke.json"
+ARRAYED_CELL_SPEC_EXAMPLE = (
+    ROOT / "examples" / "dataset_spec" / "scperturb_arrayed_cell_h5ad.yaml"
+)
+ARRAYED_RNA_SMOKE = ROOT / "outputs" / "hackathon" / "arrayed_rna_effect_build_smoke.json"
 DATASET_SPEC_FIXTURE = ROOT / "examples" / "dataset_spec" / "mini_long_effects.csv"
 DATASET_SPEC_POSITIVES = ROOT / "examples" / "dataset_spec" / "mini_positives.txt"
 PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
@@ -94,6 +98,8 @@ def main() -> None:
     cell_spec_report = validate_dataset_spec(yaml.safe_load(CELL_SPEC_EXAMPLE.read_text()))
     cell_preflight_smoke = json.loads(CELL_PREFLIGHT_SMOKE.read_text())["preflight"]
     cell_effect_build_smoke = json.loads(CELL_EFFECT_BUILD_SMOKE.read_text())
+    arrayed_spec_report = validate_dataset_spec(yaml.safe_load(ARRAYED_CELL_SPEC_EXAMPLE.read_text()))
+    arrayed_rna_smoke = json.loads(ARRAYED_RNA_SMOKE.read_text())
     dataset_adapter = load_tabular_dataset(dataset_spec, repo_root=ROOT)
     demo_html = DEMO.read_text()
     readme = (ROOT / "README.md").read_text()
@@ -192,7 +198,16 @@ def main() -> None:
         and cell_effect_build_smoke["downstream"]["missing_specificity_rows"] == 72
         and cell_effect_build_smoke["downstream"]["missing_reproducibility_rows"] == 0
         and cell_effect_build_smoke["downstream"]["runner_status"]
-        == "FEATURE_EXTRACTION_NOT_EVALUABLE",
+        == "FEATURE_EXTRACTION_NOT_EVALUABLE"
+        and arrayed_spec_report.capability == DatasetCapability.PREPROCESSING_DECLARED
+        and arrayed_rna_smoke["status"] == "ANALYSIS_COMPLETE"
+        and arrayed_rna_smoke["runtime_capability"] == "DIAGNOSTIC_ONLY"
+        and arrayed_rna_smoke["biological_verdict"] == "NOT_ISSUED"
+        and arrayed_rna_smoke["build"]["effect_rows"] == 305
+        and arrayed_rna_smoke["build"]["invalid_effect_values"] == 0
+        and arrayed_rna_smoke["downstream"]["ranking_eligible_rows"] == 40
+        and arrayed_rna_smoke["downstream"]["missing_specificity_rows"] == 0
+        and arrayed_rna_smoke["downstream"]["missing_reproducibility_rows"] == 0,
         "researcher_notebook_executed": len(notebook_code_cells) >= 8
         and all(cell.get("execution_count") is not None for cell in notebook_code_cells)
         and not notebook_errors,
@@ -236,6 +251,8 @@ def main() -> None:
         CELL_SPEC_EXAMPLE,
         CELL_PREFLIGHT_SMOKE,
         CELL_EFFECT_BUILD_SMOKE,
+        ARRAYED_CELL_SPEC_EXAMPLE,
+        ARRAYED_RNA_SMOKE,
         DATASET_SPEC_FIXTURE,
         DATASET_SPEC_POSITIVES,
         *public_surfaces,
@@ -262,6 +279,11 @@ def main() -> None:
             "cell_effect_build_smoke_rows": cell_effect_build_smoke["build"]["effect_rows"],
             "cell_effect_downstream_status": cell_effect_build_smoke["downstream"][
                 "runner_status"
+            ],
+            "arrayed_rna_smoke_status": arrayed_rna_smoke["status"],
+            "arrayed_rna_effect_rows": arrayed_rna_smoke["build"]["effect_rows"],
+            "arrayed_rna_ranking_eligible_rows": arrayed_rna_smoke["downstream"][
+                "ranking_eligible_rows"
             ],
             "locked_kernel_sha256": sha256(LOCKED_KERNEL),
             "researcher_notebook_sha256": sha256(RESEARCHER_NOTEBOOK),

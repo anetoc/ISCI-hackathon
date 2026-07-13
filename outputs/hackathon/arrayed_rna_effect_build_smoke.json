@@ -1,0 +1,59 @@
+{
+  "schema_version": "isci_external_arrayed_rna_smoke_v1",
+  "dataset_id": "datlinger_bock_2021_arrayed_rna",
+  "status": "ANALYSIS_COMPLETE",
+  "runtime_capability": "DIAGNOSTIC_ONLY",
+  "biological_verdict": "NOT_ISSUED",
+  "preflight": {
+    "source_cells": 39194,
+    "source_features": 25904,
+    "eligible_cells": 39194,
+    "excluded_cells": 0,
+    "control_cells": 4497,
+    "target_genes": 20,
+    "guides": 40,
+    "conditions": 2,
+    "replicate_wells": 384,
+    "eligible_effect_strata": 305,
+    "underpowered_effect_strata": 15,
+    "target_conditions_ready": 40,
+    "donor_resolved_conditions_ready": 0,
+    "multi_guide_policy": "not_applicable_arrayed",
+    "control_match_on": [
+      "condition"
+    ],
+    "perturbation_transform": "strip_trailing_guide_number"
+  },
+  "build": {
+    "effect_rows": 305,
+    "effect_features": 25904,
+    "invalid_effect_values": 0,
+    "normalization": "log1p_cpm",
+    "contrast": "pseudobulk_difference",
+    "standardization": "gene_wise_zscore_within_condition",
+    "git_sha": "c9c1f0ea1ffb1be31de9774d31ac35eb268b6d16",
+    "timestamp": "2026-07-13T00:11:32.230168+00:00",
+    "command": "isci build-effects examples/dataset_spec/scperturb_arrayed_cell_h5ad.yaml --repo-root . --output-dir tmp/external-smoke/datlinger_build_c9c1f0e --block-rows 32"
+  },
+  "downstream": {
+    "generated_spec_valid": true,
+    "feature_extraction_status": "COMPLETE",
+    "runner_status": "ANALYSIS_COMPLETE",
+    "controller_feature_rows": 40,
+    "ranking_eligible_rows": 40,
+    "missing_specificity_rows": 0,
+    "missing_reproducibility_rows": 0,
+    "streamed_effect_values": 7900720,
+    "peak_summary_buffer_rows": 207232,
+    "git_sha": "c9c1f0ea1ffb1be31de9774d31ac35eb268b6d16",
+    "timestamp": "2026-07-13T00:11:57.819648+00:00",
+    "command": "isci run tmp/external-smoke/datlinger_build_c9c1f0e/dataset.effects.yaml --repo-root . --output-dir tmp/external-smoke/datlinger_run_c9c1f0e --block-rows 8"
+  },
+  "input_sha256": "9f8c35058d71442a904391dabf6574bbb24ae31ed00cef5d4e4ed498828f3592",
+  "output_sha256": "a967f9b7e66f0a08d7486d9ce8192053233c0e8ce333ad749efca7371f8d2a27",
+  "generated_spec_sha256": "457edc12413b1aba6ba99fa0825e513198c089bd1db143e897e3c37237a85d7b",
+  "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+  "git_sha": "c9c1f0ea1ffb1be31de9774d31ac35eb268b6d16",
+  "timestamp": "2026-07-13T00:11:57.819648+00:00",
+  "command": "See build.command and downstream.command for the two-stage smoke test."
+}
