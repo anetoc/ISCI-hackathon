@@ -52,12 +52,12 @@
     "interactive_demo_url": "https://anetoc.github.io/ISCI-hackathon/",
     "narrated_video_url": "https://youtu.be/7Rz4PpmQZuI"
   },
-  "git_sha": "3904227b1f86b354a23dc5cf2cef10693eb50b38",
+  "git_sha": "5ccf9c86d05c70b8076b7b7adfbefc4641c87633",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
-  "source_paths_dirty": true,
+  "source_paths_dirty": false,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "efb179056ce1ae9fa5ef1af8ea4d9ccd0314aec8ae7d6dcff15e320630ef07ca",
+    "sha256": "98ea17f474fe91781d14f9933c78cc121d42acf76189a621c5384f37da6b7b53",
     "files_sha256": {
       "DELIVERABLE.md": "36dba74dee65b858bf6e17247182503cc86ac869f3768b111e30e9ac570f72ac",
       "JUDGE_QA.md": "e93858d99be0a82bfbdbf3e28076bfc894e45a56ad373e72a2c98f2b83b991e7",
@@ -67,7 +67,7 @@
       "config/hackathon_timing.json": "f4f69fad0274273291bccb37aed1a1b88c24f6909d94376cb38f597ddb4478e1",
       "contracts/dataset_spec.schema.json": "9eb53a04799e4ae784b806c102ef3109b886c10fac665072fe710a7d475265f0",
       "docs/dataset_spec.md": "3a6b794d421ca6e72dc1c3c2813c279db853f8c3aa85b5300bd247f0b0c89e3e",
-      "docs/hackathon_judge_demo.html": "ffefb1f0c848120820ad399304922e5afe7b8e9e845f97bad40d49d522b70039",
+      "docs/hackathon_judge_demo.html": "ad4d41830f5f68b7b801240e54effd7d7a905784f0a9fbcecdba5627990ff948",
       "docs/index.html": "84a069f99992da39b2bcce69902f395b8fc01af33bb7880ac0aa55c0b4d15e5e",
       "examples/dataset_spec/mini_long_effects.csv": "620b54d4ee9834d78bd66123d50cf18522ff392bc2fc5b1200a7730c039e994d",
       "examples/dataset_spec/mini_long_effects.yaml": "537aa837f26ec6c929e041e6877aa3450ea6696af42b293af57d73595799e2f2",
@@ -88,8 +88,8 @@
       "outputs/hackathon/arrayed_rna_effect_build_smoke.json": "3c1e00e853466a86c2a4c3d3bab1ec76d34b8363a180b6f8f535493300b6e3ef",
       "outputs/hackathon/cell_effect_build_smoke.json": "dee9139b03959a4130e0897eb6c15ae18350352a59167182da6dad2ac58f7e18",
       "outputs/hackathon/cell_preflight_smoke.json": "7063de4c1853dcf37ff31a50293656a3d4a5d1afa96e48dc3a098560d7af4c93",
-      "outputs/hackathon/claim_manifest.json": "5bcdb13668b3a038dab692afe45a47f8f025d80ff411fc2354e2e01c15d5b8ef",
-      "outputs/hackathon/screenshot_manifest.json": "a2558224545261c3009d8eedc0a1633e47da17b148b4ceb142f2853b9d971685",
+      "outputs/hackathon/claim_manifest.json": "9e367ceefb8450bf3ef5cc153fcb4f4d4f1bc4ab4dd7d41d439202b43a12df14",
+      "outputs/hackathon/screenshot_manifest.json": "3ead596b186e288942b31dfa0fa51dbe94f063d094ffe0e74d19df4ffc20082a",
       "outputs/tctrl_hackathon_deck.pptx": "43d57a7d3f0d5ed3afae977048f6962baa5f70189b02cc9d99d6e6aaba07959b",
       "pyproject.toml": "38b0797c5bd559a5757081f5eecdac170290886ef5dd0aa81084fe437b95c823",
       "reports/MASTER_ROADMAP.md": "7f3c329900e155c86f5e3b78e463b9c99ec497fd8771fee90d8756e3ce80582e",
@@ -101,8 +101,8 @@
     }
   },
   "branch": "main",
-  "data_sha256": "5bcdb13668b3a038dab692afe45a47f8f025d80ff411fc2354e2e01c15d5b8ef",
+  "data_sha256": "9e367ceefb8450bf3ef5cc153fcb4f4d4f1bc4ab4dd7d41d439202b43a12df14",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-13T23:48:03.516543+00:00",
+  "timestamp": "2026-07-13T23:49:00.280452+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }
