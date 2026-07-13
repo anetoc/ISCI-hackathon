@@ -1,0 +1,108 @@
+{
+  "status": "SOURCE_IDENTITIES_RESOLVED_SYNTHESIS_BLOCKED",
+  "panel": {
+    "n_guides": 54,
+    "source_identity_status_counts": {
+      "SOURCE_IDENTITY_CONFIRMED": 53,
+      "SOURCE_IDENTITY_LOW_SUPPORT": 1
+    },
+    "synthesis_status_counts": {
+      "BLOCKED_PENDING_ON_OFF_TARGET_AND_VECTOR_QC": 53,
+      "BLOCKED_LOW_SOURCE_SUPPORT": 1
+    },
+    "low_support_guides": [
+      "PAPOLG-1"
+    ],
+    "ambiguous_guides": [],
+    "unresolved_guides": [],
+    "duplicate_protospacers": {}
+  },
+  "evidence": {
+    "screen_source": "Zenodo record 5784651 Calabrese CRISPRa MAGeCK summaries",
+    "guide_source": "ENA public GSE190604 guide FASTQ prefixes",
+    "source_byte_range_per_fastq": "bytes=0-10485759",
+    "run_metrics": [
+      {
+        "well": 1,
+        "run_accession": "SRR17189067",
+        "read_pairs_examined": 345283,
+        "panel_barcode_pairs": 11243,
+        "same_target_candidate_pairs": 2015,
+        "read1_prefix_bytes": 10485760,
+        "read2_prefix_bytes": 10485760,
+        "read1_prefix_sha256": "65c74dd22319426b67e40da9626adabdfddd964076cad38916c0cd6d53bd379c",
+        "read2_prefix_sha256": "4719e672c191d1aa14b62fb74f40a2ae9ff7c449efcad7750f66c6c9b1380ab2"
+      },
+      {
+        "well": 2,
+        "run_accession": "SRR17189068",
+        "read_pairs_examined": 422561,
+        "panel_barcode_pairs": 23406,
+        "same_target_candidate_pairs": 12519,
+        "read1_prefix_bytes": 10485760,
+        "read2_prefix_bytes": 10485760,
+        "read1_prefix_sha256": "e5a45f168958cef536db50d66e6135cb56fe8c7f9e1842f1916750cfe6bddf47",
+        "read2_prefix_sha256": "0399ba7eb295147032f714e24ac1b9fcca13ad926922e6455a285ed93f3a3ad3"
+      },
+      {
+        "well": 3,
+        "run_accession": "SRR17189069",
+        "read_pairs_examined": 427794,
+        "panel_barcode_pairs": 25458,
+        "same_target_candidate_pairs": 14376,
+        "read1_prefix_bytes": 10485760,
+        "read2_prefix_bytes": 10485760,
+        "read1_prefix_sha256": "4c756f4a3be4631a490a6fb075eed7c0b94499fca034969b115f628937b57c6b",
+        "read2_prefix_sha256": "4d18c0887de5496bec78ee128ecfc8c4284b7d23a6a11bd108b875282daca0b7"
+      },
+      {
+        "well": 4,
+        "run_accession": "SRR17189070",
+        "read_pairs_examined": 418357,
+        "panel_barcode_pairs": 14977,
+        "same_target_candidate_pairs": 5605,
+        "read1_prefix_bytes": 10485760,
+        "read2_prefix_bytes": 10485760,
+        "read1_prefix_sha256": "3dfeb5e0dd08f2b26bfe7b9305be7518a4856de1f091ee0bfd29cb3d2486b5c4",
+        "read2_prefix_sha256": "c38e02acf976d0efc33aad9c4ef923ac5c51114057de73bd196fd9b57d1a0b04"
+      }
+    ],
+    "barcode_transform": "complement one-based bases 8 and 9, then exact match",
+    "cell_level_data_committed": false
+  },
+  "resolution_thresholds": {
+    "min_exact_reads": 10,
+    "min_support_wells": 2,
+    "source_identity_is_not_synthesis_approval": true
+  },
+  "remaining_gates": [
+    "targeted confirmation for low-support source identities",
+    "confirm pZR158/direct-capture vector and cloning compatibility",
+    "select current human reference build and target transcript/TSS",
+    "run sequence-specific on-target and off-target assessment",
+    "independent review before oligo ordering"
+  ],
+  "input_sha256": {
+    "outputs/decomposition_v2/prospective_donor_panel.csv": "d7a27e1fcf0eb2b50f84f5586a11ffd8fa680f6eecd543781daad65d244144a0",
+    "data/external/gse190604/guidecalls.txt.gz": "ffd5a3050a69d013ddc09a43fae63642a7659cdb778f78c865e0829207e17b7c",
+    "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+    "CRISPRa.IL2.sgrna_summary.txt": "311e9e3560848c0a3c246e7de13e4705883a2f1e13f49492ba3dbdce88217468",
+    "CRISPRa.IFNG.sgrna_summary.txt": "2638585aa6a046e5a7880b8cb093b9cd7555625da80adcd228b823af9e32f7e0",
+    "SRR17189067_1.fastq.gz.part": "65c74dd22319426b67e40da9626adabdfddd964076cad38916c0cd6d53bd379c",
+    "SRR17189067_2.fastq.gz.part": "4719e672c191d1aa14b62fb74f40a2ae9ff7c449efcad7750f66c6c9b1380ab2",
+    "SRR17189068_1.fastq.gz.part": "e5a45f168958cef536db50d66e6135cb56fe8c7f9e1842f1916750cfe6bddf47",
+    "SRR17189068_2.fastq.gz.part": "0399ba7eb295147032f714e24ac1b9fcca13ad926922e6455a285ed93f3a3ad3",
+    "SRR17189069_1.fastq.gz.part": "4c756f4a3be4631a490a6fb075eed7c0b94499fca034969b115f628937b57c6b",
+    "SRR17189069_2.fastq.gz.part": "4d18c0887de5496bec78ee128ecfc8c4284b7d23a6a11bd108b875282daca0b7",
+    "SRR17189070_1.fastq.gz.part": "3dfeb5e0dd08f2b26bfe7b9305be7518a4856de1f091ee0bfd29cb3d2486b5c4",
+    "SRR17189070_2.fastq.gz.part": "c38e02acf976d0efc33aad9c4ef923ac5c51114057de73bd196fd9b57d1a0b04"
+  },
+  "provenance": {
+    "git_sha": "25b9b3fc14a055451120e4f5eb65f5b5327176ac",
+    "data_sha256": "b2a4df668889702f0ea64dbf27bcd8d8c3897c34a638fd3192f4e959ecaf96a9",
+    "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+    "timestamp": "2026-07-12T15:26:42.636649-03:00",
+    "command": "python scripts/build_gse190604_guide_sequence_manifest.py --screen-il2 /tmp/CRISPRa.IL2.sgrna_summary.txt --screen-ifng /tmp/CRISPRa.IFNG.sgrna_summary.txt --run 1 SRR17189067 /tmp/SRR17189067_1.fastq.gz.part /tmp/SRR17189067_2.fastq.gz.part --run 2 SRR17189068 /tmp/SRR17189068_1.fastq.gz.part /tmp/SRR17189068_2.fastq.gz.part --run 3 SRR17189069 /tmp/SRR17189069_1.fastq.gz.part /tmp/SRR17189069_2.fastq.gz.part --run 4 SRR17189070 /tmp/SRR17189070_1.fastq.gz.part /tmp/SRR17189070_2.fastq.gz.part",
+    "method_version": "gse190604_guide_sequence_resolution_v1"
+  }
+}

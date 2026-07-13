@@ -1,10 +1,10 @@
-# CCI dataset registry
+# CCI evidence registry
 # ---------------------
-# To test a NEW dataset, add ONE block here. The runner (isci/run_cci.py) reads this,
-# loads the dataset via its adapter, runs the magnitude-conditional CCI test, and writes a
-# canonical outputs/<id>/cci_result.json that the dashboard picks up automatically.
-#
-# Adding a dataset = adding a block. No code changes needed for standard Perturb-seq inputs.
+# This file records the project datasets whose results are already recomputed or aggregated by
+# isci/run_cci.py. It is not yet the public bring-your-own-data interface: the current runner has
+# dataset-specific branches. New external datasets should first declare the versioned contract in
+# docs/dataset_spec.md; the generic adapter will consume that contract in the next implementation
+# slice. Adding a block here alone does not make an arbitrary dataset executable.
 
 schema_version: 1
 
@@ -61,13 +61,13 @@ datasets:
     status: done
     expected_verdict: FAIL
 
-  # ---- TEMPLATE for a new dataset (copy, fill, set status: queued) ----
+  # ---- LEGACY registry template; use DatasetSpec v1 for new public integrations ----
   # - id: my_new_screen
   #   label: "My new immune Perturb-seq"
   #   system: immune
   #   perturbation: "KO"
   #   path: data_public/mine/screen.h5ad
-  #   adapter: generic_perturbseq       # or write isci/adapters/<name>.py for odd formats
+  #   adapter: generic_perturbseq       # adapter target; not implemented by run_cci.py yet
   #   donor_col: donor                  # omit if single-donor
   #   positives: known_regulators       # known_regulators | curated | hart_essentials | custom:<file>
   #   status: queued

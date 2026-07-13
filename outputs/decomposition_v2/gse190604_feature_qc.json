@@ -1,0 +1,28 @@
+{
+  "n_target_context_rows": 138,
+  "n_targets": 69,
+  "contexts": {
+    "nostim": 69,
+    "stim": 69
+  },
+  "positives": {
+    "nostim": 23,
+    "stim": 23
+  },
+  "matrix_shape": [
+    36755,
+    103805,
+    264594772
+  ],
+  "n_singleton_cells": 61041,
+  "n_groups": 591,
+  "normalization": "raw-count pseudobulk per target-well, log1p CPM",
+  "provenance": {
+    "git_sha": "f4a9fa29787756766dc9b3d25661952726779e17",
+    "data_sha256": "{\"data/external/gse190604/barcodes.tsv.gz\": \"2465729feb9dd448fff059530b5fd732412c7f2c3eeddaa9dbe9a6406586fdf6\", \"data/external/gse190604/features.tsv.gz\": \"9905919eb3c62529f38122490f8f6472fc6ef36a43f2126ad39e3065355a34e9\", \"data/external/gse190604/guidecalls.txt.gz\": \"ffd5a3050a69d013ddc09a43fae63642a7659cdb778f78c865e0829207e17b7c\", \"data/external/gse190604/matrix.mtx.gz\": \"38113a6099f117ed1449cfde2f9f61bf10379da262af49364308f1a0602e3fc1\"}",
+    "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+    "timestamp": "2026-07-12T13:48:29.478135-03:00",
+    "command": "python scripts/build_gse190604_features.py",
+    "method_version": "gse190604_targeted_panel_v1"
+  }
+}

@@ -28,7 +28,9 @@ datasets — only the data changes.
 ### 3. Visual aggregation — `isci/build_dashboard.py`
 Scans `outputs/*/cci_result.json` (+ the seeded `cci_runs.json`) and emits:
 - **`outputs/dashboard/cci_dashboard.html`** — self-contained interactive table (verdict
-  pills, ΔAUPRC forest bars with CIs), no server needed; open in any browser.
+  pills, standardized matched C-vs-M ΔAUPRC forest bars with CIs), no server needed; open in any
+  browser. This cross-system metric is separate from the authoritative Marson full-sample M→M+C
+  estimand and its leakage-free OOF estimate.
 - **`figures/cci_dashboard_static.png`** — a static forest plot for the paper/README.
 
 Re-run `python isci/build_dashboard.py` after any new dataset finishes; the page updates

@@ -12,9 +12,11 @@ graded boundary, not a single far test.**
 We define and test a candidate general property of perturbation screens: after
 conditioning on effect **magnitude**, a reproducible, axis-specific residual signal
 `C` separates genes that **control** a cell-state transition from genes merely
-**associated** with it. In the anchoring immune system the property holds strongly
-and is orthogonal to magnitude (bootstrap ΔAUPRC +0.229, 95% CI [0.072, 0.405],
-conditional LR p<1e-4). We then tested cross-dataset invariance across four systems.
+**associated** with it. In the anchoring immune system the property holds strongly:
+the authoritative M→M+C test gains +0.357 AUPRC [0.117,0.538], and the leakage-free OOF
+estimate is +0.215 [0.074,0.560] with permutation p=0.010. The standardized matched C-vs-M
+aggregate used for cross-system comparison is +0.229 [0.072,0.405]. We then tested
+cross-dataset invariance across four systems.
 The property is **immune-scoped**: it shows the same directional signal under an
 opposite perturbation modality (CRISPRa; underpowered near-miss) but does **not**
 transfer to non-immune screens — neither a differentiation screen, where the residual
@@ -40,7 +42,7 @@ system where it fails defines the property's boundary, reported as such.
 
 ![Cross-dataset invariance]({{artifact:art_800f8a37-80cb-4a91-9c81-ba37005af1c6}})
 
-| System | Cell type | Modality | n_pos | ΔAUPRC (M→M+C) | 95% CI | LR p | Spearman(C,M) | Verdict |
+| System | Cell type | Modality | n_pos | Standardized matched C-vs-M ΔAUPRC | 95% CI | LR p | Spearman(C,M) | Verdict |
 |---|---|---|---|---|---|---|---|---|
 | **Marson** | CD4+ T (immune) | CRISPR KD/KO | 19 | **+0.229** | [0.072, 0.405] | <1e-4 | +0.02 | **PASS** |
 | Schmidt | CD4+ T (immune) | **CRISPRa** | 10 | +0.138 | [−0.029, 0.434] | n.s. | +0.05 | near-miss |

@@ -1,0 +1,277 @@
+{
+  "criteria_version": "donor_resolved_context_v1",
+  "searched_at": "2026-07-12",
+  "result": "NO_PUBLIC_GO_IDENTIFIED",
+  "decision_counts": {
+    "DIAGNOSTIC_ONLY": 6
+  },
+  "candidates": [
+    {
+      "id": "gse190604_schmidt",
+      "name": "Schmidt CRISPRa Perturb-seq",
+      "accession": "GSE190604",
+      "external_independent": true,
+      "primary_human_t_cells": true,
+      "single_cell_perturbation": true,
+      "donor_resolved": false,
+      "donor_count": 2,
+      "paired_contexts": true,
+      "same_perturbations_across_contexts": true,
+      "matched_controls": true,
+      "eligible_positive_count": 23,
+      "eligible_negative_count": 46,
+      "public_processed_data": true,
+      "relevance": "Exact targeted panel already analyzed; donors are mixed 1:1 and unresolved.",
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE190604",
+        "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5726254"
+      ],
+      "decision": "DIAGNOSTIC_ONLY",
+      "gates": {
+        "external_independent": true,
+        "primary_human_t_cells": true,
+        "single_cell_perturbation": true,
+        "donor_resolved": false,
+        "at_least_six_donors": false,
+        "paired_contexts": true,
+        "same_perturbations_across_contexts": true,
+        "matched_controls": true,
+        "positive_coverage": true,
+        "negative_coverage": true,
+        "public_processed_data": true
+      },
+      "failed_gates": [
+        "donor_resolved",
+        "at_least_six_donors"
+      ],
+      "unknown_gates": []
+    },
+    {
+      "id": "emtab13324_alda",
+      "name": "Primary T-cell crisprQTL",
+      "accession": "E-MTAB-13324",
+      "external_independent": true,
+      "primary_human_t_cells": true,
+      "single_cell_perturbation": true,
+      "donor_resolved": true,
+      "donor_count": 1,
+      "paired_contexts": false,
+      "same_perturbations_across_contexts": false,
+      "matched_controls": true,
+      "eligible_positive_count": null,
+      "eligible_negative_count": null,
+      "public_processed_data": false,
+      "relevance": "Large CRISPRi panel, but one donor and one activated culture context.",
+      "sources": [
+        "https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-13324",
+        "https://doi.org/10.1186/s13059-024-03176-z"
+      ],
+      "decision": "DIAGNOSTIC_ONLY",
+      "gates": {
+        "external_independent": true,
+        "primary_human_t_cells": true,
+        "single_cell_perturbation": true,
+        "donor_resolved": true,
+        "at_least_six_donors": false,
+        "paired_contexts": false,
+        "same_perturbations_across_contexts": false,
+        "matched_controls": true,
+        "positive_coverage": false,
+        "negative_coverage": false,
+        "public_processed_data": false
+      },
+      "failed_gates": [
+        "at_least_six_donors",
+        "paired_contexts",
+        "same_perturbations_across_contexts",
+        "public_processed_data"
+      ],
+      "unknown_gates": [
+        "positive_coverage",
+        "negative_coverage"
+      ]
+    },
+    {
+      "id": "gse297472_ho",
+      "name": "Primary T-cell emVar scCRISPRi",
+      "accession": "GSE297472 / phs004072.v1.p1",
+      "external_independent": true,
+      "primary_human_t_cells": true,
+      "single_cell_perturbation": true,
+      "donor_resolved": true,
+      "donor_count": 3,
+      "paired_contexts": false,
+      "same_perturbations_across_contexts": false,
+      "matched_controls": true,
+      "eligible_positive_count": null,
+      "eligible_negative_count": null,
+      "public_processed_data": false,
+      "relevance": "Donors are hashtag-resolved, but only three and the scCRISPRi arm has one context.",
+      "sources": [
+        "https://www.nature.com/articles/s41588-025-02301-3",
+        "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE297472"
+      ],
+      "decision": "DIAGNOSTIC_ONLY",
+      "gates": {
+        "external_independent": true,
+        "primary_human_t_cells": true,
+        "single_cell_perturbation": true,
+        "donor_resolved": true,
+        "at_least_six_donors": false,
+        "paired_contexts": false,
+        "same_perturbations_across_contexts": false,
+        "matched_controls": true,
+        "positive_coverage": false,
+        "negative_coverage": false,
+        "public_processed_data": false
+      },
+      "failed_gates": [
+        "at_least_six_donors",
+        "paired_contexts",
+        "same_perturbations_across_contexts",
+        "public_processed_data"
+      ],
+      "unknown_gates": [
+        "positive_coverage",
+        "negative_coverage"
+      ]
+    },
+    {
+      "id": "prjdb16517_chen",
+      "name": "FOXP3 Perturb-icCITE-seq",
+      "accession": "PRJDB16517",
+      "external_independent": true,
+      "primary_human_t_cells": true,
+      "single_cell_perturbation": true,
+      "donor_resolved": null,
+      "donor_count": null,
+      "paired_contexts": false,
+      "same_perturbations_across_contexts": false,
+      "matched_controls": true,
+      "eligible_positive_count": null,
+      "eligible_negative_count": null,
+      "public_processed_data": false,
+      "relevance": "Rich iTreg perturbation panel, but the screen is one polarization context and donor metadata are not proven in the public article.",
+      "sources": [
+        "https://www.nature.com/articles/s41586-025-08795-5",
+        "https://ddbj.nig.ac.jp/resource/bioproject/PRJDB16517"
+      ],
+      "decision": "DIAGNOSTIC_ONLY",
+      "gates": {
+        "external_independent": true,
+        "primary_human_t_cells": true,
+        "single_cell_perturbation": true,
+        "donor_resolved": false,
+        "at_least_six_donors": false,
+        "paired_contexts": false,
+        "same_perturbations_across_contexts": false,
+        "matched_controls": true,
+        "positive_coverage": false,
+        "negative_coverage": false,
+        "public_processed_data": false
+      },
+      "failed_gates": [
+        "paired_contexts",
+        "same_perturbations_across_contexts",
+        "public_processed_data"
+      ],
+      "unknown_gates": [
+        "donor_resolved",
+        "at_least_six_donors",
+        "positive_coverage",
+        "negative_coverage"
+      ]
+    },
+    {
+      "id": "craftseq_baglaenko",
+      "name": "CRAFTseq IL2RA state-dependent editing",
+      "accession": "Zenodo 15425510 (software only)",
+      "external_independent": true,
+      "primary_human_t_cells": true,
+      "single_cell_perturbation": true,
+      "donor_resolved": true,
+      "donor_count": 5,
+      "paired_contexts": true,
+      "same_perturbations_across_contexts": true,
+      "matched_controls": true,
+      "eligible_positive_count": 0,
+      "eligible_negative_count": 0,
+      "public_processed_data": false,
+      "relevance": "Best donor/context design, but it tests one IL2RA variant and its cell-level Th1/Treg data are not in the public data deposit.",
+      "sources": [
+        "https://www.nature.com/articles/s41586-025-09313-3",
+        "https://doi.org/10.5281/zenodo.15425510",
+        "https://doi.org/10.5281/zenodo.15935857"
+      ],
+      "decision": "DIAGNOSTIC_ONLY",
+      "gates": {
+        "external_independent": true,
+        "primary_human_t_cells": true,
+        "single_cell_perturbation": true,
+        "donor_resolved": true,
+        "at_least_six_donors": false,
+        "paired_contexts": true,
+        "same_perturbations_across_contexts": true,
+        "matched_controls": true,
+        "positive_coverage": false,
+        "negative_coverage": false,
+        "public_processed_data": false
+      },
+      "failed_gates": [
+        "at_least_six_donors",
+        "positive_coverage",
+        "negative_coverage",
+        "public_processed_data"
+      ],
+      "unknown_gates": []
+    },
+    {
+      "id": "gse214231_speedingcars",
+      "name": "speedingCARs signaling-domain screen",
+      "accession": "GSE214231",
+      "external_independent": true,
+      "primary_human_t_cells": true,
+      "single_cell_perturbation": true,
+      "donor_resolved": true,
+      "donor_count": 3,
+      "paired_contexts": false,
+      "same_perturbations_across_contexts": false,
+      "matched_controls": true,
+      "eligible_positive_count": 0,
+      "eligible_negative_count": 0,
+      "public_processed_data": true,
+      "relevance": "Multi-donor perturbation profiles, but CAR constructs are not frozen gene-controller labels and only standard CAR controls are unstimulated.",
+      "sources": [
+        "https://www.nature.com/articles/s41467-022-34141-8",
+        "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE214231"
+      ],
+      "decision": "DIAGNOSTIC_ONLY",
+      "gates": {
+        "external_independent": true,
+        "primary_human_t_cells": true,
+        "single_cell_perturbation": true,
+        "donor_resolved": true,
+        "at_least_six_donors": false,
+        "paired_contexts": false,
+        "same_perturbations_across_contexts": false,
+        "matched_controls": true,
+        "positive_coverage": false,
+        "negative_coverage": false,
+        "public_processed_data": true
+      },
+      "failed_gates": [
+        "at_least_six_donors",
+        "paired_contexts",
+        "same_perturbations_across_contexts",
+        "positive_coverage",
+        "negative_coverage"
+      ],
+      "unknown_gates": []
+    }
+  ],
+  "provenance": {
+    "git_sha": "c432d89872757391ac100e5d7f6e3fa451e6db95",
+    "timestamp": "2026-07-12T14:44:51.403572-03:00",
+    "command": "python scripts/build_donor_dataset_inventory.py"
+  }
+}

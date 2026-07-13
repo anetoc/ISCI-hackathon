@@ -1,0 +1,30 @@
+{
+  "test": "T4 leave-one-condition-out transport gate",
+  "status": "POST_HOC_STRESS_TEST",
+  "verdict": "NOT_EVALUABLE",
+  "reason": "No reusable gene-by-condition artifact jointly contains E, S, R, controller labels and auditable matching blocks/covariates. The raw Marson h5ad contains the three conditions and necessary source fields, but T4 would require raw-data recomputation.",
+  "interpretation": "This is an artifact-readiness limitation, not evidence that component support fails to transport across Rest, Stim8hr and Stim48hr.",
+  "audit": {
+    "conditions_in_raw": [
+      "Rest",
+      "Stim8hr",
+      "Stim48hr"
+    ],
+    "raw_has_required_source_fields": true,
+    "reusable_candidates_inspected": [
+      "outputs/iec_latent/iec_axis_scores_pseudobulk_stim48.csv"
+    ],
+    "raw_recomputation_performed": false
+  },
+  "provenance": {
+    "git_sha": "281f54b276af22b401dcc323bda664b10744de37",
+    "data_sha256": {
+      "results/final/isci_final_ranking.csv": "6f9fe281757d9cd7ab3ed33811b680e1f2b59b6a2f490967362e253350115d72",
+      "outputs/marson_obs_matching.parquet": "1d49edaaceb449c7454192849a10bfac94e2200f7512b8e21087bbb31cc2e0a2"
+    },
+    "raw_data_sha256": "c355f535ff32cf7ba1edc49cf9c6039fe84f2c9ebe4d005515cba75790cfbb62",
+    "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+    "timestamp": "2026-07-12T12:33:45.655362-03:00",
+    "command": "python scripts/audit_t4_condition_transport.py"
+  }
+}

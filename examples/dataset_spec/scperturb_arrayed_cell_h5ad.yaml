@@ -1,0 +1,52 @@
+schema_version: 1
+
+dataset:
+  id: datlinger_bock_2021_arrayed_rna
+  label: "Datlinger/Bock 2021 arrayed Jurkat RNA screen"
+  description: "Public scPerturb arrayed single-guide RNA example; diagnostic T-cell-line evidence."
+  organism: "Homo sapiens"
+  cell_system: "Jurkat T-cell line"
+  perturbation_modality: "OTHER"
+
+input:
+  path: "data/external/DatlingerBock2021.h5ad"
+  format: "h5ad"
+  layout: "anndata_cells"
+  sha256: "9f8c35058d71442a904391dabf6574bbb24ae31ed00cef5d4e4ed498828f3592"
+
+mapping:
+  perturbation: "perturbation"
+  guide: "perturbation"
+  replicate: "sample"
+  condition: "perturbation_2"
+
+preprocessing:
+  source:
+    location: "X"
+    kind: "raw_counts"
+  control:
+    column: "perturbation"
+    labels: ["control"]
+    match_on: ["condition"]
+  normalization: "log1p_cpm"
+  contrast: "pseudobulk_difference"
+  standardization: "gene_wise_zscore_within_condition"
+  min_cells_per_stratum: 25
+  min_replicates: 2
+  multi_guide_policy: "not_applicable_arrayed"
+  perturbation_transform: "strip_trailing_guide_number"
+
+analysis:
+  axes_path: "config/axes.yaml"
+  primary_signal: "standardized_effect"
+  sensitivity_signal: "effect"
+  leave_one_marker_out: true
+  n_bootstrap: 1000
+  seed: 0
+
+provenance:
+  source_url: "https://doi.org/10.5281/zenodo.10044268"
+  citation: "Datlinger et al.; scPerturb H5AD collection v1.3."
+  license: "CC-BY-4.0"
+  data_classification: "PUBLIC"
+  redistributable: true

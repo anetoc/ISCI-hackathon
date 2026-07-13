@@ -1,0 +1,59 @@
+{
+  "command": "preflight-cells",
+  "ok": true,
+  "preflight": {
+    "biological_verdict": "NOT_ISSUED",
+    "can_construct_effects": true,
+    "data_sha256": "e1e293c75dfebe09301bf32093703cfd5f50c17d6fb53144d8213e52e0e4e150",
+    "dataset_id": "papalexi_eccite_protein_preflight",
+    "donor_resolved_conditions_ready": 0,
+    "eligible_cells": 20729,
+    "eligible_effect_strata": 216,
+    "excluded_cells": 0,
+    "issues": [
+      {
+        "code": "SIGNAL_VALUES_NOT_SCANNED",
+        "field": "preprocessing.source",
+        "message": "metadata-only preflight did not read matrix values",
+        "severity": "WARNING"
+      },
+      {
+        "code": "DONOR_COVERAGE_INSUFFICIENT",
+        "field": "mapping.donor",
+        "message": "effect construction is diagnostic without sufficient donors",
+        "severity": "WARNING"
+      }
+    ],
+    "matrix_shape": [
+      20729,
+      4
+    ],
+    "multi_guide_cells": 0,
+    "n_controls": 2386,
+    "n_donors": null,
+    "n_perturbations": 98,
+    "n_replicates": 5,
+    "perturbation_conditions_ready": 72,
+    "preprocessing": {
+      "contrast": "pseudobulk_difference",
+      "min_cells_per_stratum": 25,
+      "min_replicates": 2,
+      "multi_guide_policy": "exclude",
+      "normalization": "log1p_cpm",
+      "source_kind": "raw_counts",
+      "source_location": "X",
+      "standardization": "gene_wise_zscore_within_condition"
+    },
+    "provenance": {
+      "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+      "command": "isci preflight-cells examples/dataset_spec/scperturb_cell_h5ad.yaml",
+      "git_sha": "28f3f5c576f93788268ca74c965cfa63112533dc",
+      "spec_sha256": "4b5f692b384ee0463532793b6c01ecc9aed5ff4e7c7ee0c3cef77234d69ad601",
+      "timestamp": "2026-07-12T23:36:11.025065+00:00"
+    },
+    "schema_version": "isci_cell_preflight_v1",
+    "source_rows": 20729,
+    "status": "DIAGNOSTIC_ONLY",
+    "underpowered_effect_strata": 120
+  }
+}

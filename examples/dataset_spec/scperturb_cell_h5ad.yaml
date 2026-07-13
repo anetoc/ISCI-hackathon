@@ -1,0 +1,52 @@
+schema_version: 1
+
+dataset:
+  id: papalexi_eccite_protein_preflight
+  label: "Papalexi/Satija 2021 ECCITE-seq protein preflight"
+  description: "Public scPerturb structure example; not CD4+ controllership evidence."
+  organism: "Homo sapiens"
+  cell_system: "THP-1 cell line"
+  perturbation_modality: "CRISPR_KO"
+
+input:
+  path: "data/external/PapalexiSatija2021_eccite_protein.h5ad"
+  format: "h5ad"
+  layout: "anndata_cells"
+  sha256: null
+
+mapping:
+  perturbation: "perturbation"
+  guide: "guide_id"
+  guide_count: "nperts"
+  replicate: "hto"
+
+preprocessing:
+  source:
+    location: "X"
+    kind: "raw_counts"
+  control:
+    column: "perturbation"
+    labels: ["control"]
+    match_on: ["replicate"]
+  normalization: "log1p_cpm"
+  contrast: "pseudobulk_difference"
+  standardization: "gene_wise_zscore_within_condition"
+  min_cells_per_stratum: 25
+  min_replicates: 2
+  multi_guide_policy: "exclude"
+  perturbation_transform: "identity"
+
+analysis:
+  axes_path: "config/axes.yaml"
+  primary_signal: "standardized_effect"
+  sensitivity_signal: "effect"
+  leave_one_marker_out: true
+  n_bootstrap: 1000
+  seed: 0
+
+provenance:
+  source_url: "https://doi.org/10.5281/zenodo.10044268"
+  citation: "Papalexi et al. 2021 ECCITE-seq; scPerturb H5AD collection v1.3."
+  license: "CC-BY-4.0"
+  data_classification: "PUBLIC"
+  redistributable: true

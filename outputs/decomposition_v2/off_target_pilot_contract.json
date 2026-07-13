@@ -1,0 +1,87 @@
+{
+  "status": "PILOT_INPUTS_READY_EXECUTION_NOT_RUN",
+  "execution_status": "NOT_EXECUTED",
+  "engine": {
+    "name": "CRISPRitz",
+    "version": "2.7.0",
+    "source_commit": "24b893ecb0c2354d5c76697e116d2febe1ee6265",
+    "distribution": "bioconda",
+    "platform": "linux-64",
+    "package_build": "py39h2de1943_0",
+    "package_sha256": "88aa3073a76f8b74b2a869ecf921c59241cf19267df877bafc285b8620cfc215",
+    "docker_latest_status": "DISALLOWED_VERSION_NOT_ALIGNED_WITH_2_7_0"
+  },
+  "scientific_reference": {
+    "assembly_accession": "GCF_000001405.40",
+    "assembly_name": "GRCh38.p14",
+    "annotation_release": "GCF_000001405.40-RS_2025_08",
+    "annotation_bed_status": "BLOCKED_DERIVATION_NOT_EXECUTED"
+  },
+  "pilot_stage": {
+    "id": "S1_PRIORITY_REFERENCE_SEARCH",
+    "input": "ALL_CURRENT_AND_FALLBACK_GUIDES_FOR_HIGH_PRIORITY_TARGETS",
+    "expected_targets": [
+      "TNFRSF9",
+      "TBX21"
+    ],
+    "genome_scope": "GCF_000001405.40",
+    "search_mode": "MISMATCH_ONLY",
+    "mismatch_ceiling": 4,
+    "dna_bulge_ceiling": 0,
+    "rna_bulge_ceiling": 0
+  },
+  "n_project_candidates": 10,
+  "targets": [
+    "TBX21",
+    "TNFRSF9"
+  ],
+  "candidate_kinds": {
+    "FALLBACK_CANDIDATE": 6,
+    "CURRENT_GUIDE": 4
+  },
+  "official_installation_control": {
+    "source": "CRISPRitz test_scripts",
+    "guide_id": "CRISPRITZ_OFFICIAL_EMX1",
+    "guide_with_pam_placeholder": "GAGTCCGAGCAGAAGAAGAANNN",
+    "reference_scope": "UCSC_hg38_chr22_INSTALLATION_ONLY",
+    "mismatch_ceiling": 4,
+    "dna_bulge_ceiling": 1,
+    "rna_bulge_ceiling": 1,
+    "boundary": "Installation control only; it cannot adjudicate the project guides."
+  },
+  "acceptance": {
+    "repeated_runs": 2,
+    "require_identical_target_rows_after_canonical_sort": true,
+    "require_nonempty_targets_and_profiles": true,
+    "require_input_output_sha256": true,
+    "require_engine_package_and_reference_hashes": true,
+    "require_wall_time_peak_rss_and_disk_usage": true,
+    "require_zero_unexpected_stderr": true,
+    "result_status_if_all_stages_pass": "TECHNICAL_OFF_TARGET_RESULTS_READY_FOR_REVIEW"
+  },
+  "promotion_boundary": {
+    "automatic_replacements": 0,
+    "synthesis_approval": false,
+    "reason": "Off-target enumeration alone does not establish CRISPRa on-target activity, TSS placement, vector compatibility, or biological efficacy."
+  },
+  "input_sha256": {
+    "config/off_target_pilot.yaml": "f00f2462e5194b19e2679e732bc7f17d0d0dbbc78612e4f13bdf62a30177b946",
+    "outputs/decomposition_v2/off_target_screening_input.csv": "4eb4ac4386ea01a003beed6778c1ca135d7b725ce3985562b8c92b6adf77e293",
+    "outputs/decomposition_v2/guide_replacement_shortlist.csv": "b55523328db7f060c57d3648d8fa966eedd0fc27dfeed10ae105cc1c516a9971",
+    "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7"
+  },
+  "output_sha256": {
+    "outputs/decomposition_v2/off_target_pilot_manifest.csv": "ee4535f0431763e9ed686596dfeefa6b25796f1bd4bab5e8dec5b609bff3be72",
+    "outputs/decomposition_v2/off_target_pilot_guides.txt": "1821498b053f4934578a955fb7f625fa3da122a9eb0ddc0195014f4bb3099b05",
+    "outputs/decomposition_v2/off_target_pilot_control_emx1.txt": "b20425c83a926546c31d016507abebc546463fff8a9d028b660956ca89a71dc8",
+    "outputs/decomposition_v2/off_target_pilot_spcas9_ngg.txt": "5916643675eadf37d47ac06f0968c21dc6c8b59ddb84fa18539029759da1b3f1"
+  },
+  "provenance": {
+    "git_sha": "3973a018af79ae68815b90a8734feadd88f4ee65",
+    "data_sha256": "b4698adfe3899ed0d3a0308dae6969debcd69187e299366f3f21ea0cc693d976",
+    "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+    "timestamp": "2026-07-12T15:49:13.538092-03:00",
+    "command": "python scripts/build_off_target_pilot.py",
+    "method_version": "off_target_pilot_v1"
+  }
+}

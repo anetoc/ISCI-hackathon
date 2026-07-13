@@ -1,0 +1,727 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/anetoc/ISCI-hackathon/contracts/dataset_spec.schema.json",
+  "title": "ISCI DatasetSpec v1",
+  "description": "Portable input contract for Perturb-seq datasets evaluated by ISCI.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset",
+    "input",
+    "mapping",
+    "analysis",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "dataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "organism",
+        "cell_system",
+        "perturbation_modality"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{2,63}$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "organism": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cell_system": {
+          "type": "string",
+          "minLength": 1
+        },
+        "perturbation_modality": {
+          "enum": [
+            "CRISPR_KO",
+            "CRISPRI",
+            "CRISPRA",
+            "RNAI",
+            "OTHER"
+          ]
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "format",
+        "layout"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "format": {
+          "enum": [
+            "h5ad",
+            "csv",
+            "parquet"
+          ]
+        },
+        "layout": {
+          "enum": [
+            "anndata_cells",
+            "anndata_effects",
+            "long_effects",
+            "controller_features"
+          ]
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "layers": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "effect": {
+              "type": "string",
+              "minLength": 1
+            },
+            "standardized_effect": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "perturbation": {
+          "$ref": "#/$defs/columnName"
+        },
+        "feature": {
+          "$ref": "#/$defs/columnName"
+        },
+        "effect": {
+          "$ref": "#/$defs/columnName"
+        },
+        "standardized_effect": {
+          "$ref": "#/$defs/columnName"
+        },
+        "condition": {
+          "$ref": "#/$defs/columnName"
+        },
+        "donor": {
+          "$ref": "#/$defs/columnName"
+        },
+        "guide": {
+          "$ref": "#/$defs/columnName"
+        },
+        "guide_count": {
+          "$ref": "#/$defs/columnName"
+        },
+        "replicate": {
+          "$ref": "#/$defs/columnName"
+        },
+        "control": {
+          "$ref": "#/$defs/columnName"
+        },
+        "magnitude": {
+          "$ref": "#/$defs/columnName"
+        },
+        "specificity": {
+          "$ref": "#/$defs/columnName"
+        },
+        "reproducibility": {
+          "$ref": "#/$defs/columnName"
+        },
+        "coherence": {
+          "$ref": "#/$defs/columnName"
+        },
+        "target_expression": {
+          "$ref": "#/$defs/columnName"
+        },
+        "n_guides": {
+          "$ref": "#/$defs/columnName"
+        },
+        "n_cells": {
+          "$ref": "#/$defs/columnName"
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "axes_path",
+        "primary_signal",
+        "sensitivity_signal",
+        "leave_one_marker_out",
+        "n_bootstrap",
+        "seed"
+      ],
+      "properties": {
+        "axes_path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "primary_signal": {
+          "const": "standardized_effect"
+        },
+        "sensitivity_signal": {
+          "const": "effect"
+        },
+        "leave_one_marker_out": {
+          "const": true
+        },
+        "n_bootstrap": {
+          "type": "integer",
+          "minimum": 100
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "preprocessing": {
+      "$ref": "#/$defs/cellPreprocessing"
+    },
+    "benchmark": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "positives",
+        "negatives"
+      ],
+      "properties": {
+        "positives": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source",
+                "path"
+              ],
+              "properties": {
+                "source": {
+                  "const": "file"
+                },
+                "path": {
+                  "$ref": "#/$defs/relativePath"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source",
+                "column"
+              ],
+              "properties": {
+                "source": {
+                  "const": "column"
+                },
+                "column": {
+                  "$ref": "#/$defs/columnName"
+                },
+                "positive_value": {}
+              }
+            }
+          ]
+        },
+        "negatives": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "strategy",
+            "match_on"
+          ],
+          "properties": {
+            "strategy": {
+              "const": "expression_matched"
+            },
+            "match_on": {
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 4,
+              "items": {
+                "enum": [
+                  "target_expression",
+                  "n_guides",
+                  "n_cells",
+                  "condition"
+                ]
+              },
+              "allOf": [
+                {
+                  "contains": {
+                    "const": "target_expression"
+                  }
+                },
+                {
+                  "contains": {
+                    "const": "n_guides"
+                  }
+                },
+                {
+                  "contains": {
+                    "const": "n_cells"
+                  }
+                },
+                {
+                  "contains": {
+                    "const": "condition"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "expected_verdict": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NULL",
+            "NOT_EVALUABLE",
+            null
+          ]
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_url",
+        "citation",
+        "license",
+        "data_classification",
+        "redistributable"
+      ],
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        "citation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "data_classification": {
+          "enum": [
+            "PUBLIC",
+            "INTERNAL",
+            "CONFIDENTIAL",
+            "RESTRICTED"
+          ]
+        },
+        "redistributable": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "columnName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "allOf": [
+        {
+          "not": {
+            "pattern": "^(?:/|[A-Za-z]:[\\\\/])"
+          }
+        },
+        {
+          "not": {
+            "pattern": "(^|[\\\\/])\\.\\.([\\\\/]|$)"
+          }
+        }
+      ]
+    },
+    "cellPreprocessing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "control",
+        "normalization",
+        "contrast",
+        "standardization",
+        "min_cells_per_stratum",
+        "min_replicates",
+        "multi_guide_policy",
+        "perturbation_transform"
+      ],
+      "properties": {
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "location",
+            "kind"
+          ],
+          "properties": {
+            "location": {
+              "enum": [
+                "X",
+                "layer"
+              ]
+            },
+            "layer": {
+              "$ref": "#/$defs/columnName"
+            },
+            "kind": {
+              "enum": [
+                "raw_counts",
+                "normalized"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "location": {
+                    "const": "layer"
+                  }
+                },
+                "required": [
+                  "location"
+                ]
+              },
+              "then": {
+                "required": [
+                  "layer"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "layer"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "control": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "column",
+            "labels",
+            "match_on"
+          ],
+          "properties": {
+            "column": {
+              "$ref": "#/$defs/columnName"
+            },
+            "labels": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/columnName"
+              }
+            },
+            "match_on": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "condition",
+                  "donor",
+                  "replicate"
+                ]
+              }
+            }
+          }
+        },
+        "normalization": {
+          "enum": [
+            "log1p_cpm",
+            "already_normalized"
+          ]
+        },
+        "contrast": {
+          "const": "pseudobulk_difference"
+        },
+        "standardization": {
+          "const": "gene_wise_zscore_within_condition"
+        },
+        "min_cells_per_stratum": {
+          "type": "integer",
+          "minimum": 10
+        },
+        "min_replicates": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "multi_guide_policy": {
+          "enum": [
+            "exclude",
+            "not_applicable_arrayed"
+          ]
+        },
+        "perturbation_transform": {
+          "enum": [
+            "identity",
+            "strip_trailing_guide_number"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "source": {
+                "properties": {
+                  "kind": {
+                    "const": "raw_counts"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "normalization": {
+                "const": "log1p_cpm"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "normalization": {
+                "const": "already_normalized"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "input": {
+            "properties": {
+              "layout": {
+                "const": "anndata_cells"
+              }
+            },
+            "required": [
+              "layout"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "preprocessing"
+        ],
+        "properties": {
+          "input": {
+            "properties": {
+              "format": {
+                "const": "h5ad"
+              }
+            }
+          },
+          "mapping": {
+            "required": [
+              "perturbation",
+              "guide",
+              "replicate"
+            ]
+          },
+          "benchmark": false
+        }
+      },
+      "else": {
+        "not": {
+          "required": [
+            "preprocessing"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input": {
+            "properties": {
+              "layout": {
+                "const": "anndata_cells"
+              }
+            },
+            "required": [
+              "layout"
+            ]
+          },
+          "preprocessing": {
+            "properties": {
+              "multi_guide_policy": {
+                "const": "exclude"
+              }
+            },
+            "required": [
+              "multi_guide_policy"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "mapping": {
+            "required": [
+              "guide_count"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input": {
+            "properties": {
+              "layout": {
+                "const": "anndata_effects"
+              }
+            },
+            "required": [
+              "layout"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "input": {
+            "properties": {
+              "format": {
+                "const": "h5ad"
+              },
+              "layers": {
+                "required": [
+                  "effect",
+                  "standardized_effect"
+                ]
+              }
+            },
+            "required": [
+              "layers"
+            ]
+          },
+          "mapping": {
+            "required": [
+              "perturbation"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input": {
+            "properties": {
+              "layout": {
+                "const": "long_effects"
+              }
+            },
+            "required": [
+              "layout"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "input": {
+            "properties": {
+              "format": {
+                "enum": [
+                  "csv",
+                  "parquet"
+                ]
+              }
+            }
+          },
+          "mapping": {
+            "required": [
+              "perturbation",
+              "feature",
+              "effect",
+              "standardized_effect"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input": {
+            "properties": {
+              "layout": {
+                "const": "controller_features"
+              }
+            },
+            "required": [
+              "layout"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "input": {
+            "properties": {
+              "format": {
+                "enum": [
+                  "csv",
+                  "parquet"
+                ]
+              }
+            }
+          },
+          "mapping": {
+            "required": [
+              "perturbation",
+              "magnitude",
+              "specificity",
+              "reproducibility"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

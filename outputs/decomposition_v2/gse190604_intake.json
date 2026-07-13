@@ -1,0 +1,165 @@
+{
+  "dataset": "GSE190604 Schmidt primary T-cell CRISPRa Perturb-seq",
+  "source": "NCBI GEO GSE190604",
+  "public_urls": {
+    "record": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE190604",
+    "matrix": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE190nnn/GSE190604/suppl/GSE190604_matrix.mtx.gz"
+  },
+  "metadata": {
+    "n_cells_matrix": 103805,
+    "n_features": 36755,
+    "n_cells_with_guide_call": 89751,
+    "n_singleton_guide_cells": 61041,
+    "n_singleton_guides": 154,
+    "n_singleton_targets_including_control": 74,
+    "n_no_target_cells": 4000,
+    "barcode_suffix_counts": {
+      "1": 13552,
+      "2": 13845,
+      "3": 13022,
+      "4": 12568,
+      "5": 13260,
+      "6": 12856,
+      "7": 12476,
+      "8": 12226
+    },
+    "target_cell_counts": {
+      "NO-TARGET": 4000,
+      "EMP3": 1588,
+      "TRAF3IP2": 1564,
+      "CD27": 1455,
+      "TNFRSF1B": 1344,
+      "LAT2": 1272,
+      "TNFRSF1A": 1260,
+      "PRKD2": 1254,
+      "IL2": 1156,
+      "IFNG": 1115,
+      "GRAP": 1105,
+      "CBY1": 1093,
+      "EMP1": 1090,
+      "PIK3AP1": 1075,
+      "TRIM21": 1063,
+      "LCP2": 1057,
+      "IL9R": 1042,
+      "MUC1": 1029,
+      "TAGAP": 1006,
+      "LTBR": 992,
+      "IL2RG": 968,
+      "RELA": 953,
+      "LHX6": 936,
+      "CNR2": 921,
+      "P2RY14": 913,
+      "VAV1": 907,
+      "JMJD1C": 902,
+      "LAT": 900,
+      "NOTCH1": 896,
+      "CD2": 891,
+      "BICDL2": 880,
+      "IL1R1": 871,
+      "TNFRSF9": 871,
+      "PLCG2": 867,
+      "WT1": 864,
+      "IL2RB": 834,
+      "TNFRSF12A": 817,
+      "CD28": 815,
+      "CD247": 781,
+      "RAC2": 777,
+      "TBX21": 770,
+      "ARHGDIB": 770,
+      "PRDM13": 730,
+      "MAP4K1": 726,
+      "OTUD7A": 718,
+      "SLA2": 703,
+      "ITPKA": 687,
+      "APOBEC3C": 654,
+      "APOL2": 624,
+      "APOBEC3D": 614,
+      "MGST3": 609,
+      "CEACAM1": 603,
+      "DEF6": 599,
+      "NLRC3": 583,
+      "INPPL1": 561,
+      "FOSB": 551,
+      "IKZF3": 548,
+      "OTUD7B": 527,
+      "ALX4": 524,
+      "FOXQ1": 520,
+      "FOXL2NB": 519,
+      "FOXD2": 518,
+      "PAPOLG": 502,
+      "ABCB10": 405,
+      "DEPDC7": 385,
+      "GATA3": 359,
+      "AKAP12": 359,
+      "FOSL1": 342,
+      "LHX4": 334,
+      "EOMES": 262,
+      "HELZ2": 128,
+      "TCF7": 115,
+      "PRDM1": 51,
+      "IRX4": 17
+    }
+  },
+  "sample_mapping": {
+    "status": "CONFIRMED_FROM_OFFICIAL_GEO_RECORD",
+    "mapping": {
+      "1-4": "mRNA-nostim-well1 through mRNA-nostim-well4",
+      "5-8": "mRNA-stim-well1 through mRNA-stim-well4"
+    },
+    "basis": "official GSE190604 record lists GSM5726254-57 as mRNA-nostim-well1-4 and GSM5726258-61 as mRNA-stim-well1-4 in barcode suffix order",
+    "verified_record": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE190604",
+    "verified_at": "2026-07-12"
+  },
+  "donor_design": {
+    "status": "PAIRED_DESIGN_DONOR_MIXED_NOT_RESOLVED",
+    "n_donors": 2,
+    "design": "cells from the two blood donors were split across no-stim and stimulated conditions, then normalized and mixed 1:1 before droplet loading",
+    "well_interpretation": "four 10x replicate wells per condition contain the donor mixture; well number is not a donor identifier",
+    "processed_matrix_has_donor_id": false,
+    "basis": "official GEO extraction protocols for GSM5726254 and GSM5726258 state that sorted cells from two blood donors were normalized and mixed 1:1 for each condition; the treatment protocol states that cells were split into the two conditions",
+    "verified_records": [
+      "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5726254",
+      "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5726258"
+    ],
+    "verified_at": "2026-07-12"
+  },
+  "donor_recovery_feasibility": {
+    "status": "NO_GO_LOCAL_CONFIRMATORY",
+    "sra_study": "SRP350148",
+    "raw_mrna_download_gb_reported": 154.2,
+    "raw_guide_download_gb_reported": 63.8,
+    "n_mrna_runs": 8,
+    "n_donors": 2,
+    "current_free_gb": 19.1,
+    "local_full_download_feasible": false,
+    "reason": "raw mRNA downloads exceed current local free space and resolving only two donors would provide a consistency diagnostic, not population-level confirmation of a context interaction",
+    "recommended_use": "do not download locally for confirmatory inference; prioritize a donor-resolved dataset or experiment with enough independent donors to estimate between-donor variation",
+    "verified_record": "https://www.ncbi.nlm.nih.gov/sra?term=SRP350148",
+    "verified_at": "2026-07-12"
+  },
+  "replication_design": {
+    "status": "TARGETED_PANEL_METHOD_REQUIRED",
+    "reason": "74 targets cannot support five disjoint negatives for each of 23 positives; use gene-level overlap weighting and nested OOF instead of disjoint blocks"
+  },
+  "matrix_intake": {
+    "compressed_bytes": 996264242,
+    "free_bytes": 19078803456,
+    "download_safe_at_12_gib_floor": true,
+    "processing": "two-pass streaming MatrixMarket; never materialize decompressed MTX"
+  },
+  "files": {
+    "barcodes": {
+      "bytes": 429508,
+      "sha256": "2465729feb9dd448fff059530b5fd732412c7f2c3eeddaa9dbe9a6406586fdf6"
+    },
+    "features": {
+      "bytes": 334687,
+      "sha256": "9905919eb3c62529f38122490f8f6472fc6ef36a43f2126ad39e3065355a34e9"
+    },
+    "guidecalls": {
+      "bytes": 999849,
+      "sha256": "ffd5a3050a69d013ddc09a43fae63642a7659cdb778f78c865e0829207e17b7c"
+    }
+  },
+  "timestamp": "2026-07-12T14:32:02.768947-03:00"
+}

@@ -1,0 +1,52 @@
+schema_version: hackathon_claim_manifest_v1
+title: ISCI — Claude as an Auditable Scientific Judge
+thesis: >-
+  Magnitude says how far a cell moved; controllability asks where it moved,
+  whether it repeated, and whether the evidence deserves a PASS.
+
+claims:
+  - claim_id: C1-CONTROLLABILITY
+    short_label: Canonical T-cell state controllers
+    claim: >-
+      Among detectable-effect perturbations, axis-specificity and cross-donor
+      coherence identify canonical T-cell state regulators beyond effect magnitude.
+    expected_verdict: PASS
+    evidence_path: outputs/isci_oof_incremental.json
+    supporting_path: reports/result_lock.md
+    scope: Detectable-effect perturbations and canonical axis-defining T-cell regulators.
+    prohibited_overclaim: Broad functional-regulator discovery or therapeutic target nomination.
+    presentation:
+      discovery_gain: 0.357
+      discovery_baseline_auprc: 0.539
+      discovery_full_auprc: 0.896
+      discovery_ci95: [0.117, 0.538]
+      oof_gain: 0.215
+      oof_ci95: [0.074, 0.560]
+      permutation_p: 0.010
+
+  - claim_id: C2-EXTERNAL-FUNCTIONAL
+    short_label: Broad external functional regulators
+    claim: >-
+      Magnitude-conditional controllership generalizes to an independent set of
+      non-marker functional regulators.
+    expected_verdict: FAIL
+    evidence_path: outputs/positive_set_stress_test.json
+    json_selector: external_screen_test
+    scope: Twenty external non-marker regulators with matched negatives.
+    prohibited_overclaim: The failed broad class invalidates the bounded canonical-regulator result.
+
+  - claim_id: C3-CART-CLINICAL
+    short_label: CAR-T clinical response
+    claim: A perturbational IEC axis transports as a multi-study CAR-T response predictor.
+    expected_verdict: "NULL"
+    evidence_path: outputs/iec_clinical/verdict.json
+    scope: Eighty-seven labeled patients across nine public studies.
+    prohibited_overclaim: Proof of no biological effect or a validated clinical biomarker.
+
+  - claim_id: C4-SCGPT
+    short_label: scGPT zero-shot corroboration
+    claim: scGPT embeddings independently separate controllers from matched negatives.
+    expected_verdict: NOT-EVALUABLE
+    evidence_path: outputs/layers/scgpt_zeroshot/scgpt_separation_result.json
+    scope: Current machine state and the pre-specified expression-profile input contract.
+    prohibited_overclaim: A scientific null, failed foundation model, or negative biological result.

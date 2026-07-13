@@ -64,8 +64,10 @@ dataset median n-DE; 1,260 / 2,520 genes).
 | Metric | Value | Source |
 |---|---|---|
 | Decorrelation from magnitude | Spearman ρ = **+0.02** (orthogonal by construction) | `result_lock.md` |
-| Regulator recovery (detectable set) | **AUPRC 0.722** vs magnitude **0.415** | `result_lock.md` |
-| Bootstrap gain (full residual set) | **+0.229 AUPRC**, 95% CI [0.072, 0.405], P(gain>0)=99.6% | `result_lock.md` |
+| Authoritative pre-specified M→M+C | **+0.357 AUPRC** (0.539→0.896), 95% CI [+0.117,+0.538], P>0=1.000 | `result_lock.md` |
+| Leakage-free OOF M→M+C | **+0.215 AUPRC**, 95% CI [+0.074,+0.560], permutation p=0.010 | `outputs/isci_oof_incremental.json` |
+| Descriptive regulator recovery | **AUPRC 0.722** vs magnitude **0.415** | `result_lock.md` |
+| Matched three-condition C-vs-M aggregate | **+0.229 AUPRC**, 95% CI [0.072, 0.405], P(gain>0)=99.6% | `result_lock.md` |
 | Conditional-LR (specificity, coherence) | both p < 1e-4 | session record |
 | Replication | all 3 culture conditions (Rest/Stim8hr/Stim48hr) | session record |
 | Leakage control | survives removal of axis-marker regulators; independent positives ARID1A/INO80/IKZF1 hold | `result_lock.md` |
@@ -249,7 +251,7 @@ the most convergent. See `reports/signed_perturbation_graph.md`.
 
 | Claim | Status | Evidence |
 |---|---|---|
-| Magnitude-conditional signal adds regulator information | **DEMONSTRATED** | AUPRC 0.722 vs 0.415; bootstrap CI excludes 0; 3-condition replication |
+| Magnitude-conditional signal adds regulator information | **DEMONSTRATED** | Primary M→M+C +0.357 [+0.117,+0.538]; leakage-free OOF +0.215 [+0.074,+0.560], permutation p=0.010; 3-condition replication |
 | The signal is an immune-scoped property (CCI) | **DEMONSTRATED** (with boundary) | 4-system PASS/FAIL ordering matches prediction |
 | Persistence and killing are separate axes | **DEMONSTRATED** | latent factor (L4≈0) + BEHAV3D functional proxy agree |
 | IEC is a measurable multi-axis capacity (2.5 axes) | **CONFIRMED at pseudobulk and CAR-T atlas single-cell resolution** (455,370 cells) | orthogonality pre-test + Phase 5 single-cell (persist orthogonal, kill↔resist entangled ρ=−0.53, survives CD8 control) |
@@ -266,8 +268,9 @@ the most convergent. See `reports/signed_perturbation_graph.md`.
 - **One-command reproduction:** `make reproduce-core` runs the validated CCI method across the
   dataset registry (`config/datasets.yaml`) via `isci/run_cci.py` and rebuilds the dashboard.
   Marson is recomputed from the committed ranking + locked helpers with **expression-matched
-  negatives** (point estimate +0.248 reproduces locked +0.229); other datasets aggregate from
-  committed reports. The legacy M/R/D/A/S modules are **deprecated** (they lost to magnitude and
+  negatives** (single-condition diagnostic +0.248); other datasets aggregate from committed
+  reports. The cross-system dashboard uses the matched C-vs-M aggregate (+0.229 for Marson), not
+  the primary full-sample M→M+C (+0.357) or OOF (+0.215) estimand. The legacy M/R/D/A/S modules are **deprecated** (they lost to magnitude and
   were abandoned) — the driver, not those stubs, is the reproduction path.
 
 - Core result frozen in `reports/result_lock.md` (commit `32e991b`); ranking md5

@@ -1,5 +1,10 @@
 # CCI / IEC — full phased roadmap (deadline-agnostic)
 
+> **Status note (2026-07-12):** this document preserves the original phased strategy, but several
+> `[HERE]` labels are now historical because the corresponding analyses were completed. The live
+> inventory of unfinished work is `reports/PROJECT_PENDING_REGISTER.md`; scientific verdicts remain
+> governed by `reports/CLAIM_LEDGER.md` and `reports/result_lock.md`.
+
 **Framing (yours):** don't triage by Sunday; lay out every phase, ordered, and run as far as
 we get — AI compresses each phase hard. So this is the complete arc: what is **done**, what is
 **executable here** (with the data + tools in this environment), and what is a genuine
@@ -21,7 +26,7 @@ now — pre-registered, not faked.
 
 ## PHASE 0 — Lock the project law  **[DONE]**
 The claim taxonomy is frozen so no later phase can drift the story:
-- **Primary claim:** CCI / `ISCI_orthogonal` — magnitude-conditional, immune-scoped, reproducible (AUPRC 0.722 vs 0.415; ΔAUPRC +0.229 [0.072, 0.405]; Spearman vs magnitude +0.02; 3 conditions).
+- **Primary claim:** CCI / `ISCI_orthogonal` — magnitude-conditional and bounded to canonical axis-defining regulators. Authoritative M→M+C +0.357 [+0.117,+0.538]; leakage-free OOF +0.215 [+0.074,+0.560], permutation p=0.010; descriptive AUPRC 0.415→0.722; matched cross-system aggregate +0.229 [0.072,0.405]; Spearman vs magnitude +0.02; 3 conditions.
 - **Secondary claims:** T-REMAP, IEC, targetability, phospho, spatial, clinical bridge.
 - **Hypotheses (never targets):** IKBKB, ZC3H12A, RCOR1, KDM1A, CXXC1, MED13, IRF2BP1, PDCD10…
 - **Not claims:** "predicts CAR-T response", "these are therapeutic targets", "TSC predicts killing", "network/PageRank is essential".

@@ -1,0 +1,54 @@
+schema_version: 1
+
+dataset:
+  id: mini_cd4_screen
+  label: "Synthetic CD4+ Perturb-seq contract fixture"
+  description: "Tiny non-biological fixture used to test the DatasetSpec boundary."
+  organism: "Homo sapiens"
+  cell_system: "primary CD4+ T cell"
+  perturbation_modality: "CRISPRI"
+
+input:
+  path: "examples/dataset_spec/mini_long_effects.csv"
+  format: "csv"
+  layout: "long_effects"
+
+mapping:
+  perturbation: "perturbation_gene"
+  feature: "measured_gene"
+  effect: "log_fc"
+  standardized_effect: "zscore"
+  condition: "condition"
+  donor: "donor_id"
+  guide: "guide_id"
+  target_expression: "target_baseMean"
+  n_guides: "n_guides"
+  n_cells: "n_cells_target"
+
+analysis:
+  axes_path: "config/axes.yaml"
+  primary_signal: "standardized_effect"
+  sensitivity_signal: "effect"
+  leave_one_marker_out: true
+  n_bootstrap: 1000
+  seed: 0
+
+benchmark:
+  positives:
+    source: "file"
+    path: "examples/dataset_spec/mini_positives.txt"
+  negatives:
+    strategy: "expression_matched"
+    match_on:
+      - "target_expression"
+      - "n_guides"
+      - "n_cells"
+      - "condition"
+  expected_verdict: null
+
+provenance:
+  source_url: "https://example.org/isci-synthetic-contract-fixture"
+  citation: "Synthetic ISCI DatasetSpec fixture; not biological evidence."
+  license: "CC0-1.0"
+  data_classification: "PUBLIC"
+  redistributable: true

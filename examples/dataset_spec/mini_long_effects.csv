@@ -1,0 +1,9 @@
+perturbation_gene,measured_gene,condition,donor_id,guide_id,log_fc,zscore,target_baseMean,n_guides,n_cells_target
+IRF1,IFNG,Stim8hr,D01,IRF1_g1,1.20,3.10,4.80,2,420
+IRF1,TBX21,Stim8hr,D02,IRF1_g2,0.80,2.20,4.80,2,390
+STAT6,IL4R,Stim8hr,D01,STAT6_g1,1.00,2.70,5.10,2,405
+STAT6,GATA3,Stim8hr,D02,STAT6_g2,0.70,2.00,5.10,2,398
+GENE_X,IFNG,Stim8hr,D01,GENE_X_g1,0.15,0.40,4.95,2,412
+GENE_X,TBX21,Stim8hr,D02,GENE_X_g2,-0.10,-0.30,4.95,2,401
+GENE_Y,IL4R,Stim8hr,D01,GENE_Y_g1,0.12,0.35,5.00,2,409
+GENE_Y,GATA3,Stim8hr,D02,GENE_Y_g2,-0.08,-0.25,5.00,2,396

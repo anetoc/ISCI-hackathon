@@ -1,0 +1,51 @@
+{
+  "status": "OFF_TARGET_PACKAGE_READY_ENGINE_NOT_FROZEN",
+  "current_panel": {
+    "n_guides": 54,
+    "n_guides_in_basic_or_source_review": 10,
+    "guides_in_review": [
+      "PRKD2-2",
+      "TNFRSF9-1",
+      "TNFRSF9-2",
+      "LHX4-2",
+      "LTBR-1",
+      "OTUD7B-1",
+      "PAPOLG-1",
+      "GATA3-1",
+      "TBX21-1",
+      "TBX21-2"
+    ]
+  },
+  "fallbacks": {
+    "n_targets": 8,
+    "n_candidates": 24,
+    "candidates_per_target": 3,
+    "high_priority_targets": [
+      "TNFRSF9",
+      "TBX21"
+    ],
+    "automatic_substitutions": 0
+  },
+  "off_target_package": {
+    "n_current_guides": 54,
+    "n_fallback_candidates": 24,
+    "reference_build": "GCF_000001405.40_GRCh38.p14",
+    "transcript_tss_annotation": "GCF_000001405.40-RS_2025_08",
+    "search_engine": "UNSELECTED",
+    "status": "BLOCKED_ENGINE_AND_PARAMETERS_NOT_FROZEN"
+  },
+  "boundary": "Technical backup ordering only. No current guide is replaced, no controller label changes, and no guide is ready for synthesis.",
+  "input_sha256": {
+    "outputs/decomposition_v2/prospective_donor_panel_sequences.csv": "cffcdc32d6a3fdcc0bbc7149c6253a07ec982a98e18860dc6ab60096165e41f6",
+    "outputs/decomposition_v2/gse190604_calabrese_panel_candidates.csv": "4cda724bbcd5d59cdff58263ad233539abc51176cd3725efdc0997167ba87332",
+    "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7"
+  },
+  "provenance": {
+    "git_sha": "09a73e4f2d3674b04f58f464d839282b23348655",
+    "data_sha256": "1f93ab0ef86d9ec548409aab84884f13bf757c548f65c3e6e0cf3c8e9bfd3ef1",
+    "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+    "timestamp": "2026-07-12T15:40:12.240306-03:00",
+    "command": "python scripts/build_guide_qc_package.py",
+    "method_version": "guide_qc_replacement_shortlist_v1"
+  }
+}
