@@ -53,9 +53,9 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "a8a3828c1e83bff083ff824e258a95cf1fbd9461",
+  "git_sha": "1bf419b9d144349eaa5e4180c7dff1969a4c41e6",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
-  "source_paths_dirty": true,
+  "source_paths_dirty": false,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
     "sha256": "dd2dc790b55378869c7b67224204b7b980a0d1c301f74af0caa0ca6595825763",
@@ -109,6 +109,6 @@
   "branch": "main",
   "data_sha256": "0c46770c4b0d0f35a81d8882ef657a2b8774513d69351591bb4d33650bf4f688",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-13T23:35:39.164122+00:00",
+  "timestamp": "2026-07-13T23:36:15.567599+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }
