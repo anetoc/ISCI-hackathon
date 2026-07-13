@@ -6,14 +6,22 @@ ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "outputs" / "hackathon" / "readiness_report.json"
 
 
-def test_readiness_report_passes_automated_gates_without_faking_human_approval():
-    """Machine checks may pass, but narration and PI approval remain explicit gates."""
+def test_readiness_report_records_the_submitted_public_package():
+    """Machine checks and author-confirmed submission state must remain distinguishable."""
 
     report = json.loads(REPORT.read_text())
-    assert report["status"] == "AUTOMATED_GATES_PASS_HUMAN_GATES_PENDING"
+    assert report["schema_version"] == "hackathon_readiness_v2"
+    assert report["status"] == "SUBMITTED_AUTOMATED_GATES_PASS"
     assert all(report["checks"].values())
     assert len(report["checks"]) == 21
-    assert len(report["human_gates_pending"]) == 5
+    assert "human_gates_pending" not in report
+    assert report["submission"] == {
+        "status": "SUBMITTED",
+        "confirmation_basis": "Author-confirmed; private platform receipt is not committed.",
+        "repository_url": "https://github.com/anetoc/ISCI-hackathon",
+        "interactive_demo_url": "https://anetoc.github.io/ISCI-hackathon/",
+        "narrated_video_url": "https://youtu.be/7Rz4PpmQZuI",
+    }
     assert report["details"]["local_path_violations"] == []
     assert report["details"]["forbidden_tracked_files"] == []
     assert len(report["details"]["medical_deck_sha256"]) == 64

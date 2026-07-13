@@ -50,12 +50,11 @@ Marson method check from committed summaries and aggregates the heavy external l
 states this boundary explicitly. The abandoned M/R/D/A/S implementation is preserved under
 `archive/d0/`, not presented as the final method.
 
-## PHASE 4 — Submission package  **[DONE — HUMAN GATES PENDING]**
-The 2:42 offline demo, README, executed notebook, manuscript, claim ledger, deck, static fallbacks
-and automated overclaim/provenance gates are committed in a public repository. The remaining work
-is human: narrated recording, final wording approval, logged-out link validation and submission
-preview. Those gates are tracked in `HACKATHON_RUNBOOK.md` rather than represented as unfinished
-science.
+## PHASE 4 — Submission package  **[DONE — SUBMITTED]**
+The 2:42 narrated video, interactive demo, README, executed notebook, manuscript, claim ledger,
+deck, static renders and automated overclaim/provenance gates are public. The Researcher Track
+submission is author-confirmed. Private platform receipts and internal recording or rehearsal
+notes are intentionally excluded because they are operational material, not research evidence.
 
 ---
 ## ── frontier of what's demonstrated; everything below EXTENDS the claim ──
@@ -136,11 +135,10 @@ biology.
 ---
 
 ## Execution order after the hackathon build
-1. Close the human submission gates: narration, three rehearsals, public-link check and form preview.
-2. Tag the accepted submission and mint an immutable release/DOI if repository authorization permits.
-3. Run the frozen off-target and guide-promotion workflow before any prospective synthesis.
-4. Execute the donor-resolved paired-context experiment only after guide promotion is frozen.
-5. Treat foundation-model, phospho, spatial and broader immune replications as independent
+1. Tag the accepted submission and mint an immutable release/DOI if repository authorization permits.
+2. Run the frozen off-target and guide-promotion workflow before any prospective synthesis.
+3. Execute the donor-resolved paired-context experiment only after guide promotion is frozen.
+4. Treat foundation-model, phospho, spatial and broader immune replications as independent
    extensions; none is required to preserve the locked hackathon claim.
 
 ## The line to defend to a reviewer

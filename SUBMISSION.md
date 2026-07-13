@@ -1,5 +1,16 @@
 # Submission — Built with Claude: Life Sciences (Researcher Track)
 
+## Submission status
+
+- **Status:** SUBMITTED
+- **Track:** Researcher
+- **Public repository:** https://github.com/anetoc/ISCI-hackathon
+- **Interactive demo:** https://anetoc.github.io/ISCI-hackathon/
+- **Narrated video:** https://youtu.be/7Rz4PpmQZuI
+
+Submission is author-confirmed. Private platform receipts and internal recording or rehearsal
+notes are intentionally not committed to the public research repository.
+
 ## Title
 **T-CTRL — Which genes actually steer T-cell state?**
 
@@ -74,7 +85,7 @@ on-target and vector-compatibility QC. The analysis and promotion gates are froz
 - **Interactive demo:** https://anetoc.github.io/ISCI-hackathon/
 - **Reproduce:** `make reproduce-core`
 - **Manuscript:** `reports/PAPER.md` · **Literature review:** `reports/literature_review.md`
-- **Master dossier:** `reports/MASTER_DOSSIER.md` · **Demo script:** `DEMO_SCRIPT.md`
+- **Master dossier:** `reports/MASTER_DOSSIER.md` · **Claim ledger:** `reports/CLAIM_LEDGER.md`
 
 ## Team
 Abel Costa (hematologist / onco-hematologist, IDOR, Brazil). Claude Science and Claude Code were

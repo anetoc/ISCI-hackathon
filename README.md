@@ -31,10 +31,9 @@ the route that matches what you want to do:
 The shortest complete judge route is the [2:42 narrated demo](https://youtu.be/7Rz4PpmQZuI),
 followed by the [interactive overview](https://anetoc.github.io/ISCI-hackathon/) for evidence and
 the [executed notebook](notebooks/ISCI_Researcher_Track_Walkthrough.ipynb) for reproducibility. The
-[evidence-based slide deck](outputs/tctrl_hackathon_deck.pptx), interactive overview and committed
-[2:42 Full-HD MP4](demo_assets/hackathon/hackathon_fallback_2m42.mp4) are deterministic offline
-fallbacks that use the same ten-slide visual sequence. The public narrated recording passed the
-repository's duration, codec, resolution and audio-presence validator before upload.
+[evidence-based slide deck](outputs/tctrl_hackathon_deck.pptx) and interactive overview are
+deterministic offline artifacts that use the same ten-slide visual sequence as the submitted
+video.
 
 ## The result
 
@@ -93,9 +92,10 @@ The repository is an integrated research package:
 2. **A Python package and CLI** validate new datasets, construct effects where needed and run the
    same audited analysis.
 3. **Versioned evidence** binds results to data, axis and Git hashes.
-4. **Judge artifacts** translate the evidence into an executed notebook, offline demos, video,
-   figures and an English judge-facing deck.
-5. **Release gates** check scientific copy, provenance, forbidden raw files and media consistency.
+4. **Public communication artifacts** translate the evidence into an executed notebook, figures,
+   an interactive explanation and an English slide deck.
+5. **Release gates** check scientific copy, provenance, forbidden raw files and artifact
+   consistency.
 
 ## Why Claude Science mattered
 
@@ -181,7 +181,9 @@ make hackathon-package
 Release manifests bind the frozen evidence to Git, data, axis and source-snapshot hashes. The
 automated readiness report is [outputs/hackathon/readiness_report.json](outputs/hackathon/readiness_report.json).
 Legacy cross-system aggregates are labeled separately when their original reports predate the
-canonical provenance schema. Human narration and PI approval remain explicit manual gates.
+canonical provenance schema. The author-confirmed submission status and public URLs are recorded
+in [SUBMISSION.md](SUBMISSION.md); private receipts and internal production notes are intentionally
+excluded from the public research repository.
 
 ## Repository map — four layers
 

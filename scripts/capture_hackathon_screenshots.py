@@ -14,10 +14,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 try:  # Package import in tests; direct import when run as `python scripts/...`.
-    from .build_final_narrated_video import render_slides, require_binary
     from .release_provenance import source_paths_dirty, source_snapshot
 except ImportError:  # pragma: no cover - exercised by the release CLI.
-    from build_final_narrated_video import render_slides, require_binary
     from release_provenance import source_paths_dirty, source_snapshot
 
 
@@ -28,13 +26,53 @@ ASSETS = ROOT / "demo_assets" / "hackathon"
 MANIFEST = ROOT / "outputs" / "hackathon" / "screenshot_manifest.json"
 AXES = ROOT / "config" / "axes.yaml"
 PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
-RENDER_HELPER = ROOT / "scripts" / "build_final_narrated_video.py"
 
 
 def sha256(path: Path) -> str:
     """Return a content address for HTML and screenshots."""
 
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def require_binary(name: str) -> str:
+    """Resolve a local rendering dependency or fail with an actionable error."""
+
+    binary = shutil.which(name)
+    if not binary:
+        raise RuntimeError(f"Required binary not found on PATH: {name}")
+    return binary
+
+
+def render_slides(deck: Path, render_dir: Path, soffice: str, pdftoppm: str) -> list[Path]:
+    """Render the public deck to exact Full-HD PNGs for the offline HTML."""
+
+    if not deck.is_file():
+        raise FileNotFoundError(deck)
+    render_dir.mkdir(parents=True, exist_ok=True)
+    pdf = render_dir / f"{deck.stem}.pdf"
+    subprocess.run(
+        [soffice, "--headless", "--convert-to", "pdf", "--outdir", str(render_dir), str(deck)],
+        check=True,
+    )
+    if not pdf.is_file():
+        raise RuntimeError(f"LibreOffice did not produce the expected PDF: {pdf}")
+    subprocess.run(
+        [
+            pdftoppm,
+            "-png",
+            "-scale-to-x",
+            "1920",
+            "-scale-to-y",
+            "1080",
+            str(pdf),
+            str(render_dir / "slide"),
+        ],
+        check=True,
+    )
+    return sorted(
+        render_dir.glob("slide-*.png"),
+        key=lambda path: int(path.stem.rsplit("-", 1)[1]),
+    )
 
 
 def png_size(path: Path) -> tuple[int, int]:
@@ -99,7 +137,7 @@ def main() -> None:
 
     validate_screenshots(screenshots, expected_count=len(timing["scenes"]))
 
-    source_paths = [Path(__file__), PROVENANCE_HELPER, RENDER_HELPER, DECK, TIMING, AXES]
+    source_paths = [Path(__file__), PROVENANCE_HELPER, DECK, TIMING, AXES]
     manifest = {
         "schema_version": "hackathon_screenshot_manifest_v1",
         "generated_at": datetime.now(timezone.utc).isoformat(),

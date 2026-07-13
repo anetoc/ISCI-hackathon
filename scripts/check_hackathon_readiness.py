@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the reproducible hackathon package and separate human-only gates."""
+"""Audit the submitted public research package and its reproducible evidence."""
 
 from __future__ import annotations
 
@@ -33,8 +33,6 @@ OUTPUT = ROOT / "outputs" / "hackathon" / "readiness_report.json"
 AXES = ROOT / "config" / "axes.yaml"
 CLAIMS = ROOT / "outputs" / "hackathon" / "claim_manifest.json"
 TIMING = ROOT / "config" / "hackathon_timing.json"
-VIDEO = ROOT / "demo_assets" / "hackathon" / "hackathon_fallback_2m42.mp4"
-VIDEO_MANIFEST = ROOT / "outputs" / "hackathon" / "video_manifest.json"
 SCREENSHOT_MANIFEST = ROOT / "outputs" / "hackathon" / "screenshot_manifest.json"
 DEMO = ROOT / "docs" / "hackathon_judge_demo.html"
 PAGES_INDEX = ROOT / "docs" / "index.html"
@@ -52,10 +50,8 @@ PIPELINE_CODE = ROOT / "isci" / "pipeline.py"
 LOCKED_KERNEL = ROOT / "skills" / "isci-controllership" / "kernel.py"
 LOCKED_METHOD = ROOT / "skills" / "isci-controllership" / "SKILL.md"
 RESEARCHER_NOTEBOOK = ROOT / "notebooks" / "ISCI_Researcher_Track_Walkthrough.ipynb"
-RUNBOOK = ROOT / "HACKATHON_RUNBOOK.md"
 PENDING_REGISTER = ROOT / "reports" / "PROJECT_PENDING_REGISTER.md"
 MASTER_ROADMAP = ROOT / "reports" / "MASTER_ROADMAP.md"
-VIDEO_VALIDATOR = ROOT / "scripts" / "validate_submission_video.py"
 PYPROJECT = ROOT / "pyproject.toml"
 DATASET_SPEC_SCHEMA = ROOT / "contracts" / "dataset_spec.schema.json"
 DATASET_SPEC_DOC = ROOT / "docs" / "dataset_spec.md"
@@ -70,6 +66,24 @@ ARRAYED_RNA_SMOKE = ROOT / "outputs" / "hackathon" / "arrayed_rna_effect_build_s
 DATASET_SPEC_FIXTURE = ROOT / "examples" / "dataset_spec" / "mini_long_effects.csv"
 DATASET_SPEC_POSITIVES = ROOT / "examples" / "dataset_spec" / "mini_positives.txt"
 PROVENANCE_HELPER = ROOT / "scripts" / "release_provenance.py"
+REPOSITORY_URL = "https://github.com/anetoc/ISCI-hackathon"
+DEMO_URL = "https://anetoc.github.io/ISCI-hackathon/"
+VIDEO_URL = "https://youtu.be/7Rz4PpmQZuI"
+INTERNAL_PRODUCTION_PATHS = [
+    "DEMO_SCRIPT.md",
+    "ELEVENLABS_PACKAGE.md",
+    "ELEVENLABS_SCRIPT_SHORT.md",
+    "HACKATHON_RUNBOOK.md",
+    "JUDGE_QA_REHEARSAL.md",
+    "RECORDING_SCRIPT.md",
+    "VIDEO_NARRATION.md",
+    "VIDEO_SCRIPT_FINAL.md",
+    "scripts/build_final_narrated_video.py",
+    "scripts/build_hackathon_video.py",
+    "scripts/validate_submission_video.py",
+    "outputs/hackathon/video_manifest.json",
+    "demo_assets/hackathon/hackathon_fallback_2m42.mp4",
+]
 
 
 def sha256(path: Path) -> str:
@@ -91,11 +105,10 @@ def word_count(text: str) -> int:
 
 
 def main() -> None:
-    """Write PASS only for machine-verifiable gates; leave human gates explicit."""
+    """Write PASS only for machine-verifiable gates and record author-confirmed submission."""
 
     claims = json.loads(CLAIMS.read_text())
     timing = json.loads(TIMING.read_text())
-    video_manifest = json.loads(VIDEO_MANIFEST.read_text())
     screenshot_manifest = json.loads(SCREENSHOT_MANIFEST.read_text())
     dataset_spec = load_dataset_spec(DATASET_SPEC_EXAMPLE, repo_root=ROOT, check_paths=True)
     dataset_spec_report = validate_dataset_spec(
@@ -127,16 +140,12 @@ def main() -> None:
     ]
     submission = (ROOT / "SUBMISSION.md").read_text()
     summary = submission.split("## 150-word summary", 1)[1].split("---", 1)[0]
-    stage_script = (ROOT / "DEMO_SCRIPT.md").read_text()
-    spoken = " ".join(line[2:] for line in stage_script.splitlines() if line.startswith("> "))
     screenshots = sorted((ROOT / "demo_assets" / "hackathon").glob("[0-9][0-9]_*.png"))
     public_surfaces = [
         ROOT / "README.md",
         ROOT / "SUBMISSION.md",
-        ROOT / "DEMO_SCRIPT.md",
         ROOT / "JUDGE_QA.md",
         ROOT / "DELIVERABLE.md",
-        RUNBOOK,
         PENDING_REGISTER,
         MASTER_ROADMAP,
         DATASET_SPEC_DOC,
@@ -167,9 +176,6 @@ def main() -> None:
             sha256(ROOT / path) == expected
             for path, expected in screenshot_manifest["screenshots_sha256"].items()
         ),
-        "video_matches_manifest": VIDEO.exists()
-        and sha256(VIDEO) == video_manifest["output_sha256"],
-        "video_is_162_seconds": video_manifest["duration_seconds"] == 162.0,
         "medical_deck_present": DECK.exists() and DECK.stat().st_size > 100_000,
         "dataset_spec_v1_valid": dataset_spec.schema_version == 1
         and dataset_spec.dataset.id == "mini_cd4_screen"
@@ -238,7 +244,13 @@ def main() -> None:
         and not notebook_errors,
         "demo_is_offline": "https://" not in demo_html and "http://" not in demo_html,
         "submission_summary_within_limit": 140 <= word_count(summary) <= 150,
-        "spoken_script_within_budget": 300 <= word_count(spoken) <= 450,
+        "submission_status_recorded": "**Status:** SUBMITTED" in submission,
+        "submitted_public_urls_recorded": all(
+            url in submission for url in (REPOSITORY_URL, DEMO_URL, VIDEO_URL)
+        ),
+        "internal_production_material_absent": not any(
+            (ROOT / path).exists() for path in INTERNAL_PRODUCTION_PATHS
+        ),
         "readme_scope_boundary_locked": "It does **not** survive" in readme
         and "ΔAUPRC −0.281 [−0.476, −0.073]" in readme
         and "cross-condition replication is within the same dataset" in readme
@@ -253,8 +265,6 @@ def main() -> None:
         AXES,
         CLAIMS,
         TIMING,
-        VIDEO,
-        VIDEO_MANIFEST,
         SCREENSHOT_MANIFEST,
         DEMO,
         DECK,
@@ -271,7 +281,6 @@ def main() -> None:
         LOCKED_KERNEL,
         LOCKED_METHOD,
         RESEARCHER_NOTEBOOK,
-        VIDEO_VALIDATOR,
         PYPROJECT,
         DATASET_SPEC_SCHEMA,
         DATASET_SPEC_EXAMPLE,
@@ -285,14 +294,11 @@ def main() -> None:
         *public_surfaces,
     ]
     report = {
-        "schema_version": "hackathon_readiness_v1",
-        "status": "AUTOMATED_GATES_PASS_HUMAN_GATES_PENDING"
-        if automated_pass
-        else "AUTOMATED_GATE_FAIL",
+        "schema_version": "hackathon_readiness_v2",
+        "status": "SUBMITTED_AUTOMATED_GATES_PASS" if automated_pass else "AUTOMATED_GATE_FAIL",
         "checks": checks,
         "details": {
             "submission_summary_words": word_count(summary),
-            "spoken_script_words": word_count(spoken),
             "medical_deck_sha256": sha256(DECK) if DECK.exists() else None,
             "dataset_spec_schema_sha256": sha256(DATASET_SPEC_SCHEMA),
             "dataset_spec_example_capability": dataset_spec_report.capability.value,
@@ -318,13 +324,13 @@ def main() -> None:
             "local_path_violations": local_paths,
             "forbidden_tracked_files": forbidden_tracked,
         },
-        "human_gates_pending": [
-            "PI approves final bounded scientific wording",
-            "three consecutive narrated rehearsals finish at or below 3:00",
-            "microphone and screen recording are reviewed end-to-end",
-            "public repository and uploaded video URLs are opened in a logged-out browser",
-            "submission form is previewed before final irreversible submit",
-        ],
+        "submission": {
+            "status": "SUBMITTED",
+            "confirmation_basis": "Author-confirmed; private platform receipt is not committed.",
+            "repository_url": REPOSITORY_URL,
+            "interactive_demo_url": DEMO_URL,
+            "narrated_video_url": VIDEO_URL,
+        },
         "git_sha": git_output("rev-parse", "HEAD"),
         "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
         "source_paths_dirty": source_paths_dirty(source_paths, ROOT),

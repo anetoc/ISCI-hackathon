@@ -1,12 +1,12 @@
 # Project pending register
 
-**Snapshot:** 2026-07-13 after public-release merge. **Scope:** current T-CTRL/ISCI repository and
+**Snapshot:** 2026-07-13 after submission closeout. **Scope:** current T-CTRL/ISCI repository and
 the prospective donor-panel path. This register distinguishes unfinished work from completed negative results. A `FAIL`,
 `NULL`, `UNSUPPORTED` or `NOT-EVALUABLE` verdict is not automatically a pending task.
 
 Priority definitions:
 
-- **P0:** blocks the hackathon submission or the prospective experiment;
+- **P0:** blocks the prospective experiment or a currently validated scientific release;
 - **P1:** engineering/release debt that should close before a durable public release;
 - **P2:** valuable scientific extension that does not block the current claim;
 - **EXTERNAL:** needs a new runtime, wet-lab, controlled-access data or maintainer authorization.
@@ -31,15 +31,16 @@ Primary artifacts: `config/off_target_pilot.yaml`, `reports/OFF_TARGET_PILOT_PRO
 `outputs/decomposition_v2/off_target_pilot_contract.json`, and
 `reports/DONOR_RESOLVED_CONTEXT_VALIDATION_PLAN.md`.
 
-## P0 — hackathon human submission gates
+## Hackathon submission — completed
 
-| ID | Pending point | Current evidence | Close condition | Dependency |
-|---|---|---|---|---|
-| SUB-01 | Approve bounded scientific wording | Automated copy gates pass; human scientific approval is intentionally not automated | PI approves `SUBMISSION.md`, `DEMO_SCRIPT.md` and Scene 6 language | None |
-| SUB-02 | Complete three narrated rehearsals | The timed visual fallback matches the submitted 2:42 deck; rehearsal log remains blank | Three consecutive runs ≤3:00 with zero number errors, overclaims or restart faults | SUB-01 |
-| SUB-03 | Record and review the narrated video | The committed MP4 is a deterministic visual fallback with a silent audio bed | Final H.264/AAC recording has audible narration and is watched end-to-end with headphones | SUB-02 |
-| SUB-04 | Validate public URLs logged out | Repository and GitHub Pages are public; uploaded video URL is not yet recorded | Repo, demo, notebook and uploaded video open without authentication | SUB-03 |
-| SUB-05 | Preview and submit the form | Submission copy is frozen at 148 words | Preview preserves symbols/numbers; final receipt is saved before the deadline | SUB-04 |
+The Researcher Track project was submitted with the following public artifacts:
+
+- repository: https://github.com/anetoc/ISCI-hackathon;
+- interactive demo: https://anetoc.github.io/ISCI-hackathon/;
+- narrated video: https://youtu.be/7Rz4PpmQZuI.
+
+This status is author-confirmed. The private platform receipt and internal recording, rehearsal and
+form-production notes are intentionally not committed to the public research repository.
 
 ## P1 — reproducibility, quality and release
 
@@ -79,17 +80,15 @@ Primary artifacts: `config/off_target_pilot.yaml`, `reports/OFF_TARGET_PILOT_PRO
 - public release: PR #3 merged into `main`; repository, MIT license, CI and GitHub Pages are public;
 - canonical legacy CCI provenance: completed; every result emitted by `run_cci.py` now carries Git,
   data, axes and config hashes, timestamp and command, with dashboard schema enforcement;
-- roadmap synchronization and final automated overclaim audit: completed in the submission
-  closeout; human approval remains SUB-01;
-- test warning debt: `141 passed` locally without emitted warnings on Python 3.13;
+- roadmap synchronization, final automated overclaim audit and public submission: completed;
+- test warning debt: `147 passed` locally without emitted warnings on Python 3.13;
 - TCR RescueMap: a separate Paper-2/multi-year program, not unfinished work required to close this
   repository.
 
 ## Recommended execution order
 
-1. Close SUB-01–05 and preserve the exact submitted video, copy and receipt.
-2. Mint REL-03 only after the accepted submission commit is known.
-3. Run OT-01 and OT-02 on disposable Linux scratch.
-4. Derive the annotation BED (OT-03), then run OT-04 and OT-05.
-5. Close PAPOLG/TSS/vector review and freeze the final guide manifest.
-6. Start EXP-01 only after guide promotion is frozen; treat SCI-01–08 as independent extensions.
+1. Mint REL-03 after the accepted submission commit is identified.
+2. Run OT-01 and OT-02 on disposable Linux scratch.
+3. Derive the annotation BED (OT-03), then run OT-04 and OT-05.
+4. Close PAPOLG/TSS/vector review and freeze the final guide manifest.
+5. Start EXP-01 only after guide promotion is frozen; treat SCI-01–08 as independent extensions.

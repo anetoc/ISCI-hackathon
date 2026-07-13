@@ -8,7 +8,6 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFESTS = [
     ROOT / "outputs" / "hackathon" / "claim_manifest.json",
     ROOT / "outputs" / "hackathon" / "screenshot_manifest.json",
-    ROOT / "outputs" / "hackathon" / "video_manifest.json",
     ROOT / "outputs" / "hackathon" / "readiness_report.json",
 ]
 

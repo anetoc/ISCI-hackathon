@@ -13,24 +13,23 @@ and a judge-facing explanation.
    metrics and reproduces the figures. Python is the engine, not the whole product.
 3. **Versioned evidence** stores the verdicts, tables, figures, commands and Git/data/axes hashes
    required to audit what was shown.
-4. **Presentation artifacts** translate the result for a mixed medical and scientific audience:
-   the PowerPoint deck, deterministic offline demo, Full-HD fallback video and judge Q&A.
-5. **Release gates** verify that the four verdicts remain frozen, the evidence and media agree,
-   public surfaces contain no local paths or prohibited raw files, and human approval is still
-   required before submission.
+4. **Public communication artifacts** translate the result for a mixed medical and scientific
+   audience: the PowerPoint deck, deterministic interactive demo, executed notebook and judge Q&A.
+5. **Release gates** verify that the four verdicts remain frozen, the public artifacts agree and
+   public surfaces contain no local paths or prohibited raw files.
 
 ## Start here
 
 - **Judge-facing deck:** `outputs/tctrl_hackathon_deck.pptx`
 - **Executed researcher notebook:** `notebooks/ISCI_Researcher_Track_Walkthrough.ipynb`
 - **Live/offline demo:** `docs/hackathon_judge_demo.html`
-- **2:42 video fallback:** `demo_assets/hackathon/hackathon_fallback_2m42.mp4`
+- **Submitted narrated video:** https://youtu.be/7Rz4PpmQZuI
 - **Submission copy:** `SUBMISSION.md`
 - **Locked scientific result:** `reports/result_lock.md`
 - **Claim-by-claim evidence:** `reports/CLAIM_LEDGER.md`
 - **Machine-readable verdicts:** `outputs/hackathon/claim_manifest.json`
 - **Automated release status:** `outputs/hackathon/readiness_report.json`
-- **Rebuild and verify the stage package:** `make hackathon-package`
+- **Rebuild and verify the public research package:** `make hackathon-package`
 
 ## What it does not claim
 

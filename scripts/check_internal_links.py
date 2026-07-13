@@ -15,12 +15,13 @@ EXTERNAL_PREFIXES = ("http://", "https://", "mailto:", "data:", "#")
 
 
 def tracked_markdown() -> list[Path]:
-    """Ask Git for the public Markdown surface instead of scanning virtual environments."""
+    """Return tracked Markdown files that still exist in the current working tree."""
 
     output = subprocess.check_output(
         ["git", "ls-files", "*.md"], cwd=ROOT, text=True
     )
-    return [ROOT / line for line in output.splitlines() if line]
+    paths = [ROOT / line for line in output.splitlines() if line]
+    return [path for path in paths if path.is_file()]
 
 
 def path_part(raw_target: str) -> str:

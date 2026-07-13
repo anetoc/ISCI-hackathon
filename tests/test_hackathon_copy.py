@@ -6,17 +6,25 @@ from zipfile import ZipFile
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_stage_script_matches_the_ten_slide_submitted_narration():
-    """Keep the public script synchronized with the approved 2:42 video deck."""
+def test_internal_production_material_is_not_part_of_the_public_repository():
+    """Keep recording, rehearsal and form-production material outside the research package."""
 
-    text = (ROOT / "DEMO_SCRIPT.md").read_text()
-    spoken_lines = [line.removeprefix("> ") for line in text.splitlines() if line.startswith("> ")]
-    spoken_words = re.findall(r"\b[\w+.–-]+\b", " ".join(spoken_lines))
-
-    assert text.count("## SLIDE ") == 10
-    assert 300 <= len(spoken_words) <= 450
-    for value in ("+0.357", "+0.215", "0.415→0.722", "+0.229"):
-        assert value in text
+    internal_paths = [
+        "DEMO_SCRIPT.md",
+        "ELEVENLABS_PACKAGE.md",
+        "ELEVENLABS_SCRIPT_SHORT.md",
+        "HACKATHON_RUNBOOK.md",
+        "JUDGE_QA_REHEARSAL.md",
+        "RECORDING_SCRIPT.md",
+        "VIDEO_NARRATION.md",
+        "VIDEO_SCRIPT_FINAL.md",
+        "scripts/build_final_narrated_video.py",
+        "scripts/build_hackathon_video.py",
+        "scripts/validate_submission_video.py",
+        "outputs/hackathon/video_manifest.json",
+        "demo_assets/hackathon/hackathon_fallback_2m42.mp4",
+    ]
+    assert not [path for path in internal_paths if (ROOT / path).exists()]
 
 
 def test_every_judge_card_has_evidence_limitation_and_overclaim_boundary():
@@ -64,9 +72,7 @@ def test_judge_surfaces_use_one_product_name_and_one_method_name():
         ROOT / "README.md",
         ROOT / "DELIVERABLE.md",
         ROOT / "SUBMISSION.md",
-        ROOT / "DEMO_SCRIPT.md",
         ROOT / "JUDGE_QA.md",
-        ROOT / "HACKATHON_RUNBOOK.md",
         ROOT / "SUMMARY.md",
         ROOT / "config" / "hackathon_claims.yaml",
         ROOT / "outputs" / "hackathon" / "claim_manifest.json",
@@ -90,7 +96,7 @@ def test_judge_surfaces_use_one_product_name_and_one_method_name():
 
 
 def test_readme_is_a_public_entry_point_with_a_bounded_judge_capsule():
-    """Serve judges the narrated demo while keeping offline fallbacks clearly secondary."""
+    """Serve judges the submitted demo while preserving the reproducible research path."""
 
     text = (ROOT / "README.md").read_text()
     start_here = text.split("## Start here", 1)[1].split("## The result", 1)[0]
@@ -109,6 +115,5 @@ def test_readme_is_a_public_entry_point_with_a_bounded_judge_capsule():
     assert "interactive overview" in judge_row
     assert "fallback" not in judge_row.lower()
     assert "2:42 narrated demo" in start_here
-    assert "public narrated recording passed" in start_here
     assert "deterministic offline" in start_here
     assert "## Repository map — four layers" in text

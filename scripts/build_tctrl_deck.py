@@ -693,7 +693,7 @@ def build() -> Path:
     add_metric(
         slide,
         "21/21",
-        "automated release gates passed\nHuman rehearsal and PI wording gates remain explicit",
+        "automated release gates passed\nSubmitted public artifacts remain reproducible",
         9.00,
         4.02,
         3.36,

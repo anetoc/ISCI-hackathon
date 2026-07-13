@@ -1,18 +1,17 @@
 {
   "schema_version": "hackathon_screenshot_manifest_v1",
-  "generated_at": "2026-07-13T23:35:27.265914+00:00",
-  "git_sha": "a8a3828c1e83bff083ff824e258a95cf1fbd9461",
+  "generated_at": "2026-07-13T23:46:17.567334+00:00",
+  "git_sha": "3904227b1f86b354a23dc5cf2cef10693eb50b38",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
-  "source_paths_dirty": false,
+  "source_paths_dirty": true,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "957b3b74cb8b720f6dd06b70aae7345e2caabeab875de215fc95df8e8417b046",
+    "sha256": "b067c0e1b71ab52e76c5ee0481718dba9db732d78b5e164497c1b78ea920c97b",
     "files_sha256": {
       "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
       "config/hackathon_timing.json": "f4f69fad0274273291bccb37aed1a1b88c24f6909d94376cb38f597ddb4478e1",
       "outputs/tctrl_hackathon_deck.pptx": "43d57a7d3f0d5ed3afae977048f6962baa5f70189b02cc9d99d6e6aaba07959b",
-      "scripts/build_final_narrated_video.py": "21ad01c2f4265cb7099b36fec9a04740b15b5c1f08c97873e68de8691ebc8b31",
-      "scripts/capture_hackathon_screenshots.py": "6603b6d7f4d9b7a3aa4b713a604e0c13b3956b45ce741f8f793dace04cfebce9",
+      "scripts/capture_hackathon_screenshots.py": "e55a7c01d3bf6fa73c07fd5de798a000cb440cf75971444278b0af46a3081562",
       "scripts/release_provenance.py": "6bb306ad56967cdbb0357f70cca81a2bf5355c0e0ce315154b89d3dbf392b19f"
     }
   },
@@ -20,7 +19,7 @@
   "renderer": "LibreOffice PDF export + pdftoppm 1920x1080",
   "deck_path": "outputs/tctrl_hackathon_deck.pptx",
   "deck_sha256": "43d57a7d3f0d5ed3afae977048f6962baa5f70189b02cc9d99d6e6aaba07959b",
-  "data_sha256": "0c46770c4b0d0f35a81d8882ef657a2b8774513d69351591bb4d33650bf4f688",
+  "data_sha256": "5bcdb13668b3a038dab692afe45a47f8f025d80ff411fc2354e2e01c15d5b8ef",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
   "width": 1920,
   "height": 1080,
