@@ -117,3 +117,8 @@ This is end-to-end technical generalization, not biological replication. The dat
 arrayed and donor-free, and no independent positive benchmark was declared. The aggregate evidence
 is in
 [`outputs/hackathon/arrayed_rna_effect_build_smoke.json`](../outputs/hackathon/arrayed_rna_effect_build_smoke.json).
+
+The same source was then rerun through the public one-command interface. `isci pipeline` reproduced
+the raw-input SHA, generated-effect SHA and final `ANALYSIS_COMPLETE` result, with four explicit
+stages: `VALIDATED → DIAGNOSTIC_ONLY → DIAGNOSTIC_EFFECTS_BUILT → ANALYSIS_COMPLETE`. Convenience
+therefore did not erase the preprocessing boundary or promote the biological verdict.

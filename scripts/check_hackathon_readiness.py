@@ -210,6 +210,15 @@ def main() -> None:
         and arrayed_rna_smoke["downstream"]["ranking_eligible_rows"] == 40
         and arrayed_rna_smoke["downstream"]["missing_specificity_rows"] == 0
         and arrayed_rna_smoke["downstream"]["missing_reproducibility_rows"] == 0
+        and arrayed_rna_smoke["pipeline"]["status"] == "ANALYSIS_COMPLETE"
+        and arrayed_rna_smoke["pipeline"]["biological_verdict"] == "NOT_ISSUED"
+        and arrayed_rna_smoke["pipeline"]["stages"]
+        == [
+            "VALIDATED",
+            "DIAGNOSTIC_ONLY",
+            "DIAGNOSTIC_EFFECTS_BUILT",
+            "ANALYSIS_COMPLETE",
+        ]
         and "def run_pipeline" in pipeline_source
         and '"isci_pipeline_v1"' in pipeline_source
         and '"pipeline"' in dataset_cli_source,

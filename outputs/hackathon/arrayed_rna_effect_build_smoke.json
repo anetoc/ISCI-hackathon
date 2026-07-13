@@ -49,11 +49,27 @@
     "timestamp": "2026-07-13T00:11:57.819648+00:00",
     "command": "isci run tmp/external-smoke/datlinger_build_c9c1f0e/dataset.effects.yaml --repo-root . --output-dir tmp/external-smoke/datlinger_run_c9c1f0e --block-rows 8"
   },
+  "pipeline": {
+    "status": "ANALYSIS_COMPLETE",
+    "biological_verdict": "NOT_ISSUED",
+    "stages": [
+      "VALIDATED",
+      "DIAGNOSTIC_ONLY",
+      "DIAGNOSTIC_EFFECTS_BUILT",
+      "ANALYSIS_COMPLETE"
+    ],
+    "source_data_sha256": "9f8c35058d71442a904391dabf6574bbb24ae31ed00cef5d4e4ed498828f3592",
+    "analysis_data_sha256": "a967f9b7e66f0a08d7486d9ce8192053233c0e8ce333ad749efca7371f8d2a27",
+    "spec_sha256": "5c3c7e15b42dc481579ea18531fbe6aa3d00c42baaa4e0cb8598490b5aef70ea",
+    "git_sha": "d5e449d6b013ae18eec664b39b2ace5a2d4cb304",
+    "timestamp": "2026-07-13T00:26:19.679568+00:00",
+    "command": "isci pipeline examples/dataset_spec/scperturb_arrayed_cell_h5ad.yaml --repo-root . --output-dir tmp/external-smoke/datlinger_pipeline_d5e449d --block-rows 8"
+  },
   "input_sha256": "9f8c35058d71442a904391dabf6574bbb24ae31ed00cef5d4e4ed498828f3592",
   "output_sha256": "a967f9b7e66f0a08d7486d9ce8192053233c0e8ce333ad749efca7371f8d2a27",
   "generated_spec_sha256": "457edc12413b1aba6ba99fa0825e513198c089bd1db143e897e3c37237a85d7b",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
   "git_sha": "c9c1f0ea1ffb1be31de9774d31ac35eb268b6d16",
   "timestamp": "2026-07-13T00:11:57.819648+00:00",
-  "command": "See build.command and downstream.command for the two-stage smoke test."
+  "command": "See build.command, downstream.command and pipeline.command for the audited paths."
 }
