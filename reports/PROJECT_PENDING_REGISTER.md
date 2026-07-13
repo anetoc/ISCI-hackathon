@@ -45,7 +45,6 @@ Primary artifacts: `config/off_target_pilot.yaml`, `reports/OFF_TARGET_PILOT_PRO
 
 | ID | Pending point | Current evidence | Close condition | Dependency |
 |---|---|---|---|---|
-| ENG-02 | Add provenance to every canonical CCI result | Release manifests are content-addressed, but the legacy `run_cci.py` schema still omits per-result data/config hashes | Schema and dashboard accept provenance without changing verdicts | None; post-submission |
 | ENG-03 | Pay down non-release lint debt | CI-supported code is clean; `ruff check .` reports 22 occurrences confined to archived D0, the executed notebook and the distributable skill kernel | Clean those surfaces or codify explicit exclusions in a separate post-submission PR | Separate engineering PR |
 | REL-03 | Mint immutable release/DOI | Pre-registration records git SHA but no project release DOI | Tagged release archived by Zenodo; badges and ledger updated | Repository-owner GitHub/Zenodo authorization |
 
@@ -78,6 +77,8 @@ Primary artifacts: `config/off_target_pilot.yaml`, `reports/OFF_TARGET_PILOT_PRO
 - reproducibility wording: README and dossier now distinguish recomputed Marson summaries,
   aggregated heavy lanes and unavailable raw-data reruns;
 - public release: PR #3 merged into `main`; repository, MIT license, CI and GitHub Pages are public;
+- canonical legacy CCI provenance: completed; every result emitted by `run_cci.py` now carries Git,
+  data, axes and config hashes, timestamp and command, with dashboard schema enforcement;
 - roadmap synchronization and final automated overclaim audit: completed in the submission
   closeout; human approval remains SUB-01;
 - test warning debt: `141 passed` locally without emitted warnings on Python 3.13;

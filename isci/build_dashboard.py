@@ -11,6 +11,14 @@ import os
 
 VCOLOR = {"PASS": "#2e7d32", "NEAR-MISS": "#f9a825", "FAIL": "#c62828",
           "QUEUED": "#9e9e9e", None: "#9e9e9e"}
+PROVENANCE_KEYS = [
+    "provenance_schema",
+    "git_sha",
+    "data_sha256",
+    "axes_sha256",
+    "timestamp",
+    "command",
+]
 
 
 def load_runs():
@@ -21,8 +29,23 @@ def load_runs():
             runs[r["id"]] = r
     for f in glob.glob("outputs/*/cci_result.json"):   # per-dataset canonical results
         r = json.load(open(f))
+        missing = [key for key in PROVENANCE_KEYS if not r.get(key)]
+        if missing:
+            raise ValueError(f"{f}: canonical result missing provenance fields {missing}")
         runs[r["id"]] = r
     return list(runs.values())
+
+
+def provenance_label(run):
+    """Render a compact audit stamp without exposing machine-specific paths."""
+
+    if not run.get("provenance_schema"):
+        return "legacy dashboard seed"
+    return "git %s · data %s · axes %s" % (
+        run["git_sha"][:8],
+        run["data_sha256"][:10],
+        run["axes_sha256"][:10],
+    )
 
 
 def bar(delta, lo, hi, w=260, span=(-0.1, 0.5)):
@@ -51,12 +74,12 @@ def build():
         lrp = ("%.1e" % lrp) if isinstance(lrp, (int, float)) else "n.s."
         rows += ('<tr><td><b>%s</b><br><span class=sub>%s</span></td>'
                  '<td>%s</td><td class=num>%s</td><td class=num>%s</td>'
-                 '<td class=num>%s</td><td>%s</td>'
+                 '<td class=num>%s</td><td>%s</td><td class=sub>%s</td>'
                  '<td><span class=pill style="background:%s">%s</span></td></tr>'
                  % (html.escape(r.get("label", r["id"])),
                     html.escape(r.get("perturbation", "")),
                     html.escape(r.get("system", "")), dtxt, ci, lrp,
-                    bar(d or 0, lo, hi), c, v))
+                    bar(d or 0, lo, hi), html.escape(provenance_label(r)), c, v))
     npass = sum(1 for r in runs if r.get("verdict") == "PASS")
     CSS = ("body{font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;margin:2rem;"
            "color:#222;max-width:1000px}h1{font-size:22px;margin-bottom:.2rem}"
@@ -75,7 +98,7 @@ def build():
             "(dot) with 95% bootstrap CI (line), dashed = 0 (no gain). "
             "<b>Prediction:</b> immune state-transition systems PASS, cell-autonomous systems FAIL.</div></div>"
             "<table><tr><th>Dataset</th><th>System</th><th>matched C-vs-M &Delta;AUPRC</th><th>95% CI</th><th>LR p</th>"
-            "<th>gain vs magnitude</th><th>verdict</th></tr>")
+            "<th>gain vs magnitude</th><th>provenance</th><th>verdict</th></tr>")
     doc = (head + rows + "</table><p class=sub>Add a dataset: edit config/datasets.yaml, "
            "run isci/run_cci.py, rebuild this page.</p>")
     os.makedirs("outputs/dashboard", exist_ok=True)
