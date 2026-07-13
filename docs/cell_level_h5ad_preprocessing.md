@@ -87,3 +87,7 @@ The source matrix is read in bounded cell-row blocks. A build can be `DIAGNOSTIC
 when donor coverage or other confirmatory evidence is absent. The downstream runner can still
 return `FEATURE_EXTRACTION_NOT_EVALUABLE` when the measured features do not cover the frozen axes;
 this is a safety property, not an execution error.
+
+`isci pipeline dataset.yaml` orchestrates this complete sequence without weakening any gate. Its
+`pipeline_report.json` records every stage and keeps source-data and constructed-effect checksums
+separate. The lower-level commands remain available for inspecting or debugging an individual step.

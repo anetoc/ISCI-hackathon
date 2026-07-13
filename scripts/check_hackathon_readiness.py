@@ -47,6 +47,7 @@ DATASET_CLI_CODE = ROOT / "isci" / "cli.py"
 DATASET_RUNNER_CODE = ROOT / "isci" / "analysis_runner.py"
 FEATURE_EXTRACTION_CODE = ROOT / "isci" / "feature_extraction.py"
 EFFECT_BUILDER_CODE = ROOT / "isci" / "effect_builder.py"
+PIPELINE_CODE = ROOT / "isci" / "pipeline.py"
 LOCKED_KERNEL = ROOT / "skills" / "isci-controllership" / "kernel.py"
 LOCKED_METHOD = ROOT / "skills" / "isci-controllership" / "SKILL.md"
 RESEARCHER_NOTEBOOK = ROOT / "notebooks" / "ISCI_Researcher_Track_Walkthrough.ipynb"
@@ -109,6 +110,7 @@ def main() -> None:
     dataset_runner_source = DATASET_RUNNER_CODE.read_text()
     feature_extraction_source = FEATURE_EXTRACTION_CODE.read_text()
     effect_builder_source = EFFECT_BUILDER_CODE.read_text()
+    pipeline_source = PIPELINE_CODE.read_text()
     dataset_cli_source = DATASET_CLI_CODE.read_text()
     notebook = json.loads(RESEARCHER_NOTEBOOK.read_text())
     notebook_code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
@@ -207,7 +209,10 @@ def main() -> None:
         and arrayed_rna_smoke["build"]["invalid_effect_values"] == 0
         and arrayed_rna_smoke["downstream"]["ranking_eligible_rows"] == 40
         and arrayed_rna_smoke["downstream"]["missing_specificity_rows"] == 0
-        and arrayed_rna_smoke["downstream"]["missing_reproducibility_rows"] == 0,
+        and arrayed_rna_smoke["downstream"]["missing_reproducibility_rows"] == 0
+        and "def run_pipeline" in pipeline_source
+        and '"isci_pipeline_v1"' in pipeline_source
+        and '"pipeline"' in dataset_cli_source,
         "researcher_notebook_executed": len(notebook_code_cells) >= 8
         and all(cell.get("execution_count") is not None for cell in notebook_code_cells)
         and not notebook_errors,
@@ -242,6 +247,7 @@ def main() -> None:
         DATASET_RUNNER_CODE,
         FEATURE_EXTRACTION_CODE,
         EFFECT_BUILDER_CODE,
+        PIPELINE_CODE,
         LOCKED_KERNEL,
         LOCKED_METHOD,
         RESEARCHER_NOTEBOOK,

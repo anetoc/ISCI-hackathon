@@ -21,6 +21,7 @@ from isci.adapters import (
 from isci.analysis_runner import run_dataset
 from isci.dataset_spec import DatasetSpecError, load_dataset_spec, validate_dataset_spec
 from isci.effect_builder import build_anndata_effects
+from isci.pipeline import run_pipeline
 
 
 EXIT_SUCCESS = 0
@@ -355,6 +356,49 @@ def _run(args: argparse.Namespace) -> int:
     return EXIT_SUCCESS if result.completed else EXIT_NOT_EVALUABLE
 
 
+def _pipeline(args: argparse.Namespace) -> int:
+    spec_path = Path(args.spec)
+    root = _repo_root(spec_path, args.repo_root)
+    try:
+        spec = load_dataset_spec(spec_path, repo_root=root, check_paths=True)
+    except FileNotFoundError:
+        _print_json(_config_error("pipeline", "SPEC_NOT_FOUND", "DatasetSpec file does not exist"))
+        return EXIT_INVALID_SPEC
+    except yaml.YAMLError as exc:
+        _print_json(_config_error("pipeline", "INVALID_YAML", type(exc).__name__))
+        return EXIT_INVALID_SPEC
+    except DatasetSpecError as exc:
+        payload = {
+            "command": "pipeline",
+            "ok": False,
+            "error": {"code": "INVALID_SPEC", "message": "DatasetSpec validation failed"},
+            "report": exc.report.to_dict(),
+        }
+        _print_json(payload)
+        return EXIT_INVALID_SPEC
+
+    output_dir = (
+        Path(args.output_dir)
+        if args.output_dir
+        else root / "outputs" / spec.dataset.id / "pipeline"
+    )
+    result = run_pipeline(
+        spec,
+        repo_root=root,
+        output_dir=output_dir,
+        block_rows=args.block_rows,
+    )
+    payload = {
+        "command": "pipeline",
+        "ok": result.completed,
+        "status": result.status,
+        "biological_verdict": "NOT_ISSUED",
+        "report": result.report,
+    }
+    _print_json(payload)
+    return EXIT_SUCCESS if result.completed else EXIT_NOT_EVALUABLE
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="isci",
@@ -449,6 +493,26 @@ def build_parser() -> argparse.ArgumentParser:
         help="H5AD observation rows per extraction block (default: 64)",
     )
     run_parser.set_defaults(handler=_run)
+
+    pipeline_parser = subparsers.add_parser(
+        "pipeline",
+        help="validate, preprocess when needed, and run one DatasetSpec end to end",
+    )
+    pipeline_parser.add_argument("spec", help="path to DatasetSpec YAML")
+    pipeline_parser.add_argument(
+        "--repo-root", help="repository root for resolving contract-relative paths"
+    )
+    pipeline_parser.add_argument(
+        "--output-dir",
+        help="output directory (default: outputs/<dataset_id>/pipeline)",
+    )
+    pipeline_parser.add_argument(
+        "--block-rows",
+        type=int,
+        default=64,
+        help="H5AD cell or observation rows per bounded block (default: 64)",
+    )
+    pipeline_parser.set_defaults(handler=_pipeline)
     return parser
 
 

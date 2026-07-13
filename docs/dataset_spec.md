@@ -97,6 +97,7 @@ because it contains only 2 observed positives, 2 donors and 1 condition.
 After `uv sync`, the same boundary is available without writing Python:
 
 ```bash
+isci pipeline dataset.yaml --output-dir outputs/my_dataset/pipeline --block-rows 32
 isci validate examples/dataset_spec/mini_long_effects.yaml
 isci validate examples/dataset_spec/scperturb_cell_h5ad.yaml --structure-only
 isci preflight-cells cell_dataset.yaml --report outputs/my_dataset/preflight.json
@@ -115,6 +116,30 @@ Exit code `0` means the requested validation/inspection completed; `2` means the
 output request is invalid; `3` means the physical dataset is `NOT_EVALUABLE`. A diagnostic or
 benchmark-ready dataset still exits `0` because the capability is reported explicitly and no
 confirmatory verdict is implied.
+
+`isci pipeline` is the default reusable entry point. For `anndata_cells`, it runs contract
+validation → metadata preflight → matched-control effect construction → generated-spec validation
+→ frozen analysis. Other layouts go directly from validation to the same analysis runner. It writes:
+
+```text
+outputs/<dataset_id>/pipeline/
+├── pipeline_report.json
+├── effects/                  # cell-level inputs only
+│   ├── effects.h5ad
+│   ├── dataset.effects.yaml
+│   └── preprocessing_report.json
+└── run/
+    ├── controller_features.csv
+    ├── axis_scores.csv
+    ├── feature_extraction_report.json
+    ├── controller_ranking.csv
+    ├── condition_metrics.json
+    └── analysis_report.json
+```
+
+The combined report keeps the raw-source hash separate from the generated-effect hash. A stopped
+stage remains visible and returns exit code `3`; the pipeline never converts a stop gate into a
+negative biological result.
 
 For `anndata_effects`, inspection opens the H5AD with `backed="r"`. `--scan-values` walks both
 declared layers in bounded observation blocks. The CLI deliberately refuses

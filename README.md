@@ -156,6 +156,8 @@ the driver, not those stubs, is the reproduction path. Every output carries a pr
 versioned DatasetSpec v1 contract, supported input layouts, conservative capability tiers and the
 synthetic contract fixture used before any large dataset is opened. The CSV/Parquet adapter already
 canonicalizes mapped columns, verifies provenance and downgrades claims from observed coverage.
+For the shortest path, run `isci pipeline <dataset.yaml>`: it validates the contract, constructs
+cell-level effects only when required, and runs the frozen analysis into one audited output tree.
 The H5AD adapter opens effect matrices in backed mode and streams grouped, bounded long-form
 blocks. Use `isci validate <dataset.yaml>` followed by `isci inspect <dataset.yaml>`. For
 CSV/Parquet `long_effects` and effect-matrix H5AD `anndata_effects`, `isci run <dataset.yaml>`
