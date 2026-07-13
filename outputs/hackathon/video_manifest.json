@@ -1,20 +1,20 @@
 {
   "schema_version": "hackathon_video_manifest_v1",
-  "generated_at": "2026-07-12T20:52:58.073476+00:00",
-  "git_sha": "6cab8efafab2f9b1d54f34c55d90967fb47ce78b",
+  "generated_at": "2026-07-13T01:39:59.817166+00:00",
+  "git_sha": "5e18113f355c1a4b16f7c5eb9149e045ccb04fd9",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
-  "source_paths_dirty": true,
+  "source_paths_dirty": false,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "3a0a48d5977ccb8fe802bfc3736e16ddd86cb8ef755088a5794721416909c902",
+    "sha256": "aad4efc8896398dce22e16f9e2c87ede6586cdb6fdd1737e85e26511bc768be7",
     "files_sha256": {
       "config/hackathon_timing.json": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
-      "demo_assets/hackathon/01_problem.png": "bfaa15e848bbb586e992b5876d941798545636721059453f6a4035f24ccc6ff3",
-      "demo_assets/hackathon/02_self_correction.png": "9ce076dc1268ae9518c64276d3ef850cfc4b69ad5404dba994eee66ea26e3f28",
-      "demo_assets/hackathon/03_controllability.png": "cedae3ddeeb442695f232e94fb0ca231073c884ded2c429b10be4f541206c3bb",
-      "demo_assets/hackathon/04_primary_judgment.png": "72d04b84802e2125a82793186a8fd5d5de3f94e18638ee5e0b7deeb255150c13",
-      "demo_assets/hackathon/05_trust_proof.png": "0752822352b73e5b9428d37d883dc4463a3d2cef1e66987a88b251f1a6a57a93",
-      "demo_assets/hackathon/06_gladstone_bridge.png": "e91dee9566a74f7a7c637ddb2ecab9fd383e170abde949f251bac59be79ec3e6",
+      "demo_assets/hackathon/01_problem.png": "e5b8141fe70f0f32ff96318e52638d2093a09d19824c9684b5eb75f00ac0ab8f",
+      "demo_assets/hackathon/02_self_correction.png": "7aabb003bd1e23d37302abd603c014e8a131dd534294131b831f81223855cc48",
+      "demo_assets/hackathon/03_controllability.png": "337846aecba32d07e4af3ed02250121857ce8271fbf0e24b01a81b8216d17a59",
+      "demo_assets/hackathon/04_primary_judgment.png": "f1d6933a83dcb045314d128f0ce0221d31346455095ce9850d104024f21e3b70",
+      "demo_assets/hackathon/05_trust_proof.png": "ef72d35d25721bdde8bb08e7cb24c4aac9bd000c6309f357e73f93b45f77044a",
+      "demo_assets/hackathon/06_gladstone_bridge.png": "690e03b6440d3792a17ff2eb4c062c8dc818f985081b5fb8dcfeb16767c8fb30",
       "scripts/build_hackathon_video.py": "4f74bc5802e3e1848bfa5fd3cd9944147090c98492b7f8a8536dba57804b2b01",
       "scripts/release_provenance.py": "6bb306ad56967cdbb0357f70cca81a2bf5355c0e0ce315154b89d3dbf392b19f"
     }
@@ -23,15 +23,15 @@
   "timing_path": "config/hackathon_timing.json",
   "timing_sha256": "2609a88de0da8fd4d2911d8185a5856a2ec43d9b40d5f7d8848930f6c8826807",
   "source_sha256": {
-    "demo_assets/hackathon/01_problem.png": "bfaa15e848bbb586e992b5876d941798545636721059453f6a4035f24ccc6ff3",
-    "demo_assets/hackathon/02_self_correction.png": "9ce076dc1268ae9518c64276d3ef850cfc4b69ad5404dba994eee66ea26e3f28",
-    "demo_assets/hackathon/03_controllability.png": "cedae3ddeeb442695f232e94fb0ca231073c884ded2c429b10be4f541206c3bb",
-    "demo_assets/hackathon/04_primary_judgment.png": "72d04b84802e2125a82793186a8fd5d5de3f94e18638ee5e0b7deeb255150c13",
-    "demo_assets/hackathon/05_trust_proof.png": "0752822352b73e5b9428d37d883dc4463a3d2cef1e66987a88b251f1a6a57a93",
-    "demo_assets/hackathon/06_gladstone_bridge.png": "e91dee9566a74f7a7c637ddb2ecab9fd383e170abde949f251bac59be79ec3e6"
+    "demo_assets/hackathon/01_problem.png": "e5b8141fe70f0f32ff96318e52638d2093a09d19824c9684b5eb75f00ac0ab8f",
+    "demo_assets/hackathon/02_self_correction.png": "7aabb003bd1e23d37302abd603c014e8a131dd534294131b831f81223855cc48",
+    "demo_assets/hackathon/03_controllability.png": "337846aecba32d07e4af3ed02250121857ce8271fbf0e24b01a81b8216d17a59",
+    "demo_assets/hackathon/04_primary_judgment.png": "f1d6933a83dcb045314d128f0ce0221d31346455095ce9850d104024f21e3b70",
+    "demo_assets/hackathon/05_trust_proof.png": "ef72d35d25721bdde8bb08e7cb24c4aac9bd000c6309f357e73f93b45f77044a",
+    "demo_assets/hackathon/06_gladstone_bridge.png": "690e03b6440d3792a17ff2eb4c062c8dc818f985081b5fb8dcfeb16767c8fb30"
   },
   "output_path": "demo_assets/hackathon/hackathon_fallback_2m30.mp4",
-  "output_sha256": "2f5a6dbdce61f0950919f5653674302a71ff0470d48b9fad797f889839461b66",
+  "output_sha256": "ad9bf24b570ca5d265d56af8e0093511cfdfb96afd611a6bb38baed815461346",
   "duration_seconds": 150.0,
   "width": 1920,
   "height": 1080,
