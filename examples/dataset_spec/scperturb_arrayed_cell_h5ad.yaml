@@ -1,24 +1,24 @@
 schema_version: 1
 
 dataset:
-  id: papalexi_eccite_protein_preflight
-  label: "Papalexi/Satija 2021 ECCITE-seq protein preflight"
-  description: "Public scPerturb structure example; not CD4+ controllership evidence."
+  id: datlinger_bock_2021_arrayed_rna
+  label: "Datlinger/Bock 2021 arrayed Jurkat RNA screen"
+  description: "Public scPerturb arrayed single-guide RNA example; diagnostic T-cell-line evidence."
   organism: "Homo sapiens"
-  cell_system: "THP-1 cell line"
-  perturbation_modality: "CRISPR_KO"
+  cell_system: "Jurkat T-cell line"
+  perturbation_modality: "OTHER"
 
 input:
-  path: "data/external/PapalexiSatija2021_eccite_protein.h5ad"
+  path: "data/external/DatlingerBock2021.h5ad"
   format: "h5ad"
   layout: "anndata_cells"
-  sha256: null
+  sha256: "9f8c35058d71442a904391dabf6574bbb24ae31ed00cef5d4e4ed498828f3592"
 
 mapping:
   perturbation: "perturbation"
-  guide: "guide_id"
-  guide_count: "nperts"
-  replicate: "hto"
+  guide: "perturbation"
+  replicate: "sample"
+  condition: "perturbation_2"
 
 preprocessing:
   source:
@@ -27,14 +27,14 @@ preprocessing:
   control:
     column: "perturbation"
     labels: ["control"]
-    match_on: ["replicate"]
+    match_on: ["condition"]
   normalization: "log1p_cpm"
   contrast: "pseudobulk_difference"
   standardization: "gene_wise_zscore_within_condition"
   min_cells_per_stratum: 25
   min_replicates: 2
-  multi_guide_policy: "exclude"
-  perturbation_transform: "identity"
+  multi_guide_policy: "not_applicable_arrayed"
+  perturbation_transform: "strip_trailing_guide_number"
 
 analysis:
   axes_path: "config/axes.yaml"
@@ -46,7 +46,7 @@ analysis:
 
 provenance:
   source_url: "https://doi.org/10.5281/zenodo.10044268"
-  citation: "Papalexi et al. 2021 ECCITE-seq; scPerturb H5AD collection v1.3."
+  citation: "Datlinger et al.; scPerturb H5AD collection v1.3."
   license: "CC-BY-4.0"
   data_classification: "PUBLIC"
   redistributable: true

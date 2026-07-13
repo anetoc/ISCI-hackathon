@@ -373,7 +373,8 @@
         "standardization",
         "min_cells_per_stratum",
         "min_replicates",
-        "multi_guide_policy"
+        "multi_guide_policy",
+        "perturbation_transform"
       ],
       "properties": {
         "source": {
@@ -432,7 +433,8 @@
           "additionalProperties": false,
           "required": [
             "column",
-            "labels"
+            "labels",
+            "match_on"
           ],
           "properties": {
             "column": {
@@ -444,6 +446,17 @@
               "uniqueItems": true,
               "items": {
                 "$ref": "#/$defs/columnName"
+              }
+            },
+            "match_on": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "condition",
+                  "donor",
+                  "replicate"
+                ]
               }
             }
           }
@@ -469,7 +482,16 @@
           "minimum": 2
         },
         "multi_guide_policy": {
-          "const": "exclude"
+          "enum": [
+            "exclude",
+            "not_applicable_arrayed"
+          ]
+        },
+        "perturbation_transform": {
+          "enum": [
+            "identity",
+            "strip_trailing_guide_number"
+          ]
         }
       },
       "allOf": [
@@ -535,7 +557,6 @@
             "required": [
               "perturbation",
               "guide",
-              "guide_count",
               "replicate"
             ]
           },
@@ -547,6 +568,41 @@
           "required": [
             "preprocessing"
           ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input": {
+            "properties": {
+              "layout": {
+                "const": "anndata_cells"
+              }
+            },
+            "required": [
+              "layout"
+            ]
+          },
+          "preprocessing": {
+            "properties": {
+              "multi_guide_policy": {
+                "const": "exclude"
+              }
+            },
+            "required": [
+              "multi_guide_policy"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "mapping": {
+            "required": [
+              "guide_count"
+            ]
+          }
         }
       }
     },

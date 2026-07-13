@@ -20,7 +20,7 @@ signals into matched-control pseudobulk effects.
 
 | `input.layout` | Physical format | Required mapping | Intended use |
 |---|---|---|---|
-| `anndata_cells` | H5AD | `perturbation`, `guide`, `guide_count`, `replicate`; explicit `preprocessing` | Backed preflight and matched-control pseudobulk construction |
+| `anndata_cells` | H5AD | `perturbation`, `guide`, `replicate`; `guide_count` for pooled designs; explicit `preprocessing` | Backed preflight and matched-control pseudobulk construction |
 | `anndata_effects` | H5AD | `perturbation`; `input.layers.effect`; `input.layers.standardized_effect` | Perturbation-by-feature effect matrices |
 | `long_effects` | CSV or Parquet | `perturbation`, `feature`, `effect`, `standardized_effect` | Portable long-form perturbation effects |
 | `controller_features` | CSV or Parquet | `perturbation`, `magnitude`, `specificity`, `reproducibility` | Compute-light analysis from precomputed controller features |
@@ -29,6 +29,14 @@ signals into matched-control pseudobulk effects.
 replication, guide multiplicity and cell support without reading `X`. `isci build-effects` then
 reads the declared signal in bounded row blocks and produces an ordinary `anndata_effects`
 artifact. That generated artifact must still satisfy axis coverage and reproducibility gates.
+
+Pooled screens declare `multi_guide_policy: exclude` and map a real guide-count column. Arrayed
+single-guide screens instead declare `not_applicable_arrayed` and omit `mapping.guide_count`.
+`preprocessing.control.match_on` states whether controls are matched by condition, donor and/or
+replicate; an empty list explicitly requests one global control pool. If a source stores guide IDs
+such as `ZAP70_1` where the target gene is `ZAP70`, the fixed
+`strip_trailing_guide_number` transform preserves the guide ID while exposing the correct target
+for leave-one-marker-out scoring.
 
 ## Capability is conservative
 

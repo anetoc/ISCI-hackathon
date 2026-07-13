@@ -37,13 +37,18 @@ def cell_level_raw():
     }
     raw["preprocessing"] = {
         "source": {"location": "X", "kind": "raw_counts"},
-        "control": {"column": "perturbation", "labels": ["NT", "non-targeting"]},
+        "control": {
+            "column": "perturbation",
+            "labels": ["NT", "non-targeting"],
+            "match_on": ["condition", "donor", "replicate"],
+        },
         "normalization": "log1p_cpm",
         "contrast": "pseudobulk_difference",
         "standardization": "gene_wise_zscore_within_condition",
         "min_cells_per_stratum": 25,
         "min_replicates": 2,
         "multi_guide_policy": "exclude",
+        "perturbation_transform": "identity",
     }
     raw.pop("benchmark")
     return raw
@@ -98,6 +103,39 @@ def test_cell_level_contract_is_explicitly_preprocessing_only(tmp_path):
     assert spec.input.layout == "anndata_cells"
     assert spec.preprocessing is not None
     assert spec.preprocessing.control["labels"] == ("NT", "non-targeting")
+
+
+def test_arrayed_cell_contract_declares_single_guide_without_a_count_column():
+    raw = cell_level_raw()
+    raw["mapping"].pop("guide_count")
+    raw["mapping"]["guide"] = raw["mapping"]["perturbation"]
+    raw["preprocessing"]["multi_guide_policy"] = "not_applicable_arrayed"
+    raw["preprocessing"]["control"]["match_on"] = ["condition"]
+
+    report = validate_dataset_spec(raw)
+
+    assert report.valid
+    assert report.capability == DatasetCapability.PREPROCESSING_DECLARED
+
+
+def test_arrayed_cell_contract_rejects_a_conflicting_guide_count_mapping():
+    raw = cell_level_raw()
+    raw["preprocessing"]["multi_guide_policy"] = "not_applicable_arrayed"
+
+    report = validate_dataset_spec(raw)
+
+    assert not report.valid
+    assert any(issue.code == "INCOMPATIBLE_MAPPING" for issue in report.issues)
+
+
+def test_control_matching_fields_must_be_declared_in_mapping():
+    raw = cell_level_raw()
+    raw["mapping"].pop("donor")
+
+    report = validate_dataset_spec(raw)
+
+    assert not report.valid
+    assert any(issue.code == "CONTROL_MATCH_CONTRACT" for issue in report.issues)
 
 
 @pytest.mark.parametrize(

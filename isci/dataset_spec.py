@@ -121,6 +121,7 @@ class CellPreprocessingSettings:
     min_cells_per_stratum: int
     min_replicates: int
     multi_guide_policy: str
+    perturbation_transform: str
 
 
 @dataclass(frozen=True)
@@ -212,6 +213,7 @@ _PREPROCESSING_FIELDS = {
     "min_cells_per_stratum",
     "min_replicates",
     "multi_guide_policy",
+    "perturbation_transform",
 }
 
 
@@ -414,7 +416,7 @@ def _validate_cell_preprocessing(
         )
 
     control = _mapping(block.get("control"), "preprocessing.control", issues)
-    _unknown_fields(control, {"column", "labels"}, "preprocessing.control", issues)
+    _unknown_fields(control, {"column", "labels", "match_on"}, "preprocessing.control", issues)
     _required_string(control, "column", "preprocessing.control", issues)
     labels = control.get("labels")
     if (
@@ -429,12 +431,35 @@ def _validate_cell_preprocessing(
             "preprocessing.control.labels",
             "must be a non-empty list of unique control labels",
         )
+    match_on = control.get("match_on")
+    allowed_match_fields = {"condition", "donor", "replicate"}
+    if (
+        not isinstance(match_on, list)
+        or not all(isinstance(field, str) for field in match_on)
+        or len(match_on) != len(set(match_on))
+    ):
+        _add(
+            issues,
+            "INVALID_VALUE",
+            "preprocessing.control.match_on",
+            "must be a list of unique logical stratum fields",
+        )
+    else:
+        unsupported = set(match_on) - allowed_match_fields
+        if unsupported:
+            _add(
+                issues,
+                "INVALID_VALUE",
+                "preprocessing.control.match_on",
+                f"unsupported fields: {', '.join(sorted(unsupported))}",
+            )
 
     expected_strings = {
         "normalization": {"log1p_cpm", "already_normalized"},
         "contrast": {"pseudobulk_difference"},
         "standardization": {"gene_wise_zscore_within_condition"},
-        "multi_guide_policy": {"exclude"},
+        "multi_guide_policy": {"exclude", "not_applicable_arrayed"},
+        "perturbation_transform": {"identity", "strip_trailing_guide_number"},
     }
     for field, allowed in expected_strings.items():
         observed = _required_string(block, field, "preprocessing", issues)
@@ -559,7 +584,7 @@ def validate_dataset_spec(
         if not isinstance(value, str) or not value.strip():
             _add(issues, "INVALID_TYPE", f"mapping.{key}", "must be a non-empty column name")
     layout_requirements = {
-        "anndata_cells": {"perturbation", "guide", "guide_count", "replicate"},
+        "anndata_cells": {"perturbation", "guide", "replicate"},
         "anndata_effects": {"perturbation"},
         "long_effects": {"perturbation", "feature", "effect", "standardized_effect"},
         "controller_features": {
@@ -573,6 +598,33 @@ def validate_dataset_spec(
         _add(issues, "REQUIRED_FIELD", f"mapping.{field}", f"required by {layout}")
 
     _validate_cell_preprocessing(root.get("preprocessing"), layout, issues)
+    if layout == "anndata_cells" and isinstance(root.get("preprocessing"), dict):
+        preprocessing = root["preprocessing"]
+        policy = preprocessing.get("multi_guide_policy")
+        if policy == "exclude" and "guide_count" not in mapping:
+            _add(
+                issues,
+                "REQUIRED_FIELD",
+                "mapping.guide_count",
+                "required when multi_guide_policy=exclude",
+            )
+        if policy == "not_applicable_arrayed" and "guide_count" in mapping:
+            _add(
+                issues,
+                "INCOMPATIBLE_MAPPING",
+                "mapping.guide_count",
+                "must be omitted for an explicitly arrayed single-guide design",
+            )
+        control = preprocessing.get("control")
+        if isinstance(control, dict) and isinstance(control.get("match_on"), list):
+            undeclared = set(control["match_on"]) - set(mapping)
+            if undeclared:
+                _add(
+                    issues,
+                    "CONTROL_MATCH_CONTRACT",
+                    "preprocessing.control.match_on",
+                    f"fields are not mapped: {', '.join(sorted(undeclared))}",
+                )
 
     analysis = _mapping(root.get("analysis"), "analysis", issues)
     _unknown_fields(analysis, _ANALYSIS_FIELDS, "analysis", issues)
@@ -741,6 +793,7 @@ def load_dataset_spec(
                 control={
                     **preprocessing["control"],
                     "labels": tuple(preprocessing["control"]["labels"]),
+                    "match_on": tuple(preprocessing["control"]["match_on"]),
                 },
                 normalization=preprocessing["normalization"],
                 contrast=preprocessing["contrast"],
@@ -748,6 +801,7 @@ def load_dataset_spec(
                 min_cells_per_stratum=preprocessing["min_cells_per_stratum"],
                 min_replicates=preprocessing["min_replicates"],
                 multi_guide_policy=preprocessing["multi_guide_policy"],
+                perturbation_transform=preprocessing["perturbation_transform"],
             )
             if preprocessing is not None
             else None

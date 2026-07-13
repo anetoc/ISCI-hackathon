@@ -10,13 +10,16 @@ frozen ISCI feature definitions, ranking kernel, axes, or verdict policy.
 
 An `anndata_cells` specification must declare:
 
-1. the perturbation, guide, guide-count, replicate, and optional condition/donor columns in `obs`;
-2. the control rule, including accepted labels and whether controls are shared or stratum-specific;
+1. the perturbation, guide, replicate, and optional condition/donor columns in `obs`, plus a real
+   guide-count column for pooled designs;
+2. the control rule, including accepted labels and the explicit logical fields used to match each
+   perturbation to a shared or stratum-specific control pool;
 3. the source signal (`X` or a named layer) and whether it contains raw counts or normalized values;
 4. minimum cells per perturbation-control stratum and minimum independent replicate units;
 5. the pseudobulk normalization and contrast method;
 6. the standardized-effect definition used as the primary signal;
-7. doublet, multi-guide, low-quality, and missing-metadata exclusion rules;
+7. pooled multi-guide exclusion or an explicit arrayed single-guide design, plus any fixed
+   guide-ID-to-target transformation required before leave-one-marker-out scoring;
 8. the public source, license, input checksum, and data classification.
 
 No field may be inferred silently when more than one plausible column or control label exists.

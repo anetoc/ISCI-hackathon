@@ -139,13 +139,22 @@ def _cell_preflight_spec(tmp_path, observations, *, include_donor=True, x=None):
         mapping["donor"] = "donor_id"
     preprocessing = CellPreprocessingSettings(
         source={"location": "X", "kind": "raw_counts"},
-        control={"column": "target", "labels": ("NT",)},
+        control={
+            "column": "target",
+            "labels": ("NT",),
+            "match_on": (
+                ("condition", "donor", "replicate")
+                if include_donor
+                else ("condition", "replicate")
+            ),
+        },
         normalization="log1p_cpm",
         contrast="pseudobulk_difference",
         standardization="gene_wise_zscore_within_condition",
         min_cells_per_stratum=10,
         min_replicates=2,
         multi_guide_policy="exclude",
+        perturbation_transform="identity",
     )
     return replace(
         spec,
@@ -184,6 +193,67 @@ def test_cell_preflight_finds_donor_resolved_effect_construction_coverage(tmp_pa
     assert result.donor_resolved_conditions_ready == 2
     assert result.n_controls == 20
     assert any(issue.code == "SIGNAL_VALUES_NOT_SCANNED" for issue in result.issues)
+
+
+def test_arrayed_cells_use_shared_condition_controls_without_guide_count(tmp_path):
+    rows = []
+    for replicate, perturbation in (
+        ("C0", "NT"),
+        ("C1", "NT"),
+        ("R0", "CTRL_A_1"),
+        ("R1", "CTRL_A_2"),
+        ("R2", "CTRL_B_1"),
+        ("R3", "CTRL_B_2"),
+    ):
+        for _ in range(10):
+            rows.append(
+                {
+                    "target": perturbation,
+                    "condition": "stim",
+                    "replicate_id": replicate,
+                }
+            )
+    observations = pd.DataFrame(rows)
+    counts = np.tile(np.array([[2, 1, 0]]), (len(observations), 1))
+    spec = _cell_preflight_spec(
+        tmp_path,
+        observations.assign(guide_id="unused", nperts=1),
+        include_donor=False,
+        x=counts,
+    )
+    spec = replace(
+        spec,
+        mapping={
+            "perturbation": "target",
+            "condition": "condition",
+            "replicate": "replicate_id",
+            "guide": "target",
+        },
+        preprocessing=replace(
+            spec.preprocessing,
+            control={"column": "target", "labels": ("NT",), "match_on": ("condition",)},
+            multi_guide_policy="not_applicable_arrayed",
+            perturbation_transform="strip_trailing_guide_number",
+        ),
+    )
+
+    preflight = preflight_anndata_cells(spec, repo_root=tmp_path)
+    built = build_anndata_effects(
+        spec,
+        repo_root=tmp_path,
+        output_dir=tmp_path / "arrayed-effects",
+        block_rows=8,
+    )
+
+    assert preflight.can_construct_effects
+    assert preflight.n_perturbations == 2
+    assert preflight.multi_guide_cells == 0
+    assert preflight.preprocessing["control_match_on"] == ["condition"]
+    assert built.completed
+    assert built.n_effect_rows == 4
+    generated = ad.read_h5ad(built.effects_path)
+    assert set(generated.obs["perturbation"]) == {"CTRL_A", "CTRL_B"}
+    assert set(generated.obs["guide"]) == {"CTRL_A_1", "CTRL_A_2", "CTRL_B_1", "CTRL_B_2"}
 
 
 def test_cell_preflight_is_diagnostic_without_donor_identity(tmp_path):
@@ -500,13 +570,18 @@ def test_cli_preflight_cells_writes_structured_metadata_report(tmp_path, capsys)
     }
     raw["preprocessing"] = {
         "source": {"location": "X", "kind": "raw_counts"},
-        "control": {"column": "target", "labels": ["NT"]},
+        "control": {
+            "column": "target",
+            "labels": ["NT"],
+            "match_on": ["condition", "donor", "replicate"],
+        },
         "normalization": "log1p_cpm",
         "contrast": "pseudobulk_difference",
         "standardization": "gene_wise_zscore_within_condition",
         "min_cells_per_stratum": 10,
         "min_replicates": 2,
         "multi_guide_policy": "exclude",
+        "perturbation_transform": "identity",
     }
     raw["analysis"]["axes_path"] = "axes.yaml"
     raw.pop("benchmark")

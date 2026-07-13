@@ -61,16 +61,27 @@ def _canonical_cells(adata: Any, spec: DatasetSpec) -> tuple[pd.DataFrame, pd.Se
     source_columns = list(dict.fromkeys([*spec.mapping.values(), control_column]))
     raw = adata.obs.loc[:, source_columns].copy()
     control = raw[control_column].astype(str).isin(spec.preprocessing.control["labels"])
-    cells = raw.loc[:, list(spec.mapping.values())].rename(
-        columns={source: logical for logical, source in spec.mapping.items()}
+    cells = pd.DataFrame(
+        {logical: raw[source] for logical, source in spec.mapping.items()},
+        index=raw.index,
     )
+    if spec.preprocessing.perturbation_transform == "strip_trailing_guide_number":
+        # Keep raw guide IDs while exposing the true target gene to downstream LOO logic.
+        cells["perturbation"] = cells["perturbation"].astype("string").str.replace(
+            r"_\d+$", "", regex=True
+        )
     cells["_row_position"] = np.arange(len(cells))
     identity = ["perturbation", "replicate"]
     identity.extend(column for column in ("condition", "donor") if column in cells)
     metadata_valid = pd.Series(True, index=cells.index)
     for column in identity:
         metadata_valid &= cells[column].notna() & cells[column].astype(str).str.strip().ne("")
-    guide_count = pd.to_numeric(cells["guide_count"], errors="coerce")
+    if spec.preprocessing.multi_guide_policy == "not_applicable_arrayed":
+        # Arrayed wells carry one declared guide by design; controls carry none.
+        guide_count = pd.Series(1, index=cells.index, dtype=float)
+        guide_count.loc[control] = 0
+    else:
+        guide_count = pd.to_numeric(cells["guide_count"], errors="coerce")
     guide_present = cells["guide"].notna() & cells["guide"].astype(str).str.strip().ne("")
     valid_control = control & guide_count.isin([0, 1])
     valid_effect = ~control & guide_present & guide_count.eq(1)
@@ -84,6 +95,7 @@ def _eligible_groups(
     *,
     min_cells: int,
     min_replicates: int,
+    control_match_on: tuple[str, ...],
 ) -> tuple[pd.DataFrame, list[str]]:
     background = [column for column in ("condition", "donor", "replicate") if column in cells]
     effect_keys = [*background, "perturbation", "guide"]
@@ -94,14 +106,19 @@ def _eligible_groups(
         .rename("n_cells")
         .reset_index()
     )
-    control_counts = (
-        cells.loc[control]
-        .groupby(background, observed=True, dropna=False)
-        .size()
-        .rename("n_control")
-        .reset_index()
-    )
-    groups = effect_counts.merge(control_counts, on=background, how="left")
+    groups = effect_counts
+    if control_match_on:
+        control_counts = (
+            cells.loc[control]
+            .groupby(list(control_match_on), observed=True, dropna=False)
+            .size()
+            .rename("n_control")
+            .reset_index()
+        )
+        groups = groups.merge(control_counts, on=list(control_match_on), how="left")
+    else:
+        # An explicit empty match list means one global control pool.
+        groups["n_control"] = int(control.sum())
     groups["n_control"] = groups["n_control"].fillna(0)
     groups = groups[(groups["n_cells"] >= min_cells) & (groups["n_control"] >= min_cells)]
     condition_keys = ["perturbation"] + (["condition"] if "condition" in groups else [])
@@ -241,6 +258,7 @@ def build_anndata_effects(
             control,
             min_cells=spec.preprocessing.min_cells_per_stratum,
             min_replicates=spec.preprocessing.min_replicates,
+            control_match_on=tuple(spec.preprocessing.control["match_on"]),
         )
         matrix = (
             adata.X
@@ -249,7 +267,15 @@ def build_anndata_effects(
         )
         control_cells = cells.loc[control]
         control_profiles: dict[tuple[Any, ...], np.ndarray] = {}
-        for key, frame in control_cells.groupby(background, observed=True, sort=True, dropna=False):
+        control_match_on = tuple(spec.preprocessing.control["match_on"])
+        control_groups = (
+            control_cells.groupby(
+                list(control_match_on), observed=True, sort=True, dropna=False
+            )
+            if control_match_on
+            else [((), control_cells)]
+        )
+        for key, frame in control_groups:
             normalized_key = key if isinstance(key, tuple) else (key,)
             control_profiles[normalized_key] = _profile(
                 matrix,
@@ -268,7 +294,7 @@ def build_anndata_effects(
             if normalized_key not in eligible_keys:
                 continue
             metadata = dict(zip(effect_keys, normalized_key, strict=True))
-            background_key = tuple(metadata[column] for column in background)
+            background_key = tuple(metadata[column] for column in control_match_on)
             target_profile = _profile(
                 matrix,
                 frame["_row_position"].to_numpy(dtype=int),

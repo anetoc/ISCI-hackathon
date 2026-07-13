@@ -117,6 +117,7 @@ def _coverage(
     *,
     min_cells: int,
     min_replicates: int,
+    control_match_on: tuple[str, ...],
 ) -> tuple[int, int, int, int]:
     background = [column for column in ("condition", "donor", "replicate") if column in cells]
     effect_keys = [*background, "perturbation", "guide"]
@@ -126,15 +127,20 @@ def _coverage(
         .size()
         .rename("n_effect")
     )
-    control_counts = (
-        cells.loc[control_mask]
-        .groupby(background, observed=True, dropna=False)
-        .size()
-        .rename("n_control")
-    )
-    groups = effect_counts.reset_index().merge(
-        control_counts.reset_index(), on=background, how="left"
-    )
+    groups = effect_counts.reset_index()
+    if control_match_on:
+        control_counts = (
+            cells.loc[control_mask]
+            .groupby(list(control_match_on), observed=True, dropna=False)
+            .size()
+            .rename("n_control")
+        )
+        groups = groups.merge(
+            control_counts.reset_index(), on=list(control_match_on), how="left"
+        )
+    else:
+        # An explicit empty match list means one global control pool.
+        groups["n_control"] = int(control_mask.sum())
     groups["n_control"] = groups["n_control"].fillna(0)
     eligible = groups[(groups["n_effect"] >= min_cells) & (groups["n_control"] >= min_cells)].copy()
     condition_keys = ["perturbation"]
@@ -217,12 +223,16 @@ def preflight_anndata_cells(
                     "MISSING_OBS_COLUMNS", "mapping", f"missing {len(missing)} declared obs columns"
                 )
             )
-        collisions = sorted(
-            source
-            for source in spec.mapping.values()
-            if list(spec.mapping.values()).count(source) > 1
-        )
-        if collisions:
+        source_to_fields: dict[str, set[str]] = {}
+        for logical, source_name in spec.mapping.items():
+            source_to_fields.setdefault(source_name, set()).add(logical)
+        arrayed = spec.preprocessing.multi_guide_policy == "not_applicable_arrayed"
+        invalid_collisions = [
+            fields
+            for fields in source_to_fields.values()
+            if len(fields) > 1 and not (arrayed and fields == {"perturbation", "guide"})
+        ]
+        if invalid_collisions:
             issues.append(
                 _error(
                     "MAPPING_COLLISION",
@@ -238,15 +248,28 @@ def preflight_anndata_cells(
         raw = adata.obs.loc[:, source_columns].copy()
         control_values = raw[control_column].astype(str)
         declared_control = control_values.isin(spec.preprocessing.control["labels"])
-        cells = raw.loc[:, list(spec.mapping.values())].rename(
-            columns={source_name: logical for logical, source_name in spec.mapping.items()}
+        cells = pd.DataFrame(
+            {
+                logical: raw[source_name]
+                for logical, source_name in spec.mapping.items()
+            },
+            index=raw.index,
         )
+        if spec.preprocessing.perturbation_transform == "strip_trailing_guide_number":
+            # Normalize guide-level IDs such as ZAP70_1 to their gene target before LOO scoring.
+            cells["perturbation"] = cells["perturbation"].astype("string").str.replace(
+                r"_\d+$", "", regex=True
+            )
         identity = ["perturbation", "replicate"]
         identity.extend(column for column in ("condition", "donor") if column in cells)
         metadata_valid = pd.Series(True, index=cells.index)
         for column in identity:
             metadata_valid &= cells[column].notna() & cells[column].astype(str).str.strip().ne("")
-        guide_count = pd.to_numeric(cells["guide_count"], errors="coerce")
+        if arrayed:
+            guide_count = pd.Series(1, index=cells.index, dtype=float)
+            guide_count.loc[declared_control] = 0
+        else:
+            guide_count = pd.to_numeric(cells["guide_count"], errors="coerce")
         guide_present = cells["guide"].notna() & cells["guide"].astype(str).str.strip().ne("")
         multi_guide = guide_count.notna() & guide_count.gt(1)
         valid_control = declared_control & guide_count.isin([0, 1])
@@ -280,6 +303,7 @@ def preflight_anndata_cells(
             control_mask,
             min_cells=spec.preprocessing.min_cells_per_stratum,
             min_replicates=spec.preprocessing.min_replicates,
+            control_match_on=tuple(spec.preprocessing.control["match_on"]),
         )
         issues.append(
             _warning(
@@ -337,6 +361,8 @@ def preflight_anndata_cells(
                 "min_cells_per_stratum": spec.preprocessing.min_cells_per_stratum,
                 "min_replicates": spec.preprocessing.min_replicates,
                 "multi_guide_policy": spec.preprocessing.multi_guide_policy,
+                "control_match_on": list(spec.preprocessing.control["match_on"]),
+                "perturbation_transform": spec.preprocessing.perturbation_transform,
             },
         )
     finally:
