@@ -359,7 +359,7 @@ def _minimum_unique_per_positive(
 ) -> int | None:
     if positive_mask is None or field not in table or not positive_mask.any():
         return None
-    counts = table.loc[positive_mask].groupby("perturbation")[field].nunique()
+    counts = table.loc[positive_mask].groupby("perturbation", observed=True)[field].nunique()
     return int(counts.min()) if not counts.empty else None
 
 

@@ -53,12 +53,12 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "901c03994939220cc1f9bbd3ea14d9b394ffff40",
+  "git_sha": "3f7de76828cdce6b68dff00a0aaf3de21367de08",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
-  "source_paths_dirty": false,
+  "source_paths_dirty": true,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "f9d596f40aebb3a013321312c97d3d011789e45356669a923be9833116849fdd",
+    "sha256": "5aafc638440b8c0d51680d91f34ce9be3080ef535e89a96327bd4d5cc8e700ef",
     "files_sha256": {
       "DELIVERABLE.md": "dfb96cce135e4e2af39fbfc11ff62545637c800e382dbc97ebde7ad1453149fe",
       "DEMO_SCRIPT.md": "7277e162c5e9a88b0fa5b7a990ae9afb51fe607d1d0b3bbf97f533a6c7ee4f70",
@@ -81,7 +81,7 @@
       "isci/adapters/__init__.py": "4a69c60f2feebdf404fa852c6cf943305423fcb401c1f67cf4af6bb7e946d635",
       "isci/adapters/anndata_cells.py": "20d1c38805c0d9939fc7e0bde24b1b6cba274743f775c454259730458379f0e1",
       "isci/adapters/anndata_effects.py": "dd582742df0452a2ed6b34b9182b567be0830786368e8c4faaca029d884c7e3a",
-      "isci/adapters/tabular.py": "c365b7cc14d55bf40f2f8fb51ad5355d3687445ccdaf3e6ccc838edf73ebd317",
+      "isci/adapters/tabular.py": "4269ea89064d126df024941db3e7cd8a1dc024fc4b21670800a0633f2f1ad99e",
       "isci/analysis_runner.py": "10daa51284d9f34969ac97e9e62e58fe276ae7b5454b4b4a6a838c124a0ef569",
       "isci/cli.py": "e6c90772cc8df14cdcc20ae4c87dd13962534c47dde8f2dc2d9f6cfbee91590c",
       "isci/dataset_spec.py": "43d39911bc46d9f2741808b82a70e7e4d16ff74e4684d421038389cd166ade81",
@@ -106,9 +106,9 @@
       "skills/isci-controllership/kernel.py": "75ec60abc153ec06d0c4165aecf05a951000fe05cbd160eaf8f00bb1f23afd6d"
     }
   },
-  "branch": "codex/public-onboarding-capsule",
+  "branch": "main",
   "data_sha256": "df8ba47b1c2a8c9aad0be85896664112f5804f9f5b053ce780149dad0d56fa15",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-13T14:56:47.534741+00:00",
+  "timestamp": "2026-07-13T15:56:41.311006+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }
