@@ -40,4 +40,3 @@ shasum -a 256 data/GWCD4i.pseudobulk_merged.h5ad
 Committed result manifests carry data and axis hashes, but they are not a license grant for the
 underlying source data. See [`docs/dataset_spec.md`](../docs/dataset_spec.md) and
 [`THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md).
-

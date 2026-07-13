@@ -68,4 +68,3 @@ make hackathon-package
 
 Heavy source datasets are public but intentionally not versioned. Dataset source, accession,
 license and checksum requirements are documented in `data/README.md` and `docs/dataset_spec.md`.
-

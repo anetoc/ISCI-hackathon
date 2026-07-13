@@ -17,4 +17,3 @@ Archived files:
 - `d0_benchmark.json` — comparison against magnitude.
 - `isci_d0_ranked.csv` — historical ranking, not a final deliverable.
 - `index.py` and `baselines.py` — original aggregation/baseline helpers removed from the wheel.
-

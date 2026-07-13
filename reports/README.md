@@ -29,4 +29,3 @@ claim.
 Machine-specific execution briefs, Portuguese planning notes and duplicated manuscript variants
 were removed from the public release. The failed D0 method is preserved separately in
 [`archive/d0/`](../archive/d0/README.md).
-

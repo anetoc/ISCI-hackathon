@@ -83,4 +83,3 @@ cross the train/test boundary. Permutations respect those same blocks.
 - validated CAR-T response biomarker;
 - independent replication when conditions share the same experiment;
 - biological failure when required inputs were missing.
-

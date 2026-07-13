@@ -135,4 +135,3 @@ The initial D0/D1 design attempted `R·S·geomean(M,D,A)` and an earlier rank pr
 magnitude baseline under native matched negatives and was rejected. Its minimal evidence is kept in
 [`archive/d0/`](../archive/d0/) so the correction remains auditable without shipping deprecated
 modules in the Python wheel.
-

@@ -21,4 +21,3 @@ limiting. `druggability_tier` is therefore ChEMBL/HPA-derived.
 small-molecule ligandability and a reverser prior, then subtracted predeclared signaling,
 essentiality and oncogenic-risk penalties. Higher values indicate experimental follow-up priority,
 not a stronger drug target.
-

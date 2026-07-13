@@ -62,4 +62,3 @@ jobs:
 
       - name: Verify frozen offline package
         run: make hackathon-check PY='uv run python'
-

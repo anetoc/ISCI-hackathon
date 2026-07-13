@@ -19,4 +19,3 @@ abstract: >-
   T-CTRL is a judge-facing, auditable workflow powered by the ISCI method. It tests whether
   state-specific and reproducible perturbation effects add regulator-recovery signal beyond raw
   effect magnitude, with leakage controls and explicit PASS, FAIL, NULL and NOT-EVALUABLE verdicts.
-
