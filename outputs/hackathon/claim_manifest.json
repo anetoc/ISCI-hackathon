@@ -1,27 +1,27 @@
 {
   "schema_version": "hackathon_claim_manifest_v1",
-  "title": "ISCI — Claude as an Auditable Scientific Judge",
+  "title": "T-CTRL, powered by ISCI — Claude as an Auditable Scientific Judge",
   "thesis": "Magnitude says how far a cell moved; controllability asks where it moved, whether it repeated, and whether the evidence deserves a PASS.",
-  "generated_at": "2026-07-12T20:52:32.033299+00:00",
-  "git_sha": "6cab8efafab2f9b1d54f34c55d90967fb47ce78b",
+  "generated_at": "2026-07-13T01:37:59.456850+00:00",
+  "git_sha": "02d0bac36f98367319588e432d0a6dabcf091e77",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": false,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "687fd93d60901ca44f19f9c3c4a783b6bb6c68cc2c8623fca98c80c5a439b994",
+    "sha256": "c3a261383a3d57e552373213bff9be0d19a5148d836e6b76c07806cd107d3efd",
     "files_sha256": {
       "config/axes.yaml": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-      "config/hackathon_claims.yaml": "95b601d803a7a742516870b953dfe91b5e8f7a93fd90c14ba38499d71d5950b8",
+      "config/hackathon_claims.yaml": "48daf88b0e5d451fc42d25cf7871054e5c7392fdb399cd9476f7be24aa1552ff",
       "outputs/iec_clinical/verdict.json": "c77fedee72e40e25498dcdc66126feb911d1ba85525c40cc9401cb702748a548",
       "outputs/isci_oof_incremental.json": "8343980f5c96d07b33880385f2b0e36b457d356de4629f1d90b301d6f8af3266",
       "outputs/layers/scgpt_zeroshot/scgpt_separation_result.json": "1fc958c50128468afe0272c37edc79ca084c05cedef90bc37b2f6fe5c7f0fb5e",
       "outputs/positive_set_stress_test.json": "733d97ab2526e7c6188c2de4a6739bd3491aa98afd22ae12ae1504b102315fd6",
-      "scripts/build_hackathon_claim_manifest.py": "e9f09f6d122b2dff8fd62f84aaff88654e1d0701d194d7f91f21c8fc29fc43d6",
+      "scripts/build_hackathon_claim_manifest.py": "8ab14abd2c90d55ba34ee826ad125796c69849bcaca21978dfdfdc8967ebc931",
       "scripts/release_provenance.py": "6bb306ad56967cdbb0357f70cca81a2bf5355c0e0ce315154b89d3dbf392b19f"
     }
   },
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "config_sha256": "95b601d803a7a742516870b953dfe91b5e8f7a93fd90c14ba38499d71d5950b8",
+  "config_sha256": "48daf88b0e5d451fc42d25cf7871054e5c7392fdb399cd9476f7be24aa1552ff",
   "command": "python scripts/build_hackathon_claim_manifest.py",
   "verdict_contract": {
     "PASS": "Prespecified direction and required gates are met.",
