@@ -43,7 +43,6 @@ isProject: false
 
 - [docs/related_work.md](docs/related_work.md) — revisão expandida (§3f vizinhos semânticos, §6b matriz de mecanismos, §7b rede de ajuda, §9–11 features Claude + MCP + repos)
 - [docs/method.md](docs/method.md) — especificação matemática ISCI (M, R, D, A, S)
-- Plano anterior: [immune-state_controllability_ce195daa.plan.md](/Users/abelcosta/.cursor/plans/immune-state_controllability_ce195daa.plan.md)
 
 ---
 
@@ -494,6 +493,5 @@ flowchart TD
   build --> skill["Empacotar como skill reutilizavel"]
   skill --> demo["Demo 3 min + repo MIT + submissao"]
 ```
-
 
 
