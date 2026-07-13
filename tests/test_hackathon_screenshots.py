@@ -2,6 +2,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from scripts.capture_hackathon_screenshots import expected_screenshots, validate_screenshots
+
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "outputs" / "hackathon" / "screenshot_manifest.json"
@@ -19,3 +21,11 @@ def test_screenshots_match_the_current_offline_demo():
         path = ROOT / relative_path
         assert hashlib.sha256(path.read_bytes()).hexdigest() == expected_sha
 
+
+def test_persistent_browser_capture_can_be_validated_without_recapturing():
+    """The low-memory path must enforce the same six-scene Full-HD contract."""
+
+    timing = json.loads((ROOT / "config" / "hackathon_timing.json").read_text())
+    screenshots = expected_screenshots(timing)
+    validate_screenshots(screenshots)
+    assert len(screenshots) == 6

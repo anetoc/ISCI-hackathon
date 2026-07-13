@@ -10,5 +10,17 @@
   "lr_p": 0.0128,
   "spearman_mag": 0.052,
   "verdict": "FAIL",
-  "report": "outputs/generalization/third_system_cci_summary.csv"
+  "report": "outputs/generalization/third_system_cci_summary.csv",
+  "provenance_schema": "isci_result_provenance_v1",
+  "git_sha": "75f2a18aeda12d2101a33320e31a3a80985fb139",
+  "git_sha_semantics": "Base revision at generation time; data_files_sha256 binds the exact committed inputs consumed by this driver.",
+  "data_sha256": "511681c2988adcd8c1b3e9539de0b8cf13a8db2dbde985b335c8a95367a2c814",
+  "data_sha256_semantics": "Content-addressed snapshot of committed inputs consumed by run_cci.py; upstream raw-data lineage remains in the linked report.",
+  "data_files_sha256": {
+    "outputs/generalization/third_system_cci_summary.csv": "c762d5b6a8449f0cf76f09d4af801efcce58690972ed001dfbbc7b18e827a1cb"
+  },
+  "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+  "config_sha256": "9466e726e19f86daea4be9aeba92679d5c546c857bcd6c78df584579d44761a6",
+  "timestamp": "2026-07-13T13:21:55.833769+00:00",
+  "command": "python isci/run_cci.py"
 }

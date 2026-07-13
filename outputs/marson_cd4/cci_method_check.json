@@ -7,9 +7,22 @@
   "delta_auprc": 0.248,
   "ci_lo": -0.043,
   "ci_hi": 0.467,
-  "lr_p": 5.16711973674573e-05,
+  "lr_p": 5.167119736745728e-05,
   "spearman_mag": 0.086,
   "verdict": "DIAGNOSTIC (verdict fixed in result_lock.md)",
   "report": "results/final/isci_final_ranking.csv (recomputed)",
-  "note": "method smoke-test with EXPRESSION-MATCHED negatives \u2014 point estimate reproduces locked \u0394AUPRC ~+0.23 + LR significant; CI n-limited (single-file). Canonical PASS +0.229 [0.072,0.405] in result_lock.md (3-condition aggregation)."
+  "provenance_schema": "isci_result_provenance_v1",
+  "git_sha": "75f2a18aeda12d2101a33320e31a3a80985fb139",
+  "git_sha_semantics": "Base revision at generation time; data_files_sha256 binds the exact committed inputs consumed by this driver.",
+  "data_sha256": "4d04c22127e694aff529386d466e01d25acf8c393460b8c72ff8f93ffab5a26d",
+  "data_sha256_semantics": "Content-addressed snapshot of committed inputs consumed by run_cci.py; upstream raw-data lineage remains in the linked report.",
+  "data_files_sha256": {
+    "outputs/marson_obs_matching.parquet": "1d49edaaceb449c7454192849a10bfac94e2200f7512b8e21087bbb31cc2e0a2",
+    "results/final/isci_final_ranking.csv": "6f9fe281757d9cd7ab3ed33811b680e1f2b59b6a2f490967362e253350115d72"
+  },
+  "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
+  "config_sha256": "9466e726e19f86daea4be9aeba92679d5c546c857bcd6c78df584579d44761a6",
+  "timestamp": "2026-07-13T13:21:55.819841+00:00",
+  "command": "python isci/run_cci.py",
+  "note": "method smoke-test with EXPRESSION-MATCHED negatives — point estimate reproduces locked ΔAUPRC ~+0.23 + LR significant; CI n-limited (single-file). Matched comparator +0.229 [0.072,0.405] in result_lock.md; authoritative M→M+C gain is +0.357 [0.117,0.538]."
 }

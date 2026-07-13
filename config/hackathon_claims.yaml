@@ -37,7 +37,7 @@ claims:
 
   - claim_id: C3-CART-CLINICAL
     short_label: CAR-T clinical response
-    claim: A perturbational IEC axis transports as a multi-study CAR-T response predictor.
+    claim: An ISCI-derived perturbational axis transports as a multi-study CAR-T response predictor.
     expected_verdict: "NULL"
     evidence_path: outputs/iec_clinical/verdict.json
     scope: Eighty-seven labeled patients across nine public studies.

@@ -248,40 +248,44 @@ negative or non-evaluable results help define scope but do not enter the core ra
 
 ## 7b. Who to ask — help network (prioritized)
 
-### IDOR — imunologia / hemato (seu diferencial clínico)
-**Objetivo:** validar eixos, priorizar narrativa clínica, acesso a dados locais.
+### IDOR — immunology / hematology (clinical differentiator)
+**Objective:** validate the axes, prioritize the clinical narrative and identify governed access to
+local data.
 
-| Pergunta-chave | Por que importa |
+| Key question | Why it matters |
 |---|---|
-| Quais eixos de estado T são clinicamente acionáveis em **CD4+** no contexto hemato? | Evita overclaim de CD4-CTL |
-| Para **CAR-T** vs **biespecífico**, qual endpoint vocês confiam mais (CR durável, MRD, PFS)? | Define D4 |
-| Top 10 genes que vocês consideram "controladores reais" de exaustão/memória? | Ground-truth clínico além da literatura |
-| Existe coorte IDOR (mesmo bulk RNA) de pacientes CAR-T/biespecífico com desfecho? | Pode virar validação exclusiva pós-hackathon |
-| Dados de **spatial** em linfoma com infiltrado T? | Habilita camada de nicho |
+| Which T-cell-state axes are clinically actionable in **CD4+** hematologic settings? | Prevents overclaiming the CD4-CTL axis |
+| For **CAR-T** versus **bispecific therapy**, which endpoint is most credible (durable CR, MRD or PFS)? | Defines the later clinical bridge |
+| Which ten genes are considered genuine controllers of exhaustion or memory? | Adds clinical ground truth beyond literature labels |
+| Is there an IDOR CAR-T or bispecific cohort with outcomes, even if only bulk RNA is available? | Could support governed post-hackathon validation |
+| Are spatial lymphoma data with T-cell infiltration available? | Enables a future tissue-niche layer |
 
-**Como abordar:** enviar 1-pager com Fig. esquemática ISCI + tabela de eixos + top-20 genes preliminares; pedir 30 min de revisão assíncrona.
+**Suggested approach:** send a one-page brief with an ISCI schematic, the axis table and the
+preliminary top-20 genes; request a 30-minute asynchronous review.
 
-### Discord do hackathon (Anthropic / Cerebral Valley)
-- `#questions` — dúvidas de regras, datasets, submissão
-- `#office-hours` — 17–18h ET diário (ter–sex)
-- `#announcements` — lives e deadlines
-- Ping `@CV` em `#hackathon-access` se role não aparecer
+### Hackathon Discord (Anthropic / Cerebral Valley)
+- `#questions` — rules, datasets and submission questions
+- `#office-hours` — daily 5–6 p.m. ET (Tuesday–Friday)
+- `#announcements` — live sessions and deadlines
+- Ping `@CV` in `#hackathon-access` if the role is missing
 
-### Lives Anthropic (obrigatórias para Claude Use)
-| Data | Quem | O que extrair para o projeto |
+### Anthropic live sessions (required for the Claude-use criterion)
+| Date | Speaker | What to extract for the project |
 |---|---|---|
-| Ter 7/jul 12h ET | Kickoff | Regras, critérios de julgamento, datasets Gladstone |
-| Qua 8/jul 12h ET | Alexander Tarashansky | Features subutilizadas do Claude Science; skills/provenance |
-| Sex 10/jul 12h ET | Sukrit Silas (Gladstone) | Alinhar ISCI com screening in silico → **prêmio Gladstone** |
-| Qui 16/jul 12h ET | Final judging | Narrativa da demo |
+| Tue, Jul 7, noon ET | Kickoff | Rules, judging criteria and Gladstone datasets |
+| Wed, Jul 8, noon ET | Alexander Tarashansky | Underused Claude Science features, skills and provenance |
+| Fri, Jul 10, noon ET | Sukrit Silas (Gladstone) | Align ISCI with in-silico screening for the **Gladstone prize** |
+| Thu, Jul 16, noon ET | Final judging | Demo narrative |
 
-### Gladstone / datasets opcionais do evento (não são nosso foco primário, mas conectam)
-- **Marson Perturb-seq** — nosso dataset principal (já mapeado)
-- **ChromBPNet / Corces VEP** (`vep.corces.gladstone.org`) — variantes → cromatina por tipo celular; útil se quisermos camada regulatória genômica
-- **Zoonomia / HARs** (Pollard lab) — evolução regulatória; tangencial ao projeto T-cell, mas forte para prêmio Gladstone se conectarmos enhancers de genes controladores
+### Gladstone / optional event datasets (not the primary focus, but relevant)
+- **Marson Perturb-seq** — the primary dataset, already mapped
+- **ChromBPNet / Corces VEP** (`vep.corces.gladstone.org`) — variants to chromatin effects by cell
+  type; useful for a future regulatory-genomics layer
+- **Zoonomia / HARs** (Pollard lab) — regulatory evolution; tangential to the T-cell project but
+  relevant to the Gladstone prize if controller genes are linked to their enhancers
 
-### Parceiros técnicos (via connectors, não humanos)
-PubMed, Consensus, Open Targets, ClinicalTrials, bioRxiv, Wiley Scholar Gateway — ver §10.
+### Technical evidence services (connectors, not human collaborators)
+PubMed, Consensus, Open Targets, ClinicalTrials, bioRxiv and Wiley Scholar Gateway — see §10.
 
 ---
 

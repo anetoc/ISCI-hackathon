@@ -24,7 +24,9 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import subprocess
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
@@ -36,14 +38,81 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "skills" / "isci-controllership"))
 
+from scripts.release_provenance import file_sha256, source_snapshot  # noqa: E402
+
 CANON_KEYS = ["id", "label", "system", "perturbation", "n_pos",
               "delta_auprc", "ci_lo", "ci_hi", "lr_p", "spearman_mag", "verdict", "report"]
+PROVENANCE_SCHEMA = "isci_result_provenance_v1"
+PROVENANCE_KEYS = [
+    "provenance_schema",
+    "git_sha",
+    "data_sha256",
+    "axes_sha256",
+    "timestamp",
+    "command",
+]
+REGISTRY_PATH = REPO / "config" / "datasets.yaml"
+AXES_PATH = REPO / "config" / "axes.yaml"
+SUMMARY_PATH = REPO / "outputs" / "generalization" / "third_system_cci_summary.csv"
+MARSON_RANKING_PATH = REPO / "results" / "final" / "isci_final_ranking.csv"
+MARSON_MATCHING_PATH = REPO / "outputs" / "marson_obs_matching.parquet"
 
 
 def load_registry():
     import yaml
-    reg = yaml.safe_load(open(REPO / "config" / "datasets.yaml"))
+    reg = yaml.safe_load(REGISTRY_PATH.read_text())
     return {d["id"]: d for d in reg["datasets"]}
+
+
+def result_input_paths(dataset_id: str) -> list[Path]:
+    """Return the exact committed inputs consumed by this lightweight driver.
+
+    Heavy aggregate lanes are not recomputed from raw H5AD files here. Their result-level
+    provenance therefore binds the committed summary consumed by this command, while the linked
+    report retains the upstream raw-data lineage. The Marson method check binds both inputs it
+    actually reads.
+    """
+
+    if dataset_id == "marson_cd4":
+        return [MARSON_RANKING_PATH, MARSON_MATCHING_PATH]
+    return [SUMMARY_PATH]
+
+
+def result_provenance(dataset_id: str, command: str) -> dict[str, object]:
+    """Build the canonical, content-addressed provenance stamp for one result."""
+
+    inputs = result_input_paths(dataset_id)
+    missing = [path for path in inputs if not path.is_file()]
+    if missing:
+        names = ", ".join(str(path.relative_to(REPO)) for path in missing)
+        raise FileNotFoundError(f"Cannot stamp {dataset_id}; missing committed input(s): {names}")
+    snapshot = source_snapshot(inputs, REPO)
+    return {
+        "provenance_schema": PROVENANCE_SCHEMA,
+        "git_sha": subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=REPO, text=True
+        ).strip(),
+        "git_sha_semantics": (
+            "Base revision at generation time; data_files_sha256 binds the exact committed "
+            "inputs consumed by this driver."
+        ),
+        "data_sha256": snapshot["sha256"],
+        "data_sha256_semantics": (
+            "Content-addressed snapshot of committed inputs consumed by run_cci.py; upstream "
+            "raw-data lineage remains in the linked report."
+        ),
+        "data_files_sha256": snapshot["files_sha256"],
+        "axes_sha256": file_sha256(AXES_PATH),
+        "config_sha256": file_sha256(REGISTRY_PATH),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "command": command,
+    }
+
+
+def write_result(path: Path, payload: dict[str, object]) -> None:
+    """Write canonical JSON with UTF-8 text and a POSIX trailing newline."""
+
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
 
 
 def recompute_marson(meta):
@@ -58,12 +127,12 @@ def recompute_marson(meta):
     (which aggregates more matched negatives). The authoritative +0.357 M→M+C result and the
     comparator +0.229 remain distinct in result_lock.md."""
     import kernel as H  # skill helpers (skills/isci-controllership/kernel.py)
-    rank = pd.read_csv(REPO / "results" / "final" / "isci_final_ranking.csv")
+    rank = pd.read_csv(MARSON_RANKING_PATH)
     det = rank[rank["detectable_effect"].astype(bool)].copy()
     det["is_pos"] = det["known_regulator"].astype(bool)
     pos = det.loc[det["is_pos"], "gene"].tolist()
     # expression/power-matched negatives via the LOCKED helper (not all non-regulators)
-    obs_path = REPO / "outputs" / "marson_obs_matching.parquet"
+    obs_path = MARSON_MATCHING_PATH
     if obs_path.exists():
         obs = pd.read_parquet(obs_path)
         neg = H.expression_matched_negatives(
@@ -103,7 +172,7 @@ def recompute_marson(meta):
 
 def aggregate_from_summary(meta):
     """Parse a committed per-dataset summary row into the canonical schema."""
-    summ = REPO / "outputs" / "generalization" / "third_system_cci_summary.csv"
+    summ = SUMMARY_PATH
     if not summ.exists():
         return None
     df = pd.read_csv(summ)
@@ -135,6 +204,7 @@ def main():
     args = ap.parse_args()
     reg = load_registry()
     ids = [args.id] if args.id else list(reg.keys())
+    command = "python isci/run_cci.py" + (f" --id {args.id}" if args.id else "")
     for did in ids:
         meta = reg.get(did)
         if meta is None:
@@ -151,6 +221,7 @@ def main():
         outdir = REPO / "outputs" / did
         outdir.mkdir(parents=True, exist_ok=True)
         payload = {k: res.get(k) for k in CANON_KEYS}
+        payload.update(result_provenance(did, command))
         if did == "marson_cd4":
             # Marson is the locked anchor. The +0.229 expression-matched, three-condition value is
             # a cross-system comparator in result_lock.md and the dashboard seed. This
@@ -163,14 +234,12 @@ def main():
                                "n-limited (single-file). Matched comparator +0.229 "
                                "[0.072,0.405] in result_lock.md; authoritative M→M+C gain is "
                                "+0.357 [0.117,0.538].")
-            with (outdir / "cci_method_check.json").open("w") as handle:
-                json.dump(payload, handle, indent=2)
+            write_result(outdir / "cci_method_check.json", payload)
             print(f"[ok] {did}: METHOD CHECK ΔAUPRC {res['delta_auprc']:+.3f} "
                   f"[{res['ci_lo']:+.3f},{res['ci_hi']:+.3f}] LR_p={res['lr_p']:.2e} -> {res['verdict']} "
                   f"(expr-matched negatives; matched comparator in result_lock)")
         else:
-            with (outdir / "cci_result.json").open("w") as handle:
-                json.dump(payload, handle, indent=2)
+            write_result(outdir / "cci_result.json", payload)
             print(f"[ok] {did}: ΔAUPRC {res['delta_auprc']:+.3f} [{res['ci_lo']:+.3f},{res['ci_hi']:+.3f}] "
                   f"LR_p={res['lr_p']:.2e} -> {res['verdict']}  (wrote outputs/{did}/cci_result.json)")
 

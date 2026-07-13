@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import os
@@ -58,32 +59,69 @@ def png_size(path: Path) -> tuple[int, int]:
     return struct.unpack(">II", header[16:24])
 
 
+def expected_screenshots(timing: dict[str, object]) -> list[Path]:
+    """Map the frozen timing plan to its six deterministic screenshot paths."""
+
+    return [
+        ASSETS / f"{scene['scene']:02d}_{scene['id']}.png"
+        for scene in timing["scenes"]
+    ]
+
+
+def validate_screenshots(screenshots: list[Path]) -> None:
+    """Reject partial or incorrectly sized captures before provenance is written."""
+
+    if len(screenshots) != 6:
+        raise ValueError(f"Expected six screenshots, found {len(screenshots)}")
+    for output in screenshots:
+        if not output.is_file():
+            raise FileNotFoundError(f"Missing screenshot: {output}")
+        if png_size(output) != (1920, 1080):
+            raise ValueError(f"Unexpected screenshot size: {output} {png_size(output)}")
+
+
 def main() -> None:
     """Capture each static scene and write provenance only after all six validate."""
 
-    chrome = find_chrome()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--reuse-existing",
+        action="store_true",
+        help=(
+            "Validate six externally captured Full-HD scenes and rebuild only the manifest. "
+            "Use this after a persistent browser capture on memory-constrained machines."
+        ),
+    )
+    args = parser.parse_args()
     timing = json.loads(TIMING.read_text())
     ASSETS.mkdir(parents=True, exist_ok=True)
-    screenshots = []
-    for scene in timing["scenes"]:
-        output = ASSETS / f"{scene['scene']:02d}_{scene['id']}.png"
-        url = f"{DEMO.as_uri()}?static=1&scene={scene['scene']}"
-        command = [
-            chrome,
-            "--headless=new",
-            "--disable-gpu",
-            "--hide-scrollbars",
-            "--allow-file-access-from-files",
-            "--force-device-scale-factor=1",
-            "--window-size=1920,1080",
-            "--virtual-time-budget=1000",
-            f"--screenshot={output}",
-            url,
-        ]
-        subprocess.run(command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        if png_size(output) != (1920, 1080):
-            raise ValueError(f"Unexpected screenshot size: {output} {png_size(output)}")
-        screenshots.append(output)
+    screenshots = expected_screenshots(timing)
+    if args.reuse_existing:
+        browser = "persistent Chrome session"
+        manifest_command = "python scripts/capture_hackathon_screenshots.py --reuse-existing"
+    else:
+        chrome = find_chrome()
+        browser = Path(chrome).name
+        manifest_command = "python scripts/capture_hackathon_screenshots.py"
+        for scene, output in zip(timing["scenes"], screenshots, strict=True):
+            url = f"{DEMO.as_uri()}?static=1&scene={scene['scene']}"
+            command = [
+                chrome,
+                "--headless=new",
+                "--disable-gpu",
+                "--hide-scrollbars",
+                "--allow-file-access-from-files",
+                "--force-device-scale-factor=1",
+                "--window-size=1920,1080",
+                "--virtual-time-budget=1000",
+                f"--screenshot={output}",
+                url,
+            ]
+            subprocess.run(
+                command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
+
+    validate_screenshots(screenshots)
 
     source_paths = [Path(__file__), PROVENANCE_HELPER, DEMO, TIMING, AXES]
     manifest = {
@@ -93,8 +131,8 @@ def main() -> None:
         "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
         "source_paths_dirty": source_paths_dirty(source_paths, ROOT),
         "source_snapshot": source_snapshot(source_paths, ROOT),
-        "command": "python scripts/capture_hackathon_screenshots.py",
-        "browser": Path(chrome).name,
+        "command": manifest_command,
+        "browser": browser,
         "demo_path": str(DEMO.relative_to(ROOT)),
         "demo_sha256": sha256(DEMO),
         "data_sha256": sha256(ROOT / "outputs" / "hackathon" / "claim_manifest.json"),

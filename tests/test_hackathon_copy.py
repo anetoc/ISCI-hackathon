@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+from zipfile import ZipFile
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,3 +37,53 @@ def test_submission_summary_stays_within_form_limit():
     summary = text.split("## 150-word summary", 1)[1].split("---", 1)[0]
     words = re.findall(r"\b[\w+→-]+\b", summary)
     assert 140 <= len(words) <= 150
+
+
+def test_public_related_work_is_not_mixed_with_portuguese_planning_copy():
+    """Keep the public English document separate from any future pt-BR translation."""
+
+    text = (ROOT / "docs" / "related_work.md").read_text()
+    portuguese_markers = [
+        "Objetivo:",
+        "Pergunta-chave",
+        "Por que importa",
+        "Como abordar",
+        "dúvidas de regras",
+        "obrigatórias para",
+        "prêmio Gladstone",
+        "não são nosso foco",
+        "Parceiros técnicos",
+    ]
+    assert not [marker for marker in portuguese_markers if marker in text]
+
+
+def test_judge_surfaces_use_one_product_name_and_one_method_name():
+    """Historical research labels belong in the evidence archive, not the stage vocabulary."""
+
+    surfaces = [
+        ROOT / "README.md",
+        ROOT / "DELIVERABLE.md",
+        ROOT / "SUBMISSION.md",
+        ROOT / "DEMO_SCRIPT.md",
+        ROOT / "JUDGE_QA.md",
+        ROOT / "HACKATHON_RUNBOOK.md",
+        ROOT / "SUMMARY.md",
+        ROOT / "config" / "hackathon_claims.yaml",
+        ROOT / "outputs" / "hackathon" / "claim_manifest.json",
+        ROOT / "docs" / "hackathon_judge_demo.template.html",
+        ROOT / "docs" / "hackathon_judge_demo.html",
+        ROOT / "docs" / "tctrl_live_demo.html",
+    ]
+    secondary_brand = re.compile(r"\b(?:CCI|IEC|TSC)\b|T-REMAP")
+    for surface in surfaces:
+        match = secondary_brand.search(surface.read_text())
+        assert match is None, f"{surface} exposes secondary stage brand {match.group(0)}"
+
+    with ZipFile(ROOT / "outputs" / "tctrl_hackathon_deck.pptx") as deck:
+        slide_xml = " ".join(
+            deck.read(name).decode("utf-8")
+            for name in deck.namelist()
+            if re.fullmatch(r"ppt/slides/slide\d+\.xml", name)
+        )
+    match = secondary_brand.search(slide_xml)
+    assert match is None, f"judge deck exposes secondary stage brand {match.group(0)}"
