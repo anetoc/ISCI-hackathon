@@ -1,4 +1,4 @@
-# CCI / IEC — reproducible entry points
+# T-CTRL / ISCI — reproducible entry points
 # The validated method runs from one command. Heavy raw data stays outside Git;
 # the locked result is reproduced from committed rankings + the isci-controllership skill.
 
@@ -16,7 +16,8 @@ help:
 # One command: run the validated CCI method across all registered datasets, then visualize.
 reproduce-core: cci dashboard
 	@echo ""
-	@echo "Core reproduced. Locked anchor: Marson CD4+ PASS (canonical dAUPRC +0.229, result_lock.md)."
+	@echo "Core reproduced. Locked anchor: Marson CD4+ PASS (authoritative M->M+C gain +0.357, result_lock.md)."
+	@echo "Cross-system matched comparator: dAUPRC +0.229 [0.072,0.405]."
 	@echo "Method smoke-test: outputs/marson_cd4/cci_method_check.json ; dashboard: outputs/dashboard/"
 
 tensor:

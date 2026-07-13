@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the self-contained, deterministic hackathon stage demo."""
+"""Build the self-contained, deterministic T-CTRL hackathon stage demo."""
 
 from __future__ import annotations
 
