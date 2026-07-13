@@ -129,7 +129,12 @@ aws s3 cp --no-sign-request \
 ## Setup
 
 ```bash
-uv sync   # Python 3.11+, or: pip install -e .
+uv sync --locked                # Python 3.11–3.13; minimal BYOD runtime
+uv run isci --help
+
+# Contributors and optional heavy research environment:
+uv sync --locked --extra dev
+uv sync --locked --extra research --extra visualization
 ```
 
 ## Reproduce
