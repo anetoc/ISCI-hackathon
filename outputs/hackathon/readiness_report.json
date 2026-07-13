@@ -53,7 +53,7 @@
     "public repository and uploaded video URLs are opened in a logged-out browser",
     "submission form is previewed before final irreversible submit"
   ],
-  "git_sha": "ff340f124a4c0043e42edbeb5b24ae10eaa68feb",
+  "git_sha": "17d1d2b99a2e67e9a3a35dde79ae4cc671b2c176",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": false,
   "source_snapshot": {
@@ -109,6 +109,6 @@
   "branch": "codex/provenance-public-taxonomy",
   "data_sha256": "df8ba47b1c2a8c9aad0be85896664112f5804f9f5b053ce780149dad0d56fa15",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-13T13:33:50.983954+00:00",
+  "timestamp": "2026-07-13T13:34:20.142218+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }
