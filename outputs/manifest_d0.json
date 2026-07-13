@@ -25,7 +25,7 @@
   },
   "inputs": {
     "DE_stats": {
-      "path": "/Users/abelcosta/projetos/claude-life-science-hackatton/data/GWCD4i.DE_stats.h5ad",
+      "path": "data/GWCD4i.DE_stats.h5ad",
       "sha256": "c355f535ff32cf7ba1edc49cf9c6039fe84f2c9ebe4d005515cba75790cfbb62",
       "size_bytes": 16786240107
     }
