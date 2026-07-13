@@ -47,3 +47,12 @@ __pycache__/
 outputs/iec_clinical/cell_axis_scores.parquet
 outputs/iec_latent/iec_axis_scores_celllevel.csv
 outputs/layers/frangieh_protein/totalvi_model/
+.gstack/
+
+# Local review and inter-tool handoff artifacts (never publish)
+handoff/
+_view_*.png
+
+# Hackathon administration material is not part of the scientific deliverable
+Application.docx
+Event Details.docx
