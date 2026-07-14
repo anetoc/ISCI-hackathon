@@ -1,5 +1,7 @@
 # T-CTRL — Which genes actually steer T-cell state?
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21348207.svg)](https://doi.org/10.5281/zenodo.21348207)
+
 **T-CTRL** is the judge-facing experience. **ISCI (Immune-State Controllability Index)** is the
 open-source, auditable method behind it.
 
@@ -236,6 +238,17 @@ aws s3 cp --no-sign-request \
 ## Author
 
 Abel Costa — hematologist / onco-hematologist, IDOR (São Paulo, Brazil)
+
+## Citation
+
+The immutable `v0.1.0` research snapshot is archived on Zenodo:
+
+> Costa, Abel (2026). *T-CTRL: auditable T-cell state controllability analysis (ISCI method)*
+> (v0.1.0). Zenodo. <https://doi.org/10.5281/zenodo.21348207>
+
+Use the version DOI `10.5281/zenodo.21348207` when referring to the submitted result. The concept
+DOI `10.5281/zenodo.21348206` represents the project across future archived versions. Citation
+metadata is also available in [CITATION.cff](CITATION.cff).
 
 ## License
 

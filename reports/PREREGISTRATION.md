@@ -8,11 +8,10 @@
 > is touched. We do **not** relabel completed work as "pre-registered" — the distinction is the
 > whole point.
 >
-> **Timestamp.** The authoritative timestamp is this file's **git commit SHA** (immutable once
-> pushed to GitHub). To additionally mint a citable DOI, cut a GitHub Release and enable the
-> Zenodo–GitHub integration (this archives the tagged commit and issues a DOI). That step needs the
-> repository owner's GitHub/Zenodo authorization and is therefore left to the maintainer; see
-> "How to mint the DOI" at the end.
+> **Timestamp.** The authoritative primary timestamp is this file's **git commit SHA**. The
+> submitted `v0.1.0` snapshot is additionally archived by Zenodo at
+> <https://doi.org/10.5281/zenodo.21348207>; the concept DOI for future versions is
+> <https://doi.org/10.5281/zenodo.21348206>.
 
 ---
 
@@ -125,10 +124,8 @@ Results do not exist at this commit. Criteria and directional predictions are lo
 
 ---
 
-## How to mint the DOI (maintainer action)
-1. Push this file; the commit SHA is the primary timestamp.
-2. On GitHub: **Releases → Draft a new release**, tag e.g. `prereg-v1`.
-3. Enable **Zenodo ↔ GitHub** for the repo (zenodo.org/account/settings/github) *before* publishing
-   the release; publishing then auto-archives the tagged commit and issues a DOI.
-4. Add the DOI badge here and in `CLAIM_LEDGER.md` (replacing the "no OSF/Zenodo timestamp" caveat
-   for Tier B).
+## Immutable archive
+
+GitHub Release `v0.1.0` archives the accepted submission commit. Zenodo record `21348207` preserves
+that tagged source snapshot and provides the version DOI `10.5281/zenodo.21348207`. Later releases
+must receive distinct version DOIs; they do not retroactively change this protocol snapshot.

@@ -29,6 +29,7 @@ and a judge-facing explanation.
 - **Claim-by-claim evidence:** `reports/CLAIM_LEDGER.md`
 - **Machine-readable verdicts:** `outputs/hackathon/claim_manifest.json`
 - **Automated release status:** `outputs/hackathon/readiness_report.json`
+- **Immutable v0.1.0 archive:** https://doi.org/10.5281/zenodo.21348207
 - **Rebuild and verify the public research package:** `make hackathon-package`
 
 ## What it does not claim

@@ -7,6 +7,8 @@
 - **Public repository:** https://github.com/anetoc/ISCI-hackathon
 - **Interactive demo:** https://anetoc.github.io/ISCI-hackathon/
 - **Narrated video:** https://youtu.be/7Rz4PpmQZuI
+- **Immutable release:** https://github.com/anetoc/ISCI-hackathon/releases/tag/v0.1.0
+- **Version DOI:** https://doi.org/10.5281/zenodo.21348207
 
 Submission is author-confirmed. Private platform receipts and internal recording or rehearsal
 notes are intentionally not committed to the public research repository.
@@ -83,6 +85,7 @@ on-target and vector-compatibility QC. The analysis and promotion gates are froz
 - **Repo:** https://github.com/anetoc/ISCI-hackathon
 - **Demo video (2:42):** https://youtu.be/7Rz4PpmQZuI
 - **Interactive demo:** https://anetoc.github.io/ISCI-hackathon/
+- **Archived release / DOI:** https://doi.org/10.5281/zenodo.21348207
 - **Reproduce:** `make reproduce-core`
 - **Manuscript:** `reports/PAPER.md` · **Literature review:** `reports/literature_review.md`
 - **Master dossier:** `reports/MASTER_DOSSIER.md` · **Claim ledger:** `reports/CLAIM_LEDGER.md`

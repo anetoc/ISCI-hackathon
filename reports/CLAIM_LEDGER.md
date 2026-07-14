@@ -45,4 +45,5 @@ with it.
   B1 was genuinely pre-registered and later completed as a near-miss. Tests **not yet run** (B2
   CD8/CAR-T replication and B3 functional P3) remain genuinely pre-registered in
   `reports/PREREGISTRATION.md` — criteria + directional predictions locked, with the git commit SHA
-  as the timestamp (Zenodo DOI mintable via a GitHub release; maintainer step).
+  as the primary timestamp and the immutable `v0.1.0` snapshot archived at
+  <https://doi.org/10.5281/zenodo.21348207>.

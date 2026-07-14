@@ -135,10 +135,9 @@ biology.
 ---
 
 ## Execution order after the hackathon build
-1. Tag the accepted submission and mint an immutable release/DOI if repository authorization permits.
-2. Run the frozen off-target and guide-promotion workflow before any prospective synthesis.
-3. Execute the donor-resolved paired-context experiment only after guide promotion is frozen.
-4. Treat foundation-model, phospho, spatial and broader immune replications as independent
+1. Run the frozen off-target and guide-promotion workflow before any prospective synthesis.
+2. Execute the donor-resolved paired-context experiment only after guide promotion is frozen.
+3. Treat foundation-model, phospho, spatial and broader immune replications as independent
    extensions; none is required to preserve the locked hackathon claim.
 
 ## The line to defend to a reviewer

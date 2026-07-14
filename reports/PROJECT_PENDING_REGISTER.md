@@ -1,6 +1,6 @@
 # Project pending register
 
-**Snapshot:** 2026-07-13 after submission closeout. **Scope:** current T-CTRL/ISCI repository and
+**Snapshot:** 2026-07-14 after immutable release closeout. **Scope:** current T-CTRL/ISCI repository and
 the prospective donor-panel path. This register distinguishes unfinished work from completed negative results. A `FAIL`,
 `NULL`, `UNSUPPORTED` or `NOT-EVALUABLE` verdict is not automatically a pending task.
 
@@ -22,7 +22,7 @@ Priority definitions:
 | GD-01 | Resolve `PAPOLG-1` low source support | Only 1 exact read in 1 well; all other 53 guides source-confirmed | Independent authoritative sequence confirmation or frozen replacement | Source/library evidence |
 | GD-02 | Review CRISPRa TSS placement and on-target suitability | Current sequence flags are structural only | Versioned TSS distance/on-target evidence per retained guide | OT-03 and final candidate set |
 | GD-03 | Complete cloning/vector compatibility | No BsmBI flag is only a screen, not construct validation | Oligo adapters, U6 constraints and vector-specific QC reviewed | Final guide candidates |
-| GD-04 | Freeze replacements before prospective outcomes | Zero automatic substitutions; TNFRSF9/TBX21 are highest priority | Independent review records final manifest and rationale before data inspection | OT-01–05, GD-01–03 |
+| GD-04 | Freeze replacements before prospective outcomes | Zero automatic substitutions; TNFRSF9/TBX21 are highest priority | Independent review records final manifest and rationale before data inspection | OT-02–05, GD-01–03 |
 | EXP-01 | Run donor-resolved prospective validation | Public reuse cannot confirm the context interaction; GSE190604 donors are mixed | At least four donor-resolved paired samples, frozen endpoints and guide-level support | Final synthesis-ready panel + wet-lab |
 | EXP-02 | Adjudicate the context-interaction claim | Current target-paired estimate is directional but swap-null p=0.091 | Pre-specified donor-level interaction analysis and reproducibility gate | EXP-01 |
 
@@ -43,9 +43,8 @@ form-production notes are intentionally not committed to the public research rep
 
 ## P1 — reproducibility, quality and release
 
-| ID | Pending point | Current evidence | Close condition | Dependency |
-|---|---|---|---|---|
-| REL-03 | Mint immutable release/DOI | Annotated `v0.1.0` tag and a GitHub Release draft exist; Zenodo archival is not yet published | Enable the Zenodo GitHub integration, publish the draft, then add the DOI to citation surfaces | Repository-owner Zenodo login |
+No P1 release blocker remains. The immutable `v0.1.0` release is public and archived at
+<https://doi.org/10.5281/zenodo.21348207>.
 
 ## P2 — scientific extensions, not blockers
 
@@ -76,6 +75,9 @@ form-production notes are intentionally not committed to the public research rep
 - reproducibility wording: README and dossier now distinguish recomputed Marson summaries,
   aggregated heavy lanes and unavailable raw-data reruns;
 - public release: PR #3 merged into `main`; repository, MIT license, CI and GitHub Pages are public;
+- immutable archive: GitHub Release `v0.1.0` and Zenodo version DOI
+  `10.5281/zenodo.21348207` published; concept DOI `10.5281/zenodo.21348206` reserved for the
+  project across future versions;
 - canonical legacy CCI provenance: completed; every result emitted by `run_cci.py` now carries Git,
   data, axes and config hashes, timestamp and command, with dashboard schema enforcement;
 - roadmap synchronization, final automated overclaim audit and public submission: completed;
@@ -90,8 +92,7 @@ form-production notes are intentionally not committed to the public research rep
 
 ## Recommended execution order
 
-1. Mint REL-03 after the accepted submission commit is identified.
-2. Run OT-02 on disposable Linux scratch using the frozen full reference.
-3. Derive the annotation BED (OT-03), then run OT-04 and OT-05.
-4. Close PAPOLG/TSS/vector review and freeze the final guide manifest.
-5. Start EXP-01 only after guide promotion is frozen; treat SCI-01–08 as independent extensions.
+1. Run OT-02 on disposable Linux scratch using the frozen full reference.
+2. Derive the annotation BED (OT-03), then run OT-04 and OT-05.
+3. Close PAPOLG/TSS/vector review and freeze the final guide manifest.
+4. Start EXP-01 only after guide promotion is frozen; treat SCI-01–08 as independent extensions.

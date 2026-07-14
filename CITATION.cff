@@ -6,8 +6,10 @@ authors:
   - family-names: Costa
     given-names: Abel
 version: 0.1.0
-date-released: 2026-07-12
+date-released: 2026-07-14
+doi: 10.5281/zenodo.21348207
 repository-code: "https://github.com/anetoc/ISCI-hackathon"
+url: "https://doi.org/10.5281/zenodo.21348207"
 license: MIT
 keywords:
   - Perturb-seq
