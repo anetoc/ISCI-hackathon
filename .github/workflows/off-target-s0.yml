@@ -26,10 +26,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p /tmp/crispritz-s0-audit
           curl --fail --location --retry 3 \
             https://api.anaconda.org/download/bioconda/crispritz/2.7.0/linux-64/crispritz-2.7.0-py39h2de1943_0.conda \
             --output /tmp/crispritz-2.7.0-py39h2de1943_0.conda
           echo "88aa3073a76f8b74b2a869ecf921c59241cf19267df877bafc285b8620cfc215  /tmp/crispritz-2.7.0-py39h2de1943_0.conda" \
+            | tee /tmp/crispritz-s0-audit/package-sha256.txt \
             | sha256sum --check --strict
 
       - name: Create the pinned Linux environment
@@ -41,7 +43,9 @@ jobs:
             channels:
               - conda-forge
               - bioconda
-            channel_priority: strict
+            # Historical CRISPRitz dependencies span both channels; the frozen package hash
+            # remains authoritative while the resolved environment is captured below.
+            channel_priority: flexible
           create-args: >-
             python=3.9
             /tmp/crispritz-2.7.0-py39h2de1943_0.conda
@@ -53,8 +57,8 @@ jobs:
         shell: micromamba-shell {0}
         run: |
           set -euo pipefail
-          mkdir -p /tmp/crispritz-s0-audit
           micromamba list crispritz | tee /tmp/crispritz-s0-audit/installed-package.txt
+          micromamba list --explicit > /tmp/crispritz-s0-audit/environment-explicit.txt
           grep -Eq 'crispritz[[:space:]]+2\.7\.0[[:space:]]+py39h2de1943_0' \
             /tmp/crispritz-s0-audit/installed-package.txt
 
