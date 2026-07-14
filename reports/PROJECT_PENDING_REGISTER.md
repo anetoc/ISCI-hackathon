@@ -84,7 +84,7 @@ form-production notes are intentionally not committed to the public research rep
 - CRISPRitz S0 installation smoke: completed `PASS` in Actions run `29296855125`; both executions
   returned seven identical canonical target rows with empty stderr, while the biological verdict
   remains `NOT_ISSUED` because no project guide was tested;
-- test warning debt: `147 passed` locally without emitted warnings on Python 3.13;
+- test warning debt: `152 passed` locally without emitted warnings on Python 3.13;
 - TCR RescueMap: a separate Paper-2/multi-year program, not unfinished work required to close this
   repository.
 
