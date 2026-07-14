@@ -1,0 +1,94 @@
+name: CRISPRitz S0 smoke
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: crispritz-s0-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  installation-smoke:
+    name: Pinned CRISPRitz 2.7.0 on chr22
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          persist-credentials: false
+
+      - name: Download and verify the frozen CRISPRitz package
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            https://api.anaconda.org/download/bioconda/crispritz/2.7.0/linux-64/crispritz-2.7.0-py39h2de1943_0.conda \
+            --output /tmp/crispritz-2.7.0-py39h2de1943_0.conda
+          echo "88aa3073a76f8b74b2a869ecf921c59241cf19267df877bafc285b8620cfc215  /tmp/crispritz-2.7.0-py39h2de1943_0.conda" \
+            | sha256sum --check --strict
+
+      - name: Create the pinned Linux environment
+        uses: mamba-org/setup-micromamba@add3a49764cedee8ee24e82dfde87f5bc2914462 # v2.0.7
+        with:
+          micromamba-version: 2.8.1-0
+          environment-name: crispritz-s0
+          condarc: |
+            channels:
+              - conda-forge
+              - bioconda
+            channel_priority: strict
+          create-args: >-
+            python=3.9
+            /tmp/crispritz-2.7.0-py39h2de1943_0.conda
+          cache-downloads: false
+          cache-environment: false
+          post-cleanup: all
+
+      - name: Verify the installed package build
+        shell: micromamba-shell {0}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/crispritz-s0-audit
+          micromamba list crispritz | tee /tmp/crispritz-s0-audit/installed-package.txt
+          grep -Eq 'crispritz[[:space:]]+2\.7\.0[[:space:]]+py39h2de1943_0' \
+            /tmp/crispritz-s0-audit/installed-package.txt
+
+      - name: Download and hash the official chr22 fixture
+        shell: micromamba-shell {0}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/crispritz-s0-reference
+          curl --fail --location --retry 3 \
+            https://hgdownload.soe.ucsc.edu/goldenPath/hg38/chromosomes/chr22.fa.gz \
+            --output /tmp/crispritz-s0-reference/chr22.fa.gz
+          gzip --decompress --keep /tmp/crispritz-s0-reference/chr22.fa.gz
+          sha256sum /tmp/crispritz-s0-reference/chr22.fa* \
+            | tee /tmp/crispritz-s0-audit/reference-sha256.txt
+
+      - name: Run the frozen S0 search twice
+        shell: micromamba-shell {0}
+        run: |
+          set -euo pipefail
+          python scripts/run_crispritz_s0.py \
+            --reference-dir /tmp/crispritz-s0-reference \
+            --reference-fasta /tmp/crispritz-s0-reference/chr22.fa \
+            --pam-file outputs/decomposition_v2/off_target_pilot_spcas9_ngg.txt \
+            --guide-file outputs/decomposition_v2/off_target_pilot_control_emx1.txt \
+            --package-file /tmp/crispritz-2.7.0-py39h2de1943_0.conda \
+            --expected-package-sha256 88aa3073a76f8b74b2a869ecf921c59241cf19267df877bafc285b8620cfc215 \
+            --output-dir /tmp/crispritz-s0-audit/runs \
+            --report /tmp/crispritz-s0-audit/s0_execution_report.json
+
+      - name: Upload the complete S0 audit package
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: crispritz-s0-${{ github.sha }}
+          path: /tmp/crispritz-s0-audit
+          if-no-files-found: error
+          retention-days: 30
