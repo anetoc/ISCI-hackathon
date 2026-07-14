@@ -48,6 +48,8 @@ jobs:
             channel_priority: flexible
           create-args: >-
             python=3.9
+            numpy=1.23.5
+            setuptools=70.3.0
             crispritz=2.7.0=py39h2de1943_0
           cache-downloads: false
           cache-environment: false
@@ -85,13 +87,18 @@ jobs:
               "id": "remove_incompatible_legacy_bytecode",
               "reason": (
                   "The Python 3.9 Bioconda package contains unversioned Azimuth .pyc "
-                  "files compiled for an older interpreter; Python rejects their magic number."
+                  "files compiled for an older interpreter and does not cap NumPy below the "
+                  "np.float removal; both defects prevent the bundled scoring code from loading."
               ),
               "scope": (
                   "Removed only unversioned cached bytecode outside __pycache__; bundled "
                   "Python sources, models, engine binaries, parameters and inputs are unchanged."
               ),
               "removed_legacy_pyc_count": int(sys.argv[1]),
+              "dependency_pins": {
+                  "numpy": "1.23.5",
+                  "setuptools": "70.3.0",
+              },
               "source_commit": "24b893ecb0c2354d5c76697e116d2febe1ee6265",
           }
           path = Path("/tmp/crispritz-s0-audit/runtime-remediation.json")
