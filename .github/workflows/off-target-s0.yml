@@ -62,6 +62,42 @@ jobs:
           grep -Eq 'crispritz[[:space:]]+2\.7\.0[[:space:]]+py39h2de1943_0' \
             /tmp/crispritz-s0-audit/installed-package.txt
 
+      - name: Remove incompatible bundled bytecode caches
+        shell: micromamba-shell {0}
+        run: |
+          set -euo pipefail
+          azimuth_root="${CONDA_PREFIX}/opt/crispritz/Python_Scripts/Scores/azimuth"
+          mapfile -d '' legacy_pyc < <(
+            find "${azimuth_root}" -type f -name '*.pyc' \
+              -not -path '*/__pycache__/*' -print0 | sort -z
+          )
+          test "${#legacy_pyc[@]}" -gt 0
+          printf '%s\0' "${legacy_pyc[@]}" \
+            | xargs -0 sha256sum \
+            > /tmp/crispritz-s0-audit/removed-legacy-pyc-sha256.txt
+          printf '%s\0' "${legacy_pyc[@]}" | xargs -0 rm
+          python - "${#legacy_pyc[@]}" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          record = {
+              "id": "remove_incompatible_legacy_bytecode",
+              "reason": (
+                  "The Python 3.9 Bioconda package contains unversioned Azimuth .pyc "
+                  "files compiled for an older interpreter; Python rejects their magic number."
+              ),
+              "scope": (
+                  "Removed only unversioned cached bytecode outside __pycache__; bundled "
+                  "Python sources, models, engine binaries, parameters and inputs are unchanged."
+              ),
+              "removed_legacy_pyc_count": int(sys.argv[1]),
+              "source_commit": "24b893ecb0c2354d5c76697e116d2febe1ee6265",
+          }
+          path = Path("/tmp/crispritz-s0-audit/runtime-remediation.json")
+          path.write_text(json.dumps(record, indent=2) + "\n")
+          PY
+
       - name: Download and hash the official chr22 fixture
         shell: micromamba-shell {0}
         run: |
@@ -78,6 +114,8 @@ jobs:
 
       - name: Run the frozen S0 search twice
         shell: micromamba-shell {0}
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
         run: |
           set -euo pipefail
           python scripts/run_crispritz_s0.py \
@@ -87,6 +125,7 @@ jobs:
             --guide-file outputs/decomposition_v2/off_target_pilot_control_emx1.txt \
             --package-file /tmp/crispritz-2.7.0-py39h2de1943_0.conda \
             --expected-package-sha256 88aa3073a76f8b74b2a869ecf921c59241cf19267df877bafc285b8620cfc215 \
+            --runtime-remediation-record /tmp/crispritz-s0-audit/runtime-remediation.json \
             --output-dir /tmp/crispritz-s0-audit/runs \
             --report /tmp/crispritz-s0-audit/s0_execution_report.json
 

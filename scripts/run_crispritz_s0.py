@@ -55,6 +55,18 @@ def git_sha(root: Path) -> str:
     return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
 
 
+def load_runtime_remediation(path: Path) -> dict[str, object]:
+    """Load the explicit compatibility intervention applied to the frozen package."""
+
+    payload = json.loads(path.read_text())
+    if not isinstance(payload, dict):
+        raise ValueError("runtime remediation record must be a JSON object")
+    required = {"id", "reason", "scope", "removed_legacy_pyc_count", "source_commit"}
+    if missing := sorted(required - payload.keys()):
+        raise ValueError(f"runtime remediation record is missing fields: {missing}")
+    return payload
+
+
 def run_once(
     *,
     run_number: int,
@@ -153,6 +165,7 @@ def main() -> None:
     parser.add_argument("--guide-file", type=Path, required=True)
     parser.add_argument("--package-file", type=Path, required=True)
     parser.add_argument("--expected-package-sha256", required=True)
+    parser.add_argument("--runtime-remediation-record", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--report", type=Path, required=True)
     args = parser.parse_args()
@@ -163,6 +176,7 @@ def main() -> None:
         args.pam_file,
         args.guide_file,
         args.package_file,
+        args.runtime_remediation_record,
     ]
     if missing := [str(path) for path in required if not path.is_file()]:
         raise SystemExit(f"missing S0 inputs: {missing}")
@@ -174,6 +188,7 @@ def main() -> None:
         raise SystemExit(
             f"CRISPRitz package hash mismatch: {package_sha} != {args.expected_package_sha256}"
         )
+    runtime_remediation = load_runtime_remediation(args.runtime_remediation_record)
 
     args.output_dir.mkdir(parents=True, exist_ok=False)
     runs = [
@@ -208,6 +223,10 @@ def main() -> None:
             "version": "2.7.0",
             "package_build": "py39h2de1943_0",
             "package_sha256": package_sha,
+        },
+        "runtime_remediation": {
+            **runtime_remediation,
+            "record_sha256": sha256(args.runtime_remediation_record),
         },
         "inputs_sha256": {
             "reference_fasta": sha256(args.reference_fasta),
