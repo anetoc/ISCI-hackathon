@@ -70,8 +70,10 @@ jobs:
           curl --fail --location --retry 3 \
             https://hgdownload.soe.ucsc.edu/goldenPath/hg38/chromosomes/chr22.fa.gz \
             --output /tmp/crispritz-s0-reference/chr22.fa.gz
-          gzip --decompress --keep /tmp/crispritz-s0-reference/chr22.fa.gz
-          sha256sum /tmp/crispritz-s0-reference/chr22.fa* \
+          sha256sum /tmp/crispritz-s0-reference/chr22.fa.gz \
+            | tee /tmp/crispritz-s0-audit/reference-compressed-sha256.txt
+          gzip --decompress /tmp/crispritz-s0-reference/chr22.fa.gz
+          sha256sum /tmp/crispritz-s0-reference/chr22.fa \
             | tee /tmp/crispritz-s0-audit/reference-sha256.txt
 
       - name: Run the frozen S0 search twice
