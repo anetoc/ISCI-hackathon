@@ -52,12 +52,12 @@
     "interactive_demo_url": "https://anetoc.github.io/ISCI-hackathon/",
     "narrated_video_url": "https://youtu.be/7Rz4PpmQZuI"
   },
-  "git_sha": "2f5b176df9b8710e30d9ca809550f929a568f315",
+  "git_sha": "1c1f84b84737e80f5952da2d8646f733538625ef",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
-  "source_paths_dirty": false,
+  "source_paths_dirty": true,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "c9487a7b61b2be72fda8fa300f01f0c1ca4188c21665acbdf80cc6a697423742",
+    "sha256": "2bbe1ec5ff88b69a4431ac7e7547ea85efeeeeb6352f8e46c87ba4f062d9d166",
     "files_sha256": {
       "DELIVERABLE.md": "36dba74dee65b858bf6e17247182503cc86ac869f3768b111e30e9ac570f72ac",
       "JUDGE_QA.md": "e93858d99be0a82bfbdbf3e28076bfc894e45a56ad373e72a2c98f2b83b991e7",
@@ -67,7 +67,7 @@
       "config/hackathon_timing.json": "f4f69fad0274273291bccb37aed1a1b88c24f6909d94376cb38f597ddb4478e1",
       "contracts/dataset_spec.schema.json": "9eb53a04799e4ae784b806c102ef3109b886c10fac665072fe710a7d475265f0",
       "docs/dataset_spec.md": "3a6b794d421ca6e72dc1c3c2813c279db853f8c3aa85b5300bd247f0b0c89e3e",
-      "docs/hackathon_judge_demo.html": "ad4d41830f5f68b7b801240e54effd7d7a905784f0a9fbcecdba5627990ff948",
+      "docs/hackathon_judge_demo.html": "677bd8df33231e8fbb57a94f7d0cf47468100027e6660c9d806c93f80892c926",
       "docs/index.html": "84a069f99992da39b2bcce69902f395b8fc01af33bb7880ac0aa55c0b4d15e5e",
       "examples/dataset_spec/mini_long_effects.csv": "620b54d4ee9834d78bd66123d50cf18522ff392bc2fc5b1200a7730c039e994d",
       "examples/dataset_spec/mini_long_effects.yaml": "537aa837f26ec6c929e041e6877aa3450ea6696af42b293af57d73595799e2f2",
@@ -88,12 +88,12 @@
       "outputs/hackathon/arrayed_rna_effect_build_smoke.json": "3c1e00e853466a86c2a4c3d3bab1ec76d34b8363a180b6f8f535493300b6e3ef",
       "outputs/hackathon/cell_effect_build_smoke.json": "dee9139b03959a4130e0897eb6c15ae18350352a59167182da6dad2ac58f7e18",
       "outputs/hackathon/cell_preflight_smoke.json": "7063de4c1853dcf37ff31a50293656a3d4a5d1afa96e48dc3a098560d7af4c93",
-      "outputs/hackathon/claim_manifest.json": "9e367ceefb8450bf3ef5cc153fcb4f4d4f1bc4ab4dd7d41d439202b43a12df14",
-      "outputs/hackathon/screenshot_manifest.json": "3ead596b186e288942b31dfa0fa51dbe94f063d094ffe0e74d19df4ffc20082a",
+      "outputs/hackathon/claim_manifest.json": "2395e93ac20349a796876fa9499fcb27b0e656a4fbc558a391693b9181a622be",
+      "outputs/hackathon/screenshot_manifest.json": "12e85bc592b1bd799fd6da25bdedfcee853fd295ce7b4f9a6c89e6a9ecd54c8a",
       "outputs/tctrl_hackathon_deck.pptx": "43d57a7d3f0d5ed3afae977048f6962baa5f70189b02cc9d99d6e6aaba07959b",
       "pyproject.toml": "3808025f8b1be0f2f8d2ebbee336361fdda7cd23484c818e64db8b99f23ad964",
       "reports/MASTER_ROADMAP.md": "7f3c329900e155c86f5e3b78e463b9c99ec497fd8771fee90d8756e3ce80582e",
-      "reports/PROJECT_PENDING_REGISTER.md": "a23111f604c8791fae33747da57ec470a8b032c9bfe7f9145f8e852a32fb5be7",
+      "reports/PROJECT_PENDING_REGISTER.md": "55d32393a123dc4163de2665d618b922f519258d228f45f8a540db8379bfa8b0",
       "scripts/check_hackathon_readiness.py": "47b8ff61a773597ff7d092c7d3ecf488606679c46932eccbc22321fbccb4afe7",
       "scripts/release_provenance.py": "6bb306ad56967cdbb0357f70cca81a2bf5355c0e0ce315154b89d3dbf392b19f",
       "skills/isci-controllership/SKILL.md": "632515998051b8b13fcaa400e3da032547c7525fe8bc5307f894b2fb9a46f392",
@@ -101,8 +101,8 @@
     }
   },
   "branch": "main",
-  "data_sha256": "9e367ceefb8450bf3ef5cc153fcb4f4d4f1bc4ab4dd7d41d439202b43a12df14",
+  "data_sha256": "2395e93ac20349a796876fa9499fcb27b0e656a4fbc558a391693b9181a622be",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-14T00:29:55.045036+00:00",
+  "timestamp": "2026-07-14T00:51:04.849723+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }
