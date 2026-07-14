@@ -39,7 +39,7 @@
     "arrayed_rna_smoke_status": "ANALYSIS_COMPLETE",
     "arrayed_rna_effect_rows": 305,
     "arrayed_rna_ranking_eligible_rows": 40,
-    "locked_kernel_sha256": "75ec60abc153ec06d0c4165aecf05a951000fe05cbd160eaf8f00bb1f23afd6d",
+    "locked_kernel_sha256": "819ff5cac39a12f5f9486a63c3ca353ed782669cf05c3985f786206c93fb022e",
     "researcher_notebook_sha256": "99a30a59bc2708449d9fbb606cc14096642e6da112be5874badff14217f61278",
     "researcher_notebook_code_cells": 9,
     "local_path_violations": [],
@@ -52,12 +52,12 @@
     "interactive_demo_url": "https://anetoc.github.io/ISCI-hackathon/",
     "narrated_video_url": "https://youtu.be/7Rz4PpmQZuI"
   },
-  "git_sha": "5ccf9c86d05c70b8076b7b7adfbefc4641c87633",
+  "git_sha": "2f5b176df9b8710e30d9ca809550f929a568f315",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": false,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
-    "sha256": "98ea17f474fe91781d14f9933c78cc121d42acf76189a621c5384f37da6b7b53",
+    "sha256": "c9487a7b61b2be72fda8fa300f01f0c1ca4188c21665acbdf80cc6a697423742",
     "files_sha256": {
       "DELIVERABLE.md": "36dba74dee65b858bf6e17247182503cc86ac869f3768b111e30e9ac570f72ac",
       "JUDGE_QA.md": "e93858d99be0a82bfbdbf3e28076bfc894e45a56ad373e72a2c98f2b83b991e7",
@@ -91,18 +91,18 @@
       "outputs/hackathon/claim_manifest.json": "9e367ceefb8450bf3ef5cc153fcb4f4d4f1bc4ab4dd7d41d439202b43a12df14",
       "outputs/hackathon/screenshot_manifest.json": "3ead596b186e288942b31dfa0fa51dbe94f063d094ffe0e74d19df4ffc20082a",
       "outputs/tctrl_hackathon_deck.pptx": "43d57a7d3f0d5ed3afae977048f6962baa5f70189b02cc9d99d6e6aaba07959b",
-      "pyproject.toml": "38b0797c5bd559a5757081f5eecdac170290886ef5dd0aa81084fe437b95c823",
+      "pyproject.toml": "3808025f8b1be0f2f8d2ebbee336361fdda7cd23484c818e64db8b99f23ad964",
       "reports/MASTER_ROADMAP.md": "7f3c329900e155c86f5e3b78e463b9c99ec497fd8771fee90d8756e3ce80582e",
-      "reports/PROJECT_PENDING_REGISTER.md": "e05050af7ab497fb1c1cc5237f9743f7bb74c3eb5724dfe091ae4e45907c723c",
+      "reports/PROJECT_PENDING_REGISTER.md": "a23111f604c8791fae33747da57ec470a8b032c9bfe7f9145f8e852a32fb5be7",
       "scripts/check_hackathon_readiness.py": "47b8ff61a773597ff7d092c7d3ecf488606679c46932eccbc22321fbccb4afe7",
       "scripts/release_provenance.py": "6bb306ad56967cdbb0357f70cca81a2bf5355c0e0ce315154b89d3dbf392b19f",
       "skills/isci-controllership/SKILL.md": "632515998051b8b13fcaa400e3da032547c7525fe8bc5307f894b2fb9a46f392",
-      "skills/isci-controllership/kernel.py": "75ec60abc153ec06d0c4165aecf05a951000fe05cbd160eaf8f00bb1f23afd6d"
+      "skills/isci-controllership/kernel.py": "819ff5cac39a12f5f9486a63c3ca353ed782669cf05c3985f786206c93fb022e"
     }
   },
   "branch": "main",
   "data_sha256": "9e367ceefb8450bf3ef5cc153fcb4f4d4f1bc4ab4dd7d41d439202b43a12df14",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-13T23:49:00.280452+00:00",
+  "timestamp": "2026-07-14T00:29:55.045036+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }
