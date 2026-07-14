@@ -52,9 +52,9 @@
     "interactive_demo_url": "https://anetoc.github.io/ISCI-hackathon/",
     "narrated_video_url": "https://youtu.be/7Rz4PpmQZuI"
   },
-  "git_sha": "ee157541b520e8e6e1c643b9cbe8b7d892dc9a07",
+  "git_sha": "a1e8e0b443169f440212e2bc3f6782d7bd399127",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
-  "source_paths_dirty": true,
+  "source_paths_dirty": false,
   "source_snapshot": {
     "schema_version": "isci_source_snapshot_v1",
     "sha256": "f16d4b8613ed2a36e4e00ac37fde347992eece40d0ab66aa56987de943f6150c",
@@ -103,6 +103,6 @@
   "branch": "main",
   "data_sha256": "d57f4c07f8c76aaa5ae88b3ca2e06d48f1315591f5b84e5a80a149285f19bd2f",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
-  "timestamp": "2026-07-14T01:10:58.830606+00:00",
+  "timestamp": "2026-07-14T01:11:08.593363+00:00",
   "command": "python scripts/check_hackathon_readiness.py"
 }
