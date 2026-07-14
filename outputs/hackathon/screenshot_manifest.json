@@ -1,7 +1,7 @@
 {
   "schema_version": "hackathon_screenshot_manifest_v1",
-  "generated_at": "2026-07-14T00:51:03.186033+00:00",
-  "git_sha": "1c1f84b84737e80f5952da2d8646f733538625ef",
+  "generated_at": "2026-07-14T01:10:57.463828+00:00",
+  "git_sha": "ee157541b520e8e6e1c643b9cbe8b7d892dc9a07",
   "git_sha_semantics": "Base revision at generation time; source_snapshot binds exact working-tree inputs.",
   "source_paths_dirty": false,
   "source_snapshot": {
@@ -19,7 +19,7 @@
   "renderer": "LibreOffice PDF export + pdftoppm 1920x1080",
   "deck_path": "outputs/tctrl_hackathon_deck.pptx",
   "deck_sha256": "43d57a7d3f0d5ed3afae977048f6962baa5f70189b02cc9d99d6e6aaba07959b",
-  "data_sha256": "2395e93ac20349a796876fa9499fcb27b0e656a4fbc558a391693b9181a622be",
+  "data_sha256": "d57f4c07f8c76aaa5ae88b3ca2e06d48f1315591f5b84e5a80a149285f19bd2f",
   "axes_sha256": "1bbcf56e4c749460f5d6e07648b341bcd28500c059c685bee1a418befeb063b7",
   "width": 1920,
   "height": 1080,
