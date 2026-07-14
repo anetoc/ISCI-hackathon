@@ -12,7 +12,9 @@ def expression_matched_negatives(positives, obs, gene_col="gene",
     positives: list of gene names. obs: per-perturbation DataFrame with gene_col
     and match_cols. Returns a deduplicated list of matched negative gene names.
     """
-    import numpy as np, pandas as pd
+    import numpy as np
+    import pandas as pd
+
     if match_cols is None:
         match_cols = ["target_baseMean", "n_cells_target"]
     exclude = set(exclude or positives)
@@ -35,7 +37,9 @@ def conditional_lr_test(feat, positives, negatives, base_col="magnitude", featur
     positive-vs-negative discrimination? Returns a DataFrame with LR stat,
     p-value, coefficient, and a boolean `adds` per feature.
     """
-    import numpy as np, pandas as pd, statsmodels.api as sm
+    import numpy as np
+    import pandas as pd
+    import statsmodels.api as sm
     from scipy.stats import chi2
     from sklearn.preprocessing import StandardScaler
     if feature_cols is None:
@@ -65,7 +69,7 @@ def bootstrap_auprc_gain(feat, positives, negatives, base_col="magnitude",
     Otherwise fits a logistic model on [base_col]+feature_cols per resample.
     Returns dict with base/full mean AUPRC, gain, 95% CI, and P(gain>0).
     """
-    import numpy as np, pandas as pd
+    import numpy as np
     from sklearn.metrics import average_precision_score
     from sklearn.preprocessing import StandardScaler
     from sklearn.linear_model import LogisticRegression
@@ -106,7 +110,8 @@ def controllership_score(feat, components, method="balanced", magnitude_col="mag
       above-median magnitude (detectable_floor).
     Returns a Series aligned to feat.index (NaN for gated-out genes).
     """
-    import numpy as np, pandas as pd
+    import numpy as np
+    import pandas as pd
     f = feat.copy()
     if method == "balanced":
         pr = np.column_stack([f[c].rank(pct=True).values for c in components])
@@ -157,7 +162,9 @@ def clinical_reversal_score(zscore_matrix, gene_index, perturbation_ids,
     Caveat: effect vectors are KNOCKDOWNs, so a high score means knocking the gene down
     shifts cells toward sensitivity; the therapeutic sign is not automatic.
     """
-    import numpy as np, pandas as pd
+    import numpy as np
+    import pandas as pd
+
     def mod_mean(genes):
         idx = [gene_index[g] for g in genes if g in gene_index]
         return np.nanmean(zscore_matrix[:, idx], axis=1)
@@ -168,15 +175,20 @@ def clinical_reversal_score(zscore_matrix, gene_index, perturbation_ids,
     rng = np.random.default_rng(seed)
     all_genes = [g for gl in list(resistance_modules.values()) + list(sensitivity_modules.values()) for g in gl]
     n_res = sum(len(g) for g in resistance_modules.values())
-    pool = list(gene_index.keys()); top = gene_rev.head(10).index.tolist()
+    pool = list(gene_index.keys())
+    top = gene_rev.head(10).index.tolist()
+
     def grev(gene, ridx, sidx):
         rows = (perturbation_ids == gene)
-        if rows.sum() == 0: return np.nan
+        if rows.sum() == 0:
+            return np.nan
         return np.nanmean(zscore_matrix[rows][:, sidx]) - np.nanmean(zscore_matrix[rows][:, ridx])
+
     null_max = np.zeros(n_perm)
     for p in range(n_perm):
         samp = rng.choice(pool, len(all_genes), replace=False)
-        ridx = [gene_index[g] for g in samp[:n_res]]; sidx = [gene_index[g] for g in samp[n_res:]]
+        ridx = [gene_index[g] for g in samp[:n_res]]
+        sidx = [gene_index[g] for g in samp[n_res:]]
         null_max[p] = np.nanmax(np.abs([grev(g, ridx, sidx) for g in top]))
     obs_max = float(np.nanmax(np.abs(gene_rev.head(10).values)))
     pval = (np.sum(null_max >= obs_max) + 1) / (n_perm + 1)
@@ -192,8 +204,11 @@ def matched_null_enrichment(target_genes, pool_df, family_sets, match_cols,
     pool_df has gene_col + numeric match_cols; family_sets: name -> set(genes).
     Returns DataFrame: observed, expected, fold, p_emp, q_bh per family.
     Call TWICE with different match_cols for Null A / Null B (e.g. +/- TCR_shutdown)."""
-    import numpy as np, pandas as pd
     from collections import defaultdict
+
+    import numpy as np
+    import pandas as pd
+
     try:
         from scipy.stats import false_discovery_control
     except Exception:
@@ -218,7 +233,8 @@ def matched_null_enrichment(target_genes, pool_df, family_sets, match_cols,
         null[i] = [fc[f] for f in fams]
     rows = []
     for j, f in enumerate(fams):
-        o = obs[f]; exp = null[:, j].mean()
+        o = obs[f]
+        exp = null[:, j].mean()
         p = (np.sum(null[:, j] >= o) + 1) / (n_perm + 1)
         rows.append({"family": f, "observed": o, "expected": round(float(exp), 2),
                      "fold": round(o / exp, 2) if exp > 0 else float("inf"), "p_emp": p})

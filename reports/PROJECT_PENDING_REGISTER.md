@@ -46,8 +46,7 @@ form-production notes are intentionally not committed to the public research rep
 
 | ID | Pending point | Current evidence | Close condition | Dependency |
 |---|---|---|---|---|
-| ENG-03 | Pay down non-release lint debt | CI-supported code is clean; `ruff check .` reports 22 occurrences confined to archived D0, the executed notebook and the distributable skill kernel | Clean those surfaces or codify explicit exclusions in a separate post-submission PR | Separate engineering PR |
-| REL-03 | Mint immutable release/DOI | Pre-registration records git SHA but no project release DOI | Tagged release archived by Zenodo; badges and ledger updated | Repository-owner GitHub/Zenodo authorization |
+| REL-03 | Mint immutable release/DOI | Annotated `v0.1.0` tag and a GitHub Release draft exist; Zenodo archival is not yet published | Enable the Zenodo GitHub integration, publish the draft, then add the DOI to citation surfaces | Repository-owner Zenodo login |
 
 ## P2 — scientific extensions, not blockers
 
@@ -81,6 +80,8 @@ form-production notes are intentionally not committed to the public research rep
 - canonical legacy CCI provenance: completed; every result emitted by `run_cci.py` now carries Git,
   data, axes and config hashes, timestamp and command, with dashboard schema enforcement;
 - roadmap synchronization, final automated overclaim audit and public submission: completed;
+- repository-wide lint: completed; `ruff check .` passes, with explicit exclusions only for the
+  immutable failed-D0 archive and the notebook's required local-import bootstrap;
 - test warning debt: `147 passed` locally without emitted warnings on Python 3.13;
 - TCR RescueMap: a separate Paper-2/multi-year program, not unfinished work required to close this
   repository.
