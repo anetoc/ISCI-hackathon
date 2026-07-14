@@ -48,7 +48,7 @@ jobs:
             channel_priority: flexible
           create-args: >-
             python=3.9
-            /tmp/crispritz-2.7.0-py39h2de1943_0.conda
+            crispritz=2.7.0=py39h2de1943_0
           cache-downloads: false
           cache-environment: false
           post-cleanup: all
