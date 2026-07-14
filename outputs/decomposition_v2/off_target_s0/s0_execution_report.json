@@ -1,0 +1,99 @@
+{
+  "schema_version": "crispritz_s0_execution_v1",
+  "stage": "S0_INSTALLATION_SMOKE",
+  "status": "S0_INSTALLATION_SMOKE_PASS",
+  "biological_verdict": "NOT_ISSUED",
+  "promotion_boundary": {
+    "automatic_replacements": 0,
+    "synthesis_approval": false,
+    "reason": "S0 validates the pinned command surface on chr22; it does not assess project guides."
+  },
+  "engine": {
+    "name": "CRISPRitz",
+    "version": "2.7.0",
+    "package_build": "py39h2de1943_0",
+    "package_sha256": "88aa3073a76f8b74b2a869ecf921c59241cf19267df877bafc285b8620cfc215"
+  },
+  "runtime_remediation": {
+    "id": "remove_incompatible_legacy_bytecode",
+    "reason": "The Python 3.9 Bioconda package contains unversioned Azimuth .pyc files compiled for an older interpreter and does not cap NumPy below the np.float removal; both defects prevent the bundled scoring code from loading.",
+    "scope": "Removed only unversioned cached bytecode outside __pycache__; bundled Python sources, models, engine binaries, parameters and inputs are unchanged.",
+    "removed_legacy_pyc_count": 14,
+    "dependency_pins": {
+      "numpy": "1.23.5",
+      "setuptools": "70.3.0"
+    },
+    "source_commit": "24b893ecb0c2354d5c76697e116d2febe1ee6265",
+    "record_sha256": "1c1e50284483ab813a5b2e734054a849614b9cdaa5b1fee0bf50640d1dfcc2cf"
+  },
+  "inputs_sha256": {
+    "reference_fasta": "ce3ee1ca39356238f7aee438a40a88b4f1b9d80b316b263e16fb12402212d10f",
+    "pam_file": "5916643675eadf37d47ac06f0968c21dc6c8b59ddb84fa18539029759da1b3f1",
+    "guide_file": "b20425c83a926546c31d016507abebc546463fff8a9d028b660956ca89a71dc8"
+  },
+  "repeated_runs": 2,
+  "identical_target_rows_after_canonical_sort": true,
+  "runs": [
+    {
+      "run": 1,
+      "status": "PASS",
+      "return_code": 0,
+      "command": "/usr/bin/time -v -o /tmp/crispritz-s0-audit/runs/run_1/resource_usage.txt /home/runner/micromamba/envs/crispritz-s0/bin/crispritz.py search /tmp/crispritz-s0-reference/ /home/runner/work/ISCI-hackathon/ISCI-hackathon/outputs/decomposition_v2/off_target_pilot_spcas9_ngg.txt /home/runner/work/ISCI-hackathon/ISCI-hackathon/outputs/decomposition_v2/off_target_pilot_control_emx1.txt emx1.hg38 -mm 4 -t -scores /tmp/crispritz-s0-reference/",
+      "unexpected_stderr": false,
+      "peak_rss_kib": 1110436,
+      "disk_bytes": 5300,
+      "canonical_target_rows": 7,
+      "canonical_targets_sha256": "39b8b3d08f62298ec67d16964f94dc4ab50f1e98d8f66f902bdece110b2a2f75",
+      "outputs": {
+        "targets": {
+          "path": "run_1/emx1.hg38.targets.txt",
+          "sha256": "663a1fc088fb0293040ec4c4e5d4b679b737e654f73cd1364df18bd69150f242",
+          "bytes": 589
+        },
+        "profile": {
+          "path": "run_1/emx1.hg38.profile.xls",
+          "sha256": "28d2dde618745019852eb32239843fae2e80c97f35798c2df82cfee7db70714b",
+          "bytes": 196
+        },
+        "extended_profile": {
+          "path": "run_1/emx1.hg38.extended_profile.xls",
+          "sha256": "a5a9a4a5035f4b67e4ac60a4b4dda67226e18c8b715ec21dc290a9959313bf2c",
+          "bytes": 1934
+        }
+      },
+      "errors": []
+    },
+    {
+      "run": 2,
+      "status": "PASS",
+      "return_code": 0,
+      "command": "/usr/bin/time -v -o /tmp/crispritz-s0-audit/runs/run_2/resource_usage.txt /home/runner/micromamba/envs/crispritz-s0/bin/crispritz.py search /tmp/crispritz-s0-reference/ /home/runner/work/ISCI-hackathon/ISCI-hackathon/outputs/decomposition_v2/off_target_pilot_spcas9_ngg.txt /home/runner/work/ISCI-hackathon/ISCI-hackathon/outputs/decomposition_v2/off_target_pilot_control_emx1.txt emx1.hg38 -mm 4 -t -scores /tmp/crispritz-s0-reference/",
+      "unexpected_stderr": false,
+      "peak_rss_kib": 1108508,
+      "disk_bytes": 5294,
+      "canonical_target_rows": 7,
+      "canonical_targets_sha256": "39b8b3d08f62298ec67d16964f94dc4ab50f1e98d8f66f902bdece110b2a2f75",
+      "outputs": {
+        "targets": {
+          "path": "run_2/emx1.hg38.targets.txt",
+          "sha256": "8e0fd383864f4d59a92156407ba6ab8d37510cc9e1d14ac9ceb59a6433dcb6f7",
+          "bytes": 589
+        },
+        "profile": {
+          "path": "run_2/emx1.hg38.profile.xls",
+          "sha256": "28d2dde618745019852eb32239843fae2e80c97f35798c2df82cfee7db70714b",
+          "bytes": 196
+        },
+        "extended_profile": {
+          "path": "run_2/emx1.hg38.extended_profile.xls",
+          "sha256": "a5a9a4a5035f4b67e4ac60a4b4dda67226e18c8b715ec21dc290a9959313bf2c",
+          "bytes": 1934
+        }
+      },
+      "errors": []
+    }
+  ],
+  "git_sha": "813fb0ae57b3f5faa516d2e3f16e0ff30d1c2e2e",
+  "timestamp": "2026-07-14T00:47:56.168691+00:00",
+  "command": "python scripts/run_crispritz_s0.py --reference-dir /tmp/crispritz-s0-reference --reference-fasta /tmp/crispritz-s0-reference/chr22.fa --pam-file outputs/decomposition_v2/off_target_pilot_spcas9_ngg.txt --guide-file outputs/decomposition_v2/off_target_pilot_control_emx1.txt --package-file /tmp/crispritz-2.7.0-py39h2de1943_0.conda --expected-package-sha256 88aa3073a76f8b74b2a869ecf921c59241cf19267df877bafc285b8620cfc215 --runtime-remediation-record /tmp/crispritz-s0-audit/runtime-remediation.json --output-dir /tmp/crispritz-s0-audit/runs --report /tmp/crispritz-s0-audit/s0_execution_report.json"
+}

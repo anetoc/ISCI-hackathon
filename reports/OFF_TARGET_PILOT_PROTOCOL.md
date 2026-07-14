@@ -1,7 +1,7 @@
 # Version-pinned off-target pilot protocol
 
-**Status:** protocol and inputs frozen before execution. No off-target result exists yet, no guide
-is replaced and no oligo is approved for synthesis.
+**Status:** protocol and inputs frozen before execution. S0 passed on 2026-07-14; S1–S3 remain
+unexecuted. No project guide is replaced and no oligo is approved for synthesis.
 
 ## Question
 
@@ -35,6 +35,12 @@ Run the official CRISPRitz EMX1 test guide
 `GAGTCCGAGCAGAAGAAGAANNN` against the official chromosome-22 installation fixture using the
 official SpCas9 pattern `NNNNNNNNNNNNNNNNNNNNNGG 3` and four mismatches. This stage validates the
 installed command surface only; its reference fixture cannot adjudicate project guides.
+
+S0 subsequently passed in GitHub Actions run
+[`29296855125`](https://github.com/anetoc/ISCI-hackathon/actions/runs/29296855125): two executions,
+seven identical canonical target rows, empty stderr and all required profiles present. The frozen
+pre-execution contract remains unchanged; the result and raw evidence are reported separately in
+`reports/OFF_TARGET_S0_RESULTS.md` and `outputs/decomposition_v2/off_target_s0/`.
 
 ### S1 — priority reference search
 

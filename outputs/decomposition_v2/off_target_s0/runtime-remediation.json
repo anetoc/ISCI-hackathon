@@ -1,0 +1,11 @@
+{
+  "id": "remove_incompatible_legacy_bytecode",
+  "reason": "The Python 3.9 Bioconda package contains unversioned Azimuth .pyc files compiled for an older interpreter and does not cap NumPy below the np.float removal; both defects prevent the bundled scoring code from loading.",
+  "scope": "Removed only unversioned cached bytecode outside __pycache__; bundled Python sources, models, engine binaries, parameters and inputs are unchanged.",
+  "removed_legacy_pyc_count": 14,
+  "dependency_pins": {
+    "numpy": "1.23.5",
+    "setuptools": "70.3.0"
+  },
+  "source_commit": "24b893ecb0c2354d5c76697e116d2febe1ee6265"
+}

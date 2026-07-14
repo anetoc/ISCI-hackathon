@@ -1,0 +1,1 @@
+ce3ee1ca39356238f7aee438a40a88b4f1b9d80b316b263e16fb12402212d10f  /tmp/crispritz-s0-reference/chr22.fa

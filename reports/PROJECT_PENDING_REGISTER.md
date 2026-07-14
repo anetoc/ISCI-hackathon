@@ -15,8 +15,7 @@ Priority definitions:
 
 | ID | Pending point | Current evidence | Close condition | Dependency |
 |---|---|---|---|---|
-| OT-01 | Execute CRISPRitz S0 installation smoke test | Versioned EMX1, PAM and engine package are frozen; `execution_status=NOT_EXECUTED` | Two deterministic S0 runs with hashes and resource log | External Linux scratch |
-| OT-02 | Execute S1 priority search for TNFRSF9/TBX21 | Ten candidates packaged: four current + six fallbacks | Two deterministic mismatch-only full-reference runs | OT-01 + `GCF_000001405.40` files |
+| OT-02 | Execute S1 priority search for TNFRSF9/TBX21 | S0 passed; ten candidates are packaged: four current + six fallbacks | Two deterministic mismatch-only full-reference runs | `GCF_000001405.40` files |
 | OT-03 | Derive versioned RefSeq annotation BED | Annotation release is selected but `BLOCKED_DERIVATION_NOT_EXECUTED` | BED conversion method, row-count checks and SHA-256 committed | NCBI annotation download |
 | OT-04 | Execute S2 full 78-candidate search | Full input exists; engine remains unexecuted | Two deterministic reference-only runs and reviewed summary | OT-02 |
 | OT-05 | Execute S3 bulge sensitivity | Parameters are frozen at 4 mismatches, 1 DNA and 1 RNA bulge | Indexed run completed twice; delta versus S2 reported | OT-04 + indexed genome |
@@ -82,6 +81,9 @@ form-production notes are intentionally not committed to the public research rep
 - roadmap synchronization, final automated overclaim audit and public submission: completed;
 - repository-wide lint: completed; `ruff check .` passes, with explicit exclusions only for the
   immutable failed-D0 archive and the notebook's required local-import bootstrap;
+- CRISPRitz S0 installation smoke: completed `PASS` in Actions run `29296855125`; both executions
+  returned seven identical canonical target rows with empty stderr, while the biological verdict
+  remains `NOT_ISSUED` because no project guide was tested;
 - test warning debt: `147 passed` locally without emitted warnings on Python 3.13;
 - TCR RescueMap: a separate Paper-2/multi-year program, not unfinished work required to close this
   repository.
@@ -89,7 +91,7 @@ form-production notes are intentionally not committed to the public research rep
 ## Recommended execution order
 
 1. Mint REL-03 after the accepted submission commit is identified.
-2. Run OT-01 and OT-02 on disposable Linux scratch.
+2. Run OT-02 on disposable Linux scratch using the frozen full reference.
 3. Derive the annotation BED (OT-03), then run OT-04 and OT-05.
 4. Close PAPOLG/TSS/vector review and freeze the final guide manifest.
 5. Start EXP-01 only after guide promotion is frozen; treat SCI-01–08 as independent extensions.

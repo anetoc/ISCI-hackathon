@@ -1,0 +1,6 @@
+USED THREADS 4
+ANALYZING CHROMOSOME chr22 (Total progress: 100.0%)
+TOTAL TIME: 1.4
+Search START
+Search END
+Search runtime: 1.3726391792297363 seconds

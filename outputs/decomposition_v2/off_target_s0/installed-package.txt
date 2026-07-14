@@ -1,0 +1,5 @@
+List of packages in environment: "/home/runner/micromamba/envs/crispritz-s0"
+
+  Name       Version  Build           Channel 
+────────────────────────────────────────────────
+  crispritz  2.7.0    py39h2de1943_0  bioconda
